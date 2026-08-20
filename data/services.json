@@ -1,0 +1,219 @@
+{
+  "meta": {
+    "name": "iHangzhou 杭州生活助手",
+    "version": "1.0.0",
+    "updated": "2026-08-20",
+    "description": "杭州人的数字生活工具箱——政务办事、交通出行、民生服务一站导航"
+  },
+  "quickTools": [
+    {
+      "id": "xianxing",
+      "name": "限行查询",
+      "icon": "car",
+      "color": "#e74c3c",
+      "desc": "今日尾号限行",
+      "action": "xianxing",
+      "tags": ["交通", "限行", "尾号"]
+    },
+    {
+      "id": "shebao",
+      "name": "社保查询",
+      "icon": "id-card",
+      "color": "#3498db",
+      "desc": "浙里办/支付宝",
+      "url": "https://www.zjzwfw.gov.cn/",
+      "tags": ["社保", "医保", "政务"]
+    },
+    {
+      "id": "gongjijin",
+      "name": "公积金",
+      "icon": "home",
+      "color": "#f39c12",
+      "desc": "账户余额/贷款",
+      "url": "https://gjj.hangzhou.gov.cn/",
+      "tags": ["公积金", "房贷", "政务"]
+    },
+    {
+      "id": "bus",
+      "name": "公交地铁",
+      "icon": "bus",
+      "color": "#27ae60",
+      "desc": "实时到站/线路",
+      "url": "https://www.hzbus.com.cn/",
+      "tags": ["公交", "地铁", "出行"]
+    },
+    {
+      "id": "weather",
+      "name": "杭州天气",
+      "icon": "cloud",
+      "color": "#9b59b6",
+      "desc": "实时/预报",
+      "action": "weather",
+      "tags": ["天气", "生活"]
+    },
+    {
+      "id": "youjia",
+      "name": "油价查询",
+      "icon": "fuel",
+      "color": "#e67e22",
+      "desc": "今日成品油价格",
+      "action": "youjia",
+      "tags": ["油价", "汽车", "出行"]
+    },
+    {
+      "id": "kuaidi",
+      "name": "快递查询",
+      "icon": "package",
+      "color": "#1abc9c",
+      "desc": "全网快递追踪",
+      "url": "https://www.kuaidi100.com/",
+      "tags": ["快递", "物流", "生活"]
+    },
+    {
+      "id": "yuyue",
+      "name": "医院挂号",
+      "icon": "heart",
+      "color": "#e74c3c",
+      "desc": "浙江预约挂号",
+      "url": "https://www.zj12580.cn/",
+      "tags": ["医院", "挂号", "健康"]
+    }
+  ],
+  "categories": [
+    {
+      "id": "gov",
+      "name": "政务办事",
+      "icon": "building",
+      "items": [
+        { "name": "身份证办理", "url": "https://zzy.hzpolice.gov.cn/", "desc": "首次申领/补办/换证" },
+        { "name": "居住证办理", "url": "https://zzy.hzpolice.gov.cn/", "desc": "居住登记/居住证" },
+        { "name": "落户政策", "url": "https://zzy.hzpolice.gov.cn/", "desc": "人才引进/积分落户" },
+        { "name": "出入境预约", "url": "https://s.nia.gov.cn/", "desc": "护照/港澳通行证" },
+        { "name": "社保查询", "url": "https://www.zjzwfw.gov.cn/", "desc": "浙里办APP" },
+        { "name": "公积金查询", "url": "https://gjj.hangzhou.gov.cn/", "desc": "余额/提取/贷款" },
+        { "name": "市民卡服务", "url": "https://www.96225.com/", "desc": "市民卡/公园年卡" },
+        { "name": "健康证办理", "url": "https://www.zjwjw.gov.cn/", "desc": "从业人员健康证" },
+        { "name": "营业执照", "url": "https://www.zjzwfw.gov.cn/", "desc": "企业开办/变更" },
+        { "name": "浙里办", "url": "https://www.zjzwfw.gov.cn/", "desc": "全省政务一网通办" }
+      ]
+    },
+    {
+      "id": "traffic",
+      "name": "交通出行",
+      "icon": "route",
+      "items": [
+        { "name": "尾号限行", "action": "xianxing", "desc": "工作日限行规则" },
+        { "name": "违章查询", "url": "https://zj.122.gov.cn/", "desc": "交通违法处理" },
+        { "name": "公交查询", "url": "https://www.hzbus.com.cn/", "desc": "线路/实时到站" },
+        { "name": "地铁线路", "url": "https://www.hzmetro.com/", "desc": "运营时间/票价" },
+        { "name": "公共自行车", "url": "https://www.ggzxc.com/", "desc": "小红车租还点" },
+        { "name": "火车票", "url": "https://www.12306.cn/", "desc": "12306官方购票" },
+        { "name": "机票查询", "url": "https://www.ctrip.com/", "desc": "萧山机场航班" },
+        { "name": "停车场查询", "url": "https://www.hzparking.com/", "desc": "市区停车诱导" },
+        { "name": "加油充电", "action": "youjia", "desc": "油价/充电桩" },
+        { "name": "车管所", "url": "https://zj.122.gov.cn/", "desc": "车辆/驾驶证业务" }
+      ]
+    },
+    {
+      "id": "life",
+      "name": "民生服务",
+      "icon": "shopping-bag",
+      "items": [
+        { "name": "水费缴纳", "url": "https://www.hzwater.com.cn/", "desc": "杭州水务" },
+        { "name": "电费缴纳", "url": "https://www.95598.cn/", "desc": "国家电网" },
+        { "name": "燃气缴费", "url": "https://www.hzgas.com.cn/", "desc": "杭州燃气" },
+        { "name": "宽带办理", "url": "https://www.10086.cn/", "desc": "移动/联通/电信" },
+        { "name": "医院挂号", "url": "https://www.zj12580.cn/", "desc": "浙江预约挂号平台" },
+        { "name": "疫苗接种", "url": "https://www.zjwjw.gov.cn/", "desc": "疫苗预约/接种点" },
+        { "name": "药店查询", "url": "https://www.zjyj.gov.cn/", "desc": "定点零售药店" },
+        { "name": "快递查询", "url": "https://www.kuaidi100.com/", "desc": "全网物流追踪" },
+        { "name": "家政服务", "url": "https://www.51jz.cn/", "desc": "保洁/维修/搬家" },
+        { "name": "二手交易", "url": "https://2.taobao.com/", "desc": "闲鱼/本地二手" }
+      ]
+    },
+    {
+      "id": "hangzhou",
+      "name": "杭州特色",
+      "icon": "map-pin",
+      "items": [
+        { "name": "西湖景区", "url": "https://www.toxihu.com/", "desc": "景点/游船/预约" },
+        { "name": "钱塘江大潮", "url": "https://www.hzqtj.com/", "desc": "观潮时间表" },
+        { "name": "灵隐寺", "url": "https://www.lingyin.org/", "desc": "预约/门票/法会" },
+        { "name": "宋城演艺", "url": "https://www.songcn.com/", "desc": "千古情演出" },
+        { "name": "西溪湿地", "url": "https://www.xixiwetland.com.cn/", "desc": "门票/游船" },
+        { "name": "千岛湖", "url": "https://www.1000islandlake.com/", "desc": "景区/游船/住宿" },
+        { "name": "杭州博物馆", "url": "https://www.hzmuseum.com/", "desc": "免费预约参观" },
+        { "name": "公园年卡", "url": "https://www.96225.com/", "desc": "市民卡公园年卡" },
+        { "name": "美食推荐", "url": "https://www.dianping.com/hangzhou/", "desc": "杭帮菜/小吃" },
+        { "name": "龙井茶", "url": "https://www.longjing.com/", "desc": "产地/购买/品鉴" }
+      ]
+    },
+    {
+      "id": "info",
+      "name": "便民信息",
+      "icon": "phone",
+      "items": [
+        { "name": "常用电话", "action": "phonebook", "desc": "应急/政务/服务热线" },
+        { "name": "邮政编码", "action": "postcode", "desc": "杭州各区县邮编" },
+        { "name": "行政区划", "action": "district", "desc": "区县/街道信息" },
+        { "name": "杭州天气", "action": "weather", "desc": "实时天气/预报" },
+        { "name": "万年历", "action": "calendar", "desc": "农历/节气/黄历" },
+        { "name": "个税计算", "action": "tax", "desc": "工资个税计算器" },
+        { "name": "房贷计算", "action": "loan", "desc": "等额本息/本金" },
+        { "name": "社保计算", "action": "sbcalc", "desc": "缴费比例/金额" },
+        { "name": "重名查询", "url": "https://zzy.hzpolice.gov.cn/", "desc": "同名同姓人数" },
+        { "name": "学历认证", "url": "https://www.chsi.com.cn/", "desc": "学信网查询" }
+      ]
+    }
+  ],
+  "phonebook": [
+    { "name": "报警电话", "number": "110", "category": "应急" },
+    { "name": "火警电话", "number": "119", "category": "应急" },
+    { "name": "急救中心", "number": "120", "category": "应急" },
+    { "name": "交通事故", "number": "122", "category": "应急" },
+    { "name": "供电抢修", "number": "95598", "category": "公用事业" },
+    { "name": "燃气抢修", "number": "967266", "category": "公用事业" },
+    { "name": "水务热线", "number": "96055", "category": "公用事业" },
+    { "name": "市民卡服务", "number": "96225", "category": "政务服务" },
+    { "name": "社保咨询", "number": "12333", "category": "政务服务" },
+    { "name": "公积金热线", "number": "12329", "category": "政务服务" },
+    { "name": "政务服务热线", "number": "12345", "category": "政务服务" },
+    { "name": "公交热线", "number": "85191122", "category": "交通" },
+    { "name": "地铁服务", "number": "26311111", "category": "交通" },
+    { "name": "萧山机场", "number": "96299", "category": "交通" },
+    { "name": "出租车投诉", "number": "12328", "category": "交通" },
+    { "name": "消费投诉", "number": "12315", "category": "维权" },
+    { "name": "环保投诉", "number": "12369", "category": "维权" },
+    { "name": "城管热线", "number": "12319", "category": "维权" },
+    { "name": "杭州电视台", "number": "89912345", "category": "媒体" },
+    { "name": "杭州日报", "number": "85051111", "category": "媒体" }
+  ],
+  "postcodes": [
+    { "district": "上城区", "code": "310000" },
+    { "district": "拱墅区", "code": "310000" },
+    { "district": "西湖区", "code": "310000" },
+    { "district": "滨江区", "code": "310051" },
+    { "district": "萧山区", "code": "311200" },
+    { "district": "余杭区", "code": "311100" },
+    { "district": "临平区", "code": "311100" },
+    { "district": "钱塘区", "code": "310018" },
+    { "district": "富阳区", "code": "311400" },
+    { "district": "临安区", "code": "311300" },
+    { "district": "桐庐县", "code": "311500" },
+    { "district": "淳安县", "code": "311700" },
+    { "district": "建德市", "code": "311600" }
+  ],
+  "xianxingRule": {
+    "note": "工作日7:00-9:00、16:30-18:30，错峰限行区域内按机动车号牌最后一位阿拉伯数字对应限行",
+    "rules": [
+      { "day": "周一", "tail": "1和9" },
+      { "day": "周二", "tail": "2和8" },
+      { "day": "周三", "tail": "3和7" },
+      { "day": "周四", "tail": "4和6" },
+      { "day": "周五", "tail": "5和0" },
+      { "day": "周六", "tail": "不限行" },
+      { "day": "周日", "tail": "不限行" }
+    ],
+    "area": "留祥路—石祥路—石桥路—秋涛路—复兴路—老复兴路—虎跑路—满觉陇路—五老峰隧道—吉庆山隧道—梅灵北路—九里松隧道—灵溪南路—灵溪隧道—西溪路—紫金港路—文一西路—古墩路构成的围合区域内所有道路（含边界道路）"
+  }
+}

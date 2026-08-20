@@ -1,0 +1,39 @@
+{
+  "name": "iHangzhou 杭州生活助手",
+  "short_name": "iHangzhou",
+  "description": "杭州人的数字生活工具箱，政务办事、交通出行、民生服务一站导航",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fafbff",
+  "theme_color": "#0ea5e9",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "categories": ["navigation", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%230ea5e9'/%3E%3Ctext x='256' y='360' font-size='280' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'%3E杭%3C/text%3E%3C/svg%3E",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "今日限行",
+      "short_name": "限行",
+      "url": "/?action=xianxing"
+    },
+    {
+      "name": "实用工具",
+      "short_name": "工具",
+      "url": "/?page=tools"
+    },
+    {
+      "name": "常用电话",
+      "short_name": "电话",
+      "url": "/?page=phone"
+    }
+  ]
+}

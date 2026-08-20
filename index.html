@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="description" content="iHangzhou 杭州生活助手 - 杭州人的数字生活工具箱，政务办事、交通出行、民生服务一站导航 | ihangzhou.net">
+  <meta name="keywords" content="杭州,杭州生活,杭州办事,社保查询,公积金,限行,杭州天气,便民服务,ihangzhou,杭州本地助手,杭州政务,杭州交通">
+  <meta name="author" content="iHangzhou">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0ea5e9">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="iHangzhou">
+  <meta property="og:title" content="iHangzhou 杭州生活助手">
+  <meta property="og:description" content="杭州人的数字生活工具箱，政务办事、交通出行、民生服务一站导航">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="iHangzhou">
+  <meta property="og:url" content="https://ihangzhou.net/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="iHangzhou 杭州生活助手">
+  <meta name="twitter:description" content="杭州人的数字生活工具箱">
+  <link rel="canonical" href="https://ihangzhou.net/">
+  <link rel="manifest" href="manifest.json">
+  <title>iHangzhou · 杭州生活助手</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%230ea5e9'/%3E%3Ctext x='256' y='360' font-size='280' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'%3E杭%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+  <!-- 顶部栏 -->
+  <header class="topbar">
+    <div class="topbar-logo">
+      <div class="icon">杭</div>
+      <div class="text">
+        iHangzhou
+        <small>杭州生活助手</small>
+      </div>
+    </div>
+    <div class="topbar-search">
+      <input type="text" id="searchInput" placeholder="搜索：社保、限行、公积金..." autocomplete="off">
+    </div>
+    <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
+  </header>
+
+  <!-- 首页 -->
+  <div class="page active" id="pageHome">
+    <div class="content">
+      <!-- Hero -->
+      <section class="hero">
+        <h1>你好，杭州 👋</h1>
+        <div class="date" id="heroDate"></div>
+        <div class="hero-stats" id="heroStats"></div>
+      </section>
+
+      <!-- 热门办事 -->
+      <div class="section-head">
+        <h2>热门办事</h2>
+        <span class="tip">最常用入口</span>
+      </div>
+      <div class="hot-grid" id="hotGrid"></div>
+
+      <!-- 热门搜索 -->
+      <div class="hot-keywords" id="hotKeywords"></div>
+
+      <!-- 分类服务 -->
+      <div class="section-head">
+        <h2>全部服务</h2>
+        <span class="tip">按分类浏览</span>
+      </div>
+      <div class="tabs" id="tabs"></div>
+      <div class="service-grid" id="serviceGrid"></div>
+    </div>
+  </div>
+
+  <!-- 工具页 -->
+  <div class="page" id="pageTools">
+    <div class="content">
+      <div class="section-head">
+        <h2>实用工具</h2>
+        <span class="tip">内置计算与查询</span>
+      </div>
+      <div class="tools-grid" id="toolsPageContent"></div>
+    </div>
+  </div>
+
+  <!-- 电话页 -->
+  <div class="page" id="pagePhone">
+    <div class="content">
+      <div class="section-head">
+        <h2>常用电话</h2>
+        <span class="tip">点击复制号码</span>
+      </div>
+      <div id="phonePageContent"></div>
+    </div>
+  </div>
+
+  <!-- 我的页 -->
+  <div class="page" id="pageMe">
+    <div class="content">
+      <div class="me-card">
+        <div class="me-avatar">🏔️</div>
+        <div class="me-name">iHangzhou 用户</div>
+        <div class="me-desc">杭州人的数字生活工具箱</div>
+      </div>
+
+      <div class="me-list">
+        <div class="me-row" onclick="window.open('https://www.hangzhou.gov.cn/','_blank')">
+          <span class="micon">🏛️</span><span class="mtext">杭州市政府官网</span><span class="marrow">›</span>
+        </div>
+        <div class="me-row" onclick="window.open('https://www.zjzwfw.gov.cn/','_blank')">
+          <span class="micon">📱</span><span class="mtext">浙里办（浙江政务服务网）</span><span class="marrow">›</span>
+        </div>
+        <div class="me-row" onclick="window.open('https://www.hzbus.com.cn/','_blank')">
+          <span class="micon">🚌</span><span class="mtext">杭州公交集团</span><span class="marrow">›</span>
+        </div>
+        <div class="me-row" onclick="window.open('https://www.hzmetro.com/','_blank')">
+          <span class="micon">🚇</span><span class="mtext">杭州地铁</span><span class="marrow">›</span>
+        </div>
+        <div class="me-row" id="meTheme">
+          <span class="micon">🎨</span><span class="mtext">切换深色/浅色模式</span><span class="marrow">›</span>
+        </div>
+        <div class="me-row" onclick="showShareTip()">
+          <span class="micon">📤</span><span class="mtext">分享给朋友</span><span class="marrow">›</span>
+        </div>
+        <div class="me-row" onclick="showAbout()">
+          <span class="micon">ℹ️</span><span class="mtext">关于 iHangzhou</span><span class="marrow">›</span>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:20px;font-size:11px;color:var(--text-muted);line-height:1.8;">
+        <p>iHangzhou · 杭州生活助手</p>
+        <p>公益导航平台 · 不存储用户数据</p>
+        <p>所有外部链接均指向官方渠道</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部导航 -->
+  <nav class="bottom-nav">
+    <div class="bnav-item active" data-page="home">
+      <span class="bicon">🏠</span><span>首页</span>
+    </div>
+    <div class="bnav-item" data-page="tools">
+      <span class="bicon">🛠️</span><span>工具</span>
+    </div>
+    <div class="bnav-item" data-page="phone">
+      <span class="bicon">📞</span><span>电话</span>
+    </div>
+    <div class="bnav-item" data-page="me">
+      <span class="bicon">👤</span><span>我的</span>
+    </div>
+  </nav>
+
+  <!-- 模态框 -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">标题</h3>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    // PWA Service Worker 注册
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js').then(function (reg) {
+          console.log('iHangzhou SW registered:', reg.scope);
+        }).catch(function (err) {
+          console.log('SW registration failed:', err);
+        });
+      });
+    }
+  </script>
+  <script src="js/app.js"></script>
+  <script>
+    // 我的页额外功能
+    function showShareTip() {
+      var t = document.getElementById('toast');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'toast';
+        t.className = 'toast';
+        document.body.appendChild(t);
+      }
+      t.textContent = '点击右上角 ··· 分享给朋友';
+      t.classList.add('show');
+      setTimeout(function(){ t.classList.remove('show'); }, 2500);
+    }
+    function showAbout() {
+      var overlay = document.getElementById('modalOverlay');
+      var title = document.getElementById('modalTitle');
+      var body = document.getElementById('modalBody');
+      title.innerHTML = 'ℹ️ 关于 iHangzhou';
+      body.innerHTML = '<div style="line-height:2;font-size:14px;">' +
+        '<p><strong>iHangzhou · 杭州生活助手</strong></p>' +
+        '<p style="color:var(--text-secondary);">杭州人的数字生活工具箱，致力于让每一位杭州市民的生活更便捷。</p>' +
+        '<p style="margin-top:12px;"><strong>功能：</strong></p>' +
+        '<p style="color:var(--text-secondary);">• 50项政务/交通/民生/特色服务导航<br>' +
+        '• 限行查询、个税/房贷/社保计算器<br>' +
+        '• 21个常用电话一键复制<br>' +
+        '• 杭州天气、油价、万年历</p>' +
+        '<p style="margin-top:12px;"><strong>声明：</strong></p>' +
+        '<p style="color:var(--text-secondary);font-size:13px;">本平台为公益导航，所有外部链接均指向官方渠道，数据仅供参考，不存储任何用户数据。</p>' +
+        '</div>';
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    // 我的页主题切换
+    document.addEventListener('DOMContentLoaded', function() {
+      var meTheme = document.getElementById('meTheme');
+      if (meTheme) {
+        meTheme.addEventListener('click', function() {
+          var btn = document.getElementById('themeBtn');
+          if (btn) btn.click();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
