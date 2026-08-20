@@ -18,5 +18,10 @@ __pycache__/
 *.pyc
 .venv/
 
+# Secrets / tokens
+.gitee
+.env
+.token
+
 # Test files (keep them but ignore temp)
 *.log
