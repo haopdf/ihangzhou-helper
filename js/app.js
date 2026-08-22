@@ -13,13 +13,13 @@
     // 热门办事（顶部快捷入口）
     hotServices: [
       { name: "今日限行", icon: "🚗", desc: "尾号限行查询", action: "xianxing", color: "#ef4444" },
-      { name: "发票抽奖", icon: "🧾", desc: "杭州发票抽奖", url: "https://fpjj.hangzhou.gov.cn/", color: "#f59e0b" },
+      { name: "发票抽奖", icon: "🧾", desc: "杭州发票抽奖", url: "http://m.hz.bendibao.com/youhui/", color: "#f59e0b" },
       { name: "找工作", icon: "💼", desc: "事业单位/国企", url: "https://hrss.hangzhou.gov.cn/", color: "#3b82f6" },
       { name: "人才认定", icon: "🎓", desc: "高层次人才申请", url: "https://hrss.hangzhou.gov.cn/", color: "#8b5cf6" },
-      { name: "灵隐寺预约", icon: "⛩️", desc: "门票免费预约", url: "https://www.hangzhou.gov.cn/", color: "#8b5cf6" },
+      { name: "灵隐寺预约", icon: "⛩️", desc: "门票免费预约", url: "http://m.hz.bendibao.com/tour/145731.shtm", color: "#8b5cf6" },
       { name: "公租房", icon: "🏠", desc: "申请/选房指南", url: "https://fgj.hangzhou.gov.cn/", color: "#10b981" },
       { name: "浙A摇号", icon: "🚘", desc: "车牌摇号申请", url: "https://xkctk.hzcb.gov.cn/", color: "#ef4444" },
-      { name: "钱塘江大潮", icon: "🌊", desc: "观潮时间表", url: "https://www.hangzhou.gov.cn/", color: "#06b6d4" }
+      { name: "钱塘江大潮", icon: "🌊", desc: "观潮时间表", url: "http://m.hz.bendibao.com/cyfw/qiantangjiangdachao/", color: "#06b6d4" }
     ],
 
     // 10大分类
@@ -41,7 +41,7 @@
           { name: "工资计算", desc: "个税/工资计算器", action: "tax" },
           { name: "市长热线", desc: "12345政务服务热线", action: "phonebook" },
           { name: "浙里办", desc: "全省政务一网通办", url: "https://www.zjzwfw.gov.cn/" },
-          { name: "发票抽奖", desc: "杭州发票抽奖登记", url: "https://fpjj.hangzhou.gov.cn/" },
+          { name: "发票抽奖", desc: "杭州发票抽奖登记", url: "http://m.hz.bendibao.com/youhui/" },
           { name: "各类补贴汇总", desc: "人才/就业/租房补贴", url: "https://hrss.hangzhou.gov.cn/" },
           { name: "学历认证", desc: "学信网查询", url: "https://www.chsi.com.cn/" },
           { name: "户口迁移", desc: "市内/市外迁移", url: "https://zzy.hzpolice.gov.cn/" }
@@ -77,9 +77,9 @@
           { name: "车辆年检", desc: "年检时间/地点查询", url: "https://zj.122.gov.cn/" },
           { name: "驾驶证业务", desc: "换证/补证/审验", url: "https://zj.122.gov.cn/" },
           { name: "驾照学分", desc: "学法减分系统", url: "https://zj.122.gov.cn/" },
-          { name: "停车包月", desc: "小区/道路停车包月", url: "https://www.hangzhou.gov.cn/" },
-          { name: "停车场查询", desc: "市区停车诱导", url: "https://www.hangzhou.gov.cn/" },
-          { name: "网约车", desc: "网约车从业资格", url: "https://www.hangzhou.gov.cn/" },
+          { name: "停车包月", desc: "小区/道路停车包月", url: "http://m.hz.bendibao.com/traffic/171165.shtm" },
+          { name: "停车场查询", desc: "市区停车诱导", url: "http://m.hz.bendibao.com/traffic/" },
+          { name: "网约车", desc: "网约车从业资格", url: "http://m.hz.bendibao.com/live/cheliangjiaotong/" },
           { name: "车管所", desc: "车辆/驾驶证综合业务", url: "https://zj.122.gov.cn/" },
           { name: "新能源车牌", desc: "绿牌申请/政策", url: "https://xkctk.hzcb.gov.cn/" },
           { name: "二手车过户", desc: "二手车交易/过户", url: "https://zj.122.gov.cn/" }
@@ -88,9 +88,9 @@
       {
         id: "life", name: "民生服务", icon: "🛍️",
         items: [
-          { name: "杭州消费券", desc: "领取/使用指南", url: "https://www.hangzhou.gov.cn/" },
+          { name: "杭州消费券", desc: "领取/使用指南", url: "http://m.hz.bendibao.com/youhui/" },
           { name: "发票抽奖", desc: "消费发票抽奖登记", url: "https://fpjj.hangzhou.gov.cn/" },
-          { name: "每日薅羊毛", desc: "优惠/折扣汇总", url: "https://www.hangzhou.gov.cn/" },
+          { name: "每日薅羊毛", desc: "优惠/折扣汇总", url: "http://m.hz.bendibao.com/youhui/meishituangou/" },
           { name: "水费缴纳", desc: "杭州水务", url: "https://www.hzwater.com.cn/" },
           { name: "电费缴纳", desc: "国家电网", url: "https://www.95598.cn/" },
           { name: "燃气缴费", desc: "杭州燃气", url: "https://www.hzgas.com.cn/" },
@@ -174,30 +174,30 @@
       {
         id: "travel", name: "旅游休闲", icon: "🏞️",
         items: [
-          { name: "西湖景区", desc: "景点/游船/预约", url: "https://www.hangzhou.gov.cn/" },
-          { name: "灵隐寺", desc: "门票免费预约", url: "https://www.hangzhou.gov.cn/" },
-          { name: "景点预约", desc: "杭州各景点预约入口", url: "https://www.hangzhou.gov.cn/" },
-          { name: "钱塘江大潮", desc: "观潮时间表/地点", url: "https://www.hangzhou.gov.cn/" },
+          { name: "西湖景区", desc: "景点/游船/预约", url: "http://m.hz.bendibao.com/tour/" },
+          { name: "灵隐寺", desc: "门票免费预约", url: "http://m.hz.bendibao.com/tour/145731.shtm" },
+          { name: "景点预约", desc: "杭州各景点预约入口", url: "http://m.hz.bendibao.com/news/jingdianyuyue/" },
+          { name: "钱塘江大潮", desc: "观潮时间表/地点", url: "http://m.hz.bendibao.com/cyfw/qiantangjiangdachao/" },
           { name: "西溪湿地", desc: "门票/游船", url: "https://www.xixiwetland.com.cn/" },
-          { name: "千岛湖", desc: "景区/游船/住宿", url: "https://www.hangzhou.gov.cn/" },
+          { name: "千岛湖", desc: "景区/游船/住宿", url: "http://m.hz.bendibao.com/tour/zhoubianlvyou/" },
           { name: "宋城演艺", desc: "千古情演出", url: "https://www.songcn.com/" },
-          { name: "杭州博物馆", desc: "免费预约参观", url: "https://www.hangzhou.gov.cn/" },
+          { name: "杭州博物馆", desc: "免费预约参观", url: "http://m.hz.bendibao.com/tour/172159.shtm" },
           { name: "中国茶叶博物馆", desc: "免预约入馆", url: "https://www.teamuseum.cn/" },
           { name: "演唱会时间表", desc: "近期演唱会信息", url: "https://www.damai.cn/" },
-          { name: "体育赛事", desc: "马拉松/篮球联赛等", url: "https://www.hangzhou.gov.cn/" },
-          { name: "杭州马拉松", desc: "报名/路线/指南", url: "https://www.hangzhou.gov.cn/" },
-          { name: "赏花攻略", desc: "四季赏花地点", url: "https://www.hangzhou.gov.cn/" },
-          { name: "水果采摘", desc: "采摘园推荐", url: "https://www.hangzhou.gov.cn/" },
-          { name: "一日游攻略", desc: "杭州一日游路线", url: "https://www.hangzhou.gov.cn/" },
+          { name: "体育赛事", desc: "马拉松/篮球联赛等", url: "http://m.hz.bendibao.com/xiuxian/tiyu/" },
+          { name: "杭州马拉松", desc: "报名/路线/指南", url: "http://m.hz.bendibao.com/xiuxian/172468.shtm" },
+          { name: "赏花攻略", desc: "四季赏花地点", url: "http://m.hz.bendibao.com/tour/" },
+          { name: "水果采摘", desc: "采摘园推荐", url: "http://m.hz.bendibao.com/tour/" },
+          { name: "一日游攻略", desc: "杭州一日游路线", url: "http://m.hz.bendibao.com/tour/youzaihz/" },
           { name: "杭州美食", desc: "杭帮菜/小吃推荐", url: "https://www.dianping.com/hangzhou/" },
-          { name: "龙井茶", desc: "产地/购买/品鉴", url: "https://www.hangzhou.gov.cn/" },
-          { name: "元宵节攻略", desc: "灯会/活动/交通", url: "https://www.hangzhou.gov.cn/" },
-          { name: "七夕攻略", desc: "约会/活动/礼物", url: "https://www.hangzhou.gov.cn/" },
-          { name: "露营推荐", desc: "露营地点/装备", url: "https://www.hangzhou.gov.cn/" },
-          { name: "爬山攻略", desc: "杭州登山路线", url: "https://www.hangzhou.gov.cn/" },
-          { name: "亲子游", desc: "亲子游玩去处", url: "https://www.hangzhou.gov.cn/" },
-          { name: "免费游", desc: "免费景点/开放日", url: "https://www.hangzhou.gov.cn/" },
-          { name: "浙BA篮球联赛", desc: "城市篮球联赛", url: "https://www.hangzhou.gov.cn/" }
+          { name: "龙井茶", desc: "产地/购买/品鉴", url: "http://m.hz.bendibao.com/tour/" },
+          { name: "元宵节攻略", desc: "灯会/活动/交通", url: "http://m.hz.bendibao.com/jieri/" },
+          { name: "七夕攻略", desc: "约会/活动/礼物", url: "http://m.hz.bendibao.com/jieri/" },
+          { name: "露营推荐", desc: "露营地点/装备", url: "http://m.hz.bendibao.com/xiuxian/" },
+          { name: "爬山攻略", desc: "杭州登山路线", url: "http://m.hz.bendibao.com/tour/" },
+          { name: "亲子游", desc: "亲子游玩去处", url: "http://m.hz.bendibao.com/xiuxian/wanlegonglue/" },
+          { name: "免费游", desc: "免费景点/开放日", url: "http://m.hz.bendibao.com/tour/" },
+          { name: "浙BA篮球联赛", desc: "城市篮球联赛", url: "http://m.hz.bendibao.com/xiuxian/tiyu/" }
         ]
       },
       {
