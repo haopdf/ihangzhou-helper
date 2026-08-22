@@ -612,15 +612,14 @@
     if (!container) return;
     var toolCat = DATA.categories.find(function (c) { return c.id === 'tool'; });
     if (!toolCat) return;
-    container.innerHTML = '<div class="tools-grid">' +
+    container.innerHTML =
       toolCat.items.map(function (item) {
         return '<div class="tool-card" data-action="' + (item.action || '') + '" data-url="' + (item.url || '') + '">' +
           '<div class="tc-icon">' + getServiceIcon(item.name) + '</div>' +
           '<div class="tc-name">' + item.name + '</div>' +
           '<div class="tc-desc">' + item.desc + '</div>' +
           '</div>';
-      }).join('') +
-      '</div>';
+      }).join('');
 
     container.querySelectorAll('.tool-card').forEach(function (card) {
       card.addEventListener('click', function () { handleClick(this); });
