@@ -488,8 +488,8 @@ a { color: var(--primary); text-decoration: none; }
 /* ===== 工具页 ===== */
 .tools-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 
 .tool-card {
