@@ -307,6 +307,174 @@
           { name: "求职补贴", desc: "就业困难补贴", url: "https://hrss.hangzhou.gov.cn/", color: "#3b82f6" },
           { name: "招聘会信息", desc: "线下招聘会排期", url: "https://hrss.hangzhou.gov.cn/", color: "#ef4444" }
         ]
+      },
+      {
+        id: "food", name: "杭帮菜谱", icon: "🍜",
+        items: [
+          { name: "西湖醋鱼", desc: "楼外楼首创名菜", color: "#ef4444" },
+          { name: "龙井虾仁", desc: "茶香四溢名菜", color: "#10b981" },
+          { name: "东坡肉", desc: "苏东坡发明", color: "#f59e0b" },
+          { name: "叫化鸡", desc: "荷叶香鸡", color: "#8b5cf6" },
+          { name: "宋嫂鱼羹", desc: "西湖名菜", color: "#06b6d4" },
+          { name: "干炸响铃", desc: "腐皮酥脆名点", color: "#f97316" },
+          { name: "西湖莼菜", desc: "滑嫩爽口", color: "#14b8a6" },
+          { name: "片儿川", desc: "杭州特色面", color: "#ec4899" },
+          { name: "虾爆鳝面", desc: "奎元馆招牌", color: "#3b82f6" },
+          { name: "知味观小笼", desc: "鲜肉汤包", color: "#84cc16" },
+          { name: "吴山酥油饼", desc: "千年历史名点", color: "#a855f7" },
+          { name: "葱包烩", desc: "杭州街头小吃", color: "#0ea5e9" },
+          { name: "定胜糕", desc: "岳王庙特色", color: "#ef4444" },
+          { name: "猫耳朵", desc: "知味观名点", color: "#22c55e" },
+          { name: "幸福双", desc: "豆沙糯米点心", color: "#eab308" },
+          { name: "小鸡酥", desc: "酥皮甜点", color: "#f59e0b" },
+          { name: "木莲芯", desc: "清凉甜品", color: "#ec4899" },
+          { name: "杭州酱鸭", desc: "冬季传统美食", color: "#8b5cf6" }
+        ]
+      },
+      {
+        id: "laozihao", name: "杭州老字号", icon: "🏮",
+        items: [
+          { name: "胡庆余堂", desc: "百年国药馆·河坊街", url: "https://www.hqyt.com/", color: "#ef4444" },
+          { name: "王星记", desc: "丝绸扇·扇子博物馆", url: "https://www.wangxingji.com/", color: "#f59e0b" },
+          { name: "张小泉", desc: "百年名刀·刀剪博物馆", url: "https://www.zxc.com.cn/", color: "#10b981" },
+          { name: "都锦生", desc: "织锦之王·茅家埠", url: "https://www.djinsilk.com/", color: "#3b82f6" },
+          { name: "知味观", desc: "百年老店·东坡路", url: "https://www.zhiweiguan.com.cn/", color: "#8b5cf6" },
+          { name: "楼外楼", desc: "西湖醋鱼发源地", url: "https://www.louwailou.com.cn/", color: "#ec4899" },
+          { name: "奎元馆", desc: "片儿川始祖·解放路", url: "https://www.kuiyukuan.com/", color: "#06b6d4" },
+          { name: "天香楼", desc: "正宗杭帮菜", url: "https://www.tianxianglou.com/", color: "#14b8a6" },
+          { name: "山外山", desc: "杭帮菜名店·植物园", url: "https://www.shanwaishan.com/", color: "#84cc16" },
+          { name: "西泠印社", desc: "金石篆刻·孤山路", url: "https://www.xlysan.com/", color: "#f97316" },
+          { name: "邵芝岩", desc: "百年毛笔·中山路", url: "https://www.shaozhiyan.com/", color: "#a855f7" },
+          { name: "孔凤春", desc: "百年化妆品·河坊街", url: "https://www.kongfengchun.com/", color: "#0ea5e9" },
+          { name: "龙泉青瓷", desc: "国家级非遗", url: "https://www.longquancizhou.com/", color: "#22c55e" },
+          { name: "万事利", desc: "国礼丝绸品牌", url: "https://www.wensli.com/", color: "#eab308" }
+        ]
+      },
+      {
+        id: "celebrity", name: "杭州名人", icon: "👤",
+        items: [
+          { name: "林徽因", desc: "建筑师的江南情怀", color: "#ef4444" },
+          { name: "胡雪岩", desc: "红顶商人·元宝街", url: "https://www.hzxyny.com/", color: "#f59e0b" },
+          { name: "白居易", desc: "杭州刺史·西湖诗人", color: "#10b981" },
+          { name: "苏东坡", desc: "西湖筑堤·文豪", color: "#3b82f6" },
+          { name: "岳飞", desc: "精忠报国·岳王庙", color: "#8b5cf6" },
+          { name: "李清照", desc: "宋词才女", color: "#ec4899" },
+          { name: "陆游", desc: "爱国诗人", color: "#06b6d4" },
+          { name: "于谦", desc: "明代名臣·清河坊", color: "#14b8a6" },
+          { name: "郁达夫", desc: "文学巨匠·大学路", color: "#84cc16" },
+          { name: "章太炎", desc: "国学大师·余杭塘栖", color: "#f97316" },
+          { name: "马一浮", desc: "国学传奇", color: "#a855f7" },
+          { name: "李叔同", desc: "弘一法师·虎跑", color: "#0ea5e9" },
+          { name: "史量才", desc: "报业大王", color: "#22c55e" },
+          { name: "戴望舒", desc: "雨巷诗人", color: "#eab308" },
+          { name: "黄宾虹", desc: "国画大师·栖霞岭", color: "#ef4444" },
+          { name: "潘天寿", desc: "美术教育家·南山路", color: "#3b82f6" }
+        ]
+      },
+      {
+        id: "history", name: "历史文化", icon: "🏯",
+        items: [
+          { name: "南宋皇城", desc: "南宋遗址公园", color: "#ef4444" },
+          { name: "良渚古城", desc: "世界遗产·余杭", url: "https://www.liangzhu.com/", color: "#f59e0b" },
+          { name: "京杭大运河", desc: "世界遗产·拱宸桥", url: "https://www.yhcanal.com/", color: "#10b981" },
+          { name: "西湖文化", desc: "世界遗产", url: "https://whol.mztrip.com/", color: "#3b82f6" },
+          { name: "钱塘江", desc: "观潮胜地", url: "https://www.gongshumeiti.com/", color: "#8b5cf6" },
+          { name: "吴越文化", desc: "钱王陵园·临安", color: "#ec4899" },
+          { name: "龙井茶文化", desc: "茶博馆·龙井路", url: "https://www.teamuseum.cn/", color: "#06b6d4" },
+          { name: "丝绸文化", desc: "丝绸博物馆·玉皇山路", url: "https://www.chinasilkmuseum.com/", color: "#14b8a6" },
+          { name: "运河文化", desc: "运河博物馆·拱墅", color: "#84cc16" },
+          { name: "南宋官窑", desc: "南宋官窑博物馆", color: "#f97316" },
+          { name: "藏书文化", desc: "文澜阁·圣因寺遗址", color: "#a855f7" },
+          { name: "佛教文化", desc: "灵隐寺·法喜寺", url: "https://www.lingyinsi.org.cn/", color: "#0ea5e9" }
+        ]
+      },
+      {
+        id: "internet", name: "互联网大厂", icon: "💻",
+        items: [
+          { name: "阿里巴巴", desc: "淘宝/支付宝·余杭", url: "https://www.alibabagroup.com/", color: "#ff6600" },
+          { name: "蚂蚁集团", desc: "支付宝/余额宝·西湖区", url: "https://www.antgroup.com/", color: "#1677ff" },
+          { name: "网易", desc: "游戏/音乐·滨江区", url: "https://www.163.com/", color: "#ea4335" },
+          { name: "字节跳动", desc: "抖音·余杭区", url: "https://www.bytedance.com/", color: "#fe2c55" },
+          { name: "阿里云", desc: "云计算·余杭", url: "https://www.aliyun.com/", color: "#ff6600" },
+          { name: "菜鸟网络", desc: "物流科技·西湖区", url: "https://www.cainiao.com/", color: "#00aeef" },
+          { name: "海康威视", desc: "安防监控·滨江区", url: "https://www.hikvision.com/", color: "#0070f3" },
+          { name: "大华股份", desc: "智慧城市·滨江区", url: "https://www.dahuatech.com/", color: "#4a90e2" },
+          { name: "新华三", desc: "网络设备·滨江区", url: "https://www.h3c.com/", color: "#00a870" },
+          { name: "涂鸦智能", desc: "IoT平台·西湖区", url: "https://www.tuya.com/", color: "#ff6b35" },
+          { name: "同花顺", desc: "金融科技·余杭区", url: "https://www.10jqka.com.cn/", color: "#1989fa" },
+          { name: "恒生电子", desc: "金融IT·滨江区", url: "https://www.hundsun.com/", color: "#07c160" },
+          { name: "梦想小镇", desc: "互联网创业·余杭", url: "https://www.hzctp.cn/", color: "#722ed1" },
+          { name: "云栖小镇", desc: "云计算产业园", url: "https://www.yunqismall.com/", color: "#1677ff" }
+        ]
+      },
+      {
+        id: "street", name: "杭州街道", icon: "🛤️",
+        items: [
+          { name: "河坊街", desc: "老字号地图·上城区", color: "#ef4444" },
+          { name: "南山路", desc: "文艺进化史·西湖区", color: "#f59e0b" },
+          { name: "延安路", desc: "百年变迁·下城区", color: "#10b981" },
+          { name: "湖滨路", desc: "时光胶囊·上城区", color: "#3b82f6" },
+          { name: "孩儿巷", desc: "市井风华·下城区", color: "#8b5cf6" },
+          { name: "马塍弄", desc: "市井哲学·西湖区", color: "#ec4899" },
+          { name: "仁和路", desc: "名流记忆·上城区", color: "#06b6d4" },
+          { name: "惠民路", desc: "平民故事·上城区", color: "#14b8a6" },
+          { name: "武林广场", desc: "商业帝国·下城区", color: "#84cc16" },
+          { name: "庆春路", desc: "繁华演变·江干区", color: "#f97316" },
+          { name: "文一路", desc: "高校文化带·西湖区", color: "#a855f7" },
+          { name: "莫干山路", desc: "老工业记忆·拱墅区", color: "#0ea5e9" },
+          { name: "解放路", desc: "交通枢纽记忆", color: "#22c55e" },
+          { name: "钱江路", desc: "江岸新篇·CBD", color: "#eab308" },
+          { name: "复兴路", desc: "历史回响·上城区", color: "#ef4444" }
+        ]
+      },
+      {
+        id: "weekend", name: "周末休闲", icon: "🎉",
+        items: [
+          { name: "亲子一日游", desc: "6条经典路线", color: "#ef4444" },
+          { name: "免费景点", desc: "8处免费景点", color: "#f59e0b" },
+          { name: "特色市集", desc: "逛吃指南", color: "#10b981" },
+          { name: "短途自驾", desc: "半日逃离都市", color: "#3b82f6" },
+          { name: "夜生活", desc: "亲子夜体验", color: "#8b5cf6" },
+          { name: "DIY工坊", desc: "动手体验", color: "#ec4899" },
+          { name: "博物馆", desc: "参观指南", color: "#06b6d4" },
+          { name: "咖啡书吧", desc: "亲子推荐", color: "#14b8a6" },
+          { name: "隐秘拍照点", desc: "20个拍照圣地", color: "#84cc16" },
+          { name: "日落观景台", desc: "10处日落", color: "#f97316" },
+          { name: "免费运动场", desc: "10处运动场所", color: "#a855f7" },
+          { name: "凌晨美食", desc: "24小时营业", color: "#0ea5e9" }
+        ]
+      },
+      {
+        id: "museum", name: "博物馆", icon: "🏛️",
+        items: [
+          { name: "浙江省博物馆", desc: "之江馆区", url: "https://www.zjmuseum.com.cn/", color: "#ef4444" },
+          { name: "浙江美术馆", desc: "南山路", url: "https://www.zjam.org.cn/", color: "#f59e0b" },
+          { name: "杭州博物馆", desc: "吴山广场", url: "https://www.hzmuseum.cn/", color: "#10b981" },
+          { name: "中国丝绸博物馆", desc: "玉皇山路", url: "https://www.chinasilkmuseum.com/", color: "#3b82f6" },
+          { name: "中国茶叶博物馆", desc: "龙井路", url: "https://www.teamuseum.cn/", color: "#8b5cf6" },
+          { name: "良渚博物院", desc: "世界遗产", url: "https://www.liangzhu.com/", color: "#ec4899" },
+          { name: "运河博物馆", desc: "拱宸桥", url: "https://www.canalmuseum.cn/", color: "#06b6d4" },
+          { name: "南宋官窑博物馆", desc: "南复路", color: "#14b8a6" },
+          { name: "刀剪剑博物馆", desc: "小河路", url: "https://www.hz Museums.com.cn/", color: "#84cc16" },
+          { name: "伞博物馆", desc: "小河路", color: "#f97316" },
+          { name: "扇博物馆", desc: "小河路", color: "#a855f7" },
+          { name: "西泠印社", desc: "孤山路", url: "https://www.xlysan.com/", color: "#0ea5e9" }
+        ]
+      },
+      {
+        id: "coffee", name: "咖啡生活", icon: "☕",
+        items: [
+          { name: "西湖边咖啡馆", desc: "湖滨/断桥周边", color: "#ef4444" },
+          { name: "南山路文艺", desc: "复古文艺咖啡馆", color: "#f59e0b" },
+          { name: "网红咖啡馆", desc: "探店指南", color: "#10b981" },
+          { name: "社区咖啡馆", desc: "日常时光", color: "#3b82f6" },
+          { name: "咖啡豆文化", desc: "烘焙体验", color: "#8b5cf6" },
+          { name: "青芝坞", desc: "文艺小清新", color: "#ec4899" },
+          { name: "馒头山", desc: "老杭州风情", color: "#06b6d4" },
+          { name: "滨江江景", desc: "钱塘江畔咖啡", color: "#14b8a6" },
+          { name: "未来科技城", desc: "互联网人聚集地", color: "#84cc16" },
+          { name: "玉皇山路", desc: "幽静书吧", color: "#f97316" }
+        ]
       }
     ],
 
