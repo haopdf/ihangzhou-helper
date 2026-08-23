@@ -284,7 +284,7 @@
           { name: "中国茶叶博物馆", desc: "免预约入馆", url: "https://www.teamuseum.cn/", color: "#ef4444" },
           { name: "丝绸博物馆", desc: "免预约", url: "https://www.chinasilkmuseum.com/", color: "#f59e0b" },
           { name: "南宋官窑博物馆", desc: "陶瓷艺术", url: "https://www.guanyao.cn/", color: "#10b981" },
-          { name: "刀剪剑博物馆", desc: "非遗传承", url: "https://www.hz Museums.cn/", color: "#8b5cf6" },
+          { name: "刀剪剑博物馆", desc: "非遗传承", url: "https://www.hzmuseums.cn/", color: "#8b5cf6" },
           { name: "演唱会", desc: "近期演出信息", url: "https://www.damai.cn/", color: "#06b6d4" },
           { name: "音乐节", desc: "草莓/迷笛", url: "https://www.damai.cn/", color: "#ec4899" },
           { name: "话剧歌剧", desc: "剧院演出", url: "https://www.piaonet.com/", color: "#14b8a6" },
@@ -367,7 +367,7 @@
           { name: "新能源补贴", desc: "新能源汽车购置补贴", url: "https://fgj.hangzhou.gov.cn/", color: "#06b6d4" },
           { name: "家电以旧换新", desc: "绿色智能家电补贴", url: "https://www.hangzhou.gov.cn/", color: "#f43f5e" },
           { name: "体育消费券", desc: "健身/游泳/羽毛球", url: "https://tyj.hangzhou.gov.cn/", color: "#8b5cf6" },
-          { name: "文化惠民", desc: "剧院/图书馆优惠券", url: "https://whg.culture. Hangzhou.gov.cn/", color: "#14b8a6" },
+          { name: "文化惠民", desc: "剧院/图书馆优惠券", url: "https://whg.culturehz.gov.cn/", color: "#14b8a6" },
           { name: "夜校课程", desc: "成人兴趣班优惠报名", url: "https://hrss.hangzhou.gov.cn/", color: "#ec4899" },
           { name: "免费培训", desc: "政府补贴职业技能培训", url: "https://hz.nvq.net.cn/", color: "#f59e0b" }
         ]
@@ -561,7 +561,7 @@
           { name: "良渚博物院", desc: "世界遗产", url: "https://www.liangzhu.com/", color: "#ec4899" },
           { name: "运河博物馆", desc: "拱宸桥", url: "https://www.canalmuseum.cn/", color: "#06b6d4" },
           { name: "南宋官窑博物馆", desc: "南复路", color: "#14b8a6" },
-          { name: "刀剪剑博物馆", desc: "小河路", url: "https://www.hz Museums.com.cn/", color: "#84cc16" },
+          { name: "刀剪剑博物馆", desc: "小河路", url: "https://www.hzmuseums.cn/", color: "#84cc16" },
           { name: "伞博物馆", desc: "小河路", color: "#f97316" },
           { name: "扇博物馆", desc: "小河路", color: "#a855f7" },
           { name: "西泠印社", desc: "孤山路", url: "https://www.xlysan.com/", color: "#0ea5e9" }
