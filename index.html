@@ -248,6 +248,35 @@
   </script>
   <script src="js/app.js"></script>
   <script>
+    // 确保模态框可以关闭
+    document.addEventListener('DOMContentLoaded', function() {
+      var modalOverlay = document.getElementById('modalOverlay');
+      var modalClose = document.getElementById('modalClose');
+      
+      if (modalClose) {
+        modalClose.addEventListener('click', function() {
+          modalOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      }
+      
+      if (modalOverlay) {
+        modalOverlay.addEventListener('click', function(e) {
+          if (e.target === modalOverlay) {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+      
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+          modalOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+    
     // 我的页额外功能
     function showShareTip() {
       var t = document.getElementById('toast');

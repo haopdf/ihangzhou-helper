@@ -1362,6 +1362,76 @@ default: showToast('功能开发中');
     };
   }
 
+  // ===== 工资计算器（打工人必备） =====
+  function showSalaryCalc() {
+    openModal('💰 工资计算器',
+      '<div class="calc-form">' +
+      '<div class="fg"><label>税前月薪（元）</label><input type="number" id="salaryInput" value="15000" min="0"></div>' +
+      '<div class="fg"><label>公积金缴存比例</label><select id="gjjRate"><option value="0.12">12%（最高）</option><option value="0.10">10%</option><option value="0.08" selected>8%（最低）</option></select></div>' +
+      '<div class="fg"><label>社保个人比例</label><select id="sbRate"><option value="0.105">10.5%（标准）</option><option value="0.115">11.5%</option></select></div>' +
+      '<button class="btn btn-primary" onclick="window._calcSalary()">计算</button>' +
+      '<div id="salaryResult"></div></div>' +
+      '<div style="margin-top:12px;padding:12px;background:var(--bg-alt);border-radius:8px;font-size:12px;color:var(--text-secondary);">' +
+      '<strong>💡 说明：</strong>杭州社保基数范围：3957-22584元<br>' +
+      '公积金基数范围：2280-34470元<br>' +
+      '个税起征点：5000元/月</div>'
+    );
+    window._calcSalary = function() {
+      var salary = parseFloat($('#salaryInput').value) || 0;
+      var gjjRate = parseFloat($('#gjjRate').value);
+      var sbRate = parseFloat($('#sbRate').value);
+      
+      if (salary <= 0) { showToast('请输入正确工资'); return; }
+      
+      // 社保计算（简化版）
+      var sbBase = Math.min(Math.max(salary, 3957), 22584);
+      var sbPersonal = sbBase * sbRate;
+      
+      // 公积金计算
+      var gjjBase = Math.min(Math.max(salary, 2280), 34470);
+      var gjjPersonal = gjjBase * gjjRate;
+      
+      // 个税计算
+      var taxable = salary - 5000 - sbPersonal - gjjPersonal;
+      var tax = 0;
+      if (taxable > 0) {
+        if (taxable <= 3000) tax = taxable * 0.03;
+        else if (taxable <= 12000) tax = taxable * 0.10 - 210;
+        else if (taxable <= 25000) tax = taxable * 0.20 - 1410;
+        else if (taxable <= 35000) tax = taxable * 0.25 - 2660;
+        else if (taxable <= 55000) tax = taxable * 0.30 - 4410;
+        else if (taxable <= 80000) tax = taxable * 0.35 - 7160;
+        else tax = taxable * 0.45 - 15160;
+      }
+      
+      var netSalary = salary - sbPersonal - gjjPersonal - tax;
+      
+      $('#salaryResult').innerHTML = 
+        '<div class="calc-result" style="background:linear-gradient(135deg,#10b981,#059669);">' +
+        '<div class="cr-amount">¥' + netSalary.toFixed(2) + '</div>' +
+        '<div class="cr-label">税后月薪</div></div>' +
+        '<div style="margin-top:12px;padding:12px;background:var(--bg);border-radius:8px;">' +
+        '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);">' +
+        '<span>税前工资</span><span style="font-weight:600;">¥' + salary.toFixed(2) + '</span></div>' +
+        '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);color:#ef4444;">' +
+        '<span>养老保险 (8%)</span><span>-¥' + (sbBase * 0.08).toFixed(2) + '</span></div>' +
+        '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);color:#ef4444;">' +
+        '<span>医疗保险 (2%)</span><span>-¥' + (sbBase * 0.02).toFixed(2) + '</span></div>' +
+        '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);color:#ef4444;">' +
+        '<span>失业保险 (0.5%)</span><span>-¥' + (sbBase * 0.005).toFixed(2) + '</span></div>' +
+        '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);color:#10b981;">' +
+        '<span>公积金 (' + (gjjRate*100) + '%)</span><span>-¥' + gjjPersonal.toFixed(2) + '</span></div>' +
+        '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);color:#ef4444;">' +
+        '<span>个税</span><span>-¥' + tax.toFixed(2) + '</span></div>' +
+        '<div style="display:flex;justify-content:space-between;padding:8px 0;color:#10b981;font-weight:700;">' +
+        '<span>税后到手</span><span>¥' + netSalary.toFixed(2) + '</span></div></div>' +
+        '<div style="margin-top:12px;padding:12px;background:var(--accent);border-radius:8px;color:#fff;font-size:13px;">' +
+        '<strong>📊 年收入估算：</strong><br>' +
+        '税后年薪约 ¥' + (netSalary * 12).toFixed(0) + '（不含年终奖）<br>' +
+        '公积金年缴 ¥' + (gjjPersonal * 12).toFixed(0) + '（可提取！）</div>';
+    };
+  }
+
   function showTimezone() {
     var now = new Date();
     openModal('🕐 时区转换', '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">' +
@@ -1895,6 +1965,7 @@ default: showToast('功能开发中');
   window.showForex = showForex;
   window.showMetro = showMetro;
   window.showWeather = showWeather;
+  window.showSalaryCalc = showSalaryCalc;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
