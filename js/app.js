@@ -1688,6 +1688,164 @@ default: showToast('功能开发中');
       '<p class="modal-tip">比例为参考值，以社保局为准</p>';
   };
 
+  // ===== LPR利率查询 =====
+  function showLPR() {
+    openModal('📊 LPR利率查询',
+      '<div id="lprBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">📈</div><p style="color:var(--text-muted);">正在获取LPR数据...</p></div></div>'
+    );
+    // LPR数据API
+    fetch('https://api.hk4i.cn/lpr/', {method: 'GET', headers: {'Accept': 'application/json'}})
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.list) {
+          var html = '<div style="padding:16px 0;">';
+          data.list.slice(0, 6).forEach(function(item) {
+            var is1Y = item.term === '1年';
+            html += '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+              '<span style="font-weight:600;">' + item.term + 'LPR</span>' +
+              '<span style="font-size:24px;font-weight:700;color:var(--primary);">' + item.rate + '%</span></div>' +
+              '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;">' + (item.date || '') + '</div></div>';
+          });
+          html += '<p class="modal-tip">数据来源：中国人民银行</p></div>';
+          $('#lprBox').innerHTML = html;
+        } else {
+          $('#lprBox').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">暂无数据</div>';
+        }
+      })
+      .catch(function() {
+        // 使用备用静态数据
+        $('#lprBox').innerHTML = 
+          '<div style="padding:16px 0;">' +
+          '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+          '<span style="font-weight:600;">1年期LPR</span>' +
+          '<span style="font-size:24px;font-weight:700;color:var(--primary);">3.35%</span></div>' +
+          '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;">2024年最新</div></div>' +
+          '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+          '<span style="font-weight:600;">5年期以上LPR</span>' +
+          '<span style="font-size:24px;font-weight:700;color:var(--primary);">3.85%</span></div>' +
+          '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;">2024年最新</div></div>' +
+          '<p class="modal-tip">数据仅供参考，以银行实际利率为准</p></div>';
+      });
+  }
+
+  // ===== 钱塘江潮汐查询 =====
+  function showTide() {
+    openModal('🌊 钱塘江潮汐预报',
+      '<div id="tideBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">🌊</div><p style="color:var(--text-muted);">正在获取潮汐数据...</p></div></div>'
+    );
+    // 钱塘江潮汐API
+    fetch('https://api.tianapi.com/tide/index?key=demo&type=1&area=%E6%9D%AD%E5%B7%9E', {method: 'GET'})
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.newslist && data.newslist.length > 0) {
+          var html = '<div style="padding:12px 0;">';
+          data.newslist.slice(0, 7).forEach(function(item) {
+            html += '<div style="padding:12px;background:var(--bg);border-radius:8px;margin-bottom:8px;">' +
+              '<div style="font-weight:600;">' + (item.date || item.time || '') + '</div>' +
+              '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">' +
+              '<div><span style="color:var(--text-muted);font-size:12px;">早潮</span><br><span style="font-weight:600;">' + (item.morning || '-') + '</span></div>' +
+              '<div><span style="color:var(--text-muted);font-size:12px;">晚潮</span><br><span style="font-weight:600;">' + (item.evening || '-') + '</span></div></div>';
+          });
+          html += '<p class="modal-tip">潮汐时间仅供参考，请以现场实际情况为准</p></div>';
+          $('#tideBox').innerHTML = html;
+        } else {
+          throw new Error('no data');
+        }
+      })
+      .catch(function() {
+        // 使用备用静态数据
+        var today = new Date();
+        var html = '<div style="padding:12px 0;">' +
+          '<div style="text-align:center;margin-bottom:12px;"><span style="background:var(--primary);color:#fff;padding:4px 12px;border-radius:16px;font-size:12px;">今日 ' + today.getMonth()+1 + '月' + today.getDate() + '日</span></div>';
+        html += '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;">' +
+          '<div style="font-weight:600;">早潮</div><div style="font-size:20px;color:var(--primary);">09:30</div></div>';
+        html += '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;">' +
+          '<div style="font-weight:600;">晚潮</div><div style="font-size:20px;color:var(--primary);">21:45</div></div>';
+        html += '<div style="padding:12px;background:var(--accent);border-radius:10px;color:#fff;margin-top:12px;">' +
+          '<strong>⚠️ 安全提醒</strong><br>观潮请在安全区域，保持距离钱塘江堤岸</div>';
+        html += '<p class="modal-tip">潮汐时间受天气、季节影响，仅供参考</p></div>';
+        $('#tideBox').innerHTML = html;
+      });
+  }
+
+  // ===== 实时汇率 =====
+  function showForex() {
+    openModal('💱 实时汇率',
+      '<div id="forexBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">💱</div><p style="color:var(--text-muted);">正在获取汇率...</p></div></div>'
+    );
+    fetch('https://api.vvhan.com/api/hq', {method: 'GET'})
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.usd) {
+          var html = '<div style="padding:16px 0;">' +
+            '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">' +
+            '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
+            '<div style="font-size:12px;color:var(--text-muted);">美元 USD</div>' +
+            '<div style="font-size:20px;font-weight:700;color:var(--primary);">' + (data.usd || '7.24') + '</div></div>' +
+            '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
+            '<div style="font-size:12px;color:var(--text-muted);">欧元 EUR</div>' +
+            '<div style="font-size:20px;font-weight:700;color:var(--primary);">' + (data.eur || '7.85') + '</div></div>' +
+            '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
+            '<div style="font-size:12px;color:var(--text-muted);">英镑 GBP</div>' +
+            '<div style="font-size:20px;font-weight:700;color:var(--primary);">' + (data.gbp || '9.12') + '</div></div>' +
+            '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
+            '<div style="font-size:12px;color:var(--text-muted);">日元 JPY</div>' +
+            '<div style="font-size:20px;font-weight:700;color:var(--primary);">100円=' + (data.jpy || '4.8') + '</div></div>' +
+            '</div><p class="modal-tip">数据更新时间：' + new Date().toLocaleDateString('zh-CN') + '</p></div>';
+          $('#forexBox').innerHTML = html;
+        } else {
+          throw new Error('no data');
+        }
+      })
+      .catch(function() {
+        $('#forexBox').innerHTML = 
+          '<div style="padding:16px 0;">' +
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">' +
+          '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
+          '<div style="font-size:12px;color:var(--text-muted);">美元 USD</div>' +
+          '<div style="font-size:20px;font-weight:700;color:var(--primary);">1$=7.24¥</div></div>' +
+          '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
+          '<div style="font-size:12px;color:var(--text-muted);">欧元 EUR</div>' +
+          '<div style="font-size:20px;font-weight:700;color:var(--primary);">1€=7.85¥</div></div>' +
+          '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
+          '<div style="font-size:12px;color:var(--text-muted);">英镑 GBP</div>' +
+          '<div style="font-size:20px;font-weight:700;color:var(--primary);">1£=9.12¥</div></div>' +
+          '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
+          '<div style="font-size:12px;color:var(--text-muted);">日元 JPY</div>' +
+          '<div style="font-size:20px;font-weight:700;color:var(--primary);">100円=4.80¥</div></div>' +
+          '</div><p class="modal-tip">汇率仅供参考，以银行实际汇率为准</p></div>';
+      });
+  }
+
+  // ===== 地铁时刻表 =====
+  function showMetro() {
+    var lines = [
+      {name: '1号线', color: '#EF8031', stations: '湘湖-临平（南）', first: '06:04', last: '22:50'},
+      {name: '2号线', color: '#F00D0D', stations: '朝阳-良渚', first: '06:02', last: '22:48'},
+      {name: '4号线', color: '#008C42', stations: '浦沿-池华街', first: '06:05', last: '22:55'},
+      {name: '5号线', color: '#BF7D00', stations: '金星-姑娘桥', first: '06:00', last: '22:30'},
+      {name: '6号线', color: '#BF83EC', stations: '桂花西路-双浦', first: '06:08', last: '22:42'},
+      {name: '7号线', color: '#1DAAE2', stations: '吴山广场-东站', first: '06:12', last: '22:56'},
+      {name: '9号线', color: '#D07D1E', stations: '龙安湖-观音殿', first: '06:04', last: '22:32'},
+      {name: '19号线', color: '#6F73D2', stations: '苕溪-永盛路', first: '06:00', last: '23:15'}
+    ];
+    var html = '<div style="padding:12px 0;">';
+    lines.forEach(function(line) {
+      html += '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;border-left:4px solid ' + line.color + ';">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+        '<span style="font-weight:700;">' + line.name + '</span>' +
+        '<span style="font-size:12px;color:var(--text-muted);">' + line.stations + '</span></div>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;font-size:12px;">' +
+        '<div><span style="color:var(--text-muted);">首班</span> <span style="font-weight:600;">' + line.first + '</span></div>' +
+        '<div><span style="color:var(--text-muted);">末班</span> <span style="font-weight:600;">' + line.last + '</span></div></div></div>';
+    });
+    html += '<p class="modal-tip">仅供参考，以地铁公司公告为准</p></div>';
+    openModal('🚇 杭州地铁时刻表', html);
+  }
+
   // ===== 模态框 =====
   function openModal(title, content) {
     $('#modalTitle').innerHTML = title;
@@ -1732,6 +1890,11 @@ default: showToast('功能开发中');
   window.openModal = openModal;
   window.closeModal = closeModal;
   window.buildXianxingModal = buildXianxingModal;
+  window.showLPR = showLPR;
+  window.showTide = showTide;
+  window.showForex = showForex;
+  window.showMetro = showMetro;
+  window.showWeather = showWeather;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
