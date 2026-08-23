@@ -979,10 +979,19 @@ var tabMap = {
     $$('.bnav-item').forEach(function (i) { i.classList.remove('active'); });
     document.querySelector('.bnav-item[data-page="' + page + '"]').classList.add('active');
 
+    // 切换页面显示
     var pages = ['home', 'tools', 'phone', 'me'];
     pages.forEach(function (p) {
       var el = document.getElementById('page' + p.charAt(0).toUpperCase() + p.slice(1));
-      if (el) el.style.display = (p === page) ? 'block' : 'none';
+      if (el) {
+        if (p === page) {
+          el.style.display = 'block';
+          el.classList.add('active');
+        } else {
+          el.style.display = 'none';
+          el.classList.remove('active');
+        }
+      }
     });
 
     if (page === 'tools') renderToolsPage();
@@ -1967,9 +1976,15 @@ default: showToast('功能开发中');
   window.showWeather = showWeather;
   window.showSalaryCalc = showSalaryCalc;
 
+  // 确保 DOM 加载完成后初始化
+  function safeInit() {
+    // 延迟一点确保 DOM 完全就绪
+    setTimeout(init, 0);
+  }
+  
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', safeInit);
   } else {
-    init();
+    safeInit();
   }
 })();
