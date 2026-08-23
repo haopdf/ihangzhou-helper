@@ -170,6 +170,20 @@ a { color: var(--primary); text-decoration: none; }
   color: var(--text-secondary);
 }
 
+/* 次级快捷入口 */
+.secondary-nav {
+  background: var(--bg-alt);
+}
+
+.secondary-nav a {
+  padding: 10px 4px;
+}
+
+.secondary-nav span {
+  font-size: 12px;
+  font-weight: 500;
+}
+
 /* ===== 热门资讯轮播 ===== */
 .news-banner {
   background: var(--bg-card);
