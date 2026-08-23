@@ -25,3 +25,4 @@ __pycache__/
 
 # Test files (keep them but ignore temp)
 *.log
+.vercel

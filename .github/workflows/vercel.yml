@@ -1,0 +1,25 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+
+# 需要在 GitHub 仓库设置中添加以下 Secrets:
+# VERCEL_TOKEN: 从 https://vercel.com/account/tokens 获取
+# VERCEL_ORG_ID: 从 vercel CLI 运行 `vercel teams list` 获取
+# VERCEL_PROJECT_ID: 从 vercel CLI 运行 `vercel projects list` 获取
