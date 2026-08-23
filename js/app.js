@@ -13,13 +13,13 @@
     // 热门办事（顶部快捷入口）
     hotServices: [
       { name: "今日限行", icon: "🚗", desc: "尾号限行查询", action: "xianxing", color: "#ef4444" },
-      { name: "发票抽奖", icon: "🧾", desc: "杭州发票抽奖", url: "https://www.hangzhou.gov.cn/col/col1229151238/index.html", color: "#f59e0b" },
+      { name: "消费券", icon: "🎫", desc: "杭州消费券领取", url: "https://m.hz.bendibao.com/youhui/", color: "#f59e0b" },
       { name: "找工作", icon: "💼", desc: "事业单位/国企", url: "https://hrss.hangzhou.gov.cn/", color: "#3b82f6" },
-      { name: "人才认定", icon: "🎓", desc: "高层次人才申请", url: "https://hrss.hangzhou.gov.cn/", color: "#8b5cf6" },
-      { name: "灵隐寺预约", icon: "⛩️", desc: "门票免费预约", url: "https://www.lingyinsi.org.cn/", color: "#8b5cf6" },
-      { name: "公租房", icon: "🏠", desc: "申请/选房指南", url: "https://fgj.hangzhou.gov.cn/", color: "#10b981" },
+      { name: "公积金", icon: "🏠", desc: "查询/提取/贷款", url: "https://gjj.hangzhou.gov.cn/", color: "#10b981" },
       { name: "浙A摇号", icon: "🚘", desc: "车牌摇号申请", url: "https://xkctk.hzcb.gov.cn/", color: "#ef4444" },
-      { name: "钱塘江大潮", icon: "🌊", desc: "观潮时间表", url: "https://www.gongshumeiti.com/", color: "#06b6d4" }
+      { name: "发票抽奖", icon: "🧾", desc: "杭州发票抽奖", url: "https://www.hangzhou.gov.cn/col/col1229151238/index.html", color: "#8b5cf6" },
+      { name: "人才认定", icon: "🎓", desc: "高层次人才申请", url: "https://hrss.hangzhou.gov.cn/", color: "#06b6d4" },
+      { name: "景区门票", icon: "🎢", desc: "优惠门票预订", url: "https://m.hz.bendibao.com/youhui/jingdianmenpiao/", color: "#ec4899" }
     ],
 
     // 10大分类（模仿本地宝频道结构）
@@ -238,9 +238,37 @@
 { name: "房贷对比", desc: "等额本息/本金对比", action: "loancmp" },
 { name: "年龄计算", desc: "精确年龄/生肖", action: "agecalc" },
 { name: "倒计时", desc: "距离目标日期", action: "countdown" },
-{ name: "数字金额", desc: "大写金额转换", action: "rmbconv" },
-{ name: "色值选择", desc: "杭州主题配色", action: "colors" }
-]
+          { name: "数字金额", desc: "大写金额转换", action: "rmbconv" },
+          { name: "色值选择", desc: "杭州主题配色", action: "colors" }
+        ]
+      },
+      {
+        id: "youhui", name: "优惠特惠", icon: "🎫",
+        items: [
+          { name: "消费券领取", desc: "杭州消费券/满减券", url: "https://m.hz.bendibao.com/youhui/" },
+          { name: "饿了么红包", desc: "外卖红包最高减15元", url: "https://m.hz.bendibao.com/youhui/detail21957.htm" },
+          { name: "美团红包", desc: "10-18元大额红包", url: "https://m.hz.bendibao.com/youhui/detail22212.htm" },
+          { name: "景区门票", desc: "优惠门票预订", url: "https://m.hz.bendibao.com/youhui/jingdianmenpiao/" },
+          { name: "餐饮团购", desc: "美食优惠券", url: "https://m.hz.bendibao.com/youhui/meishituangou/" },
+          { name: "购物优惠", desc: "超市/商场折扣", url: "https://m.hz.bendibao.com/youhui/shangchanggouwu/" },
+          { name: "出行优惠", desc: "交通出行优惠券", url: "https://m.hz.bendibao.com/youhui/chuxing/" },
+          { name: "生活服务", desc: "家政/维修优惠券", url: "https://m.hz.bendibao.com/youhui/shenghuo/" },
+          { name: "补贴申领", desc: "各类政府补贴", url: "https://m.hz.bendibao.com/youhui/butie/" },
+          { name: "发票抽奖", desc: "杭州发票抽奖登记", url: "https://www.hangzhou.gov.cn/col/col1229151238/index.html" },
+          { name: "梵高星空艺术馆", desc: "成人票29.9元", url: "https://m.hz.bendibao.com/youhui/detail20230.htm" },
+          { name: "径山花海", desc: "成人票60元(原价98)", url: "https://m.hz.bendibao.com/youhui/detail9520.htm" },
+          { name: "杭州虎跑公园", desc: "成人票15元", url: "https://m.hz.bendibao.com/youhui/detail5727.htm" },
+          { name: "云栖竹径", desc: "票价8元", url: "https://m.hz.bendibao.com/youhui/detail7122.htm" },
+          { name: "开元森泊", desc: "水乐园门票195元起", url: "https://m.hz.bendibao.com/youhui/detail18412.htm" },
+          { name: "灵栖洞", desc: "门票75元(原价85)", url: "https://m.hz.bendibao.com/youhui/detail5432.htm" },
+          { name: "胡雪岩故居", desc: "成人票10元起", url: "https://m.hz.bendibao.com/youhui/detail17782.htm" },
+          { name: "杭州宋城", desc: "千古情演出118元", url: "https://m.hz.bendibao.com/youhui/detail20929.htm" },
+          { name: "钱塘江夜游", desc: "游船票98元", url: "https://m.hz.bendibao.com/youhui/detail21671.htm" },
+          { name: "野生动物世界", desc: "优待票140元", url: "https://m.hz.bendibao.com/youhui/detail17808.htm" },
+          { name: "大明山景区", desc: "门票25元", url: "https://m.hz.bendibao.com/youhui/detail4489.htm" },
+          { name: "京东优惠券", desc: "1元起产品券", url: "https://m.hz.bendibao.com/youhui/detail22601.htm" },
+          { name: "美团酒店券", desc: "酒店满减券", url: "https://m.hz.bendibao.com/youhui/detail22598.htm" }
+        ]
       }
     ],
 
@@ -593,14 +621,15 @@
     $$('.channel-item').forEach(function (item) {
       item.addEventListener('click', function () {
         var channel = this.dataset.channel;
-        var tabMap = {
-          'zixun': 'traffic',    // 资讯 -> 交通出行
-          'banshi': 'banshi',   // 办事 -> 办事指南
-          'kaoxue': 'edu',      // 考学 -> 教育办事
-          'zhaopin': 'job',     // 招聘 -> 找工作
-          'lvyou': 'travel',    // 旅游 -> 旅游休闲
-          'xiuxian': 'tool'     // 休闲 -> 实用工具
-        };
+var tabMap = {
+'zixun': 'traffic',    // 资讯 -> 交通出行
+'banshi': 'banshi',   // 办事 -> 办事指南
+'kaoxue': 'edu',      // 考学 -> 教育办事
+'zhaopin': 'job',     // 招聘 -> 找工作
+'lvyou': 'travel',    // 旅游 -> 旅游休闲
+'xiuxian': 'tool',    // 工具 -> 实用工具
+'youhui': 'youhui'    // 优惠 -> 优惠特惠
+};
         var tabId = tabMap[channel] || 'banshi';
         state.activeTab = tabId;
         $$('.tab').forEach(function (t) { t.classList.remove('active'); });
