@@ -1728,6 +1728,11 @@ default: showToast('功能开发中');
     }
   }
 
+  // 暴露全局函数供 index.html 调用
+  window.openModal = openModal;
+  window.closeModal = closeModal;
+  window.buildXianxingModal = buildXianxingModal;
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
