@@ -29,46 +29,77 @@
 </head>
 <body>
 
-  <!-- 顶部栏 -->
+  <!-- 顶部栏（模仿本地宝） -->
   <header class="topbar">
-    <div class="topbar-logo">
-      <div class="icon">杭</div>
-      <div class="text">
-        iHangzhou
-        <small>杭州生活助手</small>
-      </div>
+    <div class="topbar-city" id="citySelect">
+      <span>杭州</span><span class="city-arrow">▼</span>
     </div>
     <div class="topbar-search">
-      <input type="text" id="searchInput" placeholder="搜索：社保、限行、公积金..." autocomplete="off">
+      <input type="text" id="searchInput" placeholder="搜索服务..." autocomplete="off">
     </div>
     <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
   </header>
 
   <!-- 首页 -->
   <div class="page active" id="pageHome">
-    <div class="content">
-      <!-- Hero -->
-      <section class="hero">
-        <h1>你好，杭州 👋</h1>
-        <div class="date" id="heroDate"></div>
-        <div class="hero-stats" id="heroStats"></div>
-      </section>
+    <!-- 顶部快捷入口（模仿本地宝） -->
+    <div class="quick-nav">
+      <a href="#" onclick="openModal('🚗 今日限行', buildXianxingModal()); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ef4444'%3E%3Cpath d='M5 13l1.5-4.5h11L19 13M5 13l-2 5h4v4H7l-2-2-2 2H2v-4h1l-2-5m0 0v-3h14v3'/%3E%3C/svg%3E" alt=""><span>今日限行</span></a>
+      <a href="#" onclick="window.open('https://www.hangzhou.gov.cn/col/col1229151238/index.html','_blank'); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f59e0b'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6M16 13H8M16 17H8M10 9H8'/%3E%3C/svg%3E" alt=""><span>发票抽奖</span></a>
+      <a href="#" onclick="window.open('https://gjj.hangzhou.gov.cn/','_blank'); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310b981'%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z'/%3E%3Cpath d='M12 6v6l4 2'/%3E%3C/svg%3E" alt=""><span>公积金</span></a>
+      <a href="#" onclick="window.open('https://hrss.hangzhou.gov.cn/','_blank'); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233b82f6'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E" alt=""><span>找工作</span></a>
+      <a href="#" onclick="window.open('https://www.lingyinsi.org.cn/','_blank'); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E" alt=""><span>灵隐寺</span></a>
+      <a href="#" onclick="window.open('https://fgj.hangzhou.gov.cn/','_blank'); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ec4899'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpath d='M9 22V12h6v10'/%3E%3C/svg%3E" alt=""><span>公租房</span></a>
+      <a href="#" onclick="window.open('https://xkctk.hzcb.gov.cn/','_blank'); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2306b6d4'%3E%3Cpath d='M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0M5 17H3V6a1 1 0 0 1 1-1h9v12M14 17h1'/%3E%3C/svg%3E" alt=""><span>浙A摇号</span></a>
+      <a href="#" onclick="window.open('https://www.zjzwfw.gov.cn/','_blank'); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Crect x='3' y='3' width='18' height='18' rx='2' ry='2'/%3E%3Cpath d='M9 9h6v6H9z'/%3E%3C/svg%3E" alt=""><span>浙里办</span></a>
+    </div>
 
-      <!-- 热门办事 -->
-      <div class="section-head">
-        <h2>热门办事</h2>
-        <span class="tip">最常用入口</span>
+    <!-- 热门资讯轮播 -->
+    <div class="news-banner" id="newsBanner">
+      <div class="news-item" onclick="window.open('https://mp.weixin.qq.com/s/KmMA5B6mL-96m8-FcX7z_A','_blank')">
+        <div class="news-tag">热门</div>
+        <div class="news-title">2026杭州公积金缴存基数调整！最高可调至...</div>
       </div>
-      <div class="hot-grid" id="hotGrid"></div>
+      <div class="news-item" onclick="window.open('https://mp.weixin.qq.com/s/3XcxxSpY-FblsQmvZG1jOg','_blank')">
+        <div class="news-tag news-tag-new">新政</div>
+        <div class="news-title">9月20日起实行！国务院修改《住房公积金管理条例》</div>
+      </div>
+    </div>
 
+    <!-- 分类入口（模仿本地宝6大频道） -->
+    <div class="channel-grid">
+      <div class="channel-item" data-channel="zixun">
+        <span class="ch-icon">📰</span>
+        <span class="ch-name">资讯</span>
+      </div>
+      <div class="channel-item" data-channel="banshi">
+        <span class="ch-icon">🏛️</span>
+        <span class="ch-name">办事</span>
+      </div>
+      <div class="channel-item" data-channel="kaoxue">
+        <span class="ch-icon">📚</span>
+        <span class="ch-name">考学</span>
+      </div>
+      <div class="channel-item" data-channel="zhaopin">
+        <span class="ch-icon">💼</span>
+        <span class="ch-name">招聘</span>
+      </div>
+      <div class="channel-item" data-channel="lvyou">
+        <span class="ch-icon">🏞️</span>
+        <span class="ch-name">旅游</span>
+      </div>
+      <div class="channel-item" data-channel="xiuxian">
+        <span class="ch-icon">🎉</span>
+        <span class="ch-name">休闲</span>
+      </div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="content">
       <!-- 热门搜索 -->
       <div class="hot-keywords" id="hotKeywords"></div>
 
-      <!-- 分类服务 -->
-      <div class="section-head">
-        <h2>全部服务</h2>
-        <span class="tip">按分类浏览</span>
-      </div>
+      <!-- 分类Tab -->
       <div class="tabs" id="tabs"></div>
       <div class="service-grid" id="serviceGrid"></div>
     </div>

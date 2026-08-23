@@ -60,52 +60,36 @@ body {
 
 a { color: var(--primary); text-decoration: none; }
 
-/* ===== 顶部栏 ===== */
+/* ===== 顶部栏（模仿本地宝） ===== */
 .topbar {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--bg-card);
-  border-bottom: 1px solid var(--border);
-  padding: 12px 16px;
+  background: var(--primary);
+  padding: 10px 14px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  box-shadow: var(--shadow);
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-.topbar-logo {
+.topbar-city {
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.topbar-logo .icon {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 4px;
   color: #fff;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 6px 10px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 16px;
 }
 
-.topbar-logo .text {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--primary);
-  line-height: 1.2;
-}
-
-.topbar-logo .text small {
-  display: block;
+.topbar-city .city-arrow {
   font-size: 10px;
-  font-weight: 400;
-  color: var(--text-muted);
+  opacity: 0.8;
 }
 
 .topbar-search {
@@ -116,17 +100,13 @@ a { color: var(--primary); text-decoration: none; }
 
 .topbar-search input {
   width: 100%;
-  padding: 8px 12px 8px 34px;
-  border: 1px solid var(--border);
+  padding: 9px 14px 9px 36px;
+  border: none;
   border-radius: 18px;
-  background: var(--bg);
-  color: var(--text);
-  font-size: 13px;
+  background: rgba(255,255,255,0.95);
+  color: #333;
+  font-size: 14px;
   outline: none;
-}
-
-.topbar-search input:focus {
-  border-color: var(--primary);
 }
 
 .topbar-search::before {
@@ -135,8 +115,7 @@ a { color: var(--primary); text-decoration: none; }
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 12px;
-  opacity: 0.5;
+  font-size: 14px;
 }
 
 .theme-btn {
@@ -144,13 +123,135 @@ a { color: var(--primary); text-decoration: none; }
   height: 34px;
   border: none;
   border-radius: 8px;
-  background: var(--bg);
+  background: rgba(255,255,255,0.2);
   font-size: 16px;
   cursor: pointer;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #fff;
+}
+
+/* ===== 快捷导航（本地宝风格） ===== */
+.quick-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  padding: 1px 0;
+}
+
+.quick-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+  background: var(--bg-card);
+  text-decoration: none;
+  color: var(--text);
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.quick-nav a:active {
+  background: var(--bg-hover);
+  transform: scale(0.98);
+}
+
+.quick-nav img {
+  width: 28px;
+  height: 28px;
+}
+
+.quick-nav span {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* ===== 热门资讯轮播 ===== */
+.news-banner {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+}
+
+.news-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.news-item:active {
+  background: var(--bg-hover);
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-tag {
+  background: var(--primary);
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.news-tag-new {
+  background: var(--danger);
+}
+
+.news-title {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.4;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ===== 频道入口（本地宝6宫格） ===== */
+.channel-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  background: var(--border);
+  padding: 1px 0;
+}
+
+.channel-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 6px;
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.channel-item:active {
+  background: var(--bg-hover);
+  transform: scale(0.95);
+}
+
+.ch-icon {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.ch-name {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 /* ===== 内容容器 ===== */
