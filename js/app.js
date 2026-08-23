@@ -13,23 +13,22 @@
     // 热门办事（顶部快捷入口）
     hotServices: [
       { name: "今日限行", icon: "🚗", desc: "尾号限行查询", action: "xianxing", color: "#ef4444" },
-      { name: "消费券", icon: "🎫", desc: "杭州消费券领取", url: "https://m.hz.bendibao.com/youhui/", color: "#f59e0b" },
+      { name: "发票抽奖", icon: "🧾", desc: "杭州发票抽奖", url: "https://www.hangzhou.gov.cn/col/col1229151238/index.html", color: "#f59e0b" },
       { name: "找工作", icon: "💼", desc: "事业单位/国企", url: "https://hrss.hangzhou.gov.cn/", color: "#3b82f6" },
       { name: "公积金", icon: "🏠", desc: "查询/提取/贷款", url: "https://gjj.hangzhou.gov.cn/", color: "#10b981" },
       { name: "浙A摇号", icon: "🚘", desc: "车牌摇号申请", url: "https://xkctk.hzcb.gov.cn/", color: "#ef4444" },
-      { name: "发票抽奖", icon: "🧾", desc: "杭州发票抽奖", url: "https://www.hangzhou.gov.cn/col/col1229151238/index.html", color: "#8b5cf6" },
+      { name: "灵隐寺", icon: "⛩️", desc: "门票预约", url: "https://www.lingyinsi.org.cn/", color: "#8b5cf6" },
       { name: "人才认定", icon: "🎓", desc: "高层次人才申请", url: "https://hrss.hangzhou.gov.cn/", color: "#06b6d4" },
-      { name: "景区门票", icon: "🎢", desc: "优惠门票预订", url: "https://m.hz.bendibao.com/youhui/jingdianmenpiao/", color: "#ec4899" }
+      { name: "市民卡", icon: "💳", desc: "服务/充值", url: "https://www.96225.com/", color: "#ec4899" }
     ],
 
     // 10大分类（模仿本地宝频道结构）
     categories: [
-      {
-        id: "banshi", name: "办事指南", icon: "🏛️",
+      { id: "banshi", name: "办事指南", icon: "🏛️",
         items: [
-          { name: "杭州社保", desc: "查询/缴费/转移", url: "https://m.hz.bendibao.com/live/shebao/" },
+          { name: "杭州社保", desc: "查询/缴费/转移", url: "https://www.zjzwfw.gov.cn/" },
           { name: "杭州公积金", desc: "查询/提取/贷款", url: "https://gjj.hangzhou.gov.cn/" },
-          { name: "杭州户口", desc: "人才落户/积分落户", url: "https://m.hz.bendibao.com/live/hukou/" },
+          { name: "杭州户口", desc: "人才落户/积分落户", url: "https://gaj.hangzhou.gov.cn/" },
           { name: "居住证办理", desc: "居住登记/居住证申领", url: "https://www.zjzwfw.gov.cn/" },
           { name: "社保转移", desc: "跨省转移/年限计算", url: "https://www.zjzwfw.gov.cn/" },
           { name: "公积金提取", desc: "租房/购房/离职提取", url: "https://gjj.hangzhou.gov.cn/" },
@@ -44,7 +43,7 @@
           { name: "发票抽奖", desc: "杭州发票抽奖登记", url: "https://www.hangzhou.gov.cn/col/col1229151238/index.html" },
           { name: "各类补贴", desc: "人才/就业/租房补贴申请", url: "https://hrss.hangzhou.gov.cn/" },
           { name: "学历认证", desc: "学信网验证", url: "https://www.chsi.com.cn/" },
-          { name: "保障房", desc: "公租房/人才房申请", url: "https://m.hz.bendibao.com/live/baozhangfang/" }
+          { name: "保障房", desc: "公租房/人才房申请", url: "https://fgj.hangzhou.gov.cn/" }
         ]
       },
       {
@@ -245,29 +244,68 @@
       {
         id: "youhui", name: "优惠特惠", icon: "🎫",
         items: [
-          { name: "消费券领取", desc: "杭州消费券/满减券", url: "https://m.hz.bendibao.com/youhui/" },
-          { name: "饿了么红包", desc: "外卖红包最高减15元", url: "https://m.hz.bendibao.com/youhui/detail21957.htm" },
-          { name: "美团红包", desc: "10-18元大额红包", url: "https://m.hz.bendibao.com/youhui/detail22212.htm" },
-          { name: "景区门票", desc: "优惠门票预订", url: "https://m.hz.bendibao.com/youhui/jingdianmenpiao/" },
-          { name: "餐饮团购", desc: "美食优惠券", url: "https://m.hz.bendibao.com/youhui/meishituangou/" },
-          { name: "购物优惠", desc: "超市/商场折扣", url: "https://m.hz.bendibao.com/youhui/shangchanggouwu/" },
-          { name: "出行优惠", desc: "交通出行优惠券", url: "https://m.hz.bendibao.com/youhui/chuxing/" },
-          { name: "生活服务", desc: "家政/维修优惠券", url: "https://m.hz.bendibao.com/youhui/shenghuo/" },
-          { name: "补贴申领", desc: "各类政府补贴", url: "https://m.hz.bendibao.com/youhui/butie/" },
-          { name: "发票抽奖", desc: "杭州发票抽奖登记", url: "https://www.hangzhou.gov.cn/col/col1229151238/index.html" },
-          { name: "梵高星空艺术馆", desc: "成人票29.9元", url: "https://m.hz.bendibao.com/youhui/detail20230.htm" },
-          { name: "径山花海", desc: "成人票60元(原价98)", url: "https://m.hz.bendibao.com/youhui/detail9520.htm" },
-          { name: "杭州虎跑公园", desc: "成人票15元", url: "https://m.hz.bendibao.com/youhui/detail5727.htm" },
-          { name: "云栖竹径", desc: "票价8元", url: "https://m.hz.bendibao.com/youhui/detail7122.htm" },
-          { name: "开元森泊", desc: "水乐园门票195元起", url: "https://m.hz.bendibao.com/youhui/detail18412.htm" },
-          { name: "灵栖洞", desc: "门票75元(原价85)", url: "https://m.hz.bendibao.com/youhui/detail5432.htm" },
-          { name: "胡雪岩故居", desc: "成人票10元起", url: "https://m.hz.bendibao.com/youhui/detail17782.htm" },
-          { name: "杭州宋城", desc: "千古情演出118元", url: "https://m.hz.bendibao.com/youhui/detail20929.htm" },
-          { name: "钱塘江夜游", desc: "游船票98元", url: "https://m.hz.bendibao.com/youhui/detail21671.htm" },
-          { name: "野生动物世界", desc: "优待票140元", url: "https://m.hz.bendibao.com/youhui/detail17808.htm" },
-          { name: "大明山景区", desc: "门票25元", url: "https://m.hz.bendibao.com/youhui/detail4489.htm" },
-          { name: "京东优惠券", desc: "1元起产品券", url: "https://m.hz.bendibao.com/youhui/detail22601.htm" },
-          { name: "美团酒店券", desc: "酒店满减券", url: "https://m.hz.bendibao.com/youhui/detail22598.htm" }
+          { name: "消费券申领", desc: "杭州消费券/数字人民币", url: "https://www.hangzhou.gov.cn/col/col1229013850/index.html", color: "#ef4444" },
+          { name: "政府补贴", desc: "人才/就业/住房补贴", url: "https://hrss.hangzhou.gov.cn/", color: "#f59e0b" },
+          { name: "发票抽奖", desc: "杭州发票抽奖登记入口", url: "https://fpjj.hangzhou.gov.cn/", color: "#10b981" },
+          { name: "人才驿站", desc: "来杭求职免费住7天", url: "https://hzrcw.com.cn/", color: "#3b82f6" },
+          { name: "毕业生补贴", desc: "应届生生活补贴申请", url: "https://hrss.hangzhou.gov.cn/", color: "#8b5cf6" },
+          { name: "租房补贴", desc: "新就业大学生租房补贴", url: "https://fgj.hangzhou.gov.cn/", color: "#ec4899" },
+          { name: "灵隐寺预约", desc: "免费预约入园", url: "https://www.lingyinsi.org.cn/", color: "#06b6d4" },
+          { name: "西湖游船", desc: "手划船/自开船票价", url: "https://whol.mztrip.com/", color: "#14b8a6" },
+          { name: "公园年卡", desc: "杭州公园年卡办理", url: "https://www.96225.com/", color: "#84cc16" },
+          { name: "市民卡优惠", desc: "公共交通/景区优惠", url: "https://www.96225.com/", color: "#f97316" },
+          { name: "工会福利", desc: "职工医疗互助/疗休养", url: "https://gh.hangzhou.gov.cn/", color: "#0ea5e9" },
+          { name: "银龄人才", desc: "退休专家补贴政策", url: "https://hrss.hangzhou.gov.cn/", color: "#a855f7" },
+          { name: "创业扶持", desc: "大学生创业资助申报", url: "https://hrss.hangzhou.gov.cn/", color: "#22c55e" },
+          { name: "技能补贴", desc: "职业技能提升补贴", url: "https://hrss.hangzhou.gov.cn/", color: "#eab308" },
+          { name: "新能源补贴", desc: "新能源汽车购置补贴", url: "https://fgj.hangzhou.gov.cn/", color: "#06b6d4" },
+          { name: "家电以旧换新", desc: "绿色智能家电补贴", url: "https://www.hangzhou.gov.cn/", color: "#f43f5e" },
+          { name: "体育消费券", desc: "健身/游泳/羽毛球", url: "https://tyj.hangzhou.gov.cn/", color: "#8b5cf6" },
+          { name: "文化惠民", desc: "剧院/图书馆优惠券", url: "https://whg.culture. Hangzhou.gov.cn/", color: "#14b8a6" },
+          { name: "夜校课程", desc: "成人兴趣班优惠报名", url: "https://hrss.hangzhou.gov.cn/", color: "#ec4899" },
+          { name: "免费培训", desc: "政府补贴职业技能培训", url: "https://hz.nvq.net.cn/", color: "#f59e0b" }
+        ]
+      },
+      {
+        id: "education", name: "教育培训", icon: "🎓",
+        items: [
+          { name: "幼儿园入园", desc: "报名时间/材料/流程", url: "https://jyj.hangzhou.gov.cn/", color: "#3b82f6" },
+          { name: "小学入学", desc: "小学报名/学区划分", url: "https://jyj.hangzhou.gov.cn/", color: "#8b5cf6" },
+          { name: "初中入学", desc: "小升初/电脑派位", url: "https://jyj.hangzhou.gov.cn/", color: "#ec4899" },
+          { name: "杭州中考", desc: "报名/考试/录取查询", url: "https://jyj.hangzhou.gov.cn/", color: "#ef4444" },
+          { name: "浙江高考", desc: "报名/志愿/录取查询", url: "https://www.zjzs.net/", color: "#10b981" },
+          { name: "研究生考试", desc: "报名/考点/成绩查询", url: "https://www.chsi.com.cn/", color: "#f59e0b" },
+          { name: "自学考试", desc: "浙江自考报名/成绩", url: "https://www.zjzs.net/", color: "#06b6d4" },
+          { name: "教师资格证", desc: "笔试/面试/认定", url: "https://ntce.neea.edu.cn/", color: "#14b8a6" },
+          { name: "普通话测试", desc: "报名/成绩查询", url: "https://www.cltt.org/", color: "#84cc16" },
+          { name: "学区房查询", desc: "各区小学/初中对口", url: "https://jyj.hangzhou.gov.cn/", color: "#f97316" },
+          { name: "学校名单", desc: "幼儿园至高校名单", url: "https://jyj.hangzhou.gov.cn/", color: "#a855f7" },
+          { name: "培训机构", desc: "合规培训机构白名单", url: "https://jyj.hangzhou.gov.cn/", color: "#0ea5e9" },
+          { name: "免费技能培训", desc: "政府补贴培训项目", url: "https://hrss.hangzhou.gov.cn/", color: "#22c55e" },
+          { name: "夜校课程", desc: "成人教育/兴趣班", url: "https://hrss.hangzhou.gov.cn/", color: "#eab308" },
+          { name: "学历认证", desc: "学信网验证报告", url: "https://www.chsi.com.cn/", color: "#3b82f6" },
+          { name: "海外学历认证", desc: "留学回国学历认证", url: "https://zwfw.cscse.edu.cn/", color: "#8b5cf6" }
+        ]
+      },
+      {
+        id: "zhaopin", name: "人才招聘", icon: "💼",
+        items: [
+          { name: "事业单位招聘", desc: "编制内岗位/公告", url: "https://hrss.hangzhou.gov.cn/", color: "#3b82f6" },
+          { name: "国企招聘", desc: "杭州国企岗位", url: "https://hrss.hangzhou.gov.cn/", color: "#ef4444" },
+          { name: "公务员省考", desc: "浙江省考公告", url: "https://gwyty.jxpta.com/", color: "#10b981" },
+          { name: "国家公务员", desc: "国考报名/录用", url: "https://bm.scs.gov.cn/", color: "#8b5cf6" },
+          { name: "杭州名企", desc: "上市公司/头部企业", url: "https://www.lagou.com/hangzhou/", color: "#f59e0b" },
+          { name: "校园招聘", desc: "秋招/春招信息", url: "https://www.zhaopin.com/", color: "#06b6d4" },
+          { name: "残疾人就业", desc: "残疾人专属岗位", url: "https://hrss.hangzhou.gov.cn/", color: "#ec4899" },
+          { name: "退役军人就业", desc: "军转干部安置", url: "https://tyjr.hangzhou.gov.cn/", color: "#14b8a6" },
+          { name: "灵活就业", desc: "兼职/自由职业", url: "https://www.zhaopin.com/", color: "#84cc16" },
+          { name: "AI/互联网", desc: "技术岗位招聘", url: "https://www.lagou.com/hangzhou/", color: "#f97316" },
+          { name: "实习岗位", desc: "大学生实习信息", url: "https://www.zhaopin.com/", color: "#a855f7" },
+          { name: "外籍人才", desc: "外国人就业许可", url: "https://hzrcw.com.cn/", color: "#0ea5e9" },
+          { name: "博士后工作站", desc: "高层次人才进站", url: "https://www.hzrcw.com.cn/", color: "#22c55e" },
+          { name: "人才认定", desc: "高层次人才分类认定", url: "https://hrss.hangzhou.gov.cn/", color: "#eab308" },
+          { name: "求职补贴", desc: "就业困难补贴", url: "https://hrss.hangzhou.gov.cn/", color: "#3b82f6" },
+          { name: "招聘会信息", desc: "线下招聘会排期", url: "https://hrss.hangzhou.gov.cn/", color: "#ef4444" }
         ]
       }
     ],
