@@ -892,11 +892,14 @@
 
   // ===== 事件绑定 =====
   function bindEvents() {
-    $('#hotGrid').addEventListener('click', function (e) {
-      var card = e.target.closest('.hot-card');
-      if (!card) return;
-      handleClick(card);
-    });
+    var hotGrid = $('#hotGrid');
+    if (hotGrid) {
+      hotGrid.addEventListener('click', function (e) {
+        var card = e.target.closest('.hot-card');
+        if (!card) return;
+        handleClick(card);
+      });
+    }
 
     $('#tabs').addEventListener('click', function (e) {
       var tab = e.target.closest('.tab');
@@ -977,7 +980,8 @@ var tabMap = {
   function switchPage(page) {
     state.currentPage = page;
     $$('.bnav-item').forEach(function (i) { i.classList.remove('active'); });
-    document.querySelector('.bnav-item[data-page="' + page + '"]').classList.add('active');
+    var activeNav = document.querySelector('.bnav-item[data-page="' + page + '"]');
+    if (activeNav) activeNav.classList.add('active');
 
     // 切换页面显示
     var pages = ['home', 'tools', 'phone', 'me'];
