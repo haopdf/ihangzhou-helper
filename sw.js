@@ -4,12 +4,10 @@
 // 域名: ihangzhou.net
 // ============================================
 
-var CACHE_NAME = 'ihangzhou-v2';
+var CACHE_NAME = 'ihangzhou-v3';
 var CACHE_URLS = [
   '/',
-  '/index.html',
   '/css/style.css',
-  '/js/app.js',
   '/manifest.json'
 ];
 

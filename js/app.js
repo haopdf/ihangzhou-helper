@@ -1919,46 +1919,134 @@ default: showToast('功能开发中');
       });
   }
 
+  // ===== 农历转换（1900-2100）=====
+  var LUNAR_INFO = [0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,
+    0x04ae0,0x0a5b6,0x0a4d0,0x0d250,0x1d255,0x0b540,0x0d6a0,0x0ada2,0x095b0,0x14977,
+    0x04970,0x0a4b0,0x0b4b5,0x06a50,0x06d40,0x1ab54,0x02b60,0x09570,0x052f2,0x04970,
+    0x06566,0x0d4a0,0x0ea50,0x06e95,0x05ad0,0x02b60,0x186e3,0x092e0,0x1c8d7,0x0c950,
+    0x0d4a0,0x1d8a6,0x0b550,0x056a0,0x1a5b4,0x025d0,0x092d0,0x0d2b2,0x0a950,0x0b557,
+    0x06ca0,0x0b550,0x15355,0x04da0,0x0a5b0,0x14573,0x052b0,0x0a9a8,0x0e950,0x06aa0,
+    0x0aea6,0x0ab50,0x04b60,0x0aae4,0x0a570,0x05260,0x0f263,0x0d950,0x05b57,0x056a0,
+    0x096d0,0x04dd5,0x04ad0,0x0a4d0,0x0d4d4,0x0d250,0x0d558,0x0b540,0x0b6a0,0x195a6,
+    0x095b0,0x049b0,0x0a974,0x0a4b0,0x0b27a,0x06a50,0x06d40,0x0af46,0x0ab60,0x09570,
+    0x04af5,0x04970,0x064b0,0x074a3,0x0ea50,0x06b58,0x055c0,0x0ab60,0x096d5,0x092e0,
+    0x0c960,0x0d954,0x0d4a0,0x0da50,0x07552,0x056a0,0x0abb7,0x025d0,0x092d0,0x0cab5,
+    0x0a950,0x0b4a0,0x0baa4,0x0ad50,0x055d9,0x04ba0,0x0a5b0,0x15176,0x052b0,0x0a930,
+    0x07954,0x06aa0,0x0ad50,0x05b52,0x04b60,0x0a6e6,0x0a4e0,0x0d260,0x0ea65,0x0d530,
+    0x05aa0,0x076a3,0x096d0,0x04afb,0x04ad0,0x0a4d0,0x1d0b6,0x0d250,0x0d520,0x0dd45,
+    0x0b5a0,0x056d0,0x055b2,0x049b0,0x0a577,0x0a4b0,0x0aa50,0x1b255,0x06d20,0x0ada0,
+    0x14b63,0x09370,0x049f8,0x04970,0x064b0,0x168a6,0x0ea50,0x06b20,0x1a6c4,0x0aae0,
+    0x0a2e0,0x0d2e3,0x0c960,0x0d557,0x0d4a0,0x0da50,0x05d55,0x056a0,0x0a6d0,0x055d4,
+    0x052d0,0x0a9b8,0x0a950,0x0b4a0,0x0b6a6,0x0ad50,0x055a0,0x0aba4,0x0a5b0,0x052b0,
+    0x0b273,0x06930,0x07337,0x06aa0,0x0ad50,0x14b55,0x04b60,0x0a570,0x054e4,0x0d160,
+    0x0e968,0x0d520,0x0daa0,0x16aa6,0x056d0,0x04ae0,0x0a9d4,0x0a2d0,0x0d150,0x0f252,
+    0x0d520];
+  function lunarYearDays(y) {
+    var sum = 348;
+    for (var i = 0x8000; i > 0x8; i >>= 1) sum += (LUNAR_INFO[y - 1900] & i) ? 1 : 0;
+    return sum + leapDays(y);
+  }
+  function leapMonth(y) { return LUNAR_INFO[y - 1900] & 0xf; }
+  function leapDays(y) {
+    if (leapMonth(y)) return (LUNAR_INFO[y - 1900] & 0x10000) ? 30 : 29;
+    return 0;
+  }
+  function monthDays(y, m) { return (LUNAR_INFO[y - 1900] & (0x10000 >> m)) ? 30 : 29; }
+  function getLunar(date) {
+    var offset = Math.floor((date - new Date(1900, 0, 31)) / 86400000);
+    var y, temp = 0;
+    for (y = 1900; y < 2101 && offset > 0; y++) { temp = lunarYearDays(y); offset -= temp; }
+    if (offset < 0) { offset += temp; y--; }
+    var leap = leapMonth(y), isLeap = false;
+    var m;
+    for (m = 1; m < 13 && offset > 0; m++) {
+      if (leap > 0 && m === leap + 1 && !isLeap) { --m; isLeap = true; temp = leapDays(y); }
+      else { temp = monthDays(y, m); }
+      if (isLeap && m === leap + 1) isLeap = false;
+      offset -= temp;
+    }
+    if (offset === 0 && leap > 0 && m === leap + 1) {
+      if (isLeap) isLeap = false; else { isLeap = true; --m; }
+    }
+    if (offset < 0) { offset += temp; --m; }
+    return { year: y, month: m, day: offset + 1, isLeap: isLeap };
+  }
+
+  // ===== 钱塘江观潮点（下游→上游，offset为相对盐官的分钟延迟）=====
+  var TIDE_POINTS = [
+    { name: '海宁盐官', desc: '一线潮·最佳观赏点', offset: 0 },
+    { name: '老盐仓', desc: '回头潮', offset: 6 },
+    { name: '萧山美女坝', desc: '美女二回头', offset: 20 },
+    { name: '下沙七格', desc: '冲天潮', offset: 30 },
+    { name: '三堡船闸', desc: '', offset: 38 },
+    { name: '钱江新城城市阳台', desc: '', offset: 42 },
+    { name: '九溪', desc: '', offset: 52 },
+    { name: '珊瑚沙', desc: '', offset: 56 },
+    { name: '闻堰', desc: '', offset: 62 },
+    { name: '袁浦', desc: '', offset: 70 }
+  ];
+
+  // 根据农历日计算盐官站两次高潮时间（分钟），并返回大潮等级
+  function calcTideTimes(lunarDay) {
+    // 民间算法：农历初一盐官约12:00高潮，每天推迟约48分钟
+    var t1 = (720 + (lunarDay - 1) * 48) % 1440;
+    var t2 = (t1 + 744) % 1440; // 间隔12h24m
+    // 区分日潮(6:00-18:00)和夜潮
+    var dayTide, nightTide;
+    if (t1 >= 360 && t1 < 1080) { dayTide = t1; nightTide = t2; }
+    else { dayTide = t2; nightTide = t1; }
+    // 大潮等级：距朔(初一)望(十五)越近潮越大
+    var distToShuo = Math.min(lunarDay - 1, 30 - lunarDay + 1);
+    var distToWang = Math.abs(lunarDay - 15);
+    var dist = Math.min(distToShuo, distToWang);
+    var level;
+    if (dist <= 3) level = { label: '大潮', color: '#ef4444' };
+    else if (dist <= 6) level = { label: '中潮', color: '#f59e0b' };
+    else level = { label: '小潮', color: '#10b981' };
+    return { day: dayTide, night: nightTide, level: level };
+  }
+  function fmtTime(min) {
+    var h = Math.floor(min / 60), m = min % 60;
+    return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
+  }
+
   // ===== 钱塘江潮汐查询 =====
-  function showTide() {
-    openModal('🌊 钱塘江潮汐预报',
-      '<div id="tideBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">🌊</div><p style="color:var(--text-muted);">正在获取潮汐数据...</p></div></div>'
-    );
-    // 钱塘江潮汐API
-    fetch('https://api.tianapi.com/tide/index?key=demo&type=1&area=%E6%9D%AD%E5%B7%9E', {method: 'GET'})
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (data && data.newslist && data.newslist.length > 0) {
-          var html = '<div style="padding:12px 0;">';
-          data.newslist.slice(0, 7).forEach(function(item) {
-            html += '<div style="padding:12px;background:var(--bg);border-radius:8px;margin-bottom:8px;">' +
-              '<div style="font-weight:600;">' + (item.date || item.time || '') + '</div>' +
-              '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">' +
-              '<div><span style="color:var(--text-muted);font-size:12px;">早潮</span><br><span style="font-weight:600;">' + (item.morning || '-') + '</span></div>' +
-              '<div><span style="color:var(--text-muted);font-size:12px;">晚潮</span><br><span style="font-weight:600;">' + (item.evening || '-') + '</span></div></div>';
-          });
-          html += '<p class="modal-tip">潮汐时间仅供参考，请以现场实际情况为准</p></div>';
-          $('#tideBox').innerHTML = html;
-        } else {
-          throw new Error('no data');
-        }
-      })
-      .catch(function() {
-        // 使用备用静态数据
-        var today = new Date();
-        var curMonth = today.getMonth() + 1;
-        var curDay = today.getDate();
-        var html = '<div style="padding:12px 0;">' +
-          '<div style="text-align:center;margin-bottom:12px;"><span style="background:var(--primary);color:#fff;padding:4px 12px;border-radius:16px;font-size:12px;">今日 ' + curMonth + '月' + curDay + '日</span></div>';
-        html += '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;">' +
-          '<div style="font-weight:600;">早潮</div><div style="font-size:20px;color:var(--primary);">09:30</div></div>';
-        html += '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;">' +
-          '<div style="font-weight:600;">晚潮</div><div style="font-size:20px;color:var(--primary);">21:45</div></div>';
-        html += '<div style="padding:12px;background:var(--accent);border-radius:10px;color:#fff;margin-top:12px;">' +
-          '<strong>⚠️ 安全提醒</strong><br>观潮请在安全区域，保持距离钱塘江堤岸</div>';
-        html += '<p class="modal-tip">潮汐时间受天气、季节影响，仅供参考</p></div>';
-        $('#tideBox').innerHTML = html;
-      });
+  function showTide(dateStr) {
+    var date = dateStr ? new Date(dateStr + 'T00:00:00') : new Date();
+    var lunar = getLunar(date);
+    var tide = calcTideTimes(lunar.day);
+    var lunarMonths = ['正','二','三','四','五','六','七','八','九','十','冬','腊'];
+    var lunarDays = ['初一','初二','初三','初四','初五','初六','初七','初八','初九','初十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十','廿一','廿二','廿三','廿四','廿五','廿六','廿七','廿八','廿九','三十'];
+    var lunarStr = '农历' + lunarMonths[lunar.month - 1] + '月' + lunarDays[lunar.day - 1];
+
+    var html = '<div style="padding:12px 0;">';
+    html += '<div style="text-align:center;margin-bottom:12px;">' +
+      '<div style="font-size:18px;font-weight:700;">' + date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日</div>' +
+      '<div style="font-size:13px;color:var(--text-muted);margin-top:2px;">' + lunarStr +
+      ' · <span style="color:' + tide.level.color + ';font-weight:600;">' + tide.level.label + '</span></div></div>';
+    html += '<div style="margin-bottom:12px;"><input type="date" id="tideDate" value="' + date.toISOString().split('T')[0] + '" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);" onchange="window.showTide(this.value)"></div>';
+
+    html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;font-size:12px;color:var(--text-muted);padding:0 8px;margin-bottom:4px;">' +
+      '<div>观潮点</div><div style="text-align:center;">日潮</div><div style="text-align:center;">夜潮</div></div>';
+    TIDE_POINTS.forEach(function(p) {
+      var m = (tide.day + p.offset) % 1440;
+      var e = (tide.night + p.offset) % 1440;
+      html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;align-items:center;padding:10px 8px;background:var(--bg);border-radius:8px;margin-bottom:6px;">' +
+        '<div><div style="font-weight:600;font-size:13px;">' + p.name + '</div>' +
+        (p.desc ? '<div style="font-size:11px;color:var(--text-muted);">' + p.desc + '</div>' : '') + '</div>' +
+        '<div style="text-align:center;font-weight:700;color:var(--primary);">' + fmtTime(m) + '</div>' +
+        '<div style="text-align:center;font-weight:700;color:#8b5cf6;">' + fmtTime(e) + '</div></div>';
+    });
+
+    html += '<div style="padding:12px;background:var(--accent);border-radius:10px;color:#fff;margin-top:12px;font-size:13px;">' +
+      '<strong>⚠️ 安全提醒</strong><br>观潮请在安全区域，切勿下堤。潮水凶猛，生命第一。</div>';
+    html += '<p class="modal-tip">时间基于农历推算，受天气、风力、江道变化影响，仅供参考，请以现场实际情况为准</p></div>';
+
+    if ($('#tideBox')) {
+      $('#tideBox').innerHTML = html;
+    } else {
+      openModal('🌊 钱塘江潮汐预报', '<div id="tideBox">' + html + '</div>');
+    }
   }
 
   // ===== 实时汇率 =====
