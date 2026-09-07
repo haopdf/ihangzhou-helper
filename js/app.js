@@ -1,4 +1,4 @@
-﻿/* ============================================
+/* ============================================
    iHangzhou 杭州生活助手 - 参考杭州本地宝结构
    10大分类 · 100+办事条目 · 数据全内联
    ============================================ */
@@ -1946,8 +1946,10 @@ default: showToast('功能开发中');
       .catch(function() {
         // 使用备用静态数据
         var today = new Date();
+        var curMonth = today.getMonth() + 1;
+        var curDay = today.getDate();
         var html = '<div style="padding:12px 0;">' +
-          '<div style="text-align:center;margin-bottom:12px;"><span style="background:var(--primary);color:#fff;padding:4px 12px;border-radius:16px;font-size:12px;">今日 ' + (today.getMonth()+1) + '月' + today.getDate() + '日</span></div>';
+          '<div style="text-align:center;margin-bottom:12px;"><span style="background:var(--primary);color:#fff;padding:4px 12px;border-radius:16px;font-size:12px;">今日 ' + curMonth + '月' + curDay + '日</span></div>';
         html += '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;">' +
           '<div style="font-weight:600;">早潮</div><div style="font-size:20px;color:var(--primary);">09:30</div></div>';
         html += '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;">' +
