@@ -302,7 +302,22 @@
           { name: "网红打卡", desc: "拍照圣地", url: "https://westlake.hangzhou.gov.cn/", color: "#06b6d4" },
           { name: "杭帮菜", desc: "知味观/楼外楼", url: "https://www.dianping.com/hangzhou/", color: "#ec4899" },
           { name: "龙井问茶", desc: "茶园体验", url: "https://www.lzsite.cn/", color: "#14b8a6" },
-          { name: "夜游攻略", desc: "夜景/夜宵", url: "https://westlake.hangzhou.gov.cn/", color: "#84cc16" }
+          { name: "夜游攻略", desc: "夜景/夜宵", url: "https://westlake.hangzhou.gov.cn/", color: "#84cc16" },
+          { name: "雷峰塔", desc: "白娘子传说·登塔览西湖", url: "https://www.leifengta.com/", color: "#ef4444" },
+          { name: "河坊街", desc: "清河坊历史街区·小吃老字号", color: "#f59e0b" },
+          { name: "南宋御街", desc: "中山中路·古街漫步", color: "#10b981" },
+          { name: "湘湖", desc: "萧山·跨湖桥文化遗址", url: "https://www.xianghu.com.cn/", color: "#3b82f6" },
+          { name: "径山寺", desc: "日本茶道祖庭·余杭", color: "#8b5cf6" },
+          { name: "龙门古镇", desc: "孙权故里·富阳", color: "#06b6d4" },
+          { name: "塘栖古镇", desc: "京杭运河名镇·余杭", color: "#14b8a6" },
+          { name: "瑶琳仙境", desc: "溶洞奇观·桐庐", url: "https://www.yaolinxianjing.com/", color: "#84cc16" },
+          { name: "大慈岩", desc: "悬空寺·建德", color: "#f97316" },
+          { name: "天目山", desc: "大树王国·临安", url: "https://www.tmshan.com/", color: "#a855f7" },
+          { name: "大明山", desc: "浙西小黄山·临安", color: "#0ea5e9" },
+          { name: "西湖骑行", desc: "环湖绿道·公共自行车", color: "#22c55e" },
+          { name: "西湖群山徒步", desc: "北高峰·龙井·九溪", color: "#eab308" },
+          { name: "西溪摇橹船", desc: "湿地生态游", url: "https://www.xixiwetland.com.cn/", color: "#ec4899" },
+          { name: "运河水上巴士", desc: "拱宸桥·武林门", url: "https://www.hzcb.gov.cn/", color: "#3b82f6" }
         ]
       },
       {
@@ -390,7 +405,20 @@
           { name: "免费技能培训", desc: "政府补贴培训项目", url: "https://hrss.hangzhou.gov.cn/", color: "#22c55e" },
           { name: "夜校课程", desc: "成人教育/兴趣班", url: "https://hrss.hangzhou.gov.cn/", color: "#eab308" },
           { name: "学历认证", desc: "学信网验证报告", url: "https://www.chsi.com.cn/", color: "#3b82f6" },
-          { name: "海外学历认证", desc: "留学回国学历认证", url: "https://zwfw.cscse.edu.cn/", color: "#8b5cf6" }
+          { name: "海外学历认证", desc: "留学回国学历认证", url: "https://zwfw.cscse.edu.cn/", color: "#8b5cf6" },
+          { name: "浙江大学", desc: "985/211·紫金港", url: "https://www.zju.edu.cn/", color: "#0ea5e9" },
+          { name: "中国美术学院", desc: "南山/象山校区", url: "https://www.caa.edu.cn/", color: "#22c55e" },
+          { name: "浙江音乐学院", desc: "转塘·音乐艺术", url: "https://www.zjcm.edu.cn/", color: "#eab308" },
+          { name: "杭州电子科技大学", desc: "IT特色高校", url: "https://www.hdu.edu.cn/", color: "#3b82f6" },
+          { name: "浙江工业大学", desc: "屏峰/朝晖校区", url: "https://www.zjut.edu.cn/", color: "#8b5cf6" },
+          { name: "杭州师范大学", desc: "仓前校区", url: "https://www.hznu.edu.cn/", color: "#ec4899" },
+          { name: "浙江工商大学", desc: "下沙校区", url: "https://www.zjsu.edu.cn/", color: "#f97316" },
+          { name: "中国计量大学", desc: "质检特色高校", url: "https://www.cjlu.edu.cn/", color: "#10b981" },
+          { name: "浙江理工大学", desc: "下沙校区", url: "https://www.zstu.edu.cn/", color: "#ef4444" },
+          { name: "杭州高级中学", desc: "百年名校", color: "#a855f7" },
+          { name: "学军中学", desc: "杭城名校", color: "#14b8a6" },
+          { name: "文澜阁", desc: "四库全书藏书阁", color: "#84cc16" },
+          { name: "万松书院", desc: "梁祝读书处", color: "#06b6d4" }
         ]
       },
       {
@@ -491,7 +519,16 @@
           { name: "运河文化", desc: "运河博物馆·拱墅", color: "#84cc16" },
           { name: "南宋官窑", desc: "南宋官窑博物馆", color: "#f97316" },
           { name: "藏书文化", desc: "文澜阁·圣因寺遗址", color: "#a855f7" },
-          { name: "佛教文化", desc: "灵隐寺·法喜寺", url: "https://www.lingyinsi.com/", color: "#0ea5e9" }
+          { name: "佛教文化", desc: "灵隐寺·法喜寺", url: "https://www.lingyinsi.com/", color: "#0ea5e9" },
+          { name: "道教文化", desc: "抱朴道院·葛岭", color: "#22c55e" },
+          { name: "清真寺文化", desc: "凤凰寺·中山中路", color: "#eab308" },
+          { name: "金石篆刻", desc: "西泠印社·孤山", color: "#ec4899" },
+          { name: "木版水印", desc: "十竹斋·非遗技艺", color: "#3b82f6" },
+          { name: "白蛇传说", desc: "雷峰塔·断桥", color: "#ef4444" },
+          { name: "梁祝传说", desc: "万松书院·长桥", color: "#8b5cf6" },
+          { name: "苏白二公", desc: "苏东坡·白居易治杭", color: "#10b981" },
+          { name: "岳飞抗金", desc: "岳王庙·栖霞岭", color: "#f59e0b" },
+          { name: "钱王射潮", desc: "钱镠治水·吴越国", color: "#06b6d4" }
         ]
       },
       {
@@ -547,7 +584,18 @@
           { name: "隐秘拍照点", desc: "20个拍照圣地", color: "#84cc16" },
           { name: "日落观景台", desc: "10处日落", color: "#f97316" },
           { name: "免费运动场", desc: "10处运动场所", color: "#a855f7" },
-          { name: "凌晨美食", desc: "24小时营业", color: "#0ea5e9" }
+          { name: "凌晨美食", desc: "24小时营业", color: "#0ea5e9" },
+          { name: "西湖一日经典", desc: "断桥→白堤→苏堤→雷峰塔", color: "#ef4444" },
+          { name: "灵隐禅踪", desc: "灵隐寺→飞来峰→法喜寺", color: "#8b5cf6" },
+          { name: "运河古韵", desc: "拱宸桥→桥西→小河直街", color: "#10b981" },
+          { name: "宋韵穿越", desc: "河坊街→南宋御街→吴山", color: "#f59e0b" },
+          { name: "茶山漫行", desc: "龙井村→梅家坞→九溪烟树", color: "#22c55e" },
+          { name: "湿地生态", desc: "西溪湿地→摇橹船→深潭口", color: "#06b6d4" },
+          { name: "古镇漫游", desc: "塘栖→超山→塘栖古镇", color: "#a855f7" },
+          { name: "富春江畔", desc: "桐君山→严子陵钓台→富春江小三峡", color: "#3b82f6" },
+          { name: "千岛湖度假", desc: "中心湖区→东南湖区→梅峰岛", color: "#14b8a6" },
+          { name: "临安山水", desc: "天目山→大明山→浙西大峡谷", color: "#f97316" },
+          { name: "桐庐秘境", desc: "瑶琳仙境→垂云通天河→严子陵钓台", color: "#eab308" }
         ]
       },
       {
@@ -564,7 +612,15 @@
           { name: "刀剪剑博物馆", desc: "小河路", url: "https://www.hzacm.cn/", color: "#84cc16" },
           { name: "伞博物馆", desc: "小河路", color: "#f97316" },
           { name: "扇博物馆", desc: "小河路", color: "#a855f7" },
-          { name: "西泠印社", desc: "孤山路", url: "", color: "#0ea5e9" }
+          { name: "西泠印社", desc: "孤山路", url: "", color: "#0ea5e9" },
+          { name: "跨湖桥遗址博物馆", desc: "萧山·独木舟", color: "#22c55e" },
+          { name: "中国湿地博物馆", desc: "西溪湿地", color: "#06b6d4" },
+          { name: "中国财税博物馆", desc: "吴山广场", color: "#eab308" },
+          { name: "中国动漫博物馆", desc: "滨江·白马湖", color: "#ec4899" },
+          { name: "中国印学博物馆", desc: "孤山·西泠印社旁", color: "#8b5cf6" },
+          { name: "浙江自然博物院", desc: "西湖文化广场", url: "https://www.zmnh.com.cn/", color: "#10b981" },
+          { name: "胡庆余堂中药博物馆", desc: "河坊街·国药文化", color: "#ef4444" },
+          { name: "都锦生织锦博物馆", desc: "茅家埠·织锦艺术", color: "#f59e0b" }
         ]
       },
       {
