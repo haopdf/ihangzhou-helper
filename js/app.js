@@ -83,6 +83,7 @@
           { name: "水上巴士", desc: "运河线/塘栖线", url: "https://www.hzbus.com.cn/", color: "#0ea5e9" },
           { name: "公共自行车", desc: "小红车借还点", url: "https://www.hzbus.com.cn/", color: "#22c55e" },
           { name: "共享单车", desc: "哈啰/美团/青桔", url: "https://www.hello-inc.com/", color: "#eab308" },
+          { name: "电动车租赁", desc: "共享电单车/长租", color: "#22c55e" },
           { name: "火车票", desc: "12306购票", url: "https://www.12306.cn/", color: "#3b82f6" },
           { name: "高铁时刻", desc: "杭州东/西/南站", url: "https://www.12306.cn/", color: "#ef4444" },
           { name: "萧山机场", desc: "航班查询/大巴", url: "https://www.hzairport.com/", color: "#10b981" },
@@ -182,7 +183,13 @@
           { name: "普通话考试", desc: "报名/成绩查询", url: "https://www.cltt.org/" },
           { name: "夜校培训", desc: "课程报名/费用", url: "https://hrss.hangzhou.gov.cn/" },
           { name: "免费培训考证", desc: "技能培训+补贴", url: "https://hrss.hangzhou.gov.cn/" },
-          { name: "成人学历", desc: "成人高考/自考", url: "https://www.zjzs.net/" }
+          { name: "成人学历", desc: "成人高考/自考", url: "https://www.zjzs.net/" },
+          { name: "入学通知书", desc: "录取通知书查询", url: "https://edu.hangzhou.gov.cn/" },
+          { name: "分班查询", desc: "新生分班信息", url: "https://edu.hangzhou.gov.cn/" },
+          { name: "军训安排", desc: "军训时间/地点", url: "https://edu.hangzhou.gov.cn/" },
+          { name: "入学体检", desc: "新生体检项目/医院", url: "https://edu.hangzhou.gov.cn/" },
+          { name: "新生报到", desc: "报到流程/须知", url: "https://edu.hangzhou.gov.cn/" },
+          { name: "录取名单", desc: "中小学录取结果", url: "https://edu.hangzhou.gov.cn/" }
         ]
       },
       {
