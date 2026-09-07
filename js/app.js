@@ -289,7 +289,7 @@
           { name: "西湖手划船", desc: "摇橹船预约", url: "https://westlake.hangzhou.gov.cn/", color: "#f59e0b" },
           { name: "灵隐寺", desc: "免费预约入园", url: "https://www.lingyinsi.com/", color: "#10b981" },
           { name: "法喜寺", desc: "网红斋饭/白玉兰", url: "https://www.lingyinsi.com/", color: "#3b82f6" },
-          { name: "景点预约", desc: "杭州各景点预约入口", url: "https://www.hangzhou.gov.cn/", color: "#8b5cf6" },
+          { name: "景点预约", desc: "杭州各景点预约入口", url: "https://wap.lotsmall.cn/vue/list/ticket?m_id=163", color: "#8b5cf6" },
           { name: "西溪湿地", desc: "门票/摇橹船", url: "https://www.xixiwetland.com.cn/", color: "#06b6d4" },
           { name: "千岛湖", desc: "景区/游船/住宿", url: "", color: "#ec4899" },
           { name: "钱塘江大潮", desc: "观潮时间表/地点", url: "", color: "#14b8a6" },
