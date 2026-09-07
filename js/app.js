@@ -1,4 +1,4 @@
-/* ============================================
+﻿/* ============================================
    iHangzhou 杭州生活助手 - 参考杭州本地宝结构
    10大分类 · 100+办事条目 · 数据全内联
    ============================================ */
@@ -218,7 +218,7 @@
           { name: "人事行政", desc: "HR/行政", url: "https://www.zhaopin.com/", color: "#ec4899" },
           { name: "残疾人就业", desc: "专属岗位", url: "https://hrss.hangzhou.gov.cn/", color: "#14b8a6" },
           { name: "退役军人", desc: "军转干部安置", url: "https://www.hangzhou.gov.cn/col/col1229836157/index.html", color: "#84cc16" },
-          { name: "外籍人才", desc: "外国人就业许可", url: "https://hzrcw.com.cn/", color: "#f97316" },
+          { name: "外籍人才", desc: "外国人就业许可", url: "https://www.hzrc.com/", color: "#f97316" },
           { name: "高层次人才", desc: "博士/博士后", url: "https://www.hzrc.com/", color: "#a855f7" },
           { name: "浙江省考", desc: "省公务员考试", url: "", color: "#0ea5e9" },
           { name: "国家公务员", desc: "国考报名录用", url: "http://www.scs.gov.cn/", color: "#22c55e" },
@@ -339,18 +339,18 @@
           { name: "雷峰塔", desc: "白娘子传说·登塔览西湖", url: "https://www.leifengta.com/", color: "#ef4444" },
           { name: "河坊街", desc: "清河坊历史街区·小吃老字号", color: "#f59e0b" },
           { name: "南宋御街", desc: "中山中路·古街漫步", color: "#10b981" },
-          { name: "湘湖", desc: "萧山·跨湖桥文化遗址", url: "https://www.xianghu.com.cn/", color: "#3b82f6" },
+          { name: "湘湖", desc: "萧山·跨湖桥文化遗址", url: "http://www.chinaxianghu.com/lvyou/", color: "#3b82f6" },
           { name: "径山寺", desc: "日本茶道祖庭·余杭", color: "#8b5cf6" },
           { name: "龙门古镇", desc: "孙权故里·富阳", color: "#06b6d4" },
           { name: "塘栖古镇", desc: "京杭运河名镇·余杭", color: "#14b8a6" },
-          { name: "瑶琳仙境", desc: "溶洞奇观·桐庐", url: "https://www.yaolinxianjing.com/", color: "#84cc16" },
+          { name: "瑶琳仙境", desc: "溶洞奇观·桐庐", url: "https://www.2tonglu.com/yaolinxianjing.html", color: "#84cc16" },
           { name: "大慈岩", desc: "悬空寺·建德", color: "#f97316" },
-          { name: "天目山", desc: "大树王国·临安", url: "https://www.tmshan.com/", color: "#a855f7" },
+          { name: "天目山", desc: "大树王国·临安", url: "https://www.zjhztms.com/sy", color: "#a855f7" },
           { name: "大明山", desc: "浙西小黄山·临安", color: "#0ea5e9" },
           { name: "西湖骑行", desc: "环湖绿道·公共自行车", color: "#22c55e" },
           { name: "西湖群山徒步", desc: "北高峰·龙井·九溪", color: "#eab308" },
           { name: "西溪摇橹船", desc: "湿地生态游", url: "https://www.xixiwetland.com.cn/", color: "#ec4899" },
-          { name: "运河水上巴士", desc: "拱宸桥·武林门", url: "https://www.hzcb.gov.cn/", color: "#3b82f6" }
+          { name: "运河水上巴士", desc: "拱宸桥·武林门", url: "https://www.hzcjtz.com/", color: "#3b82f6" }
         ]
       },
       {
@@ -401,7 +401,7 @@
           { name: "消费券申领", desc: "支付宝/浙里办领券", color: "#ef4444" },
           { name: "政府补贴", desc: "人才/就业/住房补贴", url: "https://hrss.hangzhou.gov.cn/", color: "#f59e0b" },
           { name: "发票抽奖", desc: "支付宝/云闪付搜索消费有奖", color: "#10b981" },
-          { name: "人才驿站", desc: "来杭求职免费住7天", url: "https://hzrcw.com.cn/", color: "#3b82f6" },
+          { name: "人才驿站", desc: "来杭求职免费住7天", url: "https://www.hzrc.com/", color: "#3b82f6" },
           { name: "毕业生补贴", desc: "应届生生活补贴申请", url: "https://hrss.hangzhou.gov.cn/", color: "#8b5cf6" },
           { name: "租房补贴", desc: "新就业大学生租房补贴", url: "https://fgj.hangzhou.gov.cn/", color: "#ec4899" },
           { name: "灵隐寺预约", desc: "免费预约入园", url: "https://www.lingyinsi.com/", color: "#06b6d4" },
@@ -468,7 +468,7 @@
           { name: "灵活就业", desc: "兼职/自由职业", url: "https://www.zhaopin.com/", color: "#84cc16" },
           { name: "AI/互联网", desc: "技术岗位招聘", url: "https://www.lagou.com/hangzhou/", color: "#f97316" },
           { name: "实习岗位", desc: "大学生实习信息", url: "https://www.zhaopin.com/", color: "#a855f7" },
-          { name: "外籍人才", desc: "外国人就业许可", url: "https://hzrcw.com.cn/", color: "#0ea5e9" },
+          { name: "外籍人才", desc: "外国人就业许可", url: "https://www.hzrc.com/", color: "#0ea5e9" },
           { name: "博士后工作站", desc: "高层次人才进站", url: "https://www.hzrc.com/", color: "#22c55e" },
           { name: "人才认定", desc: "高层次人才分类认定", url: "https://hrss.hangzhou.gov.cn/", color: "#eab308" },
           { name: "求职补贴", desc: "就业困难补贴", url: "https://hrss.hangzhou.gov.cn/", color: "#3b82f6" },
@@ -565,7 +565,7 @@
           { name: "岳飞抗金", desc: "岳王庙·栖霞岭", color: "#f59e0b" },
           { name: "钱王射潮", desc: "钱镠治水·吴越国", color: "#06b6d4" },
           { name: "浙派古琴", desc: "3000年历史·人类非遗", color: "#8b5cf6" },
-          { name: "印象西湖", desc: "张艺谋山水实景演出", url: "https://www.westlake-show.com/", color: "#ec4899" },
+          { name: "印象西湖", desc: "张艺谋山水实景演出", url: "http://www.yinxiangxihup.com/", color: "#ec4899" },
           { name: "越剧", desc: "浙江小百花越剧团", color: "#14b8a6" }
         ]
       },
@@ -656,7 +656,7 @@
           { name: "中国财税博物馆", desc: "吴山广场", color: "#eab308" },
           { name: "中国动漫博物馆", desc: "滨江·白马湖", color: "#ec4899" },
           { name: "中国印学博物馆", desc: "孤山·西泠印社旁", color: "#8b5cf6" },
-          { name: "浙江自然博物院", desc: "西湖文化广场", url: "https://www.zmnh.com.cn/", color: "#10b981" },
+          { name: "浙江自然博物院", desc: "西湖文化广场", url: "https://www.zmnh.com/", color: "#10b981" },
           { name: "胡庆余堂中药博物馆", desc: "河坊街·国药文化", color: "#ef4444" },
           { name: "都锦生织锦博物馆", desc: "茅家埠·织锦艺术", color: "#f59e0b" }
         ]
