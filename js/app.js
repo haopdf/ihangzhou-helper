@@ -495,7 +495,9 @@
           { name: "幸福双", desc: "豆沙糯米点心", color: "#eab308" },
           { name: "小鸡酥", desc: "酥皮甜点", color: "#f59e0b" },
           { name: "木莲芯", desc: "清凉甜品", color: "#ec4899" },
-          { name: "杭州酱鸭", desc: "冬季传统美食", color: "#8b5cf6" }
+          { name: "杭州酱鸭", desc: "冬季传统美食", color: "#8b5cf6" },
+          { name: "杭州酒家", desc: "1921年始创·传统杭帮菜", color: "#f97316" },
+          { name: "知味观味庄", desc: "杨公堤·新杭帮菜", color: "#06b6d4" }
         ]
       },
       {
@@ -561,7 +563,10 @@
           { name: "梁祝传说", desc: "万松书院·长桥", color: "#8b5cf6" },
           { name: "苏白二公", desc: "苏东坡·白居易治杭", color: "#10b981" },
           { name: "岳飞抗金", desc: "岳王庙·栖霞岭", color: "#f59e0b" },
-          { name: "钱王射潮", desc: "钱镠治水·吴越国", color: "#06b6d4" }
+          { name: "钱王射潮", desc: "钱镠治水·吴越国", color: "#06b6d4" },
+          { name: "浙派古琴", desc: "3000年历史·人类非遗", color: "#8b5cf6" },
+          { name: "印象西湖", desc: "张艺谋山水实景演出", url: "https://www.westlake-show.com/", color: "#ec4899" },
+          { name: "越剧", desc: "浙江小百花越剧团", color: "#14b8a6" }
         ]
       },
       {
