@@ -348,6 +348,34 @@ a { color: var(--primary); text-decoration: none; }
   color: var(--text-muted);
 }
 
+/* ===== 频道专题页 ===== */
+.topbar-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.15);
+  flex-shrink: 0;
+}
+
+.channel-header {
+  margin: 0;
+}
+
+.channel-desc {
+  margin: 0 0 12px;
+}
+
+.related-channels {
+  margin: 24px 12px 0;
+}
+
+.related-channels .channel-item {
+  background: var(--bg-card);
+}
+
 /* ===== 热门办事网格 ===== */
 .hot-grid {
   display: grid;

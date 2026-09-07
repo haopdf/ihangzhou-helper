@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="description" content="iHangzhou 频道专题 - 杭州生活服务导航">
+  <meta name="keywords" content="杭州,杭州生活,杭州办事,ihangzhou,杭州频道">
+  <meta name="theme-color" content="#0ea5e9">
+  <meta property="og:title" content="iHangzhou 频道专题">
+  <meta property="og:description" content="杭州人的数字生活工具箱">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://ihangzhou.net/channel.html">
+  <link rel="manifest" href="manifest.json">
+  <title>iHangzhou · 频道专题</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+</head>
+<body>
+
+  <!-- 顶部栏 -->
+  <header class="topbar">
+    <a href="index.html" class="topbar-back" style="color:#fff;text-decoration:none;font-size:20px;padding:4px 8px;">‹</a>
+    <div class="topbar-city">
+      <span>杭州</span><span class="city-arrow">▼</span>
+    </div>
+    <div class="topbar-search">
+      <input type="text" id="channelSearchInput" placeholder="在本频道搜索..." autocomplete="off">
+    </div>
+    <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
+  </header>
+
+  <!-- 频道内容 -->
+  <div class="page active" id="pageChannel">
+    <!-- 频道头部 -->
+    <div class="channel-header" id="channelHeader"></div>
+
+    <!-- 频道描述 -->
+    <div class="channel-desc" id="channelDesc"></div>
+
+    <!-- 频道服务网格 -->
+    <div class="content">
+      <div class="section-head">
+        <h2 id="channelTitle">全部服务</h2>
+        <span class="tip" id="channelCount"></span>
+      </div>
+      <div class="service-grid" id="serviceGrid"></div>
+    </div>
+
+    <!-- 相关频道推荐 -->
+    <div class="related-channels">
+      <div class="section-head">
+        <h2>相关频道</h2>
+        <span class="tip">探索更多</span>
+      </div>
+      <div class="channel-grid" id="relatedChannels"></div>
+    </div>
+
+    <!-- 返回首页 -->
+    <div style="text-align:center;padding:24px 16px 48px;">
+      <a href="index.html" style="display:inline-block;padding:12px 32px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;">← 返回首页</a>
+    </div>
+  </div>
+
+  <!-- 模态框 -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">标题</h3>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    // 频道专题页逻辑
+    (function () {
+      'use strict';
+
+      // 频道描述数据
+      var CHANNEL_DESC = {
+        'banshi': '杭州政务办事一站导航，涵盖社保、公积金、落户、证件、人才、补贴等高频办事服务，所有链接指向官方渠道。',
+        'traffic': '杭州交通出行全攻略，限行查询、地铁公交、火车机票、打车租车、停车缴费、违章处理，出行无忧。',
+        'food': '杭帮菜经典名菜与街头小吃，西湖醋鱼、龙井虾仁、东坡肉、片儿川，品味千年饮食文化。',
+        'laozihao': '杭州百年老字号品牌，胡庆余堂、王星记、张小泉、知味观、楼外楼，传承匠心工艺。',
+        'celebrity': '杭州历史与当代名人录，从白居易、苏东坡到林徽因、章太炎，见证城市人文脉络。',
+        'history': '杭州历史文化探索，南宋皇城、良渚古城、京杭大运河、西湖文化，世界遗产巡礼。',
+        'internet': '杭州互联网大厂聚集地，阿里巴巴、网易、字节跳动、蚂蚁集团，数字经济高地。',
+        'zhaopin': '杭州人才招聘导航，事业单位、国企、大厂、校招、实习，求职就业一站直达。',
+        'street': '杭州街道故事，河坊街、南山路、延安路、湖滨路，每条街道都是城市记忆。',
+        'weekend': '杭州周末休闲指南，亲子游、免费景点、特色市集、短途自驾、夜生活，周末不无聊。',
+        'museum': '杭州博物馆地图，省博物馆、丝绸博物馆、茶叶博物馆、良渚博物院，免费文化之旅。',
+        'coffee': '杭州咖啡馆指南，西湖边、南山路、青芝坞、馒头山，寻找城市中的咖啡香气。'
+      };
+
+      // 相关频道推荐
+      var RELATED = {
+        'banshi': ['traffic', 'zhaopin', 'laozihao'],
+        'traffic': ['banshi', 'weekend', 'museum'],
+        'food': ['laozihao', 'street', 'coffee'],
+        'laozihao': ['food', 'history', 'street'],
+        'celebrity': ['history', 'street', 'museum'],
+        'history': ['celebrity', 'museum', 'laozihao'],
+        'internet': ['zhaopin', 'street', 'coffee'],
+        'zhaopin': ['banshi', 'internet', 'weekend'],
+        'street': ['food', 'coffee', 'history'],
+        'weekend': ['museum', 'food', 'street'],
+        'museum': ['history', 'weekend', 'celebrity'],
+        'coffee': ['street', 'weekend', 'food']
+      };
+
+      function getChannelId() {
+        var hash = location.hash.replace('#', '');
+        if (!hash) {
+          var params = new URLSearchParams(location.search);
+          hash = params.get('ch') || '';
+        }
+        return hash;
+      }
+
+      function getServiceIcon(name) {
+        if (window.getServiceIcon) return window.getServiceIcon(name);
+        // 降级：简单emoji
+        return '📌';
+      }
+
+      function renderChannel() {
+        var chId = getChannelId();
+        if (!chId) {
+          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding:40px 16px;color:var(--text-muted);">频道未指定，请从<a href="index.html" style="color:var(--primary);">首页</a>进入</div>';
+          return;
+        }
+
+        // 从 app.js DATA 中查找对应分类
+        if (!window._getData) {
+          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding:40px 16px;color:var(--text-muted);">数据加载失败</div>';
+          return;
+        }
+
+        var DATA = window._getData();
+        var category = DATA.categories.find(function (c) { return c.id === chId; });
+        if (!category) {
+          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding:40px 16px;color:var(--text-muted);">频道「' + chId + '」未找到</div>';
+          return;
+        }
+
+        // 更新 SEO
+        document.title = category.name + ' · iHangzhou 杭州生活助手';
+        var metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', CHANNEL_DESC[chId] || category.name + '频道');
+        var metaKw = document.querySelector('meta[name="keywords"]');
+        if (metaKw) metaKw.setAttribute('content', '杭州,' + category.name + ',' + category.items.map(function (i) { return i.name; }).slice(0, 10).join(','));
+
+        // 动态 JSON-LD 结构化数据
+        var ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute('content', category.name + ' · iHangzhou');
+        var ogDesc = document.querySelector('meta[property="og:description"]');
+        if (ogDesc) ogDesc.setAttribute('content', CHANNEL_DESC[chId] || '');
+        var existJsonLd = document.getElementById('channelJsonLd');
+        if (existJsonLd) existJsonLd.remove();
+        var jsonLd = document.createElement('script');
+        jsonLd.id = 'channelJsonLd';
+        jsonLd.type = 'application/ld+json';
+        jsonLd.text = JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://ihangzhou.net/" },
+            { "@type": "ListItem", "position": 2, "name": category.name, "item": "https://ihangzhou.net/channel.html#" + chId }
+          ]
+        });
+        document.head.appendChild(jsonLd);
+
+        // 渲染频道头部
+        var header = document.getElementById('channelHeader');
+        header.innerHTML =
+          '<div class="ch-hero" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:32px 16px 24px;text-align:center;">' +
+          '<div style="font-size:56px;line-height:1;margin-bottom:8px;">' + category.icon + '</div>' +
+          '<h1 style="font-size:24px;font-weight:700;margin:0;">' + category.name + '</h1>' +
+          '<div style="font-size:13px;opacity:0.9;margin-top:6px;">iHangzhou · 杭州生活助手</div>' +
+          '</div>';
+
+        // 渲染描述
+        var descEl = document.getElementById('channelDesc');
+        descEl.innerHTML = '<div style="padding:16px;background:var(--bg-card);border-radius:0 0 12px 12px;margin:0 12px;font-size:14px;line-height:1.7;color:var(--text-secondary);">' +
+          (CHANNEL_DESC[chId] || '杭州' + category.name + '导航') + '</div>';
+
+        // 渲染标题与数量
+        document.getElementById('channelTitle').textContent = category.name + ' · 全部服务';
+        document.getElementById('channelCount').textContent = '共 ' + category.items.length + ' 项';
+
+        // 渲染服务网格
+        var grid = document.getElementById('serviceGrid');
+        grid.innerHTML = category.items.map(function (item) {
+          return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="' + (item.url || '') + '">' +
+            '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
+            '<div class="sinfo">' +
+            '<div class="sname">' + item.name + '</div>' +
+            '<div class="sdesc">' + item.desc + '</div>' +
+            '</div>' +
+            '<div class="sarrow">›</div>' +
+            '</div>';
+        }).join('');
+
+        // 绑定服务点击 - 依赖 app.js 的 #serviceGrid 委托绑定，无需重复绑定
+        // app.js 的 handleClick 已处理 action/url/详情三种情况
+
+        // 渲染相关频道
+        var related = RELATED[chId] || [];
+        var relEl = document.getElementById('relatedChannels');
+        if (relEl && related.length) {
+          relEl.innerHTML = related.map(function (rid) {
+            var rcat = DATA.categories.find(function (c) { return c.id === rid; });
+            if (!rcat) return '';
+            return '<div class="channel-item" data-channel="' + rid + '" style="cursor:pointer;">' +
+              '<span class="ch-icon">' + rcat.icon + '</span>' +
+              '<span class="ch-name">' + rcat.name + '</span>' +
+              '</div>';
+          }).join('');
+          relEl.querySelectorAll('.channel-item').forEach(function (el) {
+            el.addEventListener('click', function () {
+              var rid = this.dataset.channel;
+              location.hash = rid;
+              renderChannel();
+              window.scrollTo(0, 0);
+            });
+          });
+        }
+
+        // 搜索（频道内搜索）
+        var searchInput = document.getElementById('channelSearchInput');
+        if (searchInput) {
+          searchInput.addEventListener('input', function (e) {
+            var q = e.target.value.trim().toLowerCase();
+            if (!q) {
+              grid.querySelectorAll('.sitem').forEach(function (el) { el.style.display = 'flex'; });
+              return;
+            }
+            grid.querySelectorAll('.sitem').forEach(function (el) {
+              var name = el.querySelector('.sname').textContent.toLowerCase();
+              var desc = el.querySelector('.sdesc').textContent.toLowerCase();
+              el.style.display = (name.indexOf(q) >= 0 || desc.indexOf(q) >= 0) ? 'flex' : 'none';
+            });
+          });
+        }
+      }
+
+      // 初始化
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', renderChannel);
+      } else {
+        renderChannel();
+      }
+      window.addEventListener('hashchange', renderChannel);
+    })();
+  </script>
+</body>
+</html>

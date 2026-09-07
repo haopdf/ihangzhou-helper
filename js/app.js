@@ -13,11 +13,11 @@
     // 热门办事（顶部快捷入口）
     hotServices: [
       { name: "今日限行", icon: "🚗", desc: "尾号限行查询", action: "xianxing", color: "#ef4444" },
-      { name: "发票抽奖", icon: "🧾", desc: "杭州发票抽奖", url: "https://www.hangzhou.gov.cn/col/col1229151238/index.html", color: "#f59e0b" },
+      { name: "发票抽奖", icon: "🧾", desc: "杭州发票抽奖", url: "https://www.hangzhou.gov.cn/", color: "#f59e0b" },
       { name: "找工作", icon: "💼", desc: "事业单位/国企", url: "https://hrss.hangzhou.gov.cn/", color: "#3b82f6" },
       { name: "公积金", icon: "🏠", desc: "查询/提取/贷款", url: "https://gjj.hangzhou.gov.cn/", color: "#10b981" },
       { name: "浙A摇号", icon: "🚘", desc: "车牌摇号申请", url: "https://xkctk.hzcb.gov.cn/", color: "#ef4444" },
-      { name: "灵隐寺", icon: "⛩️", desc: "门票预约", url: "https://www.lingyinsi.org.cn/", color: "#8b5cf6" },
+      { name: "灵隐寺", icon: "⛩️", desc: "门票预约", url: "https://www.lingyinsi.com/", color: "#8b5cf6" },
       { name: "人才认定", icon: "🎓", desc: "高层次人才申请", url: "https://hrss.hangzhou.gov.cn/", color: "#06b6d4" },
       { name: "市民卡", icon: "💳", desc: "服务/充值", url: "https://www.96225.com/", color: "#ec4899" }
     ],
@@ -56,7 +56,7 @@
           { name: "住房补贴", desc: "公租房/人才房申请", url: "https://fgj.hangzhou.gov.cn/", color: "#eab308" },
           { name: "浙里办", desc: "全省政务一网通办", url: "https://www.zjzwfw.gov.cn/", color: "#3b82f6" },
           { name: "12345热线", desc: "市长热线咨询", url: "tel:12345", color: "#ef4444" },
-          { name: "发票抽奖", desc: "有奖发票登记", url: "https://www.hangzhou.gov.cn/col/col1229151238/index.html", color: "#f59e0b" },
+          { name: "发票抽奖", desc: "有奖发票登记", url: "https://www.hangzhou.gov.cn/", color: "#f59e0b" },
           { name: "学历认证", desc: "学信网验证报告", url: "https://www.chsi.com.cn/", color: "#10b981" },
           { name: "房产证明", desc: "不动产登记证明", url: "https://fgj.hangzhou.gov.cn/", color: "#8b5cf6" },
           { name: "无犯罪记录", desc: "证明开具申请", url: "https://gaj.hangzhou.gov.cn/", color: "#06b6d4" },
@@ -82,15 +82,15 @@
           { name: "公交实时", desc: "到站提醒/等待时间", url: "https://www.hzbus.com.cn/", color: "#a855f7" },
           { name: "水上巴士", desc: "运河线/塘栖线", url: "https://www.hzbus.com.cn/", color: "#0ea5e9" },
           { name: "公共自行车", desc: "小红车借还点", url: "https://www.hzbus.com.cn/", color: "#22c55e" },
-          { name: "共享单车", desc: "哈啰/美团/青桔", url: "https://www.hellobike.com/", color: "#eab308" },
+          { name: "共享单车", desc: "哈啰/美团/青桔", url: "https://www.hello-inc.com/", color: "#eab308" },
           { name: "火车票", desc: "12306购票", url: "https://www.12306.cn/", color: "#3b82f6" },
           { name: "高铁时刻", desc: "杭州东/西/南站", url: "https://www.12306.cn/", color: "#ef4444" },
           { name: "萧山机场", desc: "航班查询/大巴", url: "https://www.hzairport.com/", color: "#10b981" },
           { name: "机场大巴", desc: "武林门/平海路等", url: "https://www.hzairport.com/", color: "#f59e0b" },
           { name: "机票预订", desc: "特价机票搜索", url: "https://www.ctrip.com/", color: "#8b5cf6" },
-          { name: "汽车票", desc: "九堡/客运中心", url: "https://www.8684.cn/hz", color: "#06b6d4" },
+          { name: "汽车票", desc: "九堡/客运中心", url: "http://hangzhou.8684.com.cn/", color: "#06b6d4" },
           { name: "打车软件", desc: "滴滴/曹操/高德", url: "https://www.didiglobal.com/", color: "#ec4899" },
-          { name: "顺风车", desc: "跨城拼车", url: "https://www.顺风车.com/", color: "#14b8a6" },
+          { name: "顺风车", desc: "跨城拼车", url: "https://www.didapinche.com/", color: "#14b8a6" },
           { name: "ETC办理", desc: "浙通卡办理充值", url: "https://www.zjetc.cn/", color: "#84cc16" },
           { name: "油价查询", desc: "今日油价", action: "youjia", color: "#f97316" },
           { name: "杭州天气", desc: "实时天气/预报", action: "weather", color: "#a855f7" },
@@ -134,13 +134,13 @@
         id: "life", name: "民生服务", icon: "🛍️",
         items: [
           { name: "消费券领取", desc: "数字人民币/满减券", url: "https://www.hangzhou.gov.cn/", color: "#ef4444" },
-          { name: "发票抽奖", desc: "有奖发票登记", url: "https://www.hangzhou.gov.cn/col/col1229151238/index.html", color: "#f59e0b" },
-          { name: "水费缴纳", desc: "杭州水务集团", url: "https://www.hzwater.com.cn/", color: "#10b981" },
+          { name: "发票抽奖", desc: "有奖发票登记", url: "https://www.hangzhou.gov.cn/", color: "#f59e0b" },
+          { name: "水费缴纳", desc: "杭州水务集团", url: "https://www.hzwgc.com/", color: "#10b981" },
           { name: "电费缴纳", desc: "国家电网", url: "https://www.95598.cn/", color: "#3b82f6" },
           { name: "燃气缴费", desc: "杭州燃气", url: "https://www.hzgas.com.cn/", color: "#8b5cf6" },
           { name: "固话宽带", desc: "电信/联通/移动", url: "https://www.10086.cn/", color: "#06b6d4" },
           { name: "有线电视", desc: "华数传媒", url: "https://www.wasu.com/", color: "#ec4899" },
-          { name: "医院挂号", desc: "浙一/浙二/邵逸夫", url: "https://www.zj12580.cn/", color: "#14b8a6" },
+          { name: "医院挂号", desc: "浙一/浙二/邵逸夫", url: "https://guahao.zjol.com.cn/", color: "#14b8a6" },
           { name: "儿童疫苗", desc: "疫苗预约/接种", url: "https://wsjkw.hangzhou.gov.cn/", color: "#84cc16" },
           { name: "新冠疫苗", desc: "加强针预约", url: "https://wsjkw.hangzhou.gov.cn/", color: "#f97316" },
           { name: "HPV疫苗", desc: "九价/四价预约", url: "https://wsjkw.hangzhou.gov.cn/", color: "#a855f7" },
@@ -196,8 +196,8 @@
           { name: "医院招聘", desc: "医生/护士/行政", url: "https://wsjkw.hangzhou.gov.cn/", color: "#06b6d4" },
           { name: "大厂招聘", desc: "阿里/网易/字节", url: "https://www.lagou.com/hangzhou/", color: "#ec4899" },
           { name: "校园招聘", desc: "秋招/春招信息", url: "https://www.zhaopin.com/", color: "#14b8a6" },
-          { name: "实习岗位", desc: "大学生实习", url: "https://www.zhaopin.com/intern/", color: "#84cc16" },
-          { name: "兼职信息", desc: "短期/临时工", url: "https://www.zhaopin.com/parttime/", color: "#f97316" },
+          { name: "实习岗位", desc: "大学生实习", url: "https://www.zhaopin.com/", color: "#84cc16" },
+          { name: "兼职信息", desc: "短期/临时工", url: "https://www.zhaopin.com/", color: "#f97316" },
           { name: "低门槛岗位", desc: "不限学历", url: "https://www.zhaopin.com/", color: "#a855f7" },
           { name: "AI/算法岗", desc: "人工智能岗位", url: "https://www.lagou.com/ai/", color: "#0ea5e9" },
           { name: "前端开发", desc: "Web/小程序", url: "https://www.lagou.com/tech/", color: "#22c55e" },
@@ -207,8 +207,8 @@
           { name: "运营岗位", desc: "内容/用户/活动", url: "https://www.lagou.com/operation/", color: "#f59e0b" },
           { name: "金融岗位", desc: "银行/证券/基金", url: "https://www.lagou.com/finance/", color: "#10b981" },
           { name: "法务岗位", desc: "律师/法务顾问", url: "https://www.lagou.com/legal/", color: "#8b5cf6" },
-          { name: "销售岗位", desc: "BD/客户经理", url: "https://www.zhaopin.com/sales/", color: "#06b6d4" },
-          { name: "人事行政", desc: "HR/行政", url: "https://www.zhaopin.com/hr/", color: "#ec4899" },
+          { name: "销售岗位", desc: "BD/客户经理", url: "https://www.zhaopin.com/", color: "#06b6d4" },
+          { name: "人事行政", desc: "HR/行政", url: "https://www.zhaopin.com/", color: "#ec4899" },
           { name: "残疾人就业", desc: "专属岗位", url: "https://hrss.hangzhou.gov.cn/", color: "#14b8a6" },
           { name: "退役军人", desc: "军转干部安置", url: "https://tyjr.hangzhou.gov.cn/", color: "#84cc16" },
           { name: "外籍人才", desc: "外国人就业许可", url: "https://hzrcw.com.cn/", color: "#f97316" },
@@ -255,7 +255,7 @@
           { name: "人才驿站", desc: "免费住7天", url: "https://hrss.hangzhou.gov.cn/", color: "#14b8a6" },
           { name: "青年公寓", desc: "应届毕业生", url: "https://fgj.hangzhou.gov.cn/", color: "#84cc16" },
           { name: "酒店式公寓", desc: "长租公寓", url: "https://www.danke.com/hangzhou/", color: "#f97316" },
-          { name: "法拍房", desc: "司法拍卖", url: "https://www.fang.com/ph/", color: "#a855f7" },
+          { name: "法拍房", desc: "司法拍卖", url: "https://hz.fang.com/", color: "#a855f7" },
           { name: "房产评估", desc: "价格评估", url: "https://hz.lianjia.com/", color: "#0ea5e9" },
           { name: "中介费计算", desc: "收费标准", url: "https://hz.lianjia.com/", color: "#22c55e" },
           { name: "物业费查询", desc: "各小区物业", url: "https://fgj.hangzhou.gov.cn/", color: "#eab308" },
@@ -268,9 +268,9 @@
         items: [
           { name: "西湖景区", desc: "景点/游船/预约", url: "https://whol.mztrip.com/", color: "#ef4444" },
           { name: "西湖手划船", desc: "摇橹船预约", url: "https://whol.mztrip.com/", color: "#f59e0b" },
-          { name: "灵隐寺", desc: "免费预约入园", url: "https://www.lingyinsi.org.cn/", color: "#10b981" },
-          { name: "法喜寺", desc: "网红斋饭/白玉兰", url: "https://www.lingyinsi.org.cn/", color: "#3b82f6" },
-          { name: "景点预约", desc: "杭州各景点预约入口", url: "https://www.hangzhou.gov.cn/col/col1229013854/index.html", color: "#8b5cf6" },
+          { name: "灵隐寺", desc: "免费预约入园", url: "https://www.lingyinsi.com/", color: "#10b981" },
+          { name: "法喜寺", desc: "网红斋饭/白玉兰", url: "https://www.lingyinsi.com/", color: "#3b82f6" },
+          { name: "景点预约", desc: "杭州各景点预约入口", url: "https://www.hangzhou.gov.cn/", color: "#8b5cf6" },
           { name: "西溪湿地", desc: "门票/摇橹船", url: "https://www.xixiwetland.com.cn/", color: "#06b6d4" },
           { name: "千岛湖", desc: "景区/游船/住宿", url: "https://www.qiandaohu.cn/", color: "#ec4899" },
           { name: "钱塘江大潮", desc: "观潮时间表/地点", url: "https://www.gongshumeiti.com/", color: "#14b8a6" },
@@ -287,8 +287,8 @@
           { name: "刀剪剑博物馆", desc: "非遗传承", url: "https://www.hzmuseums.cn/", color: "#8b5cf6" },
           { name: "演唱会", desc: "近期演出信息", url: "https://www.damai.cn/", color: "#06b6d4" },
           { name: "音乐节", desc: "草莓/迷笛", url: "https://www.damai.cn/", color: "#ec4899" },
-          { name: "话剧歌剧", desc: "剧院演出", url: "https://www.piaonet.com/", color: "#14b8a6" },
-          { name: "杭州马拉松", desc: "报名/路线", url: "https://www.hangzhoumarathon.com/", color: "#84cc16" },
+          { name: "话剧歌剧", desc: "剧院演出", url: "https://www.damai.cn/", color: "#14b8a6" },
+          { name: "杭州马拉松", desc: "报名/路线", url: "https://hm.zhetiyu.cn/", color: "#84cc16" },
           { name: "浙BA篮球", desc: "城市篮球联赛", url: "https://tyj.hangzhou.gov.cn/", color: "#f97316" },
           { name: "足球联赛", desc: "中甲联赛", url: "https://tyj.hangzhou.gov.cn/", color: "#a855f7" },
           { name: "电竞比赛", desc: "LGD主场", url: "https://www.lgdgj.com/", color: "#0ea5e9" },
@@ -319,7 +319,7 @@
           { name: "邮政编码", desc: "杭州各区县邮编", action: "postcode" },
           { name: "行政区划", desc: "区县/街道信息", action: "district" },
           { name: "快递查询", desc: "全网物流追踪", url: "https://www.kuaidi100.com/" },
-          { name: "医院挂号", desc: "浙江预约挂号", url: "https://www.zj12580.cn/" },
+          { name: "医院挂号", desc: "浙江预约挂号", url: "https://guahao.zjol.com.cn/" },
           { name: "电影查询", desc: "杭州影院/排片", url: "https://www.mtime.com/" },
           { name: "福利彩票", desc: "双色球/大乐透", url: "https://www.cwl.gov.cn/" },
           { name: "体育彩票", desc: "竞彩/排三排五", url: "https://www.lottery.gov.cn/" },
@@ -350,13 +350,13 @@
       {
         id: "youhui", name: "优惠特惠", icon: "🎫",
         items: [
-          { name: "消费券申领", desc: "杭州消费券/数字人民币", url: "https://www.hangzhou.gov.cn/col/col1229013850/index.html", color: "#ef4444" },
+          { name: "消费券申领", desc: "杭州消费券/数字人民币", url: "https://www.hangzhou.gov.cn/", color: "#ef4444" },
           { name: "政府补贴", desc: "人才/就业/住房补贴", url: "https://hrss.hangzhou.gov.cn/", color: "#f59e0b" },
-          { name: "发票抽奖", desc: "杭州发票抽奖登记入口", url: "https://www.hangzhou.gov.cn/col/col1229151238/index.html", color: "#10b981" },
+          { name: "发票抽奖", desc: "杭州发票抽奖登记入口", url: "https://www.hangzhou.gov.cn/", color: "#10b981" },
           { name: "人才驿站", desc: "来杭求职免费住7天", url: "https://hzrcw.com.cn/", color: "#3b82f6" },
           { name: "毕业生补贴", desc: "应届生生活补贴申请", url: "https://hrss.hangzhou.gov.cn/", color: "#8b5cf6" },
           { name: "租房补贴", desc: "新就业大学生租房补贴", url: "https://fgj.hangzhou.gov.cn/", color: "#ec4899" },
-          { name: "灵隐寺预约", desc: "免费预约入园", url: "https://www.lingyinsi.org.cn/", color: "#06b6d4" },
+          { name: "灵隐寺预约", desc: "免费预约入园", url: "https://www.lingyinsi.com/", color: "#06b6d4" },
           { name: "西湖游船", desc: "手划船/自开船票价", url: "https://whol.mztrip.com/", color: "#14b8a6" },
           { name: "公园年卡", desc: "杭州公园年卡办理", url: "https://www.96225.com/", color: "#84cc16" },
           { name: "市民卡优惠", desc: "公共交通/景区优惠", url: "https://www.96225.com/", color: "#f97316" },
@@ -491,7 +491,7 @@
           { name: "运河文化", desc: "运河博物馆·拱墅", color: "#84cc16" },
           { name: "南宋官窑", desc: "南宋官窑博物馆", color: "#f97316" },
           { name: "藏书文化", desc: "文澜阁·圣因寺遗址", color: "#a855f7" },
-          { name: "佛教文化", desc: "灵隐寺·法喜寺", url: "https://www.lingyinsi.org.cn/", color: "#0ea5e9" }
+          { name: "佛教文化", desc: "灵隐寺·法喜寺", url: "https://www.lingyinsi.com/", color: "#0ea5e9" }
         ]
       },
       {
@@ -706,7 +706,7 @@
   // ===== 渲染 =====
   function renderHotServices() {
     var grid = $('#hotGrid');
-    if (!grid) return;
+    if (!grid) return; // quick-nav 使用 inline onclick，无 #hotGrid 容器，直接跳过
     grid.innerHTML = DATA.hotServices.map(function (s) {
       return '<div class="hot-card" data-action="' + (s.action || '') + '" data-url="' + (s.url || '') + '" style="--hc:' + s.color + '">' +
         '<div class="hot-icon">' + s.icon + '</div>' +
@@ -891,69 +891,62 @@
   }
 
   // ===== 事件绑定 =====
-  function bindEvents() {
-    $('#hotGrid').addEventListener('click', function (e) {
-      var card = e.target.closest('.hot-card');
-      if (!card) return;
-      handleClick(card);
-    });
+  function bindOn(sel, evt, handler) {
+    var el = $(sel);
+    if (el) el.addEventListener(evt, handler);
+  }
 
-    $('#tabs').addEventListener('click', function (e) {
+  function bindEvents() {
+    // quick-nav 使用 inline onclick，无需绑定 #hotGrid（避免 null 错误中断后续绑定）
+    bindOn('#tabs', 'click', function (e) {
       var tab = e.target.closest('.tab');
       if (!tab) return;
       state.activeTab = tab.dataset.tab;
       state.searchQuery = '';
-      $('#searchInput').value = '';
+      var searchInput = $('#searchInput');
+      if (searchInput) searchInput.value = '';
       $$('.tab').forEach(function (t) { t.classList.remove('active'); });
       tab.classList.add('active');
       renderServices(state.activeTab);
     });
 
-    $('#serviceGrid').addEventListener('click', function (e) {
+    bindOn('#serviceGrid', 'click', function (e) {
       var item = e.target.closest('.sitem');
       if (!item) return;
       handleClick(item);
     });
 
-    $('#searchInput').addEventListener('input', function (e) {
+    bindOn('#searchInput', 'input', function (e) {
       globalSearch(e.target.value);
     });
 
-    $('#hotKeywords').addEventListener('click', function (e) {
+    bindOn('#hotKeywords', 'click', function (e) {
       var tag = e.target.closest('.hk-tag');
       if (!tag) return;
       var kw = tag.dataset.kw;
-      $('#searchInput').value = kw;
+      var searchInput = $('#searchInput');
+      if (searchInput) searchInput.value = kw;
       globalSearch(kw);
     });
 
-    $('#themeBtn').addEventListener('click', toggleTheme);
+    bindOn('#themeBtn', 'click', toggleTheme);
 
-    // 频道入口点击事件
+    // 频道入口点击：跳转到频道专题页 channel.html#xxx
     $$('.channel-item').forEach(function (item) {
       item.addEventListener('click', function () {
         var channel = this.dataset.channel;
-var tabMap = {
-'zixun': 'traffic',    // 资讯 -> 交通出行
-'banshi': 'banshi',   // 办事 -> 办事指南
-'kaoxue': 'edu',      // 考学 -> 教育办事
-'zhaopin': 'job',     // 招聘 -> 找工作
-'lvyou': 'travel',    // 旅游 -> 旅游休闲
-'xiuxian': 'tool',    // 工具 -> 实用工具
-'youhui': 'youhui'    // 优惠 -> 优惠特惠
-};
-        var tabId = tabMap[channel] || 'banshi';
-        state.activeTab = tabId;
-        $$('.tab').forEach(function (t) { t.classList.remove('active'); });
-        var targetTab = document.querySelector('.tab[data-tab="' + tabId + '"]');
-        if (targetTab) targetTab.classList.add('active');
-        renderServices(tabId);
-        window.scrollTo(0, 0);
+        var matchedCat = DATA.categories.find(function (c) { return c.id === channel; });
+        if (matchedCat) {
+          // 跳转到频道专题页
+          location.href = 'channel.html#' + channel;
+        } else {
+          showToast('「' + (this.querySelector('.ch-name') ? this.querySelector('.ch-name').textContent : channel) + '」专题页开发中');
+        }
       });
     });
 
-    $('#modalClose').addEventListener('click', closeModal);
-    $('#modalOverlay').addEventListener('click', function (e) {
+    bindOn('#modalClose', 'click', closeModal);
+    bindOn('#modalOverlay', 'click', function (e) {
       if (e.target.id === 'modalOverlay') closeModal();
     });
     document.addEventListener('keydown', function (e) {
@@ -965,6 +958,24 @@ var tabMap = {
         switchPage(this.dataset.page);
       });
     });
+
+    // 资讯 Banner 轮播
+    initNewsBanner();
+  }
+
+  // ===== 资讯 Banner 轮播 =====
+  function initNewsBanner() {
+    var banner = $('#newsBanner');
+    if (!banner) return;
+    var items = banner.querySelectorAll('.news-item');
+    if (items.length <= 1) return;
+    var idx = 0;
+    setInterval(function () {
+      idx = (idx + 1) % items.length;
+      items.forEach(function (el, i) {
+        el.style.display = i === idx ? 'flex' : 'none';
+      });
+    }, 4000);
   }
 
   function handleClick(el) {
@@ -972,6 +983,19 @@ var tabMap = {
     var url = el.dataset.url;
     if (action) { handleAction(action); }
     else if (url) { window.open(url, '_blank', 'noopener'); }
+    else {
+      // 无外链也无action，显示服务详情
+      var nameEl = el.querySelector('.sname');
+      var descEl = el.querySelector('.sdesc');
+      if (nameEl) {
+        var name = nameEl.textContent;
+        var desc = descEl ? descEl.textContent : '';
+        openModal('📌 ' + name, '<div style="padding:16px;line-height:1.8;font-size:14px;">' +
+          '<p style="color:var(--text-secondary);">' + desc + '</p>' +
+          '<p style="margin-top:12px;font-size:13px;color:var(--text-muted);">该服务为信息展示项，暂无对应官方入口。如需办理，建议通过「浙里办」APP或拨打12345咨询。</p>' +
+          '</div>');
+      }
+    }
   }
 
   function switchPage(page) {
@@ -1956,7 +1980,7 @@ default: showToast('功能开发中');
     }
   }
 
-  // 暴露全局函数供 index.html 调用
+  // 暴露全局函数供 index.html / channel.html 调用
   window.openModal = openModal;
   window.closeModal = closeModal;
   window.buildXianxingModal = buildXianxingModal;
@@ -1966,6 +1990,9 @@ default: showToast('功能开发中');
   window.showMetro = showMetro;
   window.showWeather = showWeather;
   window.showSalaryCalc = showSalaryCalc;
+  window.getServiceIcon = getServiceIcon;
+  window._getData = function () { return DATA; };
+  window._handleAction = handleAction;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
