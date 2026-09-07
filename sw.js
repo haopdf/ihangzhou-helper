@@ -1,17 +1,15 @@
 // ============================================
 // iHangzhou Service Worker
-// 支持离线访问 + 静态资源缓存
-// 域名: ihangzhou.net
+// HTML/JS 网络优先（确保最新），CSS/图片 缓存优先
 // ============================================
 
-var CACHE_NAME = 'ihangzhou-v3';
+var CACHE_NAME = 'ihangzhou-v4';
 var CACHE_URLS = [
-  '/',
   '/css/style.css',
   '/manifest.json'
 ];
 
-// 安装：预缓存核心资源
+// 安装：预缓存静态资源
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
@@ -39,23 +37,20 @@ self.addEventListener('activate', function (event) {
   );
 });
 
-// 请求拦截：缓存优先，网络回退
+// 请求拦截
 self.addEventListener('fetch', function (event) {
-  // 只处理 GET 请求
   if (event.request.method !== 'GET') return;
 
-  // 跳过跨域请求（如天气API、外部链接）
   var url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
 
-  event.respondWith(
-    caches.match(event.request).then(function (cached) {
-      // 缓存命中：返回缓存
-      if (cached) return cached;
+  var isHtml = event.request.mode === 'navigate' || /\.html(\?|$)/.test(url.pathname);
+  var isJs = /\.js(\?|$)/.test(url.pathname);
 
-      // 网络请求
-      return fetch(event.request).then(function (response) {
-        // 成功则缓存副本
+  // HTML / JS：网络优先，失败回退缓存
+  if (isHtml || isJs) {
+    event.respondWith(
+      fetch(event.request).then(function (response) {
         if (response && response.status === 200) {
           var clone = response.clone();
           caches.open(CACHE_NAME).then(function (cache) {
@@ -64,11 +59,30 @@ self.addEventListener('fetch', function (event) {
         }
         return response;
       }).catch(function () {
-        // 离线时返回首页
-        if (event.request.mode === 'navigate') {
-          return caches.match('/index.html');
+        return caches.match(event.request).then(function (cached) {
+          if (cached) return cached;
+          if (event.request.mode === 'navigate') {
+            return caches.match('/index.html');
+          }
+        });
+      })
+    );
+    return;
+  }
+
+  // 其他资源（CSS、图片等）：缓存优先，网络回退
+  event.respondWith(
+    caches.match(event.request).then(function (cached) {
+      if (cached) return cached;
+      return fetch(event.request).then(function (response) {
+        if (response && response.status === 200) {
+          var clone = response.clone();
+          caches.open(CACHE_NAME).then(function (cache) {
+            cache.put(event.request, clone);
+          });
         }
-      });
+        return response;
+      }).catch(function () {});
     })
   );
 });
