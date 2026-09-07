@@ -1072,11 +1072,22 @@
     }, 4000);
   }
 
+  function openUrl(url) {
+    // 使用 <a> 标签点击，兼容移动端和 PWA，避免被弹窗拦截
+    var a = document.createElement('a');
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
   function handleClick(el) {
     var action = el.dataset.action;
     var url = el.dataset.url;
     if (action) { handleAction(action); }
-    else if (url) { window.open(url, '_blank', 'noopener'); }
+    else if (url) { openUrl(url); }
     else {
       // 无外链也无action，显示服务详情
       var nameEl = el.querySelector('.sname');
@@ -2189,6 +2200,7 @@ default: showToast('功能开发中');
   window.getServiceIcon = getServiceIcon;
   window._getData = function () { return DATA; };
   window._handleAction = handleAction;
+  window.openUrl = openUrl;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
