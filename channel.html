@@ -72,7 +72,7 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=20260907e"></script>
+  <script src="js/app.js?v=20260908a"></script>
   <script>
     // 频道专题页逻辑
     (function () {
@@ -193,7 +193,18 @@
         // 渲染服务网格
         var grid = document.getElementById('serviceGrid');
         grid.innerHTML = category.items.map(function (item) {
-          return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="' + (item.url || '') + '">' +
+          // 有URL的用<a>标签，浏览器原生处理跳转，不会被弹窗拦截
+          if (item.url) {
+            return '<a class="sitem" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
+              '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
+              '<div class="sinfo">' +
+              '<div class="sname">' + item.name + '</div>' +
+              '<div class="sdesc">' + item.desc + '</div>' +
+              '</div>' +
+              '<div class="sarrow">›</div>' +
+              '</a>';
+          }
+          return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="">' +
             '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
             '<div class="sinfo">' +
             '<div class="sname">' + item.name + '</div>' +

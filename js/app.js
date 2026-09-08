@@ -1,4 +1,4 @@
-﻿/* ============================================
+/* ============================================
    iHangzhou 杭州生活助手 - 参考杭州本地宝结构
    10大分类 · 100+办事条目 · 数据全内联
    ============================================ */
@@ -849,7 +849,19 @@
     }
 
     grid.innerHTML = items.map(function (item) {
-      return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="' + (item.url || '') + '">' +
+      // 有URL的用<a>标签，浏览器原生处理跳转，不会被弹窗拦截
+      if (item.url) {
+        return '<a class="sitem" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
+          '<div class="sicon">' + getServiceIcon(item.name) + '</div>' +
+          '<div class="sinfo">' +
+          '<div class="sname">' + item.name + '</div>' +
+          '<div class="sdesc">' + item.desc + '</div>' +
+          '</div>' +
+          '<div class="sarrow">›</div>' +
+          '</a>';
+      }
+      // 无URL的用<div>，交给handleClick处理action或detail弹窗
+      return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="">' +
         '<div class="sicon">' + getServiceIcon(item.name) + '</div>' +
         '<div class="sinfo">' +
         '<div class="sname">' + item.name + '</div>' +
@@ -1007,6 +1019,8 @@
     bindOn('#serviceGrid', 'click', function (e) {
       var item = e.target.closest('.sitem');
       if (!item) return;
+      // <a>标签由浏览器原生处理跳转，不拦截
+      if (item.tagName === 'A') return;
       handleClick(item);
     });
 
