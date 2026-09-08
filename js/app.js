@@ -2357,6 +2357,19 @@ default: showToast('功能开发中');
   window._getData = function () { return DATA; };
   window._handleAction = handleAction;
   window.openUrl = openUrl;
+  window.showGold = showGold;
+  window.showYaohao = showYaohao;
+  window.showYoujia = showYoujia;
+  window.showSbCalc = showSbCalc;
+  window.showTaxCalc = showTaxCalc;
+  window.showCalendar = showCalendar;
+  window.showLoanCalc = showLoanCalc;
+  window.showCountdown = showCountdown;
+  window.showBmi = showBmi;
+  window.showPostcode = showPostcode;
+  window.showIdCheck = showIdCheck;
+  window.showDistrict = showDistrict;
+  window.showPlateCheck = showPlateCheck;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
