@@ -1392,6 +1392,48 @@ default: showToast('功能开发中');
     };
   }
 
+  // wttr.in 英文天气描述→中文映射表
+  var WEATHER_ZH = {
+    'Sunny': '☀️ 晴', 'Clear': '☀️ 晴', 'Clear ': '☀️ 晴',
+    'Partly Cloudy': '⛅ 多云', 'Partly Cloudy ': '⛅ 多云',
+    'Cloudy': '☁️ 多云', 'Cloudy ': '☁️ 多云',
+    'Overcast': '☁️ 阴', 'Overcast ': '☁️ 阴',
+    'Mist': '🌫️ 薄雾', 'Mist ': '🌫️ 薄雾',
+    'Fog': '🌫️ 雾', 'Fog ': '🌫️ 雾', 'Foggy': '🌫️ 雾',
+    'Light drizzle': '🌦️ 小毛雨', 'Light drizzle ': '🌦️ 小毛雨',
+    'Patchy light rain': '🌦️ 局部小雨', 'Patchy light rain ': '🌦️ 局部小雨',
+    'Patchy rain nearby': '🌦️ 局部小雨', 'Patchy rain nearby ': '🌦️ 局部小雨',
+    'Light rain': '🌦️ 小雨', 'Light rain ': '🌦️ 小雨',
+    'Light rain shower': '🌦️ 阵雨', 'Light rain shower ': '🌦️ 阵雨',
+    'Moderate rain': '🌧️ 中雨', 'Moderate rain ': '🌧️ 中雨',
+    'Moderate rain at times': '🌧️ 间歇中雨', 'Moderate rain at times ': '🌧️ 间歇中雨',
+    'Heavy rain': '🌧️ 大雨', 'Heavy rain ': '🌧️ 大雨',
+    'Heavy rain at times': '🌧️ 间歇大雨', 'Heavy rain at times ': '🌧️ 间歇大雨',
+    'Torrential rain shower': '⛈️ 暴雨', 'Torrential rain shower ': '⛈️ 暴雨',
+    'Patchy light snow': '🌨️ 局部小雪', 'Patchy light snow ': '🌨️ 局部小雪',
+    'Patchy snow nearby': '🌨️ 局部小雪', 'Patchy snow nearby ': '🌨️ 局部小雪',
+    'Light snow': '🌨️ 小雪', 'Light snow ': '🌨️ 小雪',
+    'Light snow showers': '🌨️ 阵雪', 'Light snow showers ': '🌨️ 阵雪',
+    'Moderate snow': '❄️ 中雪', 'Moderate snow ': '❄️ 中雪',
+    'Heavy snow': '❄️ 大雪', 'Heavy snow ': '❄️ 大雪',
+    'Blizzard': '🌨️ 暴风雪', 'Blizzard ': '🌨️ 暴风雪',
+    'Patchy freezing rain nearby': '🌨️ 局部冻雨',
+    'Thundery outbreaks nearby': '⛈️ 局部雷阵雨', 'Thundery outbreaks nearby ': '⛈️ 局部雷阵雨',
+    'Thunder': '⛈️ 雷阵雨', 'Thunder ': '⛈️ 雷阵雨',
+    'Thunderstorm': '⛈️ 雷暴',
+    'Hail': '🌨️ 冰雹', 'Hail ': '🌨️ 冰雹',
+    'Smoke': '🌫️ 烟雾', 'Smoke ': '🌫️ 烟雾', 'Smoky haze': '🌫️ 烟霾', 'Smoky haze ': '🌫️ 烟霾',
+    'Haze': '🌫️ 霾', 'Haze ': '🌫️ 霾',
+    'Sandstorm': '🌪️ 沙尘暴', 'Sandstorm ': '🌪️ 沙尘暴',
+    'Duststorm': '🌪️ 扬沙', 'Duststorm ': '🌪️ 扬沙'
+  };
+  function weatherZh(desc) {
+    if (!desc) return '—';
+    var d = desc.trim();
+    if (/[\u4e00-\u9fa5]/.test(d)) return d; // 已含中文
+    return WEATHER_ZH[d] || (d.replace(/^Patchy\s+/i, '局部').replace(/^Light\s+/i, '小').replace(/^Moderate\s+/i, '中').replace(/^Heavy\s+/i, '大'));
+  }
+
   function showWeather() {
     openModal('🌤️ 杭州天气',
       '<div id="weatherBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">⛅</div><p style="color:var(--text-muted);margin-top:8px;">正在获取天气...</p></div></div>' +
@@ -1407,7 +1449,7 @@ default: showToast('功能开发中');
           try {
             var data = JSON.parse(xhr.responseText);
             var cur = data.current_condition[0];
-            var desc = cur.lang_zh && cur.lang_zh[0] ? cur.lang_zh[0].value : cur.weatherDesc[0].value;
+            var desc = weatherZh(cur.weatherDesc[0].value);
             var html = '<div style="text-align:center;padding:12px 0 16px;">' +
               '<div style="font-size:48px;font-weight:800;color:var(--primary);">' + cur.temp_C + '°C</div>' +
               '<div style="font-size:16px;margin:6px 0;">' + desc + '</div>' +
@@ -1416,7 +1458,7 @@ default: showToast('功能开发中');
             for (var i = 0; i < 3 && i < data.weather.length; i++) {
               var d = data.weather[i];
               var label = i === 0 ? '今天' : i === 1 ? '明天' : '后天';
-              var wd = d.hourly[4] && d.hourly[4].lang_zh && d.hourly[4].lang_zh[0] ? d.hourly[4].lang_zh[0].value : (d.hourly[4] ? d.hourly[4].weatherDesc[0].value : '');
+              var wd = d.hourly[4] ? weatherZh(d.hourly[4].weatherDesc[0].value) : '';
               html += '<div style="text-align:center;padding:10px 4px;background:var(--bg);border-radius:8px;">' +
                 '<div style="font-size:12px;color:var(--text-muted);">' + label + '</div>' +
                 '<div style="font-size:16px;margin:4px 0;">' + wd + '</div>' +
@@ -1945,14 +1987,14 @@ default: showToast('功能开发中');
           '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;">' +
           '<div style="display:flex;justify-content:space-between;align-items:center;">' +
           '<span style="font-weight:600;">1年期LPR</span>' +
-          '<span style="font-size:24px;font-weight:700;color:var(--primary);">3.35%</span></div>' +
-          '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;">2024年最新</div></div>' +
+          '<span style="font-size:24px;font-weight:700;color:var(--primary);">3.0%</span></div>' +
+          '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;">2026年8月20日</div></div>' +
           '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;">' +
           '<div style="display:flex;justify-content:space-between;align-items:center;">' +
           '<span style="font-weight:600;">5年期以上LPR</span>' +
-          '<span style="font-size:24px;font-weight:700;color:var(--primary);">3.85%</span></div>' +
-          '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;">2024年最新</div></div>' +
-          '<p class="modal-tip">数据仅供参考，以银行实际利率为准</p></div>';
+          '<span style="font-size:24px;font-weight:700;color:var(--primary);">3.5%</span></div>' +
+          '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;">2026年8月20日</div></div>' +
+          '<p class="modal-tip">数据来源：中国人民银行，仅供参考</p></div>';
       });
   }
 
@@ -2091,32 +2133,29 @@ default: showToast('功能开发中');
     openModal('💱 实时汇率',
       '<div id="forexBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">💱</div><p style="color:var(--text-muted);">正在获取汇率...</p></div></div>'
     );
-    fetch('https://api.vvhan.com/api/hq', {method: 'GET'})
+    // 优先调用本地 Vercel Serverless API，失败回退到公开 API，再失败用静态数据
+    fetch('/api/forex')
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        if (data && data.usd) {
+        if (data && data.list && data.list.length) {
           var html = '<div style="padding:16px 0;">' +
-            '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">' +
-            '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
-            '<div style="font-size:12px;color:var(--text-muted);">美元 USD</div>' +
-            '<div style="font-size:20px;font-weight:700;color:var(--primary);">' + (data.usd || '7.24') + '</div></div>' +
-            '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
-            '<div style="font-size:12px;color:var(--text-muted);">欧元 EUR</div>' +
-            '<div style="font-size:20px;font-weight:700;color:var(--primary);">' + (data.eur || '7.85') + '</div></div>' +
-            '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
-            '<div style="font-size:12px;color:var(--text-muted);">英镑 GBP</div>' +
-            '<div style="font-size:20px;font-weight:700;color:var(--primary);">' + (data.gbp || '9.12') + '</div></div>' +
-            '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
-            '<div style="font-size:12px;color:var(--text-muted);">日元 JPY</div>' +
-            '<div style="font-size:20px;font-weight:700;color:var(--primary);">100円=' + (data.jpy || '4.8') + '</div></div>' +
-            '</div><p class="modal-tip">数据更新时间：' + new Date().toLocaleDateString('zh-CN') + '</p></div>';
+            '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">';
+          data.list.forEach(function(c) {
+            var val = c.unit ? (c.rate * c.unit).toFixed(2) : (1 / c.rate).toFixed(4);
+            var label = c.unit ? (c.unit + c.symbol + '=') : ('1' + c.symbol + '=');
+            html += '<div style="padding:14px 10px;background:var(--bg);border-radius:10px;text-align:center;">' +
+              '<div style="font-size:12px;color:var(--text-muted);">' + c.name + ' ' + c.code + '</div>' +
+              '<div style="font-size:18px;font-weight:700;color:var(--primary);margin-top:4px;">' + label + val + '¥</div></div>';
+          });
+          html += '</div><p class="modal-tip">更新时间：' + (data.updated || new Date().toUTCString()) + '</p></div>';
           $('#forexBox').innerHTML = html;
         } else {
           throw new Error('no data');
         }
       })
       .catch(function() {
-        $('#forexBox').innerHTML = 
+        // 备用静态数据（2026年9月参考）
+        $('#forexBox').innerHTML =
           '<div style="padding:16px 0;">' +
           '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">' +
           '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
@@ -2138,13 +2177,17 @@ default: showToast('功能开发中');
   // ===== 地铁时刻表 =====
   function showMetro() {
     var lines = [
-      {name: '1号线', color: '#EF8031', stations: '湘湖-临平（南）', first: '06:04', last: '22:50'},
+      {name: '1号线', color: '#EF8031', stations: '湘湖-萧山国际机场', first: '06:04', last: '22:50'},
       {name: '2号线', color: '#F00D0D', stations: '朝阳-良渚', first: '06:02', last: '22:48'},
+      {name: '3号线', color: '#FFB81C', stations: '吴山前村-星桥', first: '06:03', last: '22:30'},
       {name: '4号线', color: '#008C42', stations: '浦沿-池华街', first: '06:05', last: '22:55'},
       {name: '5号线', color: '#BF7D00', stations: '金星-姑娘桥', first: '06:00', last: '22:30'},
       {name: '6号线', color: '#BF83EC', stations: '桂花西路-双浦', first: '06:08', last: '22:42'},
-      {name: '7号线', color: '#1DAAE2', stations: '吴山广场-东站', first: '06:12', last: '22:56'},
-      {name: '9号线', color: '#D07D1E', stations: '龙安湖-观音殿', first: '06:04', last: '22:32'},
+      {name: '7号线', color: '#1DAAE2', stations: '吴山广场-江东二路', first: '06:12', last: '22:56'},
+      {name: '8号线', color: '#8E54ED', stations: '文海南路-南阳', first: '06:08', last: '22:32'},
+      {name: '9号线', color: '#D07D1E', stations: '观音塘-龙安', first: '06:04', last: '22:32'},
+      {name: '10号线', color: '#00B2A9', stations: '黄龙体育中心-逸盛路', first: '06:05', last: '22:35'},
+      {name: '16号线', color: '#FF6B6B', stations: '九州街-临安广场', first: '06:10', last: '22:33'},
       {name: '19号线', color: '#6F73D2', stations: '苕溪-永盛路', first: '06:00', last: '23:15'}
     ];
     var html = '<div style="padding:12px 0;">';
