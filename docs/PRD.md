@@ -20,7 +20,7 @@ iHangzhou 是一款面向杭州本地居民与新市民的**城市生活导航 H
 |---|---|
 | 形态 | 移动端 H5（Mobile First）+ PWA 可安装 |
 | 后端 | 纯静态，零后端依赖，可部署 Vercel/Cloudflare Pages/GitHub Pages/OSS |
-| 域名 | ihangzhou.net |
+| 域名 | ihz.inanyang.com |
 | 数据 | 所有服务配置内联在 `data/services.json` 与 `js/app.js` |
 | 兼容 | iOS 13+ / Android 8+ / 主流浏览器（Chrome/Safari/Edge/Firefox） |
 
@@ -312,7 +312,7 @@ ihangzhou-helper/
 - Title：`iHangzhou · 杭州生活助手`
 - Description：杭州人的数字生活工具箱，政务办事、交通出行、民生服务一站导航
 - Keywords：杭州,杭州生活,杭州办事,社保查询,公积金,限行,杭州天气,便民服务
-- Canonical：https://ihangzhou.net/
+- Canonical：https://ihz.inanyang.com/
 - OpenGraph + Twitter Card 已配置
 
 ### 7.2 结构化数据

@@ -2,7 +2,7 @@
 
 > 杭州人的数字生活工具箱 —— 政务办事、交通出行、民生服务一站导航
 >
-> 🌐 官方域名：**ihangzhou.net**
+> 🌐 官方域名：**ihz.inanyang.com**
 
 纯静态站点，零后端依赖，支持 PWA 离线访问，可直接部署到任意静态托管平台。
 
@@ -66,7 +66,7 @@ php -S localhost:8080
 
 然后访问 http://localhost:8080
 
-## 🌐 部署到 ihangzhou.net
+## 🌐 部署到 ihz.inanyang.com
 
 ### 方案一：Vercel + 自定义域名（推荐）
 
@@ -76,10 +76,10 @@ php -S localhost:8080
 2. 点击「New Project」→ 导入仓库
 3. Framework Preset 选 `Other`，Build Command 留空，Output Directory 填 `.`
 4. 点击「Deploy」，获得 `https://ihangzhou-xxx.vercel.app`
-5. **绑定 ihangzhou.net 域名**：
+5. **绑定 ihz.inanyang.com 域名**：
    - Vercel 控制台 → Settings → Domains
-   - 输入 `ihangzhou.net`，点击 Add
-   - 再添加 `www.ihangzhou.net`，设置为重定向到 `ihangzhou.net`
+   - 输入 `ihz.inanyang.com`，点击 Add
+   - 再添加 `www.ihz.inanyang.com`，设置为重定向到 `ihz.inanyang.com`
    - 在域名服务商将 DNS 解析指向 Vercel：
      ```
      A    @     76.76.21.21
@@ -93,10 +93,10 @@ php -S localhost:8080
 2. 「Create a project」→ 「Connect to Git」→ 选择仓库
 3. Build command 留空，Build output directory 填 `/`
 4. 部署后获得 `https://ihangzhou.pages.dev`
-5. **绑定 ihangzhou.net 域名**：
+5. **绑定 ihz.inanyang.com 域名**：
    - Cloudflare Pages 控制台 → Custom domains
    - 点击「Set up a custom domain」
-   - 输入 `ihangzhou.net`
+   - 输入 `ihz.inanyang.com`
    - 如果域名已在 Cloudflare 管理，自动配置 DNS
    - 如果不在 Cloudflare，添加 CNAME 记录：`CNAME @ ihangzhou.pages.dev`
 
@@ -115,9 +115,9 @@ php -S localhost:8080
    ```
 3. 进入仓库 → 「Settings」→ 「Pages」
 4. Source 选择 `Deploy from a branch`，Branch 选择 `main` / `(root)`
-5. **绑定 ihangzhou.net 域名**：
-   - 在仓库根目录创建 `CNAME` 文件（无扩展名），内容为 `ihangzhou.net`
-   - Settings → Pages → Custom domain 填入 `ihangzhou.net`
+5. **绑定 ihz.inanyang.com 域名**：
+   - 在仓库根目录创建 `CNAME` 文件（无扩展名），内容为 `ihz.inanyang.com`
+   - Settings → Pages → Custom domain 填入 `ihz.inanyang.com`
    - 勾选「Enforce HTTPS」
    - 在域名服务商添加解析：
      ```
@@ -137,9 +137,9 @@ php -S localhost:8080
    git push -u origin master
    ```
 3. 仓库 → 「服务」→ 「Gitee Pages」→ 启动
-4. **绑定 ihangzhou.net 域名**（需 Gitee Pages Pro）：
+4. **绑定 ihz.inanyang.com 域名**（需 Gitee Pages Pro）：
    - Gitee Pages 设置页 → 自定义域名
-   - 填入 `ihangzhou.net`
+   - 填入 `ihz.inanyang.com`
    - 在域名服务商添加 CNAME：`CNAME @ 你的用户名.gitee.io`
 
 ### 方案五：对象存储 + CDN（适合高流量）
@@ -149,7 +149,7 @@ php -S localhost:8080
 1. 创建 OSS Bucket，读写权限设为「公共读」
 2. 上传所有静态文件到 Bucket 根目录
 3. Bucket → 基础设置 → 静态页面 → 默认首页设为 `index.html`
-4. 绑定自定义域名 `ihangzhou.net`：
+4. 绑定自定义域名 `ihz.inanyang.com`：
    - OSS → 传输管理 → 域名管理 → 绑定域名
    - 开启 CDN 加速
    - 在域名服务商添加 CNAME：`CNAME @ 你的Bucket的CDN域名`
@@ -159,7 +159,7 @@ php -S localhost:8080
 
 iHangzhou 支持作为 PWA 应用安装到手机桌面：
 
-1. 用手机浏览器访问 `https://ihangzhou.net`
+1. 用手机浏览器访问 `https://ihz.inanyang.com`
 2. **iOS Safari**：点击分享按钮 → 「添加到主屏幕」
 3. **Android Chrome**：点击菜单 → 「添加到主屏幕」或「安装应用」
 4. 安装后可像原生 App 一样全屏运行，支持离线访问核心页面
@@ -196,11 +196,11 @@ iHangzhou 支持作为 PWA 应用安装到手机桌面：
 
 ## 📱 公众号集成
 
-将 `https://ihangzhou.net` 配置到公众号菜单：
+将 `https://ihz.inanyang.com` 配置到公众号菜单：
 
 1. 登录 [微信公众平台](https://mp.weixin.qq.com)
 2. 「内容与互动」→ 「自定义菜单」
-3. 添加菜单，菜单内容选「跳转网页」，填入 `https://ihangzhou.net`
+3. 添加菜单，菜单内容选「跳转网页」，填入 `https://ihz.inanyang.com`
 4. 手机端微信打开即可使用（页面已做移动端适配）
 
 > 建议在公众号文章中嵌入网址链接，引导用户「在浏览器中打开」以获得最佳体验（含 PWA 安装功能）。
