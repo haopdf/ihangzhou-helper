@@ -1103,27 +1103,59 @@
     if (action) { handleAction(action); }
     else if (url) { openUrl(url); }
     else {
-      // 无外链也无action，显示服务详情
+      // 无外链也无action，显示服务详情（服务卡片结构）
       var nameEl = el.querySelector('.sname');
       var descEl = el.querySelector('.sdesc');
       if (nameEl) {
         var name = nameEl.textContent.replace(/\s*\[.*?\]\s*$/, '').trim();
         var desc = descEl ? descEl.textContent : '';
         var item = null;
+        var catName = '';
         // 在DATA中查找对应服务以获取detail
         DATA.categories.forEach(function(c){
           c.items.forEach(function(it){
-            if(it.name === name) item = it;
+            if(it.name === name) { item = it; catName = c.name; }
           });
         });
         var body = '<div style="padding:16px;line-height:1.8;font-size:14px;">';
+        // 1. 简介/详情
         if (item && item.detail) {
           body += item.detail;
         } else {
-          body += '<p style="color:var(--text-secondary);">' + desc + '</p>' +
-            '<p style="margin-top:12px;font-size:13px;color:var(--text-muted);">该服务为信息展示项，暂无对应官方入口。如需办理，建议通过「浙里办」APP或拨打12345咨询。</p>';
+          body += '<p style="color:var(--text-secondary);">' + desc + '</p>';
         }
         body += '</div>';
+        // 2. 官方办理入口（通用）
+        body += '<div style="margin-top:16px;padding:12px;background:var(--bg);border-radius:10px;">' +
+          '<div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text);">🏛️ 官方办理入口</div>' +
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">' +
+          '<a href="https://www.zjzwfw.gov.cn/" target="_blank" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">浙里办<br><span style="font-size:11px;color:var(--text-muted);">Web</span></a>' +
+          '<a href="https://app.gjzwfw.gov.cn/zhejiang-app/" target="_blank" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">支付宝<br><span style="font-size:11px;color:var(--text-muted);">小程序</span></a>' +
+          '<a href="tel:12345" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">12345<br><span style="font-size:11px;color:var(--text-muted);">市长热线</span></a>' +
+          '<a href="https://www.hangzhou.gov.cn/" target="_blank" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">杭州政务<br><span style="font-size:11px;color:var(--text-muted);">官网</span></a>' +
+          '</div></div>';
+        // 3. 相关推荐
+        if (item && catName) {
+          var related = [];
+          DATA.categories.forEach(function(c){
+            if (c.name === catName) {
+              c.items.forEach(function(it){
+                if (it.name !== name && related.length < 4) related.push(it);
+              });
+            }
+          });
+          if (related.length) {
+            body += '<div style="margin-top:12px;padding:12px;background:var(--bg);border-radius:10px;">' +
+              '<div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text);">🔗 相关推荐</div>';
+            related.forEach(function(r){
+              body += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">' +
+                '<span style="font-size:13px;">' + r.name + '</span>' +
+                (r.url ? '<a href="' + r.url + '" target="_blank" rel="noopener" style="color:var(--primary);font-size:12px;text-decoration:none;">前往 →</a>' : '<span style="font-size:12px;color:var(--text-muted);">详情</span>') +
+                '</div>';
+            });
+            body += '</div>';
+          }
+        }
         openModal('📌 ' + name, body);
       }
     }
@@ -1954,6 +1986,73 @@ default: showToast('功能开发中');
       '<strong>单位：</strong>养老¥' + c.养老.toFixed(2) + ' · 医疗¥' + c.医疗.toFixed(2) + ' · 失业¥' + c.失业.toFixed(2) + ' · 工伤¥' + c.工伤.toFixed(2) + ' · 生育¥' + c.生育.toFixed(2) + '</div>' +
       '<p class="modal-tip">比例为参考值，以社保局为准</p>';
   };
+
+  // ===== 金价查询 =====
+  function showGold() {
+    openModal('💰 实时金价',
+      '<div id="goldBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">💰</div><p style="color:var(--text-muted);">正在获取金价...</p></div></div>'
+    );
+    fetch('/api/gold')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.gold) {
+          var g = data.gold;
+          var html = '<div style="padding:16px 0;">' +
+            '<div style="text-align:center;padding:16px;background:var(--bg);border-radius:12px;margin-bottom:12px;">' +
+            '<div style="font-size:12px;color:var(--text-muted);">国际金价（XAU）</div>' +
+            '<div style="font-size:32px;font-weight:800;color:var(--accent);margin:6px 0;">$' + g.usdPerOz + '/oz</div>' +
+            '<div style="font-size:14px;color:var(--text-secondary);">≈ ¥' + g.cnyPerOz + '/盎司</div></div>' +
+            '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">' +
+            '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
+            '<div style="font-size:12px;color:var(--text-muted);">人民币/克</div>' +
+            '<div style="font-size:22px;font-weight:700;color:var(--primary);margin:4px 0;">¥' + g.cnyPerGram + '</div></div>' +
+            '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
+            '<div style="font-size:12px;color:var(--text-muted);">人民币/盎司</div>' +
+            '<div style="font-size:22px;font-weight:700;color:var(--primary);margin:4px 0;">¥' + g.cnyPerOz + '</div></div>' +
+            '</div>' +
+            '<div style="margin-top:12px;padding:12px;background:var(--bg);border-radius:8px;font-size:13px;color:var(--text-secondary);">' +
+            '<strong>💡 说明：</strong>1金衡盎司=31.1035克；金价实时波动，以金店/银行实际挂牌价为准</div>' +
+            '<p class="modal-tip">更新时间：' + (data.updated || new Date().toUTCString()) + '</p></div>';
+          $('#goldBox').innerHTML = html;
+        } else { throw new Error('no data'); }
+      })
+      .catch(function () {
+        $('#goldBox').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">金价获取失败，请稍后重试</div>';
+      });
+  }
+
+  // ===== 杭州小客车摇号/竞价结果查询 =====
+  function showYaohao() {
+    openModal('🚗 杭州小客车摇号',
+      '<div id="yaohaoBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">🚗</div><p style="color:var(--text-muted);">正在获取最新公告...</p></div></div>'
+    );
+    fetch('/api/yaohao')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.notices) {
+          var html = '<div style="padding:12px 0;">';
+          html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">' +
+            '<a href="' + (data.officialSite || 'https://hzxkctk.cn/') + '" target="_blank" rel="noopener" style="padding:14px;background:var(--bg);border-radius:10px;text-align:center;text-decoration:none;color:inherit;">' +
+            '<div style="font-size:24px;">🏛️</div><div style="font-size:14px;font-weight:600;margin-top:4px;">官方网站</div></a>' +
+            '<a href="' + (data.applySite || 'https://apply.hzxkctk.cn/') + '" target="_blank" rel="noopener" style="padding:14px;background:var(--bg);border-radius:10px;text-align:center;text-decoration:none;color:inherit;">' +
+            '<div style="font-size:24px;">📝</div><div style="font-size:14px;font-weight:600;margin-top:4px;">申请/查询</div></a>' +
+            '</div>';
+          html += '<div style="font-size:14px;font-weight:600;margin-bottom:8px;">📢 最新公告</div>';
+          data.notices.forEach(function (n) {
+            html += '<a href="' + n.url + '" target="_blank" rel="noopener" style="display:block;padding:12px;background:var(--bg);border-radius:8px;margin-bottom:6px;text-decoration:none;color:inherit;">' +
+              '<div style="font-size:14px;font-weight:500;">' + n.title + '</div>' +
+              '<div style="font-size:12px;color:var(--text-muted);margin-top:2px;">点击查看详情 →</div></a>';
+          });
+          html += '<div style="margin-top:12px;padding:12px;background:var(--bg);border-radius:8px;font-size:13px;color:var(--text-secondary);">' +
+            '<strong>💡 提醒：</strong>每月25日公开摇号，每月26日组织竞价；指标配置每月1次</div>' +
+            '<p class="modal-tip">数据来源：hzxkctk.cn</p></div>';
+          $('#yaohaoBox').innerHTML = html;
+        } else { throw new Error('no data'); }
+      })
+      .catch(function () {
+        $('#yaohaoBox').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">数据获取失败，<a href="https://hzxkctk.cn/" target="_blank" rel="noopener" style="color:var(--primary);">点此直接访问官网</a></div>';
+      });
+  }
 
   // ===== LPR利率查询 =====
   function showLPR() {
