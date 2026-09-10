@@ -27,7 +27,7 @@
   <link rel="canonical" href="https://www.ihangzhou.net/">
   <link rel="manifest" href="manifest.json">
   <title>iHangzhou · 杭州生活助手</title>
-  <link rel="stylesheet" href="css/style.css?v=20260918a">
+  <link rel="stylesheet" href="css/style.css?v=20260919a">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%230ea5e9'/%3E%3Ctext x='256' y='360' font-size='280' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'%3E杭%3C/text%3E%3C/svg%3E">
 </head>
@@ -220,25 +220,35 @@
           <span class="tip">官方预订更省心</span>
         </div>
         <div class="ota-grid" id="otaGrid">
-          <a class="ota-card" href="https://hotels.ctrip.com/hotels/list?countryId=1&city=32" target="_blank" rel="noopener">
+          <a class="ota-card" href="https://hotels.ctrip.com/hotels/list?countryId=1&city=32&allianceid=10511040&sid=330893571&ouid=kfptvxtool" target="_blank" rel="noopener">
             <div class="ota-icon">🏨</div>
             <div class="ota-name">酒店预订</div>
             <div class="ota-desc">携程 · 8000+ 家</div>
           </a>
-          <a class="ota-card" href="https://piao.ctrip.com/detail/32.html" target="_blank" rel="noopener">
+          <a class="ota-card" href="https://piao.ctrip.com/detail/32.html?allianceid=10511040&sid=330893571&ouid=kfptvxtool" target="_blank" rel="noopener">
             <div class="ota-icon">🎫</div>
             <div class="ota-name">景点门票</div>
             <div class="ota-desc">宋城/西溪/雷峰塔</div>
           </a>
-          <a class="ota-card" href="https://www.12306.cn/" target="_blank" rel="noopener">
+          <a class="ota-card" href="https://m.ctrip.com/webapp/train/v2/index/?allianceid=10511040&sid=330893571&ouid=kfptvxtool" target="_blank" rel="noopener">
             <div class="ota-icon">🚄</div>
             <div class="ota-name">火车票</div>
-            <div class="ota-desc">12306 官方</div>
+            <div class="ota-desc">携程 · 含抢票</div>
+          </a>
+          <a class="ota-card" href="https://flights.ctrip.com/online/list/oneway-bjs-sha/?allianceid=10511040&sid=330893571&ouid=kfptvxtool" target="_blank" rel="noopener">
+            <div class="ota-icon">✈️</div>
+            <div class="ota-name">机票预订</div>
+            <div class="ota-desc">携程 · 含低价</div>
+          </a>
+          <a class="ota-card" href="https://t.ctrip.cn/31f5qMR" target="_blank" rel="noopener">
+            <div class="ota-icon">🛍️</div>
+            <div class="ota-name">携程首页</div>
+            <div class="ota-desc">满额优惠</div>
           </a>
           <a class="ota-card" href="https://www.hzairport.com/" target="_blank" rel="noopener">
-            <div class="ota-icon">✈️</div>
-            <div class="ota-name">萧山机场</div>
-            <div class="ota-desc">航班动态</div>
+            <div class="ota-icon">📡</div>
+            <div class="ota-name">航班动态</div>
+            <div class="ota-desc">萧山机场官方</div>
           </a>
         </div>
       </div>
@@ -251,6 +261,16 @@
           <div class="biz-desc">餐饮/景区/特产/服务 · 免费上架至 iHangzhou</div>
         </div>
         <div class="biz-arrow">›</div>
+      </div>
+
+      <!-- 微信内嵌：打开携程小程序入口（佣金更高） -->
+      <div class="mp-launch-card" id="mpLaunchCard" style="display:none">
+        <div class="mp-card-head">
+          <span class="mp-badge">小程序</span>
+          <span class="mp-title">打开携程小程序</span>
+        </div>
+        <div class="mp-card-desc">微信内打开携程小程序享更多优惠，分享佣金更高</div>
+        <button type="button" class="mp-launch-btn" onclick="openCtripMp()">打开携程小程序 →</button>
       </div>
     </div>
   </div>
@@ -517,6 +537,38 @@
       t.classList.add('show');
       setTimeout(function(){ t.classList.remove('show'); }, 3500);
     }
+    // 打开携程小程序（微信内）或携程 H5（其他环境）
+    function openCtripMp() {
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.indexOf('micromessenger') > -1) {
+        // 微信内：尝试用 wx-open-launch-weapp 跳小程序（需要 jsapi 签名 + 携程小程序原始 ID gh_xxx）
+        // 当前未配置原始 ID，先 fallback 到 H5 链接
+        // 如拿到携程小程序原始 ID，可在此插入 <wx-open-launch-weapp> 标签
+        var t = document.getElementById('toast') || (function () {
+          var el = document.createElement('div');
+          el.id = 'toast'; el.className = 'toast';
+          document.body.appendChild(el);
+          return el;
+        })();
+        t.innerHTML = '📲 跳转携程小程序中...<br>如未跳转，请点击下方按钮前往携程 H5';
+        t.classList.add('show');
+        setTimeout(function () { t.classList.remove('show'); }, 2500);
+        setTimeout(function () {
+          location.href = 'https://t.ctrip.cn/31f5qMR';
+        }, 1500);
+      } else {
+        // 非微信：直接跳 H5（带分销参数）
+        location.href = 'https://t.ctrip.cn/31f5qMR';
+      }
+    }
+    // 检测微信环境显示小程序入口卡片
+    (function detectWeChat() {
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.indexOf('micromessenger') > -1) {
+        var card = document.getElementById('mpLaunchCard');
+        if (card) card.style.display = 'block';
+      }
+    })();
     // 我的页主题切换
     document.addEventListener('DOMContentLoaded', function() {
       var meTheme = document.getElementById('meTheme');

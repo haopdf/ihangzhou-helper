@@ -1847,7 +1847,7 @@ a { color: var(--primary); text-decoration: none; }
 /* OTA 网格 */
 .ota-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
 
@@ -1943,6 +1943,84 @@ a { color: var(--primary); text-decoration: none; }
 [data-theme="dark"] .goods-card,
 [data-theme="dark"] .ota-card {
   background: var(--bg-card);
+}
+
+/* ============================================
+   微信小程序跳转入口（携程小程序佣金位）
+   ============================================ */
+
+.mp-launch-card {
+  margin: 14px;
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(6, 182, 212, 0.3);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.mp-launch-card::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mp-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.mp-badge {
+  background: #fff;
+  color: #0891b2;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.mp-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.mp-card-desc {
+  font-size: 12px;
+  opacity: 0.92;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.mp-launch-btn {
+  width: 100%;
+  background: #fff;
+  color: #0891b2;
+  border: none;
+  padding: 11px;
+  border-radius: 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.mp-launch-btn:active {
+  transform: scale(0.97);
 }
 
 /* ============================================
