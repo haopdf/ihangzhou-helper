@@ -503,20 +503,41 @@
       {
         id: "laozihao", name: "杭州老字号", icon: "🏮",
         items: [
-          { name: "胡庆余堂", desc: "百年国药馆·河坊街", url: "https://www.hqyt.com/", color: "#ef4444" },
-          { name: "王星记", desc: "丝绸扇·扇子博物馆", url: "https://www.wangxingji.com/", color: "#f59e0b" },
-          { name: "张小泉", desc: "百年名刀·刀剪博物馆", url: "https://www.zhangxiaoquan.cn/", color: "#10b981" },
-          { name: "都锦生", desc: "织锦之王·茅家埠", url: "", detail: "<p><strong>都锦生</strong></p><p>中国织锦之王，始创于1922年。</p><p>• 主营：丝绸织锦、丝织品</p><p>• 特色产品：西湖风景织锦、丝绸服饰</p><p>• 地址：茅家埠（都锦生织锦博物馆）</p><p>• 门店：河坊街等</p>", color: "#3b82f6" },
-          { name: "知味观", desc: "百年老店·东坡路", url: "http://www.zwgfood.com/", color: "#8b5cf6" },
-          { name: "楼外楼", desc: "西湖醋鱼发源地", url: "", detail: "<p><strong>楼外楼</strong></p><p>始创于1848年，西湖醋鱼发源地，杭帮菜泰斗。</p><p>• 招牌菜：西湖醋鱼、龙井虾仁、东坡肉、叫化鸡</p><p>• 地址：孤山路30号（白堤尽头）</p><p>• 人均：150-300元</p><p>• 历史：170余年，接待过众多名人</p>", color: "#ec4899" },
-          { name: "奎元馆", desc: "片儿川始祖·解放路", url: "", detail: "<p><strong>奎元馆</strong></p><p>始创于1867年，片儿川始祖。</p><p>• 招牌面：片儿川、虾爆鳝面</p><p>• 地址：解放路154号</p><p>• 人均：30-60元</p><p>• 历史：江南面王</p>", color: "#06b6d4" },
-          { name: "天香楼", desc: "正宗杭帮菜", url: "https://www.tianxianglou.com/", color: "#14b8a6" },
-          { name: "山外山", desc: "杭帮菜名店·植物园", url: "https://www.shanwaishan.com/", color: "#84cc16" },
-          { name: "西泠印社", desc: "金石篆刻·孤山路", url: "", detail: "<p><strong>西泠印社</strong></p><p>位于孤山路，金石篆刻圣地。</p><p>• 中国印学博物馆（免费）</p><p>• 可参观社址、摩崖石刻</p>", color: "#f97316" },
-          { name: "邵芝岩", desc: "百年毛笔·中山路", url: "https://www.shaozhiyan.com/", color: "#a855f7" },
-          { name: "孔凤春", desc: "百年化妆品·河坊街", url: "", detail: "<p><strong>孔凤春</strong></p><p>始创于1862年，百年化妆品品牌。</p><p>• 特色产品：鹅蛋粉、麝香膏、珍珠霜</p><p>• 地址：河坊街</p><p>• 历史：中国最早的化妆品品牌之一</p>", color: "#0ea5e9" },
-          { name: "龙泉青瓷", desc: "国家级非遗", url: "", detail: "<p><strong>龙泉青瓷</strong></p><p>国家级非物质文化遗产，浙江龙泉特产。</p><p>• 特点：青如玉、明如镜、薄如纸、声如磬</p><p>• 工艺：哥窑（开片）、弟窑（无开片）</p><p>• 杭州可在河坊街、各大商场购买</p>", color: "#22c55e" },
-          { name: "万事利", desc: "国礼丝绸品牌", url: "https://www.wensli.com/", color: "#eab308" }
+          // ===== 医药类 =====
+          { name: "胡庆余堂", desc: "国药号·1874年胡雪岩创·河坊街", url: "https://www.hqyt.com/", color: "#ef4444" },
+          { name: "方回春堂", desc: "国药号·1649年创·河坊街", url: "https://www.fhcmed.com/", color: "#dc2626" },
+          { name: "朱养心", desc: "药油始祖·1628年创·民康药业", url: "https://www.minkang.com/", color: "#b91c1c" },
+          { name: "桐君堂", desc: "中华老字号·桐庐·中医药", url: "https://www.tongjutang.com/", color: "#991b1b" },
+          { name: "广升誉", desc: "杭州老字号·上城·医药", url: "", detail: "<p><strong>广升誉</strong></p><p>第四批杭州老字号，上城区中医药品牌。</p><p>• 主营：中药饮片、中成药</p><p>• 地址：上城区</p>", color: "#7f1d1d" },
+          { name: "钱爱仁堂", desc: "杭州老字号·余杭·国药馆", url: "", detail: "<p><strong>钱爱仁堂</strong></p><p>余杭老字号国药馆，第四批杭州老字号。</p><p>• 主营：传统中药、参茸</p><p>• 地址：余杭区</p>", color: "#a855f7" },
+          // ===== 餐饮食品类 =====
+          { name: "知味观", desc: "百年老店·1913年创·东坡路", url: "https://www.zwgfood.com/", color: "#8b5cf6" },
+          { name: "楼外楼", desc: "杭帮菜泰斗·1848年创·孤山", url: "https://www.louwailou.com.cn/", color: "#ec4899" },
+          { name: "奎元馆", desc: "片儿川始祖·1867年创·解放路", url: "", detail: "<p><strong>奎元馆</strong></p><p>始创于1867年，片儿川始祖，江南面王。</p><p>• 招牌面：片儿川、虾爆鳝面</p><p>• 地址：解放路154号</p><p>• 人均：30-60元</p>", color: "#06b6d4" },
+          { name: "天香楼", desc: "正宗杭帮菜·1927年创", url: "https://www.tianxianglou.com/", color: "#14b8a6" },
+          { name: "山外山", desc: "杭帮菜名店·1903年创·植物园", url: "https://www.shanwaishan.com/", color: "#84cc16" },
+          { name: "新丰小吃", desc: "杭州老字号·新丰品牌·小吃连锁", url: "", detail: "<p><strong>新丰小吃</strong></p><p>第四批杭州老字号，杭州人从小吃到大的小吃品牌。</p><p>• 招牌：虾肉小笼、牛肉粉丝、新丰鸭肉</p><p>• 地址：全城连锁</p><p>• 人均：20-40元</p>", color: "#f59e0b" },
+          { name: "五味和", desc: "百年糕点·1908年创·传统糕点", url: "", detail: "<p><strong>五味和</strong></p><p>始创于1908年，百年糕点品牌。</p><p>• 招牌产品：桂花糕、绿豆糕、月饼、定胜糕</p><p>• 地址：河坊街</p>", color: "#f97316" },
+          { name: "采芝斋", desc: "百年糕点·1928年创·传统糕饼", url: "", detail: "<p><strong>采芝斋</strong></p><p>始创于1928年，杭州传统糕饼老字号。</p><p>• 招牌产品：月饼、粽子糖、椒盐核桃</p><p>• 地址：延安路</p>", color: "#eab308" },
+          { name: "九芝斋", desc: "百年糕点·1928年创·糕饼老字号", url: "", detail: "<p><strong>九芝斋</strong></p><p>始创于1928年，与采芝斋齐名的杭州糕饼老字号。</p><p>• 招牌：麻酥糖、椒盐桃片、桂花糕</p><p>• 地址：延安路</p>", color: "#fbbf24" },
+          { name: "景阳观", desc: "百年酱菜·1907年创·河坊街", url: "", detail: "<p><strong>景阳观</strong></p><p>始创于1907年，杭州酱菜老字号。</p><p>• 招牌：虾油皇姜芽、虾油黄瓜、酱萝卜</p><p>• 地址：河坊街</p><p>• 特色：杭式酱菜，下饭一绝</p>", color: "#d97706" },
+          // ===== 绸扇刀剪工艺类 =====
+          { name: "王星记", desc: "丝绸扇·1875年创·扇子博物馆", url: "https://www.wangxingji.com/", color: "#f59e0b" },
+          { name: "张小泉", desc: "百年名刀·1663年创·刀剪博物馆", url: "https://www.zhangxiaoquan.cn/", color: "#10b981" },
+          { name: "都锦生", desc: "织锦之王·1922年创·茅家埠", url: "", detail: "<p><strong>都锦生</strong></p><p>中国织锦之王，始创于1922年。</p><p>• 主营：丝绸织锦、丝织品</p><p>• 特色产品：西湖风景织锦、丝绸服饰</p><p>• 地址：茅家埠（都锦生织锦博物馆）</p><p>• 门店：河坊街等</p>", color: "#3b82f6" },
+          { name: "万事利", desc: "国礼丝绸·1975年创·丝绸品牌", url: "https://www.wensli.com/", color: "#eab308" },
+          { name: "喜得宝", desc: "中华老字号·丝绸品牌", url: "https://www.hzxlchina.com/", color: "#0284c7" },
+          { name: "孔凤春", desc: "百年化妆品·1862年创·河坊街", url: "https://www.kfengchun.com/", color: "#0ea5e9" },
+          { name: "天堂伞", desc: "杭州老字号·天堂伞业", url: "https://www.tian-tang.com/", color: "#0284c7" },
+          { name: "龙泉青瓷", desc: "国家级非遗·哥窑弟窑", url: "", detail: "<p><strong>龙泉青瓷</strong></p><p>国家级非物质文化遗产，浙江龙泉特产。</p><p>• 特点：青如玉、明如镜、薄如纸、声如磬</p><p>• 工艺：哥窑（开片）、弟窑（无开片）</p><p>• 杭州可在河坊街、各大商场购买</p>", color: "#22c55e" },
+          // ===== 茶酒类 =====
+          { name: "狮峰牌", desc: "中华老字号·西湖龙井·浙江省茶叶集团", url: "https://www.zjtea.com/", color: "#16a34a" },
+          { name: "贡牌", desc: "西湖龙井·杭州西湖龙井茶叶", url: "http://www.hzxhjl.com/", color: "#15803d" },
+          { name: "艺福堂", desc: "杭州老字号·滨江·新式茶", url: "https://www.efuton.com/", color: "#22c55e" },
+          { name: "蓝桥风月", desc: "杭州老字号·宋酒·古法酿造", url: "", detail: "<p><strong>蓝桥风月</strong></p><p>第四批杭州老字号，杭州宋酒品牌。</p><p>• 主营：古法酿造黄酒、宋酒</p><p>• 特色：传承宋代酿酒工艺</p>", color: "#a16207" },
+          // ===== 文化用品类 =====
+          { name: "邵芝岩", desc: "百年毛笔·1865年创·中山路", url: "https://www.shaozhiyan.com/", color: "#a855f7" },
+          { name: "西泠印社", desc: "金石篆刻·1904年创·孤山路", url: "https://www.xlysa.com/", color: "#f97316" }
         ]
       },
       {
