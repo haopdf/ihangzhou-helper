@@ -985,11 +985,25 @@
       return;
     }
     grid.innerHTML = results.map(function (r) {
-      return '<div class="sitem" data-action="' + (r.item.action || '') + '" data-url="' + (r.item.url || '') + '">' +
-        '<div class="sicon">' + getServiceIcon(r.item.name) + '</div>' +
+      var item = r.item;
+      var catBadge = ' <span class="scat">[' + r.cat + ']</span>';
+      // 有URL的用<a>标签，浏览器原生处理跳转，不会被弹窗拦截
+      if (item.url) {
+        return '<a class="sitem" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
+          '<div class="sicon">' + getServiceIcon(item.name) + '</div>' +
+          '<div class="sinfo">' +
+          '<div class="sname">' + item.name + catBadge + '</div>' +
+          '<div class="sdesc">' + item.desc + '</div>' +
+          '</div>' +
+          '<div class="sarrow">›</div>' +
+          '</a>';
+      }
+      // 无URL的用<div>，交给handleClick处理action或detail弹窗
+      return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="">' +
+        '<div class="sicon">' + getServiceIcon(item.name) + '</div>' +
         '<div class="sinfo">' +
-        '<div class="sname">' + r.item.name + ' <span class="scat">[' + r.cat + ']</span></div>' +
-        '<div class="sdesc">' + r.item.desc + '</div>' +
+        '<div class="sname">' + item.name + catBadge + '</div>' +
+        '<div class="sdesc">' + item.desc + '</div>' +
         '</div>' +
         '<div class="sarrow">›</div>' +
         '</div>';
