@@ -2547,6 +2547,8 @@ case 'colors': showColors(); break;
       renderTabs();
       renderServices('banshi');
     bindEvents();
+    aiLoadHistory();
+    bindAIEvents();
     var now = new Date();
     var dateEl = $('#heroDate');
     if (dateEl) {
@@ -2563,6 +2565,318 @@ case 'colors': showColors(); break;
         '<div class="hero-stat"><div class="num">' + totalCats + '</div><div class="label">服务分类</div></div>' +
         '<div class="hero-stat"><div class="num">' + DATA.phonebook.length + '</div><div class="label">常用电话</div></div>' +
         '<div class="hero-stat"><div class="num">13</div><div class="label">区县市</div></div>';
+    }
+  }
+
+  // ============================================
+  // AI 杭州助手
+  // ============================================
+  var aiState = {
+    open: false,
+    sending: false,
+    history: [],          // [{role, content}]
+    abortCtrl: null
+  };
+
+  // 恢复历史（localStorage）
+  function aiLoadHistory() {
+    try {
+      var saved = localStorage.getItem('ihz_ai_history');
+      if (saved) aiState.history = JSON.parse(saved).slice(-16) || [];
+    } catch (e) { aiState.history = []; }
+  }
+  function aiSaveHistory() {
+    try {
+      localStorage.setItem('ihz_ai_history', JSON.stringify(aiState.history.slice(-16)));
+    } catch (e) {}
+  }
+
+  // 转义 HTML，防 XSS
+  function aiEscape(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // 简易 Markdown 渲染（**粗体**、\n、`code`、- 列表）
+  function aiRender(s) {
+    var html = aiEscape(s);
+    // 代码块
+    html = html.replace(/```([\s\S]*?)```/g, function (_, c) {
+      return '<pre><code>' + c.replace(/^\n/, '') + '</code></pre>';
+    });
+    // 行内代码
+    html = html.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+    // 粗体
+    html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    // 标题
+    html = html.replace(/^### (.+)$/gm, '<p style="font-weight:600;margin-top:6px;">$1</p>');
+    // 无序列表
+    html = html.replace(/(^|\n)([-•][\s\S]*?)(?=\n[-•]|\n\n|$)/g, function (m, pre, list) {
+      var items = list.split(/\n[-•]/).map(function (t) {
+        return '<li>' + t.replace(/^[-•]\s*/, '').trim() + '</li>';
+      }).join('');
+      return pre + '<ul style="margin:4px 0 8px 18px;">' + items + '</ul>';
+    });
+    // 段落
+    html = html.split(/\n{2,}/).map(function (p) {
+      p = p.trim();
+      if (!p) return '';
+      if (/^<(ul|pre|p)/.test(p)) return p;
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  // 渲染消息列表
+  function aiRenderMessages() {
+    var box = $('#aiMessages');
+    if (!box) return;
+    var html = '';
+    if (aiState.history.length === 0) {
+      html =
+        '<div class="ai-msg assistant">' +
+          '<div class="ai-msg-avatar">🏔️</div>' +
+          '<div class="ai-msg-bubble">' +
+            '<p>你好！我是 <strong>iHangzhou 杭州助手</strong> 🏔️</p>' +
+            '<p>问我任何杭州生活问题，比如：</p>' +
+            '<p>• 社保怎么查 / 公积金怎么提<br>• 今天限行吗 / 地铁末班车几点<br>• 西湖一日游 / 灵隐寺怎么去<br>• 杭州医保门诊怎么报销</p>' +
+            '<p style="margin-top:6px;color:var(--text-muted);font-size:12px;">由通义千问驱动，回答仅供参考。</p>' +
+          '</div>' +
+        '</div>';
+    } else {
+      aiState.history.forEach(function (msg) {
+        var isUser = msg.role === 'user';
+        html +=
+          '<div class="ai-msg ' + (isUser ? 'user' : 'assistant') + '">' +
+            '<div class="ai-msg-avatar">' + (isUser ? '🧑' : '🏔️') + '</div>' +
+            '<div class="ai-msg-bubble">' + (isUser ? aiEscape(msg.content).replace(/\n/g, '<br>') : aiRender(msg.content)) + '</div>' +
+          '</div>';
+      });
+    }
+    box.innerHTML = html;
+    // 滚到底
+    box.scrollTop = box.scrollHeight;
+  }
+
+  // 追加一条「正在思考」占位
+  function aiAppendThinking() {
+    var box = $('#aiMessages');
+    if (!box) return;
+    var div = document.createElement('div');
+    div.className = 'ai-msg assistant thinking-placeholder';
+    div.id = 'aiThinking';
+    div.innerHTML =
+      '<div class="ai-msg-avatar">🏔️</div>' +
+      '<div class="ai-msg-bubble"><span class="ai-typing"><span></span><span></span><span></span></span></div>';
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+  }
+  function aiRemoveThinking() {
+    var t = $('#aiThinking');
+    if (t) t.remove();
+  }
+
+  // 流式追加助手消息
+  function aiAppendStream() {
+    var box = $('#aiMessages');
+    if (!box) return null;
+    var div = document.createElement('div');
+    div.className = 'ai-msg assistant streaming';
+    div.innerHTML =
+      '<div class="ai-msg-avatar">🏔️</div>' +
+      '<div class="ai-msg-bubble" id="aiStreamBubble"></div>';
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+    return div.querySelector('.ai-msg-bubble');
+  }
+
+  // 切换浮窗
+  function toggleAIChat() {
+    var chat = $('#aiChat');
+    var fab = $('#aiFab');
+    if (!chat) return;
+    aiState.open = !aiState.open;
+    if (aiState.open) {
+      chat.classList.add('active');
+      if (fab) fab.classList.add('hidden');
+      aiRenderMessages();
+      // 自动 focus 输入框（移动端可能弹键盘，延后）
+      setTimeout(function () {
+        var inp = $('#aiInput');
+        if (inp) inp.focus();
+      }, 250);
+    } else {
+      chat.classList.remove('active');
+      if (fab) fab.classList.remove('hidden');
+    }
+  }
+  function closeAIChat() {
+    aiState.open = false;
+    var chat = $('#aiChat');
+    var fab = $('#aiFab');
+    if (chat) chat.classList.remove('active');
+    if (fab) fab.classList.remove('hidden');
+  }
+  function clearAIChat() {
+    if (!confirm('清空对话历史？')) return;
+    aiState.history = [];
+    aiSaveHistory();
+    aiRenderMessages();
+  }
+
+  // 发送消息（流式）
+  async function sendAIMessage(text) {
+    text = (text || '').trim();
+    if (!text || aiState.sending) return;
+    var input = $('#aiInput');
+    if (input) input.value = '';
+    aiAutoGrow();  // 重置高度
+
+    // 加入用户消息
+    aiState.history.push({ role: 'user', content: text });
+    aiSaveHistory();
+    aiRenderMessages();
+    aiAppendThinking();
+
+    aiState.sending = true;
+    var sendBtn = $('#aiSendBtn');
+    if (sendBtn) sendBtn.disabled = true;
+    var status = $('#aiStatus');
+    if (status) { status.classList.add('thinking'); status.textContent = '思考中…'; }
+
+    var fullReply = '';
+    var bubble = null;
+
+    try {
+      var res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: text,
+          history: aiState.history.slice(0, -1)  // 不含当前刚发的这条
+        })
+      });
+
+      if (!res.ok) {
+        var errData = {};
+        try { errData = await res.json(); } catch (e) {}
+        throw new Error(errData.reply || ('HTTP ' + res.status));
+      }
+
+      // 处理 SSE 流
+      var reader = res.body.getReader();
+      var decoder = new TextDecoder();
+      var buffer = '';
+
+      while (true) {
+        var chunk = await reader.read();
+        if (chunk.done) break;
+        buffer += decoder.decode(chunk.value, { stream: true });
+
+        var lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+
+        for (var i = 0; i < lines.length; i++) {
+          var line = lines[i].trim();
+          if (!line || !line.startsWith('data:')) continue;
+          var dataStr = line.slice(5).trim();
+          if (dataStr === '[DONE]') continue;
+          try {
+            var obj = JSON.parse(dataStr);
+            if (obj.content) {
+              if (!bubble) {
+                aiRemoveThinking();
+                bubble = aiAppendStream();
+              }
+              fullReply += obj.content;
+              bubble.innerHTML = aiRender(fullReply);
+              var box = $('#aiMessages');
+              if (box) box.scrollTop = box.scrollHeight;
+            } else if (obj.reply) {
+              // 服务端降级为整段回复
+              if (!bubble) {
+                aiRemoveThinking();
+                bubble = aiAppendStream();
+              }
+              fullReply = obj.reply;
+              bubble.innerHTML = aiRender(fullReply);
+            } else if (obj.error) {
+              throw new Error(obj.reply || obj.error);
+            }
+          } catch (e) {
+            // 解析分片错误，忽略
+          }
+        }
+      }
+      if (!fullReply) {
+        throw new Error('回复为空，请重试');
+      }
+      aiState.history.push({ role: 'assistant', content: fullReply });
+      aiSaveHistory();
+    } catch (err) {
+      aiRemoveThinking();
+      var box = $('#aiMessages');
+      if (box) {
+        var errDiv = document.createElement('div');
+        errDiv.className = 'ai-msg assistant error';
+        errDiv.innerHTML =
+          '<div class="ai-msg-avatar">⚠️</div>' +
+          '<div class="ai-msg-bubble">' + aiEscape(err.message || '出错了') + '</div>';
+        box.appendChild(errDiv);
+        box.scrollTop = box.scrollHeight;
+      }
+    } finally {
+      aiState.sending = false;
+      if (sendBtn) sendBtn.disabled = false;
+      if (status) { status.classList.remove('thinking'); status.textContent = '在线 · 杭州万事通'; }
+      var thinkEl = $('#aiThinking');
+      if (thinkEl) thinkEl.remove();
+    }
+  }
+
+  // 输入框自动增高
+  function aiAutoGrow() {
+    var inp = $('#aiInput');
+    if (!inp) return;
+    inp.style.height = 'auto';
+    inp.style.height = Math.min(inp.scrollHeight, 100) + 'px';
+  }
+
+  // 绑定 AI 助手事件
+  function bindAIEvents() {
+    var sendBtn = $('#aiSendBtn');
+    var input = $('#aiInput');
+    var closeBtn = $('#aiCloseBtn');
+    var clearBtn = $('#aiClearBtn');
+    var quick = $('#aiQuickAsk');
+
+    if (sendBtn) {
+      sendBtn.addEventListener('click', function () {
+        sendAIMessage(input ? input.value : '');
+      });
+    }
+    if (input) {
+      input.addEventListener('input', aiAutoGrow);
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
+          e.preventDefault();
+          sendAIMessage(input.value);
+        }
+      });
+    }
+    if (closeBtn) closeBtn.addEventListener('click', closeAIChat);
+    if (clearBtn) clearBtn.addEventListener('click', clearAIChat);
+    if (quick) {
+      quick.addEventListener('click', function (e) {
+        var btn = e.target.closest('.ai-quick-btn');
+        if (!btn) return;
+        var q = btn.getAttribute('data-q');
+        if (q) sendAIMessage(q);
+      });
     }
   }
 
@@ -2594,6 +2908,10 @@ case 'colors': showColors(); break;
   window.showIdCheck = showIdCheck;
   window.showDistrict = showDistrict;
   window.showPlateCheck = showPlateCheck;
+  window.toggleAIChat = toggleAIChat;
+  window.closeAIChat = closeAIChat;
+  window.clearAIChat = clearAIChat;
+  window.sendAIMessage = sendAIMessage;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

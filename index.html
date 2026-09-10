@@ -214,6 +214,44 @@
     </div>
   </nav>
 
+  <!-- AI 助手浮动按钮 -->
+  <div class="ai-fab" id="aiFab" onclick="toggleAIChat()" title="问问我">
+    <span class="ai-fab-icon">🤖</span>
+    <span class="ai-fab-pulse"></span>
+  </div>
+
+  <!-- AI 聊天浮窗 -->
+  <div class="ai-chat" id="aiChat">
+    <div class="ai-chat-header">
+      <div class="ai-chat-title">
+        <span class="ai-avatar">🏔️</span>
+        <div>
+          <div class="ai-name">iHangzhou 助手</div>
+          <div class="ai-status" id="aiStatus">在线 · 杭州万事通</div>
+        </div>
+      </div>
+      <div class="ai-chat-actions">
+        <button class="ai-action-btn" id="aiClearBtn" title="清空对话">🗑️</button>
+        <button class="ai-action-btn" id="aiCloseBtn" title="收起">✕</button>
+      </div>
+    </div>
+    <div class="ai-chat-body" id="aiMessages"></div>
+    <div class="ai-chat-quick" id="aiQuickAsk">
+      <button class="ai-quick-btn" data-q="社保怎么查">社保怎么查</button>
+      <button class="ai-quick-btn" data-q="今天限行吗">今天限行吗</button>
+      <button class="ai-quick-btn" data-q="西湖一日游推荐">西湖一日游</button>
+      <button class="ai-quick-btn" data-q="灵隐寺怎么去">灵隐寺怎么去</button>
+      <button class="ai-quick-btn" data-q="杭州医保门诊报销">医保报销</button>
+    </div>
+    <div class="ai-chat-input">
+      <textarea id="aiInput" placeholder="问我任何杭州生活问题..." rows="1" maxlength="800"></textarea>
+      <button class="ai-send-btn" id="aiSendBtn">发送</button>
+    </div>
+    <div class="ai-chat-footer">
+      <span>AI 由通义千问驱动 · 仅供参考，请以官方信息为准</span>
+    </div>
+  </div>
+
   <!-- 模态框 -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
@@ -237,7 +275,7 @@
       });
     }
   </script>
-  <script src="js/app.js?v=20260914a"></script>
+  <script src="js/app.js?v=20260915a"></script>
   <script>
     // 确保模态框可以关闭
     document.addEventListener('DOMContentLoaded', function() {
