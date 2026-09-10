@@ -26,17 +26,17 @@
     categories: [
       { id: "banshi", name: "办事指南", icon: "🏛️",
         items: [
-          { name: "社保查询", desc: "缴费/余额/明细", url: "https://www.zjzwfw.gov.cn/", color: "#3b82f6" },
+          { name: "社保查询", desc: "缴费/余额/明细", url: "https://www.zjzwfw.gov.cn/", color: "#3b82f6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州社保查询包括养老/医疗/失业/工伤/生育五险缴费记录与个人账户余额。线上查询已对接浙里办与电子社保卡，无需到社保大厅。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>线上查询</strong>：登录「浙里办」APP 或支付宝小程序「社保查询」<br>② <strong>实名认证</strong>：人脸识别后可查看缴费明细与余额<br>③ <strong>电子社保卡</strong>：在支付宝/微信搜索「电子社保卡」申领，与实体卡同等效力</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证原件<br>• 杭州社保卡（如已制卡）<br>• 手机号（接收验证码）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州市各区社保经办机构（市本级：上城区解放东路18号市民中心）<br>咨询电话：0571-12333</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://www.zjzwfw.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 浙里办 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>线上查询即时返回；单位缴费记录每月更新，可查近 24 个月明细；免费服务。</p></div>" },
           { name: "社保转移", desc: "跨省转移/年限计算", url: "https://www.zjzwfw.gov.cn/", color: "#ef4444" },
           { name: "社保缴费", desc: "灵活就业缴费基数", url: "https://www.zjzwfw.gov.cn/", color: "#10b981" },
-          { name: "公积金查询", desc: "余额/明细/提取记录", url: "https://gjj.hangzhou.gov.cn/", color: "#f59e0b" },
-          { name: "公积金提取", desc: "租房/购房/离职提取", url: "https://gjj.hangzhou.gov.cn/", color: "#8b5cf6" },
+          { name: "公积金查询", desc: "余额/明细/提取记录", url: "https://gjj.hangzhou.gov.cn/", color: "#f59e0b", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州住房公积金查询覆盖个人账户余额、月缴存基数、单位缴存比例、提取记录与贷款额度测算。已开通线上全流程，浙里办与支付宝均可办理。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① 登录「浙里办」或「杭州公积金」APP<br>② 人脸认证后查看个人账户余额、缴存明细<br>③ 可下载缴存证明、贷款结清证明等电子凭证</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 公积金账号（如已开户）<br>• 手机号接收验证码</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州住房公积金管理中心各网点<br>市中心网点：上城区延安路126号<br>电话：0571-12329</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://gjj.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公积金 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>线上查询即时返回；2026 年缴存基数上限 34470 元、下限 2280 元；免费服务。</p></div>" },
+          { name: "公积金提取", desc: "租房/购房/离职提取", url: "https://gjj.hangzhou.gov.cn/", color: "#8b5cf6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州公积金提取支持租房、购房、偿还贷款、离职、退休等多种情形。租房提取可线上秒办，资金秒到账；购房/偿还贷款提取需上传材料审核。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p><strong>租房提取</strong>（最常用，可线上办）：① 浙里办 APP 搜索「公积金提取」 ② 选择「租赁自住住房提取」 ③ 填写银行卡号，秒到账<br><strong>购房提取</strong>：上传购房合同/不动产权证/发票<br><strong>偿还贷款</strong>：上传贷款合同与还款明细</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 银行卡（一类账户）<br>• 租房提取无需额外材料<br>• 购房提取需购房合同 + 发票 + 不动产权证</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上办理：浙里办/支付宝「杭州公积金」<br>线下网点：上城区延安路126号 等</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://gjj.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公积金 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>租房提取：每月可提 1500 元，年度上限 18000 元，秒到账；购房/贷款提取：3 个工作日审核；免费服务。</p></div>" },
           { name: "公积金贷款", desc: "额度测算/还款计划", url: "https://gjj.hangzhou.gov.cn/", color: "#06b6d4" },
-          { name: "人才落户", desc: "学历/职称/技能落户", url: "http://police.hangzhou.gov.cn/", color: "#ec4899" },
-          { name: "积分落户", desc: "积分计算/申请流程", url: "http://police.hangzhou.gov.cn/", color: "#14b8a6" },
-          { name: "居住证办理", desc: "登记/申领/签注", url: "https://www.zjzwfw.gov.cn/", color: "#84cc16" },
-          { name: "身份证办理", desc: "首次申领/换领/补领", url: "http://police.hangzhou.gov.cn/", color: "#f97316" },
-          { name: "护照办理", desc: "因私出国护照申请", url: "https://s.nia.gov.cn/", color: "#a855f7" },
+          { name: "人才落户", desc: "学历/职称/技能落户", url: "http://police.hangzhou.gov.cn/", color: "#ec4899", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州人才落户政策开放度高，本科及以上学历、中级及以上职称、高级技师等均可申请。全日制普通高校本科及研究生以上学历可「先落户后就业」。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>学历落户</strong>：全日制本科 45 周岁以下，可「先落户后就业」；研究生 50 周岁以下<br>② <strong>职称落户</strong>：中级职称 45 周岁以下；副高职称 50 周岁以下；正高职称 55 周岁以下<br>③ <strong>技能落户</strong>：高级技师 45 周岁以下；技师 40 周岁以下<br>④ 在「警察叔叔」APP 或浙里办线上申请，邮件送达</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证、户口簿<br>• 学历证书 + 学信网验证报告<br>• 职称证书（职称落户）<br>• 劳动合同或社保缴纳证明（部分情形）<br>• 房产证或社区集体户证明</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：警察叔叔 APP、浙里办<br>线下：各公安户籍办理窗口<br>电话：0571-87280474</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>线上办理：1-3 个工作日审核；户口迁移证电子送达；免费。</p></div>" },
+          { name: "积分落户", desc: "积分计算/申请流程", url: "http://police.hangzhou.gov.cn/", color: "#14b8a6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州积分落户是面向非杭户籍人员的另一渠道，按年龄、学历、社保、房产、社会服务等累计积分，年度公布落户分值。适合学历较低但有稳定工作和居住的人员。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>积分申报</strong>：每年 3-6 月在浙里办提交<br>② <strong>积分核定</strong>：由公安、人社、住建等部门数据自动核定<br>③ <strong>落户分值</strong>：每年公布落户分值线，达到者可申请<br>④ <strong>户口迁移</strong>：取得落户资格后 30 日内办理迁移</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证、户口簿<br>• 居住证（在杭登记满 1 年）<br>• 社保缴纳证明（满 1 年）<br>• 房产证或租赁备案证明<br>• 学历/职称证书（加分项）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：浙里办 APP「积分落户」<br>线下：各公安户籍窗口</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>申报期：每年 3-6 月；结果公布：通常 9-10 月；免费服务。</p></div>" },
+          { name: "居住证办理", desc: "登记/申领/签注", url: "https://www.zjzwfw.gov.cn/", color: "#84cc16", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州居住证是非杭户籍人员在杭享受公共服务（子女入学、医保、买车上牌、考驾照等）的凭证。已开通电子居住证，可通过「警察叔叔」APP 全程线上办理。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>居住登记</strong>：先在「警察叔叔」APP 或流动人口管理平台登记满 6 个月<br>② <strong>申领居住证</strong>：登记满 6 个月后在 APP 内申领<br>③ <strong>电子居住证</strong>：申领成功后自动生成电子证，与实体证同等效力<br>④ <strong>年度签注</strong>：每年签注 1 次，线上自助办理</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 居住证明（房产证 / 租赁备案 / 居住证明）<br>• 就业或就读证明（劳动合同 / 社保 / 学生证）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：警察叔叔 APP、浙里办<br>线下：各派出所户籍窗口</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://www.zjzwfw.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 浙里办 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>登记满 6 个月后申领；线上申领 1-3 个工作日审核；免费。</p></div>" },
+          { name: "身份证办理", desc: "首次申领/换领/补领", url: "http://police.hangzhou.gov.cn/", color: "#f97316", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州身份证业务支持跨省通办，外省户籍人员可在杭换领/补领身份证。首次申领仍需回户籍地（部分省份已开通跨省首次申领试点）。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>换证</strong>：到期前 3 个月内，派出所现场办或「警察叔叔」APP 预约<br>② <strong>补证</strong>：遗失后「警察叔叔」APP 申请挂失+补领<br>③ <strong>拍照</strong>：现场免费拍照（也可上传符合要求的数码照）<br>④ <strong>领取</strong>：可选择邮寄送达或现场领取</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 户口簿或旧身份证（换证）<br>• 居住证（外地户籍在杭办需）<br>• 现场采集指纹与人像</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州各公安派出所户籍窗口<br>可在「警察叔叔」APP 查询附近网点<br>电话：0571-87280474</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>办理时限：30-60 日（省内通常 15-20 日）；换证 20 元/证，补证 40 元/证。</p></div>" },
+          { name: "护照办理", desc: "因私出国护照申请", url: "https://s.nia.gov.cn/", color: "#a855f7", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州居民可在市内任一出入境接待大厅办理护照、港澳通行证、台湾通行证。已支持「全国通办」，外省户籍人员也可在杭办理。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>预约</strong>：在「国家移民管理局」APP 或微信小程序预约杭州接待大厅与时段<br>② <strong>到场</strong>：携带材料按预约时段到大厅，采集人像与指纹<br>③ <strong>缴费</strong>：现场扫码缴费 120 元/证<br>④ <strong>领取</strong>：选择邮寄送达或现场领取</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证原件<br>• 户口簿（首次申领，部分情形）<br>• 居住证（外地户籍在杭办需）<br>• 旧护照（换发）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州市公安局出入境管理局<br>上城区 Knox 路 1 号（出入境接待大厅）<br>各区也有分局受理点<br>电话：0571-87280770</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://s.nia.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 国家移民局 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>省内户籍：7 个工作日；外省户籍：20 日；护照 120 元/证。</p></div>" },
           { name: "港澳通行证", desc: "团队游/个人游申请", url: "https://s.nia.gov.cn/", color: "#0ea5e9" },
           { name: "台湾通行证", desc: "赴台证件办理", url: "https://s.nia.gov.cn/", color: "#22c55e" },
           { name: "签证办理", desc: "各国签证申请", url: "", detail: "<p><strong>签证办理指南</strong></p><p>杭州可办理各国签证，常见方式：</p><p>① <strong>自行办理</strong>：前往目的国驻华使领馆递交材料</p><p>② <strong>签证中心</strong>：如 VFS Global、BLS 等代办中心</p><p>③ <strong>旅行社代办</strong>：省时省力但需服务费</p><p style=\"margin-top:8px;\"><strong>杭州出入境接待大厅</strong>：香积寺路3号，可办理护照、港澳台通行证</p><p style=\"color:var(--text-muted);font-size:13px;\">建议提前1-3个月办理，签证费用因国家而异</p>", color: "#eab308" },
@@ -70,7 +70,7 @@
         id: "traffic", name: "交通出行", icon: "🗺️",
         items: [
           { name: "今日限行", desc: "尾号限行查询", action: "xianxing", color: "#ef4444" },
-          { name: "浙A摇号", desc: "小客车指标申请", url: "https://hzxkctk.cn/", color: "#f59e0b" },
+          { name: "浙A摇号", desc: "小客车指标申请", url: "https://hzxkctk.cn/", color: "#f59e0b", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州小客车指标通过摇号或竞价方式配置。摇号每月 1 次，免费参与，中签率较低但成本低；竞价每月 1 次，价高者得，适合急需上牌者。还有浙 M 区域指标（仅限杭州部分区域行驶）。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>申请资格</strong>：杭州户籍或持居住证满 2 年，连续缴纳社保满 2 年<br>② <strong>摇号申请</strong>：在 hzxkctk.cn 注册并提交申请，每月 25 日公开摇号<br>③ <strong>竞价</strong>：每月 25 日竞价，需缴 2000 元保证金<br>④ <strong>查询中签</strong>：官网或短信通知，中签后 6 个月内上牌</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 居住证（非杭户籍）<br>• 社保缴纳证明<br>• 驾驶证（部分指标类型）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：杭州市小客车总量调控管理信息系统<br>线下：杭州市交警支队车管所</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://hzxkctk.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州小客车调控 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>摇号：每月 1 次，免费；竞价：每月 1 次，保证金 2000 元，平均成交价约 3-5 万元。</p></div>" },
           { name: "浙A竞价", desc: "车牌竞价出价", url: "https://hzxkctk.cn/", color: "#10b981" },
           { name: "浙M区域牌", desc: "区域指标申请", url: "https://hzxkctk.cn/", color: "#3b82f6" },
           { name: "外地车限行", desc: "非浙A限行规定", url: "http://police.hangzhou.gov.cn/", color: "#8b5cf6" },
@@ -238,7 +238,7 @@
       {
         id: "housing", name: "住房保障", icon: "🏠",
         items: [
-          { name: "公租房申请", desc: "申请条件/流程", url: "https://fgj.hangzhou.gov.cn/", color: "#ef4444" },
+          { name: "公租房申请", desc: "申请条件/流程", url: "https://fgj.hangzhou.gov.cn/", color: "#ef4444", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州公租房是为中低收入住房困难家庭提供的保障性住房，租金远低于市场价（约为市场价 30-60%）。已实现线上申请、线下选房、合同签订全流程。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>申请资格</strong>：杭州户籍或在杭连续社保满 5 年，人均住房面积低于 15 m²<br>② <strong>家庭收入</strong>：6 万元/年以下（参考，每年调整）<br>③ <strong>线上申请</strong>：浙里办「公租房申请」提交材料<br>④ <strong>选房配租</strong>：通过资格审核后进入轮候，按积分选房</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证、户口簿<br>• 婚姻证明<br>• 收入证明（单位或街道开具）<br>• 房产证明（房管部门查询）<br>• 社保缴纳证明</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：浙里办 APP<br>线下：各区住建局公租房窗口<br>电话：0571-87015858</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://fgj.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州房管 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>资格审核：30 个工作日；轮候配租：根据房源情况，主城区通常 6-12 个月；月租金 8-25 元/m²（按面积与位置）。</p></div>" },
           { name: "公租房选房", desc: "实物配租", url: "https://fgj.hangzhou.gov.cn/", color: "#f59e0b" },
           { name: "公租房续租", desc: "续租申请", url: "https://fgj.hangzhou.gov.cn/", color: "#10b981" },
           { name: "人才专项房", desc: "高层次人才房", url: "https://fgj.hangzhou.gov.cn/", color: "#3b82f6" },
@@ -274,30 +274,30 @@
         id: "travel", name: "旅游休闲", icon: "🏞️",
         items: [
           { name: "西湖景区", desc: "景点/游船/预约", url: "https://westlake.hangzhou.gov.cn/", color: "#ef4444" },
-          { name: "断桥残雪", desc: "白娘子许仙借伞定情地", url: "https://westlake.hangzhou.gov.cn/", color: "#3b82f6" },
-          { name: "苏堤春晓", desc: "2.8公里长堤·桃红柳绿", url: "https://westlake.hangzhou.gov.cn/", color: "#10b981" },
-          { name: "三潭印月", desc: "小瀛洲·人民币一元背景", url: "https://westlake.hangzhou.gov.cn/", color: "#f59e0b" },
-          { name: "曲院风荷", desc: "西湖最大公园·荷花胜景", url: "https://westlake.hangzhou.gov.cn/", color: "#8b5cf6" },
+          { name: "断桥残雪", desc: "白娘子许仙借伞定情地", url: "https://westlake.hangzhou.gov.cn/", color: "#3b82f6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">断桥位于白堤东端，是西湖最著名的景点之一。得名有二：一说是大雪初霁，桥阳面雪融而阴面残雪，远看如断；二说是白娘子与许仙在此相会又离散，故有「断桥不断」之说。冬季雪后是经典观景时刻，春日柳色亦佳。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• 冬季雪景：杭州难得下雪，雪后断桥最为知名<br>• 春日桃柳：白堤两侧桃红柳绿，江南春景典范<br>• 历史人文：白蛇传传说地，承载古典爱情意象</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>地铁 1 号线/3 号线 西湖文化广场站，步行约 800 米<br>公交：断桥站（7 路、27 路、78 路夜等）</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>西湖景区免费开放，无需门票<br>周边景点（如孤山、浙江省博物馆）免费</p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>冬季雪后 1-2 月、春季 3-4 月最佳；清晨 6-8 时人少；周末人流密集建议工作日。</p></div>" },
+          { name: "苏堤春晓", desc: "2.8公里长堤·桃红柳绿", url: "https://westlake.hangzhou.gov.cn/", color: "#10b981", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">苏堤是北宋苏轼任杭州知州时主持修筑的湖堤，全长 2.8 公里，纵贯西湖南北。堤上六桥各有特色，两侧桃柳夹岸。南宋时被列为西湖十景之首，题名「苏堤春晓」。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• 春晓桃柳：3-4 月桃花盛开，垂柳吐绿，是江南春景代表<br>• 苏堤六桥：跨虹、东浦、压堤、望山、锁澜、映波<br>• 全景漫步：步行贯通约 1 小时，沿堤可览湖光山色</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>地铁 1 号线 龙翔桥站，步行至湖滨再北上<br>公交：苏堤站（4 路、31 路、假日游线）</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>免费开放，无需预约<br>游船：50-70 元/人，可从花港码头登船</p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>3-4 月最佳；清晨 5-7 时观日出；秋季 10-11 月可赏落叶；周末人流较多。</p></div>" },
+          { name: "三潭印月", desc: "小瀛洲·人民币一元背景", url: "https://westlake.hangzhou.gov.cn/", color: "#f59e0b", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">三潭印月是西湖中最大的岛「小瀛洲」，被誉为「西湖第一胜境」。岛南湖面有三座石塔，塔中空，月夜时塔内点烛，洞口糊纸，光印湖面如三月，故名三潭印月。第五套人民币 1 元背面图案即此景。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• 三座石塔：湖中三塔呈等边三角分布，造型独特<br>• 小瀛洲园林：岛上有「湖中有岛，岛中有湖」奇景<br>• 人民币背景：1 元纸币（旧版）背面图案</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>需在西湖各码头乘船登岛<br>主要码头：湖滨、花港、中山公园、杭饭</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>船票+门票 55 元/人（含往返）<br>开放时间：8:00-17:00<br><a href=\"https://westlake.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\">查看官方信息 →</a></p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>中秋月夜最佳（三潭印月）；白天春秋两季气候宜人；建议工作日避高峰。</p></div>" },
+          { name: "曲院风荷", desc: "西湖最大公园·荷花胜景", url: "https://westlake.hangzhou.gov.cn/", color: "#8b5cf6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">曲院风荷是西湖十景之一，因南宋时期此地有官家酿酒作坊「曲院」，荷花盛开时酒香与荷香相融得名。园内荷花品种达百余种，是杭州夏季赏荷首选地。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• 荷花胜景：6-8 月荷花盛开，红白紫粉各色齐全<br>• 滨湖长廊：荷花池边长廊，可避雨赏荷<br>• 桂花林：秋季 9-10 月有桂花，与岳王庙相邻</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>公交：曲院风荷站（15 路、28 路、82 路等）<br>地铁 3 号线 黄龙体育中心站，步行约 1 公里</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>免费开放<br>岳王庙 25 元（联票可购）</p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>夏季 6-8 月清晨赏荷；秋季 10 月桂花；春秋两季休闲漫步；建议早上 6-9 时人少。</p></div>" },
           { name: "柳浪闻莺", desc: "南宋御花园·黄莺啼鸣", url: "https://westlake.hangzhou.gov.cn/", color: "#06b6d4" },
           { name: "花港观鱼", desc: "乾隆御题·鱼花共生", url: "https://westlake.hangzhou.gov.cn/", color: "#ec4899" },
           { name: "平湖秋月", desc: "西湖最佳赏月地", url: "https://westlake.hangzhou.gov.cn/", color: "#14b8a6" },
-          { name: "雷峰夕照", desc: "雷峰塔·夕阳塔影", url: "https://www.leifengta.com/", color: "#84cc16" },
+          { name: "雷峰夕照", desc: "雷峰塔·夕阳塔影", url: "https://www.leifengta.com/", color: "#84cc16", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">雷峰塔位于西湖南岸夕照山，始建于公元 977 年，原为吴越王钱俶为皇妃黄氏所建。原塔于 1924 年倒塌，2002 年重建为现代八面五层塔，是国内首座铜雕塔。白蛇传传说中镇压白娘子之地，是西湖标志性景观。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• 塔顶观湖：登顶可俯瞰整个西湖全景，对望宝石山保俶塔<br>• 夕阳塔影：日落时分塔影映湖，是经典摄影机位<br>• 地宫遗址：塔下展示原塔地宫出土文物，含鎏金阿育王塔</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>公交：净慈寺站（4 路、31 路、315 路等）<br>地铁：3 号线 黄龙体育中心站步行 1.5 公里</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>40 元/人<br>开放时间：8:00-20:30（夏季）<br><a href=\"https://www.leifengta.com/\" target=\"_blank\" rel=\"noopener\">官网预约 →</a></p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>全年开放，傍晚日落前 1 小时最佳；夏季晴日可看晚霞；秋季 10 月雷峰塔与桂花相映。</p></div>" },
           { name: "双峰插云", desc: "南北高峰远眺", url: "https://westlake.hangzhou.gov.cn/", color: "#f97316" },
           { name: "南屏晚钟", desc: "净慈寺青铜梵钟", url: "https://westlake.hangzhou.gov.cn/", color: "#a855f7" },
           { name: "西湖新十景", desc: "宝石流霞/黄龙吐翠等", url: "https://westlake.hangzhou.gov.cn/", color: "#0ea5e9" },
           { name: "三评西湖十景", desc: "灵隐禅踪/六和听涛等", url: "https://westlake.hangzhou.gov.cn/", color: "#22c55e" },
           { name: "西湖手划船", desc: "摇橹船预约", url: "https://westlake.hangzhou.gov.cn/", color: "#f59e0b" },
           { name: "灵隐寺", desc: "免费预约入园", url: "https://www.lingyinsi.com/", color: "#10b981" },
-          { name: "法喜寺", desc: "网红斋饭/白玉兰", url: "https://www.lingyinsi.com/", color: "#3b82f6" },
+          { name: "法喜寺", desc: "网红斋饭/白玉兰", url: "https://www.lingyinsi.com/", color: "#3b82f6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">法喜寺（上天竺寺）位于西湖区天竺路，始建于后晋天福元年（936年），与灵隐寺、中天竺、下天竺并称「天竺三寺」。近年来因网红 5 元斋饭、白玉兰花期与年轻化禅意文创走红，是杭州年轻人打卡礼佛热门地。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• <strong>网红斋饭</strong>：5 元一份，两菜一饭一汤，平日限量<br>• <strong>白玉兰花期</strong>：2 月底-3 月初寺内白玉兰盛开<br>• <strong>御题「法喜寺」</strong>：乾隆御笔匾额<br>• <strong>求姻缘</strong>：寺内观音灵签据说灵验，年轻人最爱的求姻缘地</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>公交：7 路、103 路、324 路「上天竺」站<br>地铁：3 号线 黄龙体育中心站，换乘公交 7 路至「上天竺」<br>提示：天竺路步行可串联下天竺→中天竺→上天竺，约 1.5 公里</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>10 元/人（含香）<br>开放时间：6:30-18:00<br>斋饭供应：11:00-13:00（售完即止，节假日排队较长）</p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>平日清晨人少；2-3 月白玉兰期最佳；周末及节假日人流量大，建议早到。</p></div>" },
           { name: "景点预约", desc: "杭州各景点预约入口", url: "https://wap.lotsmall.cn/vue/list/ticket?m_id=163", color: "#8b5cf6" },
-          { name: "西溪湿地", desc: "门票/摇橹船", url: "https://www.xixiwetland.com.cn/", color: "#06b6d4" },
+          { name: "西溪湿地", desc: "门票/摇橹船", url: "https://www.xixiwetland.com.cn/", color: "#06b6d4", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">西溪国家湿地公园位于西湖区与余杭区交界，距西湖约 5 公里，是国内首个国家级湿地公园，面积 11.5 平方公里。电影《非诚勿扰》取景地，与西湖、西泠并称「三西」。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• <strong>摇橹船</strong>：手摇木船，100 元/船（6 人），1 小时生态漫游<br>• <strong>深潭口</strong>：《非诚勿扰》取景地，古樟树与河渚街<br>• <strong>秋芦飞雪</strong>：秋季芦苇荡如雪，秋季最美<br>• <strong>河渚街</strong>：传统街巷、湿地博物馆、戏曲表演<br>• <strong>烟水渔庄</strong>：体验西溪传统渔业文化</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>• <strong>周家村入口</strong>（主入口）：公交 193 路、290 路、B 支 7<br>• <strong>地铁</strong>：3 号线 西溪湿地南站步行 800 米<br>• 自驾：周家村、北门、东门均有停车场（10 元/小时）</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>• 公园门票：80 元<br>• <strong>电瓶船套票</strong>：150 元（含门票+船票）<br>• <strong>摇橹船</strong>：100 元/船（6 人，1 小时）<br>• 开放时间：7:00-18:30（夏）/ 7:30-17:30（冬）<br>• 杭州市民卡 40 元/年无限次</p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>• <strong>春</strong>：3-4 月探梅、踏青<br>• <strong>夏</strong>：荷花、夜游湿地<br>• <strong>秋</strong>（最佳）：9-11 月芦苇飞雪，最美季节<br>• <strong>冬</strong>：探梅、静谧游</p></div>" },
           { name: "千岛湖", desc: "景区/游船/住宿", url: "", detail: "<p><strong>千岛湖（新安江水库）</strong></p><p>位于杭州市淳安县，是5A级景区，因湖中有1078座岛屿而得名。</p><p><strong>必玩项目</strong>：</p><p>• <strong>游船</strong>：中心湖区（梅峰岛、渔乐岛）、东南湖区</p><p>• <strong>梅峰岛</strong>：登高观群岛全景</p><p>• <strong>森林氧吧</strong>：漫步原始森林</p><p>• <strong>环岛骑行</strong>：绿道骑行赏湖光</p><p style=\"margin-top:8px;\"><strong>美食</strong>：千岛湖有机鱼头汤</p><p><strong>交通</strong>：杭州西站乘高铁约1小时到千岛湖站</p>", color: "#ec4899" },
           { name: "钱塘江大潮", desc: "观潮时间表/地点", url: "", detail: "<p><strong>钱塘江大潮</strong></p><p>世界三大涌潮之一，最佳观赏期为农历八月十八前后（通常公历9-10月）。</p><p><strong>观潮点推荐</strong>：</p><p>• <strong>海宁盐官</strong>：一线潮，最佳观赏点</p><p>• <strong>老盐仓</strong>：回头潮</p><p>• <strong>萧山美女坝</strong>：美女二回头</p><p>• <strong>下沙七格</strong>：冲天潮</p><p style=\"margin-top:8px;color:#ef4444;\"><strong>⚠️ 观潮安全</strong>：务必在安全区域观潮，切勿翻越堤坝！每年农历八月十八大潮期都有伤亡事故。</p>", color: "#14b8a6" },
-          { name: "宋城演艺", desc: "千古情演出", url: "https://www.songcn.com/", color: "#84cc16" },
+          { name: "宋城演艺", desc: "千古情演出", url: "https://www.songcn.com/", color: "#84cc16", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州宋城位于之江路 148 号，北依西湖、南傍钱塘，是一座以南宋文化为主题的大型人造乐园，年接待游客超 1000 万人次。「宋城千古情」演出被誉为「世界三大名秀」之一，是杭州夜游的标志性项目。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• <strong>《宋城千古情》</strong>：大型歌舞，60 分钟，分「良渚之光」「宋宫宴舞」「金戈铁马」「西子传说」「魅力杭州」五幕<br>• <strong>王员外家抛绣球</strong>：互动演艺，趣味强<br>• <strong>鬼屋/聊斋惊魂</strong>：恐怖主题体验馆<br>• <strong>宋城夜景</strong>：夜场灯火璀璨，更有穿越感<br>• <strong>市井街</strong>：还原南宋街市，可穿汉服拍照</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>• 公交：4 路、39 路、202 路、287 路「宋城」站<br>• 地铁：6 号线 之江路站 步行约 1 公里<br>• 自驾：宋城停车场 5 元/小时，节假日建议早到</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>• <strong>贵宾席</strong>：320 元（含千古情）<br>• <strong>豪华席</strong>：480 元（含千古情）<br>• <strong>尊宾席</strong>：580 元<br>• 单买公园票（不含演出）：100 元<br>• 开放时间：10:00-21:30（夜场至最后一场千古情结束）<br>• 千古情演出通常 4 场：14:00、16:00、19:00、20:30（节假日加场）</p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>• 春秋两季天气舒适；夏季注意防晒；冬季人少<br>• 演出建议提前 30 分钟入场选座<br>• 一票难求日期：国庆、春节、五一等长假</p></div>" },
           { name: "杭州乐园", desc: "主题乐园", url: "", detail: "<p><strong>杭州乐园</strong></p><p>位于萧山区风情大道，是长三角地区著名的综合性主题公园。</p><p><strong>主要项目</strong>：</p><p>• 过山车、大摆锤、激流勇进等刺激项目</p><p>• 摩天轮、旋转木马等亲子项目</p><p>• 水公园（夏季开放）</p><p>• 万圣节、春节等主题活动</p><p style=\"margin-top:8px;\"><strong>门票</strong>：成人约190元，网上预订有优惠</p><p><strong>交通</strong>：地铁1号线到湘湖站，换乘公交</p>", color: "#f97316" },
           { name: "杭州动物园", desc: "野生动物园", url: "https://www.hzzoo.com/", color: "#a855f7" },
           { name: "杭州植物园", desc: "四季花展", url: "", detail: "<p><strong>杭州植物园</strong></p><p>位于西湖区桃源岭，占地面积284.64公顷，是集科研、科普、游览于一体的综合性植物园。</p><p><strong>特色展区</strong>：</p><p>• <strong>山水园</strong>：槭树杜鹃园，秋季红叶</p><p>• <strong>百草园</strong>：药用植物</p><p>• <strong>分类区</strong>：裸子植物、被子植物</p><p>• <strong>竹类植物区</strong>：百种竹子</p><p style=\"margin-top:8px;\"><strong>四季花展</strong>：2月梅花、3-4月樱花/郁金香、5月杜鹃、9-10月桂花、11月红叶</p><p><strong>门票</strong>：10元</p>", color: "#0ea5e9" },
-          { name: "良渚古城", desc: "世界遗产", url: "https://www.lzsite.cn/", color: "#22c55e" },
+          { name: "良渚古城", desc: "世界遗产", url: "https://www.lzsite.cn/", color: "#22c55e", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">良渚古城遗址位于余杭区瓶窑镇、良渚街道一带，距今约 5300-4300 年，是中华五千年文明的实证。2019 年 7 月列入《世界遗产名录》，是中国第 55 处世界遗产。良渚文化以精美玉器闻名，「玉琮王」「玉璧王」为代表性器物，证明长江下游存在过一个早期国家。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• <strong>古城遗址区</strong>：莫角山宫殿区、反山王陵、城墙遗址<br>• <strong>良渚博物院</strong>：展示玉器、陶器、漆器，玉琮王是镇馆之宝<br>• <strong>老虎岭水坝</strong>：世界最早的大型水利工程，比大禹治水早 1000 年<br>• <strong>反山王陵</strong>：出土玉琮王、玉钺王<br>• <strong>稻作文明</strong>：考古发现 20 万斤碳化稻谷堆积</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>• 地铁：2 号线 良渚站，换乘公交 428/781 路<br>• 自驾：市区驾车约 1 小时，遗址公园内停车 10 元<br>• 公园与博物院相距约 3 公里，建议一日游同访</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>• <strong>良渚古城遗址公园</strong>：50 元（观光车另购 20 元）<br>• <strong>良渚博物院</strong>：免费（需提前预约）<br>• 开放时间：公园 9:00-17:00（16:00 停止入场）；博物院 9:00-16:30（周一闭馆）</p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>• 春秋：户外遗址区凉爽，植被最美<br>• 夏季：注意防晒、补水，公园较大需乘观光车<br>• 建议行程：上午博物院（室内）+ 下午遗址公园（户外）</p></div>" },
           { name: "京杭大运河", desc: "运河夜游", url: "https://www.canaln.com/", color: "#eab308" },
           { name: "杭州博物馆", desc: "免费预约参观", url: "https://hz-museum.cn/", color: "#3b82f6" },
           { name: "中国茶叶博物馆", desc: "免预约入馆", url: "https://www.teamuseum.cn/", color: "#ef4444" },
@@ -367,7 +367,7 @@
           { name: "邮政编码", desc: "杭州各区县邮编", action: "postcode" },
           { name: "行政区划", desc: "区县/街道信息", action: "district" },
           { name: "快递查询", desc: "全网物流追踪", url: "https://www.kuaidi100.com/" },
-          { name: "医院挂号", desc: "浙江预约挂号", url: "" },
+          { name: "医院挂号", desc: "杭州三级医院目录", action: "hospital" },
           { name: "电影查询", desc: "杭州影院/排片", url: "https://www.mtime.com/" },
           { name: "福利彩票", desc: "双色球/大乐透", url: "https://www.cwl.gov.cn/" },
           { name: "体育彩票", desc: "竞彩/排三排五", url: "https://www.lottery.gov.cn/" },
@@ -1286,56 +1286,47 @@ case 'agecalc': showAgeCalc(); break;
 case 'countdown': showCountdown(); break;
 case 'rmbconv': showRmbConv(); break;
 case 'colors': showColors(); break;
-default: showToast('功能开发中');
+	case 'hospital': showHospital(); break;
+	case 'metro': showMetro(); break;
+      default: showToast('功能开发中');
     }
   }
 
   function showXianxing() {
+    openModal('🚗 杭州限行查询', buildXianxingModal());
+  }
+
+  // 共享 getter：限行数据（同步）
+  function getXianxingData() {
     var now = new Date();
     var dayNames = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
     var today = dayNames[now.getDay()];
     var todayRule = DATA.xianxingRule.rules.find(function (r) { return r.day === today; });
-    var isWeekend = now.getDay() === 0 || now.getDay() === 6;
-    var dateStr = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日 ' + today;
-
-    openModal('🚗 杭州限行查询',
-      '<div class="xx-today" style="background:' + (isWeekend ? 'linear-gradient(135deg,#27ae60,#1e8449)' : '') + '">' +
-      '<div class="xx-date">' + dateStr + '</div>' +
-      '<div class="xx-tail">' + (todayRule ? todayRule.tail : '不限行') + '</div>' +
-      '<div class="xx-label">' + (isWeekend ? '周末不限行' : '今日限行尾号') + '</div>' +
-      '</div>' +
-      '<table class="xx-table"><thead><tr><th>星期</th><th>限行尾号</th></tr></thead><tbody>' +
-      DATA.xianxingRule.rules.map(function (r) {
-        return '<tr class="' + (r.day === today ? 'today' : '') + '"><td>' + r.day + '</td><td>' + r.tail + '</td></tr>';
-      }).join('') +
-      '</tbody></table>' +
-      '<div class="xx-note"><strong>⏰ 时间：</strong>工作日 7:00-9:00、16:30-18:30<br>' +
-      '<strong>📍 区域：</strong>' + DATA.xianxingRule.area + '<br>' +
-      '<strong>⚠️ 法定节假日不限行，以官方最新公告为准</strong></div>'
-    );
+    return {
+      dateStr: now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日 ' + today,
+      tail: todayRule ? todayRule.tail : '不限行',
+      isWeekend: now.getDay() === 0 || now.getDay() === 6,
+      area: DATA.xianxingRule.area,
+      rules: DATA.xianxingRule.rules,
+      today: today
+    };
   }
 
   // 用于 index.html 直接调用的限行弹窗
   function buildXianxingModal() {
-    var now = new Date();
-    var dayNames = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-    var today = dayNames[now.getDay()];
-    var todayRule = DATA.xianxingRule.rules.find(function (r) { return r.day === today; });
-    var isWeekend = now.getDay() === 0 || now.getDay() === 6;
-    var dateStr = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日 ' + today;
-
-    return '<div class="xx-today" style="background:' + (isWeekend ? 'linear-gradient(135deg,#27ae60,#1e8449)' : '') + '">' +
-      '<div class="xx-date">' + dateStr + '</div>' +
-      '<div class="xx-tail">' + (todayRule ? todayRule.tail : '不限行') + '</div>' +
-      '<div class="xx-label">' + (isWeekend ? '周末不限行' : '今日限行尾号') + '</div>' +
+    var d = getXianxingData();
+    return '<div class="xx-today" style="background:' + (d.isWeekend ? 'linear-gradient(135deg,#27ae60,#1e8449)' : '') + '">' +
+      '<div class="xx-date">' + d.dateStr + '</div>' +
+      '<div class="xx-tail">' + d.tail + '</div>' +
+      '<div class="xx-label">' + (d.isWeekend ? '周末不限行' : '今日限行尾号') + '</div>' +
       '</div>' +
       '<table class="xx-table"><thead><tr><th>星期</th><th>限行尾号</th></tr></thead><tbody>' +
-      DATA.xianxingRule.rules.map(function (r) {
-        return '<tr class="' + (r.day === today ? 'today' : '') + '"><td>' + r.day + '</td><td>' + r.tail + '</td></tr>';
+      d.rules.map(function (r) {
+        return '<tr class="' + (r.day === d.today ? 'today' : '') + '"><td>' + r.day + '</td><td>' + r.tail + '</td></tr>';
       }).join('') +
       '</tbody></table>' +
       '<div class="xx-note"><strong>⏰ 时间：</strong>工作日 7:00-9:00、16:30-18:30<br>' +
-      '<strong>📍 区域：</strong>' + DATA.xianxingRule.area + '<br>' +
+      '<strong>📍 区域：</strong>' + d.area + '<br>' +
       '<strong>⚠️ 法定节假日不限行，以官方最新公告为准</strong></div>';
   }
 
@@ -1508,39 +1499,65 @@ default: showToast('功能开发中');
       '<div style="margin-top:12px;padding:12px;background:var(--bg);border-radius:8px;font-size:13px;color:var(--text-secondary);">' +
       '<strong>生活提示：</strong><br>杭州属亚热带季风气候，四季分明<br>梅雨季节（6月中-7月上）多雨潮湿<br>最佳旅游：3-5月、9-11月</div>'
     );
-    try {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'https://wttr.in/Hangzhou?format=j1&lang=zh', true);
-      xhr.timeout = 8000;
-      xhr.onload = function () {
-        if (xhr.status === 200) {
-          try {
-            var data = JSON.parse(xhr.responseText);
-            var cur = data.current_condition[0];
-            var desc = weatherZh(cur.weatherDesc[0].value);
-            var html = '<div style="text-align:center;padding:12px 0 16px;">' +
-              '<div style="font-size:48px;font-weight:800;color:var(--primary);">' + cur.temp_C + '°C</div>' +
-              '<div style="font-size:16px;margin:6px 0;">' + desc + '</div>' +
-              '<div style="font-size:13px;color:var(--text-muted);">体感' + cur.FeelsLikeC + '°C · 湿度' + cur.humidity + '% · 风速' + cur.windspeedKmph + 'km/h</div>' +
-              '</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;">';
-            for (var i = 0; i < 3 && i < data.weather.length; i++) {
-              var d = data.weather[i];
-              var label = i === 0 ? '今天' : i === 1 ? '明天' : '后天';
-              var wd = d.hourly[4] ? weatherZh(d.hourly[4].weatherDesc[0].value) : '';
-              html += '<div style="text-align:center;padding:10px 4px;background:var(--bg);border-radius:8px;">' +
-                '<div style="font-size:12px;color:var(--text-muted);">' + label + '</div>' +
-                '<div style="font-size:16px;margin:4px 0;">' + wd + '</div>' +
-                '<div style="font-size:12px;">' + d.mintempC + '°~' + d.maxtempC + '</div></div>';
-            }
-            html += '</div><p class="modal-tip">数据来源：wttr.in</p>';
-            $('#weatherBox').innerHTML = html;
-          } catch (e) { $('#weatherBox').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">天气数据解析失败</div>'; }
-        }
-      };
-      xhr.onerror = function () { $('#weatherBox').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">天气获取失败</div>'; };
-      xhr.ontimeout = function () { $('#weatherBox').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">天气获取超时</div>'; };
-      xhr.send();
-    } catch (e) { $('#weatherBox').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">天气功能不可用</div>'; }
+    getWeatherData().then(function (d) {
+      if (!d) {
+        $('#weatherBox').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">天气获取失败，请稍后重试</div>';
+        return;
+      }
+      var html = '<div style="text-align:center;padding:12px 0 16px;">' +
+        '<div style="font-size:48px;font-weight:800;color:var(--primary);">' + d.temp + '°C</div>' +
+        '<div style="font-size:16px;margin:6px 0;">' + d.desc + '</div>' +
+        '<div style="font-size:13px;color:var(--text-muted);">体感' + d.feels + '°C · 湿度' + d.humidity + '% · 风速' + d.wind + 'km/h</div>' +
+        '</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;">';
+      d.forecast.forEach(function (f) {
+        html += '<div style="text-align:center;padding:10px 4px;background:var(--bg);border-radius:8px;">' +
+          '<div style="font-size:12px;color:var(--text-muted);">' + f.label + '</div>' +
+          '<div style="font-size:16px;margin:4px 0;">' + (f.desc || '—') + '</div>' +
+          '<div style="font-size:12px;">' + f.min + '°~' + f.max + '</div></div>';
+      });
+      html += '</div><p class="modal-tip">数据来源：wttr.in · 更新：' + (d.updated || '实时') + '</p>';
+      $('#weatherBox').innerHTML = html;
+    });
+  }
+
+  // 共享 getter：天气数据（异步 Promise，失败 resolve null）
+  function getWeatherData() {
+    return new Promise(function (resolve) {
+      try {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://wttr.in/Hangzhou?format=j1&lang=zh', true);
+        xhr.timeout = 8000;
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            try {
+              var data = JSON.parse(xhr.responseText);
+              var cur = data.current_condition[0];
+              var forecast = [];
+              for (var i = 0; i < 3 && i < data.weather.length; i++) {
+                var d = data.weather[i];
+                forecast.push({
+                  label: i === 0 ? '今天' : i === 1 ? '明天' : '后天',
+                  min: d.mintempC, max: d.maxtempC,
+                  desc: d.hourly[4] ? weatherZh(d.hourly[4].weatherDesc[0].value) : ''
+                });
+              }
+              resolve({
+                temp: cur.temp_C,
+                desc: weatherZh(cur.weatherDesc[0].value),
+                feels: cur.FeelsLikeC,
+                humidity: cur.humidity,
+                wind: cur.windspeedKmph,
+                updated: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }),
+                forecast: forecast
+              });
+            } catch (e) { resolve(null); }
+          } else { resolve(null); }
+        };
+        xhr.onerror = function () { resolve(null); };
+        xhr.ontimeout = function () { resolve(null); };
+        xhr.send();
+      } catch (e) { resolve(null); }
+    });
   }
 
   function showBmi() {
@@ -1872,18 +1889,23 @@ default: showToast('功能开发中');
   }
 
   function showYoujia() {
-    var prices = { '92号': '7.54', '95号': '8.03', '98号': '8.82', '0号柴油': '7.23' };
+    var prices = getYoujiaData();
     var html = '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">' +
-      Object.keys(prices).map(function (k) {
+      Object.keys(prices).filter(function(k){return k!=='updated';}).map(function (k) {
         return '<div style="text-align:center;padding:16px;background:var(--bg);border-radius:10px;border:1px solid var(--border);">' +
           '<div style="font-size:13px;color:var(--text-muted);">' + k + '</div>' +
           '<div style="font-size:24px;font-weight:800;color:var(--accent);margin:4px 0;">¥' + prices[k] + '</div>' +
           '<div style="font-size:11px;color:var(--text-muted);">元/升</div></div>';
       }).join('') +
-      '</div><p class="modal-tip">浙江省成品油参考价，以加油站实际标价为准</p>' +
+      '</div><p class="modal-tip">' + prices.updated + ' · 浙江省成品油参考价，以加油站实际标价为准</p>' +
       '<div style="margin-top:10px;padding:12px;background:var(--bg);border-radius:8px;font-size:13px;color:var(--text-secondary);">' +
       '<strong>💡 省钱：</strong>油价每10个工作日调整一次，调价前加油更划算；民营油站通常便宜0.3-0.8元/升</div>';
     openModal('⛽ 浙江油价', html);
+  }
+
+  // 共享 getter：油价数据（同步静态参考价）
+  function getYoujiaData() {
+    return { '92号': '7.54', '95号': '8.03', '98号': '8.82', '0号柴油': '7.23', updated: '参考价' };
   }
 
   function showCalendar() {
@@ -2028,32 +2050,73 @@ default: showToast('功能开发中');
     openModal('💰 实时金价',
       '<div id="goldBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">💰</div><p style="color:var(--text-muted);">正在获取金价...</p></div></div>'
     );
-    fetch('/api/gold')
+    getGoldData().then(function (result) {
+      if (!result) {
+        $('#goldBox').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">金价获取失败，请稍后重试</div>';
+        return;
+      }
+      var g = result.gold;
+      var html = '<div style="padding:16px 0;">' +
+        '<div style="text-align:center;padding:16px;background:var(--bg);border-radius:12px;margin-bottom:12px;">' +
+        '<div style="font-size:12px;color:var(--text-muted);">国际金价（XAU）</div>' +
+        '<div style="font-size:32px;font-weight:800;color:var(--accent);margin:6px 0;">$' + g.usdPerOz + '/oz</div>' +
+        '<div style="font-size:14px;color:var(--text-secondary);">≈ ¥' + g.cnyPerOz + '/盎司</div></div>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">' +
+        '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
+        '<div style="font-size:12px;color:var(--text-muted);">人民币/克</div>' +
+        '<div style="font-size:22px;font-weight:700;color:var(--primary);margin:4px 0;">¥' + g.cnyPerGram + '</div></div>' +
+        '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
+        '<div style="font-size:12px;color:var(--text-muted);">人民币/盎司</div>' +
+        '<div style="font-size:22px;font-weight:700;color:var(--primary);margin:4px 0;">¥' + g.cnyPerOz + '</div></div>' +
+        '</div>' +
+        '<div style="margin-top:12px;padding:12px;background:var(--bg);border-radius:8px;font-size:13px;color:var(--text-secondary);">' +
+        '<strong>💡 说明：</strong>1金衡盎司=31.1035克；金价实时波动，以金店/银行实际挂牌价为准</div>' +
+        '<p class="modal-tip">更新时间：' + (result.updated || new Date().toUTCString()) + '</p></div>';
+      $('#goldBox').innerHTML = html;
+    });
+  }
+
+  // 共享 getter：金价数据（异步 Promise，失败 resolve null）
+  function getGoldData() {
+    return fetch('/api/gold')
+      .then(function (r) { return r.json(); })
+      .then(function (data) { return (data && data.gold) ? data : null; })
+      .catch(function () { return null; });
+  }
+
+  // ===== 杭州医院目录查询 =====
+  function showHospital() {
+    openModal('🏥 杭州医院目录',
+      '<div id="hospitalBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">🏥</div><p style="color:var(--text-muted);">正在加载医院目录...</p></div></div>'
+    );
+    fetch('/api/hospital')
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        if (data && data.gold) {
-          var g = data.gold;
-          var html = '<div style="padding:16px 0;">' +
-            '<div style="text-align:center;padding:16px;background:var(--bg);border-radius:12px;margin-bottom:12px;">' +
-            '<div style="font-size:12px;color:var(--text-muted);">国际金价（XAU）</div>' +
-            '<div style="font-size:32px;font-weight:800;color:var(--accent);margin:6px 0;">$' + g.usdPerOz + '/oz</div>' +
-            '<div style="font-size:14px;color:var(--text-secondary);">≈ ¥' + g.cnyPerOz + '/盎司</div></div>' +
-            '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">' +
-            '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
-            '<div style="font-size:12px;color:var(--text-muted);">人民币/克</div>' +
-            '<div style="font-size:22px;font-weight:700;color:var(--primary);margin:4px 0;">¥' + g.cnyPerGram + '</div></div>' +
-            '<div style="padding:16px;background:var(--bg);border-radius:10px;text-align:center;">' +
-            '<div style="font-size:12px;color:var(--text-muted);">人民币/盎司</div>' +
-            '<div style="font-size:22px;font-weight:700;color:var(--primary);margin:4px 0;">¥' + g.cnyPerOz + '</div></div>' +
+        if (!data || !data.hospitals) throw new Error('no data');
+        var regUrl = data.regPlatform || 'https://zyygh.com/';
+        var html = '<div style="padding:8px 0 12px;">' +
+          '<a href="' + regUrl + '" target="_blank" rel="noopener" style="display:block;padding:14px;background:linear-gradient(135deg,var(--primary),#0284c7);color:#fff;border-radius:12px;text-align:center;text-decoration:none;font-weight:600;font-size:14px;margin-bottom:12px;">🏥 浙江预约挂号平台 →</a>';
+        data.hospitals.forEach(function (h) {
+          html += '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;border-left:4px solid var(--primary);">' +
+            '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">' +
+              '<div style="flex:1;">' +
+                '<div style="font-weight:700;font-size:14px;color:var(--text);">' + h.name + '</div>' +
+                '<div style="font-size:12px;color:var(--text-muted);margin-top:2px;">' + h.alias + ' · ' + h.level + ' · ' + h.area + '</div>' +
+              '</div>' +
+              '<span style="padding:2px 8px;background:var(--bg-alt);border-radius:6px;font-size:11px;color:var(--primary);white-space:nowrap;">' + (h.key ? h.key[0] : '') + '</span>' +
             '</div>' +
-            '<div style="margin-top:12px;padding:12px;background:var(--bg);border-radius:8px;font-size:13px;color:var(--text-secondary);">' +
-            '<strong>💡 说明：</strong>1金衡盎司=31.1035克；金价实时波动，以金店/银行实际挂牌价为准</div>' +
-            '<p class="modal-tip">更新时间：' + (data.updated || new Date().toUTCString()) + '</p></div>';
-          $('#goldBox').innerHTML = html;
-        } else { throw new Error('no data'); }
+            '<div style="font-size:12px;color:var(--text-secondary);margin-top:6px;line-height:1.6;">' +
+              '<strong>📍 地址：</strong>' + h.address + '<br>' +
+              '<strong>☎️ 电话：</strong><a href="tel:' + h.phone + '" style="color:inherit;text-decoration:none;">' + h.phone + '</a>' +
+            '</div>' +
+            '<a href="' + (h.regUrl || regUrl) + '" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:6px 12px;background:var(--bg-alt);color:var(--primary);border-radius:6px;text-decoration:none;font-size:12px;font-weight:600;">预约挂号 →</a>' +
+          '</div>';
+        });
+        html += '<p class="modal-tip">数据更新：' + (data.updated || '近期') + ' · 共 ' + data.hospitals.length + ' 家</p></div>';
+        $('#hospitalBox').innerHTML = html;
       })
       .catch(function () {
-        $('#goldBox').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">金价获取失败，请稍后重试</div>';
+        $('#hospitalBox').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">医院目录加载失败，<a href="https://zyygh.com/" target="_blank" rel="noopener" style="color:var(--primary);">点此直接访问挂号平台</a></div>';
       });
   }
 
@@ -2312,7 +2375,11 @@ default: showToast('功能开发中');
 
   // ===== 地铁时刻表 =====
   function showMetro() {
-    var lines = [
+    openModal('🚇 杭州地铁时刻表',
+      '<div id="metroBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">🚇</div><p style="color:var(--text-muted);">正在加载地铁时刻表...</p></div></div>'
+    );
+    // 备用静态数据（fetch 失败时回退）
+    var fallbackLines = [
       {name: '1号线', color: '#EF8031', stations: '湘湖-萧山国际机场', first: '06:04', last: '22:50'},
       {name: '2号线', color: '#F00D0D', stations: '朝阳-良渚', first: '06:02', last: '22:48'},
       {name: '3号线', color: '#FFB81C', stations: '吴山前村-星桥', first: '06:03', last: '22:30'},
@@ -2326,18 +2393,37 @@ default: showToast('功能开发中');
       {name: '16号线', color: '#FF6B6B', stations: '九州街-临安广场', first: '06:10', last: '22:33'},
       {name: '19号线', color: '#6F73D2', stations: '苕溪-永盛路', first: '06:00', last: '23:15'}
     ];
-    var html = '<div style="padding:12px 0;">';
-    lines.forEach(function(line) {
-      html += '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;border-left:4px solid ' + line.color + ';">' +
-        '<div style="display:flex;justify-content:space-between;align-items:center;">' +
-        '<span style="font-weight:700;">' + line.name + '</span>' +
-        '<span style="font-size:12px;color:var(--text-muted);">' + line.stations + '</span></div>' +
-        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;font-size:12px;">' +
-        '<div><span style="color:var(--text-muted);">首班</span> <span style="font-weight:600;">' + line.first + '</span></div>' +
-        '<div><span style="color:var(--text-muted);">末班</span> <span style="font-weight:600;">' + line.last + '</span></div></div></div>';
-    });
-    html += '<p class="modal-tip">仅供参考，以地铁公司公告为准</p></div>';
-    openModal('🚇 杭州地铁时刻表', html);
+    var renderMetro = function (lines, fare, source) {
+      var html = '<div style="padding:12px 0;">';
+      if (fare) {
+        html += '<div style="padding:12px;background:linear-gradient(135deg,var(--primary),#0284c7);color:#fff;border-radius:10px;margin-bottom:12px;">' +
+          '<div style="font-size:13px;opacity:0.9;">🚇 杭州地铁票价</div>' +
+          '<div style="font-size:18px;font-weight:700;margin-top:4px;">起步 ' + fare.base + ' 元 · 最高 ' + fare.max + ' 元</div>' +
+          '<div style="font-size:11px;opacity:0.85;margin-top:4px;line-height:1.5;">' + fare.rule + '</div></div>';
+      }
+      lines.forEach(function (line) {
+        html += '<div style="padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;border-left:4px solid ' + line.color + ';">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">' +
+          '<span style="font-weight:700;font-size:14px;">' + line.name + '</span>' +
+          '<span style="font-size:11px;color:var(--text-muted);flex:1;text-align:right;">' + line.stations + '</span></div>' +
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;font-size:12px;">' +
+          '<div><span style="color:var(--text-muted);">首班</span> <span style="font-weight:600;">' + line.first + '</span></div>' +
+          '<div><span style="color:var(--text-muted);">末班</span> <span style="font-weight:600;">' + line.last + '</span></div></div>' +
+          (line.transfer ? '<div style="margin-top:6px;font-size:11px;color:var(--text-muted);">换乘：' + (line.transfer.join ? line.transfer.join(' / ') : line.transfer) + '</div>' : '') +
+          '</div>';
+      });
+      html += '<p class="modal-tip">数据来源：' + (source || 'hzmetro.com') + '，以地铁公司公告为准</p></div>';
+      $('#metroBox').innerHTML = html;
+    };
+    fetch('/api/metro')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.lines) renderMetro(data.lines, data.fare, data.source);
+        else renderMetro(fallbackLines, null, '本地回退数据');
+      })
+      .catch(function () {
+        renderMetro(fallbackLines, null, '本地回退数据');
+      });
   }
 
   // ===== 模态框 =====
@@ -2353,9 +2439,109 @@ default: showToast('功能开发中');
     document.body.style.overflow = '';
   }
 
+  // ===== 今日杭州实时信息流卡片 =====
+  function renderTodayHangzhou() {
+    var box = $('#todayHangzhou');
+    if (!box) return;
+    // 渲染骨架
+    box.innerHTML =
+      '<div class="th-card" id="thXianxing" onclick="openModal(\'🚗 今日限行\', buildXianxingModal())">' +
+        '<div class="th-icon">🚗</div><div class="th-title">今日限行</div>' +
+        '<div class="th-value">—</div><div class="th-sub">加载中</div></div>' +
+      '<div class="th-card" id="thWeather" onclick="showWeather()">' +
+        '<div class="th-icon">⛅</div><div class="th-title">今日天气</div>' +
+        '<div class="th-value">—</div><div class="th-sub">加载中</div></div>' +
+      '<div class="th-card" id="thYoujia" onclick="showYoujia()">' +
+        '<div class="th-icon">⛽</div><div class="th-title">今日油价</div>' +
+        '<div class="th-value">—</div><div class="th-sub">92/95/98</div></div>' +
+      '<div class="th-card" id="thGold" onclick="showGold()">' +
+        '<div class="th-icon">💰</div><div class="th-title">今日金价</div>' +
+        '<div class="th-value">—</div><div class="th-sub">元/克</div></div>';
+
+    // 1. 限行（同步）
+    var xx = getXianxingData();
+    var thX = $('#thXianxing');
+    if (thX) {
+      thX.querySelector('.th-value').textContent = xx.tail;
+      thX.querySelector('.th-sub').textContent = xx.isWeekend ? '周末不限行' : '非浙A全限';
+    }
+
+    // 2. 油价（同步）
+    var yj = getYoujiaData();
+    var thY = $('#thYoujia');
+    if (thY) {
+      thY.querySelector('.th-value').textContent = '¥' + yj['92号'];
+      thY.querySelector('.th-sub').textContent = '92号油 · 元/升';
+    }
+
+    // 3. 天气（异步）
+    getWeatherData().then(function (w) {
+      var thW = $('#thWeather');
+      if (!thW) return;
+      if (!w) {
+        thW.querySelector('.th-value').textContent = '—';
+        thW.querySelector('.th-sub').textContent = '获取失败';
+        return;
+      }
+      thW.querySelector('.th-value').textContent = w.temp + '°';
+      thW.querySelector('.th-sub').textContent = w.desc + ' 明' + w.forecast[1].min + '~' + w.forecast[1].max + '°';
+    });
+
+    // 4. 金价（异步）
+    getGoldData().then(function (result) {
+      var thG = $('#thGold');
+      if (!thG) return;
+      if (!result || !result.gold) {
+        thG.querySelector('.th-value').textContent = '—';
+        thG.querySelector('.th-sub').textContent = '获取失败';
+        return;
+      }
+      thG.querySelector('.th-value').textContent = '¥' + result.gold.cnyPerGram;
+      thG.querySelector('.th-sub').textContent = '黄金人民币/克';
+    });
+  }
+
+  // ===== 资讯流：拉取 /api/news 渲染到首页 banner =====
+  function renderNewsBanner() {
+    var box = $('#newsBanner');
+    if (!box) return;
+    box.innerHTML = '<div class="news-item"><div class="news-tag">加载中</div><div class="news-title">正在获取杭州资讯...</div></div>';
+    fetch('/api/news')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data || !data.items || !data.items.length) throw new Error('no data');
+        box.innerHTML = data.items.map(function (n) {
+          var tagClass = n.tag === '政策' ? '' : (n.tag === '便民' ? 'news-tag-new' : 'news-tag');
+          return '<div class="news-item" onclick="openUrl(\'' + n.url + '\')">' +
+            '<div class="news-tag ' + tagClass + '">' + n.tag + '</div>' +
+            '<div class="news-title">' + n.title + '</div>' +
+            '</div>';
+        }).join('');
+        // 添加轮播逻辑：每隔 5s 滚动一条
+        if (!box._timer) {
+          var idx = 0;
+          var items = box.querySelectorAll('.news-item');
+          if (items.length > 1) {
+            box._timer = setInterval(function () {
+              items.forEach(function (el) { el.style.display = 'none'; });
+              idx = (idx + 1) % items.length;
+              items[idx].style.display = '';
+            }, 5000);
+          }
+        }
+      })
+      .catch(function () {
+        box.innerHTML = '<div class="news-item" onclick="openUrl(\'https://www.hangzhou.gov.cn/\')">' +
+          '<div class="news-tag">热门</div>' +
+          '<div class="news-title">点击访问杭州市政府官网 →</div></div>';
+      });
+  }
+
   // ===== 初始化 =====
   function init() {
       applyTheme(state.theme);
+      renderTodayHangzhou();
+      renderNewsBanner();
       renderHotServices();
       renderHotKeywords();
       renderTabs();
@@ -2398,6 +2584,7 @@ default: showToast('功能开发中');
   window.showYaohao = showYaohao;
   window.showYoujia = showYoujia;
   window.showSbCalc = showSbCalc;
+  window.showHospital = showHospital;
   window.showTaxCalc = showTaxCalc;
   window.showCalendar = showCalendar;
   window.showLoanCalc = showLoanCalc;
