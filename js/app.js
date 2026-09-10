@@ -88,7 +88,7 @@
           { name: "高铁时刻", desc: "杭州东/西/南站", url: "https://www.12306.cn/", color: "#ef4444" },
           { name: "萧山机场", desc: "航班查询/大巴", url: "https://www.hzairport.com/", color: "#10b981" },
           { name: "机场大巴", desc: "武林门/平海路等", url: "https://www.hzairport.com/", color: "#f59e0b" },
-          { name: "机票预订", desc: "特价机票搜索", url: "https://m.ctrip.com/webapp/flight/swa/index.html?allianceid=10511040&sid=330893571&ouid=kfptvxtool", color: "#8b5cf6" },
+          { name: "机票预订", desc: "特价机票搜索", url: "https://m.ctrip.com/html5/flight/swift/index?allianceid=10511040&sid=330893571&ouid=kfptvxtool", color: "#8b5cf6" },
           { name: "汽车票", desc: "九堡/客运中心", url: "https://hangzhou.8684.com.cn/", color: "#06b6d4" },
           { name: "打车软件", desc: "滴滴/曹操/高德", url: "https://www.didiglobal.com/", color: "#ec4899" },
           { name: "顺风车", desc: "跨城拼车", url: "https://www.didapinche.com/", color: "#14b8a6" },
