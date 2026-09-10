@@ -46,40 +46,24 @@
 
   <!-- 首页 -->
   <div class="page active" id="pageHome">
-    <!-- 顶部快捷入口（模仿本地宝） -->
+    <!-- 顶部快捷入口：8 个老百姓天天用的刚需 -->
     <div class="quick-nav">
       <a href="#" onclick="openModal('🚗 今日限行', buildXianxingModal()); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ef4444'%3E%3Cpath d='M5 13l1.5-4.5h11L19 13M5 13l-2 5h4v4H7l-2-2-2 2H2v-4h1l-2-5m0 0v-3h14v3'/%3E%3C/svg%3E" alt=""><span>今日限行</span></a>
-      <a href="#" onclick="showLPR(); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310b981'%3E%3Cpath d='M3 3v18h18'/%3E%3Cpath d='M18 9l-5 5-4-4-3 3'/%3E%3C/svg%3E" alt=""><span>LPR利率</span></a>
-      <a href="#" onclick="showTide(); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230ea5e9'%3E%3Cpath d='M2 12c.6.5 1.2 1 2.5 1C7 13 7 11 9.5 11c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1'/%3E%3Cpath d='M2 18c.6.5 1.2 1 2.5 1C7 19 7 17 9.5 17c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1'/%3E%3Cpath d='M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1'/%3E%3C/svg%3E" alt=""><span>潮汐预报</span></a>
-      <a href="#" onclick="showForex(); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f59e0b'%3E%3Cpath d='M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'/%3E%3C/svg%3E" alt=""><span>实时汇率</span></a>
-      <a href="#" onclick="showMetro(); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M4 11a8 8 0 0 0 16 0'/%3E%3Ccircle cx='12' cy='11' r='4'/%3E%3Cpath d='M4 11V5l8-2 8 2v6'/%3E%3C/svg%3E" alt=""><span>地铁时刻</span></a>
       <a href="#" onclick="showWeather(); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ec4899'%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z'/%3E%3Cpath d='M12 6v6l4 2'/%3E%3C/svg%3E" alt=""><span>天气预报</span></a>
+      <a href="#" onclick="showMetro(); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M4 11a8 8 0 0 0 16 0'/%3E%3Ccircle cx='12' cy='11' r='4'/%3E%3Cpath d='M4 11V5l8-2 8 2v6'/%3E%3C/svg%3E" alt=""><span>地铁时刻</span></a>
+      <a href="#" onclick="openUrl('https://zj.122.gov.cn/'); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f59e0b'%3E%3Cpath d='M3 22V8l5-5h8l5 5v14z'/%3E%3Cpath d='M7 22V12h10v10'/%3E%3C/svg%3E" alt=""><span>违章查询</span></a>
       <a href="#" onclick="openUrl('https://www.zjzwfw.gov.cn/'); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233b82f6'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E" alt=""><span>社保查询</span></a>
       <a href="#" onclick="openUrl('https://gjj.hangzhou.gov.cn/'); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2314b8a6'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3C/svg%3E" alt=""><span>公积金</span></a>
-      <a href="#" onclick="showGold(); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f59e0b'%3E%3Cpath d='M12 2L9 9H2l5.5 4-2 7L12 16l6.5 4-2-7L22 9h-7z'/%3E%3C/svg%3E" alt=""><span>实时金价</span></a>
       <a href="#" onclick="showYoujia(); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ef4444'%3E%3Cpath d='M3 22V8l5-5h8l5 5v14z'/%3E%3Cpath d='M7 22V12h10v10'/%3E%3C/svg%3E" alt=""><span>今日油价</span></a>
       <a href="#" onclick="showYaohao(); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M5 13l1.5-4.5h11L19 13M5 13l-2 5h4v4H7l-2-2-2 2H2v-4h1l-2-5m0 0v-3h14v3'/%3E%3C/svg%3E" alt=""><span>浙A摇号</span></a>
-      <a href="#" onclick="showSbCalc(); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310b981'%3E%3Crect x='4' y='2' width='16' height='20' rx='2'/%3E%3Cpath d='M8 6h8M8 10h8M8 14h4' fill='none' stroke='white'/%3E%3C/svg%3E" alt=""><span>社保计算</span></a>
-      <a href="#" onclick="showTaxCalc(); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ec4899'%3E%3Cpath d='M9 7h6v2H9zM9 11h6v2H9z'/%3E%3Cpath d='M5 3v18h14V3H5zm2 2h10v14H7V5z'/%3E%3C/svg%3E" alt=""><span>个税计算</span></a>
-      <a href="#" onclick="showCalendar(); return false;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230ea5e9'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cpath d='M3 9h18M8 2v4M16 2v4' fill='none' stroke='white'/%3E%3C/svg%3E" alt=""><span>日历</span></a>
     </div>
-    <!-- 次级快捷入口（更多服务） -->
+    <!-- 次级快捷入口：常用但不天天用 -->
     <div class="quick-nav secondary-nav">
-      <a href="#" onclick="openUrl('https://zj.122.gov.cn/'); return false;"><span>违章查询</span></a>
-      <a href="#" onclick="openUrl('https://fgj.hangzhou.gov.cn/'); return false;"><span>公租房</span></a>
+      <a href="#" onclick="showTaxCalc(); return false;"><span>个税计算</span></a>
       <a href="#" onclick="openUrl('https://hrss.hangzhou.gov.cn/'); return false;"><span>找工作</span></a>
-      <a href="#" onclick="openUrl('https://westlake.hangzhou.gov.cn/'); return false;"><span>景点预约</span></a>
-      <a href="#" onclick="openUrl('https://www.hangzhou.gov.cn/'); return false;"><span>发票抽奖</span></a>
-      <a href="#" onclick="openUrl('https://www.lingyinsi.com/'); return false;"><span>灵隐寺</span></a>
-      <a href="#" onclick="openUrl('https://www.hzacm.cn/'); return false;"><span>博物馆</span></a>
-      <a href="#" onclick="openUrl('https://gjj.hangzhou.gov.cn/'); return false;"><span>公积金提取</span></a>
+      <a href="#" onclick="openUrl('https://fgj.hangzhou.gov.cn/'); return false;"><span>公租房</span></a>
       <a href="#" onclick="showLoanCalc(); return false;"><span>房贷计算</span></a>
-      <a href="#" onclick="showCountdown(); return false;"><span>倒计时</span></a>
-      <a href="#" onclick="showBmi(); return false;"><span>BMI计算</span></a>
-      <a href="#" onclick="showPostcode(); return false;"><span>邮编</span></a>
-      <a href="#" onclick="showIdCheck(); return false;"><span>身份证校验</span></a>
-      <a href="#" onclick="showDistrict(); return false;"><span>区划查询</span></a>
-      <a href="#" onclick="showPlateCheck(); return false;"><span>车牌归属</span></a>
+      <a href="#" onclick="openUrl('https://gjj.hangzhou.gov.cn/'); return false;"><span>公积金提取</span></a>
     </div>
 
     <!-- 热门资讯轮播 -->
@@ -259,7 +243,7 @@
       });
     }
   </script>
-  <script src="js/app.js?v=20260910a"></script>
+  <script src="js/app.js?v=20260910b"></script>
   <script>
     // 确保模态框可以关闭
     document.addEventListener('DOMContentLoaded', function() {
