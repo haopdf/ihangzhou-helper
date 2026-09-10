@@ -810,6 +810,13 @@
     document.documentElement.setAttribute('data-theme', theme);
     var btn = $('#themeBtn');
     if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    // 同步切换搜一搜推广物料图（JS 主题切换不响应 prefers-color-scheme）
+    var promoImg = $('.search-promo-img');
+    if (promoImg) {
+      promoImg.src = theme === 'dark'
+        ? 'images/promo/search-box-green.jpg'
+        : 'images/promo/search-box-white.jpg';
+    }
   }
 
   function toggleTheme() {

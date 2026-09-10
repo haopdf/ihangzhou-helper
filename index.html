@@ -137,10 +137,10 @@
       <div class="follow-card" id="followCard">
         <div class="follow-inner">
           <div class="follow-qr-wrap">
-            <img class="follow-qr" id="followQr" alt="公众号二维码" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23ffffff'/%3E%3Ctext x='100' y='105' font-size='13' text-anchor='middle' fill='%2394a3b8'%3E长按识别二维码%3C/text%3E%3Ctext x='100' y='125' font-size='13' text-anchor='middle' fill='%2394a3b8'%3E关注 iHangzhou%3C/text%3E%3C/svg%3E">
+            <img class="follow-qr" id="followQr" alt="爱杭州公众号二维码 · 长按识别关注" src="images/qrcode-ihangzhou.jpg" width="92" height="92">
           </div>
           <div class="follow-text">
-            <div class="follow-title">📌 关注 iHangzhou 公众号</div>
+            <div class="follow-title">📌 关注「爱杭州」公众号</div>
             <div class="follow-desc">杭州人的数字生活工具箱<br>每天推送：限行 / 油价 / 政策解读 / 生活攻略</div>
             <div class="follow-tag-row">
               <span class="follow-tag">每日限行</span>
@@ -150,6 +150,14 @@
           </div>
         </div>
         <div class="follow-hint">长按上方二维码 · 一键关注</div>
+      </div>
+
+      <!-- 搜一搜 iHangzhou 推广物料（微信生态官方推广样式） -->
+      <div class="search-promo" id="searchPromo" onclick="showSearchTip()">
+        <picture>
+          <source srcset="images/promo/search-box-green.jpg" media="(prefers-color-scheme: dark)">
+          <img class="search-promo-img" src="images/promo/search-box-white.jpg" alt="微信搜一搜 iHangzhou" loading="lazy">
+        </picture>
       </div>
 
       <!-- 分享赚粉卡片 -->
@@ -378,7 +386,7 @@
       });
     }
   </script>
-  <script src="js/app.js?v=20260916a"></script>
+  <script src="js/app.js?v=20260917a"></script>
   <script>
     // 确保模态框可以关闭
     document.addEventListener('DOMContentLoaded', function() {
@@ -480,6 +488,25 @@
         '</div>';
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
+    }
+    function showSearchTip() {
+      var t = document.getElementById('toast');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'toast';
+        t.className = 'toast';
+        document.body.appendChild(t);
+      }
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.indexOf('micromessenger') > -1) {
+        // 微信内：引导下拉搜一搜
+        t.innerHTML = '🔍 在微信顶部下拉 → 点击「搜一搜」<br>输入「iHangzhou」即可找到';
+      } else {
+        // 非微信：提示需要去微信
+        t.innerHTML = '🔍 打开微信 → 顶部搜索框<br>输入「iHangzhou」即可找到本站';
+      }
+      t.classList.add('show');
+      setTimeout(function(){ t.classList.remove('show'); }, 3500);
     }
     // 我的页主题切换
     document.addEventListener('DOMContentLoaded', function() {

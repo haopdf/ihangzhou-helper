@@ -3,10 +3,13 @@
 // HTML/JS 网络优先（确保最新），CSS/图片 缓存优先
 // ============================================
 
-var CACHE_NAME = 'ihangzhou-v16';
+var CACHE_NAME = 'ihangzhou-v17';
 var CACHE_URLS = [
   '/css/style.css',
-  '/manifest.json'
+  '/manifest.json',
+  '/images/qrcode-ihangzhou.jpg',
+  '/images/promo/search-box-white.jpg',
+  '/images/promo/search-box-green.jpg'
 ];
 
 // 安装：预缓存静态资源
