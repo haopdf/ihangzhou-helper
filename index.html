@@ -132,6 +132,109 @@
       <!-- 分类Tab -->
       <div class="tabs" id="tabs"></div>
       <div class="service-grid" id="serviceGrid"></div>
+
+      <!-- 公众号关注卡片（吸粉核心入口） -->
+      <div class="follow-card" id="followCard">
+        <div class="follow-inner">
+          <div class="follow-qr-wrap">
+            <img class="follow-qr" id="followQr" alt="公众号二维码" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23ffffff'/%3E%3Ctext x='100' y='105' font-size='13' text-anchor='middle' fill='%2394a3b8'%3E长按识别二维码%3C/text%3E%3Ctext x='100' y='125' font-size='13' text-anchor='middle' fill='%2394a3b8'%3E关注 iHangzhou%3C/text%3E%3C/svg%3E">
+          </div>
+          <div class="follow-text">
+            <div class="follow-title">📌 关注 iHangzhou 公众号</div>
+            <div class="follow-desc">杭州人的数字生活工具箱<br>每天推送：限行 / 油价 / 政策解读 / 生活攻略</div>
+            <div class="follow-tag-row">
+              <span class="follow-tag">每日限行</span>
+              <span class="follow-tag">办事指南</span>
+              <span class="follow-tag">本地攻略</span>
+            </div>
+          </div>
+        </div>
+        <div class="follow-hint">长按上方二维码 · 一键关注</div>
+      </div>
+
+      <!-- 分享赚粉卡片 -->
+      <div class="share-card" id="shareCard" onclick="showShareTip()">
+        <div class="share-icon">📤</div>
+        <div class="share-text">
+          <div class="share-title">分享 iHangzhou 给朋友</div>
+          <div class="share-desc">杭州人的必备工具箱 · 多一个人看到多一份方便</div>
+        </div>
+        <div class="share-arrow">›</div>
+      </div>
+
+      <!-- 杭州好物推荐（分销/合作位，初期自营） -->
+      <div class="goods-section">
+        <div class="section-head">
+          <h2>🎁 杭州好物推荐</h2>
+          <span class="tip">本地人精挑细选</span>
+        </div>
+        <div class="goods-grid" id="goodsGrid">
+          <a class="goods-card" href="https://www.wangxingji.com/" target="_blank" rel="noopener">
+            <div class="goods-img">🌿</div>
+            <div class="goods-name">王星记檀香扇</div>
+            <div class="goods-price">¥168 起</div>
+            <div class="goods-tag">百年老字号</div>
+          </a>
+          <a class="goods-card" href="https://www.zwgfood.com/" target="_blank" rel="noopener">
+            <div class="goods-img">🥟</div>
+            <div class="goods-name">知味观小笼包</div>
+            <div class="goods-price">¥29 起</div>
+            <div class="goods-tag">真空可寄</div>
+          </a>
+          <a class="goods-card" href="https://www.zjtea.com/" target="_blank" rel="noopener">
+            <div class="goods-img">🍵</div>
+            <div class="goods-name">西湖龙井茶</div>
+            <div class="goods-price">¥198 起</div>
+            <div class="goods-tag">明前新茶</div>
+          </a>
+          <a class="goods-card" href="https://www.dianping.com/hangzhou/" target="_blank" rel="noopener">
+            <div class="goods-img">🍜</div>
+            <div class="goods-name">杭帮菜团购</div>
+            <div class="goods-price">大众点评</div>
+            <div class="goods-tag">5 折起</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- 本地服务推荐（OTA 分销位） -->
+      <div class="goods-section">
+        <div class="section-head">
+          <h2>🏨 杭州本地服务</h2>
+          <span class="tip">官方预订更省心</span>
+        </div>
+        <div class="ota-grid" id="otaGrid">
+          <a class="ota-card" href="https://hotels.ctrip.com/hotels/list?countryId=1&city=32" target="_blank" rel="noopener">
+            <div class="ota-icon">🏨</div>
+            <div class="ota-name">酒店预订</div>
+            <div class="ota-desc">携程 · 8000+ 家</div>
+          </a>
+          <a class="ota-card" href="https://piao.ctrip.com/detail/32.html" target="_blank" rel="noopener">
+            <div class="ota-icon">🎫</div>
+            <div class="ota-name">景点门票</div>
+            <div class="ota-desc">宋城/西溪/雷峰塔</div>
+          </a>
+          <a class="ota-card" href="https://www.12306.cn/" target="_blank" rel="noopener">
+            <div class="ota-icon">🚄</div>
+            <div class="ota-name">火车票</div>
+            <div class="ota-desc">12306 官方</div>
+          </a>
+          <a class="ota-card" href="https://www.hzairport.com/" target="_blank" rel="noopener">
+            <div class="ota-icon">✈️</div>
+            <div class="ota-name">萧山机场</div>
+            <div class="ota-desc">航班动态</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- 商家入驻入口（变现基建） -->
+      <div class="biz-invite" id="bizInvite" onclick="showBizInvite()">
+        <div class="biz-icon">🤝</div>
+        <div class="biz-text">
+          <div class="biz-title">本地商家入驻</div>
+          <div class="biz-desc">餐饮/景区/特产/服务 · 免费上架至 iHangzhou</div>
+        </div>
+        <div class="biz-arrow">›</div>
+      </div>
     </div>
   </div>
 
@@ -275,7 +378,7 @@
       });
     }
   </script>
-  <script src="js/app.js?v=20260915a"></script>
+  <script src="js/app.js?v=20260916a"></script>
   <script>
     // 确保模态框可以关闭
     document.addEventListener('DOMContentLoaded', function() {
@@ -306,8 +409,18 @@
       });
     });
     
-    // 我的页额外功能
+    // 我的页额外功能 + 分享引导
     function showShareTip() {
+      // 优先用浏览器原生分享（移动端 Safari / 微信均支持）
+      if (navigator.share) {
+        navigator.share({
+          title: 'iHangzhou · 杭州生活助手',
+          text: '杭州人的数字生活工具箱，办事/出行/民生一站导航',
+          url: location.href
+        }).catch(function () {});
+        return;
+      }
+      // 回退到 toast 提示（公众号内嵌场景）
       var t = document.getElementById('toast');
       if (!t) {
         t = document.createElement('div');
@@ -315,9 +428,21 @@
         t.className = 'toast';
         document.body.appendChild(t);
       }
-      t.textContent = '点击右上角 ··· 分享给朋友';
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.indexOf('micromessenger') > -1) {
+        // 公众号内嵌：引导点右上角
+        t.innerHTML = '📤 点击右上角 ··· <br>选择「发送给朋友」或「分享到朋友圈」';
+      } else {
+        // 普通浏览器：引导复制链接
+        t.innerHTML = '📤 复制下方链接分享给朋友';
+        try {
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(location.href);
+          }
+        } catch (e) {}
+      }
       t.classList.add('show');
-      setTimeout(function(){ t.classList.remove('show'); }, 2500);
+      setTimeout(function(){ t.classList.remove('show'); }, 3200);
     }
     function showAbout() {
       var overlay = document.getElementById('modalOverlay');
@@ -334,6 +459,24 @@
         '• 杭州天气、油价、万年历</p>' +
         '<p style="margin-top:12px;"><strong>声明：</strong></p>' +
         '<p style="color:var(--text-secondary);font-size:13px;">本平台为公益导航，所有外部链接均指向官方渠道，数据仅供参考，不存储任何用户数据。</p>' +
+        '</div>';
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function showBizInvite() {
+      var overlay = document.getElementById('modalOverlay');
+      var title = document.getElementById('modalTitle');
+      var body = document.getElementById('modalBody');
+      title.innerHTML = '🤝 本地商家入驻';
+      body.innerHTML = '<div style="line-height:1.8;font-size:14px;">' +
+        '<p style="color:var(--text-secondary);">iHangzhou 是杭州本地生活门户，月活用户稳步增长。欢迎杭州本地商家免费入驻：</p>' +
+        '<p style="margin-top:12px;"><strong>✅ 可入驻类型</strong></p>' +
+        '<p style="color:var(--text-secondary);">• 餐饮美食 / 杭帮菜 / 小吃<br>• 景区景点 / 演出 / 文创<br>• 杭州特产 / 老字号 / 茶叶<br>• 生活服务 / 家政 / 美业<br>• 教育 / 培训 / 亲子</p>' +
+        '<p style="margin-top:12px;"><strong>🎁 入驻权益</strong></p>' +
+        '<p style="color:var(--text-secondary);">• 首页「杭州好物」推荐位<br>• 对应分类下永久展示<br>• 公众号文章推荐<br>• 免费 · 不抽佣</p>' +
+        '<p style="margin-top:12px;"><strong>📞 联系方式</strong></p>' +
+        '<p style="color:var(--text-secondary);">• 微信：添加公众号「iHangzhou」留言<br>• 邮箱：biz@ihangzhou.net<br>• 准备材料：店铺名 / 地址 / 招牌产品 / 联系方式</p>' +
+        '<p style="margin-top:14px;color:var(--text-muted);font-size:12px;">入驻免费，iHangzhou 保留上架审核权，仅收录杭州本地优质商家。</p>' +
         '</div>';
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';

@@ -136,12 +136,12 @@
         items: [
           { name: "消费券领取", desc: "支付宝/浙里办领券", detail: "<p><strong>杭州消费券领取</strong></p><p>杭州消费券发放渠道：</p><p>① <strong>支付宝</strong>：搜索「杭州消费券」或在首页入口领取</p><p>② <strong>浙里办</strong>：搜索「消费券」</p><p>③ <strong>云闪付</strong>：搜索「杭州消费券」</p><p style=\"margin-top:8px;\">消费券通常为满减形式，如满30减10、满50减20等，限指定商户使用</p><p style=\"color:var(--text-muted);font-size:13px;\">发放时间不固定，关注「杭州发布」公众号获取最新消息</p>", color: "#ef4444" },
           { name: "发票抽奖", desc: "支付宝/云闪付搜索消费有奖", detail: "<p><strong>消费有奖（发票抽奖）</strong></p><p>杭州消费有奖活动参与方式：</p><p>① <strong>支付宝</strong>：搜索「消费有奖」或「发票管家」录入发票</p><p>② <strong>云闪付</strong>：搜索「发票抽奖」参与</p><p>③ <strong>浙里办</strong>：搜索「消费有奖」</p><p style=\"margin-top:8px;\">录入餐饮、零售等消费发票即可参与抽奖，奖金最高数万元</p><p style=\"color:var(--text-muted);font-size:13px;\">开奖周期通常为月度/季度，以官方公告为准</p>", color: "#f59e0b" },
-          { name: "水费缴纳", desc: "杭州水务集团", url: "https://www.hzwgc.com/", color: "#10b981" },
-          { name: "电费缴纳", desc: "国家电网", url: "https://www.95598.cn/", color: "#3b82f6" },
-          { name: "燃气缴费", desc: "杭州燃气", url: "https://www.hzgas.com.cn/", color: "#8b5cf6" },
-          { name: "固话宽带", desc: "电信/联通/移动", url: "https://www.10086.cn/", color: "#06b6d4" },
-          { name: "有线电视", desc: "华数传媒", url: "https://www.wasu.com/", color: "#ec4899" },
-          { name: "医院挂号", desc: "浙一/浙二/邵逸夫", url: "", detail: "<p><strong>浙江预约挂号平台</strong></p><p>统一挂号入口：zyygh.com</p><p>支持浙江省内各级医院预约挂号，包括浙一、浙二、邵逸夫等。</p><p><strong>挂号方式</strong>：网站、APP、浙里办、12580电话</p>", color: "#14b8a6" },
+          { name: "水费缴纳", desc: "杭州水务集团", url: "https://www.hzwgc.com/", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州市区自来水由杭州水务集团供应，实行阶梯水价。一户一表用户年用水量分档计价。</p><div class=\"guide-block\"><h4>📊 杭州居民阶梯水价</h4><p>• <strong>第一阶梯</strong>（0-216 吨/年）：2.40 元/吨<br>• <strong>第二阶梯</strong>（217-300 吨/年）：3.60 元/吨<br>• <strong>第三阶梯</strong>（300 吨以上）：7.20 元/吨<br>• <strong>污水处理费</strong>：1.10 元/吨（随水费代收）</p></div><div class=\"guide-block\"><h4>💳 缴费方式</h4><p>• <strong>支付宝/微信</strong>：生活缴费 → 水费 → 杭州水务<br>• <strong>浙里办</strong>：搜索「水费」<br>• <strong>银行代扣</strong>：工行/招行/杭银等可签约代扣<br>• <strong>线下营业厅</strong>：杭州水务集团各网点</p></div><div class=\"guide-block\"><h4>📞 报修/咨询</h4><p>• 杭州水务 24 小时服务热线：<strong>0571-87879999</strong><br>• 漏水报修、水质投诉、水表故障</p><p style=\"margin-top:6px;\"><a href=\"https://www.hzwgc.com/\" target=\"_blank\" rel=\"noopener\">官网查询/缴费 →</a></p></div>", color: "#10b981" },
+          { name: "电费缴纳", desc: "国家电网", url: "https://www.95598.cn/", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州居民用电执行浙江电网阶梯电价，按年累计电量分档。一户一表用户三档计价，合表用户略高。</p><div class=\"guide-block\"><h4>⚡ 浙江居民阶梯电价</h4><p>• <strong>第一档</strong>（0-2760 度/年）：0.538 元/度<br>• <strong>第二档</strong>（2761-4800 度/年）：0.588 元/度<br>• <strong>第三档</strong>（4800 度以上）：0.838 元/度<br>• <strong>峰谷电</strong>：峰 0.568 元/度，谷 0.298 元/度（需申请开通）</p></div><div class=\"guide-block\"><h4>💳 缴费方式</h4><p>• <strong>网上国网 APP</strong>：「网上国网」下载<br>• <strong>支付宝/微信</strong>：生活缴费 → 电费<br>• <strong>95598 客服</strong>：报修/咨询/业务办理</p></div><div class=\"guide-block\"><h4>📞 24h 报修热线</h4><p>• <strong>95598</strong>（全国统一）<br>• 停电报修、电表故障、电压异常</p><p style=\"margin-top:6px;\"><a href=\"https://www.95598.cn/\" target=\"_blank\" rel=\"noopener\">官网查询/缴费 →</a></p></div>", color: "#3b82f6" },
+          { name: "燃气缴费", desc: "杭州燃气", url: "https://www.hzgas.com.cn/", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州市主城区管道天然气由杭州燃气集团供应，居民用气执行阶梯气价。点火/改装/过户需预约。</p><div class=\"guide-block\"><h4>🔥 杭州居民阶梯气价</h4><p>• <strong>第一档</strong>（0-480 方/年）：2.40 元/方<br>• <strong>第二档</strong>（481-960 方/年）：2.88 元/方<br>• <strong>第三档</strong>（960 方以上）：3.60 元/方<br>• <strong>IC 卡表</strong>：先充值后使用，余额不足自动关阀</p></div><div class=\"guide-block\"><h4>💳 缴费方式</h4><p>• <strong>支付宝/微信</strong>：生活缴费 → 燃气费<br>• <strong>杭州燃气 APP</strong>：在线缴费/报装/抢修<br>• <strong>银行代扣</strong>：工行/招行可签约<br>• <strong>IC 卡圈存</strong>：营业厅/24h 自助机</p></div><div class=\"guide-block\"><h4>📞 24h 抢修热线</h4><p>• 杭州燃气 24h 抢修：<strong>0571-87361119</strong><br>• 漏气/异味/熄火保护/气压低</p><p style=\"margin-top:6px;\"><a href=\"https://www.hzgas.com.cn/\" target=\"_blank\" rel=\"noopener\">官网查询/缴费 →</a></p></div>", color: "#8b5cf6" },
+          { name: "固话宽带", desc: "电信/联通/移动", url: "https://www.10086.cn/", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州家庭宽带三大运营商可选，电信稳定性最佳，移动价格最低，联通介于其间。千兆宽带已覆盖主城区。</p><div class=\"guide-block\"><h4>🌐 三大运营商对比</h4><p>• <strong>中国电信</strong>：1000M 199元/月（含 1 手机号流量）<br>• <strong>中国移动</strong>：1000M 128元/月（需手机号绑定）<br>• <strong>中国联通</strong>：1000M 159元/月（融合套餐）</p></div><div class=\"guide-block\"><h4>💳 缴费方式</h4><p>• 支付宝/微信/银行 APP → 宽带/固话<br>• 各运营商 APP 在线缴费<br>• 营业厅签约银行代扣</p></div><div class=\"guide-block\"><h4>📞 客服</h4><p>• 电信：<strong>10000</strong><br>• 联通：<strong>10010</strong><br>• 移动：<strong>10086</strong></p></div>", color: "#06b6d4" },
+          { name: "有线电视", desc: "华数传媒", url: "https://www.wasu.com/", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州有线电视由华数传媒运营，提供数字电视、互动点播、宽带电视等服务。新装/移机/报修可线上预约。</p><div class=\"guide-block\"><h4>📺 主城区数字电视套餐</h4><p>• <strong>基本包</strong>：26 元/月（含 60+ 标清频道）<br>• <strong>互动增强包</strong>：35 元/月（含回看/点播）<br>• <strong>高清包</strong>：加 15 元/月（30+ 高清频道）<br>• <strong>4K 超清</strong>：需 4K 机顶盒</p></div><div class=\"guide-block\"><h4>💳 缴费方式</h4><p>• 支付宝/微信生活缴费<br>• 华数营业厅<br>• 银行代扣（工行/招行）</p></div><div class=\"guide-block\"><h4>📞 服务热线</h4><p>• 华数 24h 客服：<strong>96371</strong><br>• 故障报修/移机/新装/咨询</p></div>", color: "#ec4899" },
+          { name: "医院挂号", desc: "浙一/浙二/邵逸夫", url: "https://zyygh.com/", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">浙江省预约挂号统一平台 zyygh.com，覆盖省内三级以上医院，支持 7 天内预约，部分医院提前 14 天。也可通过浙里办、12580 电话挂号。</p><div class=\"guide-block\"><h4>🏥 杭州三甲医院</h4><p>• <strong>浙大一院</strong>（庆春/总部/之江）：综合实力顶尖<br>• <strong>浙大二院</strong>（滨江/解放路）：急诊烧伤科突出<br>• <strong>邵逸夫医院</strong>（庆春/下沙）：服务佳、胃肠/泌尿强<br>• <strong>省人民医院</strong>（朝晖/南星桥）：肝胆胰外科强<br>• <strong>省中医院</strong>（湖滨/丁桥）：中医综合调理</p></div><div class=\"guide-block\"><h4>📅 挂号渠道</h4><p>• <strong>浙里办 APP</strong>：最常用，省内统一<br>• <strong>12580</strong>：移动用户电话预约<br>• <strong>医院官方公众号</strong>：关注后可挂号<br>• <strong>支付宝</strong>：医疗 → 挂号</p></div><div class=\"guide-block\"><h4>⚠️ 注意事项</h4><p>• 退号至少提前 1 天，否则记爽约<br>• 爽约 3 次/年将被限制预约 90 天<br>• 急诊不预约，直接 120 或前往</p><p style=\"margin-top:6px;\"><a href=\"https://zyygh.com/\" target=\"_blank\" rel=\"noopener\">预约挂号平台 →</a></p></div>", color: "#14b8a6" },
           { name: "儿童疫苗", desc: "疫苗预约/接种", url: "https://wsjkw.hangzhou.gov.cn/", color: "#84cc16" },
           { name: "新冠疫苗", desc: "加强针预约", url: "https://wsjkw.hangzhou.gov.cn/", color: "#f97316" },
           { name: "HPV疫苗", desc: "九价/四价预约", url: "https://wsjkw.hangzhou.gov.cn/", color: "#a855f7" },
@@ -504,15 +504,15 @@
         id: "laozihao", name: "杭州老字号", icon: "🏮",
         items: [
           // ===== 医药类 =====
-          { name: "胡庆余堂", desc: "国药号·1874年胡雪岩创·河坊街", url: "https://www.hqyt.com/", color: "#ef4444" },
-          { name: "方回春堂", desc: "国药号·1649年创·河坊街", url: "https://www.fhcmed.com/", color: "#dc2626" },
+          { name: "胡庆余堂", desc: "国药号·1874年胡雪岩创·河坊街", url: "https://www.hqyt.com/", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">胡庆余堂由晚清红顶商人胡雪岩于 1874 年创办，与北京同仁堂并称「北同仁、南庆余」，是江南药王。被誉为「中国第一药堂」，国家二级博物馆。</p><div class=\"guide-block\"><h4>🏛️ 镇店三宝</h4><p>• <strong>「戒欺」匾</strong>：胡雪岩亲书「戒欺」二字挂于营业厅后堂，告诫店员「药业关系性命，尤为万不可欺」<br>• <strong>大香炉</strong>：进门青石大香炉，旧时煎药用<br>• <strong>百余年老建筑</strong>：清末徽派建筑，雕梁画栋</p></div><div class=\"guide-block\"><h4>💊 招牌产品</h4><p>• <strong>安宫牛黄丸</strong>：急救圣药，千元/丸<br>• <strong>大活络丹</strong>：中风偏瘫<br>• <strong>紫雪丹</strong>：小儿高热<br>• <strong>人参再造丸</strong>：风湿骨痛</p></div><div class=\"guide-block\"><h4>📍 体验</h4><p>• <strong>胡庆余堂中药博物馆</strong>：河坊街大井巷 95 号<br>• <strong>国药号总店</strong>：河坊街<br>• <strong>名医坐诊</strong>：可预约老中医<br>• 免费参观，营业 8:00-17:30</p><p style=\"margin-top:6px;\"><a href=\"https://www.hqyt.com/\" target=\"_blank\" rel=\"noopener\">官网 →</a></p></div>", color: "#ef4444" },
+          { name: "方回春堂", desc: "国药号·1649年创·河坊街", url: "https://www.fhcmed.com/", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">方回春堂始创于清顺治六年（1649 年），由钱塘名医方清怡创办，比胡庆余堂早 225 年，是杭州现存最古老的国药号之一。2001 年重建于河坊街，重振百年老号。</p><div class=\"guide-block\"><h4>🏮 河坊街总店</h4><p>• <strong>建筑</strong>：江南传统药号样式，四进四合院<br>• <strong>参茸厅</strong>：长白山野山参、高丽参、鹿茸<br>• <strong>膏方厅</strong>：秋冬熬膏方，预约火爆<br>• <strong>名医馆</strong>：国家级/省级名老中医坐诊</p></div><div class=\"guide-block\"><h4>💊 招牌</h4><p>• <strong>阿胶膏</strong>：秋冬滋补爆款<br>• <strong>驴皮膏</strong>：补血<br>• <strong>十全大补膏</strong>：气血双补<br>• <strong>熬膏季</strong>：每年立冬后开启</p></div><div class=\"guide-block\"><h4>📍 体验</h4><p>• <strong>河坊街总店</strong>：上城区河坊街 117 号<br>• 营业 8:00-17:30，节假日不打烊<br>• 名医号需提前 1 周预约<br>• 免费参观、可拍照</p><p style=\"margin-top:6px;\"><a href=\"https://www.fhcmed.com/\" target=\"_blank\" rel=\"noopener\">官网 →</a></p></div>", color: "#dc2626" },
           { name: "朱养心", desc: "药油始祖·1628年创·民康药业", url: "https://www.minkang.com/", color: "#b91c1c" },
           { name: "桐君堂", desc: "中华老字号·桐庐·中医药", url: "https://www.tongjutang.com/", color: "#991b1b" },
           { name: "广升誉", desc: "杭州老字号·上城·医药", url: "", detail: "<p><strong>广升誉</strong></p><p>第四批杭州老字号，上城区中医药品牌。</p><p>• 主营：中药饮片、中成药</p><p>• 地址：上城区</p>", color: "#7f1d1d" },
           { name: "钱爱仁堂", desc: "杭州老字号·余杭·国药馆", url: "", detail: "<p><strong>钱爱仁堂</strong></p><p>余杭老字号国药馆，第四批杭州老字号。</p><p>• 主营：传统中药、参茸</p><p>• 地址：余杭区</p>", color: "#a855f7" },
           // ===== 餐饮食品类 =====
-          { name: "知味观", desc: "百年老店·1913年创·东坡路", url: "https://www.zwgfood.com/", color: "#8b5cf6" },
-          { name: "楼外楼", desc: "杭帮菜泰斗·1848年创·孤山", url: "https://www.louwailou.com.cn/", color: "#ec4899" },
+          { name: "知味观", desc: "百年老店·1913年创·东坡路", url: "https://www.zwgfood.com/", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">知味观始建于 1913 年，由孙翼斋先生创办，店名取自「知味停车，闻香下马」。是杭州家喻户晓的杭帮菜老字号，本地人从小吃到大，无论是早茶、点心、团圆饭都少不了它。</p><div class=\"guide-block\"><h4>🥟 招牌必点</h4><p>• <strong>知味小笼</strong>：蟹粉/虾仁/鲜肉三种，18-32 元/笼<br>• <strong>猫耳朵</strong>：杭州特色面食，汤鲜<br>• <strong>幸福双</strong>：双拼甜点<br>• <strong>酒酿丸子</strong>：早茶必点<br>• <strong>糯米烧麦</strong>：地道早点</p></div><div class=\"guide-block\"><h4>🏠 三种店型</h4><p>• <strong>总店（湖滨/东坡路）</strong>：正餐杭帮菜，200+ 人均<br>• <strong>味雅轩</strong>：商务宴请，300+ 人均<br>• <strong>知味小吃店</strong>：早茶点心，30-50 人均</p></div><div class=\"guide-block\"><h4>📍 体验</h4><p>• <strong>总店</strong>：上城区仁和路 83 号（近湖滨银泰）<br>• <strong>外卖窗口</strong>：可买现做小笼、糕点带回家<br>• <strong>真空包装</strong>：方便送人，机场/高铁站也有售<br>• 早茶 6:30 开始，正餐 11:00-21:00</p><p style=\"margin-top:6px;\"><a href=\"https://www.zwgfood.com/\" target=\"_blank\" rel=\"noopener\">官网 →</a></p></div>", color: "#8b5cf6" },
+          { name: "楼外楼", desc: "杭帮菜泰斗·1848年创·孤山", url: "https://www.louwailou.com.cn/", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">楼外楼始创于清道光二十八年（1848 年），坐落于西湖孤山脚下，是杭帮菜的泰斗级名店。鲁迅、郁达夫、蒋介石、周恩来等都曾在此宴客。西湖醋鱼、叫化童鸡等名菜皆出于此。</p><div class=\"guide-block\"><h4>🐟 招牌必尝</h4><p>• <strong>西湖醋鱼</strong>：镇店之宝，用草鱼/鳜鱼，糖醋味，98-198 元<br>• <strong>叫化童鸡</strong>：荷叶裹泥烤制，280 元/只<br>• <strong>东坡肉</strong>：肥而不腻，68 元/盅<br>• <strong>龙井虾仁</strong>：清明前后最鲜，168 元<br>• <strong>宋嫂鱼羹</strong>：南宋名菜，58 元</p></div><div class=\"guide-block\"><h4>🌅 三楼观湖位</h4><p>• 一楼大厅：大众消费，人均 200<br>• 二楼包厢：商务宴请，人均 400+<br>• <strong>三楼观湖位</strong>：直面西湖，需提前 1 周预订，人均 600+</p></div><div class=\"guide-block\"><h4>📍 体验</h4><p>• <strong>孤山总店</strong>：孤山路 30 号（近西泠印社）<br>• 营业 11:00-21:00<br>• 节假日排队 1-2 小时，强烈建议预订<br>• 另有分店：满觉陇、城站等</p><p style=\"margin-top:6px;\"><a href=\"https://www.louwailou.com.cn/\" target=\"_blank\" rel=\"noopener\">官网预订 →</a></p></div>", color: "#ec4899" },
           { name: "奎元馆", desc: "片儿川始祖·1867年创·解放路", url: "", detail: "<p><strong>奎元馆</strong></p><p>始创于1867年，片儿川始祖，江南面王。</p><p>• 招牌面：片儿川、虾爆鳝面</p><p>• 地址：解放路154号</p><p>• 人均：30-60元</p>", color: "#06b6d4" },
           { name: "天香楼", desc: "正宗杭帮菜·1927年创", url: "https://www.tianxianglou.com/", color: "#14b8a6" },
           { name: "山外山", desc: "杭帮菜名店·1903年创·植物园", url: "https://www.shanwaishan.com/", color: "#84cc16" },
@@ -522,7 +522,7 @@
           { name: "九芝斋", desc: "百年糕点·1928年创·糕饼老字号", url: "", detail: "<p><strong>九芝斋</strong></p><p>始创于1928年，与采芝斋齐名的杭州糕饼老字号。</p><p>• 招牌：麻酥糖、椒盐桃片、桂花糕</p><p>• 地址：延安路</p>", color: "#fbbf24" },
           { name: "景阳观", desc: "百年酱菜·1907年创·河坊街", url: "", detail: "<p><strong>景阳观</strong></p><p>始创于1907年，杭州酱菜老字号。</p><p>• 招牌：虾油皇姜芽、虾油黄瓜、酱萝卜</p><p>• 地址：河坊街</p><p>• 特色：杭式酱菜，下饭一绝</p>", color: "#d97706" },
           // ===== 绸扇刀剪工艺类 =====
-          { name: "王星记", desc: "丝绸扇·1875年创·扇子博物馆", url: "https://www.wangxingji.com/", color: "#f59e0b" },
+          { name: "王星记", desc: "丝绸扇·1875年创·扇子博物馆", url: "https://www.wangxingji.com/", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">王星记扇庄始创于清光绪元年（1875 年），由王星斋创办，与杭州张小泉剪刀、都锦生丝绸并称「杭产三绝」。是中国唯一的扇子博物馆所在地，国家非物质文化遗产。</p><div class=\"guide-block\"><h4>🌿 镇店之宝</h4><p>• <strong>黑纸扇</strong>：百年招牌，棕竹扇骨、桑皮纸面、手工泥金，可保藏 30 年不蛀<br>• <strong>白纸扇</strong>：水墨名家手绘，雅致<br>• <strong>檀香扇</strong>：拉花/烫花工艺，香气持久数十年<br>• <strong>绢扇/团扇</strong>：丝绸面料，绣花</p></div><div class=\"guide-block\"><h4>🎨 工艺亮点</h4><p>• <strong>九十九道工序</strong>：从选竹到成扇近 100 道手工<br>• <strong>泥金/泥银</strong>：千年传承的贴金工艺<br>• <strong>名医题字</strong>：吴昌硕、刘海粟等大家曾题字作画</p></div><div class=\"guide-block\"><h4>📍 体验</h4><p>• <strong>王星记扇博物馆</strong>：下城区长板巷 39 号<br>• <strong>河坊街专卖店</strong>：上城区河坊街 108 号<br>• 价格区间：普通 50-200 元，精品 500+ 元，收藏级上千<br>• 推荐伴手礼：檀香扇、黑纸扇</p><p style=\"margin-top:6px;\"><a href=\"https://www.wangxingji.com/\" target=\"_blank\" rel=\"noopener\">官网 →</a></p></div>", color: "#f59e0b" },
           { name: "张小泉", desc: "百年名刀·1663年创·刀剪博物馆", url: "https://www.zhangxiaoquan.cn/", color: "#10b981" },
           { name: "都锦生", desc: "织锦之王·1922年创·茅家埠", url: "", detail: "<p><strong>都锦生</strong></p><p>中国织锦之王，始创于1922年。</p><p>• 主营：丝绸织锦、丝织品</p><p>• 特色产品：西湖风景织锦、丝绸服饰</p><p>• 地址：茅家埠（都锦生织锦博物馆）</p><p>• 门店：河坊街等</p>", color: "#3b82f6" },
           { name: "万事利", desc: "国礼丝绸·1975年创·丝绸品牌", url: "https://www.wensli.com/", color: "#eab308" },
@@ -2509,23 +2509,53 @@ case 'colors': showColors(); break;
     fetch('/api/news')
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        if (!data || !data.items || !data.items.length) throw new Error('no data');
-        box.innerHTML = data.items.map(function (n) {
+        // 兼容旧版 items / 新版 headlines
+        var items = (data && (data.headlines || data.items)) || [];
+        if (!items.length) throw new Error('no data');
+        box.innerHTML = items.map(function (n) {
           var tagClass = n.tag === '政策' ? '' : (n.tag === '便民' ? 'news-tag-new' : 'news-tag');
-          return '<div class="news-item" onclick="openUrl(\'' + n.url + '\')">' +
-            '<div class="news-tag ' + tagClass + '">' + n.tag + '</div>' +
+          var escapedTitle = (n.title || '').replace(/'/g, "\\'");
+          return '<div class="news-item" onclick="openUrl(\'' + n.url + '\')" style="cursor:pointer">' +
+            '<div class="news-tag ' + tagClass + '">' + (n.tag || '资讯') + '</div>' +
             '<div class="news-title">' + n.title + '</div>' +
             '</div>';
         }).join('');
-        // 添加轮播逻辑：每隔 5s 滚动一条
+
+        // 新版：插入「明日预告」横条作为回访钩子
+        if (data.tomorrow) {
+          var existingHint = document.getElementById('tomorrowHint');
+          if (existingHint) existingHint.remove();
+          var hint = document.createElement('div');
+          hint.id = 'tomorrowHint';
+          hint.className = 'tomorrow-hint';
+          var xxBadge = data.tomorrow.xianxing.type === 'weekend' ? '🎉 不限行' : ('限行 ' + data.tomorrow.xianxing.tail);
+          hint.innerHTML =
+            '<div class="th-label">明日 ' + data.tomorrow.week + '</div>' +
+            '<div class="th-badge ' + (data.tomorrow.xianxing.type === 'weekend' ? 'is-free' : '') + '">' + xxBadge + '</div>' +
+            '<div class="th-action">' + data.tomorrow.hint + '</div>';
+          box.parentNode.insertBefore(hint, box.nextSibling);
+        }
+
+        // 时令提醒
+        if (data.today && data.today.seasonalTip) {
+          var existingSeasonal = document.getElementById('seasonalTip');
+          if (existingSeasonal) existingSeasonal.remove();
+          var seasonal = document.createElement('div');
+          seasonal.id = 'seasonalTip';
+          seasonal.className = 'seasonal-tip';
+          seasonal.innerHTML = data.today.seasonalTip;
+          box.parentNode.insertBefore(seasonal, box.nextSibling);
+        }
+
+        // 轮播：每 5s 滚动一条
         if (!box._timer) {
           var idx = 0;
-          var items = box.querySelectorAll('.news-item');
-          if (items.length > 1) {
+          var newsItems = box.querySelectorAll('.news-item');
+          if (newsItems.length > 1) {
             box._timer = setInterval(function () {
-              items.forEach(function (el) { el.style.display = 'none'; });
-              idx = (idx + 1) % items.length;
-              items[idx].style.display = '';
+              newsItems.forEach(function (el) { el.style.display = 'none'; });
+              idx = (idx + 1) % newsItems.length;
+              newsItems[idx].style.display = 'flex';
             }, 5000);
           }
         }

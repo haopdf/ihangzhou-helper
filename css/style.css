@@ -1502,3 +1502,446 @@ a { color: var(--primary); text-decoration: none; }
   color: var(--text-secondary);
 }
 
+/* ============================================
+   吸粉卡片（公众号关注 + 分享赚粉）
+   ============================================ */
+
+/* 公众号关注卡片 */
+.follow-card {
+  margin: 16px 14px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.follow-card::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.follow-card::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.follow-inner {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.follow-qr-wrap {
+  flex-shrink: 0;
+  width: 92px;
+  height: 92px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.follow-qr {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  display: block;
+}
+
+.follow-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.follow-title {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.follow-desc {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.follow-tag-row {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.follow-tag {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.follow-hint {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 11px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.25);
+  position: relative;
+  z-index: 1;
+}
+
+/* 分享卡片 */
+.share-card {
+  margin: 12px 14px 16px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--border);
+}
+
+.share-card:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-md);
+}
+
+.share-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.share-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.share-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.share-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.share-arrow {
+  font-size: 20px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* 深色模式 */
+[data-theme="dark"] .share-card {
+  background: var(--bg-card);
+}
+
+[data-theme="dark"] .follow-card::before,
+[data-theme="dark"] .follow-card::after {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   回访钩子：明日预告 + 时令提醒
+   ============================================ */
+
+.tomorrow-hint {
+  margin: 10px 14px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 4px solid #f59e0b;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: tomorrowSlide 0.4s ease-out;
+}
+
+@keyframes tomorrowSlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tomorrow-hint:active {
+  transform: scale(0.98);
+}
+
+.th-label {
+  font-size: 12px;
+  color: #92400e;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.th-badge {
+  background: #ef4444;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+.th-badge.is-free {
+  background: #10b981;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.th-action {
+  font-size: 12px;
+  color: #78350f;
+  flex: 1;
+  line-height: 1.4;
+  min-width: 0;
+}
+
+.seasonal-tip {
+  margin: 8px 14px;
+  background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #0e7490;
+  line-height: 1.5;
+  border-left: 3px solid #06b6d4;
+}
+
+[data-theme="dark"] .tomorrow-hint {
+  background: linear-gradient(135deg, #78350f 0%, #92400e 100%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .th-label,
+[data-theme="dark"] .th-action {
+  color: #fef3c7;
+}
+
+[data-theme="dark"] .seasonal-tip {
+  background: linear-gradient(135deg, #0c4a6e 0%, #155e75 100%);
+  color: #67e8f9;
+}
+
+/* ============================================
+   变现位：好物推荐 + OTA 服务 + 商家入驻
+   ============================================ */
+
+.goods-section {
+  margin: 16px 14px;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.section-head h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.section-head .tip {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* 好物网格 */
+.goods-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.goods-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 12px;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: transform 0.2s;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.goods-card:active {
+  transform: scale(0.98);
+}
+
+.goods-img {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.goods-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.goods-price {
+  font-size: 13px;
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.goods-tag {
+  display: inline-block;
+  background: var(--bg-hover);
+  color: var(--primary);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+/* OTA 网格 */
+.ota-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.ota-card {
+  background: var(--bg-card);
+  border-radius: 10px;
+  padding: 10px 4px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s;
+}
+
+.ota-card:active {
+  transform: scale(0.96);
+}
+
+.ota-icon {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.ota-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.ota-desc {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* 商家入驻邀请 */
+.biz-invite {
+  margin: 16px 14px 24px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+}
+
+.biz-invite:active {
+  transform: scale(0.98);
+}
+
+.biz-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.biz-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.biz-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.biz-desc {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+.biz-arrow {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .goods-card,
+[data-theme="dark"] .ota-card {
+  background: var(--bg-card);
+}
+
