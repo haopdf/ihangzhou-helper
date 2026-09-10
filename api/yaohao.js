@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
     res.status(200).json({
       updated: new Date().toUTCString(),
       source: 'hzxkctk.cn',
-      officialSite: 'https://hzxctk.cn/',
+      officialSite: 'https://hzxkctk.cn/',
       applySite: 'https://apply.hzxkctk.cn/',
       notices: notices.slice(0, 10)
     });
