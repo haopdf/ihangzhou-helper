@@ -77,7 +77,7 @@ console.log('📱 apple-touch-icon:', html.indexOf('apple-touch-icon') >= 0 ? '�
 console.log('\n🌐 canonical:', html.indexOf('canonical') >= 0 ? '✅' : '❌');
 console.log('🌐 og:url:', html.indexOf('og:url') >= 0 ? '✅' : '❌');
 console.log('🌐 og:title:', html.indexOf('og:title') >= 0 ? '✅' : '❌');
-console.log('🌐 ihz.inanyang.com:', html.indexOf('ihz.inanyang.com') >= 0 ? '✅' : '❌');
+console.log('🌐 www.ihangzhou.net:', html.indexOf('www.ihangzhou.net') >= 0 ? '✅' : '❌');
 
 // 12. 身份证校验算法测试
 console.log('\n=== 身份证校验测试 ===');
