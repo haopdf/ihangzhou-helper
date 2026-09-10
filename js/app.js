@@ -851,7 +851,8 @@
     grid.innerHTML = items.map(function (item) {
       // 有URL的用<a>标签，浏览器原生处理跳转，不会被弹窗拦截
       if (item.url) {
-        return '<a class="sitem" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
+        var safeUrl = item.url.indexOf('http://') === 0 ? 'https://' + item.url.substring(7) : item.url;
+        return '<a class="sitem" href="' + safeUrl + '" rel="noopener noreferrer">' +
           '<div class="sicon">' + getServiceIcon(item.name) + '</div>' +
           '<div class="sinfo">' +
           '<div class="sname">' + item.name + '</div>' +
@@ -989,7 +990,8 @@
       var catBadge = ' <span class="scat">[' + r.cat + ']</span>';
       // 有URL的用<a>标签，浏览器原生处理跳转，不会被弹窗拦截
       if (item.url) {
-        return '<a class="sitem" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
+        var safeUrl = item.url.indexOf('http://') === 0 ? 'https://' + item.url.substring(7) : item.url;
+        return '<a class="sitem" href="' + safeUrl + '" rel="noopener noreferrer">' +
           '<div class="sicon">' + getServiceIcon(item.name) + '</div>' +
           '<div class="sinfo">' +
           '<div class="sname">' + item.name + catBadge + '</div>' +
@@ -1101,14 +1103,12 @@
   }
 
   function openUrl(url) {
-    // 使用 <a> 标签点击，兼容移动端和 PWA，避免被弹窗拦截
-    var a = document.createElement('a');
-    a.href = url;
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    // 公众号/微信内嵌浏览器场景：当前页跳转，用户按"<"返回键回 iHangzhou
+    // http 自动升级 https（微信强制https，否则打不开）
+    if (url && url.indexOf('http://') === 0) {
+      url = 'https://' + url.substring(7);
+    }
+    window.location.href = url;
   }
 
   function handleClick(el) {
@@ -1139,14 +1139,14 @@
           body += '<p style="color:var(--text-secondary);">' + desc + '</p>';
         }
         body += '</div>';
-        // 2. 官方办理入口（通用）
+        // 2. 官方办理入口（通用）—— 当前页跳转，按返回键回 iHangzhou
         body += '<div style="margin-top:16px;padding:12px;background:var(--bg);border-radius:10px;">' +
           '<div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text);">🏛️ 官方办理入口</div>' +
           '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">' +
-          '<a href="https://www.zjzwfw.gov.cn/" target="_blank" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">浙里办<br><span style="font-size:11px;color:var(--text-muted);">Web</span></a>' +
-          '<a href="https://app.gjzwfw.gov.cn/zhejiang-app/" target="_blank" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">支付宝<br><span style="font-size:11px;color:var(--text-muted);">小程序</span></a>' +
+          '<a href="https://www.zjzwfw.gov.cn/" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">浙里办<br><span style="font-size:11px;color:var(--text-muted);">Web</span></a>' +
+          '<a href="https://app.gjzwfw.gov.cn/zhejiang-app/" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">支付宝<br><span style="font-size:11px;color:var(--text-muted);">小程序</span></a>' +
           '<a href="tel:12345" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">12345<br><span style="font-size:11px;color:var(--text-muted);">市长热线</span></a>' +
-          '<a href="https://www.hangzhou.gov.cn/" target="_blank" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">杭州政务<br><span style="font-size:11px;color:var(--text-muted);">官网</span></a>' +
+          '<a href="https://www.hangzhou.gov.cn/" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">杭州政务<br><span style="font-size:11px;color:var(--text-muted);">官网</span></a>' +
           '</div></div>';
         // 3. 相关推荐
         if (item && catName) {
@@ -1162,9 +1162,10 @@
             body += '<div style="margin-top:12px;padding:12px;background:var(--bg);border-radius:10px;">' +
               '<div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text);">🔗 相关推荐</div>';
             related.forEach(function(r){
+              var rSafe = r.url && r.url.indexOf('http://') === 0 ? 'https://' + r.url.substring(7) : r.url;
               body += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">' +
                 '<span style="font-size:13px;">' + r.name + '</span>' +
-                (r.url ? '<a href="' + r.url + '" target="_blank" rel="noopener" style="color:var(--primary);font-size:12px;text-decoration:none;">前往 →</a>' : '<span style="font-size:12px;color:var(--text-muted);">详情</span>') +
+                (r.url ? '<a href="' + rSafe + '" rel="noopener" style="color:var(--primary);font-size:12px;text-decoration:none;">前往 →</a>' : '<span style="font-size:12px;color:var(--text-muted);">详情</span>') +
                 '</div>';
             });
             body += '</div>';
@@ -2046,14 +2047,15 @@ default: showToast('功能开发中');
         if (data && data.notices) {
           var html = '<div style="padding:12px 0;">';
           html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">' +
-            '<a href="' + (data.officialSite || 'https://hzxkctk.cn/') + '" target="_blank" rel="noopener" style="padding:14px;background:var(--bg);border-radius:10px;text-align:center;text-decoration:none;color:inherit;">' +
+            '<a href="' + (data.officialSite || 'https://hzxkctk.cn/') + '" rel="noopener" style="padding:14px;background:var(--bg);border-radius:10px;text-align:center;text-decoration:none;color:inherit;">' +
             '<div style="font-size:24px;">🏛️</div><div style="font-size:14px;font-weight:600;margin-top:4px;">官方网站</div></a>' +
-            '<a href="' + (data.applySite || 'https://apply.hzxkctk.cn/') + '" target="_blank" rel="noopener" style="padding:14px;background:var(--bg);border-radius:10px;text-align:center;text-decoration:none;color:inherit;">' +
+            '<a href="' + (data.applySite || 'https://apply.hzxkctk.cn/') + '" rel="noopener" style="padding:14px;background:var(--bg);border-radius:10px;text-align:center;text-decoration:none;color:inherit;">' +
             '<div style="font-size:24px;">📝</div><div style="font-size:14px;font-weight:600;margin-top:4px;">申请/查询</div></a>' +
             '</div>';
           html += '<div style="font-size:14px;font-weight:600;margin-bottom:8px;">📢 最新公告</div>';
           data.notices.forEach(function (n) {
-            html += '<a href="' + n.url + '" target="_blank" rel="noopener" style="display:block;padding:12px;background:var(--bg);border-radius:8px;margin-bottom:6px;text-decoration:none;color:inherit;">' +
+            var nSafe = n.url && n.url.indexOf('http://') === 0 ? 'https://' + n.url.substring(7) : n.url;
+            html += '<a href="' + nSafe + '" rel="noopener" style="display:block;padding:12px;background:var(--bg);border-radius:8px;margin-bottom:6px;text-decoration:none;color:inherit;">' +
               '<div style="font-size:14px;font-weight:500;">' + n.title + '</div>' +
               '<div style="font-size:12px;color:var(--text-muted);margin-top:2px;">点击查看详情 →</div></a>';
           });
@@ -2064,7 +2066,7 @@ default: showToast('功能开发中');
         } else { throw new Error('no data'); }
       })
       .catch(function () {
-        $('#yaohaoBox').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">数据获取失败，<a href="https://hzxkctk.cn/" target="_blank" rel="noopener" style="color:var(--primary);">点此直接访问官网</a></div>';
+        $('#yaohaoBox').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">数据获取失败，<a href="https://hzxkctk.cn/" rel="noopener" style="color:var(--primary);">点此直接访问官网</a></div>';
       });
   }
 
