@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>杭州区县导航 · iHangzhou</title>
+  <meta name="description" content="杭州 13 大区县（10 区 + 1 县级市 + 2 县）一站式导航：上城/拱墅/西湖/滨江/萧山/余杭/临平/钱塘/富阳/临安/桐庐/淳安/建德">
+  <meta name="keywords" content="杭州区县,杭州行政区,上城区,拱墅区,西湖区,滨江区,萧山区,余杭区,临平区,钱塘区,富阳区,临安区,桐庐县,淳安县,建德市,杭州生活,ihangzhou">
+  <meta name="theme-color" content="#0ea5e9">
+  <meta property="og:title" content="杭州 13 区县导航 · iHangzhou">
+  <meta property="og:description" content="杭州全部 13 个区县概况/景点/政务/特色一站式查询">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://www.ihangzhou.net/district.html">
+  <link rel="stylesheet" href="css/style.css?v=20260918a">
+  <style>
+    /* 区县列表页专属样式 */
+    .district-hero {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      color: #fff;
+      padding: 22px 16px 18px;
+      text-align: center;
+    }
+    .district-hero h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 6px;
+    }
+    .district-hero p {
+      font-size: 13px;
+      opacity: 0.92;
+      line-height: 1.5;
+    }
+    .district-stats {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 12px;
+      font-size: 11px;
+      opacity: 0.88;
+    }
+    .district-stats span {
+      background: rgba(255,255,255,0.18);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+
+    .district-filter {
+      display: flex;
+      gap: 6px;
+      padding: 10px 14px;
+      overflow-x: auto;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      -webkit-overflow-scrolling: touch;
+    }
+    .district-filter::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      flex-shrink: 0;
+      padding: 6px 14px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: all 0.2s;
+    }
+    .filter-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .district-list {
+      padding: 12px 14px 80px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .district-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+    }
+    .district-card:active {
+      transform: scale(0.98);
+      box-shadow: var(--shadow-md);
+    }
+    .dc-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .dc-name-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dc-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .dc-type-badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .dc-type-badge.主城 { background: #fef3c7; color: #92400e; }
+    .dc-type-badge.副城 { background: #dbeafe; color: #1e40af; }
+    .dc-type-badge.县级市 { background: #dcfce7; color: #166534; }
+    .dc-type-badge.县 { background: #fce7f3; color: #9f1239; }
+    [data-theme="dark"] .dc-type-badge.主城 { background: #78350f; color: #fef3c7; }
+    [data-theme="dark"] .dc-type-badge.副城 { background: #1e3a8a; color: #dbeafe; }
+    [data-theme="dark"] .dc-type-badge.县级市 { background: #14532d; color: #dcfce7; }
+    [data-theme="dark"] .dc-type-badge.县 { background: #831843; color: #fce7f3; }
+    .dc-arrow {
+      font-size: 18px;
+      color: var(--text-muted);
+    }
+    .dc-tag {
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .dc-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .dc-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+      padding-top: 8px;
+      border-top: 1px dashed var(--border);
+    }
+    .dc-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    /* 区县详情页样式 */
+    .district-detail {
+      padding-bottom: 80px;
+    }
+    .dd-hero {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      padding: 24px 16px 18px;
+      padding-top: max(24px, env(safe-area-inset-top));
+    }
+    .dd-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      padding: 6px 12px 6px 8px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      margin-bottom: 12px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .dd-name {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 4px;
+    }
+    .dd-tag {
+      font-size: 13px;
+      opacity: 0.92;
+      margin-bottom: 12px;
+    }
+    .dd-stats {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .dd-stat {
+      background: rgba(255,255,255,0.18);
+      padding: 4px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+    }
+    .dd-section {
+      margin: 14px;
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .dd-section h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dd-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .dd-features {
+      font-size: 13px;
+      color: var(--text-secondary);
+      background: var(--bg-alt);
+      padding: 10px 12px;
+      border-radius: 8px;
+      border-left: 3px solid var(--primary);
+      line-height: 1.6;
+    }
+    .dd-scenic-list {
+      display: grid;
+      gap: 10px;
+    }
+    .dd-scenic-item {
+      padding: 10px;
+      background: var(--bg-alt);
+      border-radius: 10px;
+      border-left: 3px solid var(--secondary);
+    }
+    .dd-scenic-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .dd-scenic-type {
+      display: inline-block;
+      background: var(--secondary);
+      color: #fff;
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 6px;
+      margin-left: 6px;
+      vertical-align: middle;
+      font-weight: 500;
+    }
+    .dd-scenic-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+    .dd-landmarks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .dd-landmark {
+      background: var(--bg-hover);
+      color: var(--primary);
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+    .dd-gov-link {
+      display: block;
+      margin-top: 10px;
+      padding: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff !important;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .dd-loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .dd-error {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--danger);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 顶部栏 -->
+  <div class="topbar">
+    <div class="topbar-city" onclick="location.href='index.html'">
+      <span>←</span>
+    </div>
+    <div class="topbar-search">
+      <input type="text" placeholder="搜索杭州区县..." id="searchInput">
+    </div>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+  </div>
+
+  <!-- 列表视图 -->
+  <div id="listView">
+    <div class="district-hero">
+      <h1>杭州 13 区县导航</h1>
+      <p>10 区 · 1 县级市 · 2 县｜每个区县都有它的脾气</p>
+      <div class="district-stats">
+        <span>主城 4</span>
+        <span>副城 5</span>
+        <span>县级市 1</span>
+        <span>县 2</span>
+      </div>
+    </div>
+
+    <div class="district-filter" id="filterBar">
+      <button class="filter-btn active" data-type="all">全部</button>
+      <button class="filter-btn" data-type="主城">主城</button>
+      <button class="filter-btn" data-type="副城">副城</button>
+      <button class="filter-btn" data-type="县级市">县级市</button>
+      <button class="filter-btn" data-type="县">县</button>
+    </div>
+
+    <div class="district-list" id="districtList">
+      <div class="dd-loading">加载中...</div>
+    </div>
+  </div>
+
+  <!-- 详情视图 -->
+  <div id="detailView" style="display:none"></div>
+
+  <script src="js/app.js?v=20260918a"></script>
+  <script>
+    // 简易主题持久化
+    (function () {
+      try {
+        var t = localStorage.getItem('ihz-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        var b = document.getElementById('themeBtn');
+        if (b) b.textContent = t === 'dark' ? '☀️' : '🌙';
+      } catch (e) {}
+    })();
+    function toggleTheme() {
+      var cur = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('ihz-theme', next);
+      var b = document.getElementById('themeBtn');
+      if (b) b.textContent = next === 'dark' ? '☀️' : '🌙';
+    }
+
+    var allDistricts = [];
+
+    // 渲染列表
+    function renderList(type, keyword) {
+      var box = document.getElementById('districtList');
+      var filtered = allDistricts.filter(function (d) {
+        if (type && type !== 'all' && d.type !== type) return false;
+        if (keyword) {
+          var k = keyword.toLowerCase();
+          if (d.name.toLowerCase().indexOf(k) < 0 && d.tag.toLowerCase().indexOf(k) < 0 && d.desc.toLowerCase().indexOf(k) < 0) return false;
+        }
+        return true;
+      });
+      if (!filtered.length) {
+        box.innerHTML = '<div class="dd-loading">未找到匹配的区县</div>';
+        return;
+      }
+      box.innerHTML = filtered.map(function (d) {
+        var metaHtml = '<div class="dc-meta-item">📍 ' + d.area + '</div>' +
+                       '<div class="dc-meta-item">👥 ' + d.population + '</div>' +
+                       '<div class="dc-meta-item">📮 ' + d.postcode + '</div>';
+        return '<a class="district-card" href="district.html?id=' + d.id + '">' +
+          '<div class="dc-head">' +
+            '<div class="dc-name-row">' +
+              '<div class="dc-name">' + d.name + '</div>' +
+              '<span class="dc-type-badge ' + d.type + '">' + d.type + '</span>' +
+            '</div>' +
+            '<div class="dc-arrow">›</div>' +
+          '</div>' +
+          '<div class="dc-tag">' + d.tag + '</div>' +
+          '<div class="dc-desc">' + d.desc + '</div>' +
+          '<div class="dc-meta">' + metaHtml + '</div>' +
+        '</a>';
+      }).join('');
+    }
+
+    // 渲染详情
+    function renderDetail(d) {
+      var view = document.getElementById('detailView');
+      var landmarks = (d.landmarks || []).map(function (l) {
+        return '<span class="dd-landmark">' + l + '</span>';
+      }).join('');
+      var scenic = (d.scenic || []).map(function (s) {
+        return '<div class="dd-scenic-item">' +
+          '<div class="dd-scenic-name">' + s.name + '<span class="dd-scenic-type">' + s.type + '</span></div>' +
+          '<div class="dd-scenic-desc">' + s.desc + '</div>' +
+        '</div>';
+      }).join('');
+      view.innerHTML =
+        '<div class="district-detail">' +
+          '<div class="dd-hero">' +
+            '<a class="dd-back" href="district.html">← 返回列表</a>' +
+            '<h1 class="dd-name">' + d.name + '</h1>' +
+            '<div class="dd-tag">' + d.tag + '</div>' +
+            '<div class="dd-stats">' +
+              '<span class="dd-stat">📍 ' + d.area + '</span>' +
+              '<span class="dd-stat">👥 ' + d.population + '</span>' +
+              '<span class="dd-stat">📮 ' + d.postcode + '</span>' +
+              '<span class="dd-stat">' + d.type + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="dd-section">' +
+            '<h2>📖 区县概况</h2>' +
+            '<div class="dd-desc">' + d.desc + '</div>' +
+          '</div>' +
+          '<div class="dd-section">' +
+            '<h2>✨ 特色亮点</h2>' +
+            '<div class="dd-features">' + d.features + '</div>' +
+          '</div>' +
+          (scenic ? '<div class="dd-section"><h2>🏞️ 代表景点</h2><div class="dd-scenic-list">' + scenic + '</div></div>' : '') +
+          (landmarks ? '<div class="dd-section"><h2>🏢 重要地标</h2><div class="dd-landmarks">' + landmarks + '</div></div>' : '') +
+          '<div class="dd-section">' +
+            '<h2>🏛️ 区政府官网</h2>' +
+            '<a class="dd-gov-link" href="' + d.govUrl + '" target="_blank" rel="noopener">访问 ' + d.name + '人民政府 →</a>' +
+          '</div>' +
+          // SEO JSON-LD
+          '<script type="application/ld+json">' +
+          JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Place",
+            "name": d.name,
+            "description": d.desc,
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "浙江省杭州市",
+              "postalCode": d.postcode
+            }
+          }) +
+          '<\/script>' +
+        '</div>';
+      document.getElementById('listView').style.display = 'none';
+      view.style.display = 'block';
+      window.scrollTo(0, 0);
+    }
+
+    // 路由：根据 URL hash 或 query 决定显示
+    function route() {
+      var params = new URLSearchParams(location.search);
+      var id = params.get('id');
+      var hash = location.hash.replace('#', '');
+      var targetId = id || hash;
+      if (targetId) {
+        var found = allDistricts.find(function (d) { return d.id === targetId; });
+        if (found) {
+          renderDetail(found);
+          document.title = found.name + ' · 杭州 ' + found.type + ' · iHangzhou';
+          return;
+        } else {
+          document.getElementById('listView').style.display = 'none';
+          document.getElementById('detailView').style.display = 'block';
+          document.getElementById('detailView').innerHTML = '<div class="dd-error">未找到该区县，请返回列表选择</div>';
+          return;
+        }
+      }
+      // 列表模式
+      document.getElementById('listView').style.display = 'block';
+      document.getElementById('detailView').style.display = 'none';
+      document.title = '杭州 13 区县导航 · iHangzhou';
+    }
+
+    // 初始化
+    function init() {
+      fetch('/api/districts')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          allDistricts = data.districts || [];
+          renderList('all', '');
+          route();
+        })
+        .catch(function () {
+          document.getElementById('districtList').innerHTML = '<div class="dd-error">数据加载失败，请刷新重试</div>';
+        });
+
+      // 筛选
+      document.getElementById('filterBar').addEventListener('click', function (e) {
+        var btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        renderList(btn.dataset.type, document.getElementById('searchInput').value);
+      });
+
+      // 搜索
+      var searchInput = document.getElementById('searchInput');
+      searchInput.addEventListener('input', function () {
+        var active = document.querySelector('.filter-btn.active');
+        renderList(active ? active.dataset.type : 'all', searchInput.value);
+      });
+
+      // 路由变化（前进/后退）
+      window.addEventListener('popstate', route);
+    }
+
+    init();
+  </script>
+</body>
+</html>

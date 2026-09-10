@@ -1989,3 +1989,84 @@ a { color: var(--primary); text-decoration: none; }
   pointer-events: none;
 }
 
+/* ============================================
+   杭州 13 区县快速导航条
+   ============================================ */
+
+.district-nav {
+  margin: 10px 14px;
+}
+
+.district-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%);
+  border: 1px solid #a5f3fc;
+  border-radius: 12px;
+  padding: 12px 14px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: 0 2px 6px rgba(6, 182, 212, 0.12);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.district-nav-item::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(6, 182, 212, 0.1);
+}
+
+.district-nav-item:active {
+  transform: scale(0.98);
+}
+
+.dn-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0e7490;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.dn-desc {
+  font-size: 11px;
+  color: #0e7490;
+  opacity: 0.85;
+  flex: 1;
+  line-height: 1.4;
+  z-index: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dn-arrow {
+  font-size: 18px;
+  color: #06b6d4;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+[data-theme="dark"] .district-nav-item {
+  background: linear-gradient(135deg, #0c4a6e 0%, #155e75 100%);
+  border-color: #0e7490;
+}
+
+[data-theme="dark"] .dn-name,
+[data-theme="dark"] .dn-desc {
+  color: #67e8f9;
+}
+
+[data-theme="dark"] .dn-arrow {
+  color: #67e8f9;
+}
+
