@@ -1384,7 +1384,7 @@
     if (action) { handleAction(action); }
     else if (url) { openUrl(url); }
     else {
-      // 无外链也无action，显示服务详情（服务卡片结构）
+      // 无外链也无action，显示服务详情（带收藏按钮）
       var nameEl = el.querySelector('.sname');
       var descEl = el.querySelector('.sdesc');
       if (nameEl) {
@@ -1392,53 +1392,14 @@
         var desc = descEl ? descEl.textContent : '';
         var item = null;
         var catName = '';
-        // 在DATA中查找对应服务以获取detail
         DATA.categories.forEach(function(c){
           c.items.forEach(function(it){
             if(it.name === name) { item = it; catName = c.name; }
           });
         });
-        var body = '<div style="padding:16px;line-height:1.8;font-size:14px;">';
-        // 1. 简介/详情
-        if (item && item.detail) {
-          body += item.detail;
-        } else {
-          body += '<p style="color:var(--text-secondary);">' + desc + '</p>';
-        }
-        body += '</div>';
-        // 2. 官方办理入口（通用）—— 当前页跳转，按返回键回 iHangzhou
-        body += '<div style="margin-top:16px;padding:12px;background:var(--bg);border-radius:10px;">' +
-          '<div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text);">🏛️ 官方办理入口</div>' +
-          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">' +
-          '<a href="https://www.zjzwfw.gov.cn/" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">浙里办<br><span style="font-size:11px;color:var(--text-muted);">Web</span></a>' +
-          '<a href="https://app.gjzwfw.gov.cn/zhejiang-app/" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">支付宝<br><span style="font-size:11px;color:var(--text-muted);">小程序</span></a>' +
-          '<a href="tel:12345" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">12345<br><span style="font-size:11px;color:var(--text-muted);">市长热线</span></a>' +
-          '<a href="https://www.hangzhou.gov.cn/" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">杭州政务<br><span style="font-size:11px;color:var(--text-muted);">官网</span></a>' +
-          '</div></div>';
-        // 3. 相关推荐
-        if (item && catName) {
-          var related = [];
-          DATA.categories.forEach(function(c){
-            if (c.name === catName) {
-              c.items.forEach(function(it){
-                if (it.name !== name && related.length < 4) related.push(it);
-              });
-            }
-          });
-          if (related.length) {
-            body += '<div style="margin-top:12px;padding:12px;background:var(--bg);border-radius:10px;">' +
-              '<div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text);">🔗 相关推荐</div>';
-            related.forEach(function(r){
-              var rSafe = r.url && r.url.indexOf('http://') === 0 ? 'https://' + r.url.substring(7) : r.url;
-              body += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">' +
-                '<span style="font-size:13px;">' + r.name + '</span>' +
-                (r.url ? '<a href="' + rSafe + '" rel="noopener" style="color:var(--primary);font-size:12px;text-decoration:none;">前往 →</a>' : '<span style="font-size:12px;color:var(--text-muted);">详情</span>') +
-                '</div>';
-            });
-            body += '</div>';
-          }
-        }
-        openModal('📌 ' + name, body);
+        renderItemModal({
+          name: name, desc: desc, cat: catName, action: item ? item.action : '', url: item ? item.url : '', detail: item ? item.detail : ''
+        });
       }
     }
   }
@@ -2816,6 +2777,7 @@ case 'colors': showColors(); break;
   // ===== 初始化 =====
   function init() {
       applyTheme(state.theme);
+      applyFontSize();
       renderTodayHangzhou();
       renderNewsBanner();
       renderHotServices();
@@ -2825,6 +2787,7 @@ case 'colors': showColors(); break;
     bindEvents();
     aiLoadHistory();
     bindAIEvents();
+    updateMeCounters();
     var now = new Date();
     var dateEl = $('#heroDate');
     if (dateEl) {
@@ -2842,6 +2805,328 @@ case 'colors': showColors(); break;
         '<div class="hero-stat"><div class="num">' + DATA.phonebook.length + '</div><div class="label">常用电话</div></div>' +
         '<div class="hero-stat"><div class="num">13</div><div class="label">区县市</div></div>';
     }
+  }
+
+  // ============================================
+  // 收藏夹 / 浏览历史 / 反馈 / 字号
+  // ============================================
+  function lsGet(key, def) {
+    try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch (e) { return def; }
+  }
+  function lsSet(key, val) {
+    try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+  }
+
+  function getFavs() { return lsGet('ihz_favs', []); }
+  function getHistory() { return lsGet('ihz_hist', []); }
+
+  function isFav(name) {
+    return getFavs().some(function (f) { return f.name === name; });
+  }
+
+  function toggleFav(name, desc, cat, action, url, detail) {
+    var favs = getFavs();
+    var idx = favs.findIndex(function (f) { return f.name === name; });
+    if (idx >= 0) {
+      favs.splice(idx, 1);
+    } else {
+      favs.unshift({ name: name, desc: desc || '', cat: cat || '', action: action || '', url: url || '', detail: detail || '', ts: Date.now() });
+      if (favs.length > 50) favs.length = 50;
+    }
+    lsSet('ihz_favs', favs);
+    updateMeCounters();
+    showToast(idx >= 0 ? '已取消收藏' : '⭐ 已收藏');
+  }
+
+  function addHistory(name, desc, cat, action, url, detail) {
+    var hist = getHistory();
+    // 去重
+    hist = hist.filter(function (h) { return h.name !== name; });
+    hist.unshift({ name: name, desc: desc || '', cat: cat || '', action: action || '', url: url || '', detail: detail || '', ts: Date.now() });
+    if (hist.length > 30) hist = hist.slice(0, 30);
+    lsSet('ihz_hist', hist);
+    updateMeCounters();
+  }
+
+  function updateMeCounters() {
+    var fc = $('#favCount'); if (fc) fc.textContent = '(' + getFavs().length + ')';
+    var hc = $('#histCount'); if (hc) hc.textContent = '(' + getHistory().length + ')';
+  }
+
+  function fmtTime(ts) {
+    var d = new Date(ts);
+    var now = new Date();
+    var diff = (now - d) / 1000;
+    if (diff < 60) return '刚刚';
+    if (diff < 3600) return Math.floor(diff / 60) + ' 分钟前';
+    if (diff < 86400) return Math.floor(diff / 3600) + ' 小时前';
+    if (diff < 604800) return Math.floor(diff / 86400) + ' 天前';
+    return (d.getMonth() + 1) + '月' + d.getDate() + '日';
+  }
+
+  function renderItemModal(item, opts) {
+    opts = opts || {};
+    var name = item.name;
+    var desc = item.desc || '';
+    var cat = item.cat || '';
+    var action = item.action || '';
+    var url = item.url || '';
+    var detail = item.detail || '';
+    var fav = isFav(name);
+
+    // 加入浏览历史
+    addHistory(name, desc, cat, action, url, detail);
+
+    var body = '<div style="padding:16px;line-height:1.8;font-size:14px;">';
+    if (detail) {
+      body += detail;
+    } else {
+      body += '<p style="color:var(--text-secondary);">' + desc + '</p>';
+    }
+    body += '</div>';
+    body += '<div style="margin-top:16px;padding:12px;background:var(--bg);border-radius:10px;">' +
+      '<div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text);">🏛️ 官方办理入口</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">' +
+      '<a href="https://www.zjzwfw.gov.cn/" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">浙里办<br><span style="font-size:11px;color:var(--text-muted);">Web</span></a>' +
+      '<a href="https://app.gjzwfw.gov.cn/zhejiang-app/" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">支付宝<br><span style="font-size:11px;color:var(--text-muted);">小程序</span></a>' +
+      '<a href="tel:12345" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">12345<br><span style="font-size:11px;color:var(--text-muted);">市长热线</span></a>' +
+      '<a href="https://www.hangzhou.gov.cn/" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">杭州政务<br><span style="font-size:11px;color:var(--text-muted);">官网</span></a>' +
+      '</div></div>';
+
+    // 相关推荐
+    if (cat) {
+      var related = [];
+      DATA.categories.forEach(function (c) {
+        if (c.name === cat) {
+          c.items.forEach(function (it) {
+            if (it.name !== name && related.length < 4) related.push(it);
+          });
+        }
+      });
+      if (related.length) {
+        body += '<div style="margin-top:12px;padding:12px;background:var(--bg);border-radius:10px;">' +
+          '<div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text);">🔗 相关推荐</div>';
+        related.forEach(function (r) {
+          var rSafe = r.url && r.url.indexOf('http://') === 0 ? 'https://' + r.url.substring(7) : r.url;
+          body += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">' +
+            '<span style="font-size:13px;">' + r.name + '</span>' +
+            (r.url ? '<a href="' + rSafe + '" rel="noopener" style="color:var(--primary);font-size:12px;text-decoration:none;">前往 →</a>' : '<span style="font-size:12px;color:var(--text-muted);">详情</span>') +
+            '</div>';
+        });
+        body += '</div>';
+      }
+    }
+
+    // 收藏按钮（底部）
+    body += '<div style="margin-top:16px;text-align:center;">' +
+      '<button onclick="window._toggleFav(\'' + name.replace(/'/g, "\\'") + '\',\'' + (desc || '').replace(/'/g, "\\'") + '\',\'' + (cat || '').replace(/'/g, "\\'") + '\',\'' + (action || '') + '\',\'' + (url || '') + '\')" style="padding:12px 24px;background:' + (fav ? 'var(--accent)' : 'var(--primary)') + ';color:#fff;border:none;border-radius:24px;font-size:14px;cursor:pointer;width:100%;">' +
+      (fav ? '⭐ 已收藏，点击取消' : '⭐ 收藏到我的收藏夹') +
+      '</button></div>';
+
+    openModal('📌 ' + name + (cat ? ' <span style="font-size:12px;color:var(--text-muted);">[' + cat + ']</span>' : ''), body, { showFav: false });
+  }
+
+  function showFavorites() {
+    var favs = getFavs();
+    var body = '<div style="padding:14px;">';
+    if (favs.length === 0) {
+      body += '<div style="text-align:center;padding:40px 0;color:var(--text-muted);">' +
+        '<div style="font-size:48px;">⭐</div>' +
+        '<p style="margin-top:12px;">还没有收藏任何服务</p>' +
+        '<p style="font-size:12px;margin-top:6px;">浏览服务时点击「⭐ 收藏」即可加入</p>' +
+        '</div>';
+    } else {
+      body += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">' +
+        '<span style="font-size:13px;color:var(--text-secondary);">共 ' + favs.length + ' 条收藏</span>' +
+        '<button onclick="window._clearFavs()" style="padding:6px 12px;background:var(--bg);border:1px solid var(--border);border-radius:14px;font-size:12px;color:var(--text-secondary);cursor:pointer;">清空</button>' +
+        '</div>';
+      favs.forEach(function (f) {
+        body += '<div class="fav-item" onclick="window._openFavItem(\'' + f.name.replace(/'/g, "\\'") + '\')" style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;cursor:pointer;">' +
+          '<div style="flex:1;min-width:0;">' +
+          '<div style="font-size:14px;font-weight:500;">' + f.name + '</div>' +
+          '<div style="font-size:12px;color:var(--text-muted);margin-top:2px;">' + (f.cat ? '[' + f.cat + '] ' : '') + fmtTime(f.ts) + '</div>' +
+          '</div>' +
+          '<span style="color:var(--text-muted);font-size:18px;">›</span>' +
+          '</div>';
+      });
+    }
+    body += '</div>';
+    openModal('⭐ 我的收藏', body);
+  }
+
+  function showHistory() {
+    var hist = getHistory();
+    var body = '<div style="padding:14px;">';
+    if (hist.length === 0) {
+      body += '<div style="text-align:center;padding:40px 0;color:var(--text-muted);">' +
+        '<div style="font-size:48px;">📜</div>' +
+        '<p style="margin-top:12px;">还没有浏览记录</p>' +
+        '</div>';
+    } else {
+      body += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">' +
+        '<span style="font-size:13px;color:var(--text-secondary);">最近浏览 ' + hist.length + ' 条</span>' +
+        '<button onclick="window._clearHist()" style="padding:6px 12px;background:var(--bg);border:1px solid var(--border);border-radius:14px;font-size:12px;color:var(--text-secondary);cursor:pointer;">清空</button>' +
+        '</div>';
+      hist.forEach(function (h) {
+        body += '<div class="hist-item" onclick="window._openHistItem(\'' + h.name.replace(/'/g, "\\'") + '\')" style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;cursor:pointer;">' +
+          '<div style="flex:1;min-width:0;">' +
+          '<div style="font-size:14px;font-weight:500;">' + h.name + '</div>' +
+          '<div style="font-size:12px;color:var(--text-muted);margin-top:2px;">' + (h.cat ? '[' + h.cat + '] ' : '') + fmtTime(h.ts) + '</div>' +
+          '</div>' +
+          '<span style="color:var(--text-muted);font-size:18px;">›</span>' +
+          '</div>';
+      });
+    }
+    body += '</div>';
+    openModal('📜 浏览历史', body);
+  }
+
+  function openItemByName(name) {
+    var found = null;
+    DATA.categories.forEach(function (c) {
+      c.items.forEach(function (it) {
+        if (it.name === name) {
+          found = { item: it, cat: c.name };
+        }
+      });
+    });
+    if (found) {
+      var it = found.item;
+      if (it.url) {
+        openUrl(it.url);
+      } else if (it.action) {
+          handleAction(it.action);
+        } else {
+          renderItemModal({
+            name: it.name, desc: it.desc, cat: found.cat, action: it.action, url: it.url, detail: it.detail
+          });
+        }
+    } else {
+      showToast('未找到该项');
+    }
+  }
+
+  function showFeedback() {
+    var body = '<div style="padding:14px;">' +
+      '<p style="color:var(--text-secondary);font-size:13px;line-height:1.8;margin-bottom:12px;">告诉我们 iHangzhou 哪里做得不好，或者你希望增加什么功能。我们会认真对待每一条反馈。</p>' +
+      '<div style="margin-bottom:12px;">' +
+        '<label style="font-size:13px;color:var(--text-secondary);display:block;margin-bottom:6px;">反馈类型</label>' +
+        '<select id="fbType" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);font-size:14px;">' +
+          '<option value="bug">🐛 报告问题 / Bug</option>' +
+          '<option value="feature">💡 功能建议</option>' +
+          '<option value="content">📝 内容补充 / 修正</option>' +
+          '<option value="other">💬 其他</option>' +
+        '</select>' +
+      '</div>' +
+      '<div style="margin-bottom:12px;">' +
+        '<label style="font-size:13px;color:var(--text-secondary);display:block;margin-bottom:6px;">详细描述</label>' +
+        '<textarea id="fbContent" rows="5" placeholder="请描述你遇到的问题或建议..." style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);font-size:14px;resize:vertical;font-family:inherit;"></textarea>' +
+      '</div>' +
+      '<div style="margin-bottom:12px;">' +
+        '<label style="font-size:13px;color:var(--text-secondary);display:block;margin-bottom:6px;">联系方式（选填，方便我们回复你）</label>' +
+        '<input id="fbContact" type="text" placeholder="微信 / 邮箱 / 手机" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);font-size:14px;">' +
+      '</div>' +
+      '<button onclick="window._submitFeedback()" style="width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:24px;font-size:14px;cursor:pointer;">提交反馈</button>' +
+      '<p style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:10px;">反馈匿名提交，不收集任何个人信息</p>' +
+      '</div>';
+    openModal('📨 意见反馈', body);
+  }
+
+  function submitFeedback() {
+    var typeEl = $('#fbType'); var contentEl = $('#fbContent'); var contactEl = $('#fbContact');
+    if (!typeEl || !contentEl) return;
+    var type = typeEl.value;
+    var content = contentEl.value.trim();
+    var contact = contactEl ? contactEl.value.trim() : '';
+    if (!content) { showToast('请填写反馈内容'); return; }
+    if (content.length < 5) { showToast('反馈内容至少 5 个字'); return; }
+
+    var payload = {
+      type: type,
+      content: content,
+      contact: contact,
+      ua: navigator.userAgent,
+      page: location.pathname,
+      ts: Date.now()
+    };
+
+    // 异步提交，失败也走本地存档
+    try {
+      fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (r) { return r.json(); }).then(function (d) {
+        showToast('✅ 反馈已提交，感谢支持！');
+      }).catch(function () {
+        // fallback 本地存档
+        var local = lsGet('ihz_feedbacks', []);
+        local.unshift(payload);
+        if (local.length > 20) local = local.slice(0, 20);
+        lsSet('ihz_feedbacks', local);
+        showToast('✅ 反馈已保存（离线模式），下次联网会自动提交');
+      });
+    } catch (e) {
+      var local2 = lsGet('ihz_feedbacks', []);
+      local2.unshift(payload);
+      lsSet('ihz_feedbacks', local2);
+      showToast('✅ 反馈已保存');
+    }
+    closeModal();
+  }
+
+  function showFontSize() {
+    var cur = lsGet('ihz_fontsize', 'normal');
+    var body = '<div style="padding:14px;">' +
+      '<p style="color:var(--text-secondary);font-size:13px;line-height:1.8;margin-bottom:12px;">选择适合你的字体大小，设置后立即生效，下次访问也会记住。</p>';
+    var sizes = [
+      { v: 'small', label: '小号', sample: '14px' },
+      { v: 'normal', label: '标准', sample: '16px' },
+      { v: 'large', label: '大号', sample: '18px' },
+      { v: 'xlarge', label: '超大号', sample: '20px' }
+    ];
+    sizes.forEach(function (s) {
+      body += '<div onclick="window._setFontSize(\'' + s.v + '\')" style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--bg);border-radius:10px;margin-bottom:8px;cursor:pointer;' + (cur === s.v ? 'border:2px solid var(--primary);' : '') + '">' +
+        '<div>' +
+          '<div style="font-size:' + s.sample + ';">' + s.label + '</div>' +
+          '<div style="font-size:11px;color:var(--text-muted);margin-top:2px;">' + s.sample + '</div>' +
+        '</div>' +
+        (cur === s.v ? '<span style="color:var(--primary);">✓</span>' : '') +
+        '</div>';
+    });
+    body += '</div>';
+    openModal('📏 字体大小', body);
+  }
+
+  function setFontSize(size) {
+    lsSet('ihz_fontsize', size);
+    var root = document.documentElement;
+    var map = { small: '14px', normal: '16px', large: '18px', xlarge: '20px' };
+    root.style.fontSize = map[size] || '16px';
+    showToast('已设置字号：' + ({ small: '小号', normal: '标准', large: '大号', xlarge: '超大号' })[size]);
+    closeModal();
+  }
+
+  function applyFontSize() {
+    var size = lsGet('ihz_fontsize', 'normal');
+    var map = { small: '14px', normal: '16px', large: '18px', xlarge: '20px' };
+    document.documentElement.style.fontSize = map[size] || '16px';
+  }
+
+  function clearFavs() {
+    if (!confirm('确定清空所有收藏？此操作不可恢复。')) return;
+    lsSet('ihz_favs', []);
+    updateMeCounters();
+    closeModal();
+    showToast('已清空收藏');
+  }
+
+  function clearHist() {
+    if (!confirm('确定清空所有浏览历史？')) return;
+    lsSet('ihz_hist', []);
+    updateMeCounters();
+    closeModal();
+    showToast('已清空浏览历史');
   }
 
   // ============================================
@@ -3188,6 +3473,17 @@ case 'colors': showColors(); break;
   window.closeAIChat = closeAIChat;
   window.clearAIChat = clearAIChat;
   window.sendAIMessage = sendAIMessage;
+  window.showFavorites = showFavorites;
+  window.showHistory = showHistory;
+  window.showFeedback = showFeedback;
+  window.showFontSize = showFontSize;
+  window._toggleFav = toggleFav;
+  window._clearFavs = clearFavs;
+  window._clearHist = clearHist;
+  window._openFavItem = openItemByName;
+  window._openHistItem = openItemByName;
+  window._submitFeedback = submitFeedback;
+  window._setFontSize = setFontSize;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

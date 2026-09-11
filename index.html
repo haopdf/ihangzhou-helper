@@ -349,6 +349,21 @@
       </div>
 
       <div class="me-list">
+        <div class="me-row" onclick="showFavorites()">
+          <span class="micon">⭐</span><span class="mtext">我的收藏 <span id="favCount" style="color:var(--text-muted);font-size:12px;">0</span></span><span class="marrow">›</span>
+        </div>
+        <div class="me-row" onclick="showHistory()">
+          <span class="micon">📜</span><span class="mtext">浏览历史 <span id="histCount" style="color:var(--text-muted);font-size:12px;">0</span></span><span class="marrow">›</span>
+        </div>
+        <div class="me-row" onclick="showFeedback()">
+          <span class="micon">📨</span><span class="mtext">意见反馈</span><span class="marrow">›</span>
+        </div>
+        <div class="me-row" onclick="showFontSize()">
+          <span class="micon">📏</span><span class="mtext">字体大小</span><span class="marrow">›</span>
+        </div>
+      </div>
+
+      <div class="me-list" style="margin-top:12px;">
         <div class="me-row" onclick="openUrl('https://www.hangzhou.gov.cn/')">
           <span class="micon">🏛️</span><span class="mtext">杭州市政府官网</span><span class="marrow">›</span>
         </div>
