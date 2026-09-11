@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>杭州旅游大全 · iHangzhou</title>
+  <meta name="description" content="杭州旅游大全：西湖十景、灵隐寺、西溪湿地、千岛湖、良渚、杭州古镇、赏花四季、寺庙古塔、夜景灯光一站齐，西湖/灵隐寺/西溪湿地/千岛湖/良渚/古镇/赏花/夜景全攻略">
+  <meta name="keywords" content="杭州旅游,西湖十景,断桥残雪,苏堤春晓,三潭印月,灵隐寺,法喜寺,雷峰塔,保俶塔,六和塔,西溪湿地,千岛湖,良渚,塘栖古镇,龙门古镇,深澳,新叶,严州古城,超山梅花,太子湾郁金香,满觉陇桂花,花港银杏,钱江新城灯光秀,西湖音乐喷泉,运河夜景,河坊街,北山街,杭州赏花,杭州夜景,杭州寺庙,ihangzhou">
+  <meta name="theme-color" content="#0ea5e9">
+  <meta property="og:title" content="杭州旅游大全 · iHangzhou">
+  <meta property="og:description" content="西湖 + 古镇 + 赏花 + 四季 + 夜景 一站齐，杭州旅游全攻略">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://www.ihangzhou.net/travel.html">
+  <link rel="stylesheet" href="css/style.css?v=20260926a">
+  <style>
+    /* 旅游专题页专属样式（独立类名，全部以 .travel- / .tc- 前缀作用于本页卡片上下文） */
+    .travel-hero {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 60%, #075985 100%);
+      color: #fff;
+      padding: 26px 16px 20px;
+      text-align: center;
+      padding-top: max(26px, env(safe-area-inset-top));
+    }
+    .travel-hero h1 {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0 0 6px;
+      letter-spacing: 1px;
+    }
+    .travel-hero p {
+      font-size: 13px;
+      opacity: 0.92;
+      line-height: 1.5;
+    }
+    .travel-hero .travel-tags {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-size: 11px;
+      opacity: 0.9;
+      flex-wrap: wrap;
+    }
+    .travel-hero .travel-tags span {
+      background: rgba(255,255,255,0.18);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+
+    /* 分区锚点 tab */
+    .travel-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 10px 14px;
+      overflow-x: auto;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 56px;
+      z-index: 50;
+      -webkit-overflow-scrolling: touch;
+    }
+    .travel-tabs::-webkit-scrollbar { display: none; }
+    .travel-tab {
+      flex-shrink: 0;
+      padding: 7px 14px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .travel-tab.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* 分区容器 */
+    .travel-section {
+      display: none;
+      padding: 12px 14px 4px;
+    }
+    .travel-section.active {
+      display: block;
+      animation: travelFade 0.25s ease-out;
+    }
+    @keyframes travelFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .travel-section-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 6px 0 12px;
+    }
+    .travel-section-head h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .travel-section-head h2::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    .travel-section-head .travel-count {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--bg-alt);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    /* 卡片网格 */
+    .travel-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 768px) {
+      .travel-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    }
+
+    /* 独立旅游卡片：.travel-card + .tc-* 字段 */
+    .travel-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    .travel-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--tc-bar, var(--primary));
+    }
+    .travel-card:active {
+      transform: scale(0.99);
+      box-shadow: var(--shadow-md);
+    }
+    .tc-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .tc-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .tc-badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-weight: 600;
+      background: var(--bg-hover);
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .tc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .tc-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .tc-meta-item strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .tc-guide {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      padding: 8px 10px;
+      background: var(--bg-alt);
+      border-radius: 8px;
+      border-left: 3px solid var(--secondary);
+    }
+    .tc-guide::before {
+      content: "💡 攻略｜";
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    /* 古镇/赏花/夜景等不同分区色调 */
+    .travel-section[data-cat="lake"] .travel-card { --tc-bar: #0ea5e9; }
+    .travel-section[data-cat="town"] .travel-card { --tc-bar: #f59e0b; }
+    .travel-section[data-cat="flower"] .travel-card { --tc-bar: #ec4899; }
+    .travel-section[data-cat="temple"] .travel-card { --tc-bar: #8b5cf6; }
+    .travel-section[data-cat="night"] .travel-card { --tc-bar: #6366f1; }
+
+    /* 月份标签（赏花四季专用） */
+    .tc-month {
+      display: inline-block;
+      background: linear-gradient(135deg, #ec4899, #db2777);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 8px;
+      margin-right: 6px;
+    }
+
+    /* 门票/时间标签 */
+    .tc-ticket {
+      color: var(--danger);
+      font-weight: 600;
+    }
+    .tc-time {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* 旅游贴士底部 */
+    .travel-tips {
+      margin: 18px 14px 14px;
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .travel-tips h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .travel-tips h2::before {
+      content: "";
+      width: 4px;
+      height: 16px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .tips-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 768px) {
+      .tips-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .tip-card {
+      background: var(--bg-alt);
+      border-radius: 10px;
+      padding: 12px;
+      border-left: 3px solid var(--primary);
+    }
+    .tip-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 0 0 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .tip-card p {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* 返回入口 */
+    .travel-back {
+      display: block;
+      margin: 0 14px 20px;
+      padding: 14px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff !important;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: var(--shadow-md);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .travel-back:active { transform: scale(0.99); }
+  </style>
+</head>
+<body>
+  <!-- 顶部栏 -->
+  <div class="topbar">
+    <div class="topbar-city" onclick="location.href='index.html'">
+      <span>←</span>
+    </div>
+    <div class="topbar-search">
+      <input type="text" placeholder="搜索杭州旅游..." id="searchInput">
+    </div>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+  </div>
+
+  <!-- Hero 区 -->
+  <div class="travel-hero">
+    <h1>杭州旅游大全</h1>
+    <p>西湖 + 古镇 + 赏花 + 四季 + 夜景 一站齐</p>
+    <div class="travel-tags">
+      <span>🏞️ 西湖十景</span>
+      <span>🏚️ 古镇</span>
+      <span>🌸 赏花四季</span>
+      <span>🛕 寺庙古塔</span>
+      <span>🌃 夜景灯光</span>
+    </div>
+  </div>
+
+  <!-- 分区锚点 tab -->
+  <div class="travel-tabs" id="travelTabs">
+    <button class="travel-tab active" data-target="lake">🏞️ 西湖十景</button>
+    <button class="travel-tab" data-target="town">🏚️ 古镇</button>
+    <button class="travel-tab" data-target="flower">🌸 赏花四季</button>
+    <button class="travel-tab" data-target="temple">🛕 寺庙古塔</button>
+    <button class="travel-tab" data-target="night">🌃 夜景灯光</button>
+  </div>
+
+  <!-- 西湖十景 -->
+  <section class="travel-section active" id="sec-lake" data-cat="lake">
+    <div class="travel-section-head">
+      <h2>西湖十景</h2>
+      <span class="travel-count">10 景</span>
+    </div>
+    <div class="travel-grid">
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">断桥残雪</div>
+          <span class="tc-badge">冬景</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西湖白堤东端</strong></span></div>
+        <div class="tc-guide">冬日雪后，桥面阳面积雪融化、阴面仍覆盖，远望似断非断。建议清晨 7 点前到达，避开人潮；地铁 1 号线凤起路站步行 10 分钟。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">苏堤春晓</div>
+          <span class="tc-badge">春景</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西湖西侧南北贯穿</strong></span></div>
+        <div class="tc-guide">苏东坡任杭州知州时筑堤，全长 2.8 公里，桃柳夹岸。3—4 月晨雾中赏柳最妙，可步行或租公共自行车全程骑行约 40 分钟。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">三潭印月</div>
+          <span class="tc-badge">月夜</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西湖中部小瀛洲</strong></span></div>
+        <div class="tc-guide">西湖最大岛屿，需乘游船登岛。中秋夜三石塔点灯，塔孔透光如月。湖滨、中山、杭饭三码头均有船票，含上岛费约 55 元。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">曲院风荷</div>
+          <span class="tc-badge">夏景</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西湖西岸杨公堤畔</strong></span></div>
+        <div class="tc-guide">6—8 月荷花盛放，品种多达百余。清晨 6—8 点光线最佳、人最少，公园免费，岳王庙旁入口步行可达。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">雷峰夕照</div>
+          <span class="tc-badge">夕景</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西湖南岸雷峰塔</strong></span></div>
+        <div class="tc-guide">日落前 40 分钟登塔可俯瞰西湖全景。塔票 40 元，建议提前在「雷峰塔景区」公众号预约，避开周末 16—18 点高峰。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">平湖秋月</div>
+          <span class="tc-badge">秋景</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>白堤西端孤山南麓</strong></span></div>
+        <div class="tc-guide">西湖赏月最佳点位，临湖平台三面环水。中秋前后傍晚到达占位，免费开放；旁有浙江省博物馆，可一并游览。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">柳浪闻莺</div>
+          <span class="tc-badge">春景</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西湖东南涌金门至清波门</strong></span></div>
+        <div class="tc-guide">柳树成林、莺啼其间，4—5 月最盛。公园免费，清晨锻炼、午后散步皆宜，近河坊街可顺路游览。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">花港观鱼</div>
+          <span class="tc-badge">春景</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西山西南苏堤入口</strong></span></div>
+        <div class="tc-guide">红鱼池锦鲤成群，带孩子喂鱼首选。免费入园，春秋两季最佳；牡丹亭片区春季有牡丹展，约 4 月中旬最盛。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">双峰插云</div>
+          <span class="tc-badge">远景</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>南高峰 + 北高峰</strong></span></div>
+        <div class="tc-guide">雨后或多云清晨云雾缭绕时最佳观感，可在西湖边远眺双峰。北高峰有索道 30 元，南高峰徒步登顶约 40 分钟。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">南屏晚钟</div>
+          <span class="tc-badge">夕景</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西湖南岸净慈寺</strong></span></div>
+        <div class="tc-guide">净慈寺内铜钟每日傍晚敲响，钟声悠扬。建议 16:30 前入寺，门票 10 元；除夕有「敲钟祈福」活动，需提前抢票。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 古镇 -->
+  <section class="travel-section" id="sec-town" data-cat="town">
+    <div class="travel-section-head">
+      <h2>杭州古镇</h2>
+      <span class="travel-count">5 镇</span>
+    </div>
+    <div class="travel-grid">
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">塘栖古镇</div>
+          <span class="tc-badge">水乡</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">✨ <strong>京杭运河名镇</strong></span>
+          <span class="tc-meta-item">📍 <strong>临平区塘栖镇</strong></span>
+        </div>
+        <div class="tc-guide">广济桥为京杭运河上仅存的七孔石拱桥。免费开放，5 月枇杷节最热闹；法根糕点、粢毛肉圆是伴手礼首选，地铁 9 号线塘栖站。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">龙门古镇</div>
+          <span class="tc-badge">孙权故里</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">✨ <strong>孙权后裔聚居地</strong></span>
+          <span class="tc-meta-item">📍 <strong>富阳区龙门镇</strong></span>
+        </div>
+        <div class="tc-guide">江南最大明清古建筑群之一，街巷如迷宫。门票 70 元；龙门面筋、孙权饺子为特色小吃。建议工作日前往，体验更佳。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">深澳古村</div>
+          <span class="tc-badge">古村落</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">✨ <strong>申屠氏宗族村落</strong></span>
+          <span class="tc-meta-item">📍 <strong>桐庐县江南镇</strong></span>
+        </div>
+        <div class="tc-guide">南宋所建暗渠排水系统保存至今，古井众多。免费开放，安静适合拍照；可联动桐庐荻浦、环溪三村连线游，自驾最便利。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">新叶古村</div>
+          <span class="tc-badge">《爸爸去哪儿》</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">✨ <strong>玉华叶氏宗族</strong></span>
+          <span class="tc-meta-item">📍 <strong>建德市大慈岩镇</strong></span>
+        </div>
+        <div class="tc-guide">村落按阴阳九宫布局，祠堂繁多。门票 65 元；3 月油菜花开时最出片，可联动周边大慈岩悬空寺、新安江一日游。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">严州古城</div>
+          <span class="tc-badge">府治遗韵</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">✨ <strong>古严州府治</strong></span>
+          <span class="tc-meta-item">📍 <strong>建德市梅城镇</strong></span>
+        </div>
+        <div class="tc-guide">三国置县、唐宋为府，城墙牌坊修复完整。免费开放；澄清门、三元坊、玉带河夜景漂亮，严州烤饼、建德豆腐包必尝。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 赏花四季 -->
+  <section class="travel-section" id="sec-flower" data-cat="flower">
+    <div class="travel-section-head">
+      <h2>赏花四季</h2>
+      <span class="travel-count">9 项</span>
+    </div>
+    <div class="travel-grid">
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name"><span class="tc-month">1月</span>超山梅花</div>
+          <span class="tc-badge">腊梅</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>临平区超山风景区</strong></span></div>
+        <div class="tc-guide">中国五大梅区之一，唐梅宋梅为镇山之宝。花期 1 月中旬—2 月底，门票 60 元；周末人多建议清晨或工作日前往。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name"><span class="tc-month">3月</span>太子湾郁金香</div>
+          <span class="tc-badge">春花</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西湖区南山路太子湾</strong></span></div>
+        <div class="tc-guide">3 月郁金香展 + 樱花同放，杭城春日顶流。免费但需预约（「杭州西湖风景名胜区」公众号）；工作日早上 8 点前人最少。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name"><span class="tc-month">4月</span>白塔樱花</div>
+          <span class="tc-badge">樱花</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>上城区白塔公园</strong></span></div>
+        <div class="tc-guide">绿皮火车 + 樱花大道是网红打卡点。免费开放；3 月底—4 月初盛花期，建议日落前一小时前往，光线柔和。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name"><span class="tc-month">6月</span>西湖荷花</div>
+          <span class="tc-badge">夏荷</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西湖曲院风荷、断桥</strong></span></div>
+        <div class="tc-guide">「接天莲叶无穷碧」，6 月中旬—8 月为花期。清晨 6—8 点花开最盛，免费；曲院风荷、北山街沿湖为最佳点位。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name"><span class="tc-month">7月</span>径山花海</div>
+          <span class="tc-badge">百日菊</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>余杭区径山镇</strong></span></div>
+        <div class="tc-guide">千亩花田，马鞭草、向日葵、百日菊接力绽放。门票 60 元；可联动径山寺品抹茶、双溪漂流玩水一日游。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name"><span class="tc-month">9月</span>满觉陇桂花</div>
+          <span class="tc-badge">秋桂</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西湖区满觉陇村</strong></span></div>
+        <div class="tc-guide">「满陇桂雨」为杭州新十景之一，7000 余株桂树。9 月底—10 月中旬最香，免费；桂花糖、桂花酒为伴手礼。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name"><span class="tc-month">10月</span>西溪芦花</div>
+          <span class="tc-badge">秋芦</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西湖区西溪湿地秋雪庵</strong></span></div>
+        <div class="tc-guide">「秋芦飞雪」，360 亩芦苇荡。10 月底—11 月最佳，湿地门票 80 元；摇橹船游芦荡是经典玩法，需另购票。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name"><span class="tc-month">11月</span>花港银杏</div>
+          <span class="tc-badge">秋杏</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西湖区花港观鱼</strong></span></div>
+        <div class="tc-guide">11 月底—12 月初银杏金黄，搭配红枫最出片。免费开放；建议与太子湾、杨公堤连成秋色路线步行游览。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name"><span class="tc-month">12月</span>断桥残雪</div>
+          <span class="tc-badge">冬雪</span>
+        </div>
+        <div class="tc-meta"><span class="tc-meta-item">📍 <strong>西湖白堤断桥</strong></span></div>
+        <div class="tc-guide">雪后初晴的断桥是江南冬日顶景。需等天降瑞雪，可关注杭州天气预报；赏雪注意保暖防滑，桥边不宜久留。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 寺庙古塔 -->
+  <section class="travel-section" id="sec-temple" data-cat="temple">
+    <div class="travel-section-head">
+      <h2>寺庙古塔</h2>
+      <span class="travel-count">9 项</span>
+    </div>
+    <div class="travel-grid">
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">灵隐寺</div>
+          <span class="tc-badge">禅宗十刹</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>西湖区灵隐路法云弄</strong></span>
+          <span class="tc-meta-item">🎫 <span class="tc-ticket">飞来峰 45+30 元</span></span>
+        </div>
+        <div class="tc-guide">东晋咸和元年始建，杭州最古佛寺。需先购飞来峰公园票（45 元）再购灵隐票（30 元）；7 点开门，清晨人少；地铁 7 号线灵隐直达。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">法喜寺</div>
+          <span class="tc-badge">网红求姻缘</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>西湖区天竺路 338 号</strong></span>
+          <span class="tc-meta-item">🎫 <span class="tc-ticket">10 元</span></span>
+        </div>
+        <div class="tc-guide">三天竺中最为年轻群体追捧，求姻缘、御守出片。建议清晨入寺抄经免费；可联动法净、法镜三天竺徒步游览。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">净慈寺</div>
+          <span class="tc-badge">南屏晚钟</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>西湖区南山路 56 号</strong></span>
+          <span class="tc-meta-item">🎫 <span class="tc-ticket">10 元</span></span>
+        </div>
+        <div class="tc-guide">西湖南屏晚钟所在地，对望雷峰塔。8:00—16:30 开放，傍晚钟声可闻；寺内运木古井为济公传说遗迹，免费素斋时段有惊喜。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">雷峰塔</div>
+          <span class="tc-badge">八景</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>西湖区南山路夕照山</strong></span>
+          <span class="tc-meta-item">🎫 <span class="tc-ticket">40 元</span></span>
+        </div>
+        <div class="tc-guide">白蛇传传说所在地，2002 年重建。电梯直达，登顶可俯瞰西湖；日落前 1 小时登塔最佳，公众号预约购票更便捷。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">保俶塔</div>
+          <span class="tc-badge">宝石山</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>西湖区宝石山</strong></span>
+          <span class="tc-meta-item">🎫 <span class="tc-ticket">免费</span></span>
+        </div>
+        <div class="tc-guide">西湖标志性古塔，五代吴越时期始建。登宝石山免费，清晨看日出、夜间看灯光西湖为最佳点位；爬山石阶较陡需小心。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">六和塔</div>
+          <span class="tc-badge">钱塘江畔</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>西湖区之江路 16 号</strong></span>
+          <span class="tc-meta-item">🎫 <span class="tc-ticket">30 元</span></span>
+        </div>
+        <div class="tc-guide">北宋开宝三年始建，登塔可俯瞰钱塘江大桥。塔内砖雕珍贵，登顶另购 10 元；近中国丝绸博物馆、九溪，可串联游览。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">钱王祠</div>
+          <span class="tc-badge">吴越国王</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>西湖区钱王祠路 11 号</strong></span>
+          <span class="tc-meta-item">🎫 <span class="tc-ticket">15 元</span></span>
+        </div>
+        <div class="tc-guide">纪念吴越国王钱镠的祠堂，西湖东岸。春节期间有西湖迎春花展，红梅与古建相映成趣；近涌金门，可步行串联湖滨。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">岳王庙</div>
+          <span class="tc-badge">岳飞纪念</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>西湖区北山街 80 号</strong></span>
+          <span class="tc-meta-item">🎫 <span class="tc-ticket">25 元</span></span>
+        </div>
+        <div class="tc-guide">岳飞墓及纪念馆，秦桧等四人跪像为看点。7:30—17:30 开放；近曲院风荷、苏堤北入口，可串联西湖西线游览。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">香积寺</div>
+          <span class="tc-badge">运河古刹</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>拱墅区香积寺巷 65 号</strong></span>
+          <span class="tc-meta-item">🎫 <span class="tc-ticket">20 元</span></span>
+        </div>
+        <div class="tc-guide">京杭运河旁唯一古刹，主供大圣紧那王。宋代铜塔为国宝级文物；可联动大兜路历史街区、拱宸桥西栅一日游。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 夜景灯光 -->
+  <section class="travel-section" id="sec-night" data-cat="night">
+    <div class="travel-section-head">
+      <h2>夜景灯光</h2>
+      <span class="travel-count">5 项</span>
+    </div>
+    <div class="travel-grid">
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">钱江新城灯光秀</div>
+          <span class="tc-badge">城市阳台</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>江干区钱江新城</strong></span>
+          <span class="tc-meta-item">⏰ <span class="tc-time">19:00 / 20:30</span></span>
+        </div>
+        <div class="tc-guide">数十栋楼宇立面联动表演，G20 后成为城市名片。每周二、五、六晚两场，每场约 15 分钟；最佳观赏点在城市阳台主平台，免费。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">西湖音乐喷泉</div>
+          <span class="tc-badge">湖滨</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>上城区湖滨三公园</strong></span>
+          <span class="tc-meta-item">⏰ <span class="tc-time">19:00 / 20:00</span></span>
+        </div>
+        <div class="tc-guide">西湖夜经典节目，水柱随乐起舞。每晚两场，每场 15 分钟；免费但需提前 1 小时到湖滨占位，周末人多注意安全。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">运河夜景拱宸桥</div>
+          <span class="tc-badge">运河</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>拱墅区桥西历史文化街区</strong></span>
+          <span class="tc-meta-item">⏰ <span class="tc-time">全天最佳 19—21 点</span></span>
+        </div>
+        <div class="tc-guide">拱宸桥横跨运河，两岸灯光古韵十足。可乘漕舫夜游运河（约 100 元/人），桥西直街、刀剪剑博物馆可一并夜游。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">河坊街夜景</div>
+          <span class="tc-badge">老街</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>上城区河坊街</strong></span>
+          <span class="tc-meta-item">⏰ <span class="tc-time">全天最佳 19—22 点</span></span>
+        </div>
+        <div class="tc-guide">清末民初风格步行街，红灯笼、老字号林立。免费开放，胡庆余堂中药博物馆、朱炳仁铜雕馆值得入内一观；定胜糕、葱包桧是小吃代表。</div>
+      </div>
+      <div class="travel-card">
+        <div class="tc-head">
+          <div class="tc-name">北山街民国风情</div>
+          <span class="tc-badge">民国</span>
+        </div>
+        <div class="tc-meta">
+          <span class="tc-meta-item">📍 <strong>西湖区北山街</strong></span>
+          <span class="tc-meta-item">⏰ <span class="tc-time">全天最佳 19—21 点</span></span>
+        </div>
+        <div class="tc-guide">民国别墅群沿湖一字排开，夜灯下风情独特。新新饭店、抱青别墅为地标；免费漫步，连保俶塔、岳王庙串成夜游线。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 旅游贴士 -->
+  <div class="travel-tips">
+    <h2>🎒 杭州旅游贴士</h2>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <h3>🚇 交通</h3>
+        <p>地铁 1—10 号线覆盖主要景点；西湖、灵隐建议地铁 + 公共自行车；萧山机场可乘 19 号线直达；周末景区限行，建议优先公共交通。</p>
+      </div>
+      <div class="tip-card">
+        <h3>🏨 住宿</h3>
+        <p>湖滨/武林广场近商圈出行便利；满觉陇、龙井茶村民宿适合度假；西溪、千岛湖适合亲子两天一夜。旺季需提前 2 周预订。</p>
+      </div>
+      <div class="tip-card">
+        <h3>🍜 美食</h3>
+        <p>杭帮菜必试西湖醋鱼、东坡肉、龙井虾仁、叫化鸡；知味观、楼外楼为老字号；河坊街、胜利河美食街是夜宵好去处。</p>
+      </div>
+      <div class="tip-card">
+        <h3>🛍️ 购物</h3>
+        <p>伴手礼推荐龙井茶、丝绸、张小泉剪刀、王星记扇子；河坊街、南宋御街、湖滨银泰 in77 是热门购物地，注意比价。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 返回 iHangzhou -->
+  <a class="travel-back" href="index.html">← 返回 iHangzhou 首页</a>
+
+  <!-- SEO JSON-LD: ItemList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "杭州旅游大全",
+    "description": "杭州旅游全攻略：西湖十景、古镇、赏花四季、寺庙古塔、夜景灯光一站齐",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "断桥残雪", "description": "西湖十景之一，冬日雪后桥面似断非断"},
+      {"@type": "ListItem", "position": 2, "name": "苏堤春晓", "description": "苏东坡所筑长堤，桃柳夹岸"},
+      {"@type": "ListItem", "position": 3, "name": "三潭印月", "description": "西湖中部小瀛洲，中秋月夜经典"},
+      {"@type": "ListItem", "position": 4, "name": "曲院风荷", "description": "西湖夏荷观赏最佳地"},
+      {"@type": "ListItem", "position": 5, "name": "雷峰夕照", "description": "雷峰塔日落西湖南岸"},
+      {"@type": "ListItem", "position": 6, "name": "平湖秋月", "description": "西湖赏月最佳点位"},
+      {"@type": "ListItem", "position": 7, "name": "柳浪闻莺", "description": "柳林莺啼涌金门畔"},
+      {"@type": "ListItem", "position": 8, "name": "花港观鱼", "description": "红鱼池锦鲤成群"},
+      {"@type": "ListItem", "position": 9, "name": "双峰插云", "description": "南北高峰云雾缭绕"},
+      {"@type": "ListItem", "position": 10, "name": "南屏晚钟", "description": "净慈寺傍晚铜钟悠扬"},
+      {"@type": "ListItem", "position": 11, "name": "塘栖古镇", "description": "京杭运河名镇，广济桥七孔石拱"},
+      {"@type": "ListItem", "position": 12, "name": "龙门古镇", "description": "孙权后裔聚居地，江南明清建筑群"},
+      {"@type": "ListItem", "position": 13, "name": "深澳古村", "description": "桐庐南宋暗渠排水古村"},
+      {"@type": "ListItem", "position": 14, "name": "新叶古村", "description": "建德玉华叶氏九宫布局村落"},
+      {"@type": "ListItem", "position": 15, "name": "严州古城", "description": "建德梅城古严州府治"},
+      {"@type": "ListItem", "position": 16, "name": "超山梅花", "description": "1 月临平超山五大梅区之一"},
+      {"@type": "ListItem", "position": 17, "name": "太子湾郁金香", "description": "3 月太子湾郁金香樱花展"},
+      {"@type": "ListItem", "position": 18, "name": "白塔樱花", "description": "4 月白塔公园樱花大道"},
+      {"@type": "ListItem", "position": 19, "name": "西湖荷花", "description": "6 月曲院风荷、断桥赏荷"},
+      {"@type": "ListItem", "position": 20, "name": "径山花海", "description": "7 月余杭径山千亩花田"},
+      {"@type": "ListItem", "position": 21, "name": "满觉陇桂花", "description": "9 月满陇桂雨杭州新十景"},
+      {"@type": "ListItem", "position": 22, "name": "西溪芦花", "description": "10 月西溪湿地秋芦飞雪"},
+      {"@type": "ListItem", "position": 23, "name": "花港银杏", "description": "11 月花港观鱼银杏红枫"},
+      {"@type": "ListItem", "position": 24, "name": "断桥残雪", "description": "12 月雪后西湖白堤残雪"},
+      {"@type": "ListItem", "position": 25, "name": "灵隐寺", "description": "东晋古刹，杭州最古佛寺"},
+      {"@type": "ListItem", "position": 26, "name": "法喜寺", "description": "三天竺网红求姻缘寺庙"},
+      {"@type": "ListItem", "position": 27, "name": "净慈寺", "description": "南屏晚钟所在地"},
+      {"@type": "ListItem", "position": 28, "name": "雷峰塔", "description": "白蛇传传说地，俯瞰西湖"},
+      {"@type": "ListItem", "position": 29, "name": "保俶塔", "description": "宝石山巅西湖标志古塔"},
+      {"@type": "ListItem", "position": 30, "name": "六和塔", "description": "钱塘江畔北宋古塔"},
+      {"@type": "ListItem", "position": 31, "name": "钱王祠", "description": "纪念吴越国王钱镠"},
+      {"@type": "ListItem", "position": 32, "name": "岳王庙", "description": "岳飞墓与纪念馆"},
+      {"@type": "ListItem", "position": 33, "name": "香积寺", "description": "京杭运河旁唯一古刹"},
+      {"@type": "ListItem", "position": 34, "name": "钱江新城灯光秀", "description": "数十栋楼宇立面联动表演"},
+      {"@type": "ListItem", "position": 35, "name": "西湖音乐喷泉", "description": "湖滨三公园水柱随乐起舞"},
+      {"@type": "ListItem", "position": 36, "name": "运河夜景拱宸桥", "description": "拱宸桥横跨运河两岸灯光古韵"},
+      {"@type": "ListItem", "position": 37, "name": "河坊街夜景", "description": "清末民初步行街红灯笼老字号"},
+      {"@type": "ListItem", "position": 38, "name": "北山街民国风情", "description": "民国别墅群沿湖夜灯风情"}
+    ]
+  }
+  </script>
+
+  <script src="js/app.js?v=20260928a"></script>
+  <script>
+    // 主题持久化
+    (function () {
+      try {
+        var t = localStorage.getItem('ihz-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        var b = document.getElementById('themeBtn');
+        if (b) b.textContent = t === 'dark' ? '☀️' : '🌙';
+      } catch (e) {}
+    })();
+    function toggleTheme() {
+      var cur = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('ihz-theme', next);
+      var b = document.getElementById('themeBtn');
+      if (b) b.textContent = next === 'dark' ? '☀️' : '🌙';
+    }
+
+    // 分区 tab 切换
+    (function () {
+      var tabs = document.querySelectorAll('.travel-tab');
+      var sections = document.querySelectorAll('.travel-section');
+
+      function activate(target) {
+        tabs.forEach(function (t) {
+          t.classList.toggle('active', t.dataset.target === target);
+        });
+        sections.forEach(function (s) {
+          s.classList.toggle('active', s.id === 'sec-' + target);
+        });
+        // 滚动到 tab 下方，避免内容被遮挡
+        try {
+          var tabsBar = document.getElementById('travelTabs');
+          var rect = tabsBar.getBoundingClientRect();
+          if (rect.top < 0) {
+            tabsBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } catch (e) {}
+        // 同步 hash
+        try {
+          history.replaceState(null, '', '#tab=' + target);
+        } catch (e) {}
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          activate(tab.dataset.target);
+        });
+      });
+
+      // 初始化：根据 hash 恢复
+      try {
+        var m = location.hash.match(/tab=([a-z]+)/);
+        if (m && m[1]) {
+          var found = Array.prototype.some.call(tabs, function (t) {
+            return t.dataset.target === m[1];
+          });
+          if (found) activate(m[1]);
+        }
+      } catch (e) {}
+    })();
+  </script>
+</body>
+</html>

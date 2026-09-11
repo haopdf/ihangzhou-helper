@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>杭州美食大全 · iHangzhou</title>
+  <meta name="description" content="杭州美食大全：杭帮菜、老字号、早茶、夜市、节气美食一站式导航。西湖醋鱼、东坡肉、龙井虾仁、片儿川、知味观、楼外楼、胡庆余堂、武林夜市、吴山夜市、立春春卷、清明艾饺、冬至年糕等尽收其中。">
+  <meta name="keywords" content="杭州美食,杭帮菜,老字号,早茶,夜市,节气美食,西湖醋鱼,东坡肉,龙井虾仁,片儿川,知味观,楼外楼,胡庆余堂,武林夜市,吴山夜市,ihangzhou">
+  <meta name="theme-color" content="#f59e0b">
+  <meta property="og:title" content="杭州美食大全 · iHangzhou">
+  <meta property="og:description" content="杭帮菜 + 老字号 + 早茶 + 夜市 + 节气美食 一站齐">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://www.ihangzhou.net/food.html">
+  <link rel="stylesheet" href="css/style.css?v=20260926a">
+  <style>
+    /* 美食页专属样式 */
+    .food-hero {
+      background: linear-gradient(135deg, #f59e0b 0%, #dc2626 100%);
+      color: #fff;
+      padding: 22px 16px 18px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .food-hero::after {
+      content: "🍜";
+      position: absolute;
+      bottom: -16px;
+      right: 10px;
+      font-size: 80px;
+      opacity: 0.18;
+      line-height: 1;
+    }
+    .food-hero h1 {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0 0 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .food-hero p {
+      font-size: 13px;
+      opacity: 0.94;
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+    .food-stats {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+      font-size: 11px;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+    }
+    .food-stats span {
+      background: rgba(255,255,255,0.2);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+
+    .food-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 10px 14px;
+      overflow-x: auto;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 56px;
+      z-index: 90;
+      -webkit-overflow-scrolling: touch;
+    }
+    .food-tabs::-webkit-scrollbar { display: none; }
+    .food-tab {
+      flex-shrink: 0;
+      padding: 7px 16px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      font-weight: 500;
+      -webkit-tap-highlight-color: transparent;
+      transition: all 0.2s;
+    }
+    .food-tab.active {
+      background: linear-gradient(135deg, #f59e0b, #dc2626);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 2px 6px rgba(220, 38, 38, 0.25);
+    }
+
+    .food-section {
+      padding: 14px 14px 6px;
+      scroll-margin-top: 110px;
+    }
+    .food-section h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .food-section h2::before {
+      content: "";
+      width: 3px;
+      height: 16px;
+      background: linear-gradient(180deg, #f59e0b, #dc2626);
+      border-radius: 2px;
+    }
+    .food-section h2 .count {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-left: 2px;
+    }
+
+    .food-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .food-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .food-card:active {
+      transform: scale(0.99);
+      box-shadow: var(--shadow-md);
+    }
+    .fc-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .fc-name-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1;
+    }
+    .fc-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .fc-badge {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 8px;
+      font-weight: 600;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .fc-badge.名菜 { background: #fef3c7; color: #92400e; }
+    .fc-badge.老字号 { background: #fee2e2; color: #991b1b; }
+    .fc-badge.早茶 { background: #dbeafe; color: #1e40af; }
+    .fc-badge.夜市 { background: #ede9fe; color: #5b21b6; }
+    .fc-badge.节气 { background: #dcfce7; color: #166534; }
+    [data-theme="dark"] .fc-badge.名菜 { background: #78350f; color: #fef3c7; }
+    [data-theme="dark"] .fc-badge.老字号 { background: #7f1d1d; color: #fee2e2; }
+    [data-theme="dark"] .fc-badge.早茶 { background: #1e3a8a; color: #dbeafe; }
+    [data-theme="dark"] .fc-badge.夜市 { background: #4c1d95; color: #ede9fe; }
+    [data-theme="dark"] .fc-badge.节气 { background: #14532d; color: #dcfce7; }
+
+    .fc-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .fc-meta {
+      display: flex;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+      padding-top: 8px;
+      border-top: 1px dashed var(--border);
+      flex-wrap: wrap;
+    }
+    .fc-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      line-height: 1.5;
+    }
+    .fc-meta-item strong {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    .fc-tag {
+      display: inline-block;
+      background: var(--bg-hover);
+      color: var(--primary);
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 500;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+
+    .food-back {
+      text-align: center;
+      padding: 22px 14px 32px;
+    }
+    .food-back a {
+      display: inline-block;
+      padding: 10px 22px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff !important;
+      border-radius: 22px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+    }
+    .food-back a:active { transform: scale(0.98); }
+  </style>
+</head>
+<body>
+  <!-- 顶部栏 -->
+  <div class="topbar">
+    <div class="topbar-city" onclick="location.href='index.html'">
+      <span>←</span>
+    </div>
+    <div class="topbar-search">
+      <input type="text" placeholder="搜索杭州美食..." id="searchInput">
+    </div>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+  </div>
+
+  <!-- Hero -->
+  <div class="food-hero">
+    <h1>杭州美食大全</h1>
+    <p>杭帮菜 + 老字号 + 早茶 + 夜市 + 节气美食 一站齐</p>
+    <div class="food-stats">
+      <span>10 道名菜</span>
+      <span>5 家老字号</span>
+      <span>5 家早茶</span>
+      <span>6 处夜市</span>
+      <span>12 节气美食</span>
+    </div>
+  </div>
+
+  <!-- Tab 锚点导航 -->
+  <nav class="food-tabs" id="foodTabs">
+    <a class="food-tab active" href="#sec-mingcai" data-target="sec-mingcai">杭帮名菜</a>
+    <a class="food-tab" href="#sec-laozihao" data-target="sec-laozihao">老字号</a>
+    <a class="food-tab" href="#sec-zaocha" data-target="sec-zaocha">早茶</a>
+    <a class="food-tab" href="#sec-yeshi" data-target="sec-yeshi">夜市</a>
+    <a class="food-tab" href="#sec-jieqi" data-target="sec-jieqi">节气美食</a>
+  </nav>
+
+  <!-- 杭帮名菜 -->
+  <section id="sec-mingcai" class="food-section">
+    <h2>🍽️ 杭帮名菜 <span class="count">10 道</span></h2>
+    <div class="food-grid">
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">西湖醋鱼</span><span class="fc-badge 名菜">必点</span></div>
+        </div>
+        <div class="fc-desc">草鱼用西湖水养净去腥，糖醋勾芡，色亮如琥珀，肉嫩带蟹味，是杭帮菜头牌。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>必吃店：</strong>楼外楼（孤山总店）</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">东坡肉</span><span class="fc-badge 名菜">经典</span></div>
+        </div>
+        <div class="fc-desc">苏东坡传下来的方肉，慢火煨足三小时，肥而不腻、瘦而不柴，浓油赤酱的代表。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>必吃店：</strong>楼外楼 / 知味观</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">叫花鸡</span><span class="fc-badge 名菜">非遗</span></div>
+        </div>
+        <div class="fc-desc">童子鸡用酒泥裹煨烤，鸡香、酒香、荷香交融，剥泥即食，传说源自丐仙。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>必吃店：</strong>杭州酒家</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">龙井虾仁</span><span class="fc-badge 名菜">时令</span></div>
+        </div>
+        <div class="fc-desc">明前龙井茶与河虾仁同炒，色泽白绿相间，茶香入虾，鲜嫩清雅。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>必吃店：</strong>楼外楼</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">片儿川</span><span class="fc-badge 名菜">面食</span></div>
+        </div>
+        <div class="fc-desc">雪菜、笋片、肉片浇头面，汤清味鲜，是杭州人早午最常见的一碗面。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>必吃店：</strong>奎元馆</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">宋嫂鱼羹</span><span class="fc-badge 名菜">千年</span></div>
+        </div>
+        <div class="fc-desc">鳜鱼切丝烩成黄羹，加姜丝陈醋，鲜醇滑口，南宋传承至今。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>必吃店：</strong>楼外楼</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">蜜汁火方</span><span class="fc-badge 名菜">功夫</span></div>
+        </div>
+        <div class="fc-desc">金华火腿中峰蜜渍慢蒸数小时，咸甜交融，酥烂到筷子夹不起，最考厨师功力。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>必吃店：</strong>知味观</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">干炸响铃</span><span class="fc-badge 名菜">酥脆</span></div>
+        </div>
+        <div class="fc-desc">豆腐皮卷肉末油炸，色泽金黄，入口嘎吱作响，蘸甜面酱更佳。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>必吃店：</strong>杭州酒家</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">油焖春笋</span><span class="fc-badge 名菜">时令</span></div>
+        </div>
+        <div class="fc-desc">临安春笋重油重糖焖煮，色泽红亮，笋肉鲜嫩回甘，是清明前后必尝的时令菜。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>必吃店：</strong>楼外楼</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">虾爆鳝面</span><span class="fc-badge 名菜">面食</span></div>
+        </div>
+        <div class="fc-desc">河虾仁爆炒、鳝片炸透浇在面上，三鲜合一，汤浓料足，奎元馆百年招牌。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>必吃店：</strong>奎元馆</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 老字号 -->
+  <section id="sec-laozihao" class="food-section">
+    <h2>🏮 老字号 <span class="count">5 家</span></h2>
+    <div class="food-grid">
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">胡庆余堂</span><span class="fc-badge 老字号">国药</span></div>
+        </div>
+        <div class="fc-desc">"江南药王"，胡雪岩创办，红顶商人留下的国药老字号。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">🏷️ <strong>招牌：</strong>人参 / 燕窝 / 阿胶 / 八宝养生丹</span>
+          <span class="fc-meta-item">📍 <strong>地址：</strong>上城区河坊街大井巷</span>
+          <span class="fc-meta-item">💡 <strong>提示：</strong>可参观胡庆余堂中药博物馆</span>
+        </div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">方回春堂</span><span class="fc-badge 老字号">国药</span></div>
+        </div>
+        <div class="fc-desc">百年国药馆，"方"字辈金字招牌，秋季膏方节最负盛名。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">🏷️ <strong>招牌：</strong>膏方 / 参茸 / 阿胶 / 戒烟丸</span>
+          <span class="fc-meta-item">📍 <strong>地址：</strong>上城区河坊街117号</span>
+          <span class="fc-meta-item">💡 <strong>提示：</strong>立冬前后开膏方节，可现场把脉</span>
+        </div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">知味观</span><span class="fc-badge 老字号">百年</span></div>
+        </div>
+        <div class="fc-desc">"知味停车，闻香下马"，1913 年开业，杭帮点心头牌。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">🏷️ <strong>招牌：</strong>猫耳朵 / 小笼包 / 幸福双 / 糯米藕</span>
+          <span class="fc-meta-item">📍 <strong>地址：</strong>上城区仁和路83号总店</span>
+          <span class="fc-meta-item">💡 <strong>提示：</strong>外卖窗口与堂食分开排队</span>
+        </div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">楼外楼</span><span class="fc-badge 老字号">百年</span></div>
+        </div>
+        <div class="fc-desc">1848 年孤山脚下开张，西湖醋鱼发源地，外地游客必打卡。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">🏷️ <strong>招牌：</strong>西湖醋鱼 / 龙井虾仁 / 叫花鸡</span>
+          <span class="fc-meta-item">📍 <strong>地址：</strong>西湖区孤山路30号</span>
+          <span class="fc-meta-item">💡 <strong>提示：</strong>建议提前一天预约包间</span>
+        </div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">王星记</span><span class="fc-badge 老字号">非遗</span></div>
+        </div>
+        <div class="fc-desc">百年扇庄，黑纸扇、檀香扇为镇店之宝，非遗手作。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">🏷️ <strong>招牌：</strong>黑纸扇 / 檀香扇 / 女绢扇</span>
+          <span class="fc-meta-item">📍 <strong>地址：</strong>上城区河坊街翁隆盛巷</span>
+          <span class="fc-meta-item">💡 <strong>提示：</strong>夏天可现场定制书法扇面</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 早茶 -->
+  <section id="sec-zaocha" class="food-section">
+    <h2>🥟 早茶 <span class="count">5 家</span></h2>
+    <div class="food-grid">
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">知味观</span><span class="fc-badge 早茶">百年</span></div>
+        </div>
+        <div class="fc-desc">杭式早茶天花板，本地老人 + 游客都爱。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">🏷️ <strong>招牌：</strong>猫耳朵 / 小笼包 / 春卷 / 幸福双</span>
+          <span class="fc-meta-item">📍 <strong>地址：</strong>上城区仁和路83号总店</span>
+          <span class="fc-meta-item">⏰ <strong>营业：</strong>06:30 - 21:00</span>
+        </div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">新丰小吃</span><span class="fc-badge 早茶">性价比</span></div>
+        </div>
+        <div class="fc-desc">杭州人最熟悉的早点铺，价格亲民、出餐快。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">🏷️ <strong>招牌：</strong>虾肉小笼 / 牛肉粉丝汤 / 馄饨</span>
+          <span class="fc-meta-item">📍 <strong>地址：</strong>上城区庆春路209号</span>
+          <span class="fc-meta-item">⏰ <strong>营业：</strong>06:00 - 21:00</span>
+        </div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">奎元馆</span><span class="fc-badge 早茶">百年</span></div>
+        </div>
+        <div class="fc-desc">面馆活化石，1867 年开门，片儿川、虾爆鳝面发源地。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">🏷️ <strong>招牌：</strong>片儿川 / 虾爆鳝面 / 拌面</span>
+          <span class="fc-meta-item">📍 <strong>地址：</strong>上城区解放路164号</span>
+          <span class="fc-meta-item">⏰ <strong>营业：</strong>06:30 - 20:30</span>
+        </div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">慧娟面馆</span><span class="fc-badge 早茶">深夜</span></div>
+        </div>
+        <div class="fc-desc">深夜食堂代表，凌晨仍有人排队，爆鳝面是必点。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">🏷️ <strong>招牌：</strong>猪肝面 / 爆鳝面 / 大排面</span>
+          <span class="fc-meta-item">📍 <strong>地址：</strong>拱墅区德胜路与草营巷交叉口</span>
+          <span class="fc-meta-item">⏰ <strong>营业：</strong>06:00 - 次日02:00</span>
+        </div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">永和大王</span><span class="fc-badge 早茶">24h</span></div>
+        </div>
+        <div class="fc-desc">全天候豆浆油条，半夜饿肚子最稳的靠山。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">🏷️ <strong>招牌：</strong>咸豆浆 / 油条 / 饭团 / 蛋饼</span>
+          <span class="fc-meta-item">📍 <strong>地址：</strong>上城区平海路123号</span>
+          <span class="fc-meta-item">⏰ <strong>营业：</strong>24 小时营业</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 夜市 -->
+  <section id="sec-yeshi" class="food-section">
+    <h2>🌃 夜市美食 <span class="count">6 处</span></h2>
+    <div class="food-grid">
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">武林夜市</span><span class="fc-badge 夜市">人气</span></div>
+        </div>
+        <div class="fc-desc">以服装小百货和网红小吃为主，年轻情侣扎堆。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">📍 <strong>位置：</strong>拱墅区武林路</span>
+          <span class="fc-meta-item">🎯 <strong>攻略：</strong>周五、六最热闹，19-21 点高峰，地铁武林门站</span>
+        </div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">吴山夜市</span><span class="fc-badge 夜市">老底子</span></div>
+        </div>
+        <div class="fc-desc">老底子夜市，外贸、文创与小吃混搭，藏版宝藏摊多。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">📍 <strong>位置：</strong>上城区仁和路、惠兴路一带</span>
+          <span class="fc-meta-item">🎯 <strong>攻略：</strong>外地游客必打卡，可顺路逛湖滨</span>
+        </div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">河坊街</span><span class="fc-badge 夜市">仿古</span></div>
+        </div>
+        <div class="fc-desc">仿古步行街，老字号扎堆，夜灯下的宋韵打卡地。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">📍 <strong>位置：</strong>上城区河坊街</span>
+          <span class="fc-meta-item">🎯 <strong>攻略：</strong>白天也开，夜游最佳，胡庆余堂同街</span>
+        </div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">胜利河美食街</span><span class="fc-badge 夜市">夜宵</span></div>
+        </div>
+        <div class="fc-desc">烧烤、海鲜大排档为主，烟火气最重，深夜食堂一条街。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">📍 <strong>位置：</strong>拱墅区胜利河畔</span>
+          <span class="fc-meta-item">🎯 <strong>攻略：</strong>凌晨不打烊，可步行到运河边消食</span>
+        </div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">大兜路</span><span class="fc-badge 夜市">文艺</span></div>
+        </div>
+        <div class="fc-desc">运河古街文艺餐厅聚集，禅意 + 餐酒馆 + 咖啡馆。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">📍 <strong>位置：</strong>拱墅区大兜路历史街区</span>
+          <span class="fc-meta-item">🎯 <strong>攻略：</strong>适合约会聚餐，环境优美，香积寺旁</span>
+        </div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">钱江新城灯光秀</span><span class="fc-badge 夜市">夜景</span></div>
+        </div>
+        <div class="fc-desc">沿江灯光秀配美食，新城商圈晚餐后看秀经典动线。</div>
+        <div class="fc-meta">
+          <span class="fc-meta-item">📍 <strong>位置：</strong>江干区市民广场、城市阳台</span>
+          <span class="fc-meta-item">🎯 <strong>攻略：</strong>19:30、20:30 两场，提前 1 小时用餐占位</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 节气美食 -->
+  <section id="sec-jieqi" class="food-section">
+    <h2>🎋 节气美食 <span class="count">12 项</span></h2>
+    <div class="food-grid">
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">立春春卷</span><span class="fc-badge 节气">立春</span></div>
+        </div>
+        <div class="fc-desc">立春吃春卷"咬春"，寓意迎新春、纳百福，薄皮包荠菜肉丝。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>吃哪：</strong>知味观 / 新丰小吃</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">清明艾饺</span><span class="fc-badge 节气">清明</span></div>
+        </div>
+        <div class="fc-desc">清明前后艾草最嫩，做青团、艾饺，清香软糯，江南祭祀点心。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>吃哪：</strong>知味观 / 采芝斋</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">立夏乌米饭</span><span class="fc-badge 节气">立夏</span></div>
+        </div>
+        <div class="fc-desc">立夏吃乌米饭，南烛叶染黑糯米，民间谓解毒消暑、夏天不疰夏。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>吃哪：</strong>老字号 / 菜市场早点摊</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">芒种五黄宴</span><span class="fc-badge 节气">芒种</span></div>
+        </div>
+        <div class="fc-desc">"五黄"：黄鱼、黄瓜、黄鳝、咸鸭蛋黄、雄黄酒，江南端午前后食俗。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>吃哪：</strong>楼外楼 / 外婆家</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">夏至冷淘</span><span class="fc-badge 节气">夏至</span></div>
+        </div>
+        <div class="fc-desc">夏至吃"冷淘"过水凉面，清凉解暑，源自唐宋宫廷食俗。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>吃哪：</strong>奎元馆 / 慧娟面馆</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">立秋贴秋膘</span><span class="fc-badge 节气">立秋</span></div>
+        </div>
+        <div class="fc-desc">立秋"贴秋膘"，吃红烧肉、东坡肉补偿苦夏掉的肉，仪式感拉满。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>吃哪：</strong>楼外楼 / 知味观</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">白露桂花</span><span class="fc-badge 节气">白露</span></div>
+        </div>
+        <div class="fc-desc">白露前后满城桂花香，做桂花糖藕、桂花酒酿、桂花糖糕，清香回甘。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>吃哪：</strong>知味观 / 绿茶餐厅</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">秋分大闸蟹</span><span class="fc-badge 节气">秋分</span></div>
+        </div>
+        <div class="fc-desc">秋分后蟹肥膏黄，杭州人吃太湖蟹、萧山本鸡，姜醋配黄酒。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>吃哪：</strong>王润兴 / 解百蟹庄</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">立冬羊肉</span><span class="fc-badge 节气">立冬</span></div>
+        </div>
+        <div class="fc-desc">立冬吃湖羊肉，"掏羊锅"是仓前老传统，肉酥汤浓暖一冬。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>吃哪：</strong>仓前羊肉老店</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">冬至年糕</span><span class="fc-badge 节气">冬至</span></div>
+        </div>
+        <div class="fc-desc">冬至吃年糕，寓意"年年高"，杭州人做糖年糕、荠菜年糕。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>吃哪：</strong>知味观 / 楼外楼</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">小寒腊八粥</span><span class="fc-badge 节气">小寒</span></div>
+        </div>
+        <div class="fc-desc">腊月初八腊八粥，杭州有甜咸两种，灵隐寺施粥最为热闹。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>吃哪：</strong>灵隐寺 / 永和大王</span></div>
+      </article>
+      <article class="food-card">
+        <div class="fc-head">
+          <div class="fc-name-row"><span class="fc-name">大寒年货</span><span class="fc-badge 节气">大寒</span></div>
+        </div>
+        <div class="fc-desc">大寒筹备年货，酱鸭酱肉在窗外挂满，老底子杭人家最暖的画面。</div>
+        <div class="fc-meta"><span class="fc-meta-item">📍 <strong>吃哪：</strong>老弄堂 / 河坊街老字号</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 底部 -->
+  <div class="food-back">
+    <a href="index.html">← 返回 iHangzhou 首页</a>
+  </div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "杭州美食大全",
+    "description": "杭帮菜、老字号、早茶、夜市、节气美食一站式导航",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "西湖醋鱼", "description": "杭帮菜头牌，糖醋草鱼，必吃店：楼外楼"},
+      {"@type": "ListItem", "position": 2, "name": "东坡肉", "description": "苏东坡传下来的方肉，慢火煨三小时"},
+      {"@type": "ListItem", "position": 3, "name": "叫花鸡", "description": "泥裹煨烤的童子鸡，非遗杭帮菜"},
+      {"@type": "ListItem", "position": 4, "name": "龙井虾仁", "description": "明前龙井茶与河虾仁同炒"},
+      {"@type": "ListItem", "position": 5, "name": "片儿川", "description": "雪菜笋肉片面，杭帮面食代表"},
+      {"@type": "ListItem", "position": 6, "name": "宋嫂鱼羹", "description": "鳜鱼丝烩黄羹，南宋传承"},
+      {"@type": "ListItem", "position": 7, "name": "蜜汁火方", "description": "金华火腿蜜渍慢蒸，咸甜交融"},
+      {"@type": "ListItem", "position": 8, "name": "干炸响铃", "description": "豆腐皮卷肉末油炸，酥脆有声"},
+      {"@type": "ListItem", "position": 9, "name": "油焖春笋", "description": "临安春笋重油重糖焖煮"},
+      {"@type": "ListItem", "position": 10, "name": "虾爆鳝面", "description": "河虾爆炒鳝片浇面，三鲜合一"},
+      {"@type": "ListItem", "position": 11, "name": "胡庆余堂", "description": "江南药王，胡雪岩创办国药老字号"},
+      {"@type": "ListItem", "position": 12, "name": "方回春堂", "description": "百年国药馆，秋季膏方节"},
+      {"@type": "ListItem", "position": 13, "name": "知味观", "description": "1913年开业，杭帮点心头牌"},
+      {"@type": "ListItem", "position": 14, "name": "楼外楼", "description": "1848年孤山开张，西湖醋鱼发源地"},
+      {"@type": "ListItem", "position": 15, "name": "王星记", "description": "百年扇庄，黑纸扇、檀香扇非遗手作"},
+      {"@type": "ListItem", "position": 16, "name": "武林夜市", "description": "服装小百货和网红小吃为主"},
+      {"@type": "ListItem", "position": 17, "name": "吴山夜市", "description": "老底子夜市，外贸与小吃"},
+      {"@type": "ListItem", "position": 18, "name": "河坊街", "description": "仿古步行街，老字号聚集"},
+      {"@type": "ListItem", "position": 19, "name": "胜利河美食街", "description": "烧烤海鲜大排档，深夜食堂"},
+      {"@type": "ListItem", "position": 20, "name": "大兜路", "description": "运河古街文艺餐厅"},
+      {"@type": "ListItem", "position": 21, "name": "钱江新城灯光秀", "description": "周末开放，配美食经典动线"},
+      {"@type": "ListItem", "position": 22, "name": "立春春卷", "description": "立春咬春，薄皮包荠菜肉丝"},
+      {"@type": "ListItem", "position": 23, "name": "清明艾饺", "description": "清明艾草做青团、艾饺"},
+      {"@type": "ListItem", "position": 24, "name": "立夏乌米饭", "description": "南烛叶染黑糯米，解毒消暑"},
+      {"@type": "ListItem", "position": 25, "name": "芒种五黄宴", "description": "黄鱼、黄瓜、黄鳝、咸鸭蛋黄、雄黄酒"},
+      {"@type": "ListItem", "position": 26, "name": "夏至冷淘", "description": "夏至吃过水凉面，清凉解暑"},
+      {"@type": "ListItem", "position": 27, "name": "立秋贴秋膘", "description": "立秋吃红烧肉、东坡肉"},
+      {"@type": "ListItem", "position": 28, "name": "白露桂花", "description": "桂花糖藕、桂花酒酿"},
+      {"@type": "ListItem", "position": 29, "name": "秋分大闸蟹", "description": "秋分后蟹肥膏黄"},
+      {"@type": "ListItem", "position": 30, "name": "立冬羊肉", "description": "立冬吃湖羊肉，掏羊锅"},
+      {"@type": "ListItem", "position": 31, "name": "冬至年糕", "description": "冬至吃年糕，年年高"},
+      {"@type": "ListItem", "position": 32, "name": "小寒腊八粥", "description": "腊月初八腊八粥，灵隐寺施粥"},
+      {"@type": "ListItem", "position": 33, "name": "大寒年货", "description": "大寒备年货，酱鸭酱肉"}
+    ]
+  }
+  </script>
+
+  <script src="js/app.js?v=20260928a"></script>
+  <script>
+    // 主题持久化（参考 district.html）
+    (function () {
+      try {
+        var t = localStorage.getItem('ihz-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        var b = document.getElementById('themeBtn');
+        if (b) b.textContent = t === 'dark' ? '☀️' : '🌙';
+      } catch (e) {}
+    })();
+    function toggleTheme() {
+      var cur = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('ihz-theme', next); } catch (e) {}
+      var b = document.getElementById('themeBtn');
+      if (b) b.textContent = next === 'dark' ? '☀️' : '🌙';
+    }
+
+    // Tab 切换：点击锚点跳转 + 滚动联动高亮
+    (function () {
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.food-tab'));
+      var sections = tabs.map(function (tab) {
+        return document.getElementById(tab.dataset.target);
+      }).filter(Boolean);
+
+      function setActive(id) {
+        tabs.forEach(function (t) {
+          t.classList.toggle('active', t.dataset.target === id);
+        });
+      }
+
+      // 点击 tab：平滑滚动 + 高亮
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function (e) {
+          e.preventDefault();
+          var target = document.getElementById(tab.dataset.target);
+          if (!target) return;
+          var offset = 110; // topbar + sticky tabs 高度
+          var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+          setActive(tab.dataset.target);
+        });
+      });
+
+      // 滚动联动：当前可视区的 section 高亮对应 tab
+      var ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          var y = window.pageYOffset + 140;
+          var current = sections[0] ? sections[0].id : null;
+          for (var i = 0; i < sections.length; i++) {
+            if (sections[i].offsetTop <= y) {
+              current = sections[i].id;
+            }
+          }
+          if (current) setActive(current);
+          ticking = false;
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('load', onScroll);
+    })();
+  </script>
+</body>
+</html>

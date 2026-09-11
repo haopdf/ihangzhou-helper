@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>杭州博物馆大全 · iHangzhou</title>
+  <meta name="description" content="杭州博物馆大全：浙江省博物馆、杭州博物馆、良渚博物院、中国丝绸博物馆、中国茶叶博物馆（茶博）、京杭大运河博物馆等14家博物馆镇馆之宝、开放时间、门票与参观攻略一站式查询">
+  <meta name="keywords" content="杭州博物馆,浙江省博物馆,良渚博物院,丝绸博物馆,茶博,运河博物馆,杭州美术馆,南宋官窑,中国财税博物馆,中国动漫博物馆,中国湿地博物馆,杭州旅游,ihangzhou">
+  <meta name="theme-color" content="#b45309">
+  <meta property="og:title" content="杭州博物馆大全 · iHangzhou">
+  <meta property="og:description" content="杭州14家博物馆镇馆之宝 + 开放时间 + 门票 + 参观攻略">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://www.ihangzhou.net/museum.html">
+  <link rel="stylesheet" href="css/style.css?v=20260926a">
+  <style>
+    /* 博物馆专题页专属样式 */
+    .museum-hero {
+      background: linear-gradient(135deg, #b45309, #7c2d12);
+      color: #fff;
+      padding: 22px 16px 18px;
+      text-align: center;
+    }
+    .museum-hero h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0 0 6px;
+      letter-spacing: 1px;
+    }
+    .museum-hero p {
+      font-size: 13px;
+      opacity: 0.92;
+      line-height: 1.5;
+    }
+    .museum-stats {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 12px;
+      font-size: 11px;
+      opacity: 0.9;
+      flex-wrap: wrap;
+    }
+    .museum-stats span {
+      background: rgba(255,255,255,0.18);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+
+    /* 锚点 tab */
+    .museum-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 10px 14px;
+      overflow-x: auto;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 56px;
+      z-index: 50;
+      -webkit-overflow-scrolling: touch;
+    }
+    .museum-tabs::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      flex-shrink: 0;
+      padding: 7px 16px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-weight: 500;
+      -webkit-tap-highlight-color: transparent;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .tab-btn.active {
+      background: #b45309;
+      color: #fff;
+      border-color: #b45309;
+    }
+
+    /* 分区内容 */
+    .museum-section {
+      padding: 14px 14px 4px;
+      scroll-margin-top: 104px;
+    }
+    .ms-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ms-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .museum-grid {
+      display: grid;
+      gap: 12px;
+      padding-bottom: 14px;
+    }
+
+    /* 博物馆卡片 */
+    .museum-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-left: 4px solid #b45309;
+    }
+    .museum-card:active {
+      transform: scale(0.99);
+      box-shadow: var(--shadow-md);
+    }
+    .mc-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .mc-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .mc-cat {
+      flex-shrink: 0;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-weight: 600;
+      background: #fef3c7;
+      color: #92400e;
+    }
+    [data-theme="dark"] .mc-cat { background: #78350f; color: #fef3c7; }
+    .mc-location {
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .mc-treasure {
+      background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border: 1px dashed #f59e0b;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #78350f;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    [data-theme="dark"] .mc-treasure {
+      background: linear-gradient(135deg, #422006, #78350f);
+      border-color: #b45309;
+      color: #fef3c7;
+    }
+    .mc-treasure strong { color: #b45309; font-weight: 700; }
+    [data-theme="dark"] .mc-treasure strong { color: #fbbf24; }
+    .mc-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 12px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      border-top: 1px dashed var(--border);
+      border-bottom: 1px dashed var(--border);
+      margin-bottom: 8px;
+    }
+    .mc-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .mc-meta-label {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+    .mc-meta-value {
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .mc-tip {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      background: var(--bg-alt);
+      padding: 8px 10px;
+      border-radius: 8px;
+      border-left: 3px solid var(--secondary);
+    }
+    .mc-tip::before {
+      content: "💡 ";
+    }
+
+    /* 参观贴士 */
+    .tips-section {
+      margin: 16px 14px 80px;
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .tips-section h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tips-list {
+      display: grid;
+      gap: 8px;
+    }
+    .tips-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .tips-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #fef3c7;
+      color: #92400e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    [data-theme="dark"] .tips-icon { background: #78350f; color: #fef3c7; }
+    .back-home {
+      display: block;
+      margin: 18px 14px 0;
+      padding: 12px;
+      background: linear-gradient(135deg, #b45309, #7c2d12);
+      color: #fff !important;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <!-- 顶部栏 -->
+  <div class="topbar">
+    <div class="topbar-city" onclick="location.href='index.html'">
+      <span>←</span>
+    </div>
+    <div class="topbar-search">
+      <input type="text" placeholder="搜索杭州博物馆..." id="searchInput">
+    </div>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+  </div>
+
+  <!-- Hero -->
+  <div class="museum-hero">
+    <h1>🏛️ 杭州博物馆大全</h1>
+    <p>14 家博物馆 + 镇馆之宝 + 参观指南</p>
+    <div class="museum-stats">
+      <span>综合 3</span>
+      <span>专题 6</span>
+      <span>艺术 3</span>
+      <span>遗址 3</span>
+    </div>
+  </div>
+
+  <!-- 锚点 tab -->
+  <div class="museum-tabs" id="tabBar">
+    <a class="tab-btn active" href="#zh" data-target="zh">综合博物馆</a>
+    <a class="tab-btn" href="#zt" data-target="zt">专题博物馆</a>
+    <a class="tab-btn" href="#ys" data-target="ys">艺术馆</a>
+    <a class="tab-btn" href="#yz" data-target="yz">遗址类博物馆</a>
+  </div>
+
+  <!-- 综合 -->
+  <section class="museum-section" id="zh">
+    <h2 class="ms-title">🏛️ 综合博物馆</h2>
+    <div class="ms-sub">省 / 市 / 自然，三大综合馆藏尽杭州</div>
+    <div class="museum-grid">
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">浙江省博物馆（之江馆区）</div>
+          <span class="mc-cat">综合</span>
+        </div>
+        <div class="mc-location">📍 西湖区之江路 91 号 · 之江文化中心</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>《富春山居图》合璧展（轮流展出）、良渚玉琮王、越王鸟篆剑</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">9:00-17:00（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费 · 需预约</span></div>
+        </div>
+        <div class="mc-tip">之江新馆 2023 年开放，富春山居图展品轮流展出，建议查官网确认展期；与省非遗馆、文学馆同在之江文化中心，可一日联游。</div>
+      </div>
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">杭州博物馆</div>
+          <span class="mc-cat">综合</span>
+        </div>
+        <div class="mc-location">📍 上城区粮道山 18 号 · 吴山广场旁</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>战国水晶杯（禁止出国文物，"最杭州"展厅常设）</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">9:00-17:00（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费 · 需预约</span></div>
+        </div>
+        <div class="mc-tip">分南北两馆，水晶杯是必看；吴山广场地铁口直达，可与河坊街、城隍阁一线游。</div>
+      </div>
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">浙江自然博物馆</div>
+          <span class="mc-cat">综合</span>
+        </div>
+        <div class="mc-location">📍 拱墅区西湖文化广场 C 座</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>义乌鸟龙、临海浙江翼龙、中华龙鸟化石</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">9:00-17:00（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费 · 需预约</span></div>
+        </div>
+        <div class="mc-tip">雨林馆、恐龙馆最受小朋友欢迎，节假日人多建议上午早到；与浙江科技馆同楼可顺游。</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 专题 -->
+  <section class="museum-section" id="zt">
+    <h2 class="ms-title">🎌 专题博物馆</h2>
+    <div class="ms-sub">丝绸 / 茶 / 官窑 / 财税 / 动漫 / 湿地，六大主题馆</div>
+    <div class="museum-grid">
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">中国丝绸博物馆</div>
+          <span class="mc-cat">专题</span>
+        </div>
+        <div class="mc-location">📍 西湖区玉皇山路 73-1 号</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>战国对龙对凤锦、近代宋庆龄旗袍、历代织绣精品</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">8:30-16:30（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费 · 需预约</span></div>
+        </div>
+        <div class="mc-tip">园林式馆区，含时装馆与锦绣廊，可顺便游玉皇山、八卦田；馆内可穿汉服拍照。</div>
+      </div>
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">中国茶叶博物馆</div>
+          <span class="mc-cat">专题</span>
+        </div>
+        <div class="mc-location">📍 西湖区龙井路双峰村</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>唐代茶具、宋代茶百戏器具、历代茶器茶样</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">9:00-17:00（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费</span></div>
+        </div>
+        <div class="mc-tip">双峰馆与龙井馆两馆相距约 1 公里，建议同游龙井八景；茶室可品龙井新茶。</div>
+      </div>
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">南宋官窑博物馆</div>
+          <span class="mc-cat">专题</span>
+        </div>
+        <div class="mc-location">📍 上城区复兴街闸口 · 乌龟山西麓（八卦田旁）</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>郊坛下南宋官窑窑址、官窑瓷片标本</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">8:30-16:30（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费</span></div>
+        </div>
+        <div class="mc-tip">可看实地窑址与作坊复原，出口即是八卦田，春秋季看油菜花 / 稻田正佳。</div>
+      </div>
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">中国财税博物馆</div>
+          <span class="mc-cat">专题</span>
+        </div>
+        <div class="mc-location">📍 西湖区北山街 · 岳庙旁</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>历代钱币、明清税收票据、古代赋役文书</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">9:00-16:30（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费</span></div>
+        </div>
+        <div class="mc-tip">北山街沿线，与岳王庙、西泠印社、抱朴道院可串成一条民国风情线。</div>
+      </div>
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">中国动漫博物馆</div>
+          <span class="mc-cat">专题</span>
+        </div>
+        <div class="mc-location">📍 滨江区白马湖路 375 号</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>上海美影厂手稿、早期动画设备、经典原画</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">9:30-16:30（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费 · 需预约</span></div>
+        </div>
+        <div class="mc-tip">国内首家国家级动漫博物馆，互动展项多，适合亲子；可与白马湖公园、中国湿地博物馆同游。</div>
+      </div>
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">中国湿地博物馆</div>
+          <span class="mc-cat">专题</span>
+        </div>
+        <div class="mc-location">📍 西湖区西溪国家湿地公园 · 紫金港</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>湿地生态标本、西溪文化陈列、候鸟标本</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">9:00-16:30（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费（湿地门票另购）</span></div>
+        </div>
+        <div class="mc-tip">建筑为"三叶草"造型，可结合湿地游船、摇橹船体验；推荐深秋看芦花。</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 艺术 -->
+  <section class="museum-section" id="ys">
+    <h2 class="ms-title">🎨 艺术馆</h2>
+    <div class="ms-sub">浙美双馆 + 工美馆群（桥西 4 馆联游）</div>
+    <div class="museum-grid">
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">浙江美术馆</div>
+          <span class="mc-cat">艺术</span>
+        </div>
+        <div class="mc-location">📍 上城区南山路 138 号</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>黄宾虹作品、近现代浙江书画、版画精品</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">9:00-17:00（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费</span></div>
+        </div>
+        <div class="mc-tip">紧邻西湖，与雷峰塔、太子湾、中国美院南山校区一线游；展厅大、特展频繁，建议查官网排期。</div>
+      </div>
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">浙江美术馆之江馆</div>
+          <span class="mc-cat">艺术</span>
+        </div>
+        <div class="mc-location">📍 西湖区之江文化中心</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>现代美术专题展、近现代浙江美术典藏</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">9:00-17:00（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费 · 需预约</span></div>
+        </div>
+        <div class="mc-tip">与省博物馆、非遗馆、文学馆同在之江文化中心，地铁 6 号线可达，建议一日联游。</div>
+      </div>
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">杭州工艺美术博物馆群</div>
+          <span class="mc-cat">艺术</span>
+        </div>
+        <div class="mc-location">📍 拱墅区桥西历史文化街区</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>张小泉剪刀、王星记扇、西湖绸伞（工美 + 刀剪剑 + 伞 + 扇 4 馆联游）</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">9:00-16:30（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费</span></div>
+        </div>
+        <div class="mc-tip">4 馆相邻步行可达，1-2 小时可逛完；出馆即是拱宸桥与小河直街，可乘水上巴士 1 号线。</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 遗址 -->
+  <section class="museum-section" id="yz">
+    <h2 class="ms-title">🏺 遗址类博物馆</h2>
+    <div class="ms-sub">良渚 + 大屋顶 + 运河，三处世界级遗产</div>
+    <div class="museum-grid">
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">良渚博物院</div>
+          <span class="mc-cat">遗址</span>
+        </div>
+        <div class="mc-location">📍 余杭区良渚文化村 · 美丽洲路 1 号</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>玉琮王、玉钺、神人兽面纹神徽</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">9:00-17:00（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费 · 需预约</span></div>
+        </div>
+        <div class="mc-tip">安藤忠雄设计建筑本身就是展品；建议结合良渚古城遗址公园一日游（公园需另购票）。</div>
+      </div>
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">良渚文化村大屋顶</div>
+          <span class="mc-cat">遗址</span>
+        </div>
+        <div class="mc-location">📍 余杭区良渚文化村 · 安藤忠雄设计</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>安藤忠雄建筑本体、晓书馆藏书、光影十字架</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">全天开放（晓书馆 9:00-21:00）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费</span></div>
+        </div>
+        <div class="mc-tip">建筑朝圣 + 文化空间复合体，距良渚博物院步行约 15 分钟；推荐晴日上午看光影变化。</div>
+      </div>
+
+      <div class="museum-card">
+        <div class="mc-head">
+          <div class="mc-name">京杭大运河博物馆</div>
+          <span class="mc-cat">遗址</span>
+        </div>
+        <div class="mc-location">📍 拱墅区运河文化广场 1 号 · 拱宸桥旁</div>
+        <div class="mc-treasure"><strong>镇馆之宝：</strong>运河漕运船模型、运河沿线文物、漕运档案</div>
+        <div class="mc-meta">
+          <div class="mc-meta-item"><span class="mc-meta-label">开放时间</span><span class="mc-meta-value">9:00-16:30（周一闭馆）</span></div>
+          <div class="mc-meta-item"><span class="mc-meta-label">门票</span><span class="mc-meta-value">免费</span></div>
+        </div>
+        <div class="mc-tip">出馆即拱宸桥，沿桥西直街、小河直街历史街区漫步；可乘水上巴士 1 号线沿运河游览。</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 参观贴士 -->
+  <div class="tips-section">
+    <h2>📌 参观通用贴士</h2>
+    <div class="tips-list">
+      <div class="tips-item">
+        <span class="tips-icon">一</span>
+        <span><strong>周一闭馆：</strong>杭州绝大多数博物馆周一闭馆（良渚文化村大屋顶除外），行程请避开周一。</span>
+      </div>
+      <div class="tips-item">
+        <span class="tips-icon">证</span>
+        <span><strong>身份证必备：</strong>免费馆普遍需刷身份证入馆，请随身携带原件。</span>
+      </div>
+      <div class="tips-item">
+        <span class="tips-icon">约</span>
+        <span><strong>提前预约：</strong>省博、杭博、自然馆、良渚、动漫馆等热门馆建议提前 1-3 天在官网或公众号预约。</span>
+      </div>
+      <div class="tips-item">
+        <span class="tips-icon">拍</span>
+        <span><strong>拍照须知：</strong>常设展一般可拍照（禁用闪光灯与三脚架），特展 / 临展请遵循馆方标识。</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 返回 iHangzhou -->
+  <a class="back-home" href="index.html">← 返回 iHangzhou 首页</a>
+
+  <!-- JSON-LD ItemList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "杭州博物馆大全",
+    "description": "杭州 14 家博物馆镇馆之宝、开放时间、门票与参观攻略",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "浙江省博物馆（之江馆区）", "url": "https://www.ihangzhou.net/museum.html#zh"},
+      {"@type": "ListItem", "position": 2, "name": "杭州博物馆", "url": "https://www.ihangzhou.net/museum.html#zh"},
+      {"@type": "ListItem", "position": 3, "name": "浙江自然博物馆", "url": "https://www.ihangzhou.net/museum.html#zh"},
+      {"@type": "ListItem", "position": 4, "name": "中国丝绸博物馆", "url": "https://www.ihangzhou.net/museum.html#zt"},
+      {"@type": "ListItem", "position": 5, "name": "中国茶叶博物馆", "url": "https://www.ihangzhou.net/museum.html#zt"},
+      {"@type": "ListItem", "position": 6, "name": "南宋官窑博物馆", "url": "https://www.ihangzhou.net/museum.html#zt"},
+      {"@type": "ListItem", "position": 7, "name": "中国财税博物馆", "url": "https://www.ihangzhou.net/museum.html#zt"},
+      {"@type": "ListItem", "position": 8, "name": "中国动漫博物馆", "url": "https://www.ihangzhou.net/museum.html#zt"},
+      {"@type": "ListItem", "position": 9, "name": "中国湿地博物馆", "url": "https://www.ihangzhou.net/museum.html#zt"},
+      {"@type": "ListItem", "position": 10, "name": "浙江美术馆", "url": "https://www.ihangzhou.net/museum.html#ys"},
+      {"@type": "ListItem", "position": 11, "name": "浙江美术馆之江馆", "url": "https://www.ihangzhou.net/museum.html#ys"},
+      {"@type": "ListItem", "position": 12, "name": "杭州工艺美术博物馆群", "url": "https://www.ihangzhou.net/museum.html#ys"},
+      {"@type": "ListItem", "position": 13, "name": "良渚博物院", "url": "https://www.ihangzhou.net/museum.html#yz"},
+      {"@type": "ListItem", "position": 14, "name": "良渚文化村大屋顶", "url": "https://www.ihangzhou.net/museum.html#yz"},
+      {"@type": "ListItem", "position": 15, "name": "京杭大运河博物馆", "url": "https://www.ihangzhou.net/museum.html#yz"}
+    ]
+  }
+  </script>
+
+  <script src="js/app.js?v=20260928a"></script>
+  <script>
+    // 主题持久化
+    (function () {
+      try {
+        var t = localStorage.getItem('ihz-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        var b = document.getElementById('themeBtn');
+        if (b) b.textContent = t === 'dark' ? '☀️' : '🌙';
+      } catch (e) {}
+    })();
+    function toggleTheme() {
+      var cur = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('ihz-theme', next);
+      var b = document.getElementById('themeBtn');
+      if (b) b.textContent = next === 'dark' ? '☀️' : '🌙';
+    }
+
+    // tab 切换 + 锚点滚动
+    (function () {
+      var tabs = document.querySelectorAll('.tab-btn');
+      var sections = document.querySelectorAll('.museum-section');
+
+      function setActive(id) {
+        tabs.forEach(function (t) {
+          t.classList.toggle('active', t.dataset.target === id);
+        });
+      }
+
+      // 点击 tab：平滑滚动到对应分区
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function (e) {
+          e.preventDefault();
+          var id = tab.dataset.target;
+          var target = document.getElementById(id);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          setActive(id);
+        });
+      });
+
+      // 滚动联动：当前可视分区高亮对应 tab
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+            setActive(entry.target.id);
+          }
+        });
+      }, { threshold: [0.3, 0.6] });
+      sections.forEach(function (s) { observer.observe(s); });
+
+      // 初始：根据 URL hash 高亮
+      var hash = location.hash.replace('#', '');
+      if (hash) {
+        setActive(hash);
+      }
+    })();
+  </script>
+</body>
+</html>
