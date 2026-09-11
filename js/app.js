@@ -897,6 +897,26 @@
         ]
       },
       {
+        id: "yayun", name: "亚运场馆", icon: "🏟️",
+        items: [
+          { name: "奥体中心体育场", desc: "莲花碗·亚运主场", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">奥体中心体育场（莲花碗）是 2026 杭州亚运主场馆，造型如盛开莲花，可容纳 8 万人，亚运后改为全民健身 + 大型赛事 + 演唱会场馆。</p><div class=\"guide-block\"><h4>🎯 亮点</h4><p>• <strong>莲花造型</strong>：标志性建筑<br>• <strong>8 万人容量</strong>：华东最大<br>• <strong>亚运主场</strong>：开闭幕式<br>• <strong>夜跑</strong>：外围开放<br>• <strong>演唱会</strong>：周杰伦 / 五月天</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>萧山区飞虹路（地铁 6 号线奥体中心站）</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• 外围免费夜跑<br>• 演唱会门票 200-2000 元<br>• 配合钱江世纪城夜景<br>• 周末人多<br>• 地铁直达</p></div>", color: "#ef4444" },
+          { name: "奥体中心游泳馆", desc: "亚运游泳·跳水馆", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">奥体中心游泳馆是亚运游泳 / 跳水比赛场馆，亚运后对公众开放，含 50 米标准池 + 跳水池，是杭州最专业的游泳馆。</p><div class=\"guide-block\"><h4>🎯 亮点</h4><p>• <strong>50 米标准池</strong>：国际标准<br>• <strong>跳水池</strong>：3 米 / 5 米 / 10 米<br>• <strong>亚运比赛池</strong>：冠军同款<br>• <strong>恒温</strong>：26-28 度<br>• <strong>对外开放</strong>：需预约</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>萧山区飞虹路（奥体中心内）</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>票价</strong>：50-80 元/次<br>• 年卡 2000-3000 元<br>• 需预约<br>• 早 6-9 点人少<br>• 配合奥体夜跑</p></div>", color: "#0ea5e9" },
+          { name: "杭州体育馆", desc: "亚运拳击·拱墅", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州体育馆（原浙江省体育馆）是亚运拳击比赛馆，位于拱墅区，亚运后改为篮球 / 羽毛球 / 乒乓球等综合场馆。</p><div class=\"guide-block\"><h4>🎯 亮点</h4><p>• <strong>亚运拳击</strong>：比赛馆<br>• <strong>综合场馆</strong>：篮 / 羽 / 乒<br>• <strong>5000 人</strong>：中型场馆<br>• <strong>市中心</strong>：交通方便<br>• <strong>演唱会</strong>：中型演出</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>拱墅区体育场路 210 号（地铁 1 号线武林广场站）</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>羽毛球</strong>：50-80 元/小时<br>• <strong>乒乓球</strong>：30-50 元/小时<br>• 需预约<br>• 配合武林广场购物<br>• 周末人爆满</p></div>", color: "#f59e0b" },
+          { name: "黄龙体育中心", desc: "亚运足球·西湖区", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">黄龙体育中心是亚运足球比赛场，位于西湖区黄龙洞，含主体育场 + 游泳馆 + 网球馆，是杭州老牌综合体育中心。</p><div class=\"guide-block\"><h4>🎯 亮点</h4><p>• <strong>亚运足球</strong>：比赛场<br>• <strong>主体育场</strong>：4 万人<br>• <strong>游泳馆</strong>：对公众开放<br>• <strong>网球馆</strong>：标准场地<br>• <strong>黄龙洞</strong>：旁边景点</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>西湖区黄龙路 5 号（地铁 3 号线黄龙洞站）</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>游泳</strong>：40-60 元/次<br>• <strong>网球</strong>：80-150 元/小时<br>• 配合黄龙洞 + 宝石山<br>• 周末人爆满<br>• 早 6 点开放夜跑</p></div>", color: "#10b981" },
+          { name: "拱墅运河体育中心", desc: "亚运乒乓球·拱墅", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">拱墅运河体育中心是亚运乒乓球比赛馆，位于拱墅区桥西，运河边，亚运后对公众开放，是运河夜景 + 运动的组合。</p><div class=\"guide-block\"><h4>🎯 亮点</h4><p>• <strong>亚运乒乓</strong>：比赛馆<br>• <strong>运河边</strong>：夜景<br>• <strong>综合场馆</strong>：篮 / 羽 / 乒<br>• <strong>新建</strong>：设施最新<br>• <strong>桥西</strong>：历史街区</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>拱墅区运河广场旁（地铁 5 号线大运河站）</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>乒乓球</strong>：30-50 元/小时<br>• <strong>羽毛球</strong>：50-80 元/小时<br>• 需预约<br>• 配合运河夜景 + 拱宸桥<br>• 周末人爆满</p></div>", color: "#8b5cf6" }
+        ]
+      },
+      {
+        id: "camping", name: "露营温泉", icon: "⛺",
+        items: [
+          { name: "鸬鸟房车营地", desc: "余杭·房车露营", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">鸬鸟房车营地是杭州最专业的房车露营地，位于余杭鸬鸟镇，山间竹海，含 30+ 房车位 + 帐篷区 + 篝火 + 烧烤，适合周末度假。</p><div class=\"guide-block\"><h4>🎯 亮点</h4><p>• <strong>30+ 房车位</strong>：水电全<br>• <strong>帐篷区</strong>：自带 / 租赁<br>• <strong>竹海</strong>：山间<br>• <strong>篝火</strong>：晚上<br>• <strong>烧烤</strong>：场地</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>余杭区鸬鸟镇（自驾 1 小时）</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>房车位</strong>：200-400 元/晚<br>• <strong>帐篷位</strong>：50-100 元/晚<br>• 自带 / 租赁帐篷<br>• 周末爆满，提前 1 周订<br>• 配合鸬鸟山 + 双溪漂流</p></div>", color: "#10b981" },
+          { name: "千岛湖露营", desc: "淳安·湖畔露营", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">千岛湖露营是杭州周边最美露营地，湖畔帐篷 + 看日出 + 看星空，是周末度假 + 朋友聚会的好去处。</p><div class=\"guide-block\"><h4>🎯 亮点</h4><p>• <strong>湖畔</strong>：一线湖景<br>• <strong>日出</strong>：早上 5 点<br>• <strong>星空</strong>：夜晚<br>• <strong>钓鱼</strong>：可租钓具<br>• <strong>烧烤</strong>：场地</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>淳安县千岛湖（自驾 2 小时）</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>帐篷位</strong>：100-200 元/晚<br>• 自带 / 租赁帐篷<br>• 周末爆满<br>• 夏季避暑<br>• 配合千岛湖游船 + 钓鱼</p></div>", color: "#0ea5e9" },
+          { name: "临安湍口温泉", desc: "临安·温泉度假", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">临安湍口温泉是杭州周边最知名的温泉度假村，含 30+ 泉池 + 酒店 + 别墅，是冬季泡汤首选。</p><div class=\"guide-block\"><h4>🎯 亮点</h4><p>• <strong>30+ 泉池</strong>：露天 + 室内<br>• <strong>温泉</strong>：38-42 度<br>• <strong>酒店</strong>：含住宿<br>• <strong>别墅</strong>：家庭度假<br>• <strong>儿童乐园</strong>：亲子</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>临安区湍口镇（自驾 1.5 小时）</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>温泉</strong>：198-298 元/人<br>• <strong>酒店</strong>：600-2000 元/晚<br>• <strong>含早</strong>：含早餐<br>• 冬季爆满，提前 1 个月订<br>• 配合天目山 + 大峡谷</p></div>", color: "#ef4444" },
+          { name: "建德航空小镇温泉", desc: "建德·航空主题", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">建德航空小镇温泉是杭州周边特色温泉，航空主题 + 温泉 + 飞行体验，是亲子度假新晋网红。</p><div class=\"guide-block\"><h4>🎯 亮点</h4><p>• <strong>航空主题</strong>：飞机餐厅<br>• <strong>温泉</strong>：20+ 泉池<br>• <strong>飞行体验</strong>：可体验<br>• <strong>儿童乐园</strong>：亲子<br>• <strong>新晋网红</strong>：拍照</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>建德市寿昌镇（自驾 1.5 小时）</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>温泉</strong>：158-258 元/人<br>• <strong>飞行体验</strong>：300-800 元<br>• <strong>酒店</strong>：400-1500 元/晚<br>• 亲子首选<br>• 配合新安江 + 17 度水</p></div>", color: "#f59e0b" },
+          { name: "桐庐芦茨湾温泉", desc: "桐庐·富春山居", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">桐庐芦茨湾温泉位于富春江畔，富春山居图实景地，含温泉 + 民宿 + 江景，是文艺度假首选。</p><div class=\"guide-block\"><h4>🎯 亮点</h4><p>• <strong>富春江</strong>：江景<br>• <strong>富春山居图</strong>：实景地<br>• <strong>温泉</strong>：15+ 泉池<br>• <strong>民宿</strong>：文艺<br>• <strong>慢生活</strong>：放松</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>桐庐县芦茨湾（自驾 1.5 小时）</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>温泉</strong>：128-228 元/人<br>• <strong>民宿</strong>：300-800 元/晚<br>• 文艺度假首选<br>• 配合瑶琳仙境 + 严子陵钓台<br>• 春秋最佳</p></div>", color: "#a855f7" }
+        ]
+      },
+      {
         id: "museum", name: "博物馆", icon: "🏛️",
         items: [
           { name: "浙江省博物馆", desc: "之江馆区", url: "https://www.zjmuseum.com.cn/", color: "#ef4444" },
@@ -2808,6 +2828,90 @@ case 'colors': showColors(); break;
   }
 
   // ============================================
+  // 每日签到 + 积分
+  // ============================================
+  function getCheckinData() {
+    return lsGet('ihz_checkin', { last: 0, total: 0, points: 0, streak: 0, history: [] });
+  }
+
+  function isSameDay(t1, t2) {
+    var d1 = new Date(t1), d2 = new Date(t2);
+    return d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate();
+  }
+
+  function isYesterday(t1, t2) {
+    var d1 = new Date(t1); d1.setHours(0,0,0,0);
+    var d2 = new Date(t2); d2.setHours(0,0,0,0);
+    var diff = (d2 - d1) / 86400000;
+    return diff === 1;
+  }
+
+  function doCheckin() {
+    var data = getCheckinData();
+    var now = Date.now();
+    if (isSameDay(data.last, now)) {
+      showToast('今日已签到，明天再来吧！');
+      return;
+    }
+    // 连续签到
+    var streak = isYesterday(data.last, now) ? data.streak + 1 : 1;
+    // 积分奖励：基础 5 + 连续加成
+    var reward = 5 + Math.min(streak - 1, 6); // 最多 +6
+    data.last = now;
+    data.streak = streak;
+    data.total += 1;
+    data.points += reward;
+    data.history.unshift({ ts: now, reward: reward, streak: streak });
+    if (data.history.length > 30) data.history = data.history.slice(0, 30);
+    lsSet('ihz_checkin', data);
+    showToast('✅ 签到成功！获得 ' + reward + ' 积分，已连续签到 ' + streak + ' 天');
+    // 重新渲染签到弹窗
+    showCheckin();
+  }
+
+  function showCheckin() {
+    var data = getCheckinData();
+    var now = Date.now();
+    var checkedToday = isSameDay(data.last, now);
+    var body = '<div style="padding:16px;text-align:center;">';
+    // 积分卡
+    body += '<div style="background:linear-gradient(135deg, var(--primary), var(--primary-dark));color:#fff;padding:20px;border-radius:14px;margin-bottom:14px;">' +
+      '<div style="font-size:12px;opacity:0.9;margin-bottom:4px;">我的积分</div>' +
+      '<div style="font-size:36px;font-weight:700;line-height:1;">' + data.points + '</div>' +
+      '<div style="font-size:12px;opacity:0.9;margin-top:6px;">累计签到 ' + data.total + ' 天 · 连续 ' + data.streak + ' 天</div>' +
+      '</div>';
+    // 签到按钮
+    body += '<button onclick="window._doCheckin()" style="width:100%;padding:14px;background:' + (checkedToday ? 'var(--bg-alt)' : 'var(--primary)') + ';color:' + (checkedToday ? 'var(--text-muted)' : '#fff') + ';border:none;border-radius:24px;font-size:15px;font-weight:500;cursor:' + (checkedToday ? 'default' : 'pointer') + ';" ' + (checkedToday ? 'disabled' : '') + '>' +
+      (checkedToday ? '✅ 今日已签到' : '📅 立即签到（+' + (5 + Math.min(data.streak, 6)) + ' 积分）') +
+      '</button>';
+    // 规则
+    body += '<div style="margin-top:14px;padding:12px;background:var(--bg);border-radius:10px;text-align:left;">' +
+      '<div style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--text);">📊 积分规则</div>' +
+      '<div style="font-size:12px;color:var(--text-secondary);line-height:1.8;">' +
+      '• 每日签到基础 5 积分<br>' +
+      '• 连续签到第 N 天加 N 积分（最多 +6）<br>' +
+      '• 第 1 天：5 积分<br>' +
+      '• 第 7 天：11 积分<br>' +
+      '• 断签清零，重新计算<br>' +
+      '• 积分未来可兑换 iHangzhou 周边福利' +
+      '</div></div>';
+    // 最近记录
+    if (data.history.length) {
+      body += '<div style="margin-top:14px;">' +
+        '<div style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--text);">📜 最近签到</div>';
+      data.history.slice(0, 5).forEach(function (h) {
+        body += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;">' +
+          '<span style="color:var(--text-secondary);">' + fmtTime(h.ts) + '</span>' +
+          '<span style="color:var(--primary);font-weight:500;">+' + h.reward + ' 积分（连续 ' + h.streak + ' 天）</span>' +
+          '</div>';
+      });
+      body += '</div>';
+    }
+    body += '</div>';
+    openModal('📅 每日签到', body);
+  }
+
+  // ============================================
   // 收藏夹 / 浏览历史 / 反馈 / 字号
   // ============================================
   function lsGet(key, def) {
@@ -3484,6 +3588,8 @@ case 'colors': showColors(); break;
   window._openHistItem = openItemByName;
   window._submitFeedback = submitFeedback;
   window._setFontSize = setFontSize;
+  window.showCheckin = showCheckin;
+  window._doCheckin = doCheckin;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
