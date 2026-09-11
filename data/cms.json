@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "lastModified": "2026-09-11T00:00:00.000Z",
+  "hotKeywords": ["限行", "社保", "公积金", "灵隐寺", "消费券", "人才认定", "钱塘江大潮", "找工作", "公租房", "摇号", "西湖", "疫苗"],
+  "hotServices": [
+    { "name": "今日限行", "icon": "🚗", "desc": "尾号限行", "action": "xianxing", "color": "#ef4444" },
+    { "name": "浙A摇号", "icon": "🚘", "desc": "车牌摇号", "url": "https://xkctk.hzcb.gov.cn/", "color": "#f59e0b" },
+    { "name": "公积金", "icon": "🏠", "desc": "查询提取", "url": "https://gjj.hangzhou.gov.cn/", "color": "#10b981" },
+    { "name": "灵隐寺", "icon": "⛩️", "desc": "门票预约", "url": "https://www.lingyinsi.org.cn/", "color": "#8b5cf6" }
+  ],
+  "categories": [
+    { "id": "banshi", "name": "办事指南", "icon": "🏛️", "items": [
+      { "name": "社保查询", "desc": "缴费/余额/明细", "url": "https://www.zjzwfw.gov.cn/", "color": "#3b82f6" },
+      { "name": "公积金查询", "desc": "余额/明细/提取记录", "url": "https://gjj.hangzhou.gov.cn/", "color": "#f59e0b" }
+    ]},
+    { "id": "traffic", "name": "交通出行", "icon": "🗺️", "items": [
+      { "name": "杭州地铁", "desc": "线路图/时刻表", "url": "https://www.hzmetro.com/", "color": "#3b82f6" },
+      { "name": "公交查询", "desc": "实时公交到站", "url": "https://www.hzbus.com.cn/", "color": "#10b981" }
+    ]},
+    { "id": "temple", "name": "寺庙道观", "icon": "⛩️", "items": [
+      { "name": "灵隐寺", "desc": "千年古刹·飞来峰", "url": "https://www.lingyinsi.org.cn/", "color": "#8b5cf6" },
+      { "name": "净慈寺", "desc": "雷峰塔下·南屏晚钟", "url": "", "color": "#ec4899" }
+    ]},
+    { "id": "museum", "name": "博物馆", "icon": "🏛️", "items": [
+      { "name": "浙江省博物馆", "desc": "孤山馆/之江新馆", "url": "https://www.zhejiangmuseum.com/", "color": "#3b82f6" }
+    ]},
+    { "id": "park", "name": "城市公园", "icon": "🌳", "items": [
+      { "name": "西湖景区", "desc": "世界文化遗产", "url": "", "color": "#10b981" }
+    ]},
+    { "id": "celebrity", "name": "杭州名人", "icon": "👤", "items": [] }
+  ],
+  "channels": [
+    { "id": "ch_banshi", "name": "办事", "icon": "🏛️", "subs": ["banshi"] },
+    { "id": "ch_traffic", "name": "出行", "icon": "🗺️", "subs": ["traffic"] },
+    { "id": "ch_life", "name": "生活", "icon": "🛍️", "subs": ["park", "museum"] },
+    { "id": "ch_culture", "name": "人文", "icon": "📚", "subs": ["temple", "celebrity"] }
+  ]
+}

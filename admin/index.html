@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iHangzhou 管理后台 - CMS</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f1f5f9;
+      min-height: 100vh;
+    }
+    .login-bg {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .login-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    .logo { text-align: center; margin-bottom: 30px; }
+    .logo-icon { font-size: 48px; margin-bottom: 10px; }
+    .logo h1 { font-size: 24px; color: #1e293b; }
+    .logo p { font-size: 13px; color: #64748b; margin-top: 4px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 13px; color: #475569; margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #0ea5e9; }
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: #0ea5e9; color: #fff; }
+    .btn-primary:hover { background: #0284c7; }
+    .btn-success { background: #10b981; color: #fff; }
+    .btn-success:hover { background: #059669; }
+    .btn-danger { background: #ef4444; color: #fff; }
+    .btn-danger:hover { background: #dc2626; }
+    .btn-sm { padding: 6px 12px; font-size: 12px; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .error { color: #ef4444; font-size: 13px; margin-top: 10px; text-align: center; }
+
+    .dashboard { display: none; min-height: 100vh; }
+    .sidebar {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: 240px;
+      background: #1e293b;
+      color: #fff;
+      padding: 20px 0;
+      overflow-y: auto;
+    }
+    .sidebar-header {
+      padding: 0 20px 20px;
+      border-bottom: 1px solid #334155;
+      margin-bottom: 10px;
+    }
+    .sidebar-header h2 { font-size: 16px; }
+    .sidebar-header p { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+    .nav-item {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+    .nav-item:hover { background: #334155; }
+    .nav-item.active { background: #0ea5e9; color: #fff; }
+    .nav-item .icon { font-size: 18px; }
+    
+    .main {
+      margin-left: 240px;
+      padding: 20px 30px;
+    }
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      background: #fff;
+      padding: 16px 24px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .header-bar h1 { font-size: 20px; color: #1e293b; }
+    .user-info { display: flex; align-items: center; gap: 12px; }
+    .logout-btn {
+      padding: 8px 16px;
+      background: #f1f5f9;
+      color: #64748b;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .panel {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .panel-title { font-size: 16px; font-weight: 600; color: #1e293b; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .stat-card h3 { font-size: 12px; color: #64748b; margin-bottom: 8px; }
+    .stat-card .value { font-size: 28px; font-weight: 700; color: #0ea5e9; }
+
+    .item-list { display: flex; flex-direction: column; gap: 8px; }
+    .item-card {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    .item-card .item-icon {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .item-card .item-info { flex: 1; }
+    .item-card .item-name { font-weight: 600; font-size: 14px; color: #1e293b; }
+    .item-card .item-desc { font-size: 12px; color: #64748b; margin-top: 2px; }
+    .item-card .item-actions { display: flex; gap: 6px; }
+
+    .category-section {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .category-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .category-count {
+      font-size: 12px;
+      color: #64748b;
+      background: #e2e8f0;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 16px;
+      padding: 30px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .modal-header h3 { font-size: 18px; color: #1e293b; }
+    .modal-close {
+      width: 32px; height: 32px;
+      border: none;
+      background: #f1f5f9;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      color: #64748b;
+    }
+
+    .feedback-item {
+      padding: 16px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .feedback-item:last-child { border-bottom: none; }
+    .feedback-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .feedback-type { padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 500; }
+    .type-suggest { background: #dbeafe; color: #1d4ed8; }
+    .type-bug { background: #fee2e2; color: #dc2626; }
+    .type-fix { background: #fef3c7; color: #d97706; }
+    .type-praise { background: #dcfce7; color: #16a34a; }
+    .feedback-time { font-size: 12px; color: #94a3b8; }
+    .feedback-content { color: #334155; font-size: 14px; line-height: 1.6; }
+    .feedback-contact { font-size: 12px; color: #64748b; margin-top: 8px; }
+
+    .loading { text-align: center; padding: 40px; color: #64748b; }
+    .empty { text-align: center; padding: 40px; color: #94a3b8; }
+
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #1e293b;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      z-index: 2000;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.3s;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.success { background: #10b981; }
+    .toast.error { background: #ef4444; }
+
+    .view-section { display: none; }
+    .view-section.active { display: block; }
+  </style>
+</head>
+<body>
+
+<div class="login-bg" id="loginBox">
+  <div class="login-box">
+    <div class="logo">
+      <div class="logo-icon">🏔️</div>
+      <h1>iHangzhou 管理后台</h1>
+      <p>CMS 内容管理系统</p>
+    </div>
+    <form id="loginForm">
+      <div class="form-group">
+        <label>管理密码</label>
+        <input type="password" id="password" placeholder="请输入管理密码" required>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">登录</button>
+      <p class="error" id="errorMsg"></p>
+    </form>
+  </div>
+</div>
+
+<div class="dashboard" id="dashboard">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h2>🏔️ iHangzhou</h2>
+      <p>内容管理系统</p>
+    </div>
+    <div class="nav-item active" data-view="overview"><span class="icon">📊</span><span>数据概览</span></div>
+    <div class="nav-item" data-view="categories"><span class="icon">📁</span><span>分类管理</span></div>
+    <div class="nav-item" data-view="hotServices"><span class="icon">🔥</span><span>热门服务</span></div>
+    <div class="nav-item" data-view="hotKeywords"><span class="icon">🔍</span><span>热门搜索</span></div>
+    <div class="nav-item" data-view="channels"><span class="icon">📺</span><span>频道管理</span></div>
+    <div class="nav-item" data-view="analytics"><span class="icon">📈</span><span>访问统计</span></div>
+    <div class="nav-item" data-view="feedback"><span class="icon">💬</span><span>用户反馈</span></div>
+  </div>
+
+  <div class="main">
+    <div class="view-section active" id="view-overview">
+      <div class="header-bar">
+        <h1>📊 数据概览</h1>
+        <div class="user-info">
+          <span id="versionInfo" style="font-size:12px;color:#64748b;"></span>
+          <button class="logout-btn" onclick="logout()">退出</button>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><h3>分类数</h3><div class="value" id="statCategories">0</div></div>
+        <div class="stat-card"><h3>服务条目</h3><div class="value" id="statItems">0</div></div>
+        <div class="stat-card"><h3>热门服务</h3><div class="value" id="statHotServices">0</div></div>
+        <div class="stat-card"><h3>热门关键词</h3><div class="value" id="statKeywords">0</div></div>
+        <div class="stat-card"><h3>总点击量</h3><div class="value" id="statClicks">0</div></div>
+        <div class="stat-card"><h3>用户反馈</h3><div class="value" id="statFeedbacks">0</div></div>
+      </div>
+    </div>
+
+    <div class="view-section" id="view-categories">
+      <div class="header-bar">
+        <h1>📁 分类管理</h1>
+        <button class="btn btn-success" onclick="showAddCategory()">+ 新增分类</button>
+      </div>
+      <div id="categoriesList"></div>
+    </div>
+
+    <div class="view-section" id="view-hotServices">
+      <div class="header-bar">
+        <h1>🔥 热门服务</h1>
+        <button class="btn btn-success" onclick="showAddHotService()">+ 新增</button>
+      </div>
+      <div id="hotServicesList"></div>
+    </div>
+
+    <div class="view-section" id="view-hotKeywords">
+      <div class="header-bar">
+        <h1>🔍 热门搜索词</h1>
+        <button class="btn btn-success" onclick="showAddKeyword()">+ 新增</button>
+      </div>
+      <div id="keywordsList"></div>
+    </div>
+
+    <div class="view-section" id="view-channels">
+      <div class="header-bar">
+        <h1>📺 频道管理</h1>
+        <button class="btn btn-success" onclick="showAddChannel()">+ 新增频道</button>
+      </div>
+      <div id="channelsList"></div>
+    </div>
+
+    <div class="view-section" id="view-analytics">
+      <div class="header-bar"><h1>📈 访问统计</h1></div>
+      <div class="panel">
+        <div class="panel-header"><span class="panel-title">热门服务点击排行</span></div>
+        <div id="analyticsHotList"><div class="loading">加载中...</div></div>
+      </div>
+    </div>
+
+    <div class="view-section" id="view-feedback">
+      <div class="header-bar"><h1>💬 用户反馈</h1></div>
+      <div class="panel">
+        <div id="feedbackList"><div class="loading">加载中...</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">编辑</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var API_BASE = '';
+var CMS_DATA = null;
+var ADMIN_PASSWORD = localStorage.getItem('ihangzhou_admin_pwd') || '';
+
+if (ADMIN_PASSWORD) { initDashboard(); }
+
+document.getElementById('loginForm').onsubmit = function(e) {
+  e.preventDefault();
+  var pwd = document.getElementById('password').value;
+  if (pwd) {
+    ADMIN_PASSWORD = pwd;
+    localStorage.setItem('ihangzhou_admin_pwd', pwd);
+    initDashboard();
+  }
+};
+
+function logout() {
+  localStorage.removeItem('ihangzhou_admin_pwd');
+  ADMIN_PASSWORD = '';
+  location.reload();
+}
+
+function initDashboard() {
+  document.getElementById('loginBox').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  loadCMSData();
+  setupNavigation();
+}
+
+async function loadCMSData() {
+  try {
+    var res = await fetch(API_BASE + '/api/content');
+    var result = await res.json();
+    if (result.success) {
+      CMS_DATA = result.data;
+      renderOverview();
+      renderCategories();
+      renderHotServices();
+      renderKeywords();
+      renderChannels();
+    }
+  } catch (e) { showToast('加载数据失败', 'error'); }
+}
+
+function setupNavigation() {
+  document.querySelectorAll('.nav-item').forEach(function(item) {
+    item.onclick = function() {
+      document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('active'); });
+      this.classList.add('active');
+      var view = this.dataset.view;
+      document.querySelectorAll('.view-section').forEach(function(v) { v.classList.remove('active'); });
+      document.getElementById('view-' + view).classList.add('active');
+      if (view === 'analytics') loadAnalytics();
+      if (view === 'feedback') loadFeedback();
+    };
+  });
+}
+
+async function apiCall(method, body) {
+  var res = await fetch(API_BASE + '/api/content', {
+    method: method,
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + ADMIN_PASSWORD },
+    body: JSON.stringify(body)
+  });
+  return res.json();
+}
+
+function renderOverview() {
+  if (!CMS_DATA) return;
+  document.getElementById('versionInfo').textContent = 'v' + (CMS_DATA.version || 1);
+  var totalItems = 0;
+  CMS_DATA.categories.forEach(function(c) { totalItems += c.items.length; });
+  document.getElementById('statCategories').textContent = CMS_DATA.categories.length;
+  document.getElementById('statItems').textContent = totalItems;
+  document.getElementById('statHotServices').textContent = CMS_DATA.hotServices.length;
+  document.getElementById('statKeywords').textContent = CMS_DATA.hotKeywords.length;
+}
+
+function renderCategories() {
+  if (!CMS_DATA) return;
+  var html = '';
+  CMS_DATA.categories.forEach(function(cat, catIdx) {
+    html += '<div class="category-section"><div class="category-header">' +
+      '<div class="category-title"><span>' + cat.icon + '</span><span>' + cat.name + '</span>' +
+      '<span class="category-count">' + cat.items.length + ' 项</span></div>' +
+      '<div><button class="btn btn-sm btn-primary" onclick="showAddItem(' + catIdx + ')">+ 添加条目</button> ' +
+      '<button class="btn btn-sm btn-danger" onclick="deleteCategory(' + catIdx + ')">删除分类</button></div></div>' +
+      '<div class="item-list" style="padding:12px;">';
+    cat.items.forEach(function(item, itemIdx) {
+      html += '<div class="item-card"><div class="item-icon" style="background:' + (item.color || '#0ea5e9') + ';">' + (item.icon || '📌') + '</div>' +
+        '<div class="item-info"><div class="item-name">' + item.name + '</div><div class="item-desc">' + item.desc + '</div></div>' +
+        '<div class="item-actions"><button class="btn btn-sm btn-primary" onclick="editItem(' + catIdx + ',' + itemIdx + ')">编辑</button>' +
+        '<button class="btn btn-sm btn-danger" onclick="deleteItem(' + catIdx + ',' + itemIdx + ')">删除</button></div></div>';
+    });
+    html += '</div></div>';
+  });
+  document.getElementById('categoriesList').innerHTML = html || '<div class="empty">暂无分类</div>';
+}
+
+function showAddCategory() {
+  showModal('新增分类',
+    '<div class="form-group"><label>分类ID（英文）</label><input id="catId" placeholder="如: traffic"></div>' +
+    '<div class="form-group"><label>分类名称</label><input id="catName" placeholder="如: 交通出行"></div>' +
+    '<div class="form-group"><label>图标</label><input id="catIcon" value="📁"></div>' +
+    '<div class="form-actions"><button class="btn btn-primary" onclick="addCategory()">保存</button></div>');
+}
+
+async function addCategory() {
+  var id = document.getElementById('catId').value.trim();
+  var name = document.getElementById('catName').value.trim();
+  var icon = document.getElementById('catIcon').value.trim() || '📁';
+  if (!id || !name) { showToast('请填写完整', 'error'); return; }
+  var res = await apiCall('POST', { type: 'category', data: { id, name, icon } });
+  if (res.success) { CMS_DATA = res.data; renderCategories(); renderOverview(); closeModal(); showToast('添加成功', 'success'); }
+  else { showToast(res.error || '添加失败', 'error'); }
+}
+
+async function deleteCategory(idx) {
+  if (!confirm('确定删除该分类及其所有条目？')) return;
+  var cat = CMS_DATA.categories[idx];
+  var res = await apiCall('DELETE', { type: 'category', categoryId: cat.id });
+  if (res.success) { CMS_DATA = res.data; renderCategories(); renderOverview(); showToast('删除成功', 'success'); }
+}
+
+function showAddItem(catIdx) {
+  showModal('添加条目 - ' + CMS_DATA.categories[catIdx].name,
+    '<div class="form-group"><label>名称</label><input id="itemName" placeholder="服务名称"></div>' +
+    '<div class="form-group"><label>描述</label><input id="itemDesc" placeholder="简短描述"></div>' +
+    '<div class="form-group"><label>链接URL</label><input id="itemUrl" placeholder="https://..."></div>' +
+    '<div class="form-group"><label>颜色</label><input id="itemColor" type="color" value="#0ea5e9"></div>' +
+    '<div class="form-group"><label>图标</label><input id="itemIcon" value="📌"></div>' +
+    '<div class="form-actions"><button class="btn btn-primary" onclick="addItem(' + catIdx + ')">保存</button></div>');
+}
+
+async function addItem(catIdx) {
+  var cat = CMS_DATA.categories[catIdx];
+  var item = {
+    name: document.getElementById('itemName').value.trim(),
+    desc: document.getElementById('itemDesc').value.trim(),
+    url: document.getElementById('itemUrl').value.trim(),
+    color: document.getElementById('itemColor').value,
+    icon: document.getElementById('itemIcon').value.trim() || '📌'
+  };
+  if (!item.name) { showToast('请填写名称', 'error'); return; }
+  var res = await apiCall('POST', { type: 'item', categoryId: cat.id, item: item });
+  if (res.success) { CMS_DATA = res.data; renderCategories(); renderOverview(); closeModal(); showToast('添加成功', 'success'); }
+  else { showToast(res.error || '添加失败', 'error'); }
+}
+
+function editItem(catIdx, itemIdx) {
+  var cat = CMS_DATA.categories[catIdx];
+  var item = cat.items[itemIdx];
+  showModal('编辑条目',
+    '<div class="form-group"><label>名称</label><input id="editName" value="' + escapeHtml(item.name) + '"></div>' +
+    '<div class="form-group"><label>描述</label><input id="editDesc" value="' + escapeHtml(item.desc) + '"></div>' +
+    '<div class="form-group"><label>链接URL</label><input id="editUrl" value="' + (item.url || '') + '"></div>' +
+    '<div class="form-group"><label>颜色</label><input id="editColor" type="color" value="' + (item.color || '#0ea5e9') + '"></div>' +
+    '<div class="form-group"><label>图标</label><input id="editIcon" value="' + (item.icon || '📌') + '"></div>' +
+    '<div class="form-actions"><button class="btn btn-primary" onclick="updateItem(' + catIdx + ',' + itemIdx + ')">保存</button></div>');
+}
+
+async function updateItem(catIdx, itemIdx) {
+  var cat = CMS_DATA.categories[catIdx];
+  var data = {
+    name: document.getElementById('editName').value.trim(),
+    desc: document.getElementById('editDesc').value.trim(),
+    url: document.getElementById('editUrl').value.trim(),
+    color: document.getElementById('editColor').value,
+    icon: document.getElementById('editIcon').value.trim()
+  };
+  var res = await apiCall('PUT', { type: 'item', categoryId: cat.id, itemIndex: itemIdx, data: data });
+  if (res.success) { CMS_DATA = res.data; renderCategories(); closeModal(); showToast('保存成功', 'success'); }
+  else { showToast(res.error || '保存失败', 'error'); }
+}
+
+async function deleteItem(catIdx, itemIdx) {
+  if (!confirm('确定删除该条目？')) return;
+  var cat = CMS_DATA.categories[catIdx];
+  var res = await apiCall('DELETE', { type: 'item', categoryId: cat.id, itemIndex: itemIdx });
+  if (res.success) { CMS_DATA = res.data; renderCategories(); renderOverview(); showToast('删除成功', 'success'); }
+}
+
+function renderHotServices() {
+  if (!CMS_DATA) return;
+  var html = '';
+  CMS_DATA.hotServices.forEach(function(item, idx) {
+    html += '<div class="item-card"><div class="item-icon" style="background:' + (item.color || '#0ea5e9') + ';">' + item.icon + '</div>' +
+      '<div class="item-info"><div class="item-name">' + item.name + '</div><div class="item-desc">' + item.desc + '</div></div>' +
+      '<div class="item-actions"><button class="btn btn-sm btn-primary" onclick="editHotService(' + idx + ')">编辑</button>' +
+      '<button class="btn btn-sm btn-danger" onclick="deleteHotService(' + idx + ')">删除</button></div></div>';
+  });
+  document.getElementById('hotServicesList').innerHTML = html || '<div class="empty">暂无热门服务</div>';
+}
+
+function showAddHotService() {
+  showModal('添加热门服务',
+    '<div class="form-group"><label>名称</label><input id="hsName" placeholder="服务名称"></div>' +
+    '<div class="form-group"><label>描述</label><input id="hsDesc" placeholder="简短描述"></div>' +
+    '<div class="form-group"><label>图标</label><input id="hsIcon" value="🔥"></div>' +
+    '<div class="form-group"><label>颜色</label><input id="hsColor" type="color" value="#ef4444"></div>' +
+    '<div class="form-group"><label>链接URL</label><input id="hsUrl" placeholder="https://... (可选)"></div>' +
+    '<div class="form-group"><label>动作</label><input id="hsAction" placeholder="xianxing/tide/weather (可选)"></div>' +
+    '<div class="form-actions"><button class="btn btn-primary" onclick="addHotService()">保存</button></div>');
+}
+
+async function addHotService() {
+  var item = {
+    name: document.getElementById('hsName').value.trim(),
+    desc: document.getElementById('hsDesc').value.trim(),
+    icon: document.getElementById('hsIcon').value.trim() || '🔥',
+    color: document.getElementById('hsColor').value,
+    url: document.getElementById('hsUrl').value.trim(),
+    action: document.getElementById('hsAction').value.trim()
+  };
+  if (!item.name) { showToast('请填写名称', 'error'); return; }
+  var res = await apiCall('POST', { type: 'hotService', item: item });
+  if (res.success) { CMS_DATA = res.data; renderHotServices(); renderOverview(); closeModal(); showToast('添加成功', 'success'); }
+}
+
+function editHotService(idx) {
+  var item = CMS_DATA.hotServices[idx];
+  showModal('编辑热门服务',
+    '<div class="form-group"><label>名称</label><input id="editHsName" value="' + escapeHtml(item.name) + '"></div>' +
+    '<div class="form-group"><label>描述</label><input id="editHsDesc" value="' + escapeHtml(item.desc) + '"></div>' +
+    '<div class="form-group"><label>图标</label><input id="editHsIcon" value="' + item.icon + '"></div>' +
+    '<div class="form-group"><label>颜色</label><input id="editHsColor" type="color" value="' + (item.color || '#ef4444') + '"></div>' +
+    '<div class="form-group"><label>链接URL</label><input id="editHsUrl" value="' + (item.url || '') + '"></div>' +
+    '<div class="form-group"><label>动作</label><input id="editHsAction" value="' + (item.action || '') + '"></div>' +
+    '<div class="form-actions"><button class="btn btn-primary" onclick="updateHotService(' + idx + ')">保存</button></div>');
+}
+
+async function updateHotService(idx) {
+  var data = {
+    name: document.getElementById('editHsName').value.trim(),
+    desc: document.getElementById('editHsDesc').value.trim(),
+    icon: document.getElementById('editHsIcon').value.trim(),
+    color: document.getElementById('editHsColor').value,
+    url: document.getElementById('editHsUrl').value.trim(),
+    action: document.getElementById('editHsAction').value.trim()
+  };
+  var res = await apiCall('PUT', { type: 'hotService', itemIndex: idx, data: data });
+  if (res.success) { CMS_DATA = res.data; renderHotServices(); closeModal(); showToast('保存成功', 'success'); }
+}
+
+async function deleteHotService(idx) {
+  if (!confirm('确定删除？')) return;
+  var res = await apiCall('DELETE', { type: 'hotService', itemIndex: idx });
+  if (res.success) { CMS_DATA = res.data; renderHotServices(); renderOverview(); showToast('删除成功', 'success'); }
+}
+
+function renderKeywords() {
+  if (!CMS_DATA) return;
+  var html = '';
+  CMS_DATA.hotKeywords.forEach(function(kw, idx) {
+    html += '<div class="item-card"><div class="item-info"><div class="item-name">' + kw + '</div></div>' +
+      '<div class="item-actions"><button class="btn btn-sm btn-primary" onclick="editKeyword(' + idx + ')">编辑</button>' +
+      '<button class="btn btn-sm btn-danger" onclick="deleteKeyword(' + idx + ',\'' + kw + '\')">删除</button></div></div>';
+  });
+  document.getElementById('keywordsList').innerHTML = html || '<div class="empty">暂无关键词</div>';
+}
+
+function showAddKeyword() {
+  showModal('添加热门关键词',
+    '<div class="form-group"><label>关键词</label><input id="kwValue" placeholder="如: 消费券"></div>' +
+    '<div class="form-actions"><button class="btn btn-primary" onclick="addKeyword()">保存</button></div>');
+}
+
+async function addKeyword() {
+  var keyword = document.getElementById('kwValue').value.trim();
+  if (!keyword) { showToast('请填写关键词', 'error'); return; }
+  var res = await apiCall('POST', { type: 'hotKeyword', data: { keyword: keyword } });
+  if (res.success) { CMS_DATA = res.data; renderKeywords(); renderOverview(); closeModal(); showToast('添加成功', 'success'); }
+}
+
+function editKeyword(idx) {
+  var kw = CMS_DATA.hotKeywords[idx];
+  showModal('编辑关键词',
+    '<div class="form-group"><label>关键词</label><input id="editKwValue" value="' + escapeHtml(kw) + '"></div>' +
+    '<div class="form-actions"><button class="btn btn-primary" onclick="updateKeyword(' + idx + ')">保存</button></div>');
+}
+
+async function updateKeyword(idx) {
+  var keyword = document.getElementById('editKwValue').value.trim();
+  if (!keyword) { showToast('请填写关键词', 'error'); return; }
+  var res = await apiCall('PUT', { type: 'hotKeyword', itemIndex: idx, data: { keyword: keyword } });
+  if (res.success) { CMS_DATA = res.data; renderKeywords(); closeModal(); showToast('保存成功', 'success'); }
+}
+
+async function deleteKeyword(idx, kw) {
+  if (!confirm('确定删除该关键词？')) return;
+  var res = await apiCall('DELETE', { type: 'hotKeyword', keyword: kw });
+  if (res.success) { CMS_DATA = res.data; renderKeywords(); renderOverview(); showToast('删除成功', 'success'); }
+}
+
+function renderChannels() {
+  if (!CMS_DATA) return;
+  var html = '';
+  CMS_DATA.channels.forEach(function(ch, idx) {
+    html += '<div class="item-card"><div class="item-icon" style="background:#0ea5e9;">' + ch.icon + '</div>' +
+      '<div class="item-info"><div class="item-name">' + ch.name + '</div><div class="item-desc">ID: ' + ch.id + ' | 子分类: ' + (ch.subs || []).join(', ') + '</div></div>' +
+      '<div class="item-actions"><button class="btn btn-sm btn-primary" onclick="editChannel(' + idx + ')">编辑</button>' +
+      '<button class="btn btn-sm btn-danger" onclick="deleteChannel(' + idx + ')">删除</button></div></div>';
+  });
+  document.getElementById('channelsList').innerHTML = html || '<div class="empty">暂无频道</div>';
+}
+
+function showAddChannel() {
+  showModal('添加频道',
+    '<div class="form-group"><label>频道ID</label><input id="chId" placeholder="如: ch_life"></div>' +
+    '<div class="form-group"><label>频道名称</label><input id="chName" placeholder="如: 生活"></div>' +
+    '<div class="form-group"><label>图标</label><input id="chIcon" value="📺"></div>' +
+    '<div class="form-group"><label>子分类ID（逗号分隔）</label><input id="chSubs" placeholder="life, tool"></div>' +
+    '<div class="form-actions"><button class="btn btn-primary" onclick="addChannel()">保存</button></div>');
+}
+
+async function addChannel() {
+  var id = document.getElementById('chId').value.trim();
+  var name = document.getElementById('chName').value.trim();
+  var icon = document.getElementById('chIcon').value.trim() || '📺';
+  var subs = document.getElementById('chSubs').value.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+  if (!id || !name) { showToast('请填写完整', 'error'); return; }
+  var res = await apiCall('POST', { type: 'channel', data: { id, name, icon, subs } });
+  if (res.success) { CMS_DATA = res.data; renderChannels(); closeModal(); showToast('添加成功', 'success'); }
+}
+
+function editChannel(idx) {
+  var ch = CMS_DATA.channels[idx];
+  showModal('编辑频道',
+    '<div class="form-group"><label>频道名称</label><input id="editChName" value="' + escapeHtml(ch.name) + '"></div>' +
+    '<div class="form-group"><label>图标</label><input id="editChIcon" value="' + ch.icon + '"></div>' +
+    '<div class="form-group"><label>子分类ID（逗号分隔）</label><input id="editChSubs" value="' + (ch.subs || []).join(', ') + '"></div>' +
+    '<div class="form-actions"><button class="btn btn-primary" onclick="updateChannel(' + idx + ')">保存</button></div>');
+}
+
+async function updateChannel(idx) {
+  var ch = CMS_DATA.channels[idx];
+  var data = {
+    name: document.getElementById('editChName').value.trim(),
+    icon: document.getElementById('editChIcon').value.trim(),
+    subs: document.getElementById('editChSubs').value.split(',').map(function(s) { return s.trim(); }).filter(Boolean)
+  };
+  var res = await apiCall('PUT', { type: 'channel', categoryId: ch.id, data: data });
+  if (res.success) { CMS_DATA = res.data; renderChannels(); closeModal(); showToast('保存成功', 'success'); }
+}
+
+async function deleteChannel(idx) {
+  if (!confirm('确定删除该频道？')) return;
+  var ch = CMS_DATA.channels[idx];
+  var res = await apiCall('DELETE', { type: 'channel', categoryId: ch.id });
+  if (res.success) { CMS_DATA = res.data; renderChannels(); showToast('删除成功', 'success'); }
+}
+
+async function loadAnalytics() {
+  try {
+    var res = await fetch(API_BASE + '/api/track?action=stats', {
+      headers: { 'Authorization': 'Bearer ' + ADMIN_PASSWORD }
+    });
+    if (res.ok) {
+      var data = await res.json();
+      if (data.success) {
+        document.getElementById('statClicks').textContent = data.data.totalClicks || 0;
+        var html = '';
+        (data.data.topItems || []).forEach(function(item, i) {
+          html += '<div class="item-card"><div class="item-info"><span style="color:#64748b;font-size:12px;margin-right:8px;">#' + (i+1) + '</span> ' + item.name + '</div>' +
+            '<div style="color:#0ea5e9;font-weight:600;">' + item.count + ' 次</div></div>';
+        });
+        document.getElementById('analyticsHotList').innerHTML = html || '<div class="empty">暂无数据</div>';
+      }
+    }
+  } catch (e) { console.log('Analytics load failed'); }
+}
+
+async function loadFeedback() {
+  try {
+    var res = await fetch(API_BASE + '/api/feedback', {
+      headers: { 'Authorization': 'Bearer ' + ADMIN_PASSWORD }
+    });
+    if (res.ok) {
+      var data = await res.json();
+      if (data.success) {
+        document.getElementById('statFeedbacks').textContent = data.stats.total || 0;
+        var html = '';
+        (data.data || []).forEach(function(f) {
+          var typeMap = { suggest: '💡 建议', bug: '🐛 报错', fix: '✏️ 纠错', praise: '👍 好评' };
+          html += '<div class="feedback-item"><div class="feedback-header">' +
+            '<span class="feedback-type type-' + f.type + '">' + (typeMap[f.type] || f.type) + '</span>' +
+            '<span class="feedback-time">' + new Date(f.time).toLocaleString() + '</span></div>' +
+            '<div class="feedback-content">' + escapeHtml(f.content) + '</div>' +
+            (f.contact ? '<div class="feedback-contact">联系方式: ' + escapeHtml(f.contact) + '</div>' : '') +
+            '</div>';
+        });
+        document.getElementById('feedbackList').innerHTML = html || '<div class="empty">暂无反馈</div>';
+      }
+    }
+  } catch (e) { console.log('Feedback load failed'); }
+}
+
+function showModal(title, content) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalContent').innerHTML = content;
+  document.getElementById('editModal').classList.add('active');
+}
+
+function closeModal() { document.getElementById('editModal').classList.remove('active'); }
+
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type ? ' ' + type : '');
+  setTimeout(function() { t.className = 'toast'; }, 2500);
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+</script>
+</body>
+</html>
