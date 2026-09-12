@@ -12,7 +12,6 @@ function verifySignature(signature, timestamp, nonce) {
   return sha1 === signature;
 }
 
-// 从 cms.json 读取关键词
 function getWechatKeywords() {
   try {
     const p = path.join(process.cwd(), 'data', 'cms.json');
@@ -20,7 +19,7 @@ function getWechatKeywords() {
       const cms = JSON.parse(fs.readFileSync(p, 'utf8'));
       return cms.wechatKeywords || [];
     }
-  } catch (e) { console.error('Load keywords error:', e); }
+  } catch (e) {}
   return [];
 }
 
@@ -35,7 +34,6 @@ function getWechatWelcome() {
   return null;
 }
 
-// 解析 XML
 function parseXML(xml) {
   const result = {};
   const regex = /<(\w+)>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/\1>/gs;
@@ -46,13 +44,11 @@ function parseXML(xml) {
   return result;
 }
 
-// 生成回复 XML
 function generateReplyXML(toUser, fromUser, content) {
   const timestamp = Math.floor(Date.now() / 1000);
   return `<xml><ToUserName><![CDATA[${toUser}]]></ToUserName><FromUserName><![CDATA[${fromUser}]]></FromUserName><CreateTime>${timestamp}</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[${content}]]></Content></xml>`;
 }
 
-// 消息处理
 function handleMessage(msg) {
   const { MsgType, Content, Event, EventKey } = msg;
 
@@ -89,7 +85,6 @@ module.exports = async (req, res) => {
     return;
   }
 
-  // GET - URL 验证
   if (req.method === 'GET') {
     const { signature, timestamp, nonce, echostr } = req.query;
     if (signature && timestamp && nonce && echostr) {
@@ -106,57 +101,33 @@ module.exports = async (req, res) => {
     return;
   }
 
-  // POST - 接收用户消息
   if (req.method === 'POST') {
-    try {
-      let rawBody = '';
-      
-      // Debug: 看看 Vercel 给我们什么
-      console.log('Content-Type:', req.headers['content-type']);
-      console.log('req.body type:', typeof req.body, req.body ? (typeof req.body === 'string' ? req.body.substring(0, 100) : 'non-string') : 'undefined');
-      
-      if (req.body) {
-        rawBody = typeof req.body === 'string' ? req.body : (req.body.toString ? req.body.toString() : String(req.body));
-      }
-      
-      if (!rawBody || rawBody.length < 5) {
-        // 尝试手动读取
-        rawBody = await new Promise((resolve, reject) => {
-          let data = '';
-          req.on('data', chunk => { data += chunk; });
-          req.on('end', () => resolve(data));
-          req.on('error', reject);
-          setTimeout(() => resolve(data), 2000); // 最多等2秒
-        });
-      }
-      
-      console.log('rawBody length:', rawBody.length, 'content:', rawBody.substring(0, 200));
-      
-      if (!rawBody || rawBody.length < 5) {
-        res.statusCode = 200;
-        res.end('success');
-        return;
-      }
-
-      const msg = parseXML(rawBody);
-      if (!msg.MsgType) {
-        res.statusCode = 200;
-        res.end('success');
-        return;
-      }
-
-      const reply = handleMessage(msg);
-      const replyXML = generateReplyXML(msg.FromUserName, msg.ToUserName, reply);
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/xml; charset=utf-8');
-      res.end(replyXML);
-      return;
-    } catch (e) {
-      console.error('WeChat POST error:', e);
-      res.statusCode = 200;
-      res.end('success');
-      return;
+    // 直接返回 debug 信息，看看 Vercel 给了我们什么
+    const debug = {
+      method: req.method,
+      headers: req.headers,
+      bodyType: typeof req.body,
+      bodyIsBuffer: Buffer.isBuffer(req.body),
+      bodyLength: req.body ? req.body.length : 0,
+      bodyContent: req.body ? (typeof req.body === 'string' ? req.body.substring(0, 500) : JSON.stringify(req.body).substring(0, 500)) : 'null',
+      rawBodyExists: !!req.rawBody,
+      rawBodyLength: req.rawBody ? req.rawBody.length : 0
+    };
+    
+    // 也尝试从 req 读取
+    let rawBody = '';
+    if (req.rawBody) {
+      rawBody = req.rawBody.toString();
+    } else if (req.body) {
+      rawBody = typeof req.body === 'string' ? req.body : req.body.toString();
     }
+    
+    debug.rawBodyFromReq = rawBody.substring(0, 500);
+    
+    res.setHeader('Content-Type', 'application/json');
+    res.statusCode = 200;
+    res.end(JSON.stringify(debug, null, 2));
+    return;
   }
 
   res.statusCode = 405;
