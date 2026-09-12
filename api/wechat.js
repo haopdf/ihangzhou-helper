@@ -5,6 +5,13 @@ const path = require('path');
 
 const WECHAT_TOKEN = process.env.WECHAT_TOKEN || 'ihangzhou2024';
 
+// 关键：关闭 Vercel body parser 才能读取 XML 原始流
+module.exports.config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 function verifySignature(signature, timestamp, nonce) {
   const arr = [WECHAT_TOKEN, timestamp, nonce].sort();
   const str = arr.join('');
@@ -74,6 +81,16 @@ function handleMessage(msg) {
   return '暂不支持此类型消息，请回复文字。';
 }
 
+// 手动读取原始 body（bodyParser 关闭后可用）
+function readRawBody(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on('data', chunk => chunks.push(chunk));
+    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    req.on('error', reject);
+  });
+}
+
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -102,32 +119,34 @@ module.exports = async (req, res) => {
   }
 
   if (req.method === 'POST') {
-    // 直接返回 debug 信息，看看 Vercel 给了我们什么
-    const debug = {
-      method: req.method,
-      headers: req.headers,
-      bodyType: typeof req.body,
-      bodyIsBuffer: Buffer.isBuffer(req.body),
-      bodyLength: req.body ? req.body.length : 0,
-      bodyContent: req.body ? (typeof req.body === 'string' ? req.body.substring(0, 500) : JSON.stringify(req.body).substring(0, 500)) : 'null',
-      rawBodyExists: !!req.rawBody,
-      rawBodyLength: req.rawBody ? req.rawBody.length : 0
-    };
-    
-    // 也尝试从 req 读取
-    let rawBody = '';
-    if (req.rawBody) {
-      rawBody = req.rawBody.toString();
-    } else if (req.body) {
-      rawBody = typeof req.body === 'string' ? req.body : req.body.toString();
+    try {
+      const rawBody = await readRawBody(req);
+      
+      if (!rawBody || rawBody.length < 5) {
+        res.statusCode = 200;
+        res.end('success');
+        return;
+      }
+
+      const msg = parseXML(rawBody);
+      if (!msg.MsgType) {
+        res.statusCode = 200;
+        res.end('success');
+        return;
+      }
+
+      const reply = handleMessage(msg);
+      const replyXML = generateReplyXML(msg.FromUserName, msg.ToUserName, reply);
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+      res.end(replyXML);
+      return;
+    } catch (e) {
+      console.error('WeChat POST error:', e);
+      res.statusCode = 200;
+      res.end('success');
+      return;
     }
-    
-    debug.rawBodyFromReq = rawBody.substring(0, 500);
-    
-    res.setHeader('Content-Type', 'application/json');
-    res.statusCode = 200;
-    res.end(JSON.stringify(debug, null, 2));
-    return;
   }
 
   res.statusCode = 405;
