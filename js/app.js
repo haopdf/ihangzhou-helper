@@ -2305,7 +2305,7 @@ case 'colors': showColors(); break;
 
   // 共享 getter：金价数据（异步 Promise，失败 resolve null）
   function getGoldData() {
-    return fetch('/api/gold')
+    return fetch('/api/tools?action=gold')
       .then(function (r) { return r.json(); })
       .then(function (data) { return (data && data.gold) ? data : null; })
       .catch(function () { return null; });
@@ -2352,7 +2352,7 @@ case 'colors': showColors(); break;
     openModal('🚗 杭州小客车摇号',
       '<div id="yaohaoBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">🚗</div><p style="color:var(--text-muted);">正在获取最新公告...</p></div></div>'
     );
-    fetch('/api/yaohao')
+    fetch('/api/tools?action=yaohao')
       .then(function (r) { return r.json(); })
       .then(function (data) {
         if (data && data.notices) {
@@ -2560,7 +2560,7 @@ case 'colors': showColors(); break;
       '<div id="forexBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">💱</div><p style="color:var(--text-muted);">正在获取汇率...</p></div></div>'
     );
     // 优先调用本地 Vercel Serverless API，失败回退到公开 API，再失败用静态数据
-    fetch('/api/forex')
+    fetch('/api/tools?action=forex')
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (data && data.list && data.list.length) {
@@ -2642,7 +2642,7 @@ case 'colors': showColors(); break;
       html += '<p class="modal-tip">数据来源：' + (source || 'hzmetro.com') + '，以地铁公司公告为准</p></div>';
       $('#metroBox').innerHTML = html;
     };
-    fetch('/api/metro')
+    fetch('/api/tools?action=metro')
       .then(function (r) { return r.json(); })
       .then(function (data) {
         if (data && data.lines) renderMetro(data.lines, data.fare, data.source);
@@ -3156,7 +3156,7 @@ case 'colors': showColors(); break;
 
     // 异步提交，失败也走本地存档
     try {
-      fetch('/api/feedback', {
+      fetch('/api/tools?action=feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

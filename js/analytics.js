@@ -2,8 +2,8 @@
 (function() {
   'use strict';
 
-  var ANALYTICS_API = '/api/track';
-  var FEEDBACK_API = '/api/feedback';
+  var ANALYTICS_API = '/api/tools?action=track';
+  var FEEDBACK_API = '/api/tools?action=feedback';
 
   function trackClick(category, item, tabId, searchQuery) {
     var data = { category: category, item: item, tab: tabId || '', search: searchQuery || '', action: 'click', time: Date.now() };

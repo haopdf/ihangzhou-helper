@@ -793,7 +793,7 @@ async function deleteChannel(idx) {
 
 async function loadAnalytics() {
   try {
-    var res = await fetch(API_BASE + '/api/track?action=stats', {
+    var res = await fetch(API_BASE + '/api/tools?action=track&stats=1', {
       headers: { 'Authorization': 'Bearer ' + ADMIN_PASSWORD }
     });
     if (res.ok) {
@@ -813,7 +813,7 @@ async function loadAnalytics() {
 
 async function loadFeedback() {
   try {
-    var res = await fetch(API_BASE + '/api/feedback', {
+    var res = await fetch(API_BASE + '/api/tools?action=feedback', {
       headers: { 'Authorization': 'Bearer ' + ADMIN_PASSWORD }
     });
     if (res.ok) {
