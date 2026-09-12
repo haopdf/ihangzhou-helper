@@ -111,18 +111,26 @@ module.exports = async (req, res) => {
     try {
       let rawBody = '';
       
-      // Vercel 可能直接提供 body（string/buffer），也可能需要手动读取
+      // Debug: 看看 Vercel 给我们什么
+      console.log('Content-Type:', req.headers['content-type']);
+      console.log('req.body type:', typeof req.body, req.body ? (typeof req.body === 'string' ? req.body.substring(0, 100) : 'non-string') : 'undefined');
+      
       if (req.body) {
         rawBody = typeof req.body === 'string' ? req.body : (req.body.toString ? req.body.toString() : String(req.body));
-      } else {
-        // fallback: 手动读取
+      }
+      
+      if (!rawBody || rawBody.length < 5) {
+        // 尝试手动读取
         rawBody = await new Promise((resolve, reject) => {
           let data = '';
           req.on('data', chunk => { data += chunk; });
           req.on('end', () => resolve(data));
           req.on('error', reject);
+          setTimeout(() => resolve(data), 2000); // 最多等2秒
         });
       }
+      
+      console.log('rawBody length:', rawBody.length, 'content:', rawBody.substring(0, 200));
       
       if (!rawBody || rawBody.length < 5) {
         res.statusCode = 200;
