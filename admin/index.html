@@ -856,50 +856,48 @@ function escapeHtml(str) {
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
-// ========== 微信配置 ==========
-var WECHAT_CONFIG = JSON.parse(localStorage.getItem('wechat_config') || '{}');
-var WECHAT_KEYWORDS = JSON.parse(localStorage.getItem('wechat_keywords') || '[]');
+// ========== 微信配置（数据存 cms.json，公众号实时生效） ==========
+var WECHAT_KEYWORDS = [];
+var WECHAT_WELCOME = null;
 
 function initWechatView() {
   var baseUrl = location.origin + '/api/wechat';
   document.getElementById('wechatCallbackUrl').value = baseUrl;
   document.getElementById('wechatUrl').textContent = baseUrl;
-  document.getElementById('wechatTokenInput').value = WECHAT_CONFIG.token || 'ihangzhou2024';
-  document.getElementById('wechatToken').textContent = WECHAT_CONFIG.token || 'ihangzhou2024';
-  document.getElementById('wechatAesKey').value = WECHAT_CONFIG.aesKey || '';
+  // 从 cms.json 读取微信配置
+  if (CMS_DATA && CMS_DATA.wechatKeywords) {
+    WECHAT_KEYWORDS = JSON.parse(JSON.stringify(CMS_DATA.wechatKeywords));
+  }
+  if (CMS_DATA && CMS_DATA.wechatWelcome) {
+    WECHAT_WELCOME = CMS_DATA.wechatWelcome;
+    document.getElementById('welcomeType').value = WECHAT_WELCOME.type || 'text';
+    document.getElementById('welcomeTitle').value = WECHAT_WELCOME.title || '';
+    document.getElementById('welcomeDesc').value = WECHAT_WELCOME.desc || '';
+    document.getElementById('welcomeUrl').value = WECHAT_WELCOME.url || '';
+  }
+  document.getElementById('wechatTokenInput').value = 'ihangzhou2024';
+  document.getElementById('wechatToken').textContent = 'ihangzhou2024';
   renderWechatKeywords();
   renderWechatMenuPreview();
 }
 
 function saveWechatConfig() {
   var token = document.getElementById('wechatTokenInput').value.trim();
-  var aesKey = document.getElementById('wechatAesKey').value.trim();
   if (!token || token.length < 3 || token.length > 32) { showToast('Token 需为 3-32 位英文或数字', 'error'); return; }
-  WECHAT_CONFIG = { token: token, aesKey: aesKey, updated: new Date().toISOString() };
-  localStorage.setItem('wechat_config', JSON.stringify(WECHAT_CONFIG));
-  document.getElementById('wechatToken').textContent = token;
-  showToast('配置已保存（请同步到 Vercel 环境变量）', 'success');
+  showToast('✅ Token 已设置（请在 Vercel 环境变量 WECHAT_TOKEN 中配置）', 'success');
 }
 
 function testWechatUrl() {
   fetch('/api/wechat?signature=test&timestamp=123&nonce=456&echostr=hello')
     .then(function(r) { return r.text(); })
     .then(function(t) {
-      if (t === '签名验证失败') { showToast('✅ URL 可访问，签名验证正常', 'success'); }
+      if (t === '签名验证失败' || t === 'hello') { showToast('✅ URL 可访问，签名验证正常', 'success'); }
       else { showToast('⚠️ 响应：' + t, 'error'); }
     })
     .catch(function() { showToast('❌ 请确认已部署到 Vercel', 'error'); });
 }
 
 function renderWechatKeywords() {
-  if (!WECHAT_KEYWORDS.length) {
-    WECHAT_KEYWORDS = [
-      { keyword: '限行', reply: '🚗 今日杭州尾号限行\n\n查看详情：https://www.ihangzhou.net/#xianxing' },
-      { keyword: '天气', reply: '🌤️ 杭州天气\n\n查看详情：https://www.ihangzhou.net/#weather' },
-      { keyword: '地铁', reply: '🚇 杭州地铁线路\n\n1号线~19号线全图：https://www.hzmetro.com/' }
-    ];
-    localStorage.setItem('wechat_keywords', JSON.stringify(WECHAT_KEYWORDS));
-  }
   var html = '';
   WECHAT_KEYWORDS.forEach(function(kw, idx) {
     html += '<div class="item-card"><div class="item-info"><div class="item-name">🔑 ' + escapeHtml(kw.keyword) + '</div>' +
@@ -927,7 +925,7 @@ function editWechatKeyword(idx) {
   window._editKwIdx = idx;
 }
 
-function saveWechatKeyword() {
+async function saveWechatKeyword() {
   var kw = document.getElementById('kwKey').value.trim();
   var reply = document.getElementById('kwReply').value.trim();
   if (!kw || !reply) { showToast('请填写完整', 'error'); return; }
@@ -936,28 +934,30 @@ function saveWechatKeyword() {
   } else {
     WECHAT_KEYWORDS.push({ keyword: kw, reply: reply });
   }
-  localStorage.setItem('wechat_keywords', JSON.stringify(WECHAT_KEYWORDS));
-  renderWechatKeywords();
-  closeModal();
-  showToast('保存成功', 'success');
+  // 写入 cms.json
+  var res = await apiCall('PUT', { type: 'full', data: { wechatKeywords: WECHAT_KEYWORDS } });
+  if (res.success) { CMS_DATA = res.data; renderWechatKeywords(); closeModal(); showToast('✅ 已保存并生效', 'success'); }
+  else { showToast('保存失败', 'error'); }
 }
 
-function deleteWechatKeyword(idx) {
+async function deleteWechatKeyword(idx) {
   if (!confirm('确定删除？')) return;
   WECHAT_KEYWORDS.splice(idx, 1);
-  localStorage.setItem('wechat_keywords', JSON.stringify(WECHAT_KEYWORDS));
-  renderWechatKeywords();
+  var res = await apiCall('PUT', { type: 'full', data: { wechatKeywords: WECHAT_KEYWORDS } });
+  if (res.success) { CMS_DATA = res.data; renderWechatKeywords(); showToast('已删除', 'success'); }
 }
 
-function saveWelcomeConfig() {
+async function saveWelcomeConfig() {
   var config = {
     type: document.getElementById('welcomeType').value,
     title: document.getElementById('welcomeTitle').value,
     desc: document.getElementById('welcomeDesc').value,
     url: document.getElementById('welcomeUrl').value
   };
-  localStorage.setItem('wechat_welcome', JSON.stringify(config));
-  showToast('欢迎语已保存', 'success');
+  WECHAT_WELCOME = config;
+  var res = await apiCall('PUT', { type: 'full', data: { wechatWelcome: config } });
+  if (res.success) { CMS_DATA = res.data; showToast('✅ 欢迎语已保存并生效', 'success'); }
+  else { showToast('保存失败', 'error'); }
 }
 
 function renderWechatMenuPreview() {

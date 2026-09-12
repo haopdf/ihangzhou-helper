@@ -29,6 +29,19 @@
     ]},
     { "id": "celebrity", "name": "杭州名人", "icon": "👤", "items": [] }
   ],
+  "wechatKeywords": [
+    { "keyword": "限行", "reply": "🚗 今日杭州尾号限行\n\n查看详情：https://www.ihangzhou.net/#xianxing" },
+    { "keyword": "天气", "reply": "🌤️ 杭州天气\n\n查看详情：https://www.ihangzhou.net/#weather" },
+    { "keyword": "地铁", "reply": "🚇 杭州地铁线路\n\n全图：https://www.hzmetro.com/" },
+    { "keyword": "公积金", "reply": "🏠 杭州公积金\n\n查询入口：https://gjj.hangzhou.gov.cn/" },
+    { "keyword": "社保", "reply": "🏥 杭州社保\n\n查询入口：https://www.zjzwfw.gov.cn/" }
+  ],
+  "wechatWelcome": {
+    "type": "text",
+    "title": "欢迎关注 iHangzhou · 杭州生活助手 🏔️",
+    "desc": "回复数字获取服务：\n1 - 今日限行\n2 - 杭州天气\n3 - 地铁线路\n4 - 公积金\n5 - 社保查询",
+    "url": "https://www.ihangzhou.net/"
+  },
   "channels": [
     { "id": "ch_banshi", "name": "办事", "icon": "🏛️", "subs": ["banshi"] },
     { "id": "ch_traffic", "name": "出行", "icon": "🗺️", "subs": ["traffic"] },
