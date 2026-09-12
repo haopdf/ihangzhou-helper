@@ -2,6 +2,10 @@
   "version": 2,
   "builds": [
     {
+      "src": "api/wechat.js",
+      "use": "@vercel/edge"
+    },
+    {
       "src": "api/**/*.js",
       "use": "@vercel/node"
     },
@@ -11,6 +15,14 @@
     }
   ],
   "routes": [
+    {
+      "src": "/api/wechat$",
+      "dest": "/api/wechat.js"
+    },
+    {
+      "src": "/api/wechat.*",
+      "dest": "/api/wechat.js"
+    },
     {
       "src": "/api/([a-z]+)$",
       "dest": "/api/$1.js"

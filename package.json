@@ -1,0 +1,28 @@
+{
+  "name": "ihangzhou-helper",
+  "version": "1.0.0",
+  "description": "> 杭州人的数字生活工具箱 —— 政务办事、交通出行、民生服务一站导航\r >\r > 🌐 官方域名：**ihz.inanyang.com**",
+  "main": "check-links.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haopdf/ihangzhou-helper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haopdf/ihangzhou-helper/issues"
+  },
+  "homepage": "https://github.com/haopdf/ihangzhou-helper#readme",
+  "dependencies": {
+    "body-parser": "^2.3.0",
+    "express": "^5.2.1",
+    "micro": "^10.0.1"
+  }
+}
