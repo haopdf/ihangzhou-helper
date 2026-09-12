@@ -9,7 +9,7 @@ function verifySignature(signature, timestamp, nonce) {
   const arr = [WECHAT_TOKEN, timestamp, nonce].sort();
   const str = arr.join('');
   const sha1 = crypto.createHash('sha1').update(str).digest('hex');
-  return sha1 === str;
+  return sha1 === signature;
 }
 
 // 从 cms.json 读取关键词
@@ -31,11 +31,11 @@ function getWechatWelcome() {
       const cms = JSON.parse(fs.readFileSync(p, 'utf8'));
       return cms.wechatWelcome || null;
     }
-  } catch (e) { return null; }
+  } catch (e) {}
   return null;
 }
 
-// 解析 XML（兼容 CDATA）
+// 解析 XML
 function parseXML(xml) {
   const result = {};
   const regex = /<(\w+)>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/\1>/gs;
@@ -56,14 +56,12 @@ function generateReplyXML(toUser, fromUser, content) {
 function handleMessage(msg) {
   const { MsgType, Content, Event, EventKey } = msg;
 
-  // 关注事件
   if (MsgType === 'event' && Event === 'subscribe') {
     const welcome = getWechatWelcome();
     if (welcome) return welcome.title + '\n\n' + welcome.desc + (welcome.url ? '\n\n' + welcome.url : '');
     return '欢迎关注 iHangzhou · 杭州生活助手 🏔️\n\n回复关键词获取服务，或访问：https://www.ihangzhou.net/';
   }
 
-  // 文字消息 - 动态匹配后台配置的关键词
   if (MsgType === 'text') {
     const key = Content.trim();
     const keywords = getWechatKeywords();
@@ -72,7 +70,6 @@ function handleMessage(msg) {
         return kw.reply;
       }
     }
-    // 默认回复
     const welcome = getWechatWelcome();
     if (welcome) return welcome.title + '\n\n' + welcome.desc;
     return '您好！感谢关注 iHangzhou 🏔️\n\n回复关键词获取服务。';
@@ -112,14 +109,22 @@ module.exports = async (req, res) => {
   // POST - 接收用户消息
   if (req.method === 'POST') {
     try {
-      // 手动读取 raw body（Vercel 不会自动解析 XML）
-      const chunks = [];
-      for await (const chunk of req) {
-        chunks.push(chunk);
-      }
-      const rawBody = Buffer.concat(chunks).toString('utf8');
+      let rawBody = '';
       
-      if (!rawBody) {
+      // Vercel 可能直接提供 body（string/buffer），也可能需要手动读取
+      if (req.body) {
+        rawBody = typeof req.body === 'string' ? req.body : (req.body.toString ? req.body.toString() : String(req.body));
+      } else {
+        // fallback: 手动读取
+        rawBody = await new Promise((resolve, reject) => {
+          let data = '';
+          req.on('data', chunk => { data += chunk; });
+          req.on('end', () => resolve(data));
+          req.on('error', reject);
+        });
+      }
+      
+      if (!rawBody || rawBody.length < 5) {
         res.statusCode = 200;
         res.end('success');
         return;
