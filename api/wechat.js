@@ -1,73 +1,128 @@
-// Vercel Edge Function - 微信公众号回调接口
-// Edge Runtime 使用标准 Web API，可以读取任意 Content-Type 的 body
-export const config = {
-  runtime: 'edge',
-  regions: ['iad1'],
-};
+// Vercel Serverless Function - 微信公众号回调接口（原生无依赖写法）
+// 参考：aiwechat-vercel / spark-wechat-vercel 项目
+const crypto = require('crypto');
 
-const WECHAT_TOKEN = 'ihangzhou2024';
+const WECHAT_TOKEN = process.env.WECHAT_TOKEN || 'ihangzhou2024';
 
-// 默认关键词
-const KEYWORDS = [
-  { keyword: '1', reply: '🚗 今日杭州尾号限行\n\nhttps://www.ihangzhou.net/#xianxing' },
-  { keyword: '2', reply: '🌤️ 杭州天气\n\nhttps://www.ihangzhou.net/#weather' },
-  { keyword: '3', reply: '🚇 杭州地铁线路\n\nhttps://www.hzmetro.com/' },
-  { keyword: '4', reply: '🏠 杭州公积金\n\nhttps://gjj.hangzhou.gov.cn/' },
-  { keyword: '5', reply: '🏥 杭州社保\n\nhttps://www.zjzwfw.gov.cn/' },
-  { keyword: '限行', reply: '🚗 今日杭州尾号限行\n\nhttps://www.ihangzhou.net/#xianxing' },
-  { keyword: '天气', reply: '🌤️ 杭州天气\n\nhttps://www.ihangzhou.net/#weather' },
-  { keyword: '地铁', reply: '🚇 杭州地铁线路\n\nhttps://www.hzmetro.com/' },
-  { keyword: '公积金', reply: '🏠 杭州公积金\n\nhttps://gjj.hangzhou.gov.cn/' },
-  { keyword: '社保', reply: '🏥 杭州社保\n\nhttps://www.zjzwfw.gov.cn/' },
-];
-
-const WELCOME_TITLE = '欢迎关注 iHangzhou · 杭州生活助手 🏔️';
-const WELCOME_DESC = '回复数字获取服务：\n1 - 今日限行\n2 - 杭州天气\n3 - 地铁线路\n4 - 公积金\n5 - 社保查询';
-const WELCOME_URL = 'https://www.ihangzhou.net/';
-
-async function verifySignature(signature, timestamp, nonce) {
+// ========== 签名验证 ==========
+function verifySignature(signature, timestamp, nonce) {
   const arr = [WECHAT_TOKEN, timestamp, nonce].sort();
   const str = arr.join('');
-  const hashBuffer = await crypto.subtle.digest('SHA-1', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('') === signature;
+  const sha1 = crypto.createHash('sha1').update(str).digest('hex');
+  return sha1 === signature;
 }
 
+// ========== XML 解析（微信公众号消息是 XML 格式） ==========
 function parseXML(xml) {
   const result = {};
+  if (!xml) return result;
   const regex = /<(\w+)>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/\1>/gs;
   let m;
-  while ((m = regex.exec(xml)) !== null) result[m[1]] = m[2];
+  while ((m = regex.exec(xml)) !== null) {
+    result[m[1]] = m[2];
+  }
   return result;
 }
 
+// ========== 生成回复 XML ==========
 function genReply(to, from, content) {
-  return `<xml><ToUserName><![CDATA[${to}]]></ToUserName><FromUserName><![CDATA[${from}]]></FromUserName><CreateTime>${Math.floor(Date.now()/1000)}</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[${content}]]></Content></xml>`;
+  const ts = Math.floor(Date.now() / 1000);
+  return `<xml><ToUserName><![CDATA[${to}]]></ToUserName><FromUserName><![CDATA[${from}]]></FromUserName><CreateTime>${ts}</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[${content}]]></Content></xml>`;
 }
 
-function handle(msg) {
-  if (msg.MsgType === 'event' && msg.Event === 'subscribe') return WELCOME_TITLE + '\n\n' + WELCOME_DESC + '\n\n' + WELCOME_URL;
+// ========== 关键词匹配 ==========
+// 从环境变量读取关键词配置（JSON格式）
+// 格式: [{"keyword":"限行","reply":"今日限行..."}]
+function getKeywords() {
+  try {
+    const env = process.env.WECHAT_KEYWORDS;
+    if (env) return JSON.parse(env);
+  } catch (e) {}
+  return [];
+}
+
+function getWelcome() {
+  try {
+    return process.env.WECHAT_WELCOME || '欢迎关注 iHangzhou · 杭州生活助手\n\n回复关键词获取信息：限行、地铁、天气';
+  } catch (e) {
+    return '欢迎关注 iHangzhou · 杭州生活助手';
+  }
+}
+
+// ========== 消息处理 ==========
+function handleMessage(msg) {
+  // 关注事件
+  if (msg.MsgType === 'event' && msg.Event === 'subscribe') {
+    return getWelcome();
+  }
+  
+  // 文字消息 - 关键词匹配
   if (msg.MsgType === 'text') {
-    const key = (msg.Content || '').trim();
-    for (const kw of KEYWORDS) if (kw.keyword && key.includes(kw.keyword)) return kw.reply;
-    return WELCOME_TITLE + '\n\n' + WELCOME_DESC;
+    const key = (msg.Content || '').trim().toLowerCase();
+    const keywords = getKeywords();
+    
+    for (const kw of keywords) {
+      if (kw.keyword && key.includes(kw.keyword.toLowerCase())) {
+        return kw.reply;
+      }
+    }
+    
+    // 无匹配时返回默认欢迎语
+    return getWelcome();
   }
-  return '请回复文字。';
+  
+  return '请回复文字消息。';
 }
 
-export default async function(req) {
+// ========== Vercel Serverless Function 入口 ==========
+module.exports = async function handler(req, res) {
+  // GET 请求 - 微信服务器验证 URL
   if (req.method === 'GET') {
-    const u = new URL(req.url);
-    const sig = u.searchParams.get('signature'), ts = u.searchParams.get('timestamp'), nonce = u.searchParams.get('nonce'), echo = u.searchParams.get('echostr');
-    if (sig && ts && nonce && echo && await verifySignature(sig, ts, nonce)) return new Response(echo, {status:200});
-    return new Response('iHangzhou WeChat API', {status:200});
+    const { signature, timestamp, nonce, echostr } = req.query || {};
+    if (signature && timestamp && nonce && echostr && verifySignature(signature, timestamp, nonce)) {
+      res.status(200).send(echostr);
+    } else {
+      res.status(200).send('iHangzhou WeChat API');
+    }
+    return;
   }
+  
+  // POST 请求 - 微信推送用户消息
   if (req.method === 'POST') {
-    const xml = await req.text();
-    const msg = parseXML(xml);
-    if (!msg.MsgType) return new Response('success', {status:200});
-    return new Response(genReply(msg.FromUserName, msg.ToUserName, handle(msg)), {
-      status: 200, headers: {'Content-Type': 'application/xml; charset=utf-8'}
-    });
+    try {
+      // 关键：Vercel 会自动解析 body，XML 内容在 req.body 中
+      // 如果 body 是 string，直接用；如果是 Buffer，转 string；如果是对象，说明已被解析
+      let xml = '';
+      if (typeof req.body === 'string') {
+        xml = req.body;
+      } else if (Buffer.isBuffer(req.body)) {
+        xml = req.body.toString('utf-8');
+      } else if (req.body && typeof req.body === 'object') {
+        // Vercel 有时会以 string 形式放在 body 中
+        xml = req.body.toString ? req.body.toString() : String(req.body);
+      }
+      
+      if (!xml || xml.length < 10) {
+        res.status(200).send('success');
+        return;
+      }
+      
+      const msg = parseXML(xml);
+      if (!msg.MsgType) {
+        res.status(200).send('success');
+        return;
+      }
+      
+      const reply = handleMessage(msg);
+      res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+      res.status(200).send(genReply(msg.FromUserName, msg.ToUserName, reply));
+    } catch (e) {
+      console.error('WeChat handler error:', e);
+      res.status(200).send('success');
+    }
+    return;
   }
-  return new Response('Method Not Allowed', {status: 405});
-}
+  
+  // 其他方法
+  res.status(405).send('Method Not Allowed');
+};

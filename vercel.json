@@ -2,10 +2,6 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/wechat.js",
-      "use": "@vercel/edge"
-    },
-    {
       "src": "api/**/*.js",
       "use": "@vercel/node"
     },
