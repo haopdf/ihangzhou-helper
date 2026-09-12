@@ -312,6 +312,7 @@
     <div class="nav-item" data-view="hotKeywords"><span class="icon">🔍</span><span>热门搜索</span></div>
     <div class="nav-item" data-view="channels"><span class="icon">📺</span><span>频道管理</span></div>
     <div class="nav-item" data-view="analytics"><span class="icon">📈</span><span>访问统计</span></div>
+    <div class="nav-item" data-view="wechat"><span class="icon">💚</span><span>微信配置</span></div>
     <div class="nav-item" data-view="feedback"><span class="icon">💬</span><span>用户反馈</span></div>
   </div>
 
@@ -374,12 +375,54 @@
       </div>
     </div>
 
-    <div class="view-section" id="view-feedback">
-      <div class="header-bar"><h1>💬 用户反馈</h1></div>
-      <div class="panel">
-        <div id="feedbackList"><div class="loading">加载中...</div></div>
-      </div>
-    </div>
+<div class="view-section" id="view-feedback">
+<div class="header-bar"><h1>💬 用户反馈</h1></div>
+<div class="panel">
+<div id="feedbackList"><div class="loading">加载中...</div></div>
+</div>
+</div>
+
+<div class="view-section" id="view-wechat">
+<div class="header-bar"><h1>💚 微信公众号配置</h1></div>
+<div class="panel">
+<div class="panel-header"><span class="panel-title">接入配置（填入微信公众号后台）</span></div>
+<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px;margin-bottom:20px;">
+<p style="font-weight:600;color:#166534;margin-bottom:8px;">📋 在微信公众平台 → 开发 → 基本配置 中填写：</p>
+<table style="width:100%;font-size:14px;border-collapse:collapse;">
+<tr style="border-bottom:1px solid #bbf7d0;"><td style="padding:8px 0;color:#166534;width:120px;">URL</td><td style="padding:8px 0;color:#1e293b;font-family:monospace;" id="wechatUrl">-</td></tr>
+<tr style="border-bottom:1px solid #bbf7d0;"><td style="padding:8px 0;color:#166534;">Token</td><td style="padding:8px 0;color:#1e293b;font-family:monospace;" id="wechatToken">-</td></tr>
+<tr style="border-bottom:1px solid #bbf7d0;"><td style="padding:8px 0;color:#166534;">EncodingAESKey</td><td style="padding:8px 0;color:#1e293b;font-family:monospace;">随机生成即可</td></tr>
+<tr><td style="padding:8px 0;color:#166534;">消息加解密</td><td style="padding:8px 0;color:#1e293b;">推荐：兼容模式</td></tr>
+</table>
+</div>
+<div class="form-group"><label>回调 URL（复制到微信后台）</label><input id="wechatCallbackUrl" readonly style="background:#f8fafc;"></div>
+<div class="form-group"><label>Token（3-32位英文/数字，自定义）</label><input id="wechatTokenInput" placeholder="如: ihangzhou2024"></div>
+<div class="form-group"><label>EncodingAESKey（可选，43位随机字符）</label><input id="wechatAesKey" placeholder="留空则随机生成" maxlength="43"></div>
+<button class="btn btn-primary" onclick="saveWechatConfig()">保存配置</button>
+<button class="btn btn-success" onclick="testWechatUrl()" style="margin-left:8px;">测试 URL 验证</button>
+</div>
+
+<div class="panel">
+<div class="panel-header"><span class="panel-title">📰 关键词自动回复</span></div>
+<div class="item-list" id="wechatKeywords"></div>
+<button class="btn btn-sm btn-primary" onclick="addWechatKeyword()" style="margin-top:12px;">+ 添加关键词</button>
+</div>
+
+<div class="panel">
+<div class="panel-header"><span class="panel-title">📊 关注后自动回复（欢迎语）</span></div>
+<div class="form-group"><label>回复内容类型</label><select id="welcomeType"><option value="text">文字</option><option value="news">图文</option></select></div>
+<div class="form-group"><label>欢迎文字 / 图文标题</label><input id="welcomeTitle" value="欢迎关注 iHangzhou · 杭州生活助手 🏔️"></div>
+<div class="form-group"><label>描述 / 图文描述</label><textarea id="welcomeDesc">杭州人的数字生活工具箱。办事/出行/民生/特色服务一站导航。</textarea></div>
+<div class="form-group"><label>跳转链接</label><input id="welcomeUrl" value="https://www.ihangzhou.net/"></div>
+<button class="btn btn-primary" onclick="saveWelcomeConfig()">保存欢迎语</button>
+</div>
+
+<div class="panel">
+<div class="panel-header"><span class="panel-title">🍔 自定义菜单</span><button class="btn btn-sm btn-success" onclick="syncWechatMenu()">同步菜单到公众号</button></div>
+<p style="font-size:13px;color:#64748b;margin-bottom:12px;">点击"同步菜单"将以下菜单推送到微信公众号（需先配置 AppID/AppSecret）</p>
+<div id="wechatMenuPreview" style="border:1px solid #e2e8f0;border-radius:8px;padding:16px;background:#f8fafc;"></div>
+</div>
+</div>
   </div>
 </div>
 
@@ -812,6 +855,141 @@ function escapeHtml(str) {
   if (!str) return '';
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
+
+// ========== 微信配置 ==========
+var WECHAT_CONFIG = JSON.parse(localStorage.getItem('wechat_config') || '{}');
+var WECHAT_KEYWORDS = JSON.parse(localStorage.getItem('wechat_keywords') || '[]');
+
+function initWechatView() {
+  var baseUrl = location.origin + '/api/wechat';
+  document.getElementById('wechatCallbackUrl').value = baseUrl;
+  document.getElementById('wechatUrl').textContent = baseUrl;
+  document.getElementById('wechatTokenInput').value = WECHAT_CONFIG.token || 'ihangzhou2024';
+  document.getElementById('wechatToken').textContent = WECHAT_CONFIG.token || 'ihangzhou2024';
+  document.getElementById('wechatAesKey').value = WECHAT_CONFIG.aesKey || '';
+  renderWechatKeywords();
+  renderWechatMenuPreview();
+}
+
+function saveWechatConfig() {
+  var token = document.getElementById('wechatTokenInput').value.trim();
+  var aesKey = document.getElementById('wechatAesKey').value.trim();
+  if (!token || token.length < 3 || token.length > 32) { showToast('Token 需为 3-32 位英文或数字', 'error'); return; }
+  WECHAT_CONFIG = { token: token, aesKey: aesKey, updated: new Date().toISOString() };
+  localStorage.setItem('wechat_config', JSON.stringify(WECHAT_CONFIG));
+  document.getElementById('wechatToken').textContent = token;
+  showToast('配置已保存（请同步到 Vercel 环境变量）', 'success');
+}
+
+function testWechatUrl() {
+  fetch('/api/wechat?signature=test&timestamp=123&nonce=456&echostr=hello')
+    .then(function(r) { return r.text(); })
+    .then(function(t) {
+      if (t === '签名验证失败') { showToast('✅ URL 可访问，签名验证正常', 'success'); }
+      else { showToast('⚠️ 响应：' + t, 'error'); }
+    })
+    .catch(function() { showToast('❌ 请确认已部署到 Vercel', 'error'); });
+}
+
+function renderWechatKeywords() {
+  if (!WECHAT_KEYWORDS.length) {
+    WECHAT_KEYWORDS = [
+      { keyword: '限行', reply: '🚗 今日杭州尾号限行\n\n查看详情：https://www.ihangzhou.net/#xianxing' },
+      { keyword: '天气', reply: '🌤️ 杭州天气\n\n查看详情：https://www.ihangzhou.net/#weather' },
+      { keyword: '地铁', reply: '🚇 杭州地铁线路\n\n1号线~19号线全图：https://www.hzmetro.com/' }
+    ];
+    localStorage.setItem('wechat_keywords', JSON.stringify(WECHAT_KEYWORDS));
+  }
+  var html = '';
+  WECHAT_KEYWORDS.forEach(function(kw, idx) {
+    html += '<div class="item-card"><div class="item-info"><div class="item-name">🔑 ' + escapeHtml(kw.keyword) + '</div>' +
+      '<div class="item-desc">' + escapeHtml(kw.reply.substring(0, 60)) + '...</div></div>' +
+      '<div class="item-actions"><button class="btn btn-sm btn-primary" onclick="editWechatKeyword(' + idx + ')">编辑</button>' +
+      '<button class="btn btn-sm btn-danger" onclick="deleteWechatKeyword(' + idx + ')">删除</button></div></div>';
+  });
+  document.getElementById('wechatKeywords').innerHTML = html || '<div class="empty">暂无关键词</div>';
+}
+
+function addWechatKeyword() {
+  showModal('添加关键词回复',
+    '<div class="form-group"><label>关键词</label><input id="kwKey" placeholder="如: 社保"></div>' +
+    '<div class="form-group"><label>回复内容</label><textarea id="kwReply" rows="4" placeholder="回复文字，支持链接"></textarea></div>' +
+    '<div class="form-actions"><button class="btn btn-primary" onclick="saveWechatKeyword()">保存</button></div>');
+  window._editKwIdx = -1;
+}
+
+function editWechatKeyword(idx) {
+  var kw = WECHAT_KEYWORDS[idx];
+  showModal('编辑关键词回复',
+    '<div class="form-group"><label>关键词</label><input id="kwKey" value="' + escapeHtml(kw.keyword) + '"></div>' +
+    '<div class="form-group"><label>回复内容</label><textarea id="kwReply" rows="4">' + escapeHtml(kw.reply) + '</textarea></div>' +
+    '<div class="form-actions"><button class="btn btn-primary" onclick="saveWechatKeyword()">保存</button></div>');
+  window._editKwIdx = idx;
+}
+
+function saveWechatKeyword() {
+  var kw = document.getElementById('kwKey').value.trim();
+  var reply = document.getElementById('kwReply').value.trim();
+  if (!kw || !reply) { showToast('请填写完整', 'error'); return; }
+  if (window._editKwIdx >= 0) {
+    WECHAT_KEYWORDS[window._editKwIdx] = { keyword: kw, reply: reply };
+  } else {
+    WECHAT_KEYWORDS.push({ keyword: kw, reply: reply });
+  }
+  localStorage.setItem('wechat_keywords', JSON.stringify(WECHAT_KEYWORDS));
+  renderWechatKeywords();
+  closeModal();
+  showToast('保存成功', 'success');
+}
+
+function deleteWechatKeyword(idx) {
+  if (!confirm('确定删除？')) return;
+  WECHAT_KEYWORDS.splice(idx, 1);
+  localStorage.setItem('wechat_keywords', JSON.stringify(WECHAT_KEYWORDS));
+  renderWechatKeywords();
+}
+
+function saveWelcomeConfig() {
+  var config = {
+    type: document.getElementById('welcomeType').value,
+    title: document.getElementById('welcomeTitle').value,
+    desc: document.getElementById('welcomeDesc').value,
+    url: document.getElementById('welcomeUrl').value
+  };
+  localStorage.setItem('wechat_welcome', JSON.stringify(config));
+  showToast('欢迎语已保存', 'success');
+}
+
+function renderWechatMenuPreview() {
+  document.getElementById('wechatMenuPreview').innerHTML =
+    '<div style="display:flex;gap:20px;justify-content:center;">' +
+    '<div style="text-align:center;"><div style="width:60px;height:50px;background:#0ea5e9;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;">🏠</div><span style="font-size:12px;color:#64748b;">首页</span></div>' +
+    '<div style="text-align:center;"><div style="width:60px;height:50px;background:#10b981;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;">🛠️</div><span style="font-size:12px;color:#64748b;">工具</span></div>' +
+    '<div style="text-align:center;"><div style="width:60px;height:50px;background:#f59e0b;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;">📋</div><span style="font-size:12px;color:#64748b;">更多 ▼</span></div>' +
+    '</div>';
+}
+
+function syncWechatMenu() {
+  showToast('ℹ️ 需要配置 AppID/AppSecret 环境变量', 'success');
+}
+
+// 切换到微信配置页时初始化
+var origSetupNav = setupNavigation;
+setupNavigation = function() {
+  origSetupNav();
+  document.querySelectorAll('.nav-item').forEach(function(item) {
+    item.onclick = function() {
+      document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('active'); });
+      this.classList.add('active');
+      var view = this.dataset.view;
+      document.querySelectorAll('.view-section').forEach(function(v) { v.classList.remove('active'); });
+      document.getElementById('view-' + view).classList.add('active');
+      if (view === 'analytics') loadAnalytics();
+      if (view === 'feedback') loadFeedback();
+      if (view === 'wechat') initWechatView();
+    };
+  });
+};
 </script>
 </body>
 </html>
