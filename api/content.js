@@ -1,6 +1,7 @@
-// Vercel Serverless Function - CMS 内容管理 API
+// Vercel Serverless Function - CMS 内容管理 API（使用 Vercel Blob 持久化）
+// 需要配置: BLOB_READ_WRITE_TOKEN（在 Vercel 创建 Blob Storage 后自动获得）
+
 const ADMIN_PASSWORD = process.env.CMS_ADMIN_PASSWORD || 'ihangzhou2024';
-const CMS_FILE = './data/cms.json';
 
 function checkAuth(req) {
   const authHeader = req.headers.authorization;
@@ -10,24 +11,37 @@ function checkAuth(req) {
   return token === ADMIN_PASSWORD;
 }
 
-function readCMS() {
+// 备用默认内容
+const DEFAULT_CMS = require('../data/cms.json');
+
+async function readCMS() {
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token) return DEFAULT_CMS;
   try {
-    const fs = require('fs');
-    if (fs.existsSync(CMS_FILE)) {
-      return JSON.parse(fs.readFileSync(CMS_FILE, 'utf8'));
-    }
-  } catch (e) { console.error('Read CMS error:', e); }
-  return { categories: [], hotServices: [], hotKeywords: [], channels: [] };
+    const res = await fetch(`https://blob.vercel.store/cms-data.json`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (res.ok) return await res.json();
+  } catch (e) { console.error('Blob read error:', e); }
+  return DEFAULT_CMS;
 }
 
-function writeCMS(data) {
+async function writeCMS(data) {
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token) { console.error('No BLOB_READ_WRITE_TOKEN'); return false; }
   try {
-    const fs = require('fs');
     data.lastModified = new Date().toISOString();
     data.version = (data.version || 0) + 1;
-    fs.writeFileSync(CMS_FILE, JSON.stringify(data, null, 2));
-    return true;
-  } catch (e) { console.error('Write CMS error:', e); return false; }
+    const res = await fetch(`https://blob.vercel.store/cms-data.json`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    return res.ok;
+  } catch (e) { console.error('Blob write error:', e); return false; }
 }
 
 module.exports = async (req, res) => {
@@ -37,18 +51,17 @@ module.exports = async (req, res) => {
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  // GET - 公开读取
   if (req.method === 'GET') {
-    return res.status(200).json({ success: true, data: readCMS() });
+    const data = await readCMS();
+    return res.status(200).json({ success: true, data });
   }
 
   if (!checkAuth(req)) return res.status(401).json({ success: false, error: '需要认证' });
 
-  // POST - 新增
   if (req.method === 'POST') {
     try {
       const { type, categoryId, item, data } = req.body;
-      const cms = readCMS();
+      const cms = await readCMS();
       switch (type) {
         case 'category':
           if (!data || !data.id || !data.name) return res.status(400).json({ success: false, error: '分类需要 id 和 name' });
@@ -76,16 +89,15 @@ module.exports = async (req, res) => {
           break;
         default: return res.status(400).json({ success: false, error: '未知类型' });
       }
-      if (writeCMS(cms)) return res.status(200).json({ success: true, data: cms });
+      if (await writeCMS(cms)) return res.status(200).json({ success: true, data: cms });
       return res.status(500).json({ success: false, error: '保存失败' });
     } catch (error) { return res.status(500).json({ success: false, error: error.message }); }
   }
 
-  // PUT - 更新
   if (req.method === 'PUT') {
     try {
       const { type, categoryId, itemIndex, data } = req.body;
-      const cms = readCMS();
+      const cms = await readCMS();
       switch (type) {
         case 'category':
           if (!categoryId || !data) return res.status(400).json({ success: false, error: '参数不全' });
@@ -121,16 +133,15 @@ module.exports = async (req, res) => {
           break;
         default: return res.status(400).json({ success: false, error: '未知类型' });
       }
-      if (writeCMS(cms)) return res.status(200).json({ success: true, data: cms });
+      if (await writeCMS(cms)) return res.status(200).json({ success: true, data: cms });
       return res.status(500).json({ success: false, error: '保存失败' });
     } catch (error) { return res.status(500).json({ success: false, error: error.message }); }
   }
 
-  // DELETE - 删除
   if (req.method === 'DELETE') {
     try {
       const { type, categoryId, itemIndex, keyword } = req.body;
-      const cms = readCMS();
+      const cms = await readCMS();
       switch (type) {
         case 'category':
           if (!categoryId) return res.status(400).json({ success: false, error: '需要 categoryId' });
@@ -162,7 +173,7 @@ module.exports = async (req, res) => {
           break;
         default: return res.status(400).json({ success: false, error: '未知类型' });
       }
-      if (writeCMS(cms)) return res.status(200).json({ success: true, data: cms });
+      if (await writeCMS(cms)) return res.status(200).json({ success: true, data: cms });
       return res.status(500).json({ success: false, error: '保存失败' });
     } catch (error) { return res.status(500).json({ success: false, error: error.message }); }
   }

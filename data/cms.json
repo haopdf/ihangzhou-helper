@@ -30,6 +30,11 @@
     { "id": "celebrity", "name": "杭州名人", "icon": "👤", "items": [] }
   ],
   "wechatKeywords": [
+    { "keyword": "1", "reply": "🚗 今日杭州尾号限行\n\n查看详情：https://www.ihangzhou.net/#xianxing" },
+    { "keyword": "2", "reply": "🌤️ 杭州天气\n\n查看详情：https://www.ihangzhou.net/#weather" },
+    { "keyword": "3", "reply": "🚇 杭州地铁线路\n\n全图：https://www.hzmetro.com/" },
+    { "keyword": "4", "reply": "🏠 杭州公积金\n\n查询入口：https://gjj.hangzhou.gov.cn/" },
+    { "keyword": "5", "reply": "🏥 杭州社保\n\n查询入口：https://www.zjzwfw.gov.cn/" },
     { "keyword": "限行", "reply": "🚗 今日杭州尾号限行\n\n查看详情：https://www.ihangzhou.net/#xianxing" },
     { "keyword": "天气", "reply": "🌤️ 杭州天气\n\n查看详情：https://www.ihangzhou.net/#weather" },
     { "keyword": "地铁", "reply": "🚇 杭州地铁线路\n\n全图：https://www.hzmetro.com/" },
