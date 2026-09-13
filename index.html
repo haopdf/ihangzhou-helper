@@ -27,7 +27,7 @@
   <link rel="canonical" href="https://www.ihangzhou.net/">
   <link rel="manifest" href="manifest.json">
   <title>iHangzhou · 杭州生活助手</title>
-  <link rel="stylesheet" href="css/style.css?v=20260911a">
+  <link rel="stylesheet" href="css/style.css?v=20260926d
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%230ea5e9'/%3E%3Ctext x='256' y='360' font-size='280' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'%3E杭%3C/text%3E%3C/svg%3E">
 </head>
@@ -36,11 +36,15 @@
   <!-- 顶部栏（模仿本地宝） -->
   <header class="topbar">
     <div class="topbar-city" id="citySelect">
-      <span>杭州</span><span class="city-arrow">▼</span>
+      <span id="cityName">杭州</span><span class="city-arrow">▼</span>
+      <div class="city-dropdown" id="cityDropdown">
+        <div class="city-dropdown-title">选择区县</div>
+      </div>
     </div>
     <div class="topbar-search">
       <input type="text" id="searchInput" placeholder="搜索服务..." autocomplete="off">
     </div>
+    <button class="topbar-elderly" id="elderlyBtn" onclick="toggleElderlyMode()" title="老人模式">👵 老人</button>
     <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
   </header>
 
@@ -75,6 +79,10 @@
       <a class="topic-nav-item" href="district.html">
         <span class="tn-icon">🗺️</span>
         <span class="tn-name">13区县</span>
+      </a>
+      <a class="topic-nav-item" href="articles.html">
+        <span class="tn-icon">📚</span>
+        <span class="tn-name">杭州故事</span>
       </a>
     </div>
 
@@ -384,6 +392,9 @@
         <div class="me-row" onclick="showFontSize()">
           <span class="micon">📏</span><span class="mtext">字体大小</span><span class="marrow">›</span>
         </div>
+        <div class="me-row" onclick="toggleElderlyMode()">
+          <span class="micon">👵</span><span class="mtext">老人模式 <span id="elderlyStatus" style="color:var(--text-muted);font-size:12px;">关闭</span></span><span class="marrow">›</span>
+        </div>
       </div>
 
       <div class="me-list" style="margin-top:12px;">
@@ -484,19 +495,30 @@
   </div>
 
   <script>
-    // PWA Service Worker 注册
+    // PWA Service Worker 注册 + 强制更新
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
         navigator.serviceWorker.register('/sw.js').then(function (reg) {
           console.log('iHangzhou SW registered:', reg.scope);
+          // 每次加载都检查 SW 更新
+          reg.update().then(function () {
+            if (reg.active && reg.waiting) {
+              // 有等待激活的新 SW，强制跳过等待
+              reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+            }
+          });
+          // 新 SW 激活后刷新页面
+          navigator.serviceWorker.addEventListener('controllerchange', function () {
+            location.reload();
+          });
         }).catch(function (err) {
           console.log('SW registration failed:', err);
         });
       });
     }
   </script>
-  <script src="js/app.js?v=20260928a"></script>
-  <script src="js/analytics.js"></script>
+  <script src="js/app.js?v=20260926d
+  <script src="js/analytics.js?v=20260926b"></script>
   <script>
     // 确保模态框可以关闭
     document.addEventListener('DOMContentLoaded', function() {

@@ -1,7 +1,31 @@
-// Vercel Serverless Function - 工具类接口合集（合并 forex/gold/metro/yaohao/feedback/track）
+// Vercel Serverless Function - 工具类接口合集
 // 通过 ?action=xxx 区分不同功能
 
+const { get, put } = require('@vercel/blob');
 const ADMIN_PASSWORD = process.env.CMS_ADMIN_PASSWORD || 'ihangzhou2024';
+const FEEDBACK_BLOB = 'feedbacks.json';
+
+async function readFeedbacks() {
+  try {
+    const result = await get(FEEDBACK_BLOB, { access: 'private', useCache: false });
+    if (!result) return [];
+    const reader = result.stream.getReader();
+    var chunks = [];
+    var done = false;
+    while (!done) { var r = await reader.read(); done = r.done; if (r.value) chunks.push(r.value); }
+    var text = Buffer.concat(chunks).toString('utf-8');
+    return JSON.parse(text);
+  } catch (e) { return []; }
+}
+
+async function writeFeedbacks(list) {
+  try {
+    await put(FEEDBACK_BLOB, JSON.stringify(list, null, 2), {
+      contentType: 'application/json', access: 'private', allowOverwrite: true
+    });
+    return true;
+  } catch (e) { return false; }
+}
 
 function checkAuth(req) {
   const authHeader = req.headers.authorization;
@@ -85,39 +109,29 @@ function aggregateStats(events) {
   return { topItems, totalClicks };
 }
 
-// ===== 用户反馈 =====
+// ===== 用户反馈（Blob 持久化） =====
 async function handleFeedback(req, res) {
-  const fs = require('fs');
-  const path = require('path');
-  const filePath = path.join(process.cwd(), 'data', 'feedbacks.json');
-
   if (req.method === 'GET') {
     if (!checkAuth(req)) return res.status(401).json({ success: false, error: '需要认证' });
     try {
-      if (fs.existsSync(filePath)) {
-        const feedbacks = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-        feedbacks.sort((a, b) => new Date(b.time) - new Date(a.time));
-        const stats = { total: feedbacks.length, byType: {}, pending: 0 };
-        feedbacks.forEach(f => { stats.byType[f.type] = (stats.byType[f.type] || 0) + 1; if (f.status === 'pending') stats.pending++; });
-        return res.status(200).json({ success: true, data: feedbacks, stats });
-      }
-      return res.status(200).json({ success: true, data: [], stats: { total: 0, byType: {}, pending: 0 } });
+      const feedbacks = await readFeedbacks();
+      feedbacks.sort((a, b) => new Date(b.time) - new Date(a.time));
+      const stats = { total: feedbacks.length, byType: {}, pending: 0 };
+      feedbacks.forEach(f => { stats.byType[f.type] = (stats.byType[f.type] || 0) + 1; if (f.status === 'pending') stats.pending++; });
+      return res.status(200).json({ success: true, data: feedbacks, stats });
     } catch (e) { return res.status(200).json({ success: true, data: [] }); }
   }
 
   if (req.method === 'POST') {
     try {
       const { type, content, contact, url, ua } = req.body;
-      if (!content || content.trim().length < 5) return res.status(400).json({ success: false, error: '内容太短' });
+      if (!content || content.trim().length < 2) return res.status(400).json({ success: false, error: '内容太短' });
       const feedback = { id: Date.now().toString(36) + Math.random().toString(36).substr(2), type: type || 'suggest', content: content.trim(), contact: contact || '', url: url || '', ua: ua || '', time: new Date().toISOString(), status: 'pending' };
-      const dir = path.join(process.cwd(), 'data');
-      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-      let feedbacks = [];
-      if (fs.existsSync(filePath)) { try { feedbacks = JSON.parse(fs.readFileSync(filePath, 'utf8')); } catch (e) {} }
+      let feedbacks = await readFeedbacks();
       feedbacks.push(feedback);
-      fs.writeFileSync(filePath, JSON.stringify(feedbacks, null, 2));
+      await writeFeedbacks(feedbacks);
       return res.status(200).json({ success: true, id: feedback.id });
-    } catch (error) { return res.status(500).json({ success: false, error: '提交失败' }); }
+    } catch (error) { return res.status(500).json({ success: false, error: '提交失败: ' + error.message }); }
   }
   res.status(400).json({ error: 'Invalid request' });
 }

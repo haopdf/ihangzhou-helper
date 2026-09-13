@@ -12,14 +12,14 @@
   <link rel="canonical" href="https://www.ihangzhou.net/channel.html">
   <link rel="manifest" href="manifest.json">
   <title>iHangzhou · 频道专题</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20260926d
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
 </head>
 <body>
 
   <!-- 顶部栏 -->
   <header class="topbar">
-    <a href="index.html" class="topbar-back" style="color:#fff;text-decoration:none;font-size:20px;padding:4px 8px;">‹</a>
+    <a href="index.html" class="topbar-back" style="color:#fff;text-decoration:none;font-size:20px;padding: 4px 16px;">‹</a>
     <div class="topbar-city">
       <span>杭州</span><span class="city-arrow">▼</span>
     </div>
@@ -53,11 +53,14 @@
         <span class="tip">探索更多</span>
       </div>
       <div class="channel-grid" id="relatedChannels"></div>
+
+      <!-- 相关文章 -->
+      <div id="relatedArticles"></div>
     </div>
 
     <!-- 返回首页 -->
-    <div style="text-align:center;padding:24px 16px 48px;">
-      <a href="index.html" style="display:inline-block;padding:12px 32px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;">← 返回首页</a>
+    <div style="text-align:center;padding: 24px 16px 48px 16px;">
+      <a href="index.html" style="display:inline-block;padding: 12px 16px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;">← 返回首页</a>
     </div>
   </div>
 
@@ -72,7 +75,7 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=20260910d"></script>
+  <script src="js/app.js?v=20260926d
   <script>
     // 频道专题页逻辑
     (function () {
@@ -110,6 +113,51 @@
         'coffee': ['street', 'weekend', 'food']
       };
 
+      // 根据频道关键词从 articles/index.json 匹配相关文章
+      function fetchRelatedArticles(chId, chips, categoryName) {
+        var el = document.getElementById('relatedArticles');
+        if (!el) return;
+        var allChips = (chips || []).slice(0, 3);
+        // 再加上频道名本身
+        if (categoryName) allChips.unshift(categoryName);
+
+        fetch('articles/index.json?t=' + Date.now())
+          .then(function(r) { return r.json(); })
+          .then(function(list) {
+            // 匹配：标题/摘要/分类 包含任意 chip 的
+            var matched = [];
+            list.forEach(function(a) {
+              for (var i = 0; i < allChips.length; i++) {
+                var kw = allChips[i];
+                if (!kw) continue;
+                if (a.title.indexOf(kw) >= 0 || a.summary.indexOf(kw) >= 0 || a.cat.indexOf(kw) >= 0) {
+                  matched.push(a);
+                  break;
+                }
+              }
+            });
+            // 限 5 篇
+            matched = matched.slice(0, 5);
+            if (!matched.length) { el.innerHTML = ''; return; }
+
+            el.innerHTML =
+              '<div class="section-head" style="margin-top:24px;padding:0 16px;">' +
+              '<h2>📚 相关杭州故事</h2>' +
+              '<span class="tip">共 ' + matched.length + ' 篇</span>' +
+              '</div>' +
+              '<div style="padding: 0 16px;">' +
+              matched.map(function(a) {
+                return '<a href="articles/' + a.slug + '.html" style="display:block;padding:12px 14px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;margin-bottom:8px;text-decoration:none;color:inherit;">' +
+                  '<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;">' + a.title + '</div>' +
+                  '<div style="font-size:12px;color:var(--text-muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">' + a.summary + '</div>' +
+                  '</a>';
+              }).join('') +
+              '<a href="articles.html" style="display:block;text-align:center;padding:12px;background:var(--bg-alt);border-radius:10px;color:var(--primary);font-size:13px;text-decoration:none;font-weight:500;margin-top:8px;">📖 查看全部杭州故事 →</a>' +
+              '</div>';
+          })
+          .catch(function() { /* 静默失败 */ });
+      }
+
       function getChannelId() {
         var hash = location.hash.replace('#', '');
         if (!hash) {
@@ -128,20 +176,20 @@
       function renderChannel() {
         var chId = getChannelId();
         if (!chId) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding:40px 16px;color:var(--text-muted);">频道未指定，请从<a href="index.html" style="color:var(--primary);">首页</a>进入</div>';
+          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">频道未指定，请从<a href="index.html" style="color:var(--primary);">首页</a>进入</div>';
           return;
         }
 
-        // 从 app.js DATA 中查找对应分类
+        // 从 app.js?v=20260926d DATA 中查找对应分类
         if (!window._getData) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding:40px 16px;color:var(--text-muted);">数据加载失败</div>';
+          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">数据加载失败</div>';
           return;
         }
 
         var DATA = window._getData();
         var category = DATA.categories.find(function (c) { return c.id === chId; });
         if (!category) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding:40px 16px;color:var(--text-muted);">频道「' + chId + '」未找到</div>';
+          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">频道「' + chId + '」未找到</div>';
           return;
         }
 
@@ -175,16 +223,38 @@
         // 渲染频道头部
         var header = document.getElementById('channelHeader');
         header.innerHTML =
-          '<div class="ch-hero" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:32px 16px 24px;text-align:center;">' +
+          '<div class="ch-hero" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding: 32px 16px 24px 16px;text-align:center;">' +
           '<div style="font-size:56px;line-height:1;margin-bottom:8px;">' + category.icon + '</div>' +
           '<h1 style="font-size:24px;font-weight:700;margin:0;">' + category.name + '</h1>' +
           '<div style="font-size:13px;opacity:0.9;margin-top:6px;">iHangzhou · 杭州生活助手</div>' +
           '</div>';
 
-        // 渲染描述
+        // 渲染描述 + 提取关键词变成可点击 chip + 加载相关文章
         var descEl = document.getElementById('channelDesc');
-        descEl.innerHTML = '<div style="padding:16px;background:var(--bg-card);border-radius:0 0 12px 12px;margin:0 12px;font-size:14px;line-height:1.7;color:var(--text-secondary);">' +
-          (CHANNEL_DESC[chId] || '杭州' + category.name + '导航') + '</div>';
+        var descText = CHANNEL_DESC[chId] || '杭州' + category.name + '导航';
+        // 从描述里提取顿号分隔的名词短语作为 chip
+        var chips = [];
+        var tokens = descText.split(/[、，,；。]/);
+        tokens.forEach(function(t) {
+          t = t.trim();
+          if (t.length >= 2 && t.length <= 10 && !/^[a-z0-9]+$/i.test(t)) chips.push(t);
+        });
+        // 去重 + 限 8 个
+        chips = chips.filter(function(v, i, a) { return a.indexOf(v) === i; }).slice(0, 8);
+
+        var chipsHtml = chips.length ?
+          '<div class="ch-chips" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">' +
+          chips.map(function(c) {
+            return '<a class="ch-chip" href="articles.html?q=' + encodeURIComponent(c) + '" style="display:inline-block;padding:4px 12px;background:var(--bg-alt);border:1px solid var(--border);border-radius:14px;font-size:12px;color:var(--text-secondary);text-decoration:none;font-weight:500;">' + c + '</a>';
+          }).join('') + '</div>' : '';
+
+        descEl.innerHTML =
+          '<div style="padding:16px;background:var(--bg-card);border-radius:0 0 12px 12px;margin:0 16px;font-size:14px;line-height:1.7;color:var(--text-secondary);">' +
+          descText + chipsHtml +
+          '</div>';
+
+        // 相关文章区域
+        fetchRelatedArticles(chId, chips, category.name);
 
         // 渲染标题与数量
         document.getElementById('channelTitle').textContent = category.name + ' · 全部服务';
@@ -214,8 +284,8 @@
             '</div>';
         }).join('');
 
-        // 绑定服务点击 - 依赖 app.js 的 #serviceGrid 委托绑定，无需重复绑定
-        // app.js 的 handleClick 已处理 action/url/详情三种情况
+        // 绑定服务点击 - 依赖 app.js?v=20260926d 的 #serviceGrid 委托绑定，无需重复绑定
+        // app.js?v=20260926d 的 handleClick 已处理 action/url/详情三种情况
 
         // 渲染相关频道
         var related = RELATED[chId] || [];
@@ -224,17 +294,15 @@
           relEl.innerHTML = related.map(function (rid) {
             var rcat = DATA.categories.find(function (c) { return c.id === rid; });
             if (!rcat) return '';
-            return '<div class="channel-item" data-channel="' + rid + '" style="cursor:pointer;">' +
+            return '<a class="channel-item" href="channel.html#' + rid + '">' +
               '<span class="ch-icon">' + rcat.icon + '</span>' +
               '<span class="ch-name">' + rcat.name + '</span>' +
-              '</div>';
+              '</a>';
           }).join('');
+          // 点跳转后重新渲染（hashchange 会自动触发，这里补一个 scrollTo 顶部）
           relEl.querySelectorAll('.channel-item').forEach(function (el) {
             el.addEventListener('click', function () {
-              var rid = this.dataset.channel;
-              location.hash = rid;
-              renderChannel();
-              window.scrollTo(0, 0);
+              setTimeout(function(){ window.scrollTo(0, 0); }, 50);
             });
           });
         }

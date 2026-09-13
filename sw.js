@@ -1,9 +1,9 @@
 // ============================================
 // iHangzhou Service Worker
-// HTML/JS 网络优先（确保最新），CSS/图片 缓存优先
+// HTML/JS/CSS 网络优先（确保最新），图片 缓存优先
 // ============================================
 
-var CACHE_NAME = 'ihangzhou-v32';
+var CACHE_NAME = 'ihangzhou-v46';
 var CACHE_URLS = [
   '/css/style.css',
   '/manifest.json',
@@ -40,12 +40,25 @@ self.addEventListener('activate', function (event) {
   );
 });
 
+// 收到 SKIP_WAITING 消息立即激活
+self.addEventListener('message', function (event) {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
 // 请求拦截
 self.addEventListener('fetch', function (event) {
   if (event.request.method !== 'GET') return;
 
   var url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
+
+  // /api/* 始终走网络，不读缓存（确保 CMS 改动立即生效）
+  if (url.pathname.indexOf('/api/') === 0) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
 
   var isHtml = event.request.mode === 'navigate' || /\.html(\?|$)/.test(url.pathname);
   var isJs = /\.js(\?|$)/.test(url.pathname);
@@ -73,7 +86,26 @@ self.addEventListener('fetch', function (event) {
     return;
   }
 
-  // 其他资源（CSS、图片等）：缓存优先，网络回退
+  // CSS：网络优先（确保最新），失败回退缓存
+  var isCss = /\.css(\?|$)/.test(url.pathname);
+  if (isCss) {
+    event.respondWith(
+      fetch(event.request).then(function (response) {
+        if (response && response.status === 200) {
+          var clone = response.clone();
+          caches.open(CACHE_NAME).then(function (cache) {
+            cache.put(event.request, clone);
+          });
+        }
+        return response;
+      }).catch(function () {
+        return caches.match(event.request);
+      })
+    );
+    return;
+  }
+
+  // 其他资源（图片等）：缓存优先，网络回退
   event.respondWith(
     caches.match(event.request).then(function (cached) {
       if (cached) return cached;

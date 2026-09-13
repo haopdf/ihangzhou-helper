@@ -11,13 +11,13 @@
   <meta property="og:description" content="杭州14家博物馆镇馆之宝 + 开放时间 + 门票 + 参观攻略">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://www.ihangzhou.net/museum.html">
-  <link rel="stylesheet" href="css/style.css?v=20260926a">
+  <link rel="stylesheet" href="css/style.css?v=20260926d
   <style>
     /* 博物馆专题页专属样式 */
     .museum-hero {
       background: linear-gradient(135deg, #b45309, #7c2d12);
       color: #fff;
-      padding: 22px 16px 18px;
+      padding: 22px 16px 18px 16px;
       text-align: center;
     }
     .museum-hero h1 {
@@ -42,7 +42,7 @@
     }
     .museum-stats span {
       background: rgba(255,255,255,0.18);
-      padding: 4px 10px;
+      padding: 4px 16px;
       border-radius: 12px;
       font-weight: 500;
     }
@@ -51,7 +51,7 @@
     .museum-tabs {
       display: flex;
       gap: 6px;
-      padding: 10px 14px;
+      padding: 10px 16px;
       overflow-x: auto;
       background: var(--bg-card);
       border-bottom: 1px solid var(--border);
@@ -71,10 +71,9 @@
       color: var(--text-secondary);
       cursor: pointer;
       font-weight: 500;
+      font-family: inherit;
       -webkit-tap-highlight-color: transparent;
       transition: all 0.2s;
-      text-decoration: none;
-      display: inline-block;
     }
     .tab-btn.active {
       background: #b45309;
@@ -82,10 +81,19 @@
       border-color: #b45309;
     }
 
-    /* 分区内容 */
+    /* 分区内容 — tab 切换模式 */
     .museum-section {
-      padding: 14px 14px 4px;
+      display: none;
+      padding: 14px 16px 4px 16px;
       scroll-margin-top: 104px;
+    }
+    .museum-section.active {
+      display: block;
+      animation: museumFade 0.25s ease-out;
+    }
+    @keyframes museumFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .ms-title {
       font-size: 16px;
@@ -137,7 +145,7 @@
     .mc-cat {
       flex-shrink: 0;
       font-size: 10px;
-      padding: 2px 8px;
+      padding: 2px 16px;
       border-radius: 8px;
       font-weight: 600;
       background: #fef3c7;
@@ -153,7 +161,7 @@
     .mc-treasure {
       background: linear-gradient(135deg, #fffbeb, #fef3c7);
       border: 1px dashed #f59e0b;
-      padding: 8px 10px;
+      padding: 8px 16px;
       border-radius: 8px;
       font-size: 12px;
       color: #78350f;
@@ -197,7 +205,7 @@
       color: var(--text-secondary);
       line-height: 1.6;
       background: var(--bg-alt);
-      padding: 8px 10px;
+      padding: 8px 16px;
       border-radius: 8px;
       border-left: 3px solid var(--secondary);
     }
@@ -207,7 +215,7 @@
 
     /* 参观贴士 */
     .tips-section {
-      margin: 16px 14px 80px;
+      margin: 16px 16px 80px 16px;
       background: var(--bg-card);
       border-radius: 12px;
       padding: 16px;
@@ -251,7 +259,7 @@
     [data-theme="dark"] .tips-icon { background: #78350f; color: #fef3c7; }
     .back-home {
       display: block;
-      margin: 18px 14px 0;
+      margin: 18px 16px0;
       padding: 12px;
       background: linear-gradient(135deg, #b45309, #7c2d12);
       color: #fff !important;
@@ -290,14 +298,13 @@
 
   <!-- 锚点 tab -->
   <div class="museum-tabs" id="tabBar">
-    <a class="tab-btn active" href="#zh" data-target="zh">综合博物馆</a>
-    <a class="tab-btn" href="#zt" data-target="zt">专题博物馆</a>
-    <a class="tab-btn" href="#ys" data-target="ys">艺术馆</a>
-    <a class="tab-btn" href="#yz" data-target="yz">遗址类博物馆</a>
+    <button class="tab-btn active" data-target="zh">综合博物馆</button>
+    <button class="tab-btn" data-target="zt">专题博物馆</button>
+    <button class="tab-btn" data-target="ys">艺术馆</button>
+    <button class="tab-btn" data-target="yz">遗址类博物馆</button>
   </div>
 
-  <!-- 综合 -->
-  <section class="museum-section" id="zh">
+  <section class="museum-section active" id="zh">
     <h2 class="ms-title">🏛️ 综合博物馆</h2>
     <div class="ms-sub">省 / 市 / 自然，三大综合馆藏尽杭州</div>
     <div class="museum-grid">
@@ -595,7 +602,7 @@
   }
   </script>
 
-  <script src="js/app.js?v=20260928a"></script>
+  <script src="js/app.js?v=20260926d
   <script>
     // 主题持久化
     (function () {
@@ -615,45 +622,39 @@
       if (b) b.textContent = next === 'dark' ? '☀️' : '🌙';
     }
 
-    // tab 切换 + 锚点滚动
+    // tab 切换（display:none 模式，和 travel.html 一致）
     (function () {
       var tabs = document.querySelectorAll('.tab-btn');
       var sections = document.querySelectorAll('.museum-section');
 
-      function setActive(id) {
+      function activate(target) {
         tabs.forEach(function (t) {
-          t.classList.toggle('active', t.dataset.target === id);
+          t.classList.toggle('active', t.dataset.target === target);
         });
+        sections.forEach(function (s) {
+          s.classList.toggle('active', s.id === target);
+        });
+        try {
+          history.replaceState(null, '', '#tab=' + target);
+        } catch (e) {}
       }
 
-      // 点击 tab：平滑滚动到对应分区
       tabs.forEach(function (tab) {
-        tab.addEventListener('click', function (e) {
-          e.preventDefault();
-          var id = tab.dataset.target;
-          var target = document.getElementById(id);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-          setActive(id);
+        tab.addEventListener('click', function () {
+          activate(tab.dataset.target);
         });
       });
 
-      // 滚动联动：当前可视分区高亮对应 tab
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
-            setActive(entry.target.id);
-          }
-        });
-      }, { threshold: [0.3, 0.6] });
-      sections.forEach(function (s) { observer.observe(s); });
-
-      // 初始：根据 URL hash 高亮
-      var hash = location.hash.replace('#', '');
-      if (hash) {
-        setActive(hash);
-      }
+      // 初始化：根据 hash 恢复
+      try {
+        var m = location.hash.match(/tab=([a-z]+)/);
+        if (m && m[1]) {
+          var found = Array.prototype.some.call(tabs, function (t) {
+            return t.dataset.target === m[1];
+          });
+          if (found) activate(m[1]);
+        }
+      } catch (e) {}
     })();
   </script>
 </body>

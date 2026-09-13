@@ -5,8 +5,8 @@
 (function () {
   'use strict';
 
-  // ===== 内联数据 =====
-  var DATA = {
+  // ===== 内联兜底数据（CMS API 失败时使用，保证离线/PWA 可用）=====
+  var DATA_FALLBACK = {
     // 热门搜索关键词（对标本地宝热门搜索）
     hotKeywords: ["限行", "社保", "公积金", "灵隐寺", "消费券", "人才认定", "钱塘江大潮", "找工作", "公租房", "摇号", "西湖", "疫苗"],
 
@@ -14,11 +14,11 @@
     hotServices: [
       { name: "今日限行", icon: "🚗", desc: "尾号限行查询", action: "xianxing", color: "#ef4444" },
       { name: "发票抽奖", icon: "🧾", desc: "支付宝/云闪付搜索消费有奖", color: "#f59e0b" },
-      { name: "找工作", icon: "💼", desc: "事业单位/国企", url: "https://hrss.hangzhou.gov.cn/", color: "#3b82f6" },
+      { name: "找工作", icon: "💼", desc: "事业单位/国企", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=杭州招聘", color: "#3b82f6" },
       { name: "公积金", icon: "🏠", desc: "查询/提取/贷款", url: "https://gjj.hangzhou.gov.cn/", color: "#10b981" },
       { name: "浙A摇号", icon: "🚘", desc: "车牌摇号申请", url: "https://hzxkctk.cn/", color: "#ef4444" },
       { name: "灵隐寺", icon: "⛩️", desc: "门票预约", url: "https://www.lingyinsi.com/", color: "#8b5cf6" },
-      { name: "人才认定", icon: "🎓", desc: "高层次人才申请", url: "https://hrss.hangzhou.gov.cn/", color: "#06b6d4" },
+      { name: "人才认定", icon: "🎓", desc: "高层次人才申请", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=人才认定", color: "#06b6d4" },
       { name: "市民卡", icon: "💳", desc: "服务/充值", url: "https://www.96225.com/", color: "#ec4899" }
     ],
 
@@ -32,10 +32,10 @@
           { name: "公积金查询", desc: "余额/明细/提取记录", url: "https://gjj.hangzhou.gov.cn/", color: "#f59e0b", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州住房公积金查询覆盖个人账户余额、月缴存基数、单位缴存比例、提取记录与贷款额度测算。已开通线上全流程，浙里办与支付宝均可办理。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① 登录「浙里办」或「杭州公积金」APP<br>② 人脸认证后查看个人账户余额、缴存明细<br>③ 可下载缴存证明、贷款结清证明等电子凭证</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 公积金账号（如已开户）<br>• 手机号接收验证码</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州住房公积金管理中心各网点<br>市中心网点：上城区延安路126号<br>电话：0571-12329</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://gjj.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公积金 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>线上查询即时返回；2026 年缴存基数上限 34470 元、下限 2280 元；免费服务。</p></div>" },
           { name: "公积金提取", desc: "租房/购房/离职提取", url: "https://gjj.hangzhou.gov.cn/", color: "#8b5cf6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州公积金提取支持租房、购房、偿还贷款、离职、退休等多种情形。租房提取可线上秒办，资金秒到账；购房/偿还贷款提取需上传材料审核。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p><strong>租房提取</strong>（最常用，可线上办）：① 浙里办 APP 搜索「公积金提取」 ② 选择「租赁自住住房提取」 ③ 填写银行卡号，秒到账<br><strong>购房提取</strong>：上传购房合同/不动产权证/发票<br><strong>偿还贷款</strong>：上传贷款合同与还款明细</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 银行卡（一类账户）<br>• 租房提取无需额外材料<br>• 购房提取需购房合同 + 发票 + 不动产权证</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上办理：浙里办/支付宝「杭州公积金」<br>线下网点：上城区延安路126号 等</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://gjj.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公积金 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>租房提取：每月可提 1500 元，年度上限 18000 元，秒到账；购房/贷款提取：3 个工作日审核；免费服务。</p></div>" },
           { name: "公积金贷款", desc: "额度测算/还款计划", url: "https://gjj.hangzhou.gov.cn/", color: "#06b6d4" },
-          { name: "人才落户", desc: "学历/职称/技能落户", url: "http://police.hangzhou.gov.cn/", color: "#ec4899", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州人才落户政策开放度高，本科及以上学历、中级及以上职称、高级技师等均可申请。全日制普通高校本科及研究生以上学历可「先落户后就业」。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>学历落户</strong>：全日制本科 45 周岁以下，可「先落户后就业」；研究生 50 周岁以下<br>② <strong>职称落户</strong>：中级职称 45 周岁以下；副高职称 50 周岁以下；正高职称 55 周岁以下<br>③ <strong>技能落户</strong>：高级技师 45 周岁以下；技师 40 周岁以下<br>④ 在「警察叔叔」APP 或浙里办线上申请，邮件送达</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证、户口簿<br>• 学历证书 + 学信网验证报告<br>• 职称证书（职称落户）<br>• 劳动合同或社保缴纳证明（部分情形）<br>• 房产证或社区集体户证明</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：警察叔叔 APP、浙里办<br>线下：各公安户籍办理窗口<br>电话：0571-87280474</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>线上办理：1-3 个工作日审核；户口迁移证电子送达；免费。</p></div>" },
-          { name: "积分落户", desc: "积分计算/申请流程", url: "http://police.hangzhou.gov.cn/", color: "#14b8a6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州积分落户是面向非杭户籍人员的另一渠道，按年龄、学历、社保、房产、社会服务等累计积分，年度公布落户分值。适合学历较低但有稳定工作和居住的人员。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>积分申报</strong>：每年 3-6 月在浙里办提交<br>② <strong>积分核定</strong>：由公安、人社、住建等部门数据自动核定<br>③ <strong>落户分值</strong>：每年公布落户分值线，达到者可申请<br>④ <strong>户口迁移</strong>：取得落户资格后 30 日内办理迁移</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证、户口簿<br>• 居住证（在杭登记满 1 年）<br>• 社保缴纳证明（满 1 年）<br>• 房产证或租赁备案证明<br>• 学历/职称证书（加分项）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：浙里办 APP「积分落户」<br>线下：各公安户籍窗口</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>申报期：每年 3-6 月；结果公布：通常 9-10 月；免费服务。</p></div>" },
+          { name: "人才落户", desc: "学历/职称/技能落户", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=人才引进落户", color: "#ec4899", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州人才落户政策开放度高，本科及以上学历、中级及以上职称、高级技师等均可申请。全日制普通高校本科及研究生以上学历可「先落户后就业」。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>学历落户</strong>：全日制本科 45 周岁以下，可「先落户后就业」；研究生 50 周岁以下<br>② <strong>职称落户</strong>：中级职称 45 周岁以下；副高职称 50 周岁以下；正高职称 55 周岁以下<br>③ <strong>技能落户</strong>：高级技师 45 周岁以下；技师 40 周岁以下<br>④ 在「警察叔叔」APP 或浙里办线上申请，邮件送达</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证、户口簿<br>• 学历证书 + 学信网验证报告<br>• 职称证书（职称落户）<br>• 劳动合同或社保缴纳证明（部分情形）<br>• 房产证或社区集体户证明</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：警察叔叔 APP、浙里办<br>线下：各公安户籍办理窗口<br>电话：0571-87280474</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>线上办理：1-3 个工作日审核；户口迁移证电子送达；免费。</p></div>" },
+          { name: "积分落户", desc: "积分计算/申请流程", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=积分落户", color: "#14b8a6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州积分落户是面向非杭户籍人员的另一渠道，按年龄、学历、社保、房产、社会服务等累计积分，年度公布落户分值。适合学历较低但有稳定工作和居住的人员。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>积分申报</strong>：每年 3-6 月在浙里办提交<br>② <strong>积分核定</strong>：由公安、人社、住建等部门数据自动核定<br>③ <strong>落户分值</strong>：每年公布落户分值线，达到者可申请<br>④ <strong>户口迁移</strong>：取得落户资格后 30 日内办理迁移</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证、户口簿<br>• 居住证（在杭登记满 1 年）<br>• 社保缴纳证明（满 1 年）<br>• 房产证或租赁备案证明<br>• 学历/职称证书（加分项）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：浙里办 APP「积分落户」<br>线下：各公安户籍窗口</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>申报期：每年 3-6 月；结果公布：通常 9-10 月；免费服务。</p></div>" },
           { name: "居住证办理", desc: "登记/申领/签注", url: "https://www.zjzwfw.gov.cn/", color: "#84cc16", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州居住证是非杭户籍人员在杭享受公共服务（子女入学、医保、买车上牌、考驾照等）的凭证。已开通电子居住证，可通过「警察叔叔」APP 全程线上办理。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>居住登记</strong>：先在「警察叔叔」APP 或流动人口管理平台登记满 6 个月<br>② <strong>申领居住证</strong>：登记满 6 个月后在 APP 内申领<br>③ <strong>电子居住证</strong>：申领成功后自动生成电子证，与实体证同等效力<br>④ <strong>年度签注</strong>：每年签注 1 次，线上自助办理</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 居住证明（房产证 / 租赁备案 / 居住证明）<br>• 就业或就读证明（劳动合同 / 社保 / 学生证）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：警察叔叔 APP、浙里办<br>线下：各派出所户籍窗口</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://www.zjzwfw.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 浙里办 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>登记满 6 个月后申领；线上申领 1-3 个工作日审核；免费。</p></div>" },
-          { name: "身份证办理", desc: "首次申领/换领/补领", url: "http://police.hangzhou.gov.cn/", color: "#f97316", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州身份证业务支持跨省通办，外省户籍人员可在杭换领/补领身份证。首次申领仍需回户籍地（部分省份已开通跨省首次申领试点）。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>换证</strong>：到期前 3 个月内，派出所现场办或「警察叔叔」APP 预约<br>② <strong>补证</strong>：遗失后「警察叔叔」APP 申请挂失+补领<br>③ <strong>拍照</strong>：现场免费拍照（也可上传符合要求的数码照）<br>④ <strong>领取</strong>：可选择邮寄送达或现场领取</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 户口簿或旧身份证（换证）<br>• 居住证（外地户籍在杭办需）<br>• 现场采集指纹与人像</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州各公安派出所户籍窗口<br>可在「警察叔叔」APP 查询附近网点<br>电话：0571-87280474</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>办理时限：30-60 日（省内通常 15-20 日）；换证 20 元/证，补证 40 元/证。</p></div>" },
+          { name: "身份证办理", desc: "首次申领/换领/补领", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=身份证办理", color: "#f97316", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州身份证业务支持跨省通办，外省户籍人员可在杭换领/补领身份证。首次申领仍需回户籍地（部分省份已开通跨省首次申领试点）。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>换证</strong>：到期前 3 个月内，派出所现场办或「警察叔叔」APP 预约<br>② <strong>补证</strong>：遗失后「警察叔叔」APP 申请挂失+补领<br>③ <strong>拍照</strong>：现场免费拍照（也可上传符合要求的数码照）<br>④ <strong>领取</strong>：可选择邮寄送达或现场领取</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 户口簿或旧身份证（换证）<br>• 居住证（外地户籍在杭办需）<br>• 现场采集指纹与人像</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州各公安派出所户籍窗口<br>可在「警察叔叔」APP 查询附近网点<br>电话：0571-87280474</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>办理时限：30-60 日（省内通常 15-20 日）；换证 20 元/证，补证 40 元/证。</p></div>" },
           { name: "护照办理", desc: "因私出国护照申请", url: "https://s.nia.gov.cn/", color: "#a855f7", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州居民可在市内任一出入境接待大厅办理护照、港澳通行证、台湾通行证。已支持「全国通办」，外省户籍人员也可在杭办理。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>预约</strong>：在「国家移民管理局」APP 或微信小程序预约杭州接待大厅与时段<br>② <strong>到场</strong>：携带材料按预约时段到大厅，采集人像与指纹<br>③ <strong>缴费</strong>：现场扫码缴费 120 元/证<br>④ <strong>领取</strong>：选择邮寄送达或现场领取</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证原件<br>• 户口簿（首次申领，部分情形）<br>• 居住证（外地户籍在杭办需）<br>• 旧护照（换发）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州市公安局出入境管理局<br>上城区 Knox 路 1 号（出入境接待大厅）<br>各区也有分局受理点<br>电话：0571-87280770</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://s.nia.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 国家移民局 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>省内户籍：7 个工作日；外省户籍：20 日；护照 120 元/证。</p></div>" },
           { name: "港澳通行证", desc: "团队游/个人游申请", url: "https://s.nia.gov.cn/", color: "#0ea5e9" },
           { name: "台湾通行证", desc: "赴台证件办理", url: "https://s.nia.gov.cn/", color: "#22c55e" },
@@ -59,7 +59,7 @@
           { name: "发票抽奖", desc: "支付宝/云闪付搜索消费有奖", detail: "<p><strong>消费有奖（发票抽奖）</strong></p><p>杭州消费有奖活动参与方式：</p><p>① <strong>支付宝</strong>：搜索「消费有奖」或「发票管家」录入发票</p><p>② <strong>云闪付</strong>：搜索「发票抽奖」参与</p><p>③ <strong>浙里办</strong>：搜索「消费有奖」</p><p style=\"margin-top:8px;\">录入餐饮、零售等消费发票即可参与抽奖，奖金最高数万元</p><p style=\"color:var(--text-muted);font-size:13px;\">开奖周期通常为月度/季度，以官方公告为准</p>", color: "#f59e0b" },
           { name: "学历认证", desc: "学信网验证报告", url: "https://www.chsi.com.cn/", color: "#10b981" },
           { name: "房产证明", desc: "不动产登记证明", url: "https://fgj.hangzhou.gov.cn/", color: "#8b5cf6" },
-          { name: "无犯罪记录", desc: "证明开具申请", url: "http://police.hangzhou.gov.cn/", color: "#06b6d4" },
+          { name: "无犯罪记录", desc: "证明开具申请", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=无犯罪记录", color: "#06b6d4" },
           { name: "婚姻登记", desc: "结婚/离婚登记预约", url: "https://www.zjzwfw.gov.cn/", color: "#ec4899" },
           { name: "生育服务", desc: "生育登记/证明", url: "https://www.zjzwfw.gov.cn/", color: "#14b8a6" },
           { name: "工资计算器", desc: "个税/社保计算", action: "tax" },
@@ -73,8 +73,8 @@
           { name: "浙A摇号", desc: "小客车指标申请", url: "https://hzxkctk.cn/", color: "#f59e0b", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州小客车指标通过摇号或竞价方式配置。摇号每月 1 次，免费参与，中签率较低但成本低；竞价每月 1 次，价高者得，适合急需上牌者。还有浙 M 区域指标（仅限杭州部分区域行驶）。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>申请资格</strong>：杭州户籍或持居住证满 2 年，连续缴纳社保满 2 年<br>② <strong>摇号申请</strong>：在 hzxkctk.cn 注册并提交申请，每月 25 日公开摇号<br>③ <strong>竞价</strong>：每月 25 日竞价，需缴 2000 元保证金<br>④ <strong>查询中签</strong>：官网或短信通知，中签后 6 个月内上牌</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 居住证（非杭户籍）<br>• 社保缴纳证明<br>• 驾驶证（部分指标类型）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：杭州市小客车总量调控管理信息系统<br>线下：杭州市交警支队车管所</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://hzxkctk.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州小客车调控 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>摇号：每月 1 次，免费；竞价：每月 1 次，保证金 2000 元，平均成交价约 3-5 万元。</p></div>" },
           { name: "浙A竞价", desc: "车牌竞价出价", url: "https://hzxkctk.cn/", color: "#10b981" },
           { name: "浙M区域牌", desc: "区域指标申请", url: "https://hzxkctk.cn/", color: "#3b82f6" },
-          { name: "外地车限行", desc: "非浙A限行规定", url: "http://police.hangzhou.gov.cn/", color: "#8b5cf6" },
-          { name: "急事通申请", desc: "周末/节假日通行证", url: "http://police.hangzhou.gov.cn/", color: "#06b6d4" },
+          { name: "外地车限行", desc: "非浙A限行规定", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=外地车限行", color: "#8b5cf6" },
+          { name: "急事通申请", desc: "周末/节假日通行证", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=急事通", color: "#06b6d4" },
           { name: "地铁线路图", desc: "1-19号线全覆盖", url: "https://www.hzmetro.com/", color: "#ec4899" },
           { name: "地铁时刻表", desc: "首末班车时间", url: "https://www.hzmetro.com/", color: "#14b8a6" },
           { name: "地铁票价", desc: "票价计算/换乘", url: "https://www.hzmetro.com/", color: "#84cc16" },
@@ -1013,6 +1013,8 @@
       area: "留祥路—石祥路—石桥路—秋涛路—复兴路—老复兴路—虎跑路—满觉陇路—五老峰隧道—吉庆山隧道—梅灵北路—九里松隧道—灵溪南路—灵溪隧道—西溪路—紫金港路—文一西路—古墩路围合区域（含边界道路）"
     }
   };
+  // 默认让 DATA 指向兜底数据；init() 后异步从 CMS 拉取覆盖
+  var DATA = DATA_FALLBACK;
 
   // ===== 状态 =====
   var state = {
@@ -1402,9 +1404,11 @@
     var action = el.dataset.action;
     var url = el.dataset.url;
     if (action) { handleAction(action); }
-    else if (url) { openUrl(url); }
-    else {
-      // 无外链也无action，显示服务详情（带收藏按钮）
+    else if (url) {
+      // 有 URL 直接跳转，不再弹详情
+      openUrl(url);
+    } else {
+      // 无 URL：弹详情（仅当有 detail 内容时）或忽略
       var nameEl = el.querySelector('.sname');
       var descEl = el.querySelector('.sdesc');
       if (nameEl) {
@@ -2739,10 +2743,10 @@ case 'colors': showColors(); break;
         // 兼容旧版 items / 新版 headlines
         var items = (data && (data.headlines || data.items)) || [];
         if (!items.length) throw new Error('no data');
-        box.innerHTML = items.map(function (n) {
+        box.innerHTML = items.map(function (n, i) {
           var tagClass = n.tag === '政策' ? '' : (n.tag === '便民' ? 'news-tag-new' : 'news-tag');
           var escapedTitle = (n.title || '').replace(/'/g, "\\'");
-          return '<div class="news-item" onclick="openUrl(\'' + n.url + '\')" style="cursor:pointer">' +
+          return '<div class="news-item" onclick="openUrl(\'' + n.url + '\')" style="cursor:pointer' + (i > 0 ? ';display:none' : '') + '">' +
             '<div class="news-tag ' + tagClass + '">' + (n.tag || '资讯') + '</div>' +
             '<div class="news-title">' + n.title + '</div>' +
             '</div>';
@@ -2775,16 +2779,15 @@ case 'colors': showColors(); break;
         }
 
         // 轮播：每 5s 滚动一条
-        if (!box._timer) {
-          var idx = 0;
-          var newsItems = box.querySelectorAll('.news-item');
-          if (newsItems.length > 1) {
-            box._timer = setInterval(function () {
-              newsItems.forEach(function (el) { el.style.display = 'none'; });
-              idx = (idx + 1) % newsItems.length;
-              newsItems[idx].style.display = 'flex';
-            }, 5000);
-          }
+        if (box._timer) { clearInterval(box._timer); box._timer = null; }
+        var carouselIdx = 0;
+        var newsItems = box.querySelectorAll('.news-item');
+        if (newsItems.length > 1) {
+          box._timer = setInterval(function () {
+            newsItems.forEach(function (el) { el.style.display = 'none'; });
+            carouselIdx = (carouselIdx + 1) % newsItems.length;
+            newsItems[carouselIdx].style.display = 'flex';
+          }, 5000);
         }
       })
       .catch(function () {
@@ -2794,10 +2797,97 @@ case 'colors': showColors(); break;
       });
   }
 
+  // ===== 杭州 13 区县数据 =====
+  var DISTRICTS = [
+    { id: 'hangzhou', name: '杭州', full: '杭州市', desc: '全市通用' },
+    { id: 'shangcheng', name: '上城', full: '上城区', desc: '湖滨/望江/清波' },
+    { id: 'gongshu', name: '拱墅', full: '拱墅区', desc: '湖墅/小河/祥符' },
+    { id: 'xihu', name: '西湖', full: '西湖区', desc: '灵隐/文新/留下' },
+    { id: 'binjiang', name: '滨江', full: '滨江区', desc: '浦沿/长河/西兴' },
+    { id: 'xiaoshan', name: '萧山', full: '萧山区', desc: '北干/蜀山/新塘' },
+    { id: 'yuhang', name: '余杭', full: '余杭区', desc: '临平/仓前/良渚' },
+    { id: 'linping', name: '临平', full: '临平区', desc: '南苑/东湖/运河' },
+    { id: 'qiantang', name: '钱塘', full: '钱塘区', desc: '下沙/白杨/河庄' },
+    { id: 'fuyang', name: '富阳', full: '富阳区', desc: '富春/银湖/东洲' },
+    { id: 'linan', name: '临安', full: '临安区', desc: '锦城/锦南/青山湖' },
+    { id: 'tonglu', name: '桐庐', full: '桐庐县', desc: '桐君/城南/富春江' },
+    { id: 'chunan', name: '淳安', full: '淳安县', desc: '千岛湖/文昌/临岐' },
+    { id: 'jiande', name: '建德', full: '建德市', desc: '新安江/梅城/寿昌' }
+  ];
+
+  function initCityDropdown() {
+    var cur = lsGet('ihz_city', 'hangzhou');
+    var name = (DISTRICTS.find(function(d){return d.id===cur;}) || DISTRICTS[0]).full;
+    var el = document.getElementById('cityName');
+    if (el) el.textContent = name;
+    var box = document.getElementById('cityDropdown');
+    if (!box) return;
+    var curId = lsGet('ihz_city', 'hangzhou');
+    var html = '<div class="city-dropdown-title">选择区县</div>';
+    DISTRICTS.forEach(function(d) {
+      html += '<div class="city-dropdown-item' + (d.id===curId?' active':'') + '" data-id="' + d.id + '">' +
+        '<span>' + d.full + '</span><span class="cd-dist">' + d.desc + '</span></div>';
+    });
+    box.innerHTML = html;
+    document.querySelectorAll('#cityDropdown .city-dropdown-item').forEach(function(it) {
+      it.onclick = function() {
+        var id = it.getAttribute('data-id');
+        lsSet('ihz_city', id);
+        var d = DISTRICTS.find(function(x){return x.id===id;});
+        if (el) el.textContent = d.full;
+        box.classList.remove('show');
+        // 重新渲染今日卡片（限行/天气按区县）
+        renderTodayHangzhou();
+        showToast('已切换到 ' + d.full);
+      };
+    });
+  }
+
+  function bindCityDropdown() {
+    var btn = document.getElementById('citySelect');
+    var box = document.getElementById('cityDropdown');
+    if (!btn || !box) return;
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      box.classList.toggle('show');
+    });
+    document.addEventListener('click', function(e) {
+      if (!btn.contains(e.target) && !box.contains(e.target)) {
+        box.classList.remove('show');
+      }
+    });
+  }
+
+  // ===== 老人模式 =====
+  function toggleElderlyMode() {
+    var cur = lsGet('ihz_elderly', 'false') === 'true';
+    lsSet('ihz_elderly', cur ? 'false' : 'true');
+    applyElderlyMode();
+    showToast(cur ? '已关闭老人模式' : '已开启老人模式');
+  }
+  window.toggleElderlyMode = toggleElderlyMode;
+
+  function applyElderlyMode() {
+    var on = lsGet('ihz_elderly', 'false') === 'true';
+    document.documentElement.setAttribute('data-elderly', on ? 'true' : 'false');
+    var btn = document.getElementById('elderlyBtn');
+    if (btn) {
+      if (on) { btn.classList.add('active'); btn.title = '关闭老人模式'; }
+      else { btn.classList.remove('active'); btn.title = '老人模式'; }
+    }
+    var st = document.getElementById('elderlyStatus');
+    if (st) st.textContent = on ? '已开启' : '关闭';
+    // 老人模式自动切到大号字体
+    if (on) { lsSet('ihz_fontsize', 'xlarge'); setFontSize('xlarge'); }
+  }
+
   // ===== 初始化 =====
   function init() {
       applyTheme(state.theme);
       applyFontSize();
+      applyElderlyMode();
+      initCityDropdown();
+      bindCityDropdown();
       renderTodayHangzhou();
       renderNewsBanner();
       renderHotServices();
@@ -2825,6 +2915,52 @@ case 'colors': showColors(); break;
         '<div class="hero-stat"><div class="num">' + DATA.phonebook.length + '</div><div class="label">常用电话</div></div>' +
         '<div class="hero-stat"><div class="num">13</div><div class="label">区县市</div></div>';
     }
+    // 异步从 CMS 拉取最新内容（失败时静默使用兜底数据）
+    loadCMSData();
+    // 页面从后台切回前台时自动刷新 CMS 数据
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) loadCMSData();
+    });
+  }
+
+  // ===== CMS 数据异步加载（覆盖兜底）=====
+  function hasDiff(a, b) {
+    try {
+      var keys = ['hotKeywords', 'hotServices', 'categories', 'channels', 'phonebook'];
+      for (var i = 0; i < keys.length; i++) {
+        if (JSON.stringify(a[keys[i]]) !== JSON.stringify(b[keys[i]])) return true;
+      }
+      return false;
+    } catch (e) { return true; }
+  }
+
+  function rerenderDynamic() {
+    try {
+      renderHotServices();
+      renderHotKeywords();
+      renderTabs();
+      renderServices(state.activeTab || 'banshi');
+      // 更新统计
+      var totalItems = DATA.categories.reduce(function (sum, c) { return sum + c.items.length; }, 0);
+      var totalCats = DATA.categories.length;
+      var statEl = $('#heroStats');
+      if (statEl) {
+        statEl.innerHTML =
+          '<div class="hero-stat"><div class="num">' + totalItems + '</div><div class="label">办事条目</div></div>' +
+          '<div class="hero-stat"><div class="num">' + totalCats + '</div><div class="label">服务分类</div></div>' +
+          '<div class="hero-stat"><div class="num">' + (DATA.phonebook ? DATA.phonebook.length : 0) + '</div><div class="label">常用电话</div></div>' +
+          '<div class="hero-stat"><div class="num">13</div><div class="label">区县市</div></div>';
+      }
+    } catch (e) { console.warn('rerenderDynamic failed:', e); }
+  }
+
+  function loadCMSData() {
+    fetch('/api/content').then(function (r) { return r.json(); }).then(function (res) {
+      if (res && res.success && res.data && hasDiff(DATA, res.data)) {
+        DATA = res.data;
+        rerenderDynamic();
+      }
+    }).catch(function () { /* 静默失败，继续使用兜底数据 */ });
   }
 
   // ============================================
@@ -3021,11 +3157,13 @@ case 'colors': showColors(); break;
       }
     }
 
-    // 收藏按钮（底部）
-    body += '<div style="margin-top:16px;text-align:center;">' +
-      '<button onclick="window._toggleFav(\'' + name.replace(/'/g, "\\'") + '\',\'' + (desc || '').replace(/'/g, "\\'") + '\',\'' + (cat || '').replace(/'/g, "\\'") + '\',\'' + (action || '') + '\',\'' + (url || '') + '\')" style="padding:12px 24px;background:' + (fav ? 'var(--accent)' : 'var(--primary)') + ';color:#fff;border:none;border-radius:24px;font-size:14px;cursor:pointer;width:100%;">' +
-      (fav ? '⭐ 已收藏，点击取消' : '⭐ 收藏到我的收藏夹') +
-      '</button></div>';
+    // 收藏按钮 + 前往链接
+    body += '<div style="margin-top:16px;display:flex;gap:10px;">' +
+      '<button onclick="window._toggleFav(\'' + name.replace(/'/g, "\\'") + '\',\'' + (desc || '').replace(/'/g, "\\'") + '\',\'' + (cat || '').replace(/'/g, "\\'") + '\',\'' + (action || '') + '\',\'' + (url || '') + '\')" style="flex:1;padding:12px 16px;background:' + (fav ? 'var(--accent)' : 'var(--primary)') + ';color:#fff;border:none;border-radius:24px;font-size:14px;cursor:pointer;">' +
+      (fav ? '⭐ 已收藏' : '⭐ 收藏') +
+      '</button>' +
+      (url ? '<a href="' + (url.indexOf('http://') === 0 ? 'https://' + url.substring(7) : url) + '" rel="noopener" style="flex:1;padding:12px 16px;background:var(--bg-alt);color:var(--text);border:none;border-radius:24px;font-size:14px;text-decoration:none;text-align:center;">前往 →</a>' : '') +
+      '</div>';
 
     openModal('📌 ' + name + (cat ? ' <span style="font-size:12px;color:var(--text-muted);">[' + cat + ']</span>' : ''), body, { showFav: false });
   }
@@ -3110,74 +3248,7 @@ case 'colors': showColors(); break;
     }
   }
 
-  function showFeedback() {
-    var body = '<div style="padding:14px;">' +
-      '<p style="color:var(--text-secondary);font-size:13px;line-height:1.8;margin-bottom:12px;">告诉我们 iHangzhou 哪里做得不好，或者你希望增加什么功能。我们会认真对待每一条反馈。</p>' +
-      '<div style="margin-bottom:12px;">' +
-        '<label style="font-size:13px;color:var(--text-secondary);display:block;margin-bottom:6px;">反馈类型</label>' +
-        '<select id="fbType" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);font-size:14px;">' +
-          '<option value="bug">🐛 报告问题 / Bug</option>' +
-          '<option value="feature">💡 功能建议</option>' +
-          '<option value="content">📝 内容补充 / 修正</option>' +
-          '<option value="other">💬 其他</option>' +
-        '</select>' +
-      '</div>' +
-      '<div style="margin-bottom:12px;">' +
-        '<label style="font-size:13px;color:var(--text-secondary);display:block;margin-bottom:6px;">详细描述</label>' +
-        '<textarea id="fbContent" rows="5" placeholder="请描述你遇到的问题或建议..." style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);font-size:14px;resize:vertical;font-family:inherit;"></textarea>' +
-      '</div>' +
-      '<div style="margin-bottom:12px;">' +
-        '<label style="font-size:13px;color:var(--text-secondary);display:block;margin-bottom:6px;">联系方式（选填，方便我们回复你）</label>' +
-        '<input id="fbContact" type="text" placeholder="微信 / 邮箱 / 手机" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);font-size:14px;">' +
-      '</div>' +
-      '<button onclick="window._submitFeedback()" style="width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:24px;font-size:14px;cursor:pointer;">提交反馈</button>' +
-      '<p style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:10px;">反馈匿名提交，不收集任何个人信息</p>' +
-      '</div>';
-    openModal('📨 意见反馈', body);
-  }
-
-  function submitFeedback() {
-    var typeEl = $('#fbType'); var contentEl = $('#fbContent'); var contactEl = $('#fbContact');
-    if (!typeEl || !contentEl) return;
-    var type = typeEl.value;
-    var content = contentEl.value.trim();
-    var contact = contactEl ? contactEl.value.trim() : '';
-    if (!content) { showToast('请填写反馈内容'); return; }
-    if (content.length < 5) { showToast('反馈内容至少 5 个字'); return; }
-
-    var payload = {
-      type: type,
-      content: content,
-      contact: contact,
-      ua: navigator.userAgent,
-      page: location.pathname,
-      ts: Date.now()
-    };
-
-    // 异步提交，失败也走本地存档
-    try {
-      fetch('/api/tools?action=feedback', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).then(function (r) { return r.json(); }).then(function (d) {
-        showToast('✅ 反馈已提交，感谢支持！');
-      }).catch(function () {
-        // fallback 本地存档
-        var local = lsGet('ihz_feedbacks', []);
-        local.unshift(payload);
-        if (local.length > 20) local = local.slice(0, 20);
-        lsSet('ihz_feedbacks', local);
-        showToast('✅ 反馈已保存（离线模式），下次联网会自动提交');
-      });
-    } catch (e) {
-      var local2 = lsGet('ihz_feedbacks', []);
-      local2.unshift(payload);
-      lsSet('ihz_feedbacks', local2);
-      showToast('✅ 反馈已保存');
-    }
-    closeModal();
-  }
+  // showFeedback / submitFeedback 完全由 analytics.js 提供（加载顺序在 app.js 之后）
 
   function showFontSize() {
     var cur = lsGet('ihz_fontsize', 'normal');
@@ -3579,14 +3650,13 @@ case 'colors': showColors(); break;
   window.sendAIMessage = sendAIMessage;
   window.showFavorites = showFavorites;
   window.showHistory = showHistory;
-  window.showFeedback = showFeedback;
+  // showFeedback / submitFeedback 由 analytics.js 提供
   window.showFontSize = showFontSize;
   window._toggleFav = toggleFav;
   window._clearFavs = clearFavs;
   window._clearHist = clearHist;
   window._openFavItem = openItemByName;
   window._openHistItem = openItemByName;
-  window._submitFeedback = submitFeedback;
   window._setFontSize = setFontSize;
   window.showCheckin = showCheckin;
   window._doCheckin = doCheckin;
