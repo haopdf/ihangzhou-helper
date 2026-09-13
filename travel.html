@@ -11,7 +11,7 @@
   <meta property="og:description" content="西湖 + 古镇 + 赏花 + 四季 + 夜景 一站齐，杭州旅游全攻略">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://www.ihangzhou.net/travel.html">
-  <link rel="stylesheet" href="css/style.css?v=20260926d
+  <link rel="stylesheet" href="css/style.css?v=20260926d">
   <style>
     /* 旅游专题页专属样式（独立类名，全部以 .travel- / .tc- 前缀作用于本页卡片上下文） */
     .travel-hero {
@@ -917,9 +917,9 @@
 
         // 构建 modal
         var mask = document.createElement('div');
-        mask.style.css?v=20260926d = 'position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:9999;display:flex;align-items:flex-end;justify-content:center;animation:fadeIn 0.2s;';
+        mask.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:9999;display:flex;align-items:flex-end;justify-content:center;animation:fadeIn 0.2s;';
         var content = document.createElement('div');
-        content.style.css?v=20260926d = 'background:var(--bg-card,#fff);border-radius:16px 16px 0 0;width:100%;max-width:720px;max-height:85vh;overflow-y:auto;padding: 20px 16px 24px 16px;animation:slideUp 0.25s ease-out;-webkit-overflow-scrolling:touch;';
+        content.style.cssText = 'background:var(--bg-card,#fff);border-radius:16px 16px 0 0;width:100%;max-width:720px;max-height:85vh;overflow-y:auto;padding: 20px 16px 24px 16px;animation:slideUp 0.25s ease-out;-webkit-overflow-scrolling:touch;';
 
         // 构造 modal 内容
         var badgeHtml = badge ? '<span style="display:inline-block;background:var(--bg-alt,#f1f5f9);color:var(--text-secondary,#475569);font-size:11px;padding: 2px 16px;border-radius:10px;margin-left:8px;font-weight:500;">' + badge + '</span>' : '';
