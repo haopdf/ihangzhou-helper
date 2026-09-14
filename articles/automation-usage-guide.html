@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>CERTIFICATE-AUTOMATION-USAGE-GUIDE · iHangzhou 杭州生活助手</title>
+  <meta name="description" content="📋 目录解决方案概述部署前准备安装和配置核心组件详解高级功能使用日常运维操作故障排除最佳实践解决方案概述VMware Horizon Certificate Automation Solution ...">
+  <meta name="keywords" content="杭州,CERTIFICATE-AUTOMATION-USAGE-GUIDE,iHangzhou,杭州生活,杭州文化">
+  <meta name="theme-color" content="#0ea5e9">
+  <meta property="og:title" content="CERTIFICATE-AUTOMATION-USAGE-GUIDE">
+  <meta property="og:description" content="📋 目录解决方案概述部署前准备安装和配置核心组件详解高级功能使用日常运维操作故障排除最佳实践解决方案概述VMware Horizon Certificate Automation Solution ...">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="iHangzhou 杭州生活助手">
+  <link rel="canonical" href="https://www.ihangzhou.net/articles/automation-usage-guide.html">
+  <link rel="stylesheet" href="../css/style.css?v=20260926b">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+  <style>
+    .article-body { max-width: 720px; margin: 0 auto; padding: 16px; }
+    .article-breadcrumb { font-size: 12px; color: var(--text-muted); padding: 10px 16px; background: var(--bg-alt); }
+    .article-breadcrumb span { margin: 0 2px; }
+    .article-breadcrumb a { color: var(--primary); }
+    .article-header { padding: 20px 16px 16px; text-align: center; max-width: 720px; margin: 0 auto; }
+    .article-header h1 { font-size: 22px; font-weight: 700; line-height: 1.4; color: var(--text); margin: 0 0 8px; }
+    .article-meta { font-size: 12px; color: var(--text-muted); }
+    .article-meta span { margin: 0 6px; }
+    .article-content { font-size: 15px; line-height: 1.9; color: var(--text-secondary); padding: 8px 0 24px; }
+    .article-content h2 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 12px; padding-left: 10px; border-left: 4px solid var(--primary); }
+    .article-content h3 { font-size: 16px; font-weight: 600; color: var(--text); margin: 20px 0 10px; }
+    .article-content p { margin: 0 0 14px; }
+    .article-content strong { color: var(--text); font-weight: 600; }
+    .article-content em { color: var(--primary); font-style: normal; font-weight: 500; }
+    .article-content blockquote { border-left: 4px solid var(--primary); background: var(--bg-alt); margin: 14px 0; padding: 10px 14px; border-radius: 0 8px 8px 0; font-style: italic; color: var(--text-secondary); }
+    .article-content blockquote p { margin: 0; }
+    .article-content hr { border: none; border-top: 1px dashed var(--border-light); margin: 24px 0; }
+    .article-content ul { padding-left: 20px; margin: 10px 0 14px; }
+    .article-content li { margin-bottom: 6px; }
+    .article-content a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; }
+    .article-content pre { background: var(--bg-alt); padding: 12px; border-radius: 8px; overflow-x: auto; margin: 12px 0; }
+    .article-content code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; font-size: 13px; color: var(--primary-dark); }
+    .article-content pre code { background: none; padding: 0; color: var(--text); }
+    .article-footer { max-width: 720px; margin: 0 auto; padding: 16px; border-top: 1px solid var(--border-light); }
+    .article-footer a { display: block; text-align: center; padding: 12px; background: var(--primary); color: #fff; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 14px; }
+    [data-theme="dark"] .article-content code { background: var(--bg-hover); color: var(--primary-light); }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="../index.html" class="topbar-back" style="color:#fff;text-decoration:none;font-size:20px;padding:4px 8px;">‹</a>
+    <div class="topbar-city"><span>iHangzhou</span></div>
+    <div class="topbar-search" style="flex:1;"></div>
+    <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
+  </header>
+
+  <div class="article-breadcrumb">
+    <a href="../index.html">首页</a> ›
+    <a href="../articles.html">文章</a> ›
+    <span>文化生活</span>
+  </div>
+
+  <div class="article-header">
+    <h1>CERTIFICATE-AUTOMATION-USAGE-GUIDE</h1>
+    <div class="article-meta">
+      <span>📂 文化生活</span>
+      <span>📖 杭州故事</span>
+    </div>
+  </div>
+
+  <div class="article-body">
+    <article class="article-content">
+      <h2>📋 目录</h2><ul class="article-list"><li><a href="#解决方案概述" target="_blank" rel="noopener">解决方案概述</a></li><li><a href="#部署前准备" target="_blank" rel="noopener">部署前准备</a></li><li><a href="#安装和配置" target="_blank" rel="noopener">安装和配置</a></li><li><a href="#核心组件详解" target="_blank" rel="noopener">核心组件详解</a></li><li><a href="#高级功能使用" target="_blank" rel="noopener">高级功能使用</a></li><li><a href="#日常运维操作" target="_blank" rel="noopener">日常运维操作</a></li><li><a href="#故障排除" target="_blank" rel="noopener">故障排除</a></li><li><a href="#最佳实践" target="_blank" rel="noopener">最佳实践</a></li></ul><h2>解决方案概述</h2><p>VMware Horizon Certificate Automation Solution 是一个完整的自动化证书管理解决方案，专为防止VMware Horizon环境中的证书过期问题而设计。</p><h3>主要功能</h3><ul class="article-list"><li><strong>自动证书监控</strong>：持续监控VMware Horizon服务器的SSL证书状态</li><li><strong>多级预警系统</strong>：30/15/7天分级预警机制</li><li><strong>多通道告警</strong>：支持邮件、Webhook、短信等多种告警方式</li><li><strong>告警去重</strong>：防止告警信息重复发送</li><li><strong>高可用设计</strong>：支持主备监控和自动故障切换</li><li><strong>安全配置</strong>：敏感信息加密存储和权限管理</li><li><strong>性能优化</strong>：资源使用控制和并行处理</li><li><strong>集中日志</strong>：统一日志收集和管理</li><li><strong>可视化仪表板</strong>：HTML报表展示系统状态</li></ul><h2>部署前准备</h2><h3>系统要求</h3><ul class="article-list"><li>Windows Server 2016 或更高版本</li><li>PowerShell 5.1 或更高版本</li><li>网络访问权限到VMware Horizon服务器的443端口</li><li>可选：SMTP服务器用于邮件告警</li><li>可选：Twilio账户用于短信告警</li></ul><h3>权限要求</h3><ul class="article-list"><li>对VMware Horizon服务器的TCP 443端口访问权限</li><li>本地系统读写权限（用于日志和配置文件）</li><li>可选：Active Directory权限（用于服务账户管理）</li></ul><h3>网络配置</h3><p>确保部署服务器可以访问以下资源：</p><ul class="article-list"><li>VMware Horizon Connection Servers</li><li>VMware Horizon Security Servers</li><li>VMware Horizon Load Balancers</li><li>SMTP服务器（如果使用邮件告警）</li><li>Webhook端点（如果使用Webhook告警）</li><li>Twilio API（如果使用短信告警）</li></ul><h2>安装和配置</h2><h3>1. 文件部署</h3><p>将所有脚本文件复制到目标目录（例如：<code>C:\CertificateAutomation</code>）</p><h3>2. 配置文件设置</h3><h4>服务器配置文件 (servers-config.json)</h4><pre><code>{
+  &quot;Servers&quot;: [
+    {
+      &quot;Name&quot;: &quot;ConnectionServer01&quot;,
+      &quot;Host&quot;: &quot;connection01.company.com&quot;,
+      &quot;Port&quot;: 443,
+      &quot;Type&quot;: &quot;ConnectionServer&quot;,
+      &quot;Enabled&quot;: true
+    },
+    {
+      &quot;Name&quot;: &quot;SecurityServer01&quot;,
+      &quot;Host&quot;: &quot;security01.company.com&quot;,
+      &quot;Port&quot;: 443,
+      &quot;Type&quot;: &quot;SecurityServer&quot;,
+      &quot;Enabled&quot;: true
+    }
+  ]
+}
+</code></pre><h4>告警配置文件 (alert-config.json)</h4><pre><code>{
+  &quot;Email&quot;: {
+    &quot;Enabled&quot;: true,
+    &quot;SmtpServer&quot;: &quot;smtp.company.com&quot;,
+    &quot;SmtpPort&quot;: 587,
+    &quot;UseSSL&quot;: true,
+    &quot;Username&quot;: &quot;cert-alert@company.com&quot;,
+    &quot;PasswordCredential&quot;: &quot;EmailPassword&quot;,
+    &quot;FromAddress&quot;: &quot;cert-alert@company.com&quot;,
+    &quot;Recipients&quot;: [&quot;admin@company.com&quot;, &quot;it-team@company.com&quot;]
+  },
+  &quot;Webhook&quot;: {
+    &quot;Enabled&quot;: true,
+    &quot;Endpoints&quot;: [
+      {
+        &quot;Name&quot;: &quot;Slack&quot;,
+        &quot;Url&quot;: &quot;https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK&quot;,
+        &quot;Method&quot;: &quot;POST&quot;
+      }
+    ]
+  },
+  &quot;SMS&quot;: {
+    &quot;Enabled&quot;: false,
+    &quot;TwilioAccountSid&quot;: &quot;YOUR_TWILIO_SID&quot;,
+    &quot;TwilioAuthTokenCredential&quot;: &quot;TwilioToken&quot;,
+    &quot;FromNumber&quot;: &quot;+1234567890&quot;,
+    &quot;ToNumbers&quot;: [&quot;+1987654321&quot;]
+  },
+  &quot;Escalation&quot;: {
+    &quot;INFO&quot;: [&quot;Log&quot;],
+    &quot;WARNING&quot;: [&quot;Email&quot;],
+    &quot;HIGH&quot;: [&quot;Email&quot;, &quot;Webhook&quot;],
+    &quot;CRITICAL&quot;: [&quot;Email&quot;, &quot;Webhook&quot;, &quot;SMS&quot;]
+  }
+}
+</code></pre><h3>3. 安全配置</h3><p>使用Secure-Config-Manager.ps1存储敏感信息：</p><pre><code># 存储邮件密码
+.\Secure-Config-Manager.ps1 -Action Store -Key &quot;EmailPassword&quot; -Value &quot;your-smtp-password&quot;
+# 存储Twilio令牌
+.\Secure-Config-Manager.ps1 -Action Store -Key &quot;TwilioToken&quot; -Value &quot;your-twilio-auth-token&quot;
+</code></pre><h3>4. 服务账户配置</h3><p>创建专用服务账户并设置最小权限：</p><pre><code># 创建服务账户
+.\Service-Account-Manager.ps1 -Action Create -Username &quot;svc-certmon&quot; -Description &quot;Certificate Monitoring Service Account&quot;
+# 设置文件权限
+.\Service-Account-Manager.ps1 -Action SetPermissions -Username &quot;svc-certmon&quot; -Path &quot;C:\CertificateAutomation&quot;
+</code></pre><h2>核心组件详解</h2><h3>证书监控 (Certificate-Monitor-Improved.ps1)</h3><h4>基本使用</h4><pre><code># 监控单个服务器
+.\Certificate-Monitor-Improved.ps1 -Server &quot;connection01.company.com&quot; -Port 443
+# 使用配置文件监控多个服务器
+.\Certificate-Monitor-Improved.ps1 -ConfigFile &quot;servers-config.json&quot;
+# 测试模式
+.\Certificate-Monitor-Improved.ps1 -TestMode &quot;valid&quot;    # 模拟有效证书
+.\Certificate-Monitor-Improved.ps1 -TestMode &quot;expiring&quot; # 模拟即将过期证书
+.\Certificate-Monitor-Improved.ps1 -TestMode &quot;expired&quot;  # 模拟已过期证书
+</code></pre><h4>参数说明</h4><ul class="article-list"><li><code>-Server</code>: 要监控的服务器地址</li><li><code>-Port</code>: 服务器端口（默认443）</li><li><code>-WarningDays</code>: 警告天数（默认30）</li><li><code>-ConfigFile</code>: 服务器配置文件路径</li><li><code>-TestMode</code>: 测试模式（valid/expiring/expired）</li><li><code>-StateFile</code>: 告警状态文件路径</li></ul><h3>多通道告警 (Multi-Channel-Alert.ps1)</h3><h4>基本使用</h4><pre><code># 发送警告级别告警
+.\Multi-Channel-Alert.ps1 -AlertLevel &quot;WARNING&quot; -Subject &quot;Certificate Alert&quot; -Message &quot;Certificate expiring soon&quot;
+# 指定收件人
+.\Multi-Channel-Alert.ps1 -AlertLevel &quot;HIGH&quot; -Subject &quot;Urgent Certificate Alert&quot; -Message &quot;Certificate expires in 15 days&quot; -Recipients &quot;admin@company.com&quot;
+</code></pre><h4>告警级别</h4><ul class="article-list"><li><strong>INFO</strong>: 信息性消息</li><li><strong>WARNING</strong>: 警告消息（30天前）</li><li><strong>HIGH</strong>: 高优先级（15天前）</li><li><strong>CRITICAL</strong>: 紧急（7天前）</li></ul><h3>健康检查 (Health-Check.ps1)</h3><h4>基本使用</h4><pre><code># 执行完整健康检查
+.\Health-Check.ps1
+# 检查特定组件
+.\Health-Check.ps1 -Component &quot;Network&quot;
+.\Health-Check.ps1 -Component &quot;Config&quot;
+.\Health-Check.ps1 -Component &quot;Alert&quot;
+</code></pre><h3>日志轮转 (Log-Rotation.ps1)</h3><h4>基本使用</h4><pre><code># 执行日志轮转
+.\Log-Rotation.ps1 -LogDirectory &quot;C:\CertificateAutomation\Logs&quot; -MaxFileSizeMB 10 -RetentionDays 30
+# 压缩旧日志
+.\Log-Rotation.ps1 -Action Compress -LogDirectory &quot;C:\CertificateAutomation\Logs&quot;
+</code></pre><h2>高级功能使用</h2><h3>高可用监控 (HA-Monitor.ps1)</h3><h4>配置主备监控</h4><pre><code>{
+  &quot;Primary&quot;: {
+    &quot;Server&quot;: &quot;monitor01.company.com&quot;,
+    &quot;Port&quot;: 443,
+    &quot;Enabled&quot;: true
+  },
+  &quot;Backup&quot;: {
+    &quot;Server&quot;: &quot;monitor02.company.com&quot;,
+    &quot;Port&quot;: 443,
+    &quot;Enabled&quot;: true
+  },
+  &quot;HeartbeatInterval&quot;: 300,
+  &quot;FailoverThreshold&quot;: 3
+}
+</code></pre><h4>启动HA监控</h4><pre><code># 启动主监控
+.\HA-Monitor.ps1 -Role Primary -ConfigFile &quot;ha-config.json&quot;
+# 启动备监控
+.\HA-Monitor.ps1 -Role Backup -ConfigFile &quot;ha-config.json&quot;
+</code></pre><h3>性能优化 (Performance-Optimizer.ps1)</h3><h4>优化脚本性能</h4><pre><code># 优化性能参数
+.\Performance-Optimizer.ps1 -Action Optimize -MaxConcurrentJobs 10 -MaxCpuUsage 80 -MaxMemoryUsage 80
+# 监控系统性能
+.\Performance-Optimizer.ps1 -Action Monitor
+# 生成性能报告
+.\Performance-Optimizer.ps1 -Action Report
+</code></pre><h3>集中日志收集 (Centralized-Log-Collector.ps1)</h3><h4>收集和管理日志</h4><pre><code># 收集所有日志
+.\Centralized-Log-Collector.ps1 -Action Collect -LogSource All
+# 归档旧日志
+.\Centralized-Log-Collector.ps1 -Action Archive -RetentionDays 30
+# 生成日志报告
+.\Centralized-Log-Collector.ps1 -Action Report
+</code></pre><h3>仪表板报表 (Dashboard-Reporter.ps1)</h3><h4>生成HTML仪表板</h4><pre><code># 生成默认仪表板
+.\Dashboard-Reporter.ps1
+# 生成30天数据的仪表板
+.\Dashboard-Reporter.ps1 -Days 30 -ReportPath &quot;C:\Reports\certificate-dashboard-30days.html&quot;
+</code></pre><h2>日常运维操作</h2><h3>1. 计划任务配置</h3><p>创建Windows计划任务以定期执行监控：</p><pre><code># 创建计划任务（每日执行）
+$action = New-ScheduledTaskAction -Execute &quot;PowerShell.exe&quot; -Argument &quot;-ExecutionPolicy Bypass -File C:\CertificateAutomation\Certificate-Monitor-Improved.ps1 -ConfigFile C:\CertificateAutomation\servers-config.json&quot;
+$trigger = New-ScheduledTaskTrigger -Daily -At &quot;08:00AM&quot;
+$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable
+Register-ScheduledTask -TaskName &quot;VMware Horizon Certificate Monitor&quot; -Action $action -Trigger $trigger -Settings $settings -Description &quot;Monitor VMware Horizon SSL certificates&quot;
+</code></pre><h3>2. 日志管理</h3><p>定期执行日志轮转和清理：</p><pre><code># 每周日志轮转
+.\Log-Rotation.ps1 -LogDirectory &quot;C:\CertificateAutomation\Logs&quot; -MaxFileSizeMB 10 -RetentionDays 90
+# 每月归档旧日志
+.\Centralized-Log-Collector.ps1 -Action Archive -RetentionDays 30
+</code></pre><h3>3. 健康检查</h3><p>定期执行系统健康检查：</p><pre><code># 每日健康检查
+.\Health-Check.ps1 | Out-File -FilePath &quot;C:\CertificateAutomation\Logs\health-check-$(Get-Date -Format &#39;yyyyMMdd&#39;).log&quot;
+</code></pre><h3>4. 报表生成</h3><p>定期生成状态报表：</p><pre><code># 每周生成仪表板报表
+.\Dashboard-Reporter.ps1 -Days 7 -ReportPath &quot;C:\Reports\certificate-dashboard-weekly.html&quot;
+</code></pre><h2>故障排除</h2><h3>常见问题及解决方案</h3><h4>1. 证书监控失败</h4><p><strong>问题</strong>：无法连接到VMware Horizon服务器</p><p><strong>解决方案</strong>：</p><ul class="article-list"><li>检查网络连通性：<code>Test-NetConnection -ComputerName "server" -Port 443</code></li><li>验证服务器地址和端口配置</li><li>检查防火墙设置</li></ul><h4>2. 告警发送失败</h4><p><strong>问题</strong>：邮件或Webhook告警无法发送</p><p><strong>解决方案</strong>：</p><ul class="article-list"><li>检查告警配置文件中的SMTP设置</li><li>验证网络连接到SMTP服务器</li><li>检查安全配置中的凭据</li></ul><h4>3. 脚本执行错误</h4><p><strong>问题</strong>：PowerShell脚本执行出错</p><p><strong>解决方案</strong>：</p><ul class="article-list"><li>检查执行策略：<code>Get-ExecutionPolicy</code></li><li>设置执行策略：<code>Set-ExecutionPolicy RemoteSigned</code></li><li>查看详细错误信息：<code>$Error[0] | Select-Object *</code></li></ul><h4>4. 权限问题</h4><p><strong>问题</strong>：脚本无法访问文件或资源</p><p><strong>解决方案</strong>：</p><ul class="article-list"><li>检查服务账户权限</li><li>验证文件夹权限设置</li><li>使用Service-Account-Manager.ps1重新配置权限</li></ul><h3>日志分析</h3><p>查看不同级别的日志文件：</p><pre><code># 查看监控日志
+Get-Content &quot;C:\CertificateAutomation\Logs\certificate-monitor.log&quot; -Tail 50
+# 查看告警日志
+Get-Content &quot;C:\CertificateAutomation\Logs\multi-channel-alert.log&quot; -Tail 50
+# 查看健康检查日志
+Get-Content &quot;C:\CertificateAutomation\Logs\health-check.log&quot; -Tail 50
+</code></pre><h3>性能监控</h3><p>监控脚本性能和资源使用：</p><pre><code># 查看性能日志
+Get-Content &quot;C:\CertificateAutomation\Logs\performance.log&quot; -Tail 50
+# 监控系统资源
+.\Performance-Optimizer.ps1 -Action Monitor
+</code></pre><h2>最佳实践</h2><h3>1. 安全最佳实践</h3><ul class="article-list"><li>使用专用服务账户运行监控脚本</li><li>定期轮换敏感凭据</li><li>限制文件系统权限</li><li>加密存储敏感配置信息</li><li>定期审查安全配置</li></ul><h3>2. 监控最佳实践</h3><ul class="article-list"><li>设置多级预警机制（30/15/7天）</li><li>配置多种告警通道确保通知送达</li><li>启用告警去重防止信息泛滥</li><li>定期验证告警通道功能</li><li>建立告警响应流程</li></ul><h3>3. 运维最佳实践</h3><ul class="article-list"><li>定期执行健康检查</li><li>实施日志轮转防止磁盘满载</li><li>定期备份配置文件</li><li>建立灾难恢复计划</li><li>文档化所有配置和变更</li></ul><h3>4. 性能最佳实践</h3><ul class="article-list"><li>根据环境规模调整并发作业数</li><li>设置合理的CPU和内存使用限制</li><li>定期清理旧日志和归档文件</li><li>监控系统资源使用情况</li><li>优化配置以平衡性能和资源消耗</li></ul><h3>5. 高可用最佳实践</h3><ul class="article-list"><li>部署主备监控节点</li><li>配置自动故障切换</li><li>定期测试故障切换功能</li><li>监控主备节点健康状态</li><li>确保主备节点配置同步</li></ul><hr><h2>📞 支持和维护</h2><p>如遇到问题，请按以下步骤操作：</p><ul class="article-list"><li><strong>查看日志文件</strong>：检查相关组件的日志文件以获取详细错误信息</li><li><strong>执行健康检查</strong>：运行Health-Check.ps1诊断系统状态</li><li><strong>验证配置</strong>：检查配置文件是否正确</li><li><strong>测试连接</strong>：验证网络连接和权限设置</li><li><strong>联系支持</strong>：如问题持续存在，请联系技术支持团队</li></ul><h2>📄 版本信息</h2><p><strong>解决方案版本</strong>：1.0</p><p><strong>最后更新</strong>：2026年6月26日</p><p><strong>兼容性</strong>：VMware Horizon 8.x 及以上版本</p><hr><p><em>VMware Horizon Certificate Automation Solution</em></p><p><em>保护您的虚拟桌面环境免受证书过期影响</em></p>
+    </article>
+  </div>
+
+  <div class="article-footer">
+    <a href="../articles.html">📚 查看更多杭州故事</a>
+  </div>
+
+  <script>
+    // 主题持久化
+    (function(){ try{ var t=localStorage.getItem('ihz-theme')||'light'; document.documentElement.setAttribute('data-theme',t); var b=document.getElementById('themeBtn'); if(b) b.textContent=t==='dark'?'☀️':'🌙'; }catch(e){} })();
+    document.getElementById('themeBtn')?.addEventListener('click',function(){ var cur=document.documentElement.getAttribute('data-theme')||'light'; var next=cur==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',next); localStorage.setItem('ihz-theme',next); this.textContent=next==='dark'?'☀️':'🌙'; });
+  </script>
+</body>
+</html>

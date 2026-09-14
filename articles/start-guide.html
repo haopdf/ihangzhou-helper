@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>QUICK-START-GUIDE · iHangzhou 杭州生活助手</title>
+  <meta name="description" content="This guide provides step-by-step instructions to deploy and configure the VMware Horizon Certificate...">
+  <meta name="keywords" content="杭州,QUICK-START-GUIDE,iHangzhou,杭州生活,杭州文化">
+  <meta name="theme-color" content="#0ea5e9">
+  <meta property="og:title" content="QUICK-START-GUIDE">
+  <meta property="og:description" content="This guide provides step-by-step instructions to deploy and configure the VMware Horizon Certificate...">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="iHangzhou 杭州生活助手">
+  <link rel="canonical" href="https://www.ihangzhou.net/articles/start-guide.html">
+  <link rel="stylesheet" href="../css/style.css?v=20260926b">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+  <style>
+    .article-body { max-width: 720px; margin: 0 auto; padding: 16px; }
+    .article-breadcrumb { font-size: 12px; color: var(--text-muted); padding: 10px 16px; background: var(--bg-alt); }
+    .article-breadcrumb span { margin: 0 2px; }
+    .article-breadcrumb a { color: var(--primary); }
+    .article-header { padding: 20px 16px 16px; text-align: center; max-width: 720px; margin: 0 auto; }
+    .article-header h1 { font-size: 22px; font-weight: 700; line-height: 1.4; color: var(--text); margin: 0 0 8px; }
+    .article-meta { font-size: 12px; color: var(--text-muted); }
+    .article-meta span { margin: 0 6px; }
+    .article-content { font-size: 15px; line-height: 1.9; color: var(--text-secondary); padding: 8px 0 24px; }
+    .article-content h2 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 12px; padding-left: 10px; border-left: 4px solid var(--primary); }
+    .article-content h3 { font-size: 16px; font-weight: 600; color: var(--text); margin: 20px 0 10px; }
+    .article-content p { margin: 0 0 14px; }
+    .article-content strong { color: var(--text); font-weight: 600; }
+    .article-content em { color: var(--primary); font-style: normal; font-weight: 500; }
+    .article-content blockquote { border-left: 4px solid var(--primary); background: var(--bg-alt); margin: 14px 0; padding: 10px 14px; border-radius: 0 8px 8px 0; font-style: italic; color: var(--text-secondary); }
+    .article-content blockquote p { margin: 0; }
+    .article-content hr { border: none; border-top: 1px dashed var(--border-light); margin: 24px 0; }
+    .article-content ul { padding-left: 20px; margin: 10px 0 14px; }
+    .article-content li { margin-bottom: 6px; }
+    .article-content a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; }
+    .article-content pre { background: var(--bg-alt); padding: 12px; border-radius: 8px; overflow-x: auto; margin: 12px 0; }
+    .article-content code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; font-size: 13px; color: var(--primary-dark); }
+    .article-content pre code { background: none; padding: 0; color: var(--text); }
+    .article-footer { max-width: 720px; margin: 0 auto; padding: 16px; border-top: 1px solid var(--border-light); }
+    .article-footer a { display: block; text-align: center; padding: 12px; background: var(--primary); color: #fff; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 14px; }
+    [data-theme="dark"] .article-content code { background: var(--bg-hover); color: var(--primary-light); }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="../index.html" class="topbar-back" style="color:#fff;text-decoration:none;font-size:20px;padding:4px 8px;">‹</a>
+    <div class="topbar-city"><span>iHangzhou</span></div>
+    <div class="topbar-search" style="flex:1;"></div>
+    <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
+  </header>
+
+  <div class="article-breadcrumb">
+    <a href="../index.html">首页</a> ›
+    <a href="../articles.html">文章</a> ›
+    <span>文化生活</span>
+  </div>
+
+  <div class="article-header">
+    <h1>QUICK-START-GUIDE</h1>
+    <div class="article-meta">
+      <span>📂 文化生活</span>
+      <span>📖 杭州故事</span>
+    </div>
+  </div>
+
+  <div class="article-body">
+    <article class="article-content">
+      <p>This guide provides step-by-step instructions to deploy and configure the VMware Horizon Certificate Automation solution.</p><h2>📋 Prerequisites</h2><p>Before deploying the solution, ensure you have:</p><ul class="article-list"><li><strong>Windows Server 2016 or later</strong> with PowerShell 5.1+</li><li><strong>Administrator privileges</strong> on the deployment machine</li><li><strong>Network connectivity</strong> to VMware Horizon servers</li><li><strong>SMTP server details</strong> for email alerts (optional)</li><li><strong>Webhook URLs</strong> for Slack/Teams integration (optional)</li><li><strong>Twilio account</strong> for SMS alerts (optional)</li></ul><h2>🚀 Quick Deployment</h2><ul class="article-list"><li><strong>Download or copy all PowerShell scripts</strong> to a temporary directory</li><li><strong>Open PowerShell as Administrator</strong></li><li><strong>Navigate to the directory</strong> containing the scripts</li><li><strong>Run the deployment script</strong>:</li></ul><pre><code>   .\Deploy-Certificate-Automation.ps1 -CreateScheduledTask
+</code></pre><p>This will:</p><ul class="article-list"><li>Install all components to <code>C:\Scripts\Horizon-Certificate-Automation</code></li><li>Create necessary directories and configuration files</li><li>Set up a scheduled task to run daily at 2:00 AM</li><li>Generate a deployment summary</li></ul><h2>⚙️ Configuration</h2><h3>1. Configure VMware Horizon Servers</h3><p>Edit <code>C:\Scripts\Horizon-Certificate-Automation\Config\servers-config.json</code>:</p><pre><code>[
+  {
+    &quot;Name&quot;: &quot;Primary Connection Server&quot;,
+    &quot;Hostname&quot;: &quot;horizon-primary.company.com&quot;,
+    &quot;Port&quot;: 443
+  },
+  {
+    &quot;Name&quot;: &quot;Backup Connection Server&quot;, 
+    &quot;Hostname&quot;: &quot;horizon-backup.company.com&quot;,
+    &quot;Port&quot;: 443
+  },
+  {
+    &quot;Name&quot;: &quot;Security Server&quot;,
+    &quot;Hostname&quot;: &quot;security.company.com&quot;, 
+    &quot;Port&quot;: 443
+  }
+]
+</code></pre><h3>2. Configure Alert Channels</h3><p>Edit <code>C:\Scripts\Horizon-Certificate-Automation\Config\alert-config.json</code>:</p><h4>Email Alerts</h4><pre><code>&quot;SMTP&quot;: {
+  &quot;Server&quot;: &quot;smtp.company.com&quot;,
+  &quot;Port&quot;: 587,
+  &quot;Username&quot;: &quot;horizon-monitor@company.com&quot;, 
+  &quot;From&quot;: &quot;horizon-monitor@company.com&quot;,
+  &quot;UseSSL&quot;: true
+}
+</code></pre><h4>Webhook Alerts (Slack/Teams)</h4><pre><code>&quot;Webhook&quot;: {
+  &quot;Slack&quot;: &quot;https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK&quot;,
+  &quot;Teams&quot;: &quot;https://company.webhook.office.com/webhookb2/YOUR-TEAMS-WEBHOOK&quot;
+}
+</code></pre><h4>SMS Alerts (Twilio)</h4><pre><code>&quot;SMS&quot;: {
+  &quot;Gateway&quot;: &quot;twilio&quot;,
+  &quot;AccountSid&quot;: &quot;YOUR_TWILIO_SID&quot;,
+  &quot;AuthToken&quot;: &quot;YOUR_TWILIO_AUTH_TOKEN&quot;, 
+  &quot;From&quot;: &quot;+1234567890&quot;,
+  &quot;To&quot;: &quot;+0987654321&quot;
+}
+</code></pre><h2>🧪 Testing</h2><h3>Test Certificate Monitoring</h3><pre><code>cd &quot;C:\Scripts\Horizon-Certificate-Automation&quot;
+PowerShell -ExecutionPolicy Bypass -File &quot;Certificate-Monitor-Improved.ps1&quot;
+</code></pre><h3>Test with Different Scenarios</h3><pre><code># Test expiring certificate
+.\Certificate-Monitor-Improved.ps1 -TestMode &quot;expiring&quot;
+# Test expired certificate  
+.\Certificate-Monitor-Improved.ps1 -TestMode &quot;expired&quot;
+# Test valid certificate
+.\Certificate-Monitor-Improved.ps1 -TestMode &quot;valid&quot;
+</code></pre><h3>Run Health Check</h3><pre><code>.\Health-Check.ps1 -Detailed
+</code></pre><h2>📊 Monitoring and Maintenance</h2><h3>Check Logs</h3><p>Logs are stored in <code>C:\Scripts\Horizon-Certificate-Automation\Logs</code></p><h3>Log Rotation</h3><p>The solution automatically rotates logs, but you can manually run:</p><pre><code>.\Log-Rotation.ps1
+</code></pre><h3>View Alert History</h3><p>Check <code>certificate-alerts.log</code> for alert history</p><h2>🛡️ Security Considerations</h2><h3>Secure Configuration</h3><p>Use the Secure Config Manager to store sensitive information:</p><pre><code>.\Secure-Config-Manager.ps1 -Action Set -Key &quot;SMTPPassword&quot; -Value &quot;YourPassword&quot;
+</code></pre><h3>File Permissions</h3><p>The deployment script sets appropriate file permissions automatically</p><h2>🚨 Troubleshooting</h2><h3>Common Issues</h3><ul class="article-list"><li><strong>Permission Denied Errors</strong></li><li>Ensure you're running PowerShell as Administrator</li><li>Check file permissions on the installation directory</li></ul><ul class="article-list"><li><strong>Network Connectivity Issues</strong></li><li>Verify network access to VMware Horizon servers</li><li>Check firewall rules for outbound connections</li></ul><ul class="article-list"><li><strong>Scheduled Task Not Running</strong></li><li>Verify the task exists in Task Scheduler</li><li>Check Windows Event Logs for errors</li></ul><h3>Manual Execution</h3><p>If the scheduled task fails, you can manually run:</p><pre><code>PowerShell -ExecutionPolicy Bypass -File &quot;C:\Scripts\Horizon-Certificate-Automation\Certificate-Monitor-Improved.ps1&quot;
+</code></pre><h2>📈 Certificate Monitoring Levels</h2><p>The solution monitors certificates and alerts at different levels:</p><ul class="article-list"><li><strong>30+ days</strong>: No alert (Informational)</li><li><strong>15-30 days</strong>: WARNING alert</li><li><strong>7-15 days</strong>: HIGH alert</li><li><strong>0-7 days</strong>: CRITICAL alert</li><li><strong>Expired</strong>: CRITICAL alert</li></ul><h2>🆘 Support</h2><p>For issues with the solution:</p><ul class="article-list"><li>Check the deployment summary in <code>DEPLOYMENT-SUMMARY.txt</code></li><li>Review logs in the Logs directory</li><li>Run the Health Check utility</li><li>Verify configuration files in the Config directory</li></ul><h2>📄 Documentation</h2><ul class="article-list"><li><code>README-Certificate-Automation.md</code> - Complete solution documentation</li><li><code>Certificate-Automation-Deployment-Guide.md</code> - Detailed deployment guide</li><li><code>DEPLOYMENT-SUMMARY.txt</code> - Deployment-specific information</li></ul><hr><p><em>VMware Horizon Certificate Automation Solution</em></p><p><em>Prevent certificate expiration issues that cause Horizon service outages</em></p>
+    </article>
+  </div>
+
+  <div class="article-footer">
+    <a href="../articles.html">📚 查看更多杭州故事</a>
+  </div>
+
+  <script>
+    // 主题持久化
+    (function(){ try{ var t=localStorage.getItem('ihz-theme')||'light'; document.documentElement.setAttribute('data-theme',t); var b=document.getElementById('themeBtn'); if(b) b.textContent=t==='dark'?'☀️':'🌙'; }catch(e){} })();
+    document.getElementById('themeBtn')?.addEventListener('click',function(){ var cur=document.documentElement.getAttribute('data-theme')||'light'; var next=cur==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',next); localStorage.setItem('ihz-theme',next); this.textContent=next==='dark'?'☀️':'🌙'; });
+  </script>
+</body>
+</html>
