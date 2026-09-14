@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -11,7 +11,7 @@
   <meta property="og:description" content="杭州14家博物馆镇馆之宝 + 开放时间 + 门票 + 参观攻略">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://www.ihangzhou.net/museum.html">
-  <link rel="stylesheet" href="css/style.css?v=20260926d">
+  <link rel="stylesheet" href="css/style.css?v=20260927a">
   <style>
     /* 博物馆专题页专属样式 */
     .museum-hero {
@@ -281,6 +281,7 @@
     <div class="topbar-search">
       <input type="text" placeholder="搜索杭州博物馆..." id="searchInput">
     </div>
+    <button class="topbar-elderly" onclick="toggleElderlyMode()" title="老人模式">👵 老人</button>
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
   </div>
 
@@ -602,7 +603,7 @@
   }
   </script>
 
-  <script src="js/app.js?v=20260926d
+  <script src="js/app.js?v=20260927a"></script>
   <script>
     // 主题持久化
     (function () {
@@ -611,6 +612,11 @@
         document.documentElement.setAttribute('data-theme', t);
         var b = document.getElementById('themeBtn');
         if (b) b.textContent = t === 'dark' ? '☀️' : '🌙';
+      } catch (e) {}
+      // 老人模式持久化
+      try {
+        var el = localStorage.getItem('ihz_elderly') === 'true';
+        document.documentElement.setAttribute('data-elderly', el ? 'true' : 'false');
       } catch (e) {}
     })();
     function toggleTheme() {
@@ -657,5 +663,12 @@
       } catch (e) {}
     })();
   </script>
+
+  <nav class="bottom-nav">
+    <a class="bnav-item" href="index.html"><span class="bicon">🏠</span><span>首页</span></a>
+    <a class="bnav-item" href="index.html#tools"><span class="bicon">🛠️</span><span>工具</span></a>
+    <a class="bnav-item" href="index.html#phone"><span class="bicon">📞</span><span>电话</span></a>
+    <a class="bnav-item" href="index.html#me"><span class="bicon">👤</span><span>我的</span></a>
+  </nav>
 </body>
 </html>

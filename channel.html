@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -12,7 +12,7 @@
   <link rel="canonical" href="https://www.ihangzhou.net/channel.html">
   <link rel="manifest" href="manifest.json">
   <title>iHangzhou · 频道专题</title>
-  <link rel="stylesheet" href="css/style.css?v=20260926d">
+  <link rel="stylesheet" href="css/style.css?v=20260927a">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
 </head>
 <body>
@@ -26,8 +26,25 @@
     <div class="topbar-search">
       <input type="text" id="channelSearchInput" placeholder="在本频道搜索..." autocomplete="off">
     </div>
+    <button class="topbar-elderly" onclick="toggleElderlyMode()" title="老人模式">👵 老人</button>
     <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
   </header>
+
+  <script>
+    // 主题 + 老人模式持久化
+    (function () {
+      try {
+        var t = localStorage.getItem('ihz-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        var b = document.getElementById('themeBtn');
+        if (b) b.textContent = t === 'dark' ? '☀️' : '🌙';
+      } catch (e) {}
+      try {
+        var el = localStorage.getItem('ihz_elderly') === 'true';
+        document.documentElement.setAttribute('data-elderly', el ? 'true' : 'false');
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- 频道内容 -->
   <div class="page active" id="pageChannel">
@@ -75,7 +92,7 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=20260926d
+  <script src="js/app.js?v=20260927a"></script>
   <script>
     // 频道专题页逻辑
     (function () {
@@ -180,7 +197,7 @@
           return;
         }
 
-        // 从 app.js?v=20260926d DATA 中查找对应分类
+        // 从 app.js DATA 中查找对应分类
         if (!window._getData) {
           document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">数据加载失败</div>';
           return;
@@ -284,8 +301,8 @@
             '</div>';
         }).join('');
 
-        // 绑定服务点击 - 依赖 app.js?v=20260926d 的 #serviceGrid 委托绑定，无需重复绑定
-        // app.js?v=20260926d 的 handleClick 已处理 action/url/详情三种情况
+        // 绑定服务点击 - 依赖 app.js 的 #serviceGrid 委托绑定，无需重复绑定
+        // app.js 的 handleClick 已处理 action/url/详情三种情况
 
         // 渲染相关频道
         var related = RELATED[chId] || [];
@@ -334,5 +351,20 @@
       window.addEventListener('hashchange', renderChannel);
     })();
   </script>
+
+  <nav class="bottom-nav">
+    <a class="bnav-item" href="index.html">
+      <span class="bicon">🏠</span><span>首页</span>
+    </a>
+    <a class="bnav-item" href="index.html#tools">
+      <span class="bicon">🛠️</span><span>工具</span>
+    </a>
+    <a class="bnav-item" href="index.html#phone">
+      <span class="bicon">📞</span><span>电话</span>
+    </a>
+    <a class="bnav-item" href="index.html#me">
+      <span class="bicon">👤</span><span>我的</span>
+    </a>
+  </nav>
 </body>
 </html>
