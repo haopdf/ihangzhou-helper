@@ -2398,3 +2398,32 @@ a { color: var(--primary); text-decoration: none; }
 .city-dropdown-item:hover { background: var(--bg-hover); }
 .city-dropdown-item.active { color: var(--primary); font-weight: 700; background: var(--bg-hover); }
 .city-dropdown-item .cd-dist { font-size: 11px; color: var(--text-muted); font-weight: 400; opacity: 0.75; }
+
+/* ===== 区县特色卡片 ===== */
+.district-info { padding: 0 16px; margin: 12px 0; }
+.district-info-card {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  border-radius: 14px;
+  padding: 18px 16px;
+  box-shadow: 0 4px 16px rgba(14,165,233,0.2);
+}
+.di-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.di-title { font-size: 18px; font-weight: 700; }
+.di-tag { font-size: 11px; background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 10px; white-space: nowrap; }
+.di-desc { font-size: 13px; line-height: 1.7; opacity: 0.95; margin-bottom: 12px; }
+.di-highlights { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.di-highlight { font-size: 11px; background: rgba(255,255,255,0.18); padding: 4px 10px; border-radius: 10px; }
+.di-scenic { margin-bottom: 12px; }
+.di-section-title { font-size: 12px; font-weight: 600; opacity: 0.9; margin-bottom: 8px; }
+.di-scenic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.di-scenic-item { background: rgba(255,255,255,0.12); padding: 8px 10px; border-radius: 8px; }
+.di-scenic-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.di-scenic-desc { font-size: 11px; opacity: 0.85; line-height: 1.4; }
+.di-landmarks { margin-bottom: 12px; }
+.di-landmark-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.di-landmark { font-size: 11px; background: rgba(255,255,255,0.12); padding: 4px 10px; border-radius: 8px; }
+.di-features { font-size: 12px; opacity: 0.9; line-height: 1.6; margin-bottom: 12px; padding: 8px 10px; background: rgba(255,255,255,0.08); border-radius: 8px; }
+.di-gov-link { display: block; text-align: center; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.di-more { display: block; text-align: center; padding: 8px; color: rgba(255,255,255,0.9); text-decoration: none; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.15); margin-top: 4px; }
+@media (max-width: 480px) { .di-scenic-grid { grid-template-columns: 1fr; } }

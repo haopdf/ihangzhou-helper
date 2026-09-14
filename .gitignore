@@ -30,5 +30,5 @@ __pycache__/
 .vercel
 .env*
 
-articles/*.html
-articles/index.json
+# articles/*.html
+# articles/index.json

@@ -1,18 +1,40 @@
-<!DOCTYPE html>
+// 生成独立频道页面
+// 用法: node gen-channels.js
+const fs = require('fs');
+const path = require('path');
+
+const channels = [
+  { id: 'banshi', name: '办事指南', icon: '🏛️', desc: '杭州政务办事一站导航，涵盖社保、公积金、落户、证件、人才、补贴等高频办事服务', kw: '杭州办事,社保查询,公积金,落户,杭州政务,ihangzhou' },
+  { id: 'traffic', name: '交通出行', icon: '🗺️', desc: '杭州交通出行全攻略，限行查询、地铁公交、火车机票、打车租车、停车缴费、违章处理', kw: '杭州交通,限行查询,地铁,公交,火车,杭州出行,ihangzhou' },
+  { id: 'food', name: '杭州美食', icon: '🍜', desc: '杭帮菜经典名菜与街头小吃，西湖醋鱼、龙井虾仁、东坡肉、片儿川，品味千年饮食文化', kw: '杭州美食,杭帮菜,西湖醋鱼,龙井虾仁,东坡肉,片儿川,ihangzhou' },
+  { id: 'laozihao', name: '老字号', icon: '🏮', desc: '杭州百年老字号品牌，胡庆余堂、王星记、张小泉、知味观、楼外楼，传承匠心工艺', kw: '杭州老字号,胡庆余堂,王星记,张小泉,知味观,楼外楼,ihangzhou' },
+  { id: 'celebrity', name: '杭州名人', icon: '👤', desc: '杭州历史与当代名人录，从白居易、苏东坡到林徽因、章太炎，见证城市人文脉络', kw: '杭州名人,白居易,苏东坡,林徽因,章太炎,杭州历史人物,ihangzhou' },
+  { id: 'history', name: '历史文化', icon: '🏯', desc: '杭州历史文化探索，南宋皇城、良渚古城、京杭大运河、西湖文化，世界遗产巡礼', kw: '杭州历史,南宋皇城,良渚古城,京杭大运河,西湖,世界遗产,ihangzhou' },
+  { id: 'internet', name: '互联网大厂', icon: '💻', desc: '杭州互联网大厂聚集地，阿里巴巴、网易、字节跳动、蚂蚁集团，数字经济高地', kw: '杭州互联网,阿里巴巴,网易,字节跳动,蚂蚁集团,数字经济,ihangzhou' },
+  { id: 'zhaopin', name: '人才招聘', icon: '💼', desc: '杭州人才招聘导航，事业单位、国企、大厂、校招、实习，求职就业一站直达', kw: '杭州招聘,杭州求职,事业单位,国企,大厂校招,杭州人才,ihangzhou' },
+  { id: 'street', name: '街道故事', icon: '🛤️', desc: '杭州街道故事，河坊街、南山路、延安路、湖滨路，每条街道都是城市记忆', kw: '杭州街道,河坊街,南山路,延安路,湖滨路,杭州老街,ihangzhou' },
+  { id: 'weekend', name: '周末休闲', icon: '🎉', desc: '杭州周末休闲指南，亲子游、免费景点、特色市集、短途自驾、夜生活，周末不无聊', kw: '杭州周末,亲子游,免费景点,特色市集,短途自驾,夜生活,ihangzhou' },
+  { id: 'museum', name: '博物馆游', icon: '🏛️', desc: '杭州博物馆地图，省博物馆、丝绸博物馆、茶叶博物馆、良渚博物院，免费文化之旅', kw: '杭州博物馆,省博物馆,丝绸博物馆,茶叶博物馆,良渚博物院,免费展览,ihangzhou' },
+  { id: 'coffee', name: '咖啡馆指南', icon: '☕', desc: '杭州咖啡馆指南，西湖边、南山路、青芝坞、馒头山，寻找城市中的咖啡香气', kw: '杭州咖啡馆,西湖边咖啡,南山路咖啡,青芝坞,馒头山,杭州咖啡,ihangzhou' }
+];
+
+// 频道模板
+function genChannelHtml(ch) {
+  return `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <meta name="description" content="杭州博物馆地图，省博物馆、丝绸博物馆、茶叶博物馆、良渚博物院，免费文化之旅，所有链接指向官方渠道。">
-  <meta name="keywords" content="杭州博物馆,省博物馆,丝绸博物馆,茶叶博物馆,良渚博物院,免费展览,ihangzhou">
+  <meta name="description" content="${ch.desc}，所有链接指向官方渠道。">
+  <meta name="keywords" content="${ch.kw}">
   <meta name="theme-color" content="#0ea5e9">
-  <meta property="og:title" content="博物馆游 · iHangzhou">
-  <meta property="og:description" content="杭州博物馆地图，省博物馆、丝绸博物馆、茶叶博物馆、良渚博物院，免费文化之旅">
+  <meta property="og:title" content="${ch.name} · iHangzhou">
+  <meta property="og:description" content="${ch.desc}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="iHangzhou 杭州生活助手">
-  <link rel="canonical" href="https://www.ihangzhou.net/museum.html">
+  <link rel="canonical" href="https://www.ihangzhou.net/${ch.id}.html">
   <link rel="manifest" href="manifest.json">
-  <title>博物馆游 · iHangzhou 杭州生活助手</title>
+  <title>${ch.name} · iHangzhou 杭州生活助手</title>
   <link rel="stylesheet" href="css/style.css?v=20260927a">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
 </head>
@@ -66,7 +88,7 @@
     <!-- 频道服务网格 -->
     <div class="content">
       <div class="section-head">
-        <h2 id="channelTitle">博物馆游 · 全部服务</h2>
+        <h2 id="channelTitle">${ch.name} · 全部服务</h2>
         <span class="tip" id="channelCount"></span>
       </div>
       <div class="service-grid" id="serviceGrid"></div>
@@ -107,10 +129,10 @@
     (function () {
       'use strict';
 
-      var CHANNEL_ID = 'museum';
-      var CHANNEL_NAME = '博物馆游';
-      var CHANNEL_ICON = '🏛️';
-      var CHANNEL_DESC = '杭州博物馆地图，省博物馆、丝绸博物馆、茶叶博物馆、良渚博物院，免费文化之旅，所有链接指向官方渠道。';
+      var CHANNEL_ID = '${ch.id}';
+      var CHANNEL_NAME = '${ch.name}';
+      var CHANNEL_ICON = '${ch.icon}';
+      var CHANNEL_DESC = '${ch.desc}，所有链接指向官方渠道。';
 
       // 相关频道推荐
       var RELATED = {
@@ -306,3 +328,14 @@
   </nav>
 </body>
 </html>
+`;
+}
+
+// 生成所有频道页面
+channels.forEach(function(ch) {
+  var filePath = path.join(__dirname, ch.id + '.html');
+  fs.writeFileSync(filePath, genChannelHtml(ch), 'utf8');
+  console.log('Generated: ' + ch.id + '.html');
+});
+
+console.log('\\nDone! Generated ' + channels.length + ' channel pages.');

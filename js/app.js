@@ -1344,14 +1344,14 @@
 
     bindOn('#themeBtn', 'click', toggleTheme);
 
-    // 频道入口点击：跳转到频道专题页 channel.html#xxx
+    // 频道入口点击：跳转到独立频道页面
     $$('.channel-item').forEach(function (item) {
-      item.addEventListener('click', function () {
+      item.addEventListener('click', function (e) {
         var channel = this.dataset.channel;
         var matchedCat = DATA.categories.find(function (c) { return c.id === channel; });
         if (matchedCat) {
-          // 跳转到频道专题页
-          location.href = 'channel.html#' + channel;
+          // 跳转到独立频道页（如 history.html）
+          location.href = channel + '.html';
         } else {
           showToast('「' + (this.querySelector('.ch-name') ? this.querySelector('.ch-name').textContent : channel) + '」专题页开发中');
         }
@@ -2799,7 +2799,7 @@ case 'colors': showColors(); break;
 
   // ===== 杭州 13 区县数据 =====
   var DISTRICTS = [
-    { id: 'hangzhou', name: '杭州', full: '杭州市', desc: '全市通用' },
+    { id: 'hangzhou', name: '杭州', full: '杭州市', desc: '湖滨/望江/清波' },
     { id: 'shangcheng', name: '上城', full: '上城区', desc: '湖滨/望江/清波' },
     { id: 'gongshu', name: '拱墅', full: '拱墅区', desc: '湖墅/小河/祥符' },
     { id: 'xihu', name: '西湖', full: '西湖区', desc: '灵隐/文新/留下' },
@@ -2814,6 +2814,212 @@ case 'colors': showColors(); break;
     { id: 'chunan', name: '淳安', full: '淳安县', desc: '千岛湖/文昌/临岐' },
     { id: 'jiande', name: '建德', full: '建德市', desc: '新安江/梅城/寿昌' }
   ];
+
+  // ===== 区县详细信息（景点/地标/政务入口）=====
+  var DISTRICT_DETAILS = {
+    'hangzhou': {
+      tag: '全市通用 · 杭州生活助手',
+      desc: '杭州，浙江省省会，长三角南翼中心城市。13 区县市，常住人口约 1200 万。',
+      highlights: ['西湖', '京杭大运河', '良渚古城', '钱塘江', '灵隐寺'],
+      govUrl: 'https://www.hangzhou.gov.cn/',
+      features: '数字经济、文化旅游、创新中心'
+    },
+    'shangcheng': {
+      tag: '南宋皇城核心 · 老底子杭州',
+      desc: '由原上城区和江干区合并，涵盖南宋皇城遗址、钱江新城 CBD，杭州政治、文化、金融中心。',
+      highlights: ['南宋御街', '河坊街', '钱江新城', '市民中心', '西湖东岸'],
+      scenic: [
+        { name: '清河坊', desc: '杭州最知名步行街，老字号与非遗聚集' },
+        { name: '南宋御街', desc: '南宋皇城的中轴大道，中山路一带' },
+        { name: '钱江新城', desc: '日月同辉、城市阳台、灯光秀' },
+        { name: '白塔公园', desc: '南宋地宫遗址、绿皮火车怀旧' },
+        { name: '湖滨步行街', desc: '西湖东岸，音乐喷泉' }
+      ],
+      landmarks: ['市民中心', '杭州大剧院', '万松书院', '胡庆余堂', '邵逸夫医院'],
+      govUrl: 'https://www.hangzhou.gov.cn/col/col1229527152/index.html',
+      features: '政务办事核心区（市民中心）、金融街（庆春路）、老字号聚集地、CBD 经济引擎'
+    },
+    'gongshu': {
+      tag: '运河文化核心 · 工业遗存',
+      desc: '由原拱墅区和下城区合并，京杭大运河南端，杭州传统工业基地转型文创示范区。',
+      highlights: ['京杭大运河', '拱宸桥', '小河直街', '武林广场', '杭州大厦'],
+      scenic: [
+        { name: '拱宸桥', desc: '京杭大运河南端标志，三孔石拱桥' },
+        { name: '小河直街', desc: '运河边的市井人家，原汁原味老杭州' },
+        { name: '桥西历史街区', desc: '运河边的历史文化保护区' },
+        { name: '大兜路历史街区', desc: '运河边的禅意慢生活' },
+        { name: '杭州工艺美术馆', desc: '免费，非遗工艺展示' }
+      ],
+      landmarks: ['武林广场', '杭州大厦', '浙江展览馆', '运河广场', '香积寺'],
+      govUrl: 'https://www.hangzhou.gov.cn/col/col1229527153/index.html',
+      features: '运河文化、工业遗存改造（LOFT49、丝联 166）、武林商圈、传统市井生活'
+    },
+    'xihu': {
+      tag: '西湖名胜核心 · 文教区',
+      desc: '因西湖而得名，涵盖西湖风景名胜区西岸、转塘、之江国家旅游度假区。杭州文教区、文创区。',
+      highlights: ['西湖', '灵隐寺', '龙井茶村', '中国美院', '云栖小镇'],
+      scenic: [
+        { name: '西湖', desc: '5A 级，免费开放，断桥、苏堤、雷峰塔' },
+        { name: '灵隐寺 + 飞来峰', desc: '杭州最古寺院，飞来峰石窟造像' },
+        { name: '龙井村 / 梅家坞', desc: '西湖龙井茶原产地，茶文化体验' },
+        { name: '中国美院象山校区', desc: '王澍设计，普利兹克奖作品' },
+        { name: '西溪湿地（部分）', desc: '国家级湿地公园' }
+      ],
+      landmarks: ['浙大紫金港校区', '黄龙体育中心', '浙江图书馆', '杭州植物园', '宋城'],
+      govUrl: 'https://www.hangzhou.gov.cn/col/col1229527154/index.html',
+      features: '西湖风景名胜区、文教区（浙大、商大、美院）、龙井茶产地、云栖小镇（云计算）'
+    },
+    'binjiang': {
+      tag: '杭州硅谷 · 高新区',
+      desc: '杭州国家高新区，与萧山隔江相望。阿里巴巴、网易、海康威视总部所在地。',
+      highlights: ['网易', '阿里巴巴', '海康威视', '白马湖', '星光大道'],
+      scenic: [
+        { name: '白马湖生态创意城', desc: '中国动漫节永久会址' },
+        { name: '杭州乐园', desc: '过山车、水上乐园' },
+        { name: '湘湖（部分）', desc: '与西湖并称「姊妹湖」' },
+        { name: '星光大道步行街', desc: '电影主题商业街' },
+        { name: '钱塘江沿岸', desc: '最美滨江跑道' }
+      ],
+      landmarks: ['阿里巴巴总部', '网易总部', '海康威视', '杭二中', '滨江区行政中心'],
+      govUrl: 'https://www.hangzhou.gov.cn/col/col1229527155/index.html',
+      features: '高新区、互联网企业总部（阿里/网易/海康/大华）、动漫产业、物联网产业'
+    },
+    'xiaoshan': {
+      tag: '机场门户 · 民企之乡',
+      desc: '萧山国际机场所在地，杭州民营企业之乡，湘湖度假区。',
+      highlights: ['萧山机场', '湘湖', '杭州乐园', '观潮城', '东方文化园'],
+      scenic: [
+        { name: '湘湖', desc: '跨湖桥遗址所在地，8000 年文明' },
+        { name: '杭州乐园', desc: '长三角老牌主题公园' },
+        { name: '极乐寺', desc: '萧山最大寺院' },
+        { name: '东方文化园', desc: '儒释道三家合一' },
+        { name: '观潮城（南阳）', desc: '钱塘江大潮最佳观赏点之一' }
+      ],
+      landmarks: ['萧山机场', '湘湖', '杭州南站', '萧山剧院', '恒逸集团'],
+      govUrl: 'https://www.hangzhou.gov.cn/col/col1229527156/index.html',
+      features: '萧山国际机场、民营企业之乡（恒逸、荣盛）、湘湖度假区、亚洲邮展中心'
+    },
+    'yuhang': {
+      tag: '良渚文明 · 未来科技城',
+      desc: '良渚古城遗址（世界遗产）所在地，未来科技城、阿里巴巴总部、之江实验室。',
+      highlights: ['良渚古城', '未来科技城', '阿里巴巴', '径山寺', '梦想小镇'],
+      scenic: [
+        { name: '良渚古城遗址公园', desc: '5000 年中华文明实证，门票 50 元' },
+        { name: '良渚博物院', desc: '免费，周一闭馆，建筑大师设计' },
+        { name: '径山寺', desc: '日本茶道祖庭，径山茶宴' },
+        { name: '双溪漂流', desc: '江南第一漂' },
+        { name: '梦想小镇', desc: '互联网创业小镇' }
+      ],
+      landmarks: ['良渚古城', '未来科技城', '阿里巴巴总部', '之江实验室', '径山'],
+      govUrl: 'https://www.hangzhou.gov.cn/col/col1229527157/index.html',
+      features: '良渚文明（世界遗产）、未来科技城、阿里巴巴总部、之江实验室、径山茶'
+    },
+    'linping': {
+      tag: '杭州东站 · 家纺之都',
+      desc: '杭州东站门户，家纺产业基地，塘栖古镇、超山梅花、艺尚小镇。',
+      highlights: ['杭州东站', '塘栖古镇', '超山梅花', '艺尚小镇', '临平大剧院'],
+      scenic: [
+        { name: '超山风景区', desc: '江南三大探梅胜地，2-3 月最佳' },
+        { name: '临平山公园', desc: '城区绿肺，俯瞰临平全景' },
+        { name: '塘栖古镇', desc: '京杭运河沿岸，杭州唯一古镇' },
+        { name: '艺尚小镇', desc: '中国时尚产业高地' },
+        { name: '临平大剧院', desc: '杭州第二大剧院' }
+      ],
+      landmarks: ['杭州东站', '塘栖古镇', '超山', '临平大剧院', '艺尚小镇'],
+      govUrl: 'https://www.hangzhou.gov.cn/col/col1229527158/index.html',
+      features: '杭州东站门户、家纺产业、时尚创意（艺尚小镇）、塘栖古镇、超山梅花'
+    },
+    'qiantang': {
+      tag: '下沙大学城 · 制造基地',
+      desc: '下沙大学城（14 所高校）、大江东制造业基地、生物医药港。',
+      highlights: ['下沙大学城', '金沙湖', '钱塘江湿地', '宝龙广场', '医药港'],
+      scenic: [
+        { name: '下沙大学城', desc: '14 所高校，15 万大学生' },
+        { name: '金沙湖公园', desc: '下沙最大城市公园' },
+        { name: '钱塘江生态湿地', desc: '滨江生态走廊' },
+        { name: '宝龙广场', desc: '下沙商业中心' },
+        { name: '沿江湿地公园', desc: '观潮、骑行、烧烤' }
+      ],
+      landmarks: ['下沙高教园', '杭州电子科技大学', '浙江理工大学', '医药港小镇', '大江东产业区'],
+      govUrl: 'https://www.hangzhou.gov.cn/col/col1229527159/index.html',
+      features: '下沙大学城（高教）、大江东制造业基地、生物医药港、跨境电商'
+    },
+    'fuyang': {
+      tag: '《富春山居图》原乡 · 造纸之乡',
+      desc: '《富春山居图》创作地，造纸之乡，龙门古镇、富春桃源。',
+      highlights: ['富春山居图', '富春江', '龙门古镇', '新登古城', '银湖科技城'],
+      scenic: [
+        { name: '龙门古镇', desc: '孙权故里，三国孙氏后裔聚居' },
+        { name: '富春桃源', desc: '溶洞 + 漂流 + 玻璃栈道' },
+        { name: '黄公望隐居地', desc: '《富春山居图》创作地' },
+        { name: '杭州野生动物世界', desc: '4A 级，亲子首选' },
+        { name: '东梓关村', desc: '中国最美安置房' }
+      ],
+      landmarks: ['富春江', '新登古城', '银湖科技城', '富阳高铁站', '春永线'],
+      govUrl: 'https://www.hangzhou.gov.cn/col/col1229527160/index.html',
+      features: '《富春山居图》原型地、造纸之乡、运动休闲之城、龙门古镇'
+    },
+    'linan': {
+      tag: '吴越王故里 · 山核桃之都',
+      desc: '吴越国钱王故里，天目山、青山湖、山核桃。',
+      highlights: ['天目山', '清凉峰', '青山湖', '大明山', '白果之乡'],
+      scenic: [
+        { name: '天目山', desc: '大树华盖闻九洲，银杏祖树' },
+        { name: '大明山', desc: '高山滑雪场（江南罕见）' },
+        { name: '青山湖', desc: '水上森林奇观' },
+        { name: '太湖源', desc: '太湖发源地之一' },
+        { name: '白果之乡 (白牛村)', desc: '中国最早淘宝村' }
+      ],
+      landmarks: ['天目山', '清凉峰', '青山湖科技城', '临安博物馆', '钱王陵'],
+      govUrl: 'https://www.hangzhou.gov.cn/col/col1229527161/index.html',
+      features: '吴越文化（钱王故里）、山核桃、竹笋、生态旅游、青山湖科技城'
+    },
+    'tonglu': {
+      tag: '中国最美县城 · 瑶琳仙境',
+      desc: '中国最美县城，瑶琳仙境、富春江下游、慢生活。',
+      highlights: ['瑶琳仙境', '富春江', '芦茨村', '深澳古村', '桐庐米粿'],
+      scenic: [
+        { name: '瑶琳仙境', desc: '全国著名溶洞，地下迷宫' },
+        { name: '富春江小三峡', desc: '严子陵钓台所在地' },
+        { name: '芦茨村', desc: '土屋、溪流、慢生活' },
+        { name: '深澳古村', desc: '申屠氏家族聚居 1000 年' },
+        { name: '合村竹筏漂流', desc: '桐庐溪漂流代表' }
+      ],
+      landmarks: ['大奇山国家森林公园', '桐君山', '桐庐博物馆', '桐庐银泰'],
+      govUrl: 'https://www.tonglu.gov.cn/',
+      features: '中国最美县城、瑶琳仙境、富春江下游、中药文化（桐君老人）、慢生活'
+    },
+    'chunan': {
+      tag: '千岛湖 · 国家级饮用水源地',
+      desc: '千岛湖 5A 景区，农夫山泉水源地，环湖骑行、有机鱼头。',
+      highlights: ['千岛湖', '农夫山泉', '梅峰岛', '环湖骑行', '鱼头'],
+      scenic: [
+        { name: '千岛湖中心湖区', desc: '梅峰岛、月光岛、龙山岛' },
+        { name: '千岛湖东南湖区', desc: '黄山尖、天池岛' },
+        { name: '环湖骑行绿道', desc: '120 公里最美环湖骑行道' },
+        { name: '千岛湖水下古城', desc: '原遂安县城，1959 年沉水' },
+        { name: '文渊狮城', desc: '水下古城的岸上复刻版' }
+      ],
+      landmarks: ['千岛湖', '农夫山泉水源地', '淳安博物馆', '千岛湖大桥'],
+      govUrl: 'https://www.qdh.gov.cn/',
+      features: '千岛湖 5A 景区、农夫山泉水源、环湖骑行、有机鱼头、水下古城'
+    },
+    'jiande': {
+      tag: '新安江 · 17 度清凉水',
+      desc: '新安江 17°C 清凉水，严州古城（梅城）、大慈岩悬空寺。',
+      highlights: ['新安江', '建德豆腐包', '大慈岩', '新叶古村', '严州古城'],
+      scenic: [
+        { name: '大慈岩', desc: '悬空寺、立佛、银杏王' },
+        { name: '灵栖洞', desc: '《西游记》取景地' },
+        { name: '新叶古村', desc: '《爸爸去哪儿》取景地' },
+        { name: '新安江水电站', desc: '中国水电事业里程碑' },
+        { name: '七里扬帆', desc: '富春江下游最美一段' }
+      ],
+      landmarks: ['新安江', '建德博物馆', '严州古城（梅城）', '建德高铁东站'],
+      govUrl: 'https://www.jiande.gov.cn/',
+      features: '新安江 17°C 清凉水、严州古城（梅城）、大慈岩悬空寺、上山文化遗址'
+    }
+  };
 
   function initCityDropdown() {
     var cur = lsGet('ihz_city', 'hangzhou');
@@ -2840,9 +3046,73 @@ case 'colors': showColors(); break;
         box.classList.remove('show');
         // 重新渲染今日卡片（限行/天气按区县）
         renderTodayHangzhou();
+        // 重新渲染区县特色卡片
+        renderDistrictInfo();
         showToast('已切换到 ' + d.full);
       };
     });
+  }
+
+  // ===== 区县特色卡片渲染 =====
+  function renderDistrictInfo() {
+    var box = $('#districtInfo');
+    if (!box) return;
+    var curId = lsGet('ihz_city', 'hangzhou');
+    var info = DISTRICT_DETAILS[curId];
+    if (!info) { box.innerHTML = ''; return; }
+    var d = DISTRICTS.find(function(x){return x.id===curId;}) || DISTRICTS[0];
+
+    var scenicHtml = '';
+    if (info.scenic && info.scenic.length) {
+      scenicHtml = '<div class="di-scenic">' +
+        '<div class="di-section-title">📍 特色景点</div>' +
+        '<div class="di-scenic-grid">' +
+        info.scenic.map(function(s) {
+          return '<div class="di-scenic-item">' +
+            '<div class="di-scenic-name">' + s.name + '</div>' +
+            '<div class="di-scenic-desc">' + s.desc + '</div>' +
+          '</div>';
+        }).join('') +
+        '</div></div>';
+    }
+
+    var landmarksHtml = '';
+    if (info.landmarks && info.landmarks.length) {
+      landmarksHtml = '<div class="di-landmarks">' +
+        '<div class="di-section-title">🏛️ 地标</div>' +
+        '<div class="di-landmark-list">' +
+        info.landmarks.map(function(l) {
+          return '<span class="di-landmark">' + l + '</span>';
+        }).join('') +
+        '</div></div>';
+    }
+
+    var highlightsHtml = '';
+    if (info.highlights && info.highlights.length) {
+      highlightsHtml = '<div class="di-highlights">' +
+        info.highlights.map(function(h) {
+          return '<span class="di-highlight">' + h + '</span>';
+        }).join('') +
+        '</div>';
+    }
+
+    var govHtml = info.govUrl ?
+      '<a class="di-gov-link" href="' + info.govUrl + '" target="_blank" rel="noopener noreferrer">🏛️ ' + d.full + '政务网 →</a>' : '';
+
+    box.innerHTML =
+      '<div class="district-info-card">' +
+        '<div class="di-header">' +
+          '<div class="di-title">' + d.full + '</div>' +
+          '<div class="di-tag">' + info.tag + '</div>' +
+        '</div>' +
+        '<div class="di-desc">' + info.desc + '</div>' +
+        highlightsHtml +
+        scenicHtml +
+        landmarksHtml +
+        '<div class="di-features">' + info.features + '</div>' +
+        govHtml +
+        '<a class="di-more" href="district.html?id=' + curId + '">查看 ' + d.full + ' 详情 →</a>' +
+      '</div>';
   }
 
   function bindCityDropdown() {
@@ -2895,6 +3165,7 @@ case 'colors': showColors(); break;
       initCityDropdown();
       bindCityDropdown();
       renderTodayHangzhou();
+      renderDistrictInfo();
       renderNewsBanner();
       renderHotServices();
       renderHotKeywords();
