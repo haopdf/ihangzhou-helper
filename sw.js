@@ -3,7 +3,7 @@
 // HTML/JS/CSS 网络优先（确保最新），图片 缓存优先
 // ============================================
 
-var CACHE_NAME = 'ihangzhou-v46';
+var CACHE_NAME = 'ihangzhou-v47';
 var CACHE_URLS = [
   '/css/style.css',
   '/manifest.json',

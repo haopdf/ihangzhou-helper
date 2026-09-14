@@ -83,6 +83,11 @@ a { color: var(--primary); text-decoration: none; }
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
+.city-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
 .topbar-city {
   display: flex;
   align-items: center;
@@ -95,7 +100,6 @@ a { color: var(--primary); text-decoration: none; }
   padding: 6px 10px;
   background: rgba(255,255,255,0.15);
   border-radius: 16px;
-  position: relative;
 }
 
 .topbar-elderly {
@@ -1148,16 +1152,12 @@ a { color: var(--primary); text-decoration: none; }
 
 /* ===== 桌面端页面统一宽度 ===== */
 @media (min-width: 768px) {
-  body { background: var(--bg-body, #f1f5f9); }
-  body > .topbar { max-width: 720px; margin: 0 auto; left: 0; right: 0; }
-  body > .page { max-width: 720px; margin: 0 auto; }
-}
-
-@media (min-width: 768px) {
-  body { font-size: 15px; }
-  .content { max-width: 720px; margin: 0 auto; padding: 20px; }
+  body { background: var(--bg-body, #f1f5f9); font-size: 15px; }
+  body > .topbar { left: 0; right: 0; }
+  body > .page { max-width: 960px; margin: 0 auto; }
+  .content { max-width: 960px; margin: 0 auto; padding: 20px; }
   .topbar { padding: 12px 20px; }
-  .topbar-inner { max-width: 720px; margin: 0 auto; }
+  .topbar-inner { max-width: 960px; margin: 0 auto; }
   .hot-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
   .hot-card { padding: 18px 8px; }
   .hot-icon { width: 44px; height: 44px; font-size: 22px; }
@@ -2305,7 +2305,7 @@ a { color: var(--primary); text-decoration: none; }
 /* ===== 专题页快速入口 ===== */
 .topic-nav {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 8px;
   padding: 10px 14px 12px;
 }

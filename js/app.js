@@ -2830,7 +2830,9 @@ case 'colors': showColors(); break;
     });
     box.innerHTML = html;
     document.querySelectorAll('#cityDropdown .city-dropdown-item').forEach(function(it) {
-      it.onclick = function() {
+      it.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         var id = it.getAttribute('data-id');
         lsSet('ihz_city', id);
         var d = DISTRICTS.find(function(x){return x.id===id;});
@@ -2855,6 +2857,10 @@ case 'colors': showColors(); break;
       if (!btn.contains(e.target) && !box.contains(e.target)) {
         box.classList.remove('show');
       }
+    });
+    // ESC 键关闭
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') box.classList.remove('show');
     });
   }
 
