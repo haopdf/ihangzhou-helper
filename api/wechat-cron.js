@@ -116,7 +116,8 @@ module.exports = async (req, res) => {
     if (token2) {
       await put('wechat-topics.json', JSON.stringify(merged, null, 2), {
         access: 'private',
-        contentType: 'application/json'
+        contentType: 'application/json',
+        allowOverwrite: true
       });
     }
 

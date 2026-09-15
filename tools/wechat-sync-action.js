@@ -16,21 +16,17 @@ const fs = require('fs');
 const path = require('path');
 
 const SITE_URL = (process.env.SITE_URL || 'https://www.ihangzhou.net').replace(/\/$/, '');
-const CRON_SECRET = process.env.CRON_SECRET;
+// 可选：Vercel 配置了 CRON_SECRET 时需设置，否则 API 开放调用
+const CRON_SECRET = process.env.CRON_SECRET || '';
 const OUT_FILE = path.join(__dirname, '..', 'articles', 'topics.json');
 
 async function main() {
-  if (!CRON_SECRET) {
-    console.error('缺少 CRON_SECRET（请在 GitHub Secrets 中配置，与 Vercel 的 CRON_SECRET 一致）');
-    process.exit(1);
-  }
-
   const url = `${SITE_URL}/api/wechat-cron`;
   console.log(`请求 ${url} ...`);
 
-  const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${CRON_SECRET}` }
-  });
+  const headers = {};
+  if (CRON_SECRET) headers.Authorization = `Bearer ${CRON_SECRET}`;
+  const res = await fetch(url, { headers });
 
   const text = await res.text();
   if (!res.ok) {
