@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "lastModified": "2026-09-11T07:53:27.162Z",
+  "lastModified": "2026-09-15T10:05:45.000Z",
   "hotKeywords": [
     "限行",
     "社保",
@@ -5628,14 +5628,149 @@
       "url": "https://www.zjzwfw.gov.cn/"
     },
     {
+      "keyword": "免费",
+      "aliases": [
+        "免费",
+        "免费资源",
+        "免费福利",
+        "free"
+      ],
+      "type": "news",
+      "title": "杭州免费资源大全！WiFi、喝水、充电、停车…收藏这篇就够了！",
+      "desc": "免费WiFi、免费喝水、免费充电、免费停车、免费公厕、免费雨伞、免费药品…90%的人都不知道的杭州免费资源！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州免费资源大全-WiFi-喝水-充电-停车-公厕.html"
+    },
+    {
+      "keyword": "薅羊毛",
+      "aliases": [
+        "薅羊毛",
+        "省钱",
+        "消费券",
+        "优惠",
+        "haoyangmao"
+      ],
+      "type": "news",
+      "title": "杭州薅羊毛省钱攻略！消费券、奶茶、积分、学生福利…一年省几千块！",
+      "desc": "政府消费券、奶茶免单、商场积分、学生福利、文旅优惠、银行活动…杭州薅羊毛全攻略，收藏这篇就够了！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州薅羊毛省钱攻略-消费券-奶茶-积分-学生福利.html"
+    },
+    {
+      "keyword": "搞钱",
+      "aliases": [
+        "搞钱",
+        "副业",
+        "赚钱",
+        "兼职",
+        "gaoqian",
+        "fuye"
+      ],
+      "type": "news",
+      "title": "杭州搞钱副业指南！8大类20+真实副业，附平台入口和真实收益！",
+      "desc": "大厂众包、本地探店、夜市摆摊、线上接单、AI副业、内容创作…8大类20+真实可做的副业，死工资之外的第二收入！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州搞钱副业指南-众包-探店-摆摊-AI副业.html"
+    },
+    {
+      "keyword": "健身",
+      "aliases": [
+        "健身",
+        "运动",
+        "骑行",
+        "跑步",
+        "登山",
+        "jianshen"
+      ],
+      "type": "news",
+      "title": "杭州免费健身运动指南！骑行、跑步、登山、公园…不用办卡就能练！",
+      "desc": "10条骑行绿道、5个免费公园、3条登山步道、社区健身路径、居家健身…杭州免费健身地图，收藏这篇就够了！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州免费健身运动指南-骑行-跑步-登山-公园.html"
+    },
+    {
+      "keyword": "WiFi",
+      "aliases": [
+        "免费WiFi",
+        "wifi",
+        "无线网络",
+        "免费wifi"
+      ],
+      "type": "news",
+      "title": "杭州免费WiFi全覆盖指南",
+      "desc": "杭州免费WiFi全覆盖！主城区2000+站点、景区、商场、图书馆、博物馆、地铁、公交、防空洞全覆盖，收藏这篇，出门再也不怕没网了！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州免费WiFi全覆盖指南-主城区景区商场图书馆地铁公交.html"
+    },
+    {
+      "keyword": "喝水",
+      "aliases": [
+        "免费喝水",
+        "开水",
+        "直饮水",
+        "凉茶",
+        "免费开水"
+      ],
+      "type": "news",
+      "title": "杭州免费喝水地图",
+      "desc": "杭州免费喝水地图！西湖77天免费凉茶、265座城管驿站免费开水、服务区免费加水、停车场爱心驿站热水，收藏这篇，出门再也不怕没水喝了！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州免费喝水地图-西湖免费凉茶城管驿站服务区.html"
+    },
+    {
+      "keyword": "充电",
+      "aliases": [
+        "免费充电",
+        "手机充电",
+        "充电宝",
+        "免费充电"
+      ],
+      "type": "news",
+      "title": "杭州免费充电地点大全",
+      "desc": "杭州免费充电地点大全！商场、餐厅、地铁、图书馆、城管驿站、便利店…到处都能免费充电，收藏这篇，出门再也不怕手机没电了！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州免费充电地点大全-商场餐厅地铁图书馆城管驿站.html"
+    },
+    {
+      "keyword": "停车",
+      "aliases": [
+        "免费停车",
+        "停车场",
+        "停车攻略",
+        "免费停车场"
+      ],
+      "type": "news",
+      "title": "杭州免费停车攻略",
+      "desc": "杭州免费停车攻略！商场免费停车、景区免费停车、路边免费停车、政府停车场…收藏这篇，在杭州停车再也不花冤枉钱了！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州免费停车攻略-商场免费停车景区免费停车路边免费停车.html"
+    },
+    {
+      "keyword": "公厕",
+      "aliases": [
+        "免费公厕",
+        "厕所",
+        "公共厕所",
+        "卫生间"
+      ],
+      "type": "news",
+      "title": "杭州公共厕所指南",
+      "desc": "杭州公共厕所指南！免费公厕、智能公厕、24小时公厕、景区公厕、商场公厕…收藏这篇，在杭州再也不怕找不到厕所了！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州公共厕所指南-免费公厕智能公厕24小时公厕.html"
+    },
+    {
       "keyword": "消费券",
       "aliases": [
-        "发票抽奖",
-        "消费有奖",
-        "杭州消费券"
+        "杭州消费券",
+        "政府消费券",
+        "消费券怎么领"
       ],
-      "type": "text",
-      "reply": "🧾 杭州消费有奖\n\n支付宝/云闪付搜索「消费有奖」录入发票即可参与抽奖\n\n详情：https://www.ihangzhou.net/"
+      "type": "news",
+      "title": "杭州消费券最新消息",
+      "desc": "杭州消费券最新消息！政府消费券、文旅消费券、餐饮消费券、零售消费券…领取时间、领取方式、使用规则全攻略，收藏这篇，第一时间领消费券！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州消费券最新消息-政府消费券文旅消费券领取指南.html"
     },
     {
       "keyword": "周末",
@@ -5840,6 +5975,118 @@
       "desc": "上城/拱墅/西湖/滨江/萧山/余杭/临平/钱塘/富阳/临安/桐庐/淳安/建德",
       "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
       "url": "https://www.ihangzhou.net/district.html"
+    },
+    {
+      "keyword": "奶茶",
+      "aliases": [
+        "奶茶优惠",
+        "免费奶茶",
+        "奶茶攻略",
+        "奶茶薅羊毛"
+      ],
+      "type": "news",
+      "title": "杭州奶茶优惠攻略",
+      "desc": "杭州奶茶优惠攻略！古茗学生卡5折、蜜雪冰城免单、喜茶奈雪优惠、霸王茶姬优惠…收藏这篇，喝奶茶再也不花冤枉钱了！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州奶茶优惠攻略-古茗学生卡5折蜜雪冰城免单喜茶奈雪优惠.html"
+    },
+    {
+      "keyword": "众包",
+      "aliases": [
+        "大厂众包",
+        "众包平台",
+        "线上众包",
+        "数据标注"
+      ],
+      "type": "news",
+      "title": "杭州大厂众包平台推荐",
+      "desc": "杭州大厂众包平台推荐！腾讯搜活帮、阿里众包、百度众包、京东微工、网易众包…附平台入口和真实收益，下班顺路就能赚钱！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州大厂众包平台推荐-腾讯搜活帮阿里众包百度众包京东微工.html"
+    },
+    {
+      "keyword": "探店",
+      "aliases": [
+        "本地探店",
+        "探店攻略",
+        "探店怎么赚钱",
+        "美食探店"
+      ],
+      "type": "news",
+      "title": "杭州本地探店搞钱攻略",
+      "desc": "杭州本地探店搞钱攻略！团购佣金10%+、商家广告费200-2000元/条、平台入口和真实收益…下班顺路拍条视频就赚钱，杭州美食之都太适合了！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州本地探店搞钱攻略-团购佣金商家广告费平台入口.html"
+    },
+    {
+      "keyword": "摆摊",
+      "aliases": [
+        "夜市摆摊",
+        "摆摊攻略",
+        "摆摊怎么赚钱",
+        "杭州夜市"
+      ],
+      "type": "news",
+      "title": "杭州夜市摆摊搞钱攻略",
+      "desc": "杭州夜市摆摊搞钱攻略！转塘联投夜市、武林夜市、吴山夜市…摊位费、真实收益、摆摊技巧全攻略，周末摆摊也能月入5000+！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州夜市摆摊搞钱攻略-转塘联投夜市摊位费真实收益.html"
+    },
+    {
+      "keyword": "跑步",
+      "aliases": [
+        "跑步路线",
+        "杭州跑步",
+        "跑步地图",
+        "免费跑步"
+      ],
+      "type": "news",
+      "title": "杭州跑步路线推荐",
+      "desc": "杭州跑步路线推荐！滨江樱花跑道、西湖环湖、湘湖环湖、钱塘江绿道、白马湖荧光跑道…10条绝美跑步路线，不用办健身卡就能跑！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州跑步路线推荐-滨江樱花跑道西湖环湖湘湖环湖钱塘江绿道.html"
+    },
+    {
+      "keyword": "爬山",
+      "aliases": [
+        "爬山路线",
+        "杭州爬山",
+        "爬山地图",
+        "徒步路线"
+      ],
+      "type": "news",
+      "title": "杭州爬山路线攻略",
+      "desc": "杭州爬山路线攻略！宝石山、北高峰、十里琅珰、九溪十八涧、六和塔→虎跑、径山、天目山…10条绝美爬山路线，新手到高手都有！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州爬山路线攻略-宝石山北高峰十里琅珰九溪十八涧径山.html"
+    },
+    {
+      "keyword": "居家健身",
+      "aliases": [
+        "居家健身app",
+        "在家健身",
+        "健身app推荐",
+        "居家锻炼"
+      ],
+      "type": "news",
+      "title": "居家健身app推荐",
+      "desc": "居家健身app推荐！Keep、B站、抖音、小红书、Nike Training、薄荷健康…10个免费健身神器，下雨天/没时间去户外？在家也能练！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/居家健身app推荐-Keep-B站-抖音-小红书-NikeTraining.html"
+    },
+    {
+      "keyword": "杭州生活",
+      "aliases": [
+        "杭州本地生活",
+        "办事指南",
+        "杭州办事",
+        "生活指南"
+      ],
+      "type": "news",
+      "title": "杭州本地生活办事指南",
+      "desc": "杭州本地生活办事指南！社保、公积金、户籍、医保、入学、驾照、结婚、护照…最全办事攻略，收藏这篇，在杭州办事不求人！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州本地生活办事指南-社保公积金户籍医保入学驾照结婚护照.html"
     },
     {
       "keyword": "搜索",
