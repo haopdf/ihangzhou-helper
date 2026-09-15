@@ -52,8 +52,6 @@
     })();
   </script>
 
-  <!-- 当前区县特色卡片 -->
-  <div class="district-info" id="districtInfo"></div>
 
   <!-- 频道内容 -->
   <div class="page active" id="pageChannel">
@@ -63,14 +61,122 @@
     <!-- 频道描述 -->
     <div class="channel-desc" id="channelDesc"></div>
 
+    <!-- 分类筛选条 -->
+    <div class="museum-filter" id="museumCatFilter" style="display:flex;gap:6px;padding:10px 16px;overflow-x:auto;background:var(--bg-card);border-bottom:1px solid var(--border);-webkit-overflow-scrolling:touch;"></div>
+
     <!-- 频道服务网格 -->
     <div class="content">
       <div class="section-head">
         <h2 id="channelTitle">博物馆游 · 全部服务</h2>
         <span class="tip" id="channelCount"></span>
       </div>
-      <div class="service-grid" id="serviceGrid"></div>
+      <div class="museum-grid" id="serviceGrid"></div>
     </div>
+
+    <style>
+      /* 博物馆图册式卡片 */
+      .museum-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 0 16px;
+      }
+      @media (min-width: 640px) {
+        .museum-grid { grid-template-columns: 1fr 1fr; }
+      }
+      @media (min-width: 1024px) {
+        .museum-grid { grid-template-columns: 1fr 1fr 1fr; }
+      }
+
+      .museum-card {
+        position: relative;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: var(--shadow);
+      }
+      .museum-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+      .museum-card:active { transform: scale(0.99); }
+
+      /* 图片区：彩色渐变 + 大 emoji + 馆名水印 */
+      .mc-image {
+        position: relative;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        overflow: hidden;
+      }
+      .mc-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.55) 100%);
+        pointer-events: none;
+      }
+      .mc-image-emoji {
+        position: relative;
+        z-index: 1;
+        filter: drop-shadow(0 2px 8px rgba(0,0,0,0.25));
+      }
+      .mc-image-title {
+        position: absolute;
+        bottom: 8px;
+        left: 12px;
+        right: 12px;
+        z-index: 2;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .mc-image-tag {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        z-index: 2;
+        background: rgba(255,255,255,0.92);
+        color: #333;
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-weight: 600;
+      }
+
+      /* 介绍区 */
+      .mc-body { padding: 10px 12px 12px; }
+      .mc-desc {
+        font-size: 12px;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 6px;
+      }
+      .mc-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 11px;
+        color: var(--text-muted);
+      }
+      .mc-arrow {
+        color: var(--primary);
+        font-weight: 700;
+      }
+    </style>
 
     <!-- 相关频道推荐 -->
     <div class="related-channels">
@@ -175,6 +281,136 @@
         return '📌';
       }
 
+      // ===== 顶层工具函数（供 renderChannel / initPage / popstate 复用）=====
+
+      // 分类规则：根据名称/描述推断主分类
+      function getMuseumCat(item) {
+        var t = (item.name || '') + ' ' + (item.desc || '') + ' ' + (item.detail || '');
+        // 美术艺术
+        if (/美术馆|画院|绘画大系|韩美林|叶浅予|十竹斋/.test(t)) return 'art';
+        // 科技自然
+        if (/科技馆|自然博物院|动物园|植物园|地质博物馆|青少年活动|Do都城|少年儿童公园/.test(t)) return 'science';
+        // 红色革命
+        if (/党史|革命|毛主席|中共|省委|五四宪法|爱国卫生|烈士|小组纪念馆/.test(t)) return 'red';
+        // 名人故居
+        if (/故居|胡雪岩|司徒雷登|马寅初|毛主席视察/.test(t)) return 'person';
+        // 行业专题
+        if (/丝绸|茶叶|茶文化|印学|刀剪剑|扇博物馆|伞博物馆|铁路|水利|中医药|中药|织锦|紫檀|版画|相机|印纹陶|工业|湿地|财税|动漫|海塘|钱塘江|京杭大运河|大运河/.test(t)) return 'industry';
+        // 区县综合
+        if (/区博物馆|市博物馆|县博物馆|区非遗博物馆/.test(t)) return 'district';
+        // 综合历史（含遗址、纪念馆、综合博物馆等）
+        return 'history';
+      }
+
+      var CATS = [
+        { id: 'all',      name: '全部',       icon: '🏛️' },
+        { id: 'history',  name: '综合历史',   icon: '📜' },
+        { id: 'art',      name: '美术艺术',   icon: '🎨' },
+        { id: 'science',  name: '科技自然',   icon: '🔬' },
+        { id: 'red',      name: '红色革命',   icon: '🔴' },
+        { id: 'person',   name: '名人故居',   icon: '👤' },
+        { id: 'industry', name: '行业专题',   icon: '🏭' },
+        { id: 'district', name: '区县综合',   icon: '🏙️' }
+      ];
+
+      // 当前筛选状态：从 URL 读取
+      function readState() {
+        var p = new URLSearchParams(location.search);
+        return { cat: p.get('cat') || 'all', city: p.get('city') || '' };
+      }
+
+      // 推断 districts（item.districts 缺失时从文本推断）
+      function inferDistricts(item) {
+        if (Array.isArray(item.districts)) return item.districts;
+        var d = (item.detail || '') + ' ' + (item.name || '') + ' ' + (item.desc || '');
+        var ds = [];
+        if (/楼外楼|孤山|岳王庙|西湖|北山街|南山路|龙井|植物园|动物园/.test(d)) ds.push('xihu');
+        if (/河坊街|吴山|小营巷|元宝街|劳动路|中山路|钱江新城|市民中心|望江路|庆春路|延安路|玉皇山|凤凰山|八卦田|白塔/.test(d)) ds.push('shangcheng');
+        if (/拱宸桥|运河|小河|武林|庆春路258|耶稣堂|竹竿巷|桥西|登云路|陆家坞|长板巷|德苑路|丽水路|通益公/.test(d)) ds.push('gongshu');
+        if (/滨江|网易|阿里|白马湖|滨文|奥体/.test(d)) ds.push('binjiang');
+        if (/萧山|跨湖桥|茅湾里|钱塘江南岸/.test(d)) ds.push('xiaoshan');
+        if (/余杭|良渚|径山|仓前|梦想小镇/.test(d)) ds.push('yuhang');
+        if (/临平|玉架山|古海塘/.test(d)) ds.push('linping');
+        if (/下沙|钱塘/.test(d)) ds.push('qiantang');
+        if (/富阳|富春|公望/.test(d)) ds.push('fuyang');
+        if (/临安|天目|青山湖|吴越/.test(d)) ds.push('linan');
+        if (/桐庐/.test(d)) ds.push('tonglu');
+        if (/千岛湖|淳安/.test(d)) ds.push('chunan');
+        if (/建德|新安江|严州/.test(d)) ds.push('jiande');
+        if (ds.length === 0) ds = ['hangzhou'];
+        ds.push('hangzhou');
+        return ds;
+      }
+
+      // 同步顶部区县名与 URL ?city= 参数
+      function syncCityName() {
+        var st = readState();
+        var el = document.getElementById('cityName');
+        if (!el) return;
+        if (!st.city) { el.textContent = '杭州'; return; }
+        if (!window.DISTRICTS) return;
+        var d = window.DISTRICTS.find(function (x) { return x.id === st.city; });
+        if (d) el.textContent = d.full;
+        document.querySelectorAll('#cityDropdown .city-dropdown-item').forEach(function (it) {
+          it.classList.toggle('active', it.getAttribute('data-id') === st.city);
+        });
+      }
+
+      // 覆盖 app.js 的区县跳转：在 museum.html 上切换区县时不跳走，仅更新 URL 并重新渲染
+      function overrideCityDropdown() {
+        var box = document.getElementById('cityDropdown');
+        if (!box) return;
+        box.querySelectorAll('.city-dropdown-item').forEach(function (it) {
+          it.onclick = function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var id = this.getAttribute('data-id');
+            try { localStorage.setItem('ihz_city', id); } catch (ex) {}
+            box.classList.remove('show');
+            var cur = readState();
+            var newUrl = 'museum.html?cat=' + cur.cat + (id && id !== 'hangzhou' ? '&city=' + id : '');
+            history.pushState({ cat: cur.cat, city: id }, '', newUrl);
+            renderChannel();
+            syncCityName();
+          };
+        });
+      }
+
+      // 顶部"‹"返回按钮：用 history.back()，与浏览器后退一致
+      function overrideBackButton() {
+        var btn = document.querySelector('.topbar-back');
+        if (!btn) return;
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (window.history.length > 1) {
+            window.history.back();
+          } else {
+            window.location.href = 'index.html';
+          }
+        });
+      }
+
+      // 渲染分类筛选条
+      function renderCatFilter() {
+        var catFilter = document.getElementById('museumCatFilter');
+        if (!catFilter) return;
+        var st = readState();
+        catFilter.innerHTML = CATS.map(function(c) {
+          return '<button class="museum-cat-btn' + (c.id === st.cat ? ' active' : '') + '" data-cat="' + c.id + '" style="flex-shrink:0;padding:6px 14px;background:var(--bg-alt);border:1px solid var(--border);border-radius:14px;font-size:12px;color:var(--text-secondary);cursor:pointer;-webkit-tap-highlight-color:transparent;font-weight:500;">' +
+            c.icon + ' ' + c.name + '</button>';
+        }).join('');
+        catFilter.querySelectorAll('.museum-cat-btn').forEach(function(btn) {
+          btn.onclick = function() {
+            var cat = btn.getAttribute('data-cat');
+            var cur = readState();
+            var newUrl = 'museum.html?cat=' + cat + (cur.city ? '&city=' + cur.city : '');
+            history.pushState({ cat: cat, city: cur.city }, '', newUrl);
+            renderChannel();
+            syncCityName();
+          };
+        });
+      }
+
       function renderChannel() {
         if (!window._getData) {
           document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">数据加载失败，请刷新重试</div>';
@@ -222,32 +458,64 @@
         // 相关文章区域
         fetchRelatedArticles(chips, category.name);
 
-        // 渲染标题与数量
-        document.getElementById('channelTitle').textContent = category.name + ' · 全部服务';
-        document.getElementById('channelCount').textContent = '共 ' + category.items.length + ' 项';
+        // 渲染分类筛选条（顶层 renderCatFilter 已定义）
+        renderCatFilter();
 
-        // 渲染服务网格
+        // ===== 渲染服务网格（按分类 + 区县双重过滤）=====
+        var st = readState();
+        var filteredItems = category.items.filter(function(item) {
+          var catOk = (st.cat === 'all') || (getMuseumCat(item) === st.cat);
+          var cityOk = !st.city || (inferDistricts(item).indexOf(st.city) >= 0);
+          return catOk && cityOk;
+        });
+
+        // 标题前缀：切了区县显示区县名
+        var cityObj = null;
+        if (st.city && window.DISTRICTS) {
+          cityObj = window.DISTRICTS.find(function (d) { return d.id === st.city; });
+        }
+        var catName = (CATS.find(function(c) { return c.id === st.cat; }) || {}).name || '全部';
+        var cityPrefix = cityObj ? cityObj.full + ' · ' : '';
+        document.getElementById('channelTitle').textContent = cityPrefix + category.name + ' · ' + catName;
+        document.getElementById('channelCount').textContent = filteredItems.length + ' 项' +
+          (st.city ? ' 匹配 ' + (cityObj ? cityObj.full : st.city) : '');
+
+        // 渲染服务网格（图册式卡片）
         var grid = document.getElementById('serviceGrid');
-        grid.innerHTML = category.items.map(function (item) {
-          if (item.url) {
-            return '<a class="sitem" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
-              '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
-              '<div class="sinfo">' +
-              '<div class="sname">' + item.name + '</div>' +
-              '<div class="sdesc">' + item.desc + '</div>' +
-              '</div>' +
-              '<div class="sarrow">›</div>' +
-              '</a>';
-          }
-          return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="">' +
-            '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
-            '<div class="sinfo">' +
-            '<div class="sname">' + item.name + '</div>' +
-            '<div class="sdesc">' + item.desc + '</div>' +
-            '</div>' +
-            '<div class="sarrow">›</div>' +
+        if (filteredItems.length === 0) {
+          grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 16px;color:var(--text-muted);font-size:14px;">' +
+            '当前筛选无结果，<a href="museum.html?cat=all" style="color:var(--primary);">查看全部博物馆 →</a>' +
             '</div>';
-        }).join('');
+        } else {
+          grid.innerHTML = filteredItems.map(function (item) {
+            var color = item.color || '#0ea5e9';
+            var emoji = getServiceIcon(item.name) || '🏛️';
+            var catId = getMuseumCat(item);
+            var catObj = CATS.find(function(c) { return c.id === catId; }) || {};
+            var catLabel = catObj.icon + ' ' + catObj.name;
+            // 生成图片占位背景：双色渐变
+            var bg = 'linear-gradient(135deg, ' + color + ', color-mix(in srgb, ' + color + ' 60%, #000))';
+            // 简短介绍：优先用 desc，desc 缺失时从 detail 提取纯文本前 60 字
+            var intro = item.desc || '';
+            if (!intro && item.detail) {
+              intro = item.detail.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().substring(0, 60) + '…';
+            }
+            var cardHtml =
+              '<div class="mc-image" style="background:' + bg + ';">' +
+                '<span class="mc-image-emoji">' + emoji + '</span>' +
+                '<span class="mc-image-title">' + item.name + '</span>' +
+                '<span class="mc-image-tag">' + catLabel + '</span>' +
+              '</div>' +
+              '<div class="mc-body">' +
+                '<div class="mc-desc">' + (intro || '点击查看详细介绍') + '</div>' +
+                '<div class="mc-meta">' +
+                  '<span>' + (item.url ? '🔗 官网可前往' : '📍 查看详情') + '</span>' +
+                  '<span class="mc-arrow">›</span>' +
+                '</div>' +
+              '</div>';
+            return '<div class="museum-card" data-action="' + (item.action || '') + '" data-url="' + (item.url || '') + '">' + cardHtml + '</div>';
+          }).join('');
+        }
 
         // 渲染相关频道
         var related = RELATED[CHANNEL_ID] || [];
@@ -263,30 +531,131 @@
           }).join('');
         }
 
-        // 搜索（频道内搜索）
+        // 卡片点击：所有卡片统一弹详情 modal（避免外链被浏览器拦截）
+        // 用 inline onclick 属性绑定，确保不依赖事件绑定时机
+        grid.querySelectorAll('.museum-card').forEach(function (card) {
+          var nameEl = card.querySelector('.mc-image-title');
+          if (nameEl) {
+            var itemName = nameEl.textContent;
+            card.setAttribute('onclick', "window._openMuseumModal('" + itemName.replace(/'/g, "\\'") + "')");
+          }
+        });
+        // 兜底：也绑定 card.onclick，以防 inline onclick 失效
+        grid.querySelectorAll('.museum-card').forEach(function (card) {
+          card.onclick = function (e) {
+            var nameEl = this.querySelector('.mc-image-title');
+            if (!nameEl) return;
+            var itemName = nameEl.textContent;
+            var item = category.items.find(function (it) { return it.name === itemName; });
+            if (!item) return;
+            openMuseumModal(item);
+          };
+        });
+
+        // 搜索（频道内搜索，仅作用于当前已渲染的卡片）
         var searchInput = document.getElementById('channelSearchInput');
         if (searchInput) {
-          searchInput.addEventListener('input', function (e) {
+          // 用 oninput 赋值，避免多次 addEventListener 重复绑定
+          searchInput.oninput = function (e) {
             var q = e.target.value.trim().toLowerCase();
             if (!q) {
-              grid.querySelectorAll('.sitem').forEach(function (el) { el.style.display = 'flex'; });
+              grid.querySelectorAll('.museum-card').forEach(function (el) { el.style.display = 'block'; });
               return;
             }
-            grid.querySelectorAll('.sitem').forEach(function (el) {
-              var name = el.querySelector('.sname').textContent.toLowerCase();
-              var desc = el.querySelector('.sdesc').textContent.toLowerCase();
-              el.style.display = (name.indexOf(q) >= 0 || desc.indexOf(q) >= 0) ? 'flex' : 'none';
+            grid.querySelectorAll('.museum-card').forEach(function (el) {
+              var name = (el.querySelector('.mc-image-title') || {}).textContent || '';
+              var desc = (el.querySelector('.mc-desc') || {}).textContent || '';
+              el.style.display = (name.toLowerCase().indexOf(q) >= 0 || desc.toLowerCase().indexOf(q) >= 0) ? 'block' : 'none';
             });
-          });
+          };
         }
       }
 
-      // 初始化
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', renderChannel);
-      } else {
-        renderChannel();
+      // 本地 modal：打开博物馆详情
+      function openMuseumModal(item) {
+        var overlay = document.getElementById('modalOverlay');
+        var titleEl = document.getElementById('modalTitle');
+        var bodyEl = document.getElementById('modalBody');
+        if (!overlay || !titleEl || !bodyEl) return;
+        var catId = getMuseumCat(item);
+        var catObj = CATS.find(function(c) { return c.id === catId; }) || {};
+        var color = item.color || '#0ea5e9';
+        var emoji = getServiceIcon(item.name) || '🏛️';
+        var bg = 'linear-gradient(135deg, ' + color + ', color-mix(in srgb, ' + color + ' 60%, #000))';
+
+        var body =
+          // 顶部 banner（同款占位图）
+          '<div style="position:relative;height:180px;background:' + bg + ';display:flex;align-items:center;justify-content:center;font-size:64px;margin:-16px -16px 0 -16px;overflow:hidden;">' +
+            '<span style="filter:drop-shadow(0 2px 8px rgba(0,0,0,0.25));">' + emoji + '</span>' +
+            '<span style="position:absolute;bottom:12px;left:16px;right:16px;color:#fff;font-size:18px;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,0.6);">' + item.name + '</span>' +
+            '<span style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.92);color:#333;font-size:11px;padding:3px 10px;border-radius:10px;font-weight:600;">' + catObj.icon + ' ' + catObj.name + '</span>' +
+          '</div>' +
+          // 描述
+          '<div style="margin-top:14px;font-size:13px;color:var(--text-secondary);line-height:1.6;">' + (item.desc || '') + '</div>' +
+          // 详情
+          (item.detail ? '<div style="margin-top:14px;font-size:14px;line-height:1.8;color:var(--text);">' + item.detail + '</div>' : '') +
+          // 前往按钮
+          (item.url ? '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer" style="display:block;margin-top:16px;padding:12px;background:var(--primary);color:#fff;border-radius:24px;text-align:center;text-decoration:none;font-size:14px;">🔗 前往官网 / 预约</a>' : '');
+
+        titleEl.innerHTML = '🏛️ ' + item.name;
+        bodyEl.innerHTML = body;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
       }
+
+      // modal 关闭
+      (function bindModalClose() {
+        var overlay = document.getElementById('modalOverlay');
+        var closeBtn = document.getElementById('modalClose');
+        if (overlay) {
+          overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) {
+              overlay.classList.remove('active');
+              document.body.style.overflow = '';
+            }
+          });
+        }
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function () {
+            var o = document.getElementById('modalOverlay');
+            if (o) { o.classList.remove('active'); document.body.style.overflow = ''; }
+          });
+        }
+      })();
+
+      // 浏览器后退/前进时重新渲染（只绑定一次）
+      window.addEventListener('popstate', function () {
+        renderChannel();
+        syncCityName();
+      });
+
+      // 初始化
+      function initPage() {
+        renderChannel();
+        syncCityName();
+        overrideCityDropdown();
+        overrideBackButton();
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPage);
+      } else {
+        initPage();
+      }
+
+      // 暴露到 window：供 inline onclick 调用，通过馆名查找 item 并弹 modal
+      window._openMuseumModal = function (itemName) {
+        try {
+          var DATA = window._getData ? window._getData() : null;
+          if (!DATA) { alert('数据未加载，请稍后重试'); return; }
+          var category = DATA.categories.find(function (c) { return c.id === 'museum'; });
+          if (!category) { alert('博物馆分类未找到'); return; }
+          var item = category.items.find(function (it) { return it.name === itemName; });
+          if (!item) { alert('未找到「' + itemName + '」'); return; }
+          openMuseumModal(item);
+        } catch (err) {
+          alert('打开详情失败：' + err.message);
+        }
+      };
     })();
   </script>
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -12,7 +12,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="iHangzhou 杭州生活助手">
   <link rel="canonical" href="https://www.ihangzhou.net/articles/start-guide.html">
-  <link rel="stylesheet" href="../css/style.css?v=20260926b">
+  <link rel="stylesheet" href="../css/style.css?v=20260915f">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
   <style>
     .article-body { max-width: 720px; margin: 0 auto; padding: 16px; }
@@ -116,7 +116,7 @@ PowerShell -ExecutionPolicy Bypass -File &quot;Certificate-Monitor-Improved.ps1&
 </code></pre><h3>View Alert History</h3><p>Check <code>certificate-alerts.log</code> for alert history</p><h2>🛡️ Security Considerations</h2><h3>Secure Configuration</h3><p>Use the Secure Config Manager to store sensitive information:</p><pre><code>.\Secure-Config-Manager.ps1 -Action Set -Key &quot;SMTPPassword&quot; -Value &quot;YourPassword&quot;
 </code></pre><h3>File Permissions</h3><p>The deployment script sets appropriate file permissions automatically</p><h2>🚨 Troubleshooting</h2><h3>Common Issues</h3><ul class="article-list"><li><strong>Permission Denied Errors</strong></li><li>Ensure you're running PowerShell as Administrator</li><li>Check file permissions on the installation directory</li></ul><ul class="article-list"><li><strong>Network Connectivity Issues</strong></li><li>Verify network access to VMware Horizon servers</li><li>Check firewall rules for outbound connections</li></ul><ul class="article-list"><li><strong>Scheduled Task Not Running</strong></li><li>Verify the task exists in Task Scheduler</li><li>Check Windows Event Logs for errors</li></ul><h3>Manual Execution</h3><p>If the scheduled task fails, you can manually run:</p><pre><code>PowerShell -ExecutionPolicy Bypass -File &quot;C:\Scripts\Horizon-Certificate-Automation\Certificate-Monitor-Improved.ps1&quot;
 </code></pre><h2>📈 Certificate Monitoring Levels</h2><p>The solution monitors certificates and alerts at different levels:</p><ul class="article-list"><li><strong>30+ days</strong>: No alert (Informational)</li><li><strong>15-30 days</strong>: WARNING alert</li><li><strong>7-15 days</strong>: HIGH alert</li><li><strong>0-7 days</strong>: CRITICAL alert</li><li><strong>Expired</strong>: CRITICAL alert</li></ul><h2>🆘 Support</h2><p>For issues with the solution:</p><ul class="article-list"><li>Check the deployment summary in <code>DEPLOYMENT-SUMMARY.txt</code></li><li>Review logs in the Logs directory</li><li>Run the Health Check utility</li><li>Verify configuration files in the Config directory</li></ul><h2>📄 Documentation</h2><ul class="article-list"><li><code>README-Certificate-Automation.md</code> - Complete solution documentation</li><li><code>Certificate-Automation-Deployment-Guide.md</code> - Detailed deployment guide</li><li><code>DEPLOYMENT-SUMMARY.txt</code> - Deployment-specific information</li></ul><hr><p><em>VMware Horizon Certificate Automation Solution</em></p><p><em>Prevent certificate expiration issues that cause Horizon service outages</em></p>
-    </article>
+    </article><script src="../js/article-table-fix.js?v=20260915a"></script><script src="../js/article-toc.js?v=20260915f"></script>
   </div>
 
   <div class="article-footer">
@@ -130,3 +130,7 @@ PowerShell -ExecutionPolicy Bypass -File &quot;Certificate-Monitor-Improved.ps1&
   </script>
 </body>
 </html>
+
+
+
+

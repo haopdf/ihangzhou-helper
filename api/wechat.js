@@ -10,7 +10,7 @@ const WECHAT_TOKEN = process.env.WECHAT_TOKEN || 'ihangzhou2024';
 const DEFAULT_WELCOME = {
   type: 'text',
   title: '欢迎关注 iHangzhou · 杭州生活助手 🏔️',
-  desc: '杭州人的数字生活工具箱\n回复数字获取服务：1限行 2天气 3地铁 4公积金 5社保\n回复「帮助」查看全部指令',
+  desc: '杭州人的数字生活工具箱\n\n【数字快捷】1限行 2天气 3地铁 4公积金 5社保\n【场景推荐】周末/下雨/拍照/亲子/夜景/赏花/古镇/寺庙/美食\n【资讯查询】故事/区县/博物馆/搜索\n\n回复「帮助」查看全部指令',
   picUrl: 'https://www.ihangzhou.net/images/og-cover.jpg',
   url: 'https://www.ihangzhou.net/'
 };
@@ -176,14 +176,33 @@ function matchKeyword(userText, keywords) {
   return null;
 }
 
-// ========== 帮助指令：列出所有可用关键词 ==========
+// ========== 帮助指令：分组列出可用关键词 ==========
 function genHelpReply(toUser, fromUser, keywords) {
-  const lines = ['📖 iHangzhou 可用指令：', ''];
-  keywords.forEach(function(kw, i) {
-    const aliases = kw.aliases && kw.aliases.length ? '（' + kw.aliases.slice(0, 2).join('/') + '）' : '';
-    lines.push((i + 1) + '. ' + kw.keyword + aliases);
+  // 按类型分组：数字快捷 / 工具 / 场景 / 资讯
+  var groups = { '数字快捷': [], '日常工具': [], '场景推荐': [], '资讯查询': [] };
+  var numKws = ['1','2','3','4','5'];
+  var toolKws = ['限行','天气','地铁','公积金','社保','摇号','居住证','消费券','落户'];
+  var sceneKws = ['周末','下雨','拍照','亲子','夜景','赏花','古镇','寺庙','西湖','美食','博物馆'];
+  var infoKws = ['故事','区县','搜索'];
+  keywords.forEach(function(kw){
+    var k = kw.keyword;
+    if (numKws.indexOf(k) >= 0) groups['数字快捷'].push(kw);
+    else if (toolKws.indexOf(k) >= 0) groups['日常工具'].push(kw);
+    else if (sceneKws.indexOf(k) >= 0) groups['场景推荐'].push(kw);
+    else if (infoKws.indexOf(k) >= 0) groups['资讯查询'].push(kw);
   });
-  lines.push('', '💡 提示：直接输入关键词即可获取服务', '🌐 完整功能：https://www.ihangzhou.net/');
+  var lines = ['📖 iHangzhou 指令清单', ''];
+  Object.keys(groups).forEach(function(gname){
+    if (!groups[gname].length) return;
+    lines.push('【' + gname + '】');
+    groups[gname].forEach(function(kw){
+      var aliases = kw.aliases && kw.aliases.length ? '（' + kw.aliases.slice(0,2).join('/') + '）' : '';
+      lines.push('· ' + kw.keyword + aliases);
+    });
+    lines.push('');
+  });
+  lines.push('💡 直接输入关键词即可');
+  lines.push('🌐 全站搜索：https://www.ihangzhou.net/articles.html');
   return genTextReply(toUser, fromUser, lines.join('\n'));
 }
 

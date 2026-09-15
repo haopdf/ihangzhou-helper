@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -12,7 +12,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="iHangzhou 杭州生活助手">
   <link rel="canonical" href="https://www.ihangzhou.net/articles/horizon-certificate-automation-solution.html">
-  <link rel="stylesheet" href="../css/style.css?v=20260926b">
+  <link rel="stylesheet" href="../css/style.css?v=20260915f">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
   <style>
     .article-body { max-width: 720px; margin: 0 auto; padding: 16px; }
@@ -155,7 +155,7 @@ Test-CertificateAutomationHealth
 </code></pre><hr><h2>📈 计划任务配置</h2><p>解决方案包含以下计划任务：</p><ul class="article-list"><li><strong>每日证书监控</strong> - 每天上午8:00执行</li><li><strong>每周日志轮转</strong> - 每周日凌晨2:00执行</li><li><strong>月度仪表板报告</strong> - 每月周日凌晨3:00执行</li></ul><hr><h2>🆘 故障排除</h2><h3>常见问题</h3><ul class="article-list"><li><strong>脚本执行策略错误</strong></li></ul><pre><code>   Set-ExecutionPolicy RemoteSigned
 </code></pre><ul class="article-list"><li><strong>权限不足</strong></li><li>确保以管理员身份运行</li><li>检查服务账户权限</li></ul><ul class="article-list"><li><strong>网络连接问题</strong></li></ul><pre><code>   Test-NetConnection -ComputerName &quot;server&quot; -Port 443
 </code></pre><h3>日志文件位置</h3><ul class="article-list"><li>主要日志：<code>C:\CertificateAutomation\Logs\</code></li><li>模块日志：<code>C:\CertificateAutomation\Logs\module.log</code></li><li>部署日志：<code>C:\CertificateAutomation\deployment.log</code></li></ul><hr><h2>📞 支持和维护</h2><h3>定期维护任务</h3><ul class="article-list"><li><strong>每周</strong>：执行健康检查</li><li><strong>每月</strong>：审查日志文件</li><li><strong>每季度</strong>：更新配置和测试告警通道</li></ul><h3>监控要点</h3><ul class="article-list"><li>检查计划任务执行状态</li><li>审查告警日志</li><li>验证证书监控准确性</li><li>确认告警通道功能正常</li></ul><hr><h2>🙏 感谢使用</h2><p>感谢您选择VMware Horizon Certificate Automation Solution！这个解决方案将帮助您：</p><ul class="article-list"><li>🔒 防止证书过期导致的服务中断</li><li>🚨 及时获得证书状态预警</li><li>📊 获得可视化的证书状态报告</li><li>🛠️ 实现证书管理的自动化</li></ul><p>如需进一步帮助，请参考提供的文档文件或联系技术支持。</p><hr><p><strong>VMware Horizon Certificate Automation Solution</strong></p><p><strong>版本</strong>: 1.0</p><p><strong>创建日期</strong>: June 26, 2026</p><p><strong>状态</strong>: ✅ 部署完成，准备使用</p>
-    </article>
+    </article><script src="../js/article-table-fix.js?v=20260915a"></script><script src="../js/article-toc.js?v=20260915f"></script>
   </div>
 
   <div class="article-footer">
@@ -169,3 +169,7 @@ Test-CertificateAutomationHealth
   </script>
 </body>
 </html>
+
+
+
+

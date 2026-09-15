@@ -2505,120 +2505,198 @@
           "name": "西湖醋鱼",
           "desc": "楼外楼首创名菜",
           "detail": "<p><strong>西湖醋鱼</strong></p><p>杭州传统名菜，楼外楼首创。选用西湖草鱼，饿养去腥，现杀现烹。</p><p><strong>特点</strong>：鱼肉鲜嫩，酸甜可口，带有蟹味</p><p><strong>推荐餐厅</strong>：楼外楼（孤山路）、知味观</p>",
-          "color": "#ef4444"
+          "color": "#ef4444",
+          "districts": [
+            "xihu",
+            "shangcheng",
+            "hangzhou"
+          ]
         },
         {
           "name": "龙井虾仁",
           "desc": "茶香四溢名菜",
           "detail": "<p><strong>龙井虾仁</strong></p><p>以西湖龙井茶和新鲜河虾仁炒制，茶香与虾鲜完美融合。</p><p><strong>特点</strong>：色泽淡雅，虾仁鲜嫩，茶香四溢</p><p><strong>推荐餐厅</strong>：楼外楼、知味观味庄</p>",
-          "color": "#10b981"
+          "color": "#10b981",
+          "districts": [
+            "xihu",
+            "shangcheng",
+            "hangzhou"
+          ]
         },
         {
           "name": "东坡肉",
           "desc": "苏东坡发明",
           "detail": "<p><strong>东坡肉</strong></p><p>相传为苏东坡所创，用五花肉加黄酒、酱油慢炖而成。</p><p><strong>特点</strong>：色泽红亮，肥而不腻，入口即化</p><p><strong>推荐餐厅</strong>：楼外楼、杭州酒家</p>",
-          "color": "#f59e0b"
+          "color": "#f59e0b",
+          "districts": [
+            "xihu",
+            "shangcheng",
+            "hangzhou"
+          ]
         },
         {
           "name": "叫化鸡",
           "desc": "荷叶香鸡",
           "detail": "<p><strong>叫化鸡（荷叶包鸡）</strong></p><p>用荷叶包裹整鸡，外裹黄泥烤制，原汁原味。</p><p><strong>特点</strong>：鸡肉酥烂，荷香浓郁</p><p><strong>推荐餐厅</strong>：楼外楼</p>",
-          "color": "#8b5cf6"
+          "color": "#8b5cf6",
+          "districts": [
+            "xihu",
+            "hangzhou"
+          ]
         },
         {
           "name": "宋嫂鱼羹",
           "desc": "西湖名菜",
           "detail": "<p><strong>宋嫂鱼羹</strong></p><p>南宋名菜，以鲈鱼或鳜鱼制作，形似蟹羹。</p><p><strong>特点</strong>：鲜嫩滑润，酸辣开胃</p><p><strong>推荐餐厅</strong>：楼外楼、知味观</p>",
-          "color": "#06b6d4"
+          "color": "#06b6d4",
+          "districts": [
+            "xihu",
+            "shangcheng",
+            "hangzhou"
+          ]
         },
         {
           "name": "干炸响铃",
           "desc": "腐皮酥脆名点",
           "detail": "<p><strong>干炸响铃</strong></p><p>用豆腐皮包裹肉馅炸制，酥脆有声。</p><p><strong>特点</strong>：外酥里嫩，鲜香可口</p><p><strong>推荐餐厅</strong>：知味观</p>",
-          "color": "#f97316"
+          "color": "#f97316",
+          "districts": [
+            "shangcheng",
+            "hangzhou"
+          ]
         },
         {
           "name": "西湖莼菜",
           "desc": "滑嫩爽口",
           "detail": "<p><strong>西湖莼菜汤</strong></p><p>西湖特产莼菜，配以火腿丝、鸡丝制成清汤。</p><p><strong>特点</strong>：莼菜滑嫩，汤清味鲜</p><p style=\"color:var(--text-muted);font-size:13px;\">莼菜是水生植物，富含胶质，营养价值高</p>",
-          "color": "#14b8a6"
+          "color": "#14b8a6",
+          "districts": [
+            "hangzhou"
+          ]
         },
         {
           "name": "片儿川",
           "desc": "杭州特色面",
           "detail": "<p><strong>片儿川</strong></p><p>杭州特色面食，以雪菜、笋片、肉片为浇头。</p><p><strong>特点</strong>：汤鲜面爽，浇头丰富</p><p><strong>推荐面馆</strong>：奎元馆（解放路）、知味观</p>",
-          "color": "#ec4899"
+          "color": "#ec4899",
+          "districts": [
+            "shangcheng",
+            "hangzhou"
+          ]
         },
         {
           "name": "虾爆鳝面",
           "desc": "奎元馆招牌",
           "detail": "<p><strong>虾爆鳝面</strong></p><p>奎元馆招牌面，以虾仁、鳝鱼为浇头。</p><p><strong>特点</strong>：鳝片香脆，虾仁鲜嫩，面条入味</p><p><strong>推荐面馆</strong>：奎元馆（解放路总店）</p>",
-          "color": "#3b82f6"
+          "color": "#3b82f6",
+          "districts": [
+            "shangcheng",
+            "hangzhou"
+          ]
         },
         {
           "name": "知味观小笼",
           "desc": "鲜肉汤包",
           "detail": "<p><strong>知味观小笼包</strong></p><p>皮薄馅大，汤汁丰富，是杭州小笼包的代表。</p><p><strong>特点</strong>：皮薄如纸，汤汁鲜美</p><p><strong>推荐餐厅</strong>：知味观总店（仁和路）</p>",
-          "color": "#84cc16"
+          "color": "#84cc16",
+          "districts": [
+            "shangcheng",
+            "hangzhou"
+          ]
         },
         {
           "name": "吴山酥油饼",
           "desc": "千年历史名点",
           "detail": "<p><strong>吴山酥油饼</strong></p><p>有千年历史的杭州传统名点。</p><p><strong>特点</strong>：层叠酥脆，香甜可口</p><p><strong>推荐</strong>：河坊街、吴山广场周边</p>",
-          "color": "#a855f7"
+          "color": "#a855f7",
+          "districts": [
+            "hangzhou"
+          ]
         },
         {
           "name": "葱包烩",
           "desc": "杭州街头小吃",
-          "color": "#0ea5e9"
+          "color": "#0ea5e9",
+          "districts": [
+            "hangzhou"
+          ]
         },
         {
           "name": "定胜糕",
           "desc": "岳王庙特色",
           "detail": "<p><strong>定胜糕</strong></p><p>粉色米糕，岳王庙特色，寓意胜利。</p><p><strong>特点</strong>：松软香甜，豆沙馅心</p><p><strong>推荐</strong>：岳王庙周边、河坊街</p>",
-          "color": "#ef4444"
+          "color": "#ef4444",
+          "districts": [
+            "hangzhou"
+          ]
         },
         {
           "name": "猫耳朵",
           "desc": "知味观名点",
           "detail": "<p><strong>猫耳朵</strong></p><p>知味观名点，面疙瘩形似猫耳。</p><p><strong>特点</strong>：筋道爽滑，汤鲜料足</p><p><strong>推荐餐厅</strong>：知味观</p>",
-          "color": "#22c55e"
+          "color": "#22c55e",
+          "districts": [
+            "shangcheng",
+            "hangzhou"
+          ]
         },
         {
           "name": "幸福双",
           "desc": "豆沙糯米点心",
           "detail": "<p><strong>幸福双</strong></p><p>豆沙糯米点心，甜而不腻。</p><p><strong>推荐餐厅</strong>：知味观</p>",
-          "color": "#eab308"
+          "color": "#eab308",
+          "districts": [
+            "shangcheng",
+            "hangzhou"
+          ]
         },
         {
           "name": "小鸡酥",
           "desc": "酥皮甜点",
           "detail": "<p><strong>小鸡酥</strong></p><p>酥皮甜点，造型可爱。</p><p><strong>推荐餐厅</strong>：知味观</p>",
-          "color": "#f59e0b"
+          "color": "#f59e0b",
+          "districts": [
+            "shangcheng",
+            "hangzhou"
+          ]
         },
         {
           "name": "木莲芯",
           "desc": "清凉甜品",
           "detail": "<p><strong>木莲芯（木莲豆腐）</strong></p><p>清凉甜品，用木莲籽制作，类似凉粉。</p><p><strong>特点</strong>：爽滑清凉，消暑佳品</p><p><strong>推荐</strong>：河坊街、夏季街头</p>",
-          "color": "#ec4899"
+          "color": "#ec4899",
+          "districts": [
+            "hangzhou"
+          ]
         },
         {
           "name": "杭州酱鸭",
           "desc": "冬季传统美食",
           "detail": "<p><strong>杭州酱鸭</strong></p><p>冬季传统美食，用酱油、香料腌制风干。</p><p><strong>特点</strong>：咸鲜入味，肉质紧实</p><p><strong>推荐</strong>：万隆酱鸭（老字号）</p>",
-          "color": "#8b5cf6"
+          "color": "#8b5cf6",
+          "districts": [
+            "hangzhou"
+          ]
         },
         {
           "name": "杭州酒家",
           "desc": "1921年始创·传统杭帮菜",
           "detail": "<p><strong>杭州酒家</strong></p><p>始创于1921年，传统杭帮菜名店。</p><p>• 招牌菜：东坡肉、西湖醋鱼、龙井虾仁</p><p>• 地址：延安路</p><p>• 人均：100-150元</p>",
-          "color": "#f97316"
+          "color": "#f97316",
+          "districts": [
+            "shangcheng",
+            "hangzhou"
+          ]
         },
         {
           "name": "知味观味庄",
           "desc": "杨公堤·新杭帮菜",
           "detail": "<p><strong>知味观味庄</strong></p><p>知味观旗下高端店，位于杨公堤。</p><p>• 新杭帮菜，环境优美（临西湖）</p><p>• 招牌菜：西湖醋鱼、龙井虾仁、叫化鸡</p><p>• 人均：200-300元</p>",
-          "color": "#06b6d4"
+          "color": "#06b6d4",
+          "districts": [
+            "shangcheng",
+            "hangzhou"
+          ]
         }
       ]
     },
@@ -4494,39 +4572,51 @@
       "items": [
         {
           "name": "浙江省博物馆",
-          "desc": "之江馆区",
+          "desc": "之江馆区·国家一级",
           "url": "https://www.zjmuseum.com.cn/",
-          "color": "#ef4444"
+          "detail": "<p><strong>浙江省博物馆</strong></p><p>浙江省规模最大的综合性人文科学博物馆，国家一级博物馆。主馆区位于之江，另有孤山馆区、武林馆区、绍兴鲁迅故里馆区等。</p><p>• 馆藏文物十万余件，含河姆渡文化遗物、良渚文化玉器、越窑青瓷等</p><p>• 《富春山居图》（剩山图）为镇馆之宝</p><p>• 免费开放，需预约</p><p>• 周一闭馆</p><p>• 之江新馆 2023 年开放，建筑面积 4.1 万㎡</p>",
+          "color": "#ef4444",
+          "districts": ["xihu", "hangzhou"]
         },
         {
           "name": "浙江美术馆",
-          "desc": "南山路",
+          "desc": "南山路·国家重点美术馆",
           "url": "https://www.zjam.org.cn/",
-          "color": "#f59e0b"
+          "detail": "<p><strong>浙江美术馆</strong></p><p>位于西湖畔南山路，国家重点美术馆，浙江省省级美术馆。</p><p>• 建筑面积 3.2 万㎡，展厅 18 个</p><p>• 馆藏国画、油画、版画、雕塑等近现代美术作品</p><p>• 免费开放，需预约</p><p>• 周一闭馆</p><p>• 重点展示浙江近现代美术史与黄宾虹、潘天寿等大家作品</p>",
+          "color": "#f59e0b",
+          "districts": ["xihu", "hangzhou"]
         },
         {
           "name": "杭州博物馆",
-          "desc": "吴山广场",
+          "desc": "吴山广场·国家一级",
           "url": "https://hz-museum.cn/",
+          "detail": "<p><strong>杭州博物馆</strong></p><p>位于吴山广场，杭州市综合性博物馆，国家一级博物馆。前身为杭州历史博物馆，2011 年定名。</p><p>• 馆藏两万余件，含战国水晶杯、越窑青瓷、良渚玉器等</p><p>• 战国水晶杯为镇馆之宝，禁止出境文物</p><p>• 免费开放，需预约</p><p>• 周一闭馆</p><p>• 展示杭州城市历史与西湖文化</p>",
+          "districts": ["shangcheng", "hangzhou"],
           "color": "#10b981"
         },
         {
           "name": "中国丝绸博物馆",
-          "desc": "玉皇山路",
+          "desc": "玉皇山路·国家一级",
           "url": "https://www.chinasilkmuseum.com/",
-          "color": "#3b82f6"
+          "detail": "<p><strong>中国丝绸博物馆</strong></p><p>位于玉皇山路莲花峰路，国家一级博物馆，世界最大的丝绸专业博物馆。</p><p>• 馆藏文物 4 万余件，涵盖丝织品、服饰、织机等</p><p>• 含丝路馆、织造馆、修复馆、时装馆等</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 1992 年开馆，2023 年完成改造提升</p>",
+          "color": "#3b82f6",
+          "districts": ["xihu", "hangzhou"]
         },
         {
           "name": "中国茶叶博物馆",
-          "desc": "龙井路",
+          "desc": "龙井路·国家一级",
           "url": "https://www.teamuseum.cn/",
+          "detail": "<p><strong>中国茶叶博物馆</strong></p><p>位于龙井路双峰村，国家一级博物馆，中国唯一以茶和茶文化为主题的国家级专题博物馆。</p><p>• 设茶史馆、茶具馆、茶事馆、茶俗馆等展厅</p><p>• 馆区依托龙井茶园，室外有中华茶文化展示区</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 1991 年开馆</p>",
+          "districts": ["xihu", "hangzhou"],
           "color": "#8b5cf6"
         },
         {
           "name": "良渚博物院",
-          "desc": "世界遗产",
+          "desc": "世界遗产·国家一级",
           "url": "https://www.lzmuseum.cn/",
-          "color": "#ec4899"
+          "detail": "<p><strong>良渚博物院</strong></p><p>位于余杭良渚，国家一级博物馆，展示世界文化遗产良渚古城遗址。</p><p>• 建筑由大卫·奇普菲尔德设计，2008 年开馆</p><p>• 展示良渚文化玉器、陶器、漆器等出土文物</p><p>• 玉琮、玉璧为镇馆之宝，实证中华五千年文明史</p><p>• 免费开放，需预约</p><p>• 周一闭馆</p><p>• 2019 年良渚古城遗址列入世界遗产名录</p>",
+          "color": "#ec4899",
+          "districts": ["yuhang", "hangzhou"]
         },
         {
           "name": "运河博物馆",
@@ -4543,9 +4633,11 @@
         },
         {
           "name": "刀剪剑博物馆",
-          "desc": "小河路",
+          "desc": "小河路·国家一级",
           "url": "https://www.hzacm.cn/",
-          "color": "#84cc16"
+          "detail": "<p><strong>中国刀剪剑博物馆</strong></p><p>位于拱墅小河路，国家一级博物馆，展示中国刀剪剑文化。</p><p>• 设刀展厅、剑展厅、剪展厅</p><p>• 张小泉剪刀历史与制作工艺</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 与伞博物馆、扇博物馆相邻，均由 LOFT49 老厂房改造</p>",
+          "color": "#84cc16",
+          "districts": ["gongshu", "hangzhou"]
         },
         {
           "name": "伞博物馆",
@@ -4561,9 +4653,11 @@
         },
         {
           "name": "西泠印社",
-          "desc": "孤山路",
+          "desc": "孤山路·百年名社",
           "url": "",
-          "color": "#0ea5e9"
+          "detail": "<p><strong>西泠印社</strong></p><p>位于孤山路西湖边，创立于清光绪三十年（1904 年），是海内外研究金石篆刻历史最悠久的文人社团。</p><p>• 创始人：丁辅之、王禔、吴隐、叶铭</p><p>• 首任社长：吴昌硕</p><p>• 2006 年列入首批国家级非物质文化遗产</p><p>• 孤山社址内有柏堂、竹阁、仰贤亭、山川雨露图书室等建筑</p><p>• 免费参观</p><p>• 周一闭馆</p>",
+          "color": "#0ea5e9",
+          "districts": ["xihu", "hangzhou"]
         },
         {
           "name": "跨湖桥遗址博物馆",
@@ -4597,9 +4691,11 @@
         },
         {
           "name": "浙江自然博物院",
-          "desc": "西湖文化广场",
+          "desc": "西湖文化广场·国家一级",
           "url": "https://www.zmnh.com/",
-          "color": "#10b981"
+          "detail": "<p><strong>浙江自然博物院</strong></p><p>位于西湖文化广场，国家一级博物馆，中国历史最悠久的自然博物馆之一。</p><p>• 馆藏 15 万余件，含恐龙化石、古生物、矿物等</p><p>• 设地球生命故事、丰富奇异的生物世界、绿色浙江、狂野之地等展厅</p><p>• 免费开放，需预约</p><p>• 周一闭馆</p><p>• 前身为 1929 年西湖博物馆</p><p>• 安吉馆区 2018 年开放，为亚洲单体最大自然博物馆</p>",
+          "color": "#10b981",
+          "districts": ["shangcheng", "hangzhou"]
         },
         {
           "name": "胡庆余堂中药博物馆",
@@ -4612,6 +4708,678 @@
           "desc": "茅家埠·织锦艺术",
           "detail": "<p><strong>都锦生织锦博物馆</strong></p><p>位于茅家埠，展示织锦艺术。</p><p>• 免费开放</p><p>• 可参观织锦工艺、购买丝绸制品</p>",
           "color": "#f59e0b"
+        },
+        {
+          "name": "南宋德寿宫遗址博物馆",
+          "desc": "望江路·2022新开放",
+          "url": "",
+          "detail": "<p><strong>南宋德寿宫遗址博物馆</strong></p><p>位于望江路，2022年开放的南宋皇宫遗址博物馆，网红打卡地。</p><p>• 免费开放，需预约</p><p>• 周一闭馆</p><p>• 交通：地铁5号线候潮门站</p><p>• 展示南宋皇宫遗址、数字化复原展</p>",
+          "color": "#dc2626",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "杭州工艺美术博物馆",
+          "desc": "拱宸桥·工艺三馆",
+          "url": "",
+          "detail": "<p><strong>杭州工艺美术博物馆</strong></p><p>位于拱宸桥，与刀剪剑、伞、扇博物馆组成工艺三馆群。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示杭州传统工艺美术</p><p>• 可体验手工艺制作</p>",
+          "color": "#0891b2",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "西湖博物馆",
+          "desc": "南山路·西子湖畔",
+          "url": "",
+          "detail": "<p><strong>西湖博物馆</strong></p><p>位于南山路，紧邻西湖，展示西湖历史与文化。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示西湖地质、生态、历史、文化</p><p>• 适合游西湖前后参观</p>",
+          "color": "#0284c7",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "浙江省科技馆",
+          "desc": "西湖文化广场",
+          "url": "",
+          "detail": "<p><strong>浙江省科技馆</strong></p><p>位于西湖文化广场，省级综合科技馆。</p><p>• 免费开放，需预约</p><p>• 周一闭馆</p><p>• 互动体验丰富，适合亲子</p><p>• 与浙江自然博物院相邻</p>",
+          "color": "#7c3aed",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "中国江南水乡文化博物馆",
+          "desc": "萧山·水乡文化",
+          "url": "",
+          "detail": "<p><strong>中国江南水乡文化博物馆</strong></p><p>位于萧山，展示江南水乡文化。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示江南水乡民俗、建筑、交通</p>",
+          "color": "#16a34a",
+          "districts": ["xiaoshan", "hangzhou"]
+        },
+        {
+          "name": "杭州孔庙·碑林",
+          "desc": "劳动路·儒家文化",
+          "url": "",
+          "detail": "<p><strong>杭州孔庙·碑林</strong></p><p>位于劳动路，杭州现存孔庙，展示儒家文化与碑林。</p><p>• 免费开放</p><p>• 杭州碑林收藏丰富</p><p>• 古建筑保存完好</p>",
+          "color": "#ca8a04",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "胡雪岩故居",
+          "desc": "元宝街·红顶商人",
+          "url": "",
+          "detail": "<p><strong>胡雪岩故居</strong></p><p>位于元宝街，清代红顶商人胡雪岩的豪宅。</p><p>• 门票：20元</p><p>• 建筑精美，园林典雅</p><p>• 交通：地铁1号线定安路站</p>",
+          "color": "#b91c1c",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "良渚古城遗址公园",
+          "desc": "余杭·世界遗产",
+          "url": "https://www.lzcity.com/",
+          "detail": "<p><strong>良渚古城遗址公园</strong></p><p>位于余杭，世界文化遗产，5000年中华文明实证。</p><p>• 门票：80元</p><p>• 包含宫殿区、城墙、水利系统</p><p>• 与良渚博物院配合参观</p><p>• 交通：建议自驾或公交</p>",
+          "color": "#9333ea",
+          "districts": ["yuhang", "hangzhou"]
+        },
+        {
+          "name": "浙江革命烈士纪念馆",
+          "desc": "西湖边·革命传统",
+          "url": "",
+          "detail": "<p><strong>浙江革命烈士纪念馆</strong></p><p>位于西湖边云居山，纪念浙江革命先烈。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 爱国主义教育基地</p>",
+          "color": "#dc2626",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "中国国际设计博物馆",
+          "desc": "象山·中国美院",
+          "url": "",
+          "detail": "<p><strong>中国国际设计博物馆</strong></p><p>位于象山中国美术学院，由阿尔瓦罗·西扎设计。</p><p>• 展示包豪斯、国际设计</p><p>• 建筑本身就是艺术品</p><p>• 需预约参观</p>",
+          "color": "#0284c7",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "杭州城市规划展览馆",
+          "desc": "市民中心·城市未来",
+          "url": "",
+          "detail": "<p><strong>杭州城市规划展览馆</strong></p><p>位于市民中心，展示杭州城市规划与发展。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 可了解杭州城市历史与未来规划</p><p>• 适合了解城市脉络</p>",
+          "color": "#0891b2",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "临安博物馆",
+          "desc": "临安·吴越国文化",
+          "url": "",
+          "detail": "<p><strong>临安博物馆</strong></p><p>位于临安，展示吴越国文化，由王澍设计。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 建筑极具特色</p><p>• 展示临安历史与吴越国文物</p>",
+          "color": "#16a34a",
+          "districts": ["linan", "hangzhou"]
+        },
+        {
+          "name": "桐庐博物馆",
+          "desc": "桐庐·历史人文",
+          "url": "",
+          "detail": "<p><strong>桐庐博物馆</strong></p><p>位于桐庐，展示桐庐历史人文。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示桐庐从古至今的发展</p>",
+          "color": "#65a30d",
+          "districts": ["tonglu", "hangzhou"]
+        },
+        {
+          "name": "富阳博物馆",
+          "desc": "富阳·富春山居",
+          "url": "",
+          "detail": "<p><strong>富阳博物馆</strong></p><p>位于富阳，展示富春江畔历史人文。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 与富春山居图文化相关</p>",
+          "color": "#0d9488",
+          "districts": ["fuyang", "hangzhou"]
+        },
+        {
+          "name": "中国水利博物馆",
+          "desc": "萧山·国家一级",
+          "url": "",
+          "detail": "<p><strong>中国水利博物馆</strong></p><p>位于萧山钱塘江南岸，水利部直属国家级行业博物馆，国家一级博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示水与人类文明、水利千秋、龙施雨沛等</p><p>• 室外镇水、分水、祈水文化展区</p>",
+          "color": "#0284c7",
+          "districts": ["xiaoshan", "hangzhou"]
+        },
+        {
+          "name": "杭州市临平博物馆",
+          "desc": "临平·国家一级",
+          "url": "",
+          "detail": "<p><strong>杭州市临平博物馆</strong></p><p>位于临平，综合性博物馆，国家一级博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 研究展示江南文化和地方历史</p>",
+          "color": "#dc2626",
+          "districts": ["linping", "hangzhou"]
+        },
+        {
+          "name": "浙江大学艺术与考古博物馆",
+          "desc": "紫金港·国家一级",
+          "url": "",
+          "detail": "<p><strong>浙江大学艺术与考古博物馆</strong></p><p>位于浙大紫金港校区，国家一级博物馆。</p><p>• 免费开放，需预约</p><p>• 周一闭馆</p><p>• 通过艺术品原作开展实物教学</p><p>• 探索“文”与“物”并重新模式</p>",
+          "color": "#7c3aed",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "中国国家版本馆杭州分馆",
+          "desc": "良渚·文润阁",
+          "url": "",
+          "detail": "<p><strong>中国国家版本馆杭州分馆（文润阁）</strong></p><p>位于良渚，2022年开放的国家版本馆分馆。</p><p>• 免费开放，需预约</p><p>• 周一闭馆</p><p>• 中央总馆异地灾备馆</p><p>• 江南风韵宋韵园林建筑</p>",
+          "color": "#92400e",
+          "districts": ["yuhang", "hangzhou"]
+        },
+        {
+          "name": "吴越文化博物馆",
+          "desc": "临安·吴越国文化",
+          "url": "",
+          "detail": "<p><strong>吴越文化博物馆</strong></p><p>位于临安，2024年开放，专展示吴越国文化。</p><p>• 免费开放，需预约</p><p>• 周一闭馆</p><p>• 与临安博物馆互补</p>",
+          "color": "#16a34a",
+          "districts": ["linan", "hangzhou"]
+        },
+        {
+          "name": "玉架山考古博物馆",
+          "desc": "临平·2025新馆",
+          "url": "",
+          "detail": "<p><strong>玉架山考古博物馆</strong></p><p>位于临平，2025年开放，考古遗址专题博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示玉架山遗址考古成果</p>",
+          "color": "#0891b2",
+          "districts": ["linping", "hangzhou"]
+        },
+        {
+          "name": "中国历代绘画大系典藏馆",
+          "desc": "之江·绘画大系",
+          "url": "",
+          "detail": "<p><strong>中国历代绘画大系典藏馆</strong></p><p>位于之江，收藏《中国历代绘画大系》成果。</p><p>• 免费开放，需预约</p><p>• 周一闭馆</p><p>• 展示中国历代绘画高仿珍品</p>",
+          "color": "#ca8a04",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "杭州亚运会博物馆",
+          "desc": "奥体·亚运遗产",
+          "url": "",
+          "detail": "<p><strong>杭州亚运会博物馆</strong></p><p>位于奥体中心区，记录2022杭州亚运会。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示亚运火炬、奖牌、服饰等</p>",
+          "color": "#0ea5e9",
+          "districts": ["binjiang", "hangzhou"]
+        },
+        {
+          "name": "茅湾里印纹陶博物馆",
+          "desc": "萧山·印纹陶文化",
+          "url": "",
+          "detail": "<p><strong>茅湾里印纹陶博物馆</strong></p><p>位于萧山，专展示中国印纹陶文化。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 全国首个印纹陶专题博物馆</p>",
+          "color": "#a16207",
+          "districts": ["xiaoshan", "hangzhou"]
+        },
+        {
+          "name": "浙江省地质博物馆",
+          "desc": "之江·地质科普",
+          "url": "",
+          "detail": "<p><strong>浙江省地质博物馆</strong></p><p>位于之江，省级地质专题博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示浙江地质演化、矿物资源</p><p>• 适合亲子科普</p>",
+          "color": "#84cc16",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "临平古海塘博物馆",
+          "desc": "临平·海塘遗址",
+          "url": "",
+          "detail": "<p><strong>临平古海塘博物馆</strong></p><p>位于临平，展示古海塘遗址与文化。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示明清海塘工程</p>",
+          "color": "#0d9488",
+          "districts": ["linping", "hangzhou"]
+        },
+        {
+          "name": "西湖博览会博物馆",
+          "desc": "北山街·1929西博会",
+          "url": "",
+          "detail": "<p><strong>西湖博览会博物馆</strong></p><p>位于北山街，1929年第一届西湖博览会工业馆原址改建。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 百年历史建筑</p><p>• 展示西湖博览会历史与文化</p>",
+          "color": "#f59e0b",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "中国共产党杭州历史馆",
+          "desc": "北山街·党史",
+          "url": "",
+          "detail": "<p><strong>中国共产党杭州历史馆</strong></p><p>位于北山街，展示中共杭州地方党史。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 爱国主义教育基地</p>",
+          "color": "#dc2626",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "五四宪法历史资料陈列馆",
+          "desc": "北山街·新中国第一部宪法",
+          "url": "",
+          "detail": "<p><strong>五四宪法历史资料陈列馆</strong></p><p>位于北山街，毛泽东在杭州起草新中国第一部宪法的历史陈列馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 国家级宪法教育基地</p>",
+          "color": "#b91c1c",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "杭州海塘遗址博物馆",
+          "desc": "上城·古海塘遗址",
+          "url": "",
+          "detail": "<p><strong>杭州海塘遗址博物馆</strong></p><p>位于上城，展示古海塘遗址与海塘文化。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示明清鱼鳞大石塘</p>",
+          "color": "#0891b2",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "G20杭州峰会展示厅",
+          "desc": "奥体·2016G20",
+          "url": "",
+          "detail": "<p><strong>G20杭州峰会历史资料展示厅</strong></p><p>位于奥体，记录2016年G20杭州峰会。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示峰会用品、纪念品等</p>",
+          "color": "#0ea5e9",
+          "districts": ["binjiang", "hangzhou"]
+        },
+        {
+          "name": "杭州铁路博物馆",
+          "desc": "江墅·铁路+知青",
+          "url": "",
+          "detail": "<p><strong>杭州铁路博物馆（知青纪念馆）</strong></p><p>位于江墅铁路遗址，展示杭州铁路与知青历史。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 铁路文化与知青记忆结合</p>",
+          "color": "#475569",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "韩美林艺术馆",
+          "desc": "Botanic·艺术大师",
+          "url": "",
+          "detail": "<p><strong>韩美林艺术馆</strong></p><p>位于杭州植物园内，展示艺术家韩美林作品。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 集绘画、雕塑、陶瓷等艺术</p>",
+          "color": "#ec4899",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "全国爱国卫生运动纪念馆",
+          "desc": "小营巷·爱国卫生",
+          "url": "",
+          "detail": "<p><strong>全国爱国卫生运动纪念馆</strong></p><p>位于上城小营巷，2017年开馆。</p><p>• 免费开放</p><p>• 周日、周一闭馆</p><p>• 全面展示爱国卫生65年发展历程</p>",
+          "color": "#16a34a",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "毛主席视察小营巷纪念馆",
+          "desc": "小营巷56号·1958视察",
+          "url": "",
+          "detail": "<p><strong>毛主席视察小营巷纪念馆</strong></p><p>位于上城小营巷56号，纪念1958年毛主席视察。</p><p>• 免费开放</p><p>• 周日、周一闭馆</p><p>• 展示毛主席照片、用过的实物</p>",
+          "color": "#dc2626",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "中共杭州小组纪念馆",
+          "desc": "皮市巷·浙江第一党组织",
+          "url": "",
+          "detail": "<p><strong>中共杭州小组纪念馆</strong></p><p>位于上城皮市巷，1922年9月浙江省第一个中共地方组织诞生地。</p><p>• 免费开放</p><p>• 周日、周一闭馆</p><p>• 展示浙江省党组织发展史</p>",
+          "color": "#b91c1c",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "杭州城市建设陈列馆",
+          "desc": "庆春路·红楼",
+          "url": "",
+          "detail": "<p><strong>杭州城市建设陈列馆</strong></p><p>位于拱墅庆春路258号，百年红楼建筑。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示2200多年杭州建城史</p>",
+          "color": "#a16207",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "中共浙江省委机关旧址陈列室",
+          "desc": "拱墅·1927省委成立",
+          "url": "",
+          "detail": "<p><strong>中共浙江省委机关旧址陈列馆</strong></p><p>位于拱墅，展示1927-1929年浙江省委创建与斗争史。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 拱墅红色基因库</p>",
+          "color": "#dc2626",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "浙江中医药博物馆",
+          "desc": "滨文·中医药文化",
+          "url": "",
+          "detail": "<p><strong>浙江中医药博物馆</strong></p><p>位于滨文，展示浙江中医药文化。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 与胡庆余堂中药博物馆互补</p>",
+          "color": "#10b981",
+          "districts": ["binjiang", "hangzhou"]
+        },
+        {
+          "name": "司徒雷登故居",
+          "desc": "耶稣堂弄·民国建筑",
+          "url": "",
+          "detail": "<p><strong>司徒雷登故居</strong></p><p>位于拱墅耶稣堂弄3号，出生于此的司徒雷登故居。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 近现代重要史迹</p>",
+          "color": "#475569",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "公望美术馆",
+          "desc": "富阳·公望文化",
+          "url": "",
+          "detail": "<p><strong>公望美术馆</strong></p><p>位于富阳，区级公共美术馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示黄公望与富春山居图文化</p>",
+          "color": "#0d9488",
+          "districts": ["fuyang", "hangzhou"]
+        },
+        {
+          "name": "千岛湖艺术馆",
+          "desc": "淳安·区级美术馆",
+          "url": "",
+          "detail": "<p><strong>千岛湖艺术馆</strong></p><p>位于淳安千岛湖畔，区级公共美术馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示当代艺术与千岛湖风光作品</p>",
+          "color": "#0ea5e9",
+          "districts": ["chunan", "hangzhou"]
+        },
+        {
+          "name": "叶浅予艺术馆",
+          "desc": "桐庐·叶浅予",
+          "url": "",
+          "detail": "<p><strong>叶浅予艺术馆</strong></p><p>位于桐庐，展示桐庐籍画家叶浅予作品。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 中国画、速写、漫画艺术</p>",
+          "color": "#7c3aed",
+          "districts": ["tonglu", "hangzhou"]
+        },
+        {
+          "name": "临平美术馆",
+          "desc": "临平·区级美术馆",
+          "url": "",
+          "detail": "<p><strong>临平区画院（临平美术馆）</strong></p><p>位于临平，区级公共美术馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 当代书画与本地艺术</p>",
+          "color": "#9333ea",
+          "districts": ["linping", "hangzhou"]
+        },
+        {
+          "name": "临安美术馆",
+          "desc": "临安·区级美术馆",
+          "url": "",
+          "detail": "<p><strong>临安美术馆</strong></p><p>位于临安，区级公共美术馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 本地书画艺术</p>",
+          "color": "#65a30d",
+          "districts": ["linan", "hangzhou"]
+        },
+        {
+          "name": "西泠·武林美术馆",
+          "desc": "拱墅·武林商圈",
+          "url": "",
+          "detail": "<p><strong>西泠·武林美术馆</strong></p><p>位于拱墅武林商圈，西泠印社集团旗下。</p><p>• 免费开放，需预约</p><p>• 周一闭馆</p><p>• 已举办25+展览，惠及8万+市民</p>",
+          "color": "#0d9488",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "西泠印社美术馆",
+          "desc": "西湖·印社文化",
+          "url": "",
+          "detail": "<p><strong>西泠印社美术馆</strong></p><p>位于西湖边，西泠印社旗下。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 印学、金石、书画展览</p>",
+          "color": "#0891b2",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "杭州画院美术馆",
+          "desc": "南山路·本土画院",
+          "url": "",
+          "detail": "<p><strong>杭州画院美术馆</strong></p><p>位于南山路，杭州画院旗下。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 杭州本土艺术家展览</p>",
+          "color": "#0284c7",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "杭州国画院美术馆",
+          "desc": "西湖·国画文化",
+          "url": "",
+          "detail": "<p><strong>杭州国画院美术馆</strong></p><p>位于西湖边，杭州国画院旗下。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 中国画展览与推广</p>",
+          "color": "#0ea5e9",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "钱江美术馆",
+          "desc": "上城·社区艺术",
+          "url": "",
+          "detail": "<p><strong>钱江美术馆</strong></p><p>位于上城，民办非企业美术馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 推出“艺术进社区”计划</p>",
+          "color": "#f59e0b",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "杭州师范大学美术学院美术馆",
+          "desc": "余杭·高校美术馆",
+          "url": "",
+          "detail": "<p><strong>杭州师范大学美术学院美术馆</strong></p><p>位于余杭仓前，高校美术馆。</p><p>• 不定期对外开放</p><p>• 周一闭馆</p><p>• 师生作品与学术展览</p>",
+          "color": "#7c3aed",
+          "districts": ["yuhang", "hangzhou"]
+        },
+        {
+          "name": "王星记扇博物馆",
+          "desc": "拱墅·老字号扇",
+          "url": "",
+          "detail": "<p><strong>王星记扇博物馆</strong></p><p>位于拱墅长板巷，王星记老字号扇文化博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 杭州老字号扇文化</p>",
+          "color": "#8b5cf6",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "大运河数字文献馆",
+          "desc": "拱墅·桥西直街",
+          "url": "",
+          "detail": "<p><strong>大运河数字文献馆</strong></p><p>位于拱墅桥西直街，运河数字文献展示。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 数字化运河文献</p>",
+          "color": "#0284c7",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "天竺筷工艺博物馆",
+          "desc": "拱墅·天竺筷非遗",
+          "url": "",
+          "detail": "<p><strong>天竺筷工艺博物馆</strong></p><p>位于拱墅老字号国潮数字产业园，天竺筷非遗博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 杭州非遗天竺筷工艺</p>",
+          "color": "#a16207",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "杭州高氏照相机博物馆",
+          "desc": "拱墅·相机收藏",
+          "url": "",
+          "detail": "<p><strong>杭州高氏照相机博物馆</strong></p><p>位于拱墅陆家坞，非国有照相机专题博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 中外各年代相机收藏</p>",
+          "color": "#475569",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "马寅初纪念馆",
+          "desc": "拱墅·马寅初故居",
+          "url": "",
+          "detail": "<p><strong>马寅初纪念馆</strong></p><p>位于拱墅庆春路210号，经济学家马寅初故居。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 全国重点文物保护单位</p>",
+          "color": "#dc2626",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "浙江十竹斋版画博物馆",
+          "desc": "拱墅·十竹斋木版",
+          "url": "",
+          "detail": "<p><strong>浙江十竹斋版画博物馆</strong></p><p>位于拱墅观成实验学校，十竹斋木版水印博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 国家级非遗十竹斋木版水印</p>",
+          "color": "#9333ea",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "浙江省大运河紫檀博物馆",
+          "desc": "拱墅·登云路",
+          "url": "",
+          "detail": "<p><strong>浙江省大运河紫檀博物馆</strong></p><p>位于拱墅登云路，非国有紫檀家具博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 紫檀家具与木作工艺</p>",
+          "color": "#475569",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "浙江观吟艺术博物馆",
+          "desc": "拱墅·丽水路",
+          "url": "",
+          "detail": "<p><strong>浙江观吟艺术博物馆</strong></p><p>位于拱墅丽水路，非国有艺术博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 当代艺术与收藏</p>",
+          "color": "#0d9488",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "杭州拱墅民俗生活博物馆",
+          "desc": "拱墅·陆家坞",
+          "url": "",
+          "detail": "<p><strong>杭州市拱墅区民俗生活博物馆</strong></p><p>位于拱墅陆家坞，乡村社区博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 杭州市井民俗生活</p>",
+          "color": "#a16207",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "大关印象非遗博物馆",
+          "desc": "拱墅·大关",
+          "url": "",
+          "detail": "<p><strong>大关印象非遗博物馆</strong></p><p>位于拱墅德苑路，乡村社区博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 非遗文化展示</p>",
+          "color": "#84cc16",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "武林街道非遗博物馆",
+          "desc": "拱墅·竹竿巷",
+          "url": "",
+          "detail": "<p><strong>武林街道非遗博物馆</strong></p><p>位于拱墅竹竿巷，乡村社区博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 街道级非遗展示</p>",
+          "color": "#65a30d",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "建德市博物馆",
+          "desc": "建德·县级综合",
+          "url": "",
+          "detail": "<p><strong>建德市博物馆</strong></p><p>位于建德新安江，县级综合博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示建德历史与严州文化</p>",
+          "color": "#0891b2",
+          "districts": ["jiande", "hangzhou"]
+        },
+        {
+          "name": "淳安县博物馆",
+          "desc": "淳安·千岛湖",
+          "url": "",
+          "detail": "<p><strong>淳安县博物馆</strong></p><p>位于淳安千岛湖镇，县级综合博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示淳安历史与水下古城文化</p>",
+          "color": "#0ea5e9",
+          "districts": ["chunan", "hangzhou"]
+        },
+        {
+          "name": "钱塘区博物馆",
+          "desc": "钱塘·下沙",
+          "url": "",
+          "detail": "<p><strong>钱塘区博物馆</strong></p><p>位于钱塘下沙，区级综合博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示钱塘区围垦历史与发展</p>",
+          "color": "#7c3aed",
+          "districts": ["qiantang", "hangzhou"]
+        },
+        {
+          "name": "杭州植物园科普馆",
+          "desc": "西湖·植物科普",
+          "url": "",
+          "detail": "<p><strong>杭州植物园科普馆</strong></p><p>位于西湖区杭州植物园内，植物科普馆。</p><p>• 免费开放（需购植物园门票）</p><p>• 周一闭馆</p><p>• 植物科普与生态教育</p>",
+          "color": "#16a34a",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "杭州动物园科普馆",
+          "desc": "西湖·动物科普",
+          "url": "",
+          "detail": "<p><strong>杭州动物园科普馆</strong></p><p>位于西湖区杭州动物园内，动物科普馆。</p><p>• 免费开放（需购动物园门票）</p><p>• 周一闭馆</p><p>• 动物科普与保护教育</p>",
+          "color": "#f59e0b",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "西湖风景名胜区博物馆",
+          "desc": "西湖·世界遗产",
+          "url": "",
+          "detail": "<p><strong>西湖风景名胜区博物馆</strong></p><p>位于西湖景区，世界文化遗产西湖专题。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 西湖文化景观与历史</p>",
+          "color": "#0ea5e9",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "余杭区博物馆",
+          "desc": "余杭·区级综合",
+          "url": "",
+          "detail": "<p><strong>余杭区博物馆</strong></p><p>位于余杭，区级综合博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示余杭历史与径山茶文化</p>",
+          "color": "#9333ea",
+          "districts": ["yuhang", "hangzhou"]
+        },
+        {
+          "name": "滨江区博物馆",
+          "desc": "滨江·区级综合",
+          "url": "",
+          "detail": "<p><strong>滨江区博物馆</strong></p><p>位于滨江，区级综合博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示滨江从古至今发展</p>",
+          "color": "#0d9488",
+          "districts": ["binjiang", "hangzhou"]
+        },
+        {
+          "name": "萧山区博物馆",
+          "desc": "萧山·区级综合",
+          "url": "",
+          "detail": "<p><strong>萧山区博物馆</strong></p><p>位于萧山，区级综合博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示萧山历史与跨湖桥文化</p>",
+          "color": "#0891b2",
+          "districts": ["xiaoshan", "hangzhou"]
+        },
+        {
+          "name": "上城区非遗博物馆",
+          "desc": "上城·非遗",
+          "url": "",
+          "detail": "<p><strong>上城区非物质文化遗产博物馆</strong></p><p>位于上城，区级非遗主题博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 杭州非遗项目展示</p>",
+          "color": "#dc2626",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "西湖区非遗博物馆",
+          "desc": "西湖·非遗",
+          "url": "",
+          "detail": "<p><strong>西湖区非物质文化遗产博物馆</strong></p><p>位于西湖区，区级非遗主题博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 西湖区非遗展示</p>",
+          "color": "#0284c7",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "南宋皇城遗址博物馆",
+          "desc": "上城·南宋皇宫",
+          "url": "",
+          "detail": "<p><strong>南宋皇城遗址博物馆</strong></p><p>位于上城凤凰山，南宋皇宫遗址展示。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 与德寿宫互补，展示南宋皇城</p>",
+          "color": "#92400e",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "龙井茶文化博物馆",
+          "desc": "西湖·龙井茶",
+          "url": "",
+          "detail": "<p><strong>龙井茶文化博物馆</strong></p><p>位于西湖龙井村，龙井茶文化专题。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 与中国茶叶博物馆互补</p>",
+          "color": "#16a34a",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "径山茶文化博物馆",
+          "desc": "余杭·径山茶",
+          "url": "",
+          "detail": "<p><strong>径山茶文化博物馆</strong></p><p>位于余杭径山，径山茶文化专题。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 径山茶与日本茶道渊源</p>",
+          "color": "#65a30d",
+          "districts": ["yuhang", "hangzhou"]
+        },
+        {
+          "name": "杭州丝绸工业博物馆",
+          "desc": "拱墅·工业遗存",
+          "url": "",
+          "detail": "<p><strong>杭州丝绸工业博物馆</strong></p><p>位于拱墅通益公纱厂旧址，工业遗存改造。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 杭州丝绸工业百年史</p>",
+          "color": "#ec4899",
+          "districts": ["gongshu", "hangzhou"]
+        },
+        {
+          "name": "杭州钱塘江博物馆",
+          "desc": "钱江·钱塘江文化",
+          "url": "",
+          "detail": "<p><strong>杭州钱塘江博物馆</strong></p><p>位于钱江新城，钱塘江文化专题。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 展示钱塘江潮汐、文化、水利</p>",
+          "color": "#0284c7",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "白塔公园陈列馆",
+          "desc": "上城·南宋地宫",
+          "url": "",
+          "detail": "<p><strong>白塔公园陈列馆</strong></p><p>位于上城白塔公园，南宋地宫遗址与绿皮火车。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 工业遗存与南宋文化</p>",
+          "color": "#a16207",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "南宋御街陈列馆",
+          "desc": "上城·中山路",
+          "url": "",
+          "detail": "<p><strong>南宋御街陈列馆</strong></p><p>位于上城中山路，南宋皇城中轴大道展示。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 考古发掘现场与南宋街市</p>",
+          "color": "#92400e",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "八卦田遗址陈列馆",
+          "desc": "上城·南宋郊坛",
+          "url": "",
+          "detail": "<p><strong>八卦田遗址陈列馆</strong></p><p>位于上城玉皇山南，南宋皇帝躬耕籍田遗址。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 九宫格八卦田形状</p>",
+          "color": "#16a34a",
+          "districts": ["shangcheng", "hangzhou"]
+        },
+        {
+          "name": "杭州动物园",
+          "desc": "西湖·亲子科普",
+          "url": "",
+          "detail": "<p><strong>杭州动物园</strong></p><p>位于西湖区大慈山，市级动物园。</p><p>• 门票：20元</p><p>• 含大熊猫、金丝猴等珍稀动物</p><p>• 中小学生第二课堂基地</p>",
+          "color": "#f59e0b",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "杭州少年儿童公园",
+          "desc": "西湖·亲子乐园",
+          "url": "",
+          "detail": "<p><strong>杭州少年儿童公园</strong></p><p>位于西湖区，市级少年儿童公园。</p><p>• 门票：15元</p><p>• 亲子游乐设施</p><p>• 中小学生第二课堂基地</p>",
+          "color": "#ec4899",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "杭州植物园",
+          "desc": "西湖·植物科普",
+          "url": "",
+          "detail": "<p><strong>杭州植物园</strong></p><p>位于西湖区桃源岭，市级植物园。</p><p>• 门票：10元</p><p>• 灵峰探梅、杜鹃园、玉泉</p><p>• 中小学生第二课堂基地</p>",
+          "color": "#16a34a",
+          "districts": ["xihu", "hangzhou"]
+        },
+        {
+          "name": "杭州市青少年活动中心",
+          "desc": "西湖·Do都城",
+          "url": "",
+          "detail": "<p><strong>杭州市青少年活动中心（Do都城）</strong></p><p>位于西湖区，市级青少年社会体验馆。</p><p>• Do都城少儿社会体验馆（半价优惠）</p><p>• 中小学生第二课堂基地</p>",
+          "color": "#0ea5e9",
+          "districts": ["xihu", "hangzhou"]
         }
       ]
     },
@@ -4868,12 +5636,226 @@
       ],
       "type": "text",
       "reply": "🧾 杭州消费有奖\n\n支付宝/云闪付搜索「消费有奖」录入发票即可参与抽奖\n\n详情：https://www.ihangzhou.net/"
+    },
+    {
+      "keyword": "周末",
+      "aliases": [
+        "周末去哪",
+        "周末玩什么",
+        "周末安排",
+        "去哪玩",
+        "出去玩"
+      ],
+      "type": "news",
+      "title": "🏞️ 杭州周末去哪",
+      "desc": "西湖/古镇/赏花/寺庙/夜景 5 大主题，拍照路线与小众地点全攻略",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/travel.html"
+    },
+    {
+      "keyword": "下雨",
+      "aliases": [
+        "下雨天",
+        "下雨去哪",
+        "雨天",
+        "雨天游玩"
+      ],
+      "type": "news",
+      "title": "🌧️ 杭州下雨天去哪",
+      "desc": "博物馆/室内茶馆/商场/书店/地下街区，雨天也能玩得开心",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles.html?q=下雨"
+    },
+    {
+      "keyword": "拍照",
+      "aliases": [
+        "拍照路线",
+        "机位",
+        "拍照地点",
+        "摄影",
+        "打卡",
+        "网红"
+      ],
+      "type": "news",
+      "title": "📷 杭州拍照机位",
+      "desc": "免费绝美机位、网红打卡点、日落夜景拍摄路线合集",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles.html?q=拍照"
+    },
+    {
+      "keyword": "亲子",
+      "aliases": [
+        "带娃",
+        "亲子游",
+        "亲子去处",
+        "小孩",
+        "遛娃",
+        "家庭"
+      ],
+      "type": "news",
+      "title": "👨‍👧 杭州亲子去处",
+      "desc": "公园/博物馆/乐园/郊野，适合带父母带娃的杭州地点合集",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles.html?q=亲子"
+    },
+    {
+      "keyword": "夜景",
+      "aliases": [
+        "夜晚",
+        "晚上去哪",
+        "夜游",
+        "灯光秀",
+        "夜杭州"
+      ],
+      "type": "news",
+      "title": "🌙 杭州夜景",
+      "desc": "钱江新城灯光秀/西湖音乐喷泉/运河夜景/河坊街夜游",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/travel.html#sec-night"
+    },
+    {
+      "keyword": "赏花",
+      "aliases": [
+        "花期",
+        "花",
+        "看花",
+        "花季",
+        "春花"
+      ],
+      "type": "news",
+      "title": "🌸 杭州赏花四季",
+      "desc": "超山梅花/太子湾郁金香/满觉陇桂花/花港银杏，全年花历",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/travel.html#sec-flower"
+    },
+    {
+      "keyword": "古镇",
+      "aliases": [
+        "古村",
+        "水乡",
+        "老街",
+        "古街"
+      ],
+      "type": "news",
+      "title": "🏘️ 杭州古镇合集",
+      "desc": "塘栖/龙门/深澳/新叶/严州古城，杭州周边古镇深度游",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/travel.html#sec-town"
+    },
+    {
+      "keyword": "寺庙",
+      "aliases": [
+        "寺庙游",
+        "佛寺",
+        "古刹",
+        "灵隐",
+        "法喜",
+        "净慈"
+      ],
+      "type": "news",
+      "title": "⛩️ 杭州寺庙游",
+      "desc": "灵隐寺/法喜寺/净慈寺/六和塔，千年古刹预约与开放时间",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/travel.html#sec-temple"
+    },
+    {
+      "keyword": "西湖",
+      "aliases": [
+        "西湖十景",
+        "西湖景点",
+        "游西湖"
+      ],
+      "type": "news",
+      "title": "🏞️ 西湖十景",
+      "desc": "断桥残雪/苏堤春晓/三潭印月/曲院风荷/雷峰夕照全攻略",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/travel.html#sec-lake"
+    },
+    {
+      "keyword": "美食",
+      "aliases": [
+        "吃",
+        "吃什么",
+        "杭帮菜",
+        "杭州菜",
+        "好吃的",
+        "老店"
+      ],
+      "type": "news",
+      "title": "🍜 杭州美食",
+      "desc": "杭帮菜/老字号/地道小店/美食地图，杭州吃喝全攻略",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/food.html"
+    },
+    {
+      "keyword": "故事",
+      "aliases": [
+        "杭州故事",
+        "人物",
+        "杭州人",
+        "杭州历史",
+        "杭州文化"
+      ],
+      "type": "news",
+      "title": "📚 杭州故事",
+      "desc": "杭州人物/街道/记忆/民俗，160+ 篇本地深度文章",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles.html"
+    },
+    {
+      "keyword": "博物馆",
+      "aliases": [
+        "博物馆游",
+        "浙博",
+        "展览",
+        "看展"
+      ],
+      "type": "news",
+      "title": "🏛️ 杭州博物馆游",
+      "desc": "浙江省博物馆/中国丝绸博物馆/浙江美术馆/中国茶叶博物馆",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/museum.html"
+    },
+    {
+      "keyword": "区县",
+      "aliases": [
+        "13区县",
+        "杭州区县",
+        "上城",
+        "拱墅",
+        "西湖",
+        "滨江",
+        "萧山",
+        "余杭",
+        "临平",
+        "钱塘",
+        "富阳",
+        "临安",
+        "桐庐",
+        "淳安",
+        "建德"
+      ],
+      "type": "news",
+      "title": "🗺️ 杭州13区县",
+      "desc": "上城/拱墅/西湖/滨江/萧山/余杭/临平/钱塘/富阳/临安/桐庐/淳安/建德",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/district.html"
+    },
+    {
+      "keyword": "搜索",
+      "aliases": [
+        "查找",
+        "找",
+        "搜"
+      ],
+      "type": "text",
+      "reply": "🔍 iHangzhou 全站搜索\n\n访问 https://www.ihangzhou.net/articles.html\n在搜索框输入关键词即可查找 160+ 篇杭州本地文章\n\n例：周末/下雨/拍照/亲子/古镇/夜景"
     }
   ],
   "wechatWelcome": {
-    "type": "news",
+    "type": "text",
     "title": "欢迎关注 iHangzhou · 杭州生活助手 🏔️",
-    "desc": "杭州人的数字生活工具箱\n回复数字获取服务：1限行 2天气 3地铁 4公积金 5社保\n回复「帮助」查看全部指令",
+    "desc": "杭州人的数字生活工具箱\n\n【数字快捷】1限行 2天气 3地铁 4公积金 5社保\n【场景推荐】周末/下雨/拍照/亲子/夜景/赏花/古镇/寺庙/美食\n【资讯查询】故事/区县/博物馆/搜索\n\n回复「帮助」查看全部指令",
     "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
     "url": "https://www.ihangzhou.net/"
   },

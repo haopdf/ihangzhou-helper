@@ -1,0 +1,401 @@
+[
+  {
+    "keyword": "1",
+    "aliases": [
+      "1",
+      "壹",
+      "一"
+    ],
+    "type": "text",
+    "reply": "🚗 今日杭州尾号限行\n\n查看详情：https://www.ihangzhou.net/#xianxing"
+  },
+  {
+    "keyword": "2",
+    "aliases": [
+      "2",
+      "贰",
+      "二"
+    ],
+    "type": "text",
+    "reply": "🌤️ 杭州天气\n\n查看详情：https://www.ihangzhou.net/#weather"
+  },
+  {
+    "keyword": "3",
+    "aliases": [
+      "3",
+      "叁",
+      "三"
+    ],
+    "type": "text",
+    "reply": "🚇 杭州地铁线路\n\n全图：https://www.hzmetro.com/"
+  },
+  {
+    "keyword": "4",
+    "aliases": [
+      "4",
+      "肆",
+      "四"
+    ],
+    "type": "text",
+    "reply": "🏠 杭州公积金\n\n查询入口：https://gjj.hangzhou.gov.cn/"
+  },
+  {
+    "keyword": "5",
+    "aliases": [
+      "5",
+      "伍",
+      "五"
+    ],
+    "type": "text",
+    "reply": "🏥 杭州社保\n\n查询入口：https://www.zjzwfw.gov.cn/"
+  },
+  {
+    "keyword": "限行",
+    "aliases": [
+      "限号",
+      "尾号",
+      "限行尾号",
+      "车牌限行"
+    ],
+    "type": "news",
+    "title": "🚗 今日杭州尾号限行",
+    "desc": "工作日 7:00-9:00 / 16:30-18:30 限行，点击查看今日限行尾号与限行区域",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/#xianxing"
+  },
+  {
+    "keyword": "天气",
+    "aliases": [
+      "天气预报",
+      "杭州天气",
+      "下雨",
+      "气温"
+    ],
+    "type": "news",
+    "title": "🌤️ 杭州天气预报",
+    "desc": "实时天气、未来 7 天预报、空气质量、生活指数",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/#weather"
+  },
+  {
+    "keyword": "地铁",
+    "aliases": [
+      "地铁线路",
+      "地铁时刻",
+      "杭州地铁",
+      "地铁图"
+    ],
+    "type": "news",
+    "title": "🚇 杭州地铁线路图",
+    "desc": "1-19 号线全覆盖，首末班车时间，换乘查询",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.hzmetro.com/"
+  },
+  {
+    "keyword": "公积金",
+    "aliases": [
+      "公积金查询",
+      "公积金提取",
+      "公积金贷款",
+      "住房公积"
+    ],
+    "type": "news",
+    "title": "🏠 杭州公积金",
+    "desc": "余额查询、明细、提取记录、贷款额度测算",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://gjj.hangzhou.gov.cn/"
+  },
+  {
+    "keyword": "社保",
+    "aliases": [
+      "社保查询",
+      "社保卡",
+      "医保",
+      "养老保险",
+      "五险"
+    ],
+    "type": "news",
+    "title": "🏥 杭州社保查询",
+    "desc": "养老/医疗/失业/工伤/生育五险缴费记录与个人账户余额",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.zjzwfw.gov.cn/"
+  },
+  {
+    "keyword": "摇号",
+    "aliases": [
+      "浙A摇号",
+      "车牌摇号",
+      "小客车",
+      "指标"
+    ],
+    "type": "news",
+    "title": "🚘 浙A车牌摇号",
+    "desc": "摇号/竞价/浙M区域指标申请入口与中签查询",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://hzxkctk.cn/"
+  },
+  {
+    "keyword": "灵隐寺",
+    "aliases": [
+      "灵隐",
+      "飞来峰",
+      "寺庙"
+    ],
+    "type": "news",
+    "title": "⛩️ 灵隐寺",
+    "desc": "千年古刹·飞来峰造像，门票预约与开放时间",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.lingyinsi.org.cn/"
+  },
+  {
+    "keyword": "落户",
+    "aliases": [
+      "户口",
+      "人才落户",
+      "积分落户",
+      "迁户口"
+    ],
+    "type": "news",
+    "title": "🏠 杭州落户政策",
+    "desc": "学历落户/职称落户/技能落户/积分落户全攻略",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "http://police.hangzhou.gov.cn/"
+  },
+  {
+    "keyword": "居住证",
+    "aliases": [
+      "暂住证",
+      "居住登记",
+      "电子居住证"
+    ],
+    "type": "news",
+    "title": "📄 杭州居住证办理",
+    "desc": "登记满 6 个月即可申领电子居住证",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.zjzwfw.gov.cn/"
+  },
+  {
+    "keyword": "消费券",
+    "aliases": [
+      "发票抽奖",
+      "消费有奖",
+      "杭州消费券"
+    ],
+    "type": "text",
+    "reply": "🧾 杭州消费有奖\n\n支付宝/云闪付搜索「消费有奖」录入发票即可参与抽奖\n\n详情：https://www.ihangzhou.net/"
+  },
+  {
+    "keyword": "周末",
+    "aliases": [
+      "周末去哪",
+      "周末玩什么",
+      "周末安排",
+      "去哪玩",
+      "出去玩"
+    ],
+    "type": "news",
+    "title": "🏞️ 杭州周末去哪",
+    "desc": "西湖/古镇/赏花/寺庙/夜景 5 大主题，拍照路线与小众地点全攻略",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/travel.html"
+  },
+  {
+    "keyword": "下雨",
+    "aliases": [
+      "下雨天",
+      "下雨去哪",
+      "雨天",
+      "雨天游玩"
+    ],
+    "type": "news",
+    "title": "🌧️ 杭州下雨天去哪",
+    "desc": "博物馆/室内茶馆/商场/书店/地下街区，雨天也能玩得开心",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/articles.html?q=下雨"
+  },
+  {
+    "keyword": "拍照",
+    "aliases": [
+      "拍照路线",
+      "机位",
+      "拍照地点",
+      "摄影",
+      "打卡",
+      "网红"
+    ],
+    "type": "news",
+    "title": "📷 杭州拍照机位",
+    "desc": "免费绝美机位、网红打卡点、日落夜景拍摄路线合集",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/articles.html?q=拍照"
+  },
+  {
+    "keyword": "亲子",
+    "aliases": [
+      "带娃",
+      "亲子游",
+      "亲子去处",
+      "小孩",
+      "遛娃",
+      "家庭"
+    ],
+    "type": "news",
+    "title": "👨‍👧 杭州亲子去处",
+    "desc": "公园/博物馆/乐园/郊野，适合带父母带娃的杭州地点合集",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/articles.html?q=亲子"
+  },
+  {
+    "keyword": "夜景",
+    "aliases": [
+      "夜晚",
+      "晚上去哪",
+      "夜游",
+      "灯光秀",
+      "夜杭州"
+    ],
+    "type": "news",
+    "title": "🌙 杭州夜景",
+    "desc": "钱江新城灯光秀/西湖音乐喷泉/运河夜景/河坊街夜游",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/travel.html#sec-night"
+  },
+  {
+    "keyword": "赏花",
+    "aliases": [
+      "花期",
+      "花",
+      "看花",
+      "花季",
+      "春花"
+    ],
+    "type": "news",
+    "title": "🌸 杭州赏花四季",
+    "desc": "超山梅花/太子湾郁金香/满觉陇桂花/花港银杏，全年花历",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/travel.html#sec-flower"
+  },
+  {
+    "keyword": "古镇",
+    "aliases": [
+      "古村",
+      "水乡",
+      "老街",
+      "古街"
+    ],
+    "type": "news",
+    "title": "🏘️ 杭州古镇合集",
+    "desc": "塘栖/龙门/深澳/新叶/严州古城，杭州周边古镇深度游",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/travel.html#sec-town"
+  },
+  {
+    "keyword": "寺庙",
+    "aliases": [
+      "寺庙游",
+      "佛寺",
+      "古刹",
+      "灵隐",
+      "法喜",
+      "净慈"
+    ],
+    "type": "news",
+    "title": "⛩️ 杭州寺庙游",
+    "desc": "灵隐寺/法喜寺/净慈寺/六和塔，千年古刹预约与开放时间",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/travel.html#sec-temple"
+  },
+  {
+    "keyword": "西湖",
+    "aliases": [
+      "西湖十景",
+      "西湖景点",
+      "游西湖"
+    ],
+    "type": "news",
+    "title": "🏞️ 西湖十景",
+    "desc": "断桥残雪/苏堤春晓/三潭印月/曲院风荷/雷峰夕照全攻略",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/travel.html#sec-lake"
+  },
+  {
+    "keyword": "美食",
+    "aliases": [
+      "吃",
+      "吃什么",
+      "杭帮菜",
+      "杭州菜",
+      "好吃的",
+      "老店"
+    ],
+    "type": "news",
+    "title": "🍜 杭州美食",
+    "desc": "杭帮菜/老字号/地道小店/美食地图，杭州吃喝全攻略",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/food.html"
+  },
+  {
+    "keyword": "故事",
+    "aliases": [
+      "杭州故事",
+      "人物",
+      "杭州人",
+      "杭州历史",
+      "杭州文化"
+    ],
+    "type": "news",
+    "title": "📚 杭州故事",
+    "desc": "杭州人物/街道/记忆/民俗，160+ 篇本地深度文章",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/articles.html"
+  },
+  {
+    "keyword": "博物馆",
+    "aliases": [
+      "博物馆游",
+      "浙博",
+      "展览",
+      "看展"
+    ],
+    "type": "news",
+    "title": "🏛️ 杭州博物馆游",
+    "desc": "浙江省博物馆/中国丝绸博物馆/浙江美术馆/中国茶叶博物馆",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/museum.html"
+  },
+  {
+    "keyword": "区县",
+    "aliases": [
+      "13区县",
+      "杭州区县",
+      "上城",
+      "拱墅",
+      "西湖",
+      "滨江",
+      "萧山",
+      "余杭",
+      "临平",
+      "钱塘",
+      "富阳",
+      "临安",
+      "桐庐",
+      "淳安",
+      "建德"
+    ],
+    "type": "news",
+    "title": "🗺️ 杭州13区县",
+    "desc": "上城/拱墅/西湖/滨江/萧山/余杭/临平/钱塘/富阳/临安/桐庐/淳安/建德",
+    "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+    "url": "https://www.ihangzhou.net/district.html"
+  },
+  {
+    "keyword": "搜索",
+    "aliases": [
+      "查找",
+      "找",
+      "搜"
+    ],
+    "type": "text",
+    "reply": "🔍 iHangzhou 全站搜索\n\n访问 https://www.ihangzhou.net/articles.html\n在搜索框输入关键词即可查找 160+ 篇杭州本地文章\n\n例：周末/下雨/拍照/亲子/古镇/夜景"
+  }
+]

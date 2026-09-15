@@ -3,7 +3,7 @@
 // HTML/JS/CSS 网络优先（确保最新），图片 缓存优先
 // ============================================
 
-var CACHE_NAME = 'ihangzhou-v48';
+var CACHE_NAME = 'ihangzhou-v49';
 var CACHE_URLS = [
   '/css/style.css',
   '/manifest.json',
@@ -62,9 +62,10 @@ self.addEventListener('fetch', function (event) {
 
   var isHtml = event.request.mode === 'navigate' || /\.html(\?|$)/.test(url.pathname);
   var isJs = /\.js(\?|$)/.test(url.pathname);
+  var isJson = /\.json(\?|$)/.test(url.pathname);
 
-  // HTML / JS：网络优先，失败回退缓存
-  if (isHtml || isJs) {
+  // HTML / JS / JSON：网络优先，失败回退缓存（JSON 数据需确保最新，避免缓存旧数据导致页面加载失败）
+  if (isHtml || isJs || isJson) {
     event.respondWith(
       fetch(event.request).then(function (response) {
         if (response && response.status === 200) {

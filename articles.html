@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -22,16 +22,25 @@
     .art-stats { display: flex; justify-content: center; gap: 10px; margin-top: 12px; font-size: 11px; opacity: 0.9; flex-wrap: wrap; }
     .art-stats span { background: rgba(255,255,255,0.18); padding: 4px 16px; border-radius: 12px; font-weight: 500; }
 
-    .art-search { padding: 12px 16px; position: sticky; top: 56px; z-index: 50; background: var(--bg-card); border-bottom: 1px solid var(--border); }
-    .art-search input { width: 100%; padding: 10px 16px; border: 1px solid var(--border); border-radius: 20px; background: var(--bg-alt); font-size: 14px; outline: none; }
+    .art-search { padding: 14px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border); }
+    .art-search-wrap { position: relative; }
+    .art-search input { width: 100%; padding: 12px 16px 12px 40px; border: 1px solid var(--border); border-radius: 22px; background: var(--bg-alt); font-size: 14px; outline: none; }
     .art-search input:focus { border-color: var(--primary); background: var(--bg-card); }
+    .art-search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; opacity: 0.5; pointer-events: none; }
+    .art-search-hint { font-size: 11px; color: var(--text-muted); margin-top: 8px; padding: 0 4px; }
+    .art-search-hint b { color: var(--primary); font-weight: 500; }
 
-    .art-cats { display: flex; gap: 6px; padding: 10px 16px; overflow-x: auto; background: var(--bg-card); border-bottom: 1px solid var(--border); -webkit-overflow-scrolling: touch; flex-wrap: wrap; }
+    .art-cats { display: flex; gap: 6px; padding: 8px 16px; overflow-x: auto; background: var(--bg-card); border-bottom: 1px solid var(--border); -webkit-overflow-scrolling: touch; flex-wrap: nowrap; position: sticky; top: 56px; z-index: 50; }
     .art-cats::-webkit-scrollbar { display: none; }
     .art-cat { flex-shrink: 0; padding: 6px 16px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 16px; font-size: 13px; color: var(--text-secondary); cursor: pointer; white-space: nowrap; font-weight: 500; font-family: inherit; }
     .art-cat.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .art-cat-more { flex-shrink: 0; padding: 6px 14px; background: transparent; border: 1px dashed var(--border); border-radius: 16px; font-size: 13px; color: var(--text-muted); cursor: pointer; white-space: nowrap; font-weight: 500; font-family: inherit; }
+    .art-cat-more.expanded { display: none; }
+    .art-cat[data-hidden="true"] { display: none; }
 
-    .art-list { padding: 8px 16px 120px 16px; max-width: 720px; margin: 0 auto; }
+    .art-list { padding: 8px 16px 120px 16px; max-width: 1100px; margin: 0 auto; }
+    @media (min-width: 1024px) { .art-list { max-width: 1280px; } }
+    @media (min-width: 1440px) { .art-list { max-width: 1440px; } }
     .art-item { display: block; padding: 14px; background: var(--bg-card); border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--border-light); text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
     .art-item:active { transform: scale(0.98); box-shadow: var(--shadow); }
     .art-item-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
@@ -40,16 +49,38 @@
     .art-item-summary { font-size: 13px; color: var(--text-secondary); line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .art-empty { text-align: center; padding: 40px 16px; color: var(--text-muted); font-size: 14px; }
     .art-load { text-align: center; padding: 20px; color: var(--primary); font-size: 13px; cursor: pointer; }
+
+    .art-deep-search-btn {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      border-radius: 20px;
+      font-size: 13px;
+      cursor: pointer;
+      margin: 8px 0;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .art-deep-search-btn:hover { background: var(--primary); color: #fff; }
+    .art-deep-search-btn:disabled { opacity: 0.6; cursor: wait; }
+    .art-result-count { font-size: 12px; color: var(--text-muted); margin-top: 8px; padding: 0 4px; }
+    .art-result-count b { color: var(--primary); font-weight: 500; }
   </style>
 </head>
 <body>
   <header class="topbar">
     <a href="index.html" class="topbar-back" style="color:#fff;text-decoration:none;font-size:20px;padding: 4px 16px;">‹</a>
     <div class="topbar-city"><span>杭州故事</span><span class="city-arrow">▼</span></div>
-    <div class="topbar-search" style="flex:1;"><input type="text" id="artSearchInput" placeholder="搜索文章..." autocomplete="off"></div>
+    <div style="flex:1;"></div>
     <button class="topbar-elderly" onclick="toggleElderlyMode()" title="老人模式">👵 老人</button>
     <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
   </header>
+
+  <div class="art-cats" id="artCats">
+    <button class="art-cat active" data-cat="all">全部</button>
+  </div>
 
   <div class="art-hero">
     <h1>📚 杭州故事 · 本地文章合集</h1>
@@ -60,8 +91,14 @@
     </div>
   </div>
 
-  <div class="art-cats" id="artCats">
-    <button class="art-cat active" data-cat="all">全部</button>
+  <div class="art-search">
+    <div class="art-search-wrap">
+      <span class="art-search-icon">🔍</span>
+      <input type="text" id="artSearchInput" placeholder="搜索杭州周末去哪/下雨/拍照/亲子/美食..." autocomplete="off">
+    </div>
+    <div class="art-search-hint">试试关键词：<b>周末</b> · <b>下雨</b> · <b>拍照</b> · <b>亲子</b> · <b>古镇</b> · <b>夜景</b></div>
+    <button id="deepSearchBtn" class="art-deep-search-btn" style="display:none;">🔍 深度搜索正文</button>
+    <div id="artResultCount" class="art-result-count" style="display:none;"></div>
   </div>
 
   <div class="art-list" id="artList">
@@ -78,28 +115,42 @@
     var FILTERED = [];
     var PAGE_SIZE = 30;
     var CURRENT_PAGE = 0;
+    var PAGE_PARAMS = new URLSearchParams(location.search);
+
+    // 深度搜索（正文全文搜索）相关状态
+    var deepSearchCache = {};   // slug -> 正文纯文本（缓存，避免重复请求）
+    var deepSearched = false;    // 是否已对当前关键词执行过深度搜索
+    var deepSearchLoading = false; // 是否正在加载正文
 
     // 清理分类名（去掉开头的 "01-" "02-" 等编号）
     function cleanCat(c) { return c.replace(/^\d+[-_\s]+/, '').replace('系列','').trim(); }
 
     function loadArticles() {
+      document.getElementById('artList').innerHTML = '<div class="art-empty">加载中...</div>';
       fetch('articles/index.json?t=' + Date.now())
-        .then(function(r){ return r.json(); })
+        .then(function(r){
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
         .then(function(data){
           ALL_ARTICLES = data.map(function(a){
             return Object.assign({}, a, { catClean: cleanCat(a.cat.split(' / ')[0]) });
           });
-          document.getElementById('artTotalCount').textContent = '📖 ' + ALL_ARTICLES.length + ' 篇文章';
+          var totalEl = document.getElementById('artTotalCount');
+          if (totalEl) totalEl.textContent = '📖 ' + ALL_ARTICLES.length + ' 篇文章';
 
-          // 构建分类 tab
+          // 构建分类 tab：只显示前 8 个高频 + 更多按钮
           var cats = {};
           ALL_ARTICLES.forEach(function(a){ cats[a.catClean] = (cats[a.catClean]||0)+1; });
+          var sortedCats = Object.keys(cats).sort(function(a,b){ return cats[b]-cats[a]; });
           var catBar = document.getElementById('artCats');
-          Object.keys(cats).sort(function(a,b){ return cats[b]-cats[a]; }).forEach(function(c){
+          var TOP_N = 8;
+          sortedCats.forEach(function(c, idx){
             var btn = document.createElement('button');
             btn.className = 'art-cat';
             btn.dataset.cat = c;
             btn.textContent = c + ' (' + cats[c] + ')';
+            if (idx >= TOP_N) btn.dataset.hidden = 'true';
             btn.addEventListener('click', function(){
               catBar.querySelectorAll('.art-cat').forEach(function(b){ b.classList.remove('active'); });
               btn.classList.add('active');
@@ -108,12 +159,41 @@
             });
             catBar.appendChild(btn);
           });
-          document.getElementById('artCatCount').textContent = '📂 ' + Object.keys(cats).length + ' 个分类';
+          // 更多分类按钮
+          if (sortedCats.length > TOP_N) {
+            var moreBtn = document.createElement('button');
+            moreBtn.className = 'art-cat-more';
+            moreBtn.textContent = '更多 ' + (sortedCats.length - TOP_N) + ' 个分类 ▼';
+            moreBtn.addEventListener('click', function(){
+              catBar.querySelectorAll('.art-cat[data-hidden="true"]').forEach(function(b){ b.removeAttribute('data-hidden'); });
+              moreBtn.classList.add('expanded');
+              moreBtn.style.display = 'none';
+            });
+            catBar.appendChild(moreBtn);
+          }
+          var catCountEl = document.getElementById('artCatCount');
+          if (catCountEl) catCountEl.textContent = '📂 ' + Object.keys(cats).length + ' 个分类';
+          // URL 参数 ?cat= 自动选中分类（从文章页分类 chips 跳转过来）
+          var autoCat = PAGE_PARAMS.get('cat');
+          if (autoCat) {
+            var targetBtn = null;
+            catBar.querySelectorAll('.art-cat').forEach(function(b){ if (b.dataset.cat === autoCat) targetBtn = b; });
+            if (targetBtn) {
+              targetBtn.removeAttribute('data-hidden');
+              targetBtn.click();
+            }
+          }
           render();
         })
         .catch(function(err){
-          document.getElementById('artList').innerHTML = '<div class="art-empty">文章加载失败，请从首页进入</div>';
-          console.error(err);
+          console.error('文章加载失败:', err);
+          document.getElementById('artList').innerHTML =
+            '<div class="art-empty">' +
+              '<div style="font-size:40px;margin-bottom:12px;">📭</div>' +
+              '<div style="margin-bottom:8px;">文章加载失败</div>' +
+              '<div style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">' + (err && err.message ? err.message : '网络异常') + '</div>' +
+              '<button onclick="loadArticles()" style="padding:10px 24px;background:var(--primary);color:#fff;border:none;border-radius:20px;font-size:14px;cursor:pointer;font-weight:500;">🔄 重新加载</button>' +
+            '</div>';
         });
     }
 
@@ -133,6 +213,26 @@
 
       document.getElementById('artList').innerHTML = '';
       renderPage();
+
+      // 深度搜索按钮显隐：标题/摘要搜索结果少于 3 篇且未深度搜索过时显示
+      var deepBtn = document.getElementById('deepSearchBtn');
+      if (deepBtn) {
+        if (q && FILTERED.length < 3 && !deepSearched) {
+          deepBtn.style.display = 'inline-block';
+        } else {
+          deepBtn.style.display = 'none';
+        }
+      }
+      // 结果计数
+      var countEl = document.getElementById('artResultCount');
+      if (countEl) {
+        if (q) {
+          countEl.textContent = '标题/摘要搜索找到 ' + FILTERED.length + ' 篇' + (FILTERED.length < 3 && !deepSearched ? '，可尝试深度搜索正文' : '');
+          countEl.style.display = 'block';
+        } else {
+          countEl.style.display = 'none';
+        }
+      }
     }
 
     function renderPage() {
@@ -166,17 +266,90 @@
       }
     }
 
+    // 深度搜索：异步分批加载文章正文 HTML，提取纯文本后在正文中搜索关键词
+    function deepSearch(query) {
+      if (!query || !ALL_ARTICLES.length || deepSearchLoading) return;
+      deepSearchLoading = true;
+      var btn = document.getElementById('deepSearchBtn');
+      if (btn) { btn.textContent = '🔍 搜索中...'; btn.disabled = true; }
+
+      var pending = ALL_ARTICLES.filter(function(a){ return !deepSearchCache.hasOwnProperty(a.slug); });
+      var loaded = 0;
+
+      // 分批加载，每批 5 篇，避免一次性发起过多请求
+      function loadBatch(items) {
+        if (!items.length) {
+          // 全部加载完成，执行搜索
+          deepSearched = true;
+          deepSearchLoading = false;
+          doDeepSearch(query);
+          return;
+        }
+        var batch = items.slice(0, 5);
+        Promise.all(batch.map(function(a){
+          return fetch('articles/' + a.slug + '.html')
+            .then(function(r){ return r.text(); })
+            .then(function(html){
+              // 去掉 HTML 标签，得到纯文本用于搜索
+              var text = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+              deepSearchCache[a.slug] = text;
+            })
+            .catch(function(){ deepSearchCache[a.slug] = ''; });
+        })).then(function(){
+          loaded += batch.length;
+          if (btn) btn.textContent = '🔍 搜索中... (' + loaded + '/' + pending.length + ')';
+          loadBatch(items.slice(5));
+        });
+      }
+      loadBatch(pending);
+    }
+
+    function doDeepSearch(query) {
+      var q = query.toLowerCase();
+      var results = ALL_ARTICLES.filter(function(a){
+        var text = deepSearchCache[a.slug] || '';
+        return text.toLowerCase().indexOf(q) >= 0 ||
+               (a.title || '').toLowerCase().indexOf(q) >= 0 ||
+               (a.summary || '').toLowerCase().indexOf(q) >= 0;
+      });
+
+      FILTERED = results.slice();
+      // 排序：与普通搜索保持一致，长文章优先
+      FILTERED.sort(function(a,b){ return b.words - a.words; });
+      CURRENT_PAGE = 0;
+
+      var list = document.getElementById('artList');
+      list.innerHTML = '';
+      renderPage();
+
+      var btn = document.getElementById('deepSearchBtn');
+      if (btn) { btn.style.display = 'none'; btn.disabled = false; btn.textContent = '🔍 深度搜索正文'; }
+
+      var countEl = document.getElementById('artResultCount');
+      if (countEl) {
+        countEl.textContent = '🔍 全文搜索找到 ' + results.length + ' 篇';
+        countEl.style.display = 'block';
+      }
+    }
+
     // 搜索防抖
     var searchTimer = null;
     document.getElementById('artSearchInput').addEventListener('input', function(){
       clearTimeout(searchTimer);
+      // 用户输入新关键词时重置深度搜索状态，回到普通标题/摘要搜索
+      deepSearched = false;
       searchTimer = setTimeout(render, 300);
+    });
+
+    // 深度搜索正文按钮点击事件
+    document.getElementById('deepSearchBtn')?.addEventListener('click', function(){
+      var q = document.getElementById('artSearchInput').value.trim();
+      if (q) deepSearch(q);
     });
 
     loadArticles();
     // URL 参数 ?q= 自动搜索
-    var params = new URLSearchParams(location.search);
-    var autoQ = params.get('q');
+    var autoQ = PAGE_PARAMS.get('q');
     if (autoQ) {
       document.getElementById('artSearchInput').value = autoQ;
       setTimeout(render, 200);

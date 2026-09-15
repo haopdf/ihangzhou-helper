@@ -52,8 +52,6 @@
     })();
   </script>
 
-  <!-- 当前区县特色卡片 -->
-  <div class="district-info" id="districtInfo"></div>
 
   <!-- 频道内容 -->
   <div class="page active" id="pageChannel">
@@ -226,19 +224,11 @@
         document.getElementById('channelTitle').textContent = category.name + ' · 全部服务';
         document.getElementById('channelCount').textContent = '共 ' + category.items.length + ' 项';
 
-        // 渲染服务网格
+        // 渲染服务网格：统一用 div.sitem（不用 a 标签），点击由 app.js #serviceGrid click handler 处理
+        // data-url 留空，强制走 handleClick 的 else 分支弹 modal（即使 item 有 url）
+        // modal 里会显示 detail 和"前往"按钮（app.js renderItemModal 自动处理）
         var grid = document.getElementById('serviceGrid');
         grid.innerHTML = category.items.map(function (item) {
-          if (item.url) {
-            return '<a class="sitem" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
-              '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
-              '<div class="sinfo">' +
-              '<div class="sname">' + item.name + '</div>' +
-              '<div class="sdesc">' + item.desc + '</div>' +
-              '</div>' +
-              '<div class="sarrow">›</div>' +
-              '</a>';
-          }
           return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="">' +
             '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
             '<div class="sinfo">' +

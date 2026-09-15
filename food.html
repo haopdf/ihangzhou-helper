@@ -52,8 +52,6 @@
     })();
   </script>
 
-  <!-- 当前区县特色卡片 -->
-  <div class="district-info" id="districtInfo"></div>
 
   <!-- 频道内容 -->
   <div class="page active" id="pageChannel">
@@ -223,12 +221,59 @@
         fetchRelatedArticles(chips, category.name);
 
         // 渲染标题与数量
-        document.getElementById('channelTitle').textContent = category.name + ' · 全部服务';
-        document.getElementById('channelCount').textContent = '共 ' + category.items.length + ' 项';
+        // 支持 ?city= 区县过滤：item.districts 包含 cityId 才显示
+        var params = new URLSearchParams(location.search);
+        var cityId = params.get('city') || '';
+        var cityObj = null;
+        if (cityId && window.DISTRICTS) {
+          cityObj = window.DISTRICTS.find(function (d) { return d.id === cityId; });
+        }
+        // 兜底推断 districts：item.districts 不存在时，从 detail/name 文本推断
+        function inferDistricts(item) {
+          if (Array.isArray(item.districts)) return item.districts;
+          var d = (item.detail || '') + ' ' + (item.name || '') + ' ' + (item.desc || '');
+          var ds = [];
+          if (/楼外楼|孤山路|岳王庙|西湖/.test(d)) ds.push('xihu');
+          if (/知味观|仁和路|奎元馆|解放路|杭州酒家|延安路|河坊街|吴山/.test(d)) ds.push('shangcheng');
+          if (/拱宸桥|运河|小河/.test(d)) ds.push('gongshu');
+          if (/滨江|网易|阿里/.test(d)) ds.push('binjiang');
+          if (/萧山/.test(d)) ds.push('xiaoshan');
+          if (/余杭|良渚|径山|梦想小镇/.test(d)) ds.push('yuhang');
+          if (/临平/.test(d)) ds.push('linping');
+          if (/下沙/.test(d)) ds.push('qiantang');
+          if (/富阳|富春/.test(d)) ds.push('fuyang');
+          if (/临安|天目|青山湖/.test(d)) ds.push('linan');
+          if (/桐庐/.test(d)) ds.push('tonglu');
+          if (/千岛湖|淳安/.test(d)) ds.push('chunan');
+          if (/建德|新安江|严州/.test(d)) ds.push('jiande');
+          if (ds.length === 0) ds = ['hangzhou'];
+          ds.push('hangzhou');
+          return ds;
+        }
+        var filteredItems = cityId ?
+          category.items.filter(function (item) {
+            return inferDistricts(item).indexOf(cityId) >= 0;
+          }) :
+          category.items;
+        // 标题前缀：切了区县显示区县名
+        var cityPrefix = cityObj ? cityObj.full + ' · ' : '';
+        document.getElementById('channelTitle').textContent = cityPrefix + category.name + ' · 美食推荐';
+        document.getElementById('channelCount').textContent = cityId ?
+          (filteredItems.length + ' 项匹配 ' + (cityObj ? cityObj.full : cityId)) :
+          ('共 ' + category.items.length + ' 项');
+
+        // 切了区县但无数据时的提示
+        if (cityId && filteredItems.length === 0) {
+          document.getElementById('serviceGrid').innerHTML =
+            '<div style="grid-column:1/-1;text-align:center;padding:40px 16px;color:var(--text-muted);font-size:14px;">' +
+            '本区暂无标记美食，<a href="food.html" style="color:var(--primary);">查看全市美食 →</a>' +
+            '</div>';
+          return;
+        }
 
         // 渲染服务网格
         var grid = document.getElementById('serviceGrid');
-        grid.innerHTML = category.items.map(function (item) {
+        grid.innerHTML = filteredItems.map(function (item) {
           if (item.url) {
             return '<a class="sitem" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
               '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
@@ -281,11 +326,79 @@
         }
       }
 
-      // 初始化
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', renderChannel);
-      } else {
+      // 同步顶部区县名与 URL ?city= 参数
+      function syncCityName() {
+        var params = new URLSearchParams(location.search);
+        var cityId = params.get('city') || '';
+        // 无 city 参数时显示"杭州"（全市）
+        var el = document.getElementById('cityName');
+        if (!el) return;
+        if (!cityId) { el.textContent = '杭州'; return; }
+        if (!window.DISTRICTS) return;
+        var d = window.DISTRICTS.find(function (x) { return x.id === cityId; });
+        if (d) el.textContent = d.full;
+        // 标记当前选中项
+        document.querySelectorAll('#cityDropdown .city-dropdown-item').forEach(function (it) {
+          it.classList.toggle('active', it.getAttribute('data-id') === cityId);
+        });
+      }
+
+      // 切换区县：用 history.pushState 更新 URL，不刷新页面，只重新渲染
+      // 这样浏览器后退能逐步回到上一个区县，最终回到进入本页之前的状态
+      function switchCity(id) {
+        var newUrl = id === 'hangzhou' ? 'food.html' : 'food.html?city=' + id;
+        history.pushState({ city: id }, '', newUrl);
         renderChannel();
+        syncCityName();
+      }
+
+      // 覆盖 app.js 的区县跳转：在 food.html 上切换区县时不跳走，仅更新 URL 并重新渲染
+      function overrideCityDropdown() {
+        var box = document.getElementById('cityDropdown');
+        if (!box) return;
+        box.querySelectorAll('.city-dropdown-item').forEach(function (it) {
+          it.onclick = function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var id = this.getAttribute('data-id');
+            try { localStorage.setItem('ihz_city', id); } catch (ex) {}
+            box.classList.remove('show');
+            switchCity(id);
+          };
+        });
+      }
+
+      // 浏览器后退/前进时重新渲染（与 pushState 配合）
+      window.addEventListener('popstate', function () {
+        renderChannel();
+        syncCityName();
+      });
+
+      // 顶部"‹"返回按钮：用 history.back()，与浏览器后退行为一致
+      function overrideBackButton() {
+        var btn = document.querySelector('.topbar-back');
+        if (!btn) return;
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (window.history.length > 1) {
+            window.history.back();
+          } else {
+            window.location.href = 'index.html';
+          }
+        });
+      }
+
+      // 初始化
+      function initPage() {
+        renderChannel();
+        syncCityName();
+        overrideCityDropdown();
+        overrideBackButton();
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPage);
+      } else {
+        initPage();
       }
     })();
   </script>

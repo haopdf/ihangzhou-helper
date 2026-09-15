@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>杭州地点详情 · iHangzhou</title>
+  <meta name="description" content="杭州地点详情，景点、美食、路线、街区全攻略。">
+  <meta name="keywords" content="杭州,杭州地点,杭州景点,杭州美食,iHangzhou">
+  <meta name="theme-color" content="#0ea5e9">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="iHangzhou 杭州生活助手">
+  <link rel="canonical" href="https://www.ihangzhou.net/place.html">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/style.css?v=20260927a">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+  <style>
+    .place-hero { position: relative; height: 220px; overflow: hidden; background: #0ea5e9; }
+    .place-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .place-hero-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; background: linear-gradient(transparent, rgba(0,0,0,0.75)); color: #fff; }
+    .place-hero-overlay h1 { font-size: 22px; font-weight: 700; margin: 0 0 4px; }
+    .place-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .place-tag { font-size: 11px; background: rgba(255,255,255,0.25); padding: 3px 10px; border-radius: 12px; font-weight: 500; }
+    .place-meta { padding: 14px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border); }
+    .place-meta-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-size: 13px; color: var(--text-secondary); }
+    .place-meta-row .mi { font-size: 16px; width: 20px; text-align: center; }
+    .place-meta-row strong { color: var(--text); font-weight: 600; }
+    .place-summary { padding: 16px; background: var(--primary); color: #fff; }
+    .place-summary p { font-size: 14px; line-height: 1.7; margin: 0; }
+    .place-content { padding: 16px; }
+    .place-content h2 { font-size: 17px; font-weight: 700; margin: 16px 0 10px; color: var(--text); border-left: 3px solid var(--primary); padding-left: 8px; }
+    .place-content p { font-size: 14px; line-height: 1.85; color: var(--text-secondary); margin-bottom: 12px; }
+    .place-tips { margin: 16px; padding: 14px; background: var(--bg-alt); border-radius: 10px; border-left: 3px solid var(--primary); }
+    .place-tips h3 { font-size: 14px; font-weight: 600; color: var(--primary); margin: 0 0 6px; }
+    .place-tips p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+    .place-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 16px; }
+    .place-action { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; color: var(--text); text-decoration: none; font-size: 13px; font-weight: 500; }
+    .place-action:active { transform: scale(0.97); }
+    .place-action.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .related-section { padding: 16px; border-top: 8px solid var(--bg-alt); }
+    .related-section h2 { font-size: 16px; font-weight: 700; margin: 0 0 12px; }
+    .related-list { display: grid; gap: 10px; }
+    .related-item { display: flex; gap: 10px; padding: 10px; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 10px; text-decoration: none; color: inherit; }
+    .related-item img { width: 70px; height: 56px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
+    .related-item-info { flex: 1; min-width: 0; }
+    .related-item-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+    .related-item-summary { font-size: 12px; color: var(--text-muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .place-loading { text-align: center; padding: 80px 16px; color: var(--text-muted); }
+    .place-error { text-align: center; padding: 60px 16px; }
+    .place-error h1 { font-size: 20px; color: var(--text); margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" class="topbar-back" style="color:#fff;text-decoration:none;font-size:20px;padding: 4px 16px;">‹</a>
+    <div class="topbar-city">
+      <span>杭州地点</span><span class="city-arrow">▼</span>
+    </div>
+    <div class="topbar-search" style="flex:1;"><input type="text" id="placeSearchInput" placeholder="搜索地点..." autocomplete="off"></div>
+    <button class="topbar-elderly" onclick="toggleElderlyMode()" title="老人模式">👵 老人</button>
+    <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
+  </header>
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('ihz-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        var b = document.getElementById('themeBtn');
+        if (b) b.textContent = t === 'dark' ? '☀️' : '🌙';
+      } catch (e) {}
+      try {
+        var el = localStorage.getItem('ihz_elderly') === 'true';
+        document.documentElement.setAttribute('data-elderly', el ? 'true' : 'false');
+      } catch (e) {}
+    })();
+  </script>
+
+  <div id="placeContainer">
+    <div class="place-loading">正在加载地点详情…</div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a class="bnav-item" href="index.html"><span class="bicon">🏠</span><span>首页</span></a>
+    <a class="bnav-item" href="index.html#discover"><span class="bicon">🧭</span><span>发现</span></a>
+    <a class="bnav-item" href="index.html#tools"><span class="bicon">🛠️</span><span>工具</span></a>
+    <a class="bnav-item" href="district.html"><span class="bicon">🗺️</span><span>地图</span></a>
+    <a class="bnav-item" href="index.html#me"><span class="bicon">👤</span><span>我的</span></a>
+  </nav>
+
+  <script src="js/app.js?v=20260927a"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      function getPlaceId() {
+        var m = window.location.pathname.match(/\/place\/([^/]+?)(?:\.html)?$/);
+        if (m) return decodeURIComponent(m[1]);
+        var u = new URL(window.location.href);
+        return u.searchParams.get('id') || '';
+      }
+
+      function renderPlace(data) {
+        var p = data.place;
+        if (!p) { renderError('地点数据异常'); return; }
+
+        document.title = p.seo_title || (p.name + ' · iHangzhou 杭州生活助手');
+        var metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc && p.seo_desc) metaDesc.setAttribute('content', p.seo_desc);
+        var canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) canonical.setAttribute('href', 'https://www.ihangzhou.net/place/' + p.id + '.html');
+
+        var tagsHtml = (p.tags || []).map(function (t) {
+          return '<span class="place-tag">' + t + '</span>';
+        }).join('');
+
+        var metaHtml = '';
+        if (p.district_name) metaHtml += '<div class="place-meta-row"><span class="mi">📍</span><span>区县：<strong>' + p.district_name + '</strong></span></div>';
+        if (p.address) metaHtml += '<div class="place-meta-row"><span class="mi">🗺️</span><span>' + p.address + '</span></div>';
+        if (p.open_time) metaHtml += '<div class="place-meta-row"><span class="mi">🕐</span><span>开放：<strong>' + p.open_time + '</strong></span></div>';
+        if (p.ticket) metaHtml += '<div class="place-meta-row"><span class="mi">🎫</span><span>门票：<strong>' + p.ticket + '</strong></span></div>';
+        if (p.best_season) metaHtml += '<div class="place-meta-row"><span class="mi">🌸</span><span>最佳季节：<strong>' + p.best_season + '</strong></span></div>';
+        if (p.recommend_level) {
+          var stars = '⭐'.repeat(p.recommend_level);
+          metaHtml += '<div class="place-meta-row"><span class="mi">👍</span><span>推荐指数：<strong>' + stars + '</strong></span></div>';
+        }
+
+        var contentHtml = '';
+        if (p.content) {
+          var paras = p.content.split(/\n\n+/);
+          contentHtml = paras.map(function (para) {
+            return '<p>' + para + '</p>';
+          }).join('');
+        }
+
+        var tipsHtml = '';
+        if (p.tips) {
+          tipsHtml = '<div class="place-tips"><h3>💡 实用贴士</h3><p>' + p.tips + '</p></div>';
+        }
+
+        var relatedHtml = '';
+        if (data.related && data.related.length) {
+          relatedHtml = '<div class="related-section"><h2>相关杭州地点</h2><div class="related-list">' +
+            data.related.map(function (r) {
+              return '<a class="related-item" href="/place/' + r.id + '.html">' +
+                '<img src="' + (r.cover || '') + '" alt="' + r.name + '" loading="lazy">' +
+                '<div class="related-item-info">' +
+                '<div class="related-item-name">' + r.name + '</div>' +
+                '<div class="related-item-summary">' + (r.summary || '') + '</div>' +
+                '</div></a>';
+            }).join('') +
+            '</div></div>';
+        }
+
+        var container = document.getElementById('placeContainer');
+        container.innerHTML =
+          '<div class="place-hero">' +
+            '<img src="' + (p.cover || '') + '" alt="' + p.name + '" onerror="this.style.display=\'none\'">' +
+            '<div class="place-hero-overlay">' +
+              '<h1>' + p.name + '</h1>' +
+              '<div class="place-tags">' + tagsHtml + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="place-meta">' + metaHtml + '</div>' +
+          '<div class="place-summary"><p>' + (p.summary || '') + '</p></div>' +
+          '<div class="place-content">' +
+            '<h2>详细介绍</h2>' +
+            contentHtml +
+          '</div>' +
+          tipsHtml +
+          '<div class="place-actions">' +
+            '<a class="place-action primary" href="javascript:void(0)" onclick="toggleFavoritePlace(\'' + p.id + '\',\'' + p.name.replace(/'/g, '\\\'') + '\')">❤️ 收藏地点</a>' +
+            '<a class="place-action" href="index.html#discover">← 返回发现</a>' +
+          '</div>' +
+          relatedHtml;
+      }
+
+      function renderError(msg) {
+        document.getElementById('placeContainer').innerHTML =
+          '<div class="place-error"><h1>⚠️ ' + (msg || '地点未找到') + '</h1>' +
+          '<p style="color:var(--text-muted);font-size:14px;margin-top:8px;">可能该地点暂未收录。</p>' +
+          '<a href="index.html" style="display:inline-block;margin-top:16px;padding:10px 20px;background:var(--primary);color:#fff;border-radius:20px;text-decoration:none;font-size:14px;">← 返回首页</a>' +
+          '</div>';
+      }
+
+      function loadPlace(id) {
+        if (!id) { renderError('未指定地点'); return; }
+        fetch('/api/places?id=' + encodeURIComponent(id))
+          .then(function (r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+          })
+          .then(function (data) { renderPlace(data); })
+          .catch(function (e) { renderError('加载失败'); });
+      }
+
+      window.toggleFavoritePlace = function (id, name) {
+        try {
+          var favs = JSON.parse(localStorage.getItem('ihz_place_favs') || '[]');
+          var idx = favs.indexOf(id);
+          if (idx >= 0) {
+            favs.splice(idx, 1);
+            showToast('已取消收藏');
+          } else {
+            favs.push(id);
+            showToast('已收藏：' + name);
+          }
+          localStorage.setItem('ihz_place_favs', JSON.stringify(favs));
+        } catch (e) { showToast('收藏失败，请稍后重试'); }
+      };
+
+      var placeId = getPlaceId();
+      loadPlace(placeId);
+    })();
+  </script>
+</body>
+</html>

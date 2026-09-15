@@ -1,238 +1,136 @@
 # iHangzhou · 杭州生活助手
 
-> 杭州人的数字生活工具箱 —— 政务办事、交通出行、民生服务一站导航
+> 🌐 官方域名：**www.ihangzhou.net**
 >
-> 🌐 官方域名：**ihz.inanyang.com**
+> 📱 公众号：iHangzhou（本仓库同时作为公众号自动回复后台）
 
-纯静态站点，零后端依赖，支持 PWA 离线访问，可直接部署到任意静态托管平台。
+iHangzhou 是一个**双重身份**项目：
 
-## ✨ 功能特性
+1. **独立网站** —— 杭州人的数字生活工具箱 + 本地内容合集
+   - 工具入口：限行 / 天气 / 地铁 / 社保 / 公积金 / 摇号 / 油价 ……
+   - 内容栏目：i杭州玩（旅游） / i杭州吃（美食） / i杭州人（杭州故事 160+ 篇本地深度文章）
 
-### 核心功能
-- **快捷工具**：限行查询、社保、公积金、公交地铁、天气、油价、快递、医院挂号
-- **政务办事**：身份证、居住证、落户、出入境、社保、公积金、市民卡、健康证、发票抽奖、补贴汇总
-- **交通出行**：限行、违章、公交、地铁、公共自行车、火车票、机票、停车、春运攻略
-- **民生服务**：水电燃气缴费、宽带、医院挂号、疫苗、药店、快递、家政、电影、彩票
-- **教育就业**：中考高考、学区查询、学历认证、招聘信息、求职补贴、公考
-- **旅游休闲**：西湖、钱塘江大潮、灵隐寺、宋城、西溪湿地、千岛湖、龙井茶、露营、马拉松
-- **便民工具**：常用电话簿（一键复制）、邮政编码、个税/房贷/社保计算器、万年历、身份证校验、车牌归属查询
+2. **微信公众号后台** —— 关键词自动回复
+   - 28 个关键词覆盖：数字快捷 / 日常工具 / 场景推荐 / 资讯查询
+   - 未匹配消息转接微信 AI（transfer_biz_ai_ivr）
 
-### 用户体验
-- **热门搜索**：对标本地宝，提供热门关键词快捷标签
-- **全局搜索**：输入关键词快速定位服务
-- **PWA 支持**：可安装到手机桌面，支持离线访问
-- **暗色模式**：支持明暗主题切换，偏好本地存储
-- **响应式设计**：移动端优先，完美适配手机/平板/桌面
+## ✨ 核心功能
+
+### 网站端
+- **首页 3 栏目入口**：i杭州玩 / i杭州吃 / i杭州人（对齐"发现杭州美好生活"定位）
+- **8 个刚需快捷工具**：今日限行、天气预报、地铁时刻、违章查询、社保、公积金、今日油价、浙A摇号
+- **13 区县导航 + 区县特色卡片**
+- **全站搜索**：[articles.html](articles.html) 输入关键词即可在 160+ 篇文章中检索
+- **PWA 支持**：可安装到手机桌面，Service Worker 离线缓存
+- **暗色模式 + 老人模式**：明暗主题切换、老人模式（大字号高对比）
+- **响应式设计**：移动端优先，桌面端 max-width: 960px
+
+### 公众号端（[/api/wechat.js](api/wechat.js)）
+- **URL 验证 + 消息回调**：XML 解析、签名验证
+- **28 个关键字**（[/data/cms.json](data/cms.json) wechatKeywords）：
+  - 数字快捷：1 限行 / 2 天气 / 3 地铁 / 4 公积金 / 5 社保
+  - 日常工具：限行 / 天气 / 地铁 / 公积金 / 社保 / 摇号 / 居住证 / 消费券 / 落户
+  - 场景推荐：周末 / 下雨 / 拍照 / 亲子 / 夜景 / 赏花 / 古镇 / 寺庙 / 西湖 / 美食 / 博物馆
+  - 资讯查询：故事 / 区县 / 搜索
+- **欢迎语分组列出全部指令**（[wechat.js DEFAULT_WELCOME](api/wechat.js#L10)）
+- **帮助指令**：回复「帮助 / ? / ?」分组列出可用关键字
+- **未匹配兜底**：转接微信 AI（transfer_biz_ai_ivr）
+- **关键词数据**：Vercel Blob 独立存储 `wechat-keywords.json`，10s 缓存
 
 ## 📁 项目结构
 
 ```
 ihangzhou-helper/
-├── index.html          # 主页面（含 PWA 注册、SEO meta）
-├── manifest.json       # PWA 应用清单
-├── sw.js               # Service Worker（离线缓存）
-├── css/
-│   └── style.css       # 样式表（含暗色模式、响应式）
-├── js/
-│   └── app.js          # 交互逻辑（搜索、Tab、计算器、模态框等）
-├── data/
-│   └── services.json   # 服务数据配置（所有内容集中管理）
-├── assets/
-│   └── icons/          # 图标资源目录
-└── README.md           # 项目说明
+├── index.html              # 首页（工具入口 + 3 栏目导航）
+├── travel.html             # i杭州玩（西湖/古镇/赏花/寺庙/夜景 + 博物馆）
+├── food.html               # i杭州吃
+├── articles.html           # i杭州人（160+ 篇文章搜索 + 分类）
+├── museum.html             # 博物馆专题（从 travel.html tab 进入）
+├── district.html           # 13 区县
+├── channel.html            # 频道页（按分类聚合工具）
+├── banshi.html / traffic.html / coffee.html / ...  # 频道子页
+├── place.html              # 地点详情页（动态生成）
+├── articles/               # 160+ 篇本地文章（按系列分目录）
+│   └── index.json          # 文章索引（标题/分类/摘要/字数）
+├── api/                    # Vercel Serverless Functions
+│   ├── wechat.js           # 公众号回调 + 关键词匹配 + 菜单同步
+│   ├── content.js          # CMS 内容接口
+│   ├── chat.js             # AI 对话（DASHSCOPE_API_KEY）
+│   ├── districts.js        # 区县数据
+│   ├── places.js          # 地点数据
+│   ├── tools.js            # 工具数据
+│   ├── news.js             # 资讯
+│   ├── hospital.js         # 医院查询
+│   └── wx-jsapi.js         # 微信 JSAPI 签名
+├── data/                   # 内容数据源
+│   ├── cms.json            # 主 CMS（含 wechatKeywords/wechatMenu/channels 等）
+│   ├── places.json         # 景点数据
+│   ├── services.json       # 服务数据
+│   └── stats.json
+├── css/style.css
+├── js/app.js
+├── sw.js                   # Service Worker
+├── vercel.json             # 部署配置
+└── .env.local              # 环境变量（不入库）
 ```
 
 ## 🚀 本地预览
 
-### 方式一：直接打开
-
-双击 `index.html` 即可在浏览器中打开。
-
-> 注意：PWA Service Worker 需要 HTTP 环境，直接打开时 SW 不会注册，但其他功能正常。
-
-### 方式二：本地 HTTP 服务器（推荐）
-
 ```bash
 # Python 3
-cd ~/PycharmProjects/ihangzhou-helper
-python3 -m http.server 8080
+python -m http.server 8080
 
 # 或 Node.js
 npx serve .
-
-# 或 PHP
-php -S localhost:8080
 ```
 
-然后访问 http://localhost:8080
+访问 http://localhost:8080
 
-## 🌐 部署到 ihz.inanyang.com
+## 🌐 部署到 www.ihangzhou.net
 
-### 方案一：Vercel + 自定义域名（推荐）
+### Vercel + GitHub 自动部署（推荐）
 
-**最适合国内访问，免费且支持 HTTPS**
+1. Vercel 导入 GitHub 仓库 [haopdf/ihangzhou-helper](https://github.com/haopdf/ihangzhou-helper)
+2. Framework Preset：`Other` / Build Command：空 / Output：`.`
+3. 绑定自定义域名 `www.ihangzhou.net`（Cloudflare DNS）
+4. 配置环境变量（Vercel Dashboard → Settings → Environment Variables）：
+   - `WECHAT_TOKEN` —— 公众号签名 Token
+   - `WX_APPID` / `WX_SECRET` —— 公众号 AppID/Secret（菜单同步用）
+   - `DASHSCOPE_API_KEY` —— AI 对话 API Key
+   - `BLOB_READ_WRITE_TOKEN` —— Vercel Blob 读写令牌
+   - `CMS_ADMIN_PASSWORD` —— 管理后台密码
+5. `git push` 即自动部署
 
-1. 登录 [vercel.com](https://vercel.com)，用 GitHub 账号授权
-2. 点击「New Project」→ 导入仓库
-3. Framework Preset 选 `Other`，Build Command 留空，Output Directory 填 `.`
-4. 点击「Deploy」，获得 `https://ihangzhou-xxx.vercel.app`
-5. **绑定 ihz.inanyang.com 域名**：
-   - Vercel 控制台 → Settings → Domains
-   - 输入 `ihz.inanyang.com`，点击 Add
-   - 再添加 `www.ihz.inanyang.com`，设置为重定向到 `ihz.inanyang.com`
-   - 在域名服务商将 DNS 解析指向 Vercel：
-     ```
-     A    @     76.76.21.21
-     CNAME www   cname.vercel-dns.com
-     ```
-   - 等待 DNS 生效（通常几分钟到几小时），Vercel 自动签发 SSL 证书
+> ⚠️ Vercel CLI 在 Windows 上可能存在部署不完整的 bug，建议统一用 `git push` 触发自动部署。
 
-### 方案二：Cloudflare Pages + 自定义域名
+## 🔑 公众号配置要点
 
-1. 登录 [pages.cloudflare.com](https://pages.cloudflare.com)
-2. 「Create a project」→ 「Connect to Git」→ 选择仓库
-3. Build command 留空，Build output directory 填 `/`
-4. 部署后获得 `https://ihangzhou.pages.dev`
-5. **绑定 ihz.inanyang.com 域名**：
-   - Cloudflare Pages 控制台 → Custom domains
-   - 点击「Set up a custom domain」
-   - 输入 `ihz.inanyang.com`
-   - 如果域名已在 Cloudflare 管理，自动配置 DNS
-   - 如果不在 Cloudflare，添加 CNAME 记录：`CNAME @ ihangzhou.pages.dev`
+- **服务器配置**：URL 填 `https://www.ihangzhou.net/api/wechat`，Token 与环境变量 `WECHAT_TOKEN` 一致
+- **消息推送**：启用后公众号后台自定义菜单失效，需走 API 管理（[wechatMenu](data/cms.json)）
+- **菜单同步**：调用 `/api/wechat?action=syncMenu` 同步 `wechatMenu` 配置
+- **关键词数据**：默认读 `cms.json#wechatKeywords`；若 Blob 有 `wechat-keywords.json` 则优先读 Blob
+- **菜单接口 48001**：未认证订阅号无菜单 API 权限，需后台手动配置
 
-### 方案三：GitHub Pages + 自定义域名
+## 📝 内容编辑
 
-1. 登录 [GitHub](https://github.com)，新建仓库
-2. 上传代码：
-   ```bash
-   cd ~/PycharmProjects/ihangzhou-helper
-   git init
-   git add .
-   git commit -m "init: iHangzhou 杭州生活助手"
-   git remote add origin https://github.com/你的用户名/ihangzhou.git
-   git branch -M main
-   git push -u origin main
-   ```
-3. 进入仓库 → 「Settings」→ 「Pages」
-4. Source 选择 `Deploy from a branch`，Branch 选择 `main` / `(root)`
-5. **绑定 ihz.inanyang.com 域名**：
-   - 在仓库根目录创建 `CNAME` 文件（无扩展名），内容为 `ihz.inanyang.com`
-   - Settings → Pages → Custom domain 填入 `ihz.inanyang.com`
-   - 勾选「Enforce HTTPS」
-   - 在域名服务商添加解析：
-     ```
-     A    @     185.199.108.153
-     A    @     185.199.109.153
-     A    @     185.199.110.153
-     A    @     185.199.111.153
-     CNAME www   你的用户名.github.io
-     ```
+### 新增文章
+1. 在 `articles/` 对应系列目录创建 `*.html`
+2. 在 [articles/index.json](articles/index.json) 增加索引项：`{ slug, title, cat, summary, words }`
 
-### 方案四：Gitee Pages + 自定义域名
+### 修改景点数据
+直接编辑 [data/places.json](data/places.json)，运行 `node gen-places.js` 重新生成 place 详情页
 
-1. 登录 [Gitee](https://gitee.com)，新建仓库
-2. 上传代码：
-   ```bash
-   git remote add origin https://gitee.com/你的用户名/ihangzhou.git
-   git push -u origin master
-   ```
-3. 仓库 → 「服务」→ 「Gitee Pages」→ 启动
-4. **绑定 ihz.inanyang.com 域名**（需 Gitee Pages Pro）：
-   - Gitee Pages 设置页 → 自定义域名
-   - 填入 `ihz.inanyang.com`
-   - 在域名服务商添加 CNAME：`CNAME @ 你的用户名.gitee.io`
+### 修改公众号关键字
+直接编辑 [data/cms.json](data/cms.json#L4686) 的 `wechatKeywords` 数组，部署后即生效
 
-### 方案五：对象存储 + CDN（适合高流量）
+## 🛠 开发约定
 
-**阿里云 OSS + CDN 部署**
+- **HTML/JS/CSS/SW** 文件 `Cache-Control: max-age=0, must-revalidate`，避免 CDN 缓存
+- **静态资源版本号**：`?v=YYYYMMDDa` 形式，每次改动递增
+- **Service Worker 版本**：静态资源更新时同步递增 sw.js 中的版本号
+- **外链**：使用原生 `<a href="url" target="_blank">` 标签，避免移动浏览器弹窗拦截
+- **主域名**：`www.ihangzhou.net`（canonical/og:url/al:web:url 同步）
 
-1. 创建 OSS Bucket，读写权限设为「公共读」
-2. 上传所有静态文件到 Bucket 根目录
-3. Bucket → 基础设置 → 静态页面 → 默认首页设为 `index.html`
-4. 绑定自定义域名 `ihz.inanyang.com`：
-   - OSS → 传输管理 → 域名管理 → 绑定域名
-   - 开启 CDN 加速
-   - 在域名服务商添加 CNAME：`CNAME @ 你的Bucket的CDN域名`
-5. 配置 HTTPS：在 CDN 控制台申请免费 SSL 证书
+## 📜 License
 
-## 📱 PWA 安装
-
-iHangzhou 支持作为 PWA 应用安装到手机桌面：
-
-1. 用手机浏览器访问 `https://ihz.inanyang.com`
-2. **iOS Safari**：点击分享按钮 → 「添加到主屏幕」
-3. **Android Chrome**：点击菜单 → 「添加到主屏幕」或「安装应用」
-4. 安装后可像原生 App 一样全屏运行，支持离线访问核心页面
-
-### PWA 技术细节
-
-- `manifest.json`：应用名称、图标、主题色等元数据
-- `sw.js`：Service Worker，负责静态资源缓存和离线访问
-- 首次访问时自动缓存核心资源（HTML/CSS/JS）
-- 再次访问时优先使用缓存，后台静默更新
-- 离线状态下仍可浏览已缓存的页面
-
-## 🔧 内容修改
-
-所有服务数据集中在 `js/app.js` 的 `DATA` 对象中，修改后重新部署即可生效。
-
-### 添加新服务
-
-在 `js/app.js` 中对应分类的 `items` 数组添加：
-
-```javascript
-{ name: "服务名称", desc: "简短描述", url: "https://官方网址" }
-```
-
-### 添加内置工具
-
-1. 在分类 `items` 中设置 `"action": "工具标识"`
-2. 在 `handleAction` 函数中添加对应 case
-3. 实现对应的展示函数（如 `showXxx()`）
-
-### 修改热门搜索词
-
-编辑 `js/app.js` 中 `DATA.hotKeywords` 数组。
-
-## 📱 公众号集成
-
-将 `https://ihz.inanyang.com` 配置到公众号菜单：
-
-1. 登录 [微信公众平台](https://mp.weixin.qq.com)
-2. 「内容与互动」→ 「自定义菜单」
-3. 添加菜单，菜单内容选「跳转网页」，填入 `https://ihz.inanyang.com`
-4. 手机端微信打开即可使用（页面已做移动端适配）
-
-> 建议在公众号文章中嵌入网址链接，引导用户「在浏览器中打开」以获得最佳体验（含 PWA 安装功能）。
-
-## 📊 访问统计（可选）
-
-添加免费统计代码：
-
-- [百度统计](https://tongji.baidu.com)：国内访问数据准确
-- [Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/)：免费、无cookie、隐私友好
-- [Umami](https://umami.is/)：可自部署的开源统计
-
-在 `index.html` 的 `</head>` 前插入统计代码即可。
-
-## 🔄 更新部署
-
-代码推送到 Git 仓库后：
-- **Vercel / Cloudflare Pages**：自动触发部署，无需操作
-- **GitHub Pages**：自动部署，1-2 分钟生效
-- **Gitee Pages**：需手动点击「更新」
-- **对象存储**：需手动上传更新后的文件
-
-> 更新部署后，PWA 会在用户下次访问时自动更新缓存（Service Worker 版本号递增触发更新）。
-
-## ⚠️ 免责声明
-
-- 本项目为公益导航平台，所有外部服务链接均指向官方渠道
-- 限行规则、油价、天气等数据仅供参考，实际以官方最新公告为准
-- 个税、房贷、社保计算器结果为估算值，不构成专业建议
-- 身份证号校验仅在本地进行格式验证，不会上传任何数据
-- 本项目不存储任何用户数据
-
-## 📄 License
-
-MIT License - 可自由使用、修改、分发。
+MIT
