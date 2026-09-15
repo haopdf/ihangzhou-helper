@@ -1,0 +1,48 @@
+# 微信公众号草稿选题定时同步
+# 每天北京时间 9:00 (UTC 1:00) 自动运行
+# 拉取草稿箱标题/摘要（不拉全文），保存为 JSON 提交回仓库
+# 前端通过 articles/topics.json 或 /api/wechat-topics 读取
+
+name: WeChat Topics Sync
+
+on:
+  schedule:
+    - cron: '0 1 * * *'   # UTC 1:00 = 北京时间 9:00
+  workflow_dispatch:        # 支持手动触发
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wechat-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch WeChat draft topics
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          SITE_URL: https://www.ihangzhou.net
+        run: node tools/wechat-sync-action.js
+
+      - name: Commit topics if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- articles/topics.json; then
+            echo "选题无变化，跳过提交"
+          else
+            git add articles/topics.json
+            git commit -m "chore: 同步公众号草稿选题 [skip ci]"
+            git push
+          fi
