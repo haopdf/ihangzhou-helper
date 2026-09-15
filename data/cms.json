@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "lastModified": "2026-09-11T07:53:27.162Z",
+  "lastModified": "2026-09-15T07:30:00.000Z",
   "hotKeywords": [
     "限行",
     "社保",
@@ -4868,6 +4868,67 @@
       ],
       "type": "text",
       "reply": "🧾 杭州消费有奖\n\n支付宝/云闪付搜索「消费有奖」录入发票即可参与抽奖\n\n详情：https://www.ihangzhou.net/"
+    },
+    {
+      "keyword": "免费",
+      "aliases": [
+        "免费",
+        "免费资源",
+        "免费福利",
+        "free"
+      ],
+      "type": "news",
+      "title": "杭州免费资源大全！WiFi、喝水、充电、停车…收藏这篇就够了！",
+      "desc": "免费WiFi、免费喝水、免费充电、免费停车、免费公厕、免费雨伞、免费药品…90%的人都不知道的杭州免费资源！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州免费资源大全-WiFi-喝水-充电-停车-公厕.html"
+    },
+    {
+      "keyword": "薅羊毛",
+      "aliases": [
+        "薅羊毛",
+        "省钱",
+        "消费券",
+        "优惠",
+        "haoyangmao"
+      ],
+      "type": "news",
+      "title": "杭州薅羊毛省钱攻略！消费券、奶茶、积分、学生福利…一年省几千块！",
+      "desc": "政府消费券、奶茶免单、商场积分、学生福利、文旅优惠、银行活动…杭州薅羊毛全攻略，收藏这篇就够了！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州薅羊毛省钱攻略-消费券-奶茶-积分-学生福利.html"
+    },
+    {
+      "keyword": "搞钱",
+      "aliases": [
+        "搞钱",
+        "副业",
+        "赚钱",
+        "兼职",
+        "gaoqian",
+        "fuye"
+      ],
+      "type": "news",
+      "title": "杭州搞钱副业指南！8大类20+真实副业，附平台入口和真实收益！",
+      "desc": "大厂众包、本地探店、夜市摆摊、线上接单、AI副业、内容创作…8大类20+真实可做的副业，死工资之外的第二收入！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州搞钱副业指南-众包-探店-摆摊-AI副业.html"
+    },
+    {
+      "keyword": "健身",
+      "aliases": [
+        "健身",
+        "运动",
+        "骑行",
+        "跑步",
+        "登山",
+        "jianshen"
+      ],
+      "type": "news",
+      "title": "杭州免费健身运动指南！骑行、跑步、登山、公园…不用办卡就能练！",
+      "desc": "10条骑行绿道、5个免费公园、3条登山步道、社区健身路径、居家健身…杭州免费健身地图，收藏这篇就够了！",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州免费健身运动指南-骑行-跑步-登山-公园.html"
     }
   ],
   "wechatWelcome": {
