@@ -100,26 +100,6 @@
     "done": false
   },
   {
-    "mediaId": "orZdfS8uWtatTZdyGpIsVjs9jlN0Vjf9LEJnp64KT3IlDBzf5z2EKRdbwh3L_0QF",
-    "title": "杭州西湖陪拍师火了：有人一天赚1800，节假日收入直接翻倍，会拍照就能赚钱？",
-    "digest": "杭州西湖边，一群年轻女孩做起了\"陪拍师\"。浙传大四学生小高，做陪拍两年多，清明假期首日从早8点拍到晚8点，四单无缝衔接，赚了1800多。资深陪拍师月月，周末一天赚一千多，节假日收入翻倍。这个新职业，正在杭州悄悄火起来。",
-    "updateTime": 1789439184,
-    "updateTimeStr": "2026-09-15",
-    "isNew": false,
-    "synced": true,
-    "done": false
-  },
-  {
-    "mediaId": "orZdfS8uWtatTZdyGpIsVnh1l8M8ZG75IvB0wN1TnVu4-3eMe7rNg2ZCOpQUIMad",
-    "title": "杭州发钱了！社保补贴25%直接打进个人账户，这些人都能领",
-    "digest": "杭州重点群体社保补贴开放个人申领！补贴25%直接打进个人账户，无需企业代办，灵活就业人员也能领。看看你符合条件吗？",
-    "updateTime": 1789439120,
-    "updateTimeStr": "2026-09-15",
-    "isNew": false,
-    "synced": true,
-    "done": false
-  },
-  {
     "mediaId": "orZdfS8uWtatTZdyGpIsVtmBj1gow5RYgC6K5hc1HxtLtIoFcHVK_iTa24VP53pr",
     "title": "请2天假连休13天！2026杭州中秋国庆放假安排！附拼假攻略",
     "digest": "> 中秋3天不调休，国庆7天，中间请2天假连休13天！杭州人赶紧规划起来！ 🎉 **杭州人注意！2026年中秋国庆放假安排定了！** 今年的假期有点特别： - **中秋节**：9月25日（周五）至",
@@ -197,6 +177,26 @@
     "updateTimeStr": "2026-09-10",
     "isNew": false,
     "synced": true,
+    "done": false
+  },
+  {
+    "mediaId": "orZdfS8uWtatTZdyGpIsVmQswHJxN9G6i0Ii2UzQ6rbZI3z1T4y0kN-wlAUVV--Y",
+    "title": "90后杭州女生夜市摆摊做饭团，一晚卖200多个：摆摊虽然辛苦，但比上班自由比上班赚得多",
+    "digest": "90后女生，在杭州夜市摆摊做饭团，一晚上能卖200多个。她说，摆摊虽然辛苦，但比上班自由，比上班赚得多。她的故事，可能会给正在纠结\"要不要摆摊\"的你一些勇气。",
+    "updateTime": 1789043702,
+    "updateTimeStr": "2026-09-10",
+    "isNew": true,
+    "synced": false,
+    "done": false
+  },
+  {
+    "mediaId": "orZdfS8uWtatTZdyGpIsVozAUNFcjzxcIhrkQjbqFqxLCgtUG-B8ZKuEq98AVOnn",
+    "title": "杭州程序员不进大厂，一个人做AI独立开发者：一个人就是一家公司，比在大厂更自由更开心",
+    "digest": "程序员，没有去大厂，而是做了一名AI独立开发者，一个人开发AI产品，一个人运营，一个人赚钱。他说，一个人也可以做一家公司，而且比在大厂更自由，更开心。他的故事，可能会给正在纠结\"要不要去大厂\"的程序员一些启发。",
+    "updateTime": 1789043691,
+    "updateTimeStr": "2026-09-10",
+    "isNew": true,
+    "synced": false,
     "done": false
   }
 ]
