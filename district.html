@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -483,15 +483,29 @@
 </head>
 <body>
   <!-- 顶部栏 -->
-  <div class="topbar">
-    <div class="topbar-city" onclick="location.href='index.html'">
-      <span>←</span>
-    </div>
+  <header class="topbar" id="topbar">
+    <a href="index.html" class="topbar-logo" style="text-decoration:none;">
+      <span class="logo-icon">‹</span>
+      <span class="logo-text">13区县</span>
+    </a>
     <div class="topbar-search">
       <input type="text" placeholder="搜索杭州区县..." id="searchInput">
     </div>
-    <button class="topbar-elderly" onclick="toggleElderlyMode()" title="老人模式">👵 老人</button>
-    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+    <button class="topbar-settings" onclick="toggleSettings()" title="设置">⚙️</button>
+  </header>
+
+  <!-- 设置面板 -->
+  <div class="settings-overlay" id="settingsOverlay" onclick="toggleSettings()"></div>
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-title"><span>⚙️ 设置</span><button class="settings-close" onclick="toggleSettings()" aria-label="关闭">✕</button></div>
+    <div class="settings-item">
+      <span class="settings-label">🌙 暗色模式</span>
+      <label class="settings-switch"><input type="checkbox" id="darkToggle" onchange="setDarkMode(this.checked)"><span class="switch-slider"></span></label>
+    </div>
+    <div class="settings-item">
+      <span class="settings-label">👵 老人模式</span>
+      <label class="settings-switch"><input type="checkbox" id="elderlyToggle" onchange="setElderlyMode(this.checked)"><span class="switch-slider"></span></label>
+    </div>
   </div>
 
   <!-- 列表视图 -->

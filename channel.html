@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -18,17 +18,30 @@
 <body>
 
   <!-- 顶部栏 -->
-  <header class="topbar">
-    <a href="index.html" class="topbar-back" style="color:#fff;text-decoration:none;font-size:20px;padding: 4px 16px;">‹</a>
-    <div class="topbar-city">
-      <span>杭州</span><span class="city-arrow">▼</span>
-    </div>
+  <header class="topbar" id="topbar">
+    <a href="index.html" class="topbar-logo" style="text-decoration:none;">
+      <span class="logo-icon">‹</span>
+      <span class="logo-text">杭州频道</span>
+    </a>
     <div class="topbar-search">
       <input type="text" id="channelSearchInput" placeholder="在本频道搜索..." autocomplete="off">
     </div>
-    <button class="topbar-elderly" onclick="toggleElderlyMode()" title="老人模式">👵 老人</button>
-    <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
+    <button class="topbar-settings" onclick="toggleSettings()" title="设置">⚙️</button>
   </header>
+
+  <!-- 设置面板 -->
+  <div class="settings-overlay" id="settingsOverlay" onclick="toggleSettings()"></div>
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-title"><span>⚙️ 设置</span><button class="settings-close" onclick="toggleSettings()" aria-label="关闭">✕</button></div>
+    <div class="settings-item">
+      <span class="settings-label">🌙 暗色模式</span>
+      <label class="settings-switch"><input type="checkbox" id="darkToggle" onchange="setDarkMode(this.checked)"><span class="switch-slider"></span></label>
+    </div>
+    <div class="settings-item">
+      <span class="settings-label">👵 老人模式</span>
+      <label class="settings-switch"><input type="checkbox" id="elderlyToggle" onchange="setElderlyMode(this.checked)"><span class="switch-slider"></span></label>
+    </div>
+  </div>
 
   <script>
     // 主题 + 老人模式持久化

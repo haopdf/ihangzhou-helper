@@ -44,12 +44,28 @@
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <a href="../index.html" class="topbar-back" style="color:#fff;text-decoration:none;font-size:20px;padding:4px 8px;">‹</a>
-    <div class="topbar-city"><span>iHangzhou</span></div>
-    <div class="topbar-search" style="flex:1;"></div>
-    <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
+  <header class="topbar" id="topbar">
+    <a href="../index.html" class="topbar-logo" style="text-decoration:none;">
+      <span class="logo-icon">‹</span>
+      <span class="logo-text">iHangzhou</span>
+    </a>
+    <div class="topbar-search"></div>
+    <button class="topbar-settings" onclick="toggleSettings()" title="设置">⚙️</button>
   </header>
+
+  <!-- 设置面板 -->
+  <div class="settings-overlay" id="settingsOverlay" onclick="toggleSettings()"></div>
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-title"><span>⚙️ 设置</span><button class="settings-close" onclick="toggleSettings()" aria-label="关闭">✕</button></div>
+    <div class="settings-item">
+      <span class="settings-label">🌙 暗色模式</span>
+      <label class="settings-switch"><input type="checkbox" id="darkToggle" onchange="setDarkMode(this.checked)"><span class="switch-slider"></span></label>
+    </div>
+    <div class="settings-item">
+      <span class="settings-label">👵 老人模式</span>
+      <label class="settings-switch"><input type="checkbox" id="elderlyToggle" onchange="setElderlyMode(this.checked)"><span class="switch-slider"></span></label>
+    </div>
+  </div>
 
   <div class="article-breadcrumb">
     <a href="../index.html">首页</a> ›
@@ -161,10 +177,10 @@
     <a href="../articles.html">📚 查看更多杭州故事</a>
   </div>
 
+  <script src="../js/app.js"></script>
   <script>
-    // 主题持久化
-    (function(){ try{ var t=localStorage.getItem('ihz-theme')||'light'; document.documentElement.setAttribute('data-theme',t); var b=document.getElementById('themeBtn'); if(b) b.textContent=t==='dark'?'☀️':'🌙'; }catch(e){} })();
-    document.getElementById('themeBtn')?.addEventListener('click',function(){ var cur=document.documentElement.getAttribute('data-theme')||'light'; var next=cur==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',next); localStorage.setItem('ihz-theme',next); this.textContent=next==='dark'?'☀️':'🌙'; });
+    // 主题 + 老人模式持久化
+    (function(){ try{ var t=localStorage.getItem('ihz-theme')||'light'; document.documentElement.setAttribute('data-theme',t); }catch(e){} try{ var el=localStorage.getItem('ihz_elderly')==='true'; document.documentElement.setAttribute('data-elderly',el?'true':'false'); }catch(e){} })();
   </script>
 </body>
 </html>

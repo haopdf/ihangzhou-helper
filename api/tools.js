@@ -48,11 +48,28 @@ async function handleForex() {
 // ===== 金价 =====
 async function handleGold() {
   try {
-    // 返回模拟金价数据（实际项目可接入真实 API）
-    return { success: true, data: { gold: 618.5, silver: 7.82, platinum: 285.3, unit: '元/克', updated: new Date().toLocaleDateString('zh-CN') } };
-  } catch (e) {
-    return { success: false, error: '金价获取失败' };
-  }
+    // 尝试从实时 API 获取金价
+    const res = await fetch('https://api.metals.live/v1/spot/gold', { signal: AbortSignal.timeout(5000) });
+    if (res.ok) {
+      const prices = await res.json();
+      // metals.live 返回 [{timestamp, price}] 数组，price 是美元/盎司
+      const latest = prices[prices.length - 1];
+      if (latest && latest.price) {
+        const usdPerOz = Math.round(latest.price * 100) / 100;
+        // 获取美元兑人民币汇率
+        let usdCny = 7.25;
+        try {
+          const fxRes = await fetch('https://open.er-api.com/v6/latest/USD', { signal: AbortSignal.timeout(4000) });
+          if (fxRes.ok) { const fx = await fxRes.json(); usdCny = fx.rates?.CNY || 7.25; }
+        } catch (e) {}
+        const cnyPerOz = Math.round(usdPerOz * usdCny);
+        const cnyPerGram = Math.round(cnyPerOz / 31.1035 * 100) / 100;
+        return { success: true, data: { gold: { usdPerOz, cnyPerOz, cnyPerGram }, unit: '元/克', updated: new Date().toLocaleString('zh-CN') } };
+      }
+    }
+  } catch (e) { /* 降级到模拟数据 */ }
+  // 降级：模拟金价
+  return { success: true, data: { gold: { usdPerOz: 2658, cnyPerOz: 19270, cnyPerGram: 619.5 }, unit: '元/克', updated: new Date().toLocaleString('zh-CN') } };
 }
 
 // ===== 地铁时刻 =====
