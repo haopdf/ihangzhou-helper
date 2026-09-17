@@ -27,49 +27,28 @@
   <link rel="canonical" href="https://www.ihangzhou.net/">
   <link rel="manifest" href="manifest.json">
   <title>iHangzhou · 杭州生活助手</title>
-  <link rel="stylesheet" href="css/style.css?v=20260928a">
+  <link rel="stylesheet" href="css/style.css?v=20260927a">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%230ea5e9'/%3E%3Ctext x='256' y='360' font-size='280' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'%3E杭%3C/text%3E%3C/svg%3E">
 </head>
 <body>
 
-  <!-- 顶部栏：logo + 搜索 + 设置 -->
-  <header class="topbar" id="topbar">
-    <a href="index.html" class="topbar-logo" style="text-decoration:none;">
-      <span class="logo-icon">🏔️</span>
-      <span class="logo-text">iHangzhou</span>
-    </a>
-    <div class="topbar-search">
-      <input type="text" id="searchInput" placeholder="搜索社保/公积金/限行/落户/夜市..." autocomplete="off">
-      <button class="search-cancel" onclick="clearSearch()">✕</button>
-    </div>
-    <button class="topbar-settings" onclick="toggleSettings()" title="设置">⚙️</button>
-  </header>
-
-  <!-- 设置面板 -->
-  <div class="settings-overlay" id="settingsOverlay" onclick="toggleSettings()"></div>
-  <div class="settings-panel" id="settingsPanel">
-    <div class="settings-title"><span>⚙️ 设置</span><button class="settings-close" onclick="toggleSettings()" aria-label="关闭">✕</button></div>
-    <div class="settings-item">
-      <span class="settings-label">📍 当前城市</span>
-      <div class="city-wrap" style="position:relative;">
-        <div class="topbar-city" id="citySelect" style="display:inline-flex;align-items:center;gap:4px;cursor:pointer;color:var(--primary);font-weight:600;">
-          <span id="cityName">杭州</span><span class="city-arrow">▼</span>
-        </div>
-        <div class="city-dropdown" id="cityDropdown">
-          <div class="city-dropdown-title">选择区县</div>
-        </div>
+  <!-- 顶部栏（模仿本地宝） -->
+  <header class="topbar">
+    <div class="city-wrap">
+      <div class="topbar-city" id="citySelect">
+        <span id="cityName">杭州</span><span class="city-arrow">▼</span>
+      </div>
+      <div class="city-dropdown" id="cityDropdown">
+        <div class="city-dropdown-title">选择区县</div>
       </div>
     </div>
-    <div class="settings-item">
-      <span class="settings-label">🌙 暗色模式</span>
-      <label class="settings-switch"><input type="checkbox" id="darkToggle" onchange="setDarkMode(this.checked)"><span class="switch-slider"></span></label>
+    <div class="topbar-search">
+      <input type="text" id="searchInput" placeholder="搜索社保/公积金/限行/落户/夜市..." autocomplete="off">
     </div>
-    <div class="settings-item">
-      <span class="settings-label">👵 老人模式</span>
-      <label class="settings-switch"><input type="checkbox" id="elderlyToggle" onchange="setElderlyMode(this.checked)"><span class="switch-slider"></span></label>
-    </div>
-  </div>
+    <button class="topbar-elderly" id="elderlyBtn" onclick="toggleElderlyMode()" title="老人模式">👵 老人</button>
+    <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
+  </header>
 
   <!-- 首页 -->
   <div class="page active" id="pageHome">
@@ -471,7 +450,7 @@
       });
     }
   </script>
-  <script src="js/app.js?v=20260928a"></script>
+  <script src="js/app.js?v=20260927a"></script>
   <script src="js/analytics.js?v=20260926b"></script>
   <script>
     // 确保模态框可以关闭
@@ -503,66 +482,40 @@
       });
     });
     
-    // 分享 iHangzhou 给朋友：复制网址 + 公众号二维码
+    // 我的页额外功能 + 分享引导
     function showShareTip() {
-      var SHARE_URL = 'https://www.ihangzhou.net/';
-      var QR_CODE_URL = 'images/qrcode-ihangzhou.jpg';
-
-      // 尝试同时复制文本和图片到剪贴板
-      function copyBoth() {
-        var textCopied = false;
-        var imageCopied = false;
-
-        // 1. 复制网址文本
+      // 优先用浏览器原生分享（移动端 Safari / 微信均支持）
+      if (navigator.share) {
+        navigator.share({
+          title: 'iHangzhou · 杭州生活助手',
+          text: '杭州人的数字生活工具箱，办事/出行/民生一站导航',
+          url: location.href
+        }).catch(function () {});
+        return;
+      }
+      // 回退到 toast 提示（公众号内嵌场景）
+      var t = document.getElementById('toast');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'toast';
+        t.className = 'toast';
+        document.body.appendChild(t);
+      }
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.indexOf('micromessenger') > -1) {
+        // 公众号内嵌：引导点右上角
+        t.innerHTML = '📤 点击右上角 ··· <br>选择「发送给朋友」或「分享到朋友圈」';
+      } else {
+        // 普通浏览器：引导复制链接
+        t.innerHTML = '📤 复制下方链接分享给朋友';
         try {
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(SHARE_URL).then(function () {
-              textCopied = true;
-              if (imageCopied || !navigator.clipboard.write) showSuccessToast();
-            }).catch(function () {});
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(location.href);
           }
         } catch (e) {}
-
-        // 2. 复制公众号二维码图片
-        try {
-          if (navigator.clipboard && navigator.clipboard.write) {
-            fetch(QR_CODE_URL).then(function (res) { return res.blob(); }).then(function (blob) {
-              var item = new ClipboardItem({ 'image/png': blob });
-              navigator.clipboard.write([item]).then(function () {
-                imageCopied = true;
-                if (textCopied) showSuccessToast();
-              }).catch(function () {
-                // 图片复制失败，至少文本已复制
-                showSuccessToast();
-              });
-            }).catch(function () {
-              showSuccessToast();
-            });
-          } else {
-            // 不支持图片复制，仅复制文本
-            showSuccessToast();
-          }
-        } catch (e) {
-          showSuccessToast();
-        }
       }
-
-      // 成功提示
-      function showSuccessToast() {
-        var t = document.getElementById('toast');
-        if (!t) {
-          t = document.createElement('div');
-          t.id = 'toast';
-          t.className = 'toast';
-          document.body.appendChild(t);
-        }
-        t.textContent = '✅ 已复制，请粘贴发送给朋友';
-        t.classList.add('show');
-        clearTimeout(t._timer);
-        t._timer = setTimeout(function () { t.classList.remove('show'); }, 3500);
-      }
-
-      copyBoth();
+      t.classList.add('show');
+      setTimeout(function(){ t.classList.remove('show'); }, 3200);
     }
     function showAbout() {
       var overlay = document.getElementById('modalOverlay');
