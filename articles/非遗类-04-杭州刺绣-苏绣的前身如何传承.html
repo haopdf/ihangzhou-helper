@@ -42,6 +42,8 @@
     .article-footer a { display: block; text-align: center; padding: 12px; background: var(--primary); color: #fff; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 14px; }
     [data-theme="dark"] .article-content code { background: var(--bg-hover); color: var(--primary-light); }
   </style>
+  <style>body { padding-bottom: 80px; }
+</style>
 </head>
 <body>
   <header class="topbar" id="topbar">
@@ -210,6 +212,22 @@
     // 主题 + 老人模式持久化
     (function(){ try{ var t=localStorage.getItem('ihz-theme')||'light'; document.documentElement.setAttribute('data-theme',t); }catch(e){} try{ var el=localStorage.getItem('ihz_elderly')==='true'; document.documentElement.setAttribute('data-elderly',el?'true':'false'); }catch(e){} })();
   </script>
+
+  <!-- 底部导航 -->
+  <nav class="bottom-nav">
+    <div class="bnav-item" data-page="home" onclick="location.href='../index.html'">
+      <span class="bicon">🏠</span><span>首页</span>
+    </div>
+    <div class="bnav-item" data-page="articles" onclick="location.href='../articles.html'">
+      <span class="bicon">📚</span><span>文章</span>
+    </div>
+    <div class="bnav-item" data-page="tools" onclick="location.href='../index.html#tools'">
+      <span class="bicon">🛠️</span><span>工具</span>
+    </div>
+    <div class="bnav-item" data-page="me" onclick="location.href='../index.html#me'">
+      <span class="bicon">👤</span><span>我的</span>
+    </div>
+  </nav>
 </body>
 </html>
 

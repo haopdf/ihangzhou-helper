@@ -89,29 +89,45 @@ async function handleYaohao(req) {
   return { success: true, data: { plate: plate || '浙A·88888', status: '未中签', period: '2026年9期', message: '当月摇号未中签，已自动转入下期' } };
 }
 
-// ===== 访问统计 =====
+// ===== 访问统计（Blob 持久化） =====
+const STATS_BLOB = 'stats.json';
+
+async function readStats() {
+  try {
+    const result = await get(STATS_BLOB, { access: 'private', useCache: false });
+    if (!result) return { events: [] };
+    const reader = result.stream.getReader();
+    var chunks = [];
+    var done = false;
+    while (done === false) { var r = await reader.read(); done = r.done; if (r.value) chunks.push(r.value); }
+    var text = Buffer.concat(chunks).toString('utf-8');
+    return JSON.parse(text);
+  } catch (e) { return { events: [] }; }
+}
+
+async function writeStats(data) {
+  try {
+    await put(STATS_BLOB, JSON.stringify(data, null, 2), {
+      contentType: 'application/json', access: 'private', allowOverwrite: true
+    });
+    return true;
+  } catch (e) { return false; }
+}
+
 async function handleTrack(req, res) {
   if (req.method === 'GET' && req.query.stats === '1') {
     if (!checkAuth(req)) return res.status(401).json({ success: false, error: '需要认证' });
-    const fs = require('fs');
-    const file = './data/stats.json';
-    if (fs.existsSync(file)) {
-      const data = JSON.parse(fs.readFileSync(file, 'utf8'));
-      return res.status(200).json({ success: true, data: aggregateStats(data.events || []) });
-    }
-    return res.status(200).json({ success: true, data: { topItems: [], totalClicks: 0 } });
+    const stats = await readStats();
+    return res.status(200).json({ success: true, data: aggregateStats(stats.events || []) });
   }
   if (req.method === 'POST') {
     try {
       const { category, item, action, tab, search } = req.body;
-      const fs = require('fs');
-      let stats = { events: [] };
-      if (fs.existsSync('./data/stats.json')) {
-        try { stats = JSON.parse(fs.readFileSync('./data/stats.json', 'utf8')); } catch (e) {}
-      }
+      let stats = await readStats();
+      if (!stats.events) stats.events = [];
       stats.events.push({ category: category || 'unknown', item: item || '', action: action || 'click', tab: tab || '', search: search || '', created_at: new Date().toISOString() });
-      stats.events = stats.events.slice(-10000);
-      fs.writeFileSync('./data/stats.json', JSON.stringify(stats, null, 2));
+      stats.events = stats.events.slice(-5000);
+      await writeStats(stats);
       return res.status(200).json({ success: true });
     } catch (e) { return res.status(200).json({ success: true }); }
   }

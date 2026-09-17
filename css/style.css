@@ -100,7 +100,9 @@ body.search-mode .district-nav,
 body.search-mode .topic-nav,
 body.search-mode .quick-nav,
 body.search-mode .news-banner,
-body.search-mode .channel-grid {
+body.search-mode .channel-grid,
+body.search-mode .hot-keywords,
+body.search-mode .follow-card {
   display: none !important;
 }
 

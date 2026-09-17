@@ -1071,6 +1071,9 @@
     document.documentElement.setAttribute('data-theme', theme);
     var btn = $('#themeBtn');
     if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    // 同步设置面板暗色模式开关
+    var dt = document.getElementById('darkToggle');
+    if (dt) dt.checked = (theme === 'dark');
     // 同步切换搜一搜推广物料图（JS 主题切换不响应 prefers-color-scheme）
     var promoImg = $('.search-promo-img');
     if (promoImg) {
@@ -1323,6 +1326,20 @@
     }).join('');
   }
 
+  // 清空搜索：恢复首页内容、移除搜索状态
+  window.clearSearch = function () {
+    document.body.classList.remove('search-mode');
+    var topbar = document.getElementById('topbar');
+    if (topbar) topbar.classList.remove('searching');
+    var si = $('#searchInput');
+    if (si) {
+      si.value = '';
+      si.classList.remove('searching');
+    }
+    var sr = $('#searchResult');
+    if (sr) sr.style.display = 'none';
+  };
+
   // ===== 事件绑定 =====
   function bindOn(sel, evt, handler) {
     var el = $(sel);
@@ -1352,15 +1369,30 @@
     });
 
     bindOn('#searchInput', 'input', function (e) {
-      globalSearch(e.target.value);
+      var val = e.target.value;
+      var topbar = document.getElementById('topbar');
+      if (val.trim()) {
+        document.body.classList.add('search-mode');
+        if (topbar) topbar.classList.add('searching');
+        e.target.classList.add('searching');
+      } else {
+        clearSearch();
+      }
+      globalSearch(val);
+    });
+
+    bindOn('#searchInput', 'focus', function (e) {
+      if (e.target.value.trim()) {
+        document.body.classList.add('search-mode');
+        var topbar = document.getElementById('topbar');
+        if (topbar) topbar.classList.add('searching');
+        e.target.classList.add('searching');
+      }
     });
 
     // 搜索结果区关闭按钮：清空搜索框 + 隐藏结果区
     bindOn('#searchResultClose', 'click', function () {
-      var sr = $('#searchResult');
-      if (sr) sr.style.display = 'none';
-      var si = $('#searchInput');
-      if (si) si.value = '';
+      clearSearch();
     });
 
     bindOn('#hotKeywords', 'click', function (e) {
@@ -3196,9 +3228,46 @@ case 'colors': showColors(); break;
     }
     var st = document.getElementById('elderlyStatus');
     if (st) st.textContent = on ? '已开启' : '关闭';
+    // 同步设置面板开关
+    var elTog = document.getElementById('elderlyToggle');
+    if (elTog) elTog.checked = on;
     // 老人模式自动切到大号字体
     if (on) { lsSet('ihz_fontsize', 'xlarge'); setFontSize('xlarge'); }
   }
+
+  // ===== 设置面板 =====
+  window.toggleSettings = function () {
+    var overlay = document.getElementById('settingsOverlay');
+    var panel = document.getElementById('settingsPanel');
+    if (!overlay || !panel) return;
+    var show = !panel.classList.contains('show');
+    if (show) {
+      overlay.classList.add('show');
+      panel.classList.add('show');
+      // 同步当前状态到开关
+      var dark = lsGet('ihz-theme', 'light') === 'dark';
+      var elderly = lsGet('ihz_elderly', 'false') === 'true';
+      var dt = document.getElementById('darkToggle');
+      var et = document.getElementById('elderlyToggle');
+      if (dt) dt.checked = dark;
+      if (et) et.checked = elderly;
+    } else {
+      overlay.classList.remove('show');
+      panel.classList.remove('show');
+    }
+  };
+
+  window.setDarkMode = function (on) {
+    var theme = on ? 'dark' : 'light';
+    lsSet('ihz-theme', theme);
+    applyTheme(theme);
+  };
+
+  window.setElderlyMode = function (on) {
+    lsSet('ihz_elderly', on ? 'true' : 'false');
+    applyElderlyMode();
+    showToast(on ? '已开启老人模式' : '已关闭老人模式');
+  };
 
   // ===== 初始化 =====
   function init() {
