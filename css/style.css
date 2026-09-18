@@ -2927,7 +2927,7 @@ border-radius: 14px;
 }
 .art-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #0ea5e9, #0284c7);
+  background: linear-gradient(90deg, #f97316, #ef4444);
   transition: width 0.1s ease;
   border-radius: 0 2px 2px 0;
 }
