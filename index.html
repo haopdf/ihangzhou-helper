@@ -124,82 +124,62 @@
         <div class="service-grid" id="serviceGrid"></div>
       </div>
 
-      <!-- 公众号关注卡片（吸粉核心入口） -->
+      <!-- 首屏 Slogan（站点定位一眼可见） -->
+      <div class="hero-slogan">
+        <h1>杭州人的数字生活工具箱</h1>
+        <p>办事 · 出行 · 民生 · 一站导航</p>
+      </div>
+
+      <!-- 公众号关注卡片（精简为单行） -->
       <div class="follow-card" id="followCard">
         <div class="follow-inner">
-          <div class="follow-qr-wrap">
-            <img class="follow-qr" id="followQr" alt="爱杭州公众号二维码 · 长按识别关注" src="images/qrcode-ihangzhou.jpg" width="92" height="92">
-          </div>
+          <img class="follow-qr" id="followQr" alt="爱杭州公众号二维码" src="images/qrcode-ihangzhou.jpg" width="48" height="48">
           <div class="follow-text">
             <div class="follow-title">📌 关注「爱杭州」公众号</div>
-            <div class="follow-desc">杭州人的数字生活工具箱<br>每天推送：限行 / 油价 / 政策解读 / 生活攻略</div>
-            <div class="follow-tag-row">
-              <span class="follow-tag">每日限行</span>
-              <span class="follow-tag">办事指南</span>
-              <span class="follow-tag">本地攻略</span>
-            </div>
+            <div class="follow-desc">每天推送：限行 / 油价 / 政策解读 / 生活攻略</div>
           </div>
         </div>
-        <div class="follow-hint">长按上方二维码 · 一键关注</div>
       </div>
 
-      <!-- 搜一搜 iHangzhou 推广物料（微信生态官方推广样式） -->
-      <div class="search-promo" id="searchPromo" onclick="showSearchTip()">
-        <picture>
-          <source srcset="images/promo/search-box-green.jpg" media="(prefers-color-scheme: dark)">
-          <img class="search-promo-img" src="images/promo/search-box-white.jpg" alt="微信搜一搜 iHangzhou" loading="lazy">
-        </picture>
-      </div>
-
-      <!-- 分享赚粉卡片 -->
-      <div class="share-card" id="shareCard" onclick="showShareTip()">
-        <div class="share-icon">📤</div>
-        <div class="share-text">
-          <div class="share-title">分享 iHangzhou 给朋友</div>
-          <div class="share-desc">杭州人的必备工具箱 · 多一个人看到多一份方便</div>
-        </div>
-        <div class="share-arrow">›</div>
-      </div>
-
-      <!-- 杭州好物推荐（分销/合作位，初期自营） -->
+      <!-- 杭州好物推荐（渐变色底 + 大 emoji，2列布局） -->
       <div class="goods-section">
         <div class="section-head">
           <h2>🎁 杭州好物推荐</h2>
           <span class="tip">本地人精挑细选</span>
         </div>
         <div class="goods-grid" id="goodsGrid">
-          <a class="goods-card" href="https://m.tb.cn/h.8ptSIg4" target="_blank" rel="noopener">
+          <a class="goods-card" href="https://m.tb.cn/h.8ptSIg4" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">
             <div class="goods-img">🌿</div>
             <div class="goods-name">王星记折扇</div>
             <div class="goods-price">¥65.10</div>
             <div class="goods-tag">国家级非遗</div>
           </a>
-          <a class="goods-card" href="https://m.tb.cn/h.8JaDM4V" target="_blank" rel="noopener">
+          <a class="goods-card" href="https://m.tb.cn/h.8JaDM4V" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#fee2e2,#fecaca)">
             <div class="goods-img">🥟</div>
             <div class="goods-name">知味观小笼包</div>
             <div class="goods-price">¥59.90</div>
             <div class="goods-tag">超千人疯抢</div>
           </a>
-          <a class="goods-card" href="https://m.tb.cn/h.8KGLUJb" target="_blank" rel="noopener">
+          <a class="goods-card" href="https://m.tb.cn/h.8KGLUJb" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0)">
             <div class="goods-img">🍵</div>
             <div class="goods-name">狮峰龙井礼盒</div>
             <div class="goods-price">¥535.55</div>
             <div class="goods-tag">明前特级</div>
           </a>
-          <a class="goods-card" href="https://m.tb.cn/h.8JayBqt" target="_blank" rel="noopener">
+          <a class="goods-card" href="https://m.tb.cn/h.8JayBqt" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#e0e7ff,#c7d2fe)">
             <div class="goods-img">🧣</div>
             <div class="goods-name">苏绣丝巾礼盒</div>
             <div class="goods-price">¥325.00</div>
             <div class="goods-tag">送长辈高端</div>
           </a>
-          <a class="goods-card" href="https://search.jd.com/Search?keyword=杭州特产&enc=utf-8&cu=true&utm_source=2038468850" target="_blank" rel="noopener">
+          <a class="goods-card" href="https://search.jd.com/Search?keyword=杭州特产&enc=utf-8&cu=true&utm_source=2038468850" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#fae8ff,#f5d0fe)">
             <div class="goods-img">📦</div>
             <div class="goods-name">杭州特产京东</div>
             <div class="goods-price">京东自营</div>
             <div class="goods-tag">次日达</div>
           </a>
-          <a class="goods-card" href="https://search.jd.com/Search?keyword=西湖龙井&enc=utf-8&cu=true&utm_source=2038468850" target="_blank" rel="noopener">
-            <div class="goods-img">📦</div>
+          <a class="goods-card" href="https://search.jd.com/Search?keyword=西湖龙井&enc=utf-8&cu=true&utm_source=2038468850" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#cffafe,#a5f3fc)">
+            <div class="goods-img">🍃</div>
             <div class="goods-name">西湖龙井京东</div>
             <div class="goods-price">¥168 起</div>
             <div class="goods-tag">品质保证</div>
@@ -207,94 +187,38 @@
         </div>
       </div>
 
-      <!-- 本地服务推荐（OTA 分销位） -->
+      <!-- 本地服务（原 OTA/美团/商家/小程序 合并为一个九宫格） -->
       <div class="goods-section">
         <div class="section-head">
-          <h2>🏨 杭州本地服务</h2>
-          <span class="tip">官方预订更省心</span>
+          <h2>🏙️ 本地服务</h2>
+          <span class="tip">酒店 / 门票 / 商旅</span>
         </div>
         <div class="ota-grid" id="otaGrid">
           <a class="ota-card" href="https://m.ctrip.com/webapp/hotels/hotelsearch/search?allianceid=10511040&sid=330893571&ouid=kfptvxtool" target="_blank" rel="noopener">
             <div class="ota-icon">🏨</div>
             <div class="ota-name">酒店预订</div>
-            <div class="ota-desc">携程 · 杭州 8000+ 家</div>
           </a>
           <a class="ota-card" href="https://m.ctrip.com/xtangram/ticket?pageId=MjI3NTc4&ctm_ref=vactang_page_227578&isHideNavBar=YES&coords=1&allianceid=10511040&sid=330893571&ouid=kfptvxtool" target="_blank" rel="noopener">
             <div class="ota-icon">🎫</div>
             <div class="ota-name">景点门票</div>
-            <div class="ota-desc">宋城 / 西溪 / 雷峰塔</div>
-          </a>
-          <a class="ota-card" href="https://m.ctrip.com/webapp/train/v2/index/?allianceid=10511040&sid=330893571&ouid=kfptvxtool" target="_blank" rel="noopener">
-            <div class="ota-icon">🚄</div>
-            <div class="ota-name">火车票</div>
-            <div class="ota-desc">携程 · 含抢票</div>
-          </a>
-          <a class="ota-card" href="https://m.ctrip.com/html5/flight/swift/index?allianceid=10511040&sid=330893571&ouid=kfptvxtool" target="_blank" rel="noopener">
-            <div class="ota-icon">✈️</div>
-            <div class="ota-name">机票预订</div>
-            <div class="ota-desc">携程 · 含低价</div>
           </a>
           <a class="ota-card" href="https://m.ctrip.com/html5/?allianceid=10511040&sid=330893571&ouid=kfptvxtool" target="_blank" rel="noopener">
             <div class="ota-icon">🛍️</div>
-            <div class="ota-name">携程首页</div>
-            <div class="ota-desc">满额优惠</div>
+            <div class="ota-name">携程旅行</div>
           </a>
-          <a class="ota-card" href="https://www.hzairport.com/" target="_blank" rel="noopener">
-            <div class="ota-icon">📡</div>
-            <div class="ota-name">萧山机场</div>
-            <div class="ota-desc">航班动态官方</div>
-          </a>
-        </div>
-      </div>
-
-      <!-- 美团本地生活分销位 -->
-      <div class="goods-section">
-        <div class="section-head">
-          <h2>🍜 杭州本地生活</h2>
-          <span class="tip">美团 · 餐饮 / 休闲娱乐</span>
-        </div>
-        <div class="ota-grid" id="meituanGrid">
           <a class="ota-card" href="https://i.meituan.com/ahangzhou?channel=485720" target="_blank" rel="noopener">
             <div class="ota-icon">🍲</div>
-            <div class="ota-name">杭帮菜团购</div>
-            <div class="ota-desc">美团 · 5 折起</div>
-          </a>
-          <a class="ota-card" href="https://i.meituan.com/ahangzhou?channel=485720" target="_blank" rel="noopener">
-            <div class="ota-icon">🏞️</div>
-            <div class="ota-name">景区休闲</div>
-            <div class="ota-desc">宋城 / 西溪 / 灵隐</div>
+            <div class="ota-name">餐饮团购</div>
           </a>
           <a class="ota-card" href="https://h5.waimai.meituan.com/waimai/mindex/home?channel=485720" target="_blank" rel="noopener">
             <div class="ota-icon">🍜</div>
             <div class="ota-name">美食外卖</div>
-            <div class="ota-desc">美团外卖 · 满 30 减</div>
           </a>
           <a class="ota-card" href="https://i.meituan.com/ahangzhou?channel=485720" target="_blank" rel="noopener">
             <div class="ota-icon">💪</div>
             <div class="ota-name">休闲娱乐</div>
-            <div class="ota-desc">健身 / KTV / 足浴</div>
           </a>
         </div>
-      </div>
-
-      <!-- 商家入驻入口（变现基建） -->
-      <div class="biz-invite" id="bizInvite" onclick="showBizInvite()">
-        <div class="biz-icon">🤝</div>
-        <div class="biz-text">
-          <div class="biz-title">本地商家入驻</div>
-          <div class="biz-desc">餐饮/景区/特产/服务 · 免费上架至 iHangzhou</div>
-        </div>
-        <div class="biz-arrow">›</div>
-      </div>
-
-      <!-- 微信内嵌：打开携程小程序入口（佣金更高） -->
-      <div class="mp-launch-card" id="mpLaunchCard" style="display:none">
-        <div class="mp-card-head">
-          <span class="mp-badge">小程序</span>
-          <span class="mp-title">打开携程小程序</span>
-        </div>
-        <div class="mp-card-desc">微信内打开携程小程序享更多优惠，分享佣金更高</div>
-        <button type="button" class="mp-launch-btn" onclick="openCtripMp()">打开携程小程序 →</button>
       </div>
     </div>
   </div>
@@ -618,13 +542,18 @@
         location.href = 'https://m.ctrip.com/html5/?allianceid=10511040&sid=330893571&ouid=kfptvxtool';
       }
     }
-    // 检测微信环境显示小程序入口卡片
-    (function detectWeChat() {
-      var ua = navigator.userAgent.toLowerCase();
-      if (ua.indexOf('micromessenger') > -1) {
-        var card = document.getElementById('mpLaunchCard');
-        if (card) card.style.display = 'block';
-      }
+    // 搜索框 placeholder 按时段轮换（低成本小惊喜）
+    (function rotateSearchPlaceholder() {
+      var hour = new Date().getHours();
+      var ph = '搜索社保/公积金/限行/落户/夜市...';
+      if (hour >= 6 && hour < 10) ph = '早上好！今天限行几号？';
+      else if (hour >= 10 && hour < 12) ph = '搜索社保/公积金/落户...';
+      else if (hour >= 12 && hour < 14) ph = '午饭吃什么？搜美食团购';
+      else if (hour >= 14 && hour < 18) ph = '搜索博物馆/周末去哪...';
+      else if (hour >= 18 && hour < 22) ph = '今晚去哪逛？搜夜市/演出';
+      else ph = '深夜也在，搜索生活攻略...';
+      var si = document.getElementById('searchInput');
+      if (si) si.placeholder = ph;
     })();
     // 我的页主题切换
     document.addEventListener('DOMContentLoaded', function() {

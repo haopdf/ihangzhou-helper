@@ -384,12 +384,11 @@ body.search-mode .follow-card {
   padding: 12px 6px;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--radius);
   text-decoration: none;
   color: var(--text);
   gap: 6px;
   transition: all 0.2s;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
 
 .quick-nav a:active {
@@ -400,10 +399,13 @@ body.search-mode .follow-card {
 .quick-nav img {
   width: 28px;
   height: 28px;
+  padding: 4px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--primary) 8%, white);
 }
 
 .quick-nav span {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-secondary);
   font-weight: 500;
 }
@@ -592,6 +594,23 @@ body.search-mode .follow-card {
 .section-head .tip {
   font-size: 12px;
   color: var(--text-muted);
+}
+
+/* ===== 首屏 Slogan ===== */
+.hero-slogan {
+  padding: 16px 14px 8px;
+  text-align: center;
+}
+.hero-slogan h1 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+.hero-slogan p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
 }
 
 /* ===== 频道专题页 ===== */
@@ -1908,13 +1927,12 @@ body.search-mode .follow-card {
    吸粉卡片（公众号关注 + 分享赚粉）
    ============================================ */
 
-/* 公众号关注卡片 */
+/* 公众号关注卡片（紧凑单行式） */
 .follow-card {
-  margin: 16px 14px;
+  margin: 12px 14px;
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  border-radius: 14px;
-  padding: 14px;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+  border-radius: var(--radius);
+  padding: 10px 14px;
   position: relative;
   overflow: hidden;
 }
@@ -1922,23 +1940,12 @@ body.search-mode .follow-card {
 .follow-card::before {
   content: '';
   position: absolute;
-  top: -30px;
-  right: -30px;
-  width: 100px;
-  height: 100px;
+  top: -20px;
+  right: -20px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
-}
-
-.follow-card::after {
-  content: '';
-  position: absolute;
-  bottom: -40px;
-  left: -20px;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
 }
 
 .follow-inner {
@@ -1949,21 +1956,14 @@ body.search-mode .follow-card {
   z-index: 1;
 }
 
-.follow-qr-wrap {
-  flex-shrink: 0;
-  width: 92px;
-  height: 92px;
-  background: #fff;
-  border-radius: 8px;
-  padding: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
 .follow-qr {
-  width: 100%;
-  height: 100%;
-  border-radius: 4px;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
   display: block;
+  background: #fff;
+  padding: 3px;
 }
 
 .follow-text {
@@ -2171,49 +2171,26 @@ body.search-mode .follow-card {
   margin: 16px 14px;
 }
 
-.section-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.section-head h2 {
-font-size: 15px;
-font-weight: 700;
-color: var(--text);
-margin: 0;
-}
-[data-theme="dark"] .section-head h2 {
-  color: #f1f5f9;
-}
-
-.section-head .tip {
-  font-size: 11px;
-  color: var(--text-muted);
-}
-
-/* 好物网格 */
+/* 好物网格：2列布局（视觉更透气） */
 .goods-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 8px;
 }
 
+/* 好物卡片：渐变色底 + 大 emoji，去掉冗余边框 */
 .goods-card {
-  background: var(--bg-card);
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: var(--radius);
+  padding: 14px;
   text-decoration: none;
   color: var(--text);
   display: flex;
   flex-direction: column;
   gap: 4px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
   transition: transform 0.2s;
   position: relative;
   -webkit-tap-highlight-color: transparent;
+  border: none;
 }
 
 .goods-card:active {
@@ -2221,9 +2198,10 @@ margin: 0;
 }
 
 .goods-img {
-  font-size: 32px;
-  text-align: center;
-  margin-bottom: 4px;
+font-size: 40px;
+text-align: center;
+margin-bottom: 6px;
+line-height: 1.2;
 }
 
 .goods-name {
@@ -2257,16 +2235,15 @@ margin: 0;
 }
 
 .ota-card {
-  background: var(--bg-card);
-  border-radius: 10px;
-  padding: 10px 4px;
-  text-align: center;
-  text-decoration: none;
-  color: var(--text);
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-  -webkit-tap-highlight-color: transparent;
-  transition: transform 0.2s;
+background: var(--bg-card);
+border-radius: var(--radius);
+padding: 12px 4px;
+text-align: center;
+text-decoration: none;
+color: var(--text);
+border: 1px solid var(--border);
+-webkit-tap-highlight-color: transparent;
+transition: transform 0.2s;
 }
 
 .ota-card:active {
@@ -2276,6 +2253,13 @@ margin: 0;
 .ota-icon {
   font-size: 22px;
   margin-bottom: 4px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--primary) 8%, white);
 }
 
 .ota-name {
