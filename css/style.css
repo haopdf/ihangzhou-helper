@@ -1937,17 +1937,6 @@ body.search-mode .follow-card {
   overflow: hidden;
 }
 
-.follow-card::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-}
-
 .follow-inner {
   display: flex;
   gap: 12px;
@@ -2073,10 +2062,27 @@ body.search-mode .follow-card {
   background: var(--bg-card);
 }
 
-[data-theme="dark"] .follow-card::before,
-[data-theme="dark"] .follow-card::after {
-  background: rgba(255, 255, 255, 0.05);
+/* ===== 分享入口（紧凑一行式） ===== */
+.share-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 14px;
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
 }
+.share-row:active { background: var(--bg-hover); }
+.share-row-icon { font-size: 20px; flex-shrink: 0; }
+.share-row-text { flex: 1; min-width: 0; }
+.share-row-title { font-size: 13px; font-weight: 600; }
+.share-row-desc { font-size: 11px; color: var(--text-muted); }
+.share-row-arrow { color: var(--text-muted); font-size: 18px; }
 
 /* ============================================
    回访钩子：明日预告 + 时令提醒
