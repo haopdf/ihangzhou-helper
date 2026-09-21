@@ -105,10 +105,14 @@
     try { global.localStorage.setItem('ihz_large_font', on ? 'true' : 'false'); } catch (e) {}
   }
   function applyColor(c) {
+    // 品牌色板：松绿(默认) / 竹青 / 鎏金 / 胭脂 / 黛蓝
     var map = {
-      sky: '#0ea5e9', emerald: '#10b981', violet: '#8b5cf6',
-      rose: '#f43f5e', amber: '#f59e0b'
+      pine: '#1b4d3e', bamboo: '#4a7c59', gold: '#a8842c',
+      plum: '#a0433b', ink: '#2c4a5e'
     };
+    // 旧版色值键名兼容：老用户 localStorage 里的 sky/emerald 等平滑迁移到新色板
+    var legacy = { sky: 'pine', emerald: 'bamboo', violet: 'ink', rose: 'plum', amber: 'gold' };
+    if (legacy[c]) c = legacy[c];
     if (map[c]) {
       document.documentElement.style.setProperty('--primary', map[c]);
       document.documentElement.style.setProperty('--primary-dark', shiftDark(map[c]));
