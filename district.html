@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -11,7 +11,8 @@
   <meta property="og:description" content="杭州全部 13 个区县概况/景点/政务/特色一站式查询">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://www.ihangzhou.net/district.html">
-  <link rel="stylesheet" href="css/style.css?v=20260928c">
+  <link rel="stylesheet" href="css/style.css?v=20260921a">
+  <script src="js/layout.js"></script>
   <style>
     /* 区县列表页专属样式 */
     .district-hero {
@@ -482,31 +483,10 @@
   </style>
 </head>
 <body>
-  <!-- 顶部栏 -->
-  <header class="topbar" id="topbar">
-    <a href="index.html" class="topbar-logo" style="text-decoration:none;">
-      <span class="logo-icon">‹</span>
-      <span class="logo-text">13区县</span>
-    </a>
-    <div class="topbar-search">
-      <input type="text" placeholder="搜索杭州区县..." id="searchInput">
-    </div>
-    <button class="topbar-settings" onclick="toggleSettings()" title="设置">⚙️</button>
-  </header>
-
-  <!-- 设置面板 -->
-  <div class="settings-overlay" id="settingsOverlay" onclick="toggleSettings()"></div>
-  <div class="settings-panel" id="settingsPanel">
-    <div class="settings-title"><span>⚙️ 设置</span><button class="settings-close" onclick="toggleSettings()" aria-label="关闭">✕</button></div>
-    <div class="settings-item">
-      <span class="settings-label">🌙 暗色模式</span>
-      <label class="settings-switch"><input type="checkbox" id="darkToggle" onchange="setDarkMode(this.checked)"><span class="switch-slider"></span></label>
-    </div>
-    <div class="settings-item">
-      <span class="settings-label">👵 老人模式</span>
-      <label class="settings-switch"><input type="checkbox" id="elderlyToggle" onchange="setElderlyMode(this.checked)"><span class="switch-slider"></span></label>
-    </div>
-  </div>
+  <script>
+    window.IHZ_PAGE = { title: '杭州区县', icon: '🗺️' };
+    window.IZ_SKIP_APP_THEME = true;
+  </script>
 
   <!-- 列表视图 -->
   <div id="listView">
@@ -538,6 +518,11 @@
   <div id="detailView" style="display:none"></div>
 
   <script src="js/app.js?v=20260928c"></script>
+  <script>
+    if (window.IZ && IZ.layout) {
+      document.addEventListener("DOMContentLoaded", IZ.layout.init);
+    }
+  </script>
   <script>
     // 简易主题持久化
     (function () {
@@ -761,11 +746,11 @@
         if (!btn) return;
         document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
         btn.classList.add('active');
-        renderList(btn.dataset.type, document.getElementById('searchInput').value);
+        renderList(btn.dataset.type, document.getElementById('headerSearchInput').value);
       });
 
       // 搜索
-      var searchInput = document.getElementById('searchInput');
+      var searchInput = document.getElementById('headerSearchInput');
       searchInput.addEventListener('input', function () {
         var active = document.querySelector('.filter-btn.active');
         renderList(active ? active.dataset.type : 'all', searchInput.value);
@@ -815,12 +800,5 @@
 
     init();
   </script>
-
-  <nav class="bottom-nav">
-    <a class="bnav-item" href="index.html"><span class="bicon">🏠</span><span>首页</span></a>
-    <a class="bnav-item" href="index.html#tools"><span class="bicon">🛠️</span><span>工具</span></a>
-    <a class="bnav-item" href="index.html#phone"><span class="bicon">📞</span><span>电话</span></a>
-    <a class="bnav-item" href="index.html#me"><span class="bicon">👤</span><span>我的</span></a>
-  </nav>
 </body>
 </html>

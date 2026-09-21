@@ -3,9 +3,56 @@
    10大分类 · 100+办事条目 · 数据全内联
    ============================================ */
 (function () {
-  'use strict';
+'use strict';
 
-  // ===== 内联兜底数据（CMS API 失败时使用，保证离线/PWA 可用）=====
+// ===== PWA：Service Worker 注册 + 网络状态提示 =====
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js').then(function (reg) {
+      reg.addEventListener('updatefound', function () {
+        var newWorker = reg.installing;
+        newWorker.addEventListener('statechange', function () {
+          if (newWorker.state === 'activated') {
+            // 新版本已激活，提示刷新
+            var tip = document.createElement('div');
+            tip.id = 'sw-update-tip';
+            tip.textContent = '发现新版本，刷新获得最新体验 ✦';
+            tip.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#0ea5e9;color:#fff;text-align:center;padding:10px 14px;font-size:13px;z-index:99999;cursor:pointer;';
+            tip.onclick = function () {
+              if (navigator.serviceWorker.controller) {
+                navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
+              }
+              window.location.reload();
+            };
+            document.body.appendChild(tip);
+          }
+        });
+      });
+    }).catch(function () {
+      // SW 注册失败，静默忽略
+    });
+  });
+}
+
+// 离线 / 在线状态提示
+window.addEventListener('online', function () {
+  var el = document.getElementById('network-status');
+  if (el) el.textContent = '已恢复网络连接';
+  if (el) el.className = 'network-status online';
+});
+window.addEventListener('offline', function () {
+  var el = document.getElementById('network-status');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'network-status';
+    el.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#ef4444;color:#fff;text-align:center;padding:8px 12px;font-size:13px;z-index:99999;transition:all .3s;';
+    document.body.appendChild(el);
+  }
+  el.textContent = '网络已断开，部分功能受限';
+  el.className = 'network-status offline';
+});
+
+// ===== 内联兜底数据（CMS API 失败时使用，保证离线/PWA 可用）=====
   var DATA_FALLBACK = {
     // 热门搜索关键词（对标本地宝热门搜索）
     hotKeywords: ["限行", "社保", "公积金", "灵隐寺", "消费券", "人才认定", "钱塘江大潮", "找工作", "公租房", "摇号", "西湖", "疫苗"],
@@ -14,11 +61,11 @@
     hotServices: [
       { name: "今日限行", icon: "🚗", desc: "尾号限行查询", action: "xianxing", color: "#ef4444" },
       { name: "发票抽奖", icon: "🧾", desc: "支付宝/云闪付搜索消费有奖", color: "#f59e0b" },
-      { name: "找工作", icon: "💼", desc: "事业单位/国企", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=杭州招聘", color: "#3b82f6" },
+      { name: "找工作", icon: "💼", desc: "事业单位/国企", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%9C%AC%E4%BA%BA%E6%8B%9B%E8%81%98", color: "#3b82f6" },
       { name: "公积金", icon: "🏠", desc: "查询/提取/贷款", url: "https://gjj.hangzhou.gov.cn/", color: "#10b981" },
       { name: "浙A摇号", icon: "🚘", desc: "车牌摇号申请", url: "https://hzxkctk.cn/", color: "#ef4444" },
       { name: "灵隐寺", icon: "⛩️", desc: "门票预约", url: "https://www.lingyinsi.com/", color: "#8b5cf6" },
-      { name: "人才认定", icon: "🎓", desc: "高层次人才申请", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=人才认定", color: "#06b6d4" },
+      { name: "人才认定", icon: "🎓", desc: "高层次人才申请", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E4%BA%BA%E6%89%8D%E8%AE%A4%E5%AE%9A", color: "#06b6d4" },
       { name: "市民卡", icon: "💳", desc: "服务/充值", url: "https://www.96225.com/", color: "#ec4899" }
     ],
 
@@ -26,16 +73,16 @@
     categories: [
       { id: "banshi", name: "办事指南", icon: "🏛️",
         items: [
-          { name: "社保查询", desc: "缴费/余额/明细", url: "https://www.zjzwfw.gov.cn/", color: "#3b82f6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州社保查询包括养老/医疗/失业/工伤/生育五险缴费记录与个人账户余额。线上查询已对接浙里办与电子社保卡，无需到社保大厅。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>线上查询</strong>：登录「浙里办」APP 或支付宝小程序「社保查询」<br>② <strong>实名认证</strong>：人脸识别后可查看缴费明细与余额<br>③ <strong>电子社保卡</strong>：在支付宝/微信搜索「电子社保卡」申领，与实体卡同等效力</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证原件<br>• 杭州社保卡（如已制卡）<br>• 手机号（接收验证码）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州市各区社保经办机构（市本级：上城区解放东路18号市民中心）<br>咨询电话：0571-12333</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://www.zjzwfw.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 浙里办 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>线上查询即时返回；单位缴费记录每月更新，可查近 24 个月明细；免费服务。</p></div>" },
-          { name: "社保转移", desc: "跨省转移/年限计算", url: "https://www.zjzwfw.gov.cn/", color: "#ef4444" },
-          { name: "社保缴费", desc: "灵活就业缴费基数", url: "https://www.zjzwfw.gov.cn/", color: "#10b981" },
+          { name: "社保查询", desc: "缴费/余额/明细", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E7%A4%BE%E4%BF%9D%E6%9F%A5%E8%AF%A2", color: "#3b82f6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州社保查询包括养老/医疗/失业/工伤/生育五险缴费记录与个人账户余额。线上查询已对接浙里办与电子社保卡，无需到社保大厅。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>线上查询</strong>：登录「浙里办」APP 或支付宝小程序「社保查询」<br>② <strong>实名认证</strong>：人脸识别后可查看缴费明细与余额<br>③ <strong>电子社保卡</strong>：在支付宝/微信搜索「电子社保卡」申领，与实体卡同等效力</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证原件<br>• 杭州社保卡（如已制卡）<br>• 手机号（接收验证码）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州市各区社保经办机构（市本级：上城区解放东路18号市民中心）<br>咨询电话：0571-12333</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 浙里办 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>线上查询即时返回；单位缴费记录每月更新，可查近 24 个月明细；免费服务。</p></div>" },
+          { name: "社保转移", desc: "跨省转移/年限计算", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E7%A4%BE%E4%BF%9D%E8%BD%AC%E7%A7%BB", color: "#ef4444" },
+          { name: "社保缴费", desc: "灵活就业缴费基数", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E7%A4%BE%E4%BF%9D%E7%BC%B4%E8%B4%B9", color: "#10b981" },
           { name: "公积金查询", desc: "余额/明细/提取记录", url: "https://gjj.hangzhou.gov.cn/", color: "#f59e0b", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州住房公积金查询覆盖个人账户余额、月缴存基数、单位缴存比例、提取记录与贷款额度测算。已开通线上全流程，浙里办与支付宝均可办理。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① 登录「浙里办」或「杭州公积金」APP<br>② 人脸认证后查看个人账户余额、缴存明细<br>③ 可下载缴存证明、贷款结清证明等电子凭证</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 公积金账号（如已开户）<br>• 手机号接收验证码</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州住房公积金管理中心各网点<br>市中心网点：上城区延安路126号<br>电话：0571-12329</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://gjj.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公积金 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>线上查询即时返回；2026 年缴存基数上限 34470 元、下限 2280 元；免费服务。</p></div>" },
           { name: "公积金提取", desc: "租房/购房/离职提取", url: "https://gjj.hangzhou.gov.cn/", color: "#8b5cf6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州公积金提取支持租房、购房、偿还贷款、离职、退休等多种情形。租房提取可线上秒办，资金秒到账；购房/偿还贷款提取需上传材料审核。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p><strong>租房提取</strong>（最常用，可线上办）：① 浙里办 APP 搜索「公积金提取」 ② 选择「租赁自住住房提取」 ③ 填写银行卡号，秒到账<br><strong>购房提取</strong>：上传购房合同/不动产权证/发票<br><strong>偿还贷款</strong>：上传贷款合同与还款明细</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 银行卡（一类账户）<br>• 租房提取无需额外材料<br>• 购房提取需购房合同 + 发票 + 不动产权证</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上办理：浙里办/支付宝「杭州公积金」<br>线下网点：上城区延安路126号 等</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://gjj.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公积金 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>租房提取：每月可提 1500 元，年度上限 18000 元，秒到账；购房/贷款提取：3 个工作日审核；免费服务。</p></div>" },
           { name: "公积金贷款", desc: "额度测算/还款计划", url: "https://gjj.hangzhou.gov.cn/", color: "#06b6d4" },
-          { name: "人才落户", desc: "学历/职称/技能落户", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=人才引进落户", color: "#ec4899", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州人才落户政策开放度高，本科及以上学历、中级及以上职称、高级技师等均可申请。全日制普通高校本科及研究生以上学历可「先落户后就业」。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>学历落户</strong>：全日制本科 45 周岁以下，可「先落户后就业」；研究生 50 周岁以下<br>② <strong>职称落户</strong>：中级职称 45 周岁以下；副高职称 50 周岁以下；正高职称 55 周岁以下<br>③ <strong>技能落户</strong>：高级技师 45 周岁以下；技师 40 周岁以下<br>④ 在「警察叔叔」APP 或浙里办线上申请，邮件送达</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证、户口簿<br>• 学历证书 + 学信网验证报告<br>• 职称证书（职称落户）<br>• 劳动合同或社保缴纳证明（部分情形）<br>• 房产证或社区集体户证明</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：警察叔叔 APP、浙里办<br>线下：各公安户籍办理窗口<br>电话：0571-87280474</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>线上办理：1-3 个工作日审核；户口迁移证电子送达；免费。</p></div>" },
-          { name: "积分落户", desc: "积分计算/申请流程", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=积分落户", color: "#14b8a6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州积分落户是面向非杭户籍人员的另一渠道，按年龄、学历、社保、房产、社会服务等累计积分，年度公布落户分值。适合学历较低但有稳定工作和居住的人员。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>积分申报</strong>：每年 3-6 月在浙里办提交<br>② <strong>积分核定</strong>：由公安、人社、住建等部门数据自动核定<br>③ <strong>落户分值</strong>：每年公布落户分值线，达到者可申请<br>④ <strong>户口迁移</strong>：取得落户资格后 30 日内办理迁移</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证、户口簿<br>• 居住证（在杭登记满 1 年）<br>• 社保缴纳证明（满 1 年）<br>• 房产证或租赁备案证明<br>• 学历/职称证书（加分项）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：浙里办 APP「积分落户」<br>线下：各公安户籍窗口</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>申报期：每年 3-6 月；结果公布：通常 9-10 月；免费服务。</p></div>" },
-          { name: "居住证办理", desc: "登记/申领/签注", url: "https://www.zjzwfw.gov.cn/", color: "#84cc16", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州居住证是非杭户籍人员在杭享受公共服务（子女入学、医保、买车上牌、考驾照等）的凭证。已开通电子居住证，可通过「警察叔叔」APP 全程线上办理。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>居住登记</strong>：先在「警察叔叔」APP 或流动人口管理平台登记满 6 个月<br>② <strong>申领居住证</strong>：登记满 6 个月后在 APP 内申领<br>③ <strong>电子居住证</strong>：申领成功后自动生成电子证，与实体证同等效力<br>④ <strong>年度签注</strong>：每年签注 1 次，线上自助办理</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 居住证明（房产证 / 租赁备案 / 居住证明）<br>• 就业或就读证明（劳动合同 / 社保 / 学生证）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：警察叔叔 APP、浙里办<br>线下：各派出所户籍窗口</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://www.zjzwfw.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 浙里办 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>登记满 6 个月后申领；线上申领 1-3 个工作日审核；免费。</p></div>" },
-          { name: "身份证办理", desc: "首次申领/换领/补领", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=身份证办理", color: "#f97316", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州身份证业务支持跨省通办，外省户籍人员可在杭换领/补领身份证。首次申领仍需回户籍地（部分省份已开通跨省首次申领试点）。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>换证</strong>：到期前 3 个月内，派出所现场办或「警察叔叔」APP 预约<br>② <strong>补证</strong>：遗失后「警察叔叔」APP 申请挂失+补领<br>③ <strong>拍照</strong>：现场免费拍照（也可上传符合要求的数码照）<br>④ <strong>领取</strong>：可选择邮寄送达或现场领取</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 户口簿或旧身份证（换证）<br>• 居住证（外地户籍在杭办需）<br>• 现场采集指纹与人像</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州各公安派出所户籍窗口<br>可在「警察叔叔」APP 查询附近网点<br>电话：0571-87280474</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>办理时限：30-60 日（省内通常 15-20 日）；换证 20 元/证，补证 40 元/证。</p></div>" },
+          { name: "人才落户", desc: "学历/职称/技能落户", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E4%BA%BA%E6%89%8D%E5%BC%95%E8%BF%9B%E8%90%BD%E6%88%B7", color: "#ec4899", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州人才落户政策开放度高，本科及以上学历、中级及以上职称、高级技师等均可申请。全日制普通高校本科及研究生以上学历可「先落户后就业」。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>学历落户</strong>：全日制本科 45 周岁以下，可「先落户后就业」；研究生 50 周岁以下<br>② <strong>职称落户</strong>：中级职称 45 周岁以下；副高职称 50 周岁以下；正高职称 55 周岁以下<br>③ <strong>技能落户</strong>：高级技师 45 周岁以下；技师 40 周岁以下<br>④ 在「警察叔叔」APP 或浙里办线上申请，邮件送达</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证、户口簿<br>• 学历证书 + 学信网验证报告<br>• 职称证书（职称落户）<br>• 劳动合同或社保缴纳证明（部分情形）<br>• 房产证或社区集体户证明</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：警察叔叔 APP、浙里办<br>线下：各公安户籍办理窗口<br>电话：0571-87280474</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>线上办理：1-3 个工作日审核；户口迁移证电子送达；免费。</p></div>" },
+          { name: "积分落户", desc: "积分计算/申请流程", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E7%A7%AF%E5%88%86%E8%90%BD%E6%88%B7", color: "#14b8a6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州积分落户是面向非杭户籍人员的另一渠道，按年龄、学历、社保、房产、社会服务等累计积分，年度公布落户分值。适合学历较低但有稳定工作和居住的人员。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>积分申报</strong>：每年 3-6 月在浙里办提交<br>② <strong>积分核定</strong>：由公安、人社、住建等部门数据自动核定<br>③ <strong>落户分值</strong>：每年公布落户分值线，达到者可申请<br>④ <strong>户口迁移</strong>：取得落户资格后 30 日内办理迁移</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证、户口簿<br>• 居住证（在杭登记满 1 年）<br>• 社保缴纳证明（满 1 年）<br>• 房产证或租赁备案证明<br>• 学历/职称证书（加分项）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：浙里办 APP「积分落户」<br>线下：各公安户籍窗口</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>申报期：每年 3-6 月；结果公布：通常 9-10 月；免费服务。</p></div>" },
+          { name: "居住证办理", desc: "登记/申领/签注", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E5%B1%85%E4%BD%8F%E8%AF%81%E5%8A%9E%E7%90%86", color: "#84cc16", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州居住证是非杭户籍人员在杭享受公共服务（子女入学、医保、买车上牌、考驾照等）的凭证。已开通电子居住证，可通过「警察叔叔」APP 全程线上办理。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>居住登记</strong>：先在「警察叔叔」APP 或流动人口管理平台登记满 6 个月<br>② <strong>申领居住证</strong>：登记满 6 个月后在 APP 内申领<br>③ <strong>电子居住证</strong>：申领成功后自动生成电子证，与实体证同等效力<br>④ <strong>年度签注</strong>：每年签注 1 次，线上自助办理</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 居住证明（房产证 / 租赁备案 / 居住证明）<br>• 就业或就读证明（劳动合同 / 社保 / 学生证）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：警察叔叔 APP、浙里办<br>线下：各派出所户籍窗口</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 浙里办 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>登记满 6 个月后申领；线上申领 1-3 个工作日审核；免费。</p></div>" },
+          { name: "身份证办理", desc: "首次申领/换领/补领", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E8%BA%AB%E4%BB%BD%E8%AF%81", color: "#f97316", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州身份证业务支持跨省通办，外省户籍人员可在杭换领/补领身份证。首次申领仍需回户籍地（部分省份已开通跨省首次申领试点）。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>换证</strong>：到期前 3 个月内，派出所现场办或「警察叔叔」APP 预约<br>② <strong>补证</strong>：遗失后「警察叔叔」APP 申请挂失+补领<br>③ <strong>拍照</strong>：现场免费拍照（也可上传符合要求的数码照）<br>④ <strong>领取</strong>：可选择邮寄送达或现场领取</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 户口簿或旧身份证（换证）<br>• 居住证（外地户籍在杭办需）<br>• 现场采集指纹与人像</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州各公安派出所户籍窗口<br>可在「警察叔叔」APP 查询附近网点<br>电话：0571-87280474</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"http://police.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公安 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>办理时限：30-60 日（省内通常 15-20 日）；换证 20 元/证，补证 40 元/证。</p></div>" },
           { name: "护照办理", desc: "因私出国护照申请", url: "https://s.nia.gov.cn/", color: "#a855f7", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州居民可在市内任一出入境接待大厅办理护照、港澳通行证、台湾通行证。已支持「全国通办」，外省户籍人员也可在杭办理。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>预约</strong>：在「国家移民管理局」APP 或微信小程序预约杭州接待大厅与时段<br>② <strong>到场</strong>：携带材料按预约时段到大厅，采集人像与指纹<br>③ <strong>缴费</strong>：现场扫码缴费 120 元/证<br>④ <strong>领取</strong>：选择邮寄送达或现场领取</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证原件<br>• 户口簿（首次申领，部分情形）<br>• 居住证（外地户籍在杭办需）<br>• 旧护照（换发）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州市公安局出入境管理局<br>上城区 Knox 路 1 号（出入境接待大厅）<br>各区也有分局受理点<br>电话：0571-87280770</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://s.nia.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 国家移民局 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>省内户籍：7 个工作日；外省户籍：20 日；护照 120 元/证。</p></div>" },
           { name: "港澳通行证", desc: "团队游/个人游申请", url: "https://s.nia.gov.cn/", color: "#0ea5e9" },
           { name: "台湾通行证", desc: "赴台证件办理", url: "https://s.nia.gov.cn/", color: "#22c55e" },
@@ -46,22 +93,22 @@
           { name: "健康证办理", desc: "从业人员健康证明", url: "https://wsjkw.hangzhou.gov.cn/", color: "#f59e0b" },
           { name: "驾驶证业务", desc: "换证/补证/转入", url: "https://zj.122.gov.cn/", color: "#8b5cf6" },
           { name: "行驶证业务", desc: "补领/换领/变更", url: "https://zj.122.gov.cn/", color: "#06b6d4" },
-          { name: "营业执照", desc: "设立/变更/注销", url: "https://www.zjzwfw.gov.cn/", color: "#ec4899" },
-          { name: "税务登记", desc: "税务登记/申报", url: "https://www.zjzwfw.gov.cn/", color: "#14b8a6" },
-          { name: "社保卡申领", desc: "社保卡办理/激活", url: "https://www.zjzwfw.gov.cn/", color: "#84cc16" },
+          { name: "营业执照", desc: "设立/变更/注销", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1?q=%E8%90%A5%E4%B8%9A%E6%89%A7%E7%85%A7", color: "#ec4899" },
+          { name: "税务登记", desc: "税务登记/申报", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E7%A8%8E%E5%8A%A1%E7%99%BB%E8%AE%B0", color: "#14b8a6" },
+          { name: "社保卡申领", desc: "社保卡办理/激活", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E7%A4%BE%E4%BF%9D%E5%8D%A1%E7%94%B3%E9%A2%86", color: "#84cc16" },
           { name: "高层次人才认定", desc: "A/B/C/D/E类人才", url: "https://hrss.hangzhou.gov.cn/", color: "#f97316" },
           { name: "毕业生补贴", desc: "生活补贴/租房补贴", url: "https://hrss.hangzhou.gov.cn/", color: "#a855f7" },
           { name: "创业资助", desc: "大学生创业扶持", url: "https://hrss.hangzhou.gov.cn/", color: "#0ea5e9" },
           { name: "技能补贴", desc: "职业技能提升补贴", url: "https://hrss.hangzhou.gov.cn/", color: "#22c55e" },
           { name: "住房补贴", desc: "公租房/人才房申请", url: "https://fgj.hangzhou.gov.cn/", color: "#eab308" },
-          { name: "浙里办", desc: "全省政务一网通办", url: "https://www.zjzwfw.gov.cn/", color: "#3b82f6" },
+          { name: "浙里办", desc: "全省政务一网通办", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E", color: "#3b82f6" },
           { name: "12345热线", desc: "市长热线咨询", url: "tel:12345", color: "#ef4444" },
           { name: "发票抽奖", desc: "支付宝/云闪付搜索消费有奖", detail: "<p><strong>消费有奖（发票抽奖）</strong></p><p>杭州消费有奖活动参与方式：</p><p>① <strong>支付宝</strong>：搜索「消费有奖」或「发票管家」录入发票</p><p>② <strong>云闪付</strong>：搜索「发票抽奖」参与</p><p>③ <strong>浙里办</strong>：搜索「消费有奖」</p><p style=\"margin-top:8px;\">录入餐饮、零售等消费发票即可参与抽奖，奖金最高数万元</p><p style=\"color:var(--text-muted);font-size:13px;\">开奖周期通常为月度/季度，以官方公告为准</p>", color: "#f59e0b" },
           { name: "学历认证", desc: "学信网验证报告", url: "https://www.chsi.com.cn/", color: "#10b981" },
           { name: "房产证明", desc: "不动产登记证明", url: "https://fgj.hangzhou.gov.cn/", color: "#8b5cf6" },
-          { name: "无犯罪记录", desc: "证明开具申请", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=无犯罪记录", color: "#06b6d4" },
-          { name: "婚姻登记", desc: "结婚/离婚登记预约", url: "https://www.zjzwfw.gov.cn/", color: "#ec4899" },
-          { name: "生育服务", desc: "生育登记/证明", url: "https://www.zjzwfw.gov.cn/", color: "#14b8a6" },
+          { name: "无犯罪记录", desc: "证明开具申请", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%97%A0%E7%8A%AF%E7%BD%AA%E8%AE%B0%E5%BD%95", color: "#06b6d4" },
+          { name: "婚姻登记", desc: "结婚/离婚登记预约", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1?q=%E5%A9%9A%E5%A7%BB%E7%99%BB%E8%AE%B0", color: "#ec4899" },
+          { name: "生育服务", desc: "生育登记/证明", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1?q=%E7%94%9F%E8%82%B2%E6%9C%8D%E5%8A%A1", color: "#14b8a6" },
           { name: "工资计算器", desc: "个税/社保计算", action: "tax" },
           { name: "万年历", desc: "农历/节气/黄历", action: "calendar" }
         ]
@@ -73,8 +120,8 @@
           { name: "浙A摇号", desc: "小客车指标申请", url: "https://hzxkctk.cn/", color: "#f59e0b", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州小客车指标通过摇号或竞价方式配置。摇号每月 1 次，免费参与，中签率较低但成本低；竞价每月 1 次，价高者得，适合急需上牌者。还有浙 M 区域指标（仅限杭州部分区域行驶）。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>申请资格</strong>：杭州户籍或持居住证满 2 年，连续缴纳社保满 2 年<br>② <strong>摇号申请</strong>：在 hzxkctk.cn 注册并提交申请，每月 25 日公开摇号<br>③ <strong>竞价</strong>：每月 25 日竞价，需缴 2000 元保证金<br>④ <strong>查询中签</strong>：官网或短信通知，中签后 6 个月内上牌</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 居住证（非杭户籍）<br>• 社保缴纳证明<br>• 驾驶证（部分指标类型）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：杭州市小客车总量调控管理信息系统<br>线下：杭州市交警支队车管所</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://hzxkctk.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州小客车调控 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>摇号：每月 1 次，免费；竞价：每月 1 次，保证金 2000 元，平均成交价约 3-5 万元。</p></div>" },
           { name: "浙A竞价", desc: "车牌竞价出价", url: "https://hzxkctk.cn/", color: "#10b981" },
           { name: "浙M区域牌", desc: "区域指标申请", url: "https://hzxkctk.cn/", color: "#3b82f6" },
-          { name: "外地车限行", desc: "非浙A限行规定", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=外地车限行", color: "#8b5cf6" },
-          { name: "急事通申请", desc: "周末/节假日通行证", url: "https://www.zjzwfw.gov.cn/zjservice/item/search/index.do?keyword=急事通", color: "#06b6d4" },
+          { name: "外地车限行", desc: "非浙A限行规定", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E5%A4%96%E5%9C%B0%E8%BD%A6%E9%99%90%E8%A1%8C", color: "#8b5cf6" },
+          { name: "急事通申请", desc: "周末/节假日通行证", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%80%A5%E4%BA%8B%E9%80%9A", color: "#06b6d4" },
           { name: "地铁线路图", desc: "1-19号线全覆盖", url: "https://www.hzmetro.com/", color: "#ec4899" },
           { name: "地铁时刻表", desc: "首末班车时间", url: "https://www.hzmetro.com/", color: "#14b8a6" },
           { name: "地铁票价", desc: "票价计算/换乘", url: "https://www.hzmetro.com/", color: "#84cc16" },
@@ -544,7 +591,8 @@
         id: "celebrity", name: "杭州名人", icon: "👤",
         items: [
           { name: "林徽因", desc: "建筑师的江南情怀", detail: "<p><strong>林徽因（1904-1955）</strong></p><p>中国著名建筑师、作家，人民英雄纪念碑和中华人民共和国国徽深化方案的设计者之一。</p><p>• 与丈夫梁思成共同研究中国古代建筑</p><p>• 文学作品：《你是人间的四月天》</p><p>• 与杭州的渊源：祖籍杭州，祖父林孝恂为杭州人</p>", color: "#ef4444" },
-          { name: "胡雪岩", desc: "红顶商人·元宝街", url: "https://credit.hangzhou.gov.cn/", color: "#f59e0b" },
+          { name: "胡雪岩", desc: "红顶商人·元宝街", detail: "<p><strong>胡雪岩（1823-1885）</strong></p><p>名光墉，清末著名徽商，富可敌国，被誉为「中国商圣」。</p><p>• 与左宗棠结交，为西征筹措军费，获二品顶戴 — 「红顶商人」</p><p>• 创办「胡庆余堂」国药店，以「戒欺」为宗旨</p><p>• 故居位于杭州上城区元宝街</p><p>• 胡庆余堂中药文化已列入国家级非遗</p>", color: "#f59e0b" },
+          { name: "胡庆余堂", desc: "国药老字号·1874年创", detail: "<p><strong>胡庆余堂（1874 年创办）</strong></p><p>由胡雪岩创办，与北京同仁堂并称「北同仁、南庆余」。</p><p>• 「戒欺」匾：药业关系性命，尤为万不可欺</p><p>• 镇店三宝：戒欺匾、大香炉、百余年老建筑</p><p>• 位于河坊街大井巷 95 号，免费参观</p>", color: "#ef4444" },
           { name: "白居易", desc: "杭州刺史·西湖诗人", detail: "<p><strong>白居易（772-846）</strong></p><p>唐代诗人，曾任杭州刺史。</p><p>• 在杭州期间疏浚西湖、筑堤（白堤）</p><p>• 诗句「最爱湖东行不足，绿杨阴里白沙堤」</p><p>• 与杭州的渊源：白堤以其命名</p>", color: "#10b981" },
           { name: "苏东坡", desc: "西湖筑堤·文豪", detail: "<p><strong>苏轼（1037-1101）</strong></p><p>北宋文豪，曾任杭州知州（两次）。</p><p>• 疏浚西湖，筑苏堤</p><p>• 发明东坡肉</p><p>• 诗句「欲把西湖比西子，淡妆浓抹总相宜」</p><p>• 与杭州的渊源：苏堤以其命名</p>", color: "#3b82f6" },
           { name: "岳飞", desc: "精忠报国·岳王庙", detail: "<p><strong>岳飞（1103-1142）</strong></p><p>南宋抗金名将，精忠报国。</p><p>• 被秦桧害死于杭州风波亭</p><p>• 岳王庙位于栖霞岭南麓</p><p>• 墓前有秦桧等四人跪像</p>", color: "#8b5cf6" },
@@ -627,7 +675,7 @@
           { name: "解放路", desc: "交通枢纽记忆", detail: "<p><strong>解放路</strong></p><p>杭州东西主干道，交通枢纽。</p><p>• 奎元馆（片儿川）</p><p>• 解百商厦</p><p>• 地铁1号线沿线</p>", color: "#22c55e" },
           { name: "钱江路", desc: "江岸新篇·CBD", detail: "<p><strong>钱江路</strong></p><p>江干区（现上城区），钱江新城CBD主干道。</p><p>• 杭州CBD核心</p><p>• 「日月同辉」（洲际酒店、杭州大剧院）</p><p>• 城市阳台</p>", color: "#eab308" },
           { name: "复兴路", desc: "历史回响·上城区", detail: "<p><strong>复兴路</strong></p><p>上城区，历史回响。</p><p>• 南宋皇城遗址附近</p><p>• 老城区改造</p>", color: "#ef4444" },
-          { name: "杭州特产", desc: "带走杭州味道", detail: "<div style=\"line-height:1.8;\"><p><strong>🎁 杭州伴手礼 · 特产推荐</strong></p><p style=\"margin-top:10px;\"><strong>🍃 西湖龙井</strong></p><p>中国十大名茶之首，产于西湖龙井村周围群山。色绿、香郁、味甘、形美。明前龙井最贵，雨前茶性价比高。建议选购农户直供或有品牌保障的商品，认准地理标志。</p><p style=\"margin-top:10px;\"><strong>🧣 杭州丝绸</strong></p><p>杭州丝绸历史悠久，素有"丝绸之府"美誉。丝绸围巾、领带、睡衣、旗袍均为特色。都锦生是杭州老字号丝绸品牌，'XX'纹样最具代表性。中国丝绸博物馆文创店品质有保障。</p><p style=\"margin-top:10px;\"><strong>🪭 王星记扇子</strong></p><p>百年老字号，国家级非遗。檀香扇、黑纸扇、团扇各有特色。自用或送礼皆宜，古色古香。</p><p style=\"margin-top:10px;\"><strong>🍡 知味观点心</strong></p><p>杭州百年老字号，糕团点心名扬四方。定胜糕、幸福双、桂花糕、绿豆糕等最具特色，真空包装可带走。</p><p style=\"margin-top:10px;\"><strong>🌸 西湖藕粉</strong></p><p>西湖藕粉是杭州特产，冲泡后晶莹透明，清香补身。选择正宗西湖产地，别买假冒产品。</p><p style=\"margin-top:10px;\"><strong>🥢 张小泉剪刀</strong></p><p>始创于明崇祯年间，距今近400年历史。剪刀锋利耐用，'张小泉'三字招牌是品质保证。</p><p style=\"margin-top:10px;\"><strong>🏥 方回春堂/胡庆余堂</strong></p><p>晚清老字号，中药养生、膏方、燕窝等浙派国药代表。送长辈养生好礼。</p><p style=\"margin-top:10px;\"><strong>🪨 临平塘栖枇杷/鸬鸟蜜梨</strong></p><p>杭州本地时令水果，塘栖枇杷白沙最甜，鸬鸟蜜梨汁多无渣。季节限定可关注。</p><p style=\"margin-top:10px;\"><strong>📍 购买建议</strong></p><p>• 河坊街、南宋御街：老字号集中<br>• 湖滨银泰in77：品牌旗舰店<br>• 大型超市：价格实惠但品质参差<br>• 旗舰店/官网：最可靠但价格较高</p></div>", color: "#f97316" }
+          { name: "杭州特产", desc: "带走杭州味道", detail: "<div style=\"line-height:1.8;\"><p><strong>🎁 杭州伴手礼 · 特产推荐</strong></p><p style=\"margin-top:10px;\"><strong>🍃 西湖龙井</strong></p><p>中国十大名茶之首，产于西湖龙井村周围群山。色绿、香郁、味甘、形美。明前龙井最贵，雨前茶性价比高。建议选购农户直供或有品牌保障的商品，认准地理标志。</p><p style=\"margin-top:10px;\"><strong>🧣 杭州丝绸</strong></p><p>杭州丝绸历史悠久，素有\"丝绸之府\"美誉。丝绸围巾、领带、睡衣、旗袍均为特色。都锦生是杭州老字号丝绸品牌，'XX'纹样最具代表性。中国丝绸博物馆文创店品质有保障。</p><p style=\"margin-top:10px;\"><strong>🪭 王星记扇子</strong></p><p>百年老字号，国家级非遗。檀香扇、黑纸扇、团扇各有特色。自用或送礼皆宜，古色古香。</p><p style=\"margin-top:10px;\"><strong>🍡 知味观点心</strong></p><p>杭州百年老字号，糕团点心名扬四方。定胜糕、幸福双、桂花糕、绿豆糕等最具特色，真空包装可带走。</p><p style=\"margin-top:10px;\"><strong>🌸 西湖藕粉</strong></p><p>西湖藕粉是杭州特产，冲泡后晶莹透明，清香补身。选择正宗西湖产地，别买假冒产品。</p><p style=\"margin-top:10px;\"><strong>🥢 张小泉剪刀</strong></p><p>始创于明崇祯年间，距今近400年历史。剪刀锋利耐用，'张小泉'三字招牌是品质保证。</p><p style=\"margin-top:10px;\"><strong>🏥 方回春堂/胡庆余堂</strong></p><p>晚清老字号，中药养生、膏方、燕窝等浙派国药代表。送长辈养生好礼。</p><p style=\"margin-top:10px;\"><strong>🪨 临平塘栖枇杷/鸬鸟蜜梨</strong></p><p>杭州本地时令水果，塘栖枇杷白沙最甜，鸬鸟蜜梨汁多无渣。季节限定可关注。</p><p style=\"margin-top:10px;\"><strong>📍 购买建议</strong></p><p>• 河坊街、南宋御街：老字号集中<br>• 湖滨银泰in77：品牌旗舰店<br>• 大型超市：价格实惠但品质参差<br>• 旗舰店/官网：最可靠但价格较高</p></div>", color: "#f97316" }
         ]
       },
       {
@@ -920,24 +968,24 @@
       {
         id: "museum", name: "博物馆", icon: "🏛️",
         items: [
-          { name: "浙江省博物馆", desc: "之江馆区", url: "https://www.zjmuseum.com.cn/", color: "#ef4444" },
-          { name: "浙江美术馆", desc: "南山路", url: "https://www.zjam.org.cn/", color: "#f59e0b" },
-          { name: "杭州博物馆", desc: "吴山广场", url: "https://hz-museum.cn/", color: "#10b981" },
-          { name: "中国丝绸博物馆", desc: "玉皇山路", url: "https://www.chinasilkmuseum.com/", color: "#3b82f6" },
-          { name: "中国茶叶博物馆", desc: "龙井路", url: "https://www.teamuseum.cn/", color: "#8b5cf6" },
-          { name: "良渚博物院", desc: "世界遗产", url: "https://www.lzmuseum.cn/", color: "#ec4899" },
+          { name: "浙江省博物馆", desc: "之江馆区", url: "https://www.zjmuseum.com.cn/", color: "#ef4444", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">浙江省博物馆是浙江省最大综合性博物馆，之江新馆2023年开放，占地10万平方米，馆藏文物10万余件。前身为1929年创建的「西湖博物院」。</p><div class=\"guide-block\"><h4>🏛️ 镇馆之宝</h4><p>• <strong>良渚文化玉琮</strong>：5000年文明实证<br>• <strong>战国越王州句剑</strong>：吴越国宝<br>• <strong>五代吴越国鎏金阿育王塔</strong>：雷峰塔地宫出土<br>• <strong>北宋彩塑泥人</strong>：北宋风俗<br>• <strong>元赵孟頫《吴兴赋》</strong>：书法名作</p></div><div class=\"guide-block\"><h4>📍 馆区</h4><p>• <strong>之江馆</strong>（新馆）：之江文化中心，2023年开放，规模最大<br>• <strong>孤山馆</strong>：西湖边老馆，江南园林式</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>免费</strong>，需预约<br>• 之江馆全程 4-6 小时<br>• 孤山馆 2 小时<br>• 周一闭馆</p></div>" },
+          { name: "浙江美术馆", desc: "南山路", url: "https://www.zjam.org.cn/", color: "#f59e0b", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">浙江美术馆位于南山路南山的中国美院旁，占地3.7万平方米，是浙江省最大公立美术馆，2009年开馆，涵盖美术展览、收藏、研究、教育。</p><div class=\"guide-block\"><h4>🎨 主要展览</h4><p>• <strong>现代美术作品展</strong>：浙江籍名家<br>• <strong>当代艺术展</strong>：国内国际<br>• <strong>民间美术</strong>：非遗、民俗<br>• <strong>国际交流展</strong>：各国名作</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>西湖区南山路138号（中国美院旁）</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>免费</strong>，需预约<br>• 展览更换频繁，关注公众号<br>• 配合中国美院 + 南山路游<br>• 周一闭馆</p></div>" },
+          { name: "杭州博物馆", desc: "吴山广场", url: "https://hz-museum.cn/", color: "#10b981", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州博物馆位于上城区吴山广场北侧，是讲述杭州历史变迁的城市博物馆，馆藏1万余件，其中国家一级文物88件。</p><div class=\"guide-block\"><h4>🏛️ 三大镇馆之宝</h4><p>• <strong>战国水晶杯</strong>：1990年半山墓出土，整块高纯水晶打磨，距今2300年，入选国家文物局禁出境展览文物<br>• <strong>折枝牡丹纹青花瓷</strong>：元代青花代表作<br>• <strong>越窑青瓷褐彩云纹熏炉</strong>：五代越窑精品</p></div><div class=\"guide-block\"><h4>🎯 常设展厅</h4><p>• <strong>「最忆是杭州」</strong>：杭州通史陈列，从跨湖桥到明清<br>• <strong>「珍藏」</strong>：馆藏精品书画、工艺、钱币<br>• <strong>「西湖诗文」</strong>：历代歌咏西湖的书画作品</p></div><div class=\"guide-block\"><h4>📍 实用信息</h4><p>• <strong>免费</strong>，需提前公众号预约<br>• 开放时间：9:00-16:30（周一闭馆）<br>• 交通：地铁7号线吴山广场站<br>• 建议游览：1.5-2 小时</p></div>" },
+          { name: "中国丝绸博物馆", desc: "玉皇山路", url: "https://www.chinasilkmuseum.com/", color: "#3b82f6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">中国丝绸博物馆位于西子湖畔玉皇山路，1992年开放，是世界上最大的丝绸专题博物馆，国家一级博物馆。2023年改造后以'五千年的丝线'为主线全新亮相。</p><div class=\"guide-block\"><h4>🧣 主要展区</h4><p>• <strong>基本陈列「锦程」</strong>：中国五千年丝绸文明史<br>• <strong>纺织品文物修复展示馆</strong>：现场观看修复师修复古代织物<br>• <strong>西方时装馆</strong>：18-20世纪欧洲时装<br>• <strong>中国时装馆</strong>：近现代中国服饰演变</p></div><div class=\"guide-block\"><h4>🎯 镇馆看点</h4><p>• <strong>距今5000年的丝线</strong>：浙江湖州钱山漾遗址出土（世界最早）<br>• <strong>唐代联珠对鸭纹锦</strong>：丝绸之路珍品<br>• <strong>宋缂丝「牡丹图」</strong>：一寸缂丝一寸金</p></div><div class=\"guide-block\"><h4>📍 实用信息</h4><p>• <strong>免费</strong>，免预约直接入馆<br>• 开放时间：9:00-17:00（周一闭馆）<br>• 交通：公交12路、31路「丝绸博物馆」<br>• 建议游览：2-3 小时<br>• 馆内有文创店，丝巾品质佳适合做伴手礼</p></div>" },
+          { name: "中国茶叶博物馆", desc: "龙井路", url: "https://www.teamuseum.cn/", color: "#8b5cf6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">中国茶叶博物馆位于杭州西湖龙井茶乡，是国内唯一国家级茶专题博物馆，分为双峰馆区和龙井馆区两座，占地共8万平方米。</p><div class=\"guide-block\"><h4>🍵 双馆区介绍</h4><p>• <strong>双峰馆区</strong>（主馆）：茶史、茶萃、茶事、茶缘、茶具、茶俗六大展区，系统展示中国5000年茶文明<br>• <strong>龙井馆区</strong>：世界茶文化展，茶与咖啡、可可的环球对比，茶山风光</p></div><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• 三国时期茶饼实物（国内最早）<br>• 唐代煮茶器、宋代点茶具、明代紫砂壶<br>• 名茶样本展厅：全国各地名茶<br>• 茶山茶园：馆区本身就是龙井茶园</p></div><div class=\"guide-block\"><h4>📍 实用信息</h4><p>• <strong>免费</strong>，免预约刷身份证入馆<br>• 开放时间：9:00-16:30（周一闭馆）<br>• 交通：公交27路、87路「茶博双峰馆区」<br>• 建议游览：2-3 小时<br>• 春季采茶季可在馆区周边体验采茶、炒茶<br>• 馆内茶室可品龙井茶</p></div>" },
+          { name: "良渚博物院", desc: "世界遗产", url: "https://www.lzmuseum.cn/", color: "#ec4899", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">良渚博物院是世界遗产良渚古城遗址的展示窗口，由建筑大师戴卫·奇普菲尔德设计。展示5000年中华文明实证。</p><div class=\"guide-block\"><h4>🏛️ 镇馆之宝</h4><p>• <strong>玉琮王</strong>：良渚最大玉琮<br>• <strong>玉钺</strong>：王权象征<br>• <strong>玉璧</strong>：礼器<br>• <strong>神徽</strong>：良渚人图腾</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>余杭区良渚街道美丽洲路1号</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>免费</strong>，需预约<br>• 周一闭馆<br>• 全程 2-3 小时<br>• 配合良渚古城遗址公园一日游</p></div>" },
           { name: "运河博物馆", desc: "拱宸桥", url: "", detail: "<p><strong>中国京杭大运河博物馆</strong></p><p>位于拱宸桥畔，全面展示运河历史文化。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 交通：地铁5号线大运河站</p>", color: "#06b6d4" },
           { name: "南宋官窑博物馆", desc: "南复路", detail: "<p><strong>南宋官窑博物馆</strong></p><p>位于南复路，中国第一座陶瓷专题博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 交通：地铁4号线水澄桥站</p>", color: "#14b8a6" },
-          { name: "刀剪剑博物馆", desc: "小河路", url: "https://www.hzacm.cn/", color: "#84cc16" },
+          { name: "刀剪剑博物馆", desc: "小河路", url: "https://www.hzacm.cn/", color: "#84cc16", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">中国刀剪剑博物馆位于拱墅小河路，是中国唯一刀剪剑专题博物馆，展示刀、剪、剑的历史与文化，国家三级博物馆。张小泉剪刀国家级非遗。</p><div class=\"guide-block\"><h4>🔪 展区</h4><p>• <strong>刀展厅</strong>：从石器到现代刀具<br>• <strong>剑展厅</strong>：从青铜剑到现代军刀<br>• <strong>剪展厅</strong>：张小泉剪刀历史与工艺</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>免费</strong><br>• 周一闭馆<br>• 与伞博物馆、扇博物馆相邻<br>• 全程 1 小时</p></div>" },
           { name: "伞博物馆", desc: "小河路", detail: "<p><strong>中国伞博物馆</strong></p><p>位于小河路，展示中国伞文化。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 与扇博物馆、刀剪剑博物馆相邻</p>", color: "#f97316" },
           { name: "扇博物馆", desc: "小河路", detail: "<p><strong>中国扇博物馆</strong></p><p>位于小河路，展示中国扇文化。</p><p>• 免费开放</p><p>• 周一闭馆</p><p>• 可体验制扇工艺</p>", color: "#a855f7" },
-          { name: "西泠印社", desc: "孤山路", url: "", color: "#0ea5e9" },
+          { name: "西泠印社", desc: "孤山路", url: "", color: "#0ea5e9", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">西泠印社位于孤山路西湖边，创立于清光绪三十年（1904年），是海内研究金石篆刻历史最悠久的文人社团，有「天下第一名社」之誉。首任社长吴昌硕。</p><div class=\"guide-block\"><h4>🏛️ 建筑</h4><p>• <strong>华严经塔</strong>：孤山标志<br>• <strong>题襟馆</strong>：文人雅集<br>• <strong>仰贤亭</strong>：石室<br>• <strong>汉三老石室</strong>：石碑</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>西湖区孤山路31号</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>免费</strong><br>• 配合孤山 + 浙江博物馆 + 西泠桥<br>• 书法篆刻爱好者必去<br>• 可购西泠印社文创</p></div>" },
           { name: "跨湖桥遗址博物馆", desc: "萧山·独木舟", detail: "<p><strong>跨湖桥遗址博物馆</strong></p><p>位于萧山，展示8000年前跨湖桥文化。</p><p>• 镇馆之宝：世界最早的独木舟</p><p>• 免费开放</p>", color: "#22c55e" },
           { name: "中国湿地博物馆", desc: "西溪湿地", detail: "<p><strong>中国湿地博物馆</strong></p><p>位于西溪湿地，国内首个湿地主题博物馆。</p><p>• 免费开放</p><p>• 周一闭馆</p>", color: "#06b6d4" },
           { name: "中国财税博物馆", desc: "吴山广场", detail: "<p><strong>中国财税博物馆</strong></p><p>位于吴山广场，展示中国财税历史。</p><p>• 免费开放</p><p>• 周一闭馆</p>", color: "#eab308" },
           { name: "中国动漫博物馆", desc: "滨江·白马湖", detail: "<p><strong>中国动漫博物馆</strong></p><p>位于滨江白马湖，国内最大的动漫主题博物馆。</p><p>• 免费开放，需预约</p><p>• 周一闭馆</p><p>• 互动体验丰富，适合亲子</p>", color: "#ec4899" },
           { name: "中国印学博物馆", desc: "孤山·西泠印社旁", detail: "<p><strong>中国印学博物馆</strong></p><p>位于孤山，西泠印社旁。</p><p>• 展示中国印章、篆刻艺术</p><p>• 免费开放</p>", color: "#8b5cf6" },
-          { name: "浙江自然博物院", desc: "西湖文化广场", url: "https://www.zmnh.com/", color: "#10b981" },
+          { name: "浙江自然博物院", desc: "西湖文化广场", url: "https://www.zmnh.com/", color: "#10b981", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">浙江自然博物院（武林馆区）是浙江省最大自然类博物馆，恐龙化石、动物标本、地球科学，亲子必去。2023年杭州馆区（西湖文化广场）改造升级。</p><div class=\"guide-block\"><h4>🏛️ 重点</h4><p>• <strong>恐龙化石</strong>：浙江吉兰泰龙、礼贤龙<br>• <strong>动物标本</strong>：全球动物<br>• <strong>地球科学</strong>：矿物、地质<br>• <strong>浙江自然</strong>：本省生态</p></div><div class=\"guide-block\"><h4>📍 位置</h4><p>拱墅区西湖文化广场6号</p></div><div class=\"guide-block\"><h4>💡 攻略</h4><p>• <strong>免费</strong>，需预约<br>• 全程 2-3 小时<br>• 亲子首选<br>• 周一闭馆</p></div>" },
           { name: "胡庆余堂中药博物馆", desc: "河坊街·国药文化", detail: "<p><strong>胡庆余堂中药博物馆</strong></p><p>位于河坊街，在胡庆余堂国药号内。</p><p>• 展示中药文化、制药工艺</p><p>• 门票：10元</p><p>• 可参观老药铺</p>", color: "#ef4444" },
           { name: "都锦生织锦博物馆", desc: "茅家埠·织锦艺术", detail: "<p><strong>都锦生织锦博物馆</strong></p><p>位于茅家埠，展示织锦艺术。</p><p>• 免费开放</p><p>• 可参观织锦工艺、购买丝绸制品</p>", color: "#f59e0b" }
         ]
@@ -1814,7 +1862,18 @@ case 'colors': showColors(); break;
     });
   }
 
-  // 共享 getter：天气数据（异步 Promise，失败 resolve null）
+  // 本地开发兜底天气数据
+  var WEATHER_FALLBACK = {
+    temp: 22, desc: '多云', feels: 21, humidity: 65, wind: 12,
+    updated: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }),
+    forecast: [
+      { label: '今天', min: 18, max: 26, desc: '多云' },
+      { label: '明天', min: 17, max: 24, desc: '晴' },
+      { label: '后天', min: 16, max: 23, desc: '小雨' }
+    ]
+  };
+
+  // 共享 getter：天气数据（异步 Promise，失败 resolve 兜底数据）
   function getWeatherData() {
     return new Promise(function (resolve) {
       try {
@@ -1844,13 +1903,13 @@ case 'colors': showColors(); break;
                 updated: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }),
                 forecast: forecast
               });
-            } catch (e) { resolve(null); }
-          } else { resolve(null); }
+            } catch (e) { resolve(WEATHER_FALLBACK); }
+          } else { resolve(WEATHER_FALLBACK); }
         };
-        xhr.onerror = function () { resolve(null); };
-        xhr.ontimeout = function () { resolve(null); };
+        xhr.onerror = function () { resolve(WEATHER_FALLBACK); };
+        xhr.ontimeout = function () { resolve(WEATHER_FALLBACK); };
         xhr.send();
-      } catch (e) { resolve(null); }
+      } catch (e) { resolve(WEATHER_FALLBACK); }
     });
   }
 
@@ -2370,12 +2429,15 @@ case 'colors': showColors(); break;
     });
   }
 
-  // 共享 getter：金价数据（异步 Promise，失败 resolve null）
+  // 本地开发兜底金价数据（与 Vercel 端点降级数据一致）
+  var GOLD_FALLBACK = { gold: { usdPerOz: 2658, cnyPerOz: 19270, cnyPerGram: 619.5 }, unit: '元/克', updated: new Date().toLocaleString('zh-CN') };
+
+  // 共享 getter：金价数据（异步 Promise，失败 resolve 兜底数据）
   function getGoldData() {
     return fetch('/api/tools?action=gold')
       .then(function (r) { return r.json(); })
-      .then(function (data) { return (data && data.gold) ? data : null; })
-      .catch(function () { return null; });
+      .then(function (data) { return (data && data.gold) ? data : GOLD_FALLBACK; })
+      .catch(function () { return GOLD_FALLBACK; });
   }
 
   // ===== 杭州医院目录查询 =====
@@ -2768,28 +2830,18 @@ case 'colors': showColors(); break;
       thY.querySelector('.th-sub').textContent = '92号油 · 元/升';
     }
 
-    // 3. 天气（异步）
+    // 3. 天气（异步，失败使用兜底数据）
     getWeatherData().then(function (w) {
       var thW = $('#thWeather');
       if (!thW) return;
-      if (!w) {
-        thW.querySelector('.th-value').textContent = '—';
-        thW.querySelector('.th-sub').textContent = '获取失败';
-        return;
-      }
       thW.querySelector('.th-value').textContent = w.temp + '°';
       thW.querySelector('.th-sub').textContent = w.desc + ' 明' + w.forecast[1].min + '~' + w.forecast[1].max + '°';
     });
 
-    // 4. 金价（异步）
+    // 4. 金价（异步，失败使用兜底数据）
     getGoldData().then(function (result) {
       var thG = $('#thGold');
       if (!thG) return;
-      if (!result || !result.gold) {
-        thG.querySelector('.th-value').textContent = '—';
-        thG.querySelector('.th-sub').textContent = '获取失败';
-        return;
-      }
       thG.querySelector('.th-value').textContent = '¥' + result.gold.cnyPerGram;
       thG.querySelector('.th-sub').textContent = '黄金人民币/克';
     });
@@ -3515,7 +3567,7 @@ case 'colors': showColors(); break;
       body += '<div style="margin-top:16px;padding:12px;background:var(--bg);border-radius:10px;">' +
         '<div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text);">🏛️ 官方办理入口</div>' +
         '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">' +
-        '<a href="https://www.zjzwfw.gov.cn/" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">浙里办<br><span style="font-size:11px;color:var(--text-muted);">Web</span></a>' +
+        '<a href="https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">浙里办<br><span style="font-size:11px;color:var(--text-muted);">Web</span></a>' +
         '<a href="https://app.gjzwfw.gov.cn/zhejiang-app/" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">支付宝<br><span style="font-size:11px;color:var(--text-muted);">小程序</span></a>' +
         '<a href="tel:12345" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">12345<br><span style="font-size:11px;color:var(--text-muted);">市长热线</span></a>' +
         '<a href="https://www.hangzhou.gov.cn/" rel="noopener" style="padding:10px;background:var(--surface);border-radius:8px;text-align:center;text-decoration:none;color:inherit;font-size:13px;">杭州政务<br><span style="font-size:11px;color:var(--text-muted);">官网</span></a>' +

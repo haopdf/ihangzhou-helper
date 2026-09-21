@@ -8,7 +8,8 @@
   <meta name="keywords" content="杭州故事,杭州文章,杭州文化,杭州历史,杭州美食,iHangzhou">
   <meta name="theme-color" content="#0ea5e9">
   <link rel="canonical" href="https://www.ihangzhou.net/articles.html">
-  <link rel="stylesheet" href="css/style.css?v=20260928c">
+  <link rel="stylesheet" href="css/style.css?v=20260921a">
+  <script src="js/layout.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
   <style>
     .art-hero {
@@ -23,7 +24,7 @@
     .art-stats span { background: rgba(255,255,255,0.18); padding: 4px 16px; border-radius: 12px; font-weight: 500; }
 
     .art-search { padding: 14px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border); }
-    .art-search-wrap { position: relative; }
+    .art-search-wrap { position: relative; max-width: 720px; margin: 0 auto; }
     .art-search input { width: 100%; padding: 12px 16px 12px 40px; border: 1px solid var(--border); border-radius: 22px; background: var(--bg-alt); font-size: 14px; outline: none; }
     .art-search input:focus { border-color: var(--primary); background: var(--bg-card); }
     .art-search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; opacity: 0.5; pointer-events: none; }
@@ -70,13 +71,10 @@
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <a href="index.html" class="topbar-back" style="color:#fff;text-decoration:none;font-size:20px;padding: 4px 16px;">‹</a>
-    <div class="topbar-city"><span>杭州故事</span><span class="city-arrow">▼</span></div>
-    <div style="flex:1;"></div>
-    <button class="topbar-elderly" onclick="toggleElderlyMode()" title="老人模式">👵 老人</button>
-    <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
-  </header>
+  <script>
+    window.IHZ_PAGE = { title: '杭州故事', icon: '📚' };
+    window.IZ_SKIP_APP_THEME = true;
+  </script>
 
   <div class="art-cats" id="artCats">
     <button class="art-cat active" data-cat="all">全部</button>
@@ -107,10 +105,11 @@
 
   <script src="js/app.js?v=20260928c"></script>
   <script>
-    // 主题 + 老人模式持久化
-    (function(){ try{ var t=localStorage.getItem('ihz-theme')||'light'; document.documentElement.setAttribute('data-theme',t); var b=document.getElementById('themeBtn'); if(b) b.textContent=t==='dark'?'☀️':'🌙'; }catch(e){} try{ var el=localStorage.getItem('ihz_elderly')==='true'; document.documentElement.setAttribute('data-elderly',el?'true':'false'); }catch(e){} })();
-    document.getElementById('themeBtn')?.addEventListener('click',function(){ var cur=document.documentElement.getAttribute('data-theme')||'light'; var next=cur==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',next); localStorage.setItem('ihz-theme',next); this.textContent=next==='dark'?'☀️':'🌙'; });
-
+    if (window.IZ && IZ.layout) {
+      document.addEventListener("DOMContentLoaded", IZ.layout.init);
+    }
+  </script>
+  <script>
     var ALL_ARTICLES = [];
     var FILTERED = [];
     var PAGE_SIZE = 30;
@@ -355,12 +354,5 @@
       setTimeout(render, 200);
     }
   </script>
-
-  <nav class="bottom-nav">
-    <a class="bnav-item" href="index.html"><span class="bicon">🏠</span><span>首页</span></a>
-    <a class="bnav-item" href="index.html#tools"><span class="bicon">🛠️</span><span>工具</span></a>
-    <a class="bnav-item" href="index.html#phone"><span class="bicon">📞</span><span>电话</span></a>
-    <a class="bnav-item" href="index.html#me"><span class="bicon">👤</span><span>我的</span></a>
-  </nav>
 </body>
 </html>

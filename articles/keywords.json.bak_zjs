@@ -47,7 +47,7 @@
       "五"
     ],
     "type": "text",
-    "reply": "🏥 杭州社保\n\n查询入口：https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E"
+    "reply": "🏥 杭州社保\n\n查询入口：https://www.zjzwfw.gov.cn/"
   },
   {
     "keyword": "限行",
@@ -118,7 +118,7 @@
     "title": "🏥 杭州社保查询",
     "desc": "养老/医疗/失业/工伤/生育五险缴费记录与个人账户余额",
     "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
-    "url": "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E"
+    "url": "https://www.zjzwfw.gov.cn/"
   },
   {
     "keyword": "摇号",
@@ -172,7 +172,7 @@
     "title": "📄 杭州居住证办理",
     "desc": "登记满 6 个月即可申领电子居住证",
     "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
-    "url": "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E"
+    "url": "https://www.zjzwfw.gov.cn/"
   },
   {
     "keyword": "免费",

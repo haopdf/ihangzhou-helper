@@ -564,18 +564,33 @@ function initDashboard() {
 }
 
 async function loadCMSData() {
+  var loaded = false;
+  // 1) 先尝试 API（Vercel 环境）
   try {
     var res = await fetch(API_BASE + '/api/content');
     var result = await res.json();
     if (result.success) {
       CMS_DATA = result.data;
-      renderOverview();
-      renderCategories();
-      renderHotServices();
-      renderKeywords();
-      renderChannels();
+      loaded = true;
     }
-  } catch (e) { showToast('加载数据失败', 'error'); }
+  } catch (e) { /* ignore */ }
+  // 2) API 失败则回退到静态 JSON（本地预览/静态服务器）
+  if (!loaded) {
+    try {
+      var staticRes = await fetch('../data/cms.json?t=' + Date.now());
+      CMS_DATA = await staticRes.json();
+      loaded = true;
+    } catch (e2) { /* ignore */ }
+  }
+  if (loaded) {
+    renderOverview();
+    renderCategories();
+    renderHotServices();
+    renderKeywords();
+    renderChannels();
+  } else {
+    showToast('加载数据失败：API 与本地 JSON 均不可用', 'error');
+  }
 }
 
 function setupNavigation() {
@@ -1358,7 +1373,7 @@ async function doAutoGenerate() {
 function showBatchImport() {
   var sample = [
     { "keyword": "停电", "aliases": ["停水停电", "电力"], "type": "text", "reply": "⚡ 杭州停电通知\n\n查询入口：https://www.ihangzhou.net/" },
-    { "keyword": "挂号", "aliases": ["医院挂号", "预约挂号"], "type": "news", "title": "🏥 杭州医院预约挂号", "desc": "浙里办/挂号网预约挂号", "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg", "url": "https://www.zjzwfw.gov.cn/" }
+    { "keyword": "挂号", "aliases": ["医院挂号", "预约挂号"], "type": "news", "title": "🏥 杭州医院预约挂号", "desc": "浙里办/挂号网预约挂号", "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg", "url": "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E" }
   ];
   showModal('批量粘贴导入关键词回复',
     '<div style="margin-bottom:12px;color:#475569;font-size:13px;">' +

@@ -6,12 +6,19 @@
 // 4. 移动端目录折叠为顶部"📂 目录"按钮
 (function () {
   function init() {
-    // 注入阅读进度条
+    // 注入阅读进度条（固定于 body 顶端，紧贴 topbar 下方）
     var progressBar = document.createElement('div');
     progressBar.className = 'art-progress-bar';
     progressBar.innerHTML = '<div class="art-progress-fill"></div>';
-    var topbar = document.querySelector('.topbar');
-    if (topbar) topbar.insertAdjacentElement('afterend', progressBar);
+    // 插到 body 最前面，CSS 用 top: var(--topbar-h) 跟随 topbar 高度
+    document.body.prepend(progressBar);
+    function syncTopbarH() {
+      var tb = document.querySelector('.topbar');
+      var h = tb ? tb.getBoundingClientRect().height : 44;
+      document.documentElement.style.setProperty('--topbar-h', h + 'px');
+    }
+    syncTopbarH();
+    window.addEventListener('resize', syncTopbarH);
 
     // 更新进度
     function updateProgress() {

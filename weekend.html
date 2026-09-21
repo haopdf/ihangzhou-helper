@@ -13,47 +13,16 @@
   <link rel="canonical" href="https://www.ihangzhou.net/weekend.html">
   <link rel="manifest" href="manifest.json">
   <title>周末休闲 · iHangzhou 杭州生活助手</title>
-  <link rel="stylesheet" href="css/style.css?v=20260928c">
+  <link rel="stylesheet" href="css/style.css?v=20260921a">
+  <script src="js/layout.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
 </head>
 <body>
-
-  <!-- 顶部栏 -->
-  <header class="topbar">
-    <a href="index.html" class="topbar-back" style="color:#fff;text-decoration:none;font-size:20px;padding: 4px 16px;">‹</a>
-    <div class="city-wrap">
-      <div class="topbar-city" id="citySelect">
-        <span id="cityName">杭州</span><span class="city-arrow">▼</span>
-      </div>
-      <div class="city-dropdown" id="cityDropdown">
-        <div class="city-dropdown-title">选择区县</div>
-      </div>
-    </div>
-    <div class="topbar-search">
-      <input type="text" id="channelSearchInput" placeholder="在本频道搜索..." autocomplete="off">
-    </div>
-    <button class="topbar-elderly" onclick="toggleElderlyMode()" title="老人模式">👵 老人</button>
-    <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
-  </header>
-
   <script>
-    // 主题 + 老人模式持久化
-    (function () {
-      try {
-        var t = localStorage.getItem('ihz-theme') || 'light';
-        document.documentElement.setAttribute('data-theme', t);
-        var b = document.getElementById('themeBtn');
-        if (b) b.textContent = t === 'dark' ? '☀️' : '🌙';
-      } catch (e) {}
-      try {
-        var el = localStorage.getItem('ihz_elderly') === 'true';
-        document.documentElement.setAttribute('data-elderly', el ? 'true' : 'false');
-      } catch (e) {}
-    })();
+    window.IHZ_PAGE = { title: "周末休闲", icon: "🎉", channelId: "weekend" };
+    window.IZ_SKIP_APP_THEME = true;
   </script>
-
-
-  <!-- 频道内容 -->
+<!-- 频道内容 -->
   <div class="page active" id="pageChannel">
     <!-- 频道头部 -->
     <div class="channel-header" id="channelHeader"></div>
@@ -262,7 +231,7 @@
         }
 
         // 搜索（频道内搜索）
-        var searchInput = document.getElementById('channelSearchInput');
+        var searchInput = document.getElementById('headerSearchInput');
         if (searchInput) {
           searchInput.addEventListener('input', function (e) {
             var q = e.target.value.trim().toLowerCase();
@@ -287,20 +256,11 @@
       }
     })();
   </script>
+  <script>
+    if (window.IZ && IZ.layout) {
+      document.addEventListener("DOMContentLoaded", IZ.layout.init);
+    }
+  </script>
 
-  <nav class="bottom-nav">
-    <a class="bnav-item" href="index.html">
-      <span class="bicon">🏠</span><span>首页</span>
-    </a>
-    <a class="bnav-item" href="index.html#tools">
-      <span class="bicon">🛠️</span><span>工具</span>
-    </a>
-    <a class="bnav-item" href="index.html#phone">
-      <span class="bicon">📞</span><span>电话</span>
-    </a>
-    <a class="bnav-item" href="index.html#me">
-      <span class="bicon">👤</span><span>我的</span>
-    </a>
-  </nav>
 </body>
 </html>

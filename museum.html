@@ -12,56 +12,29 @@
   <meta property="og:site_name" content="iHangzhou 杭州生活助手">
   <link rel="canonical" href="https://www.ihangzhou.net/museum.html">
   <link rel="manifest" href="manifest.json">
+  <!-- JSON-LD 结构化数据 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "博物馆游 · 杭州生活助手",
+    "url": "https://www.ihangzhou.net/museum.html",
+    "description": "杭州博物馆地图，省博物馆、丝绸博物馆、茶叶博物馆、良渚博物院，免费文化之旅",
+    "inLanguage": "zh-CN",
+    "isPartOf": { "@type": "WebSite", "url": "https://www.ihangzhou.net/" }
+  }
+  </script>
   <title>博物馆游 · iHangzhou 杭州生活助手</title>
-  <link rel="stylesheet" href="css/style.css?v=20260928c">
+  <link rel="stylesheet" href="css/style.css?v=20260921a">
+  <script src="js/layout.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
 </head>
 <body>
-
-  <!-- 顶部栏 -->
-<header class="topbar" id="topbar">
-<a href="index.html" class="topbar-logo" style="text-decoration:none;">
-  <span class="logo-icon">‹</span>
-  <span class="logo-text">博物馆游</span>
-</a>
-<div class="topbar-search">
-<input type="text" id="channelSearchInput" placeholder="在本频道搜索..." autocomplete="off">
-</div>
-<button class="topbar-settings" onclick="toggleSettings()" title="设置">⚙️</button>
-</header>
-
-<!-- 设置面板 -->
-<div class="settings-overlay" id="settingsOverlay" onclick="toggleSettings()"></div>
-<div class="settings-panel" id="settingsPanel">
-<div class="settings-title"><span>⚙️ 设置</span><button class="settings-close" onclick="toggleSettings()" aria-label="关闭">✕</button></div>
-<div class="settings-item">
-  <span class="settings-label">🌙 暗色模式</span>
-  <label class="settings-switch"><input type="checkbox" id="darkToggle" onchange="setDarkMode(this.checked)"><span class="switch-slider"></span></label>
-</div>
-<div class="settings-item">
-  <span class="settings-label">👵 老人模式</span>
-  <label class="settings-switch"><input type="checkbox" id="elderlyToggle" onchange="setElderlyMode(this.checked)"><span class="switch-slider"></span></label>
-</div>
-</div>
-
   <script>
-    // 主题 + 老人模式持久化
-    (function () {
-      try {
-        var t = localStorage.getItem('ihz-theme') || 'light';
-        document.documentElement.setAttribute('data-theme', t);
-        var b = document.getElementById('themeBtn');
-        if (b) b.textContent = t === 'dark' ? '☀️' : '🌙';
-      } catch (e) {}
-      try {
-        var el = localStorage.getItem('ihz_elderly') === 'true';
-        document.documentElement.setAttribute('data-elderly', el ? 'true' : 'false');
-      } catch (e) {}
-    })();
+    window.IHZ_PAGE = { title: "博物馆游", icon: "🏛️", channelId: "museum" };
+    window.IZ_SKIP_APP_THEME = true;
   </script>
-
-
-  <!-- 频道内容 -->
+<!-- 频道内容 -->
   <div class="page active" id="pageChannel">
     <!-- 频道头部 -->
     <div class="channel-header" id="channelHeader"></div>
@@ -561,7 +534,7 @@
         });
 
         // 搜索（频道内搜索，仅作用于当前已渲染的卡片）
-        var searchInput = document.getElementById('channelSearchInput');
+        var searchInput = document.getElementById('headerSearchInput');
         if (searchInput) {
           // 用 oninput 赋值，避免多次 addEventListener 重复绑定
           searchInput.oninput = function (e) {
@@ -650,36 +623,42 @@
         initPage();
       }
 
+      // Toast 提示（优雅替代 alert）
+      function showToast(msg) {
+        var t = document.getElementById('toast');
+        if (!t) {
+          t = document.createElement('div');
+          t.id = 'toast';
+          t.style.cssText = 'position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.85);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;z-index:9999;max-width:80%;text-align:center;pointer-events:none;opacity:0;transition:opacity .25s;';
+          document.body.appendChild(t);
+        }
+        t.textContent = msg;
+        t.style.opacity = '1';
+        clearTimeout(showToast._tid);
+        showToast._tid = setTimeout(function () { t.style.opacity = '0'; }, 1800);
+      }
+
       // 暴露到 window：供 inline onclick 调用，通过馆名查找 item 并弹 modal
       window._openMuseumModal = function (itemName) {
         try {
           var DATA = window._getData ? window._getData() : null;
-          if (!DATA) { alert('数据未加载，请稍后重试'); return; }
+          if (!DATA) { showToast('数据未加载，请稍后重试'); return; }
           var category = DATA.categories.find(function (c) { return c.id === 'museum'; });
-          if (!category) { alert('博物馆分类未找到'); return; }
+          if (!category) { showToast('博物馆分类未找到'); return; }
           var item = category.items.find(function (it) { return it.name === itemName; });
-          if (!item) { alert('未找到「' + itemName + '」'); return; }
+          if (!item) { showToast('未找到「' + itemName + '」'); return; }
           openMuseumModal(item);
         } catch (err) {
-          alert('打开详情失败：' + err.message);
+          showToast('打开详情失败，请重试');
         }
       };
     })();
   </script>
+  <script>
+    if (window.IZ && IZ.layout) {
+      document.addEventListener("DOMContentLoaded", IZ.layout.init);
+    }
+  </script>
 
-  <nav class="bottom-nav">
-    <a class="bnav-item" href="index.html">
-      <span class="bicon">🏠</span><span>首页</span>
-    </a>
-    <a class="bnav-item" href="index.html#tools">
-      <span class="bicon">🛠️</span><span>工具</span>
-    </a>
-    <a class="bnav-item" href="index.html#phone">
-      <span class="bicon">📞</span><span>电话</span>
-    </a>
-    <a class="bnav-item" href="index.html#me">
-      <span class="bicon">👤</span><span>我的</span>
-    </a>
-  </nav>
 </body>
 </html>

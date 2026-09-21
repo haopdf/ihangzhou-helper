@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -11,7 +11,8 @@
   <meta property="og:description" content="西湖 + 古镇 + 赏花 + 四季 + 夜景 一站齐，杭州旅游全攻略">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://www.ihangzhou.net/travel.html">
-  <link rel="stylesheet" href="css/style.css?v=20260928c">
+  <link rel="stylesheet" href="css/style.css?v=20260921a">
+  <script src="js/layout.js"></script>
   <style>
     /* 旅游专题页专属样式（独立类名，全部以 .travel- / .tc- 前缀作用于本页卡片上下文） */
     .travel-hero {
@@ -329,23 +330,10 @@
   </style>
 </head>
 <body>
-  <!-- 顶部栏 -->
-  <div class="topbar">
-    <a href="index.html" class="topbar-back" style="color:#fff;text-decoration:none;font-size:20px;padding: 4px 12px;">‹</a>
-    <div class="city-wrap">
-      <div class="topbar-city" id="citySelect">
-        <span id="cityName">杭州</span><span class="city-arrow">▼</span>
-      </div>
-      <div class="city-dropdown" id="cityDropdown">
-        <div class="city-dropdown-title">选择区县</div>
-      </div>
-    </div>
-    <div class="topbar-search">
-      <input type="text" placeholder="搜索杭州旅游..." id="searchInput">
-    </div>
-    <button class="topbar-elderly" onclick="toggleElderlyMode()" title="老人模式">👵 老人</button>
-    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
-  </div>
+  <script>
+    window.IHZ_PAGE = { title: '杭州旅游', icon: '🏞️', channelId: 'travel' };
+    window.IZ_SKIP_APP_THEME = true;
+  </script>
 
   <!-- Hero 区 -->
   <div class="travel-hero">
@@ -900,6 +888,11 @@
 
   <script src="js/app.js?v=20260928c"></script>
   <script>
+    if (window.IZ && IZ.layout) {
+      document.addEventListener("DOMContentLoaded", IZ.layout.init);
+    }
+  </script>
+  <script>
     // 主题持久化
     (function () {
       try {
@@ -1067,12 +1060,5 @@
       });
     })();
   </script>
-
-  <nav class="bottom-nav">
-    <a class="bnav-item" href="index.html"><span class="bicon">🏠</span><span>首页</span></a>
-    <a class="bnav-item" href="index.html#tools"><span class="bicon">🛠️</span><span>工具</span></a>
-    <a class="bnav-item" href="index.html#phone"><span class="bicon">📞</span><span>电话</span></a>
-    <a class="bnav-item" href="index.html#me"><span class="bicon">👤</span><span>我的</span></a>
-  </nav>
 </body>
 </html>

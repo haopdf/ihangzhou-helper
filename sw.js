@@ -1,18 +1,26 @@
 // ============================================
-// iHangzhou Service Worker
-// HTML/JS/CSS 网络优先（确保最新），图片 缓存优先
+// iHangzhou Service Worker v2
+// PWA 离线缓存策略：Network-first for pages, Cache-first for static assets
 // ============================================
 
-var CACHE_NAME = 'ihangzhou-v51';
+var CACHE_NAME = 'ihangzhou-v53';
+var OFFLINE_PAGE = '/offline.html';
+
 var CACHE_URLS = [
+  '/',
+  '/index.html',
+  '/banshi.html',
+  '/museum.html',
   '/css/style.css',
   '/manifest.json',
+  '/js/app.js',
+  OFFLINE_PAGE,
   '/images/qrcode-ihangzhou.jpg',
   '/images/promo/search-box-white.jpg',
   '/images/promo/search-box-green.jpg'
 ];
 
-// 安装：预缓存静态资源
+// 安装：预缓存核心资源
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
@@ -23,7 +31,7 @@ self.addEventListener('install', function (event) {
   );
 });
 
-// 激活：清理旧缓存
+// 激活：清理旧缓存 & 立即接管页面
 self.addEventListener('activate', function (event) {
   event.waitUntil(
     caches.keys().then(function (names) {
@@ -55,17 +63,23 @@ self.addEventListener('fetch', function (event) {
   if (url.origin !== self.location.origin) return;
 
   // /api/* 始终走网络，不读缓存（确保 CMS 改动立即生效）
-  if (url.pathname.indexOf('/api/') === 0) {
-    event.respondWith(fetch(event.request));
+  if (url.pathname.indexOf('/api/') === 0 || url.pathname.indexOf('/data/') === 0) {
+    event.respondWith(fetch(event.request).catch(function () {
+      return new Response(JSON.stringify({ error: 'offline', message: '当前离线，数据暂不可用' }), {
+        status: 503,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }));
     return;
   }
 
   var isHtml = event.request.mode === 'navigate' || /\.html(\?|$)/.test(url.pathname);
   var isJs = /\.js(\?|$)/.test(url.pathname);
-  var isJson = /\.json(\?|$)/.test(url.pathname);
+  var isCss = /\.css(\?|$)/.test(url.pathname);
+  var isImage = /\.(png|jpg|jpeg|gif|svg|webp|ico)(\?|$)/.test(url.pathname);
 
-  // HTML / JS / JSON：网络优先，失败回退缓存（JSON 数据需确保最新，避免缓存旧数据导致页面加载失败）
-  if (isHtml || isJs || isJson) {
+  // HTML / JS / CSS / JSON：网络优先，失败回退缓存
+  if (isHtml || isJs || isCss) {
     event.respondWith(
       fetch(event.request).then(function (response) {
         if (response && response.status === 200) {
@@ -78,8 +92,9 @@ self.addEventListener('fetch', function (event) {
       }).catch(function () {
         return caches.match(event.request).then(function (cached) {
           if (cached) return cached;
+          // SPA 导航回退到离线页
           if (event.request.mode === 'navigate') {
-            return caches.match('/index.html');
+            return caches.match(OFFLINE_PAGE);
           }
         });
       })
@@ -87,30 +102,31 @@ self.addEventListener('fetch', function (event) {
     return;
   }
 
-  // CSS：网络优先（确保最新），失败回退缓存
-  var isCss = /\.css(\?|$)/.test(url.pathname);
-  if (isCss) {
+  // 图片：缓存优先，网络回退
+  if (isImage) {
     event.respondWith(
-      fetch(event.request).then(function (response) {
-        if (response && response.status === 200) {
-          var clone = response.clone();
-          caches.open(CACHE_NAME).then(function (cache) {
-            cache.put(event.request, clone);
-          });
-        }
-        return response;
-      }).catch(function () {
-        return caches.match(event.request);
+      caches.match(event.request).then(function (cached) {
+        if (cached) return cached;
+        return fetch(event.request).then(function (response) {
+          if (response && response.status === 200) {
+            var clone = response.clone();
+            caches.open(CACHE_NAME).then(function (cache) {
+              cache.put(event.request, clone);
+            });
+          }
+          return response;
+        }).catch(function () {
+          return new Response('', { status: 204 });
+        });
       })
     );
     return;
   }
 
-  // 其他资源（图片等）：缓存优先，网络回退
+  // 其他资源：缓存优先
   event.respondWith(
     caches.match(event.request).then(function (cached) {
-      if (cached) return cached;
-      return fetch(event.request).then(function (response) {
+      return cached || fetch(event.request).then(function (response) {
         if (response && response.status === 200) {
           var clone = response.clone();
           caches.open(CACHE_NAME).then(function (cache) {

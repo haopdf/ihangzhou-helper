@@ -51,7 +51,7 @@ module.exports = async (req, res) => {
     {
       title: '杭州市居住证电子证照全面启用',
       summary: '可通过"警察叔叔"APP或浙里办申领电子居住证，与实体证同等效力',
-      url: 'https://www.zjzwfw.gov.cn/',
+      url: 'https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E',
       tag: '便民'
     },
     {

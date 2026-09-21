@@ -21,7 +21,7 @@
       "icon": "id-card",
       "color": "#3498db",
       "desc": "浙里办/支付宝",
-      "url": "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E",
+      "url": "https://www.zjzwfw.gov.cn/",
       "tags": ["社保", "医保", "政务"]
     },
     {
@@ -89,12 +89,12 @@
         { "name": "居住证办理", "url": "https://zzy.hzpolice.gov.cn/", "desc": "居住登记/居住证" },
         { "name": "落户政策", "url": "https://zzy.hzpolice.gov.cn/", "desc": "人才引进/积分落户" },
         { "name": "出入境预约", "url": "https://s.nia.gov.cn/", "desc": "护照/港澳通行证" },
-        { "name": "社保查询", "url": "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E", "desc": "浙里办APP" },
+        { "name": "社保查询", "url": "https://www.zjzwfw.gov.cn/", "desc": "浙里办APP" },
         { "name": "公积金查询", "url": "https://gjj.hangzhou.gov.cn/", "desc": "余额/提取/贷款" },
         { "name": "市民卡服务", "url": "https://www.96225.com/", "desc": "市民卡/公园年卡" },
         { "name": "健康证办理", "url": "https://www.zjwjw.gov.cn/", "desc": "从业人员健康证" },
-        { "name": "营业执照", "url": "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E", "desc": "企业开办/变更" },
-        { "name": "浙里办", "url": "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E", "desc": "全省政务一网通办" }
+        { "name": "营业执照", "url": "https://www.zjzwfw.gov.cn/", "desc": "企业开办/变更" },
+        { "name": "浙里办", "url": "https://www.zjzwfw.gov.cn/", "desc": "全省政务一网通办" }
       ]
     },
     {
