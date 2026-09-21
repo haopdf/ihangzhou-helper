@@ -3,7 +3,7 @@
 // PWA 离线缓存策略：Network-first for pages, Cache-first for static assets
 // ============================================
 
-var CACHE_NAME = 'ihangzhou-v53';
+var CACHE_NAME = 'ihangzhou-v58';
 var OFFLINE_PAGE = '/offline.html';
 
 var CACHE_URLS = [

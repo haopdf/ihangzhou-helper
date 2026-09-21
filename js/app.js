@@ -1483,6 +1483,13 @@ window.addEventListener('offline', function () {
       });
     });
 
+    // 快捷导航中的栏目入口（电话/工具等内部页）
+    $$('.quick-nav a[data-page]').forEach(function (item) {
+      item.addEventListener('click', function () {
+        switchPage(this.dataset.page);
+      });
+    });
+
     // 资讯 Banner 轮播
     initNewsBanner();
   }
@@ -1542,7 +1549,9 @@ window.addEventListener('offline', function () {
   function switchPage(page) {
     state.currentPage = page;
     $$('.bnav-item').forEach(function (i) { i.classList.remove('active'); });
-    document.querySelector('.bnav-item[data-page="' + page + '"]').classList.add('active');
+    // tools/phone 等栏目已不在底栏，找不到对应 tab 时保持当前高亮
+    var tab = document.querySelector('.bnav-item[data-page="' + page + '"]');
+    if (tab) tab.classList.add('active');
 
     var pages = ['home', 'tools', 'phone', 'me'];
     pages.forEach(function (p) {

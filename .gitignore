@@ -27,8 +27,10 @@ __pycache__/
 *.log
 .vercel
 
-.vercel
 .env*
 
 # articles/*.html
 # articles/index.json
+
+# UI QA 截图（本地归档用，不入库）
+docs/ui-review/
