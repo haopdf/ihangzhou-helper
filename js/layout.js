@@ -67,7 +67,7 @@
   function initTheme() {
     var T = global.localStorage.getItem('ihz-theme') || 'light';
     var F = global.localStorage.getItem('ihz_large_font') === 'true';
-    var C = global.localStorage.getItem('ihz_color') || 'sky';
+    var C = global.localStorage.getItem('ihz_color') || 'pine';
 
     applyTheme(T);
     applyLargeFont(F);
