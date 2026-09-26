@@ -126,7 +126,8 @@ async function handleTrack(req, res) {
   if (req.method === 'GET' && req.query.raw === '1') {
     if (!checkAuth(req)) return res.status(401).json({ success: false, error: '需要认证' });
     const stats = await readStats();
-    return res.status(200).json({ success: true, total: (stats.events || []).length, events: (stats.events || []).slice(-100) });
+    const rawLimit = Math.min(parseInt(req.query.limit) || 500, 2000);
+    return res.status(200).json({ success: true, total: (stats.events || []).length, events: (stats.events || []).slice(-rawLimit) });
   }
   // POST 上报事件
   if (req.method === 'POST') {
