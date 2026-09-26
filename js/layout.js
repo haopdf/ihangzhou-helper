@@ -193,6 +193,36 @@
   }
 
   /**
+   * 搜索展开 / 取消（移动端全宽体验）
+   */
+  function bindSearch() {
+    var input = document.getElementById('headerSearchInput');
+    var header = document.getElementById('appHeader');
+    if (!input || !header) return;
+
+    // 动态创建取消按钮
+    var cancel = document.createElement('button');
+    cancel.className = 'header-search-cancel';
+    cancel.textContent = '取消';
+    cancel.style.display = 'none';
+    header.appendChild(cancel);
+
+    input.addEventListener('focus', function () {
+      header.classList.add('searching');
+      cancel.style.display = 'block';
+    });
+    function closeSearch() {
+      header.classList.remove('searching');
+      cancel.style.display = 'none';
+      input.value = '';
+      input.blur();
+      // 触发 input 事件，让页面有机会恢复列表
+      try { input.dispatchEvent(new Event('input', { bubbles: true })); } catch (e) {}
+    }
+    cancel.addEventListener('click', closeSearch);
+  }
+
+  /**
    * 更新顶栏标题
    */
   function initTitle() {
@@ -210,6 +240,7 @@
     var p2 = window.IZ_FOOTER === false ? Promise.resolve(true) : loadTemplate('templates/footer.html', 'append');
 
     Promise.all([p1, p2]).then(function () {
+      bindSearch();
       initTheme();
       bindSettings();
       highlightNav();

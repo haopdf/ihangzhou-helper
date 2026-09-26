@@ -54,12 +54,12 @@ function genChannelHtml(ch) {
     <div class="topbar-search">
       <input type="text" id="channelSearchInput" placeholder="在本频道搜索..." autocomplete="off">
     </div>
-    <button class="topbar-elderly" onclick="toggleElderlyMode()" title="老人模式">👵 老人</button>
+    <button class="topbar-elderly" onclick="toggleElderlyMode()" title="大字模式">🔤 大字</button>
     <button class="theme-btn" id="themeBtn" title="切换主题">🌙</button>
   </header>
 
   <script>
-    // 主题 + 老人模式持久化
+    // 主题 + 大字模式持久化
     (function () {
       try {
         var t = localStorage.getItem('ihz-theme') || 'light';
@@ -252,7 +252,7 @@ function genChannelHtml(ch) {
         var grid = document.getElementById('serviceGrid');
         grid.innerHTML = category.items.map(function (item) {
           if (item.url) {
-            return '<a class="sitem" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
+            return ('<a class="sitem" href="' + item.url + '"' + ( /^https?:\/\//i.test(item.url) ? ' target="_blank" rel="noopener noreferrer"' : '' ) + '>') +
               '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
               '<div class="sinfo">' +
               '<div class="sname">' + item.name + '</div>' +

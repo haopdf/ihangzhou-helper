@@ -47,8 +47,11 @@
     var content = document.getElementById('fbContent') ? document.getElementById('fbContent').value.trim() : '';
     var contact = document.getElementById('fbContact') ? document.getElementById('fbContact').value.trim() : '';
 
-    if (!content) { showToast('请输入反馈内容'); return; }
-    if (content.length < 5) { showToast('反馈内容太短，请详细描述'); return; }
+    // 使用 ihzShowToast（layout.js 全局）或回退到 alert
+    var toast = window.ihzShowToast || function(msg) { try { alert(msg); } catch(e) {} };
+
+    if (!content) { toast('请输入反馈内容'); return; }
+    if (content.length < 5) { toast('反馈内容太短，请详细描述'); return; }
 
     var feedback = { type: type, content: content, contact: contact, url: window.location.href, ua: navigator.userAgent, time: new Date().toISOString() };
 
@@ -58,13 +61,15 @@
       localStorage.setItem('ihangzhou_feedbacks', JSON.stringify(feedbacks));
     } catch (e) {}
 
-    fetch(FEEDBACK_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(feedback) })
-      .then(function(res) { return res.json(); })
-      .then(function(data) { showToast(data.success ? '✅ 感谢您的反馈！' : '⚠️ 已暂存，待网络恢复后发送'); })
-      .catch(function() { showToast('⚠️ 已暂存本地'); });
-
+    // 关闭弹窗（先关弹窗再提交，避免用户等太久）
     var overlay = document.getElementById('modalOverlay');
     if (overlay) { overlay.classList.remove('active'); document.body.style.overflow = ''; }
+    toast('✅ 感谢您的反馈！');
+
+    fetch(FEEDBACK_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(feedback) })
+    .then(function(res) { return res.json(); })
+    .then(function(data) { if (!data.success) console.warn('反馈提交异常:', data); })
+    .catch(function() { /* 静默失败，已本地暂存 */ });
   };
 
   function init() {

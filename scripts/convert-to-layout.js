@@ -62,7 +62,7 @@ pages.forEach(file => {
     '\n'
   );
 
-  // 6. 删除旧的内联主题/老人模式 script 块
+  // 6. 删除旧的内联主题/大字模式 script 块
   html = html.replace(
     /\s*<script>\s*\n?\s*\/\/\s*主题[\s\S]*?\(\)\s*;\s*\n?\s*<\/script>\s*/,
     '\n'

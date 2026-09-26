@@ -70,7 +70,7 @@ ihangzhou-helper/
 ├── index.html               # 首页（3 栏目导航 + 8 工具 + 5 次级 + 分类网格）
 ├── travel.html              # i杭州玩（6 个分区 tab + 博物馆入口）
 ├── food.html                # i杭州吃
-├── articles.html            # i杭州人（160+ 文章搜索）
+├── articles.html            # i杭州人（2700+ 文章搜索）
 ├── museum.html              # 博物馆专题
 ├── district.html            # 13 区县
 ├── channel.html             # 频道聚合页（?ch=chId）
@@ -88,7 +88,7 @@ ihangzhou-helper/
 ├── weekend.html             # 周末频道
 ├── zhaopin.html             # 招聘频道
 ├── celebrity.html           # 名人频道
-├── articles/                # 160+ 篇本地文章
+├── articles/                # 2700+ 篇本地文章
 │   └── index.json           # 文章索引
 ├── api/                     # Vercel Serverless Functions
 │   ├── wechat.js             # 公众号回调（核心！）

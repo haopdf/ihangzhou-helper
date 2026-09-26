@@ -13,7 +13,7 @@
   <link rel="canonical" href="https://www.ihangzhou.net/food.html">
   <link rel="manifest" href="manifest.json">
   <title>杭州美食 · iHangzhou 杭州生活助手</title>
-  <link rel="stylesheet" href="css/style.css?v=20260921g">
+  <link rel="stylesheet" href="css/style.css?v=20260921h">
   <script src="js/layout.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
 </head>
@@ -244,7 +244,9 @@
         var grid = document.getElementById('serviceGrid');
         grid.innerHTML = filteredItems.map(function (item) {
           if (item.url) {
-            return '<a class="sitem" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
+            var isExt = /^https?:\/\//i.test(item.url);
+            var extAttr = isExt ? ' target="_blank" rel="noopener noreferrer"' : '';
+            return '<a class="sitem" href="' + item.url + '"' + extAttr + '>'' +
               '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
               '<div class="sinfo">' +
               '<div class="sname">' + item.name + '</div>' +
@@ -277,22 +279,22 @@
           }).join('');
         }
 
-        // 搜索（频道内搜索）
-        var searchInput = document.getElementById('headerSearchInput');
-        if (searchInput) {
-          searchInput.addEventListener('input', function (e) {
-            var q = e.target.value.trim().toLowerCase();
-            if (!q) {
-              grid.querySelectorAll('.sitem').forEach(function (el) { el.style.display = 'flex'; });
-              return;
-            }
-            grid.querySelectorAll('.sitem').forEach(function (el) {
-              var name = el.querySelector('.sname').textContent.toLowerCase();
-              var desc = el.querySelector('.sdesc').textContent.toLowerCase();
-              el.style.display = (name.indexOf(q) >= 0 || desc.indexOf(q) >= 0) ? 'flex' : 'none';
-            });
+        // 搜索（频道内搜索）- 用事件委托，避免 header 模板未加载时绑定失效
+        document.body.addEventListener('input', function (e) {
+          if (e.target.id !== 'headerSearchInput') return;
+          var q = e.target.value.trim().toLowerCase();
+          var grid = document.getElementById('serviceGrid');
+          if (!grid) return;
+          if (!q) {
+            grid.querySelectorAll('.sitem').forEach(function (el) { el.style.display = 'flex'; });
+            return;
+          }
+          grid.querySelectorAll('.sitem').forEach(function (el) {
+            var name = el.querySelector('.sname') ? el.querySelector('.sname').textContent.toLowerCase() : '';
+            var desc = el.querySelector('.sdesc') ? el.querySelector('.sdesc').textContent.toLowerCase() : '';
+            el.style.display = (name.indexOf(q) >= 0 || desc.indexOf(q) >= 0) ? 'flex' : 'none';
           });
-        }
+        });
       }
 
       // 同步顶部区县名与 URL ?city= 参数
@@ -324,16 +326,21 @@
       // 覆盖 app.js 的区县跳转：在 food.html 上切换区县时不跳走，仅更新 URL 并重新渲染
       function overrideCityDropdown() {
         var box = document.getElementById('cityDropdown');
-        if (!box) return;
-        box.querySelectorAll('.city-dropdown-item').forEach(function (it) {
-          it.onclick = function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var id = this.getAttribute('data-id');
-            try { localStorage.setItem('ihz_city', id); } catch (ex) {}
-            box.classList.remove('show');
-            switchCity(id);
-          };
+        if (!box || box._foodOverrideBound) return;
+        box._foodOverrideBound = true;
+        box.addEventListener('click', function (e) {
+          var item = e.target.closest('.city-dropdown-item');
+          if (!item) return;
+          e.preventDefault();
+          e.stopPropagation();
+          var id = item.getAttribute('data-id');
+          try { localStorage.setItem('ihz_city', id); } catch (ex) {}
+          box.classList.remove('show');
+          // 更新选中态
+          box.querySelectorAll('.city-dropdown-item').forEach(function (it) {
+            it.classList.toggle('active', it.getAttribute('data-id') === id);
+          });
+          switchCity(id);
         });
       }
 
