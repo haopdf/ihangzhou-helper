@@ -1201,7 +1201,7 @@ window.addEventListener('offline', function () {
       // 有URL的用<a>标签，浏览器原生处理跳转，不会被弹窗拦截
       if (item.url) {
         var safeUrl = item.url.indexOf('http://') === 0 ? 'https://' + item.url.substring(7) : item.url;
-        return '<a class="sitem" href="' + safeUrl + '" rel="noopener noreferrer">' +
+        return '<a class="sitem" data-name="' + item.name + '" href="' + safeUrl + '" rel="noopener noreferrer" target="_blank">' +
           '<div class="sicon">' + getServiceIcon(item.name) + '</div>' +
           '<div class="sinfo">' +
           '<div class="sname">' + item.name + '</div>' +
@@ -1211,7 +1211,7 @@ window.addEventListener('offline', function () {
           '</a>';
       }
       // 无URL的用<div>，交给handleClick处理action或detail弹窗
-      return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="">' +
+      return '<div class="sitem" data-name="' + item.name + '" data-action="' + (item.action || '') + '" data-url="">' +
         '<div class="sicon">' + getServiceIcon(item.name) + '</div>' +
         '<div class="sinfo">' +
         '<div class="sname">' + item.name + '</div>' +
@@ -1355,7 +1355,7 @@ window.addEventListener('offline', function () {
       // 有URL的用<a>标签，浏览器原生处理跳转，不会被弹窗拦截
       if (item.url) {
         var safeUrl = item.url.indexOf('http://') === 0 ? 'https://' + item.url.substring(7) : item.url;
-        return '<a class="sitem" href="' + safeUrl + '" rel="noopener noreferrer">' +
+        return '<a class="sitem" data-name="' + item.name + '" data-cat="' + r.cat + '" href="' + safeUrl + '" rel="noopener noreferrer" target="_blank">' +
           '<div class="sicon">' + getServiceIcon(item.name) + '</div>' +
           '<div class="sinfo">' +
           '<div class="sname">' + item.name + catBadge + '</div>' +
@@ -1365,7 +1365,7 @@ window.addEventListener('offline', function () {
           '</a>';
       }
       // 无URL的用<div>，交给handleClick处理action或detail弹窗
-      return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="">' +
+      return '<div class="sitem" data-name="' + item.name + '" data-cat="' + r.cat + '" data-action="' + (item.action || '') + '" data-url="">' +
         '<div class="sicon">' + getServiceIcon(item.name) + '</div>' +
         '<div class="sinfo">' +
         '<div class="sname">' + item.name + catBadge + '</div>' +
@@ -1413,6 +1413,16 @@ window.addEventListener('offline', function () {
     bindOn('#serviceGrid', 'click', function (e) {
       var item = e.target.closest('.sitem');
       if (!item) return;
+      // 先统计点击（<a> 和 <div> 都报）
+      var btnName = item.dataset.name || '';
+      var btnCat = item.dataset.cat || state.activeTab || '其他';
+      if (!btnName) {
+        var nmEl = item.querySelector('.sname');
+        if (nmEl) btnName = nmEl.textContent.replace(/\s*\[.*?\]\s*$/, '').trim();
+      }
+      if (btnName && window.iHangzhouTrack) {
+        window.iHangzhouTrack.click(btnCat, btnName, btnName, '');
+      }
       // <a>标签由浏览器原生处理跳转，不拦截
       if (item.tagName === 'A') return;
       handleClick(item);
@@ -1580,7 +1590,12 @@ window.addEventListener('offline', function () {
       }).join('');
 
     container.querySelectorAll('.tool-card').forEach(function (card) {
-      card.addEventListener('click', function () { handleClick(this); });
+      card.addEventListener('click', function () {
+        // 工具卡点击统计
+        var nmEl = card.querySelector('.tc-name');
+        if (nmEl && window.iHangzhouTrack) window.iHangzhouTrack.click('工具', nmEl.textContent.trim(), nmEl.textContent.trim(), '');
+        handleClick(this);
+      });
     });
   }
 

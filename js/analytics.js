@@ -147,6 +147,15 @@
         if (nm) trackPageView('/detail?item=' + encodeURIComponent(nm.textContent.trim()));
       }
     });
+    // 全局按钮点击追踪：任何带 data-track 属性的元素被点击时自动上报
+    document.addEventListener('click', function(e) {
+      var el = e.target.closest('[data-track]');
+      if (!el) return;
+      var name = el.dataset.track || el.textContent.trim().substring(0, 30);
+      var cat = el.dataset.trackCat || '按钮';
+      var action = el.dataset.trackAction || '';
+      if (name && window.iHangzhouTrack) window.iHangzhouTrack.click(cat, name, action, '');
+    });
     var searchInput = document.getElementById('searchInput');
     if (searchInput) {
       searchInput.addEventListener('keypress', function(e) {
