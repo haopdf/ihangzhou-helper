@@ -52,8 +52,10 @@
   }
 
   // ===== PV 上报（每次页面加载/切换自动调用） =====
-  function trackPageView() {
-    send({ action: 'pv', uuid: getUuid(), fp: getFingerprint(), page: getPageName(), ref: document.referrer || '', day: todayStr(), t: Date.now() });
+  // pageOverride 用于 SPA 内切换时明确指定页面（如首页 Tab → /index#tab-food）
+  function trackPageView(pageOverride) {
+    var pg = pageOverride || getPageName();
+    send({ action: 'pv', uuid: getUuid(), fp: getFingerprint(), page: pg, ref: document.referrer || '', day: todayStr(), t: Date.now() });
   }
 
   // ===== 点击事件 =====
@@ -131,12 +133,20 @@
       tabs.addEventListener('click', function(e) {
         var tab = e.target.closest('.tab');
         if (tab && tab.dataset.tab) {
+          // Tab 切换：用 page 参数区分首页不同 Tab（美食/旅游/生活…）
           trackTab(tab.dataset.tab);
-          // Tab 切换也上报 PV，确保页面浏览被准确记录
-          setTimeout(trackPageView, 200);
+          setTimeout(function() { trackPageView('/index#tab-' + tab.dataset.tab); }, 200);
         }
       });
     }
+    // 服务详情弹窗 → 也上报一次 PV（页面= /detail?item=名称）
+    document.addEventListener('click', function(e) {
+      var sitem = e.target.closest('.sitem');
+      if (sitem && sitem.dataset.detail === 'modal') {
+        var nm = sitem.querySelector('.sname');
+        if (nm) trackPageView('/detail?item=' + encodeURIComponent(nm.textContent.trim()));
+      }
+    });
     var searchInput = document.getElementById('searchInput');
     if (searchInput) {
       searchInput.addEventListener('keypress', function(e) {
