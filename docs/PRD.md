@@ -53,7 +53,7 @@ iHangzhou
 ├── i杭州玩（travel.html）
 │   ├── 西湖十景 / 古镇 / 赏花四季 / 寺庙古塔 / 夜景灯光 / 博物馆
 ├── i杭州吃（food.html）
-├── i杭州人（articles.html，160+ 篇本地文章搜索）
+├── i杭州人（articles.html，2700+ 篇本地文章搜索）
 ├── 频道页（channel.html#chId）
 ├── 区县页（district.html）
 ├── 地点详情（place.html?id=）
@@ -66,7 +66,7 @@ iHangzhou
 |---|---|---|---|
 | i杭州玩 | travel.html | 西湖十景 / 古镇 / 赏花 / 寺庙 / 夜景 / 博物馆 6 个分区 | 民宿 / 亲子 / 文旅合作 |
 | i杭州吃 | food.html | 杭帮菜 / 老字号 / 地道小店 / 美食地图 | 餐饮探店 |
-| i杭州人 | articles.html | 160+ 篇本地深度文章，按场景搜索 | 内容沉淀 / SEO 长尾 |
+| i杭州人 | articles.html | 2700+ 篇本地深度文章，按场景搜索 | 内容沉淀 / SEO 长尾 |
 
 ### 2.3 8 个刚需快捷工具（首页 quick-nav）
 
@@ -245,7 +245,7 @@ type 取值：`news`（图文）/ `text`（纯文本，用 `reply` 字段）
 - ✅ 28 个公众号关键字分组
 - ✅ 13 区县 + 区县特色卡片
 - ✅ PWA + 暗色模式 + 老人模式
-- ✅ 160+ 篇本地文章 + 全站搜索
+- ✅ 2700+ 篇本地文章 + 全站搜索
 
 ### v3.1（2026 Q4 规划）
 - 🔜 places.json 加场景字段（rain_ok / photo_friendly / family_friendly）

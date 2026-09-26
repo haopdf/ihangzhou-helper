@@ -3162,19 +3162,28 @@ case 'colors': showColors(); break;
         '<span>' + d.full + '</span><span class="cd-dist">' + d.desc + '</span></div>';
     });
     box.innerHTML = html;
-    document.querySelectorAll('#cityDropdown .city-dropdown-item').forEach(function(it) {
-      it.onclick = function(e) {
+    // 事件委托：避免 header 模板异步加载后 onclick 丢失
+    if (!box._delegateBound) {
+      box._delegateBound = true;
+      box.addEventListener('click', function(e) {
+        var item = e.target.closest('.city-dropdown-item');
+        if (!item) return;
         e.preventDefault();
         e.stopPropagation();
-        var id = it.getAttribute('data-id');
+        var id = item.getAttribute('data-id');
         lsSet('ihz_city', id);
         var d = DISTRICTS.find(function(x){return x.id===id;});
-        if (el) el.textContent = d.full;
+        var nameEl = document.getElementById('cityName');
+        if (nameEl) nameEl.textContent = d.full;
         box.classList.remove('show');
+        // 更新选中态
+        box.querySelectorAll('.city-dropdown-item').forEach(function(it) {
+          it.classList.toggle('active', it.getAttribute('data-id') === id);
+        });
         // 全市不跳转，仅刷新首页
         if (id === 'hangzhou') {
-          renderTodayHangzhou();
-          renderDistrictInfo();
+          if (typeof renderTodayHangzhou === 'function') renderTodayHangzhou();
+          if (typeof renderDistrictInfo === 'function') renderDistrictInfo();
           showToast('已切换到 ' + d.full);
           return;
         }
@@ -3183,8 +3192,8 @@ case 'colors': showColors(); break;
         setTimeout(function() {
           location.href = 'district.html?id=' + id;
         }, 400);
-      };
-    });
+      });
+    }
   }
 
   // ===== 区县特色卡片渲染 =====
@@ -3256,27 +3265,36 @@ case 'colors': showColors(); break;
     var btn = document.getElementById('citySelect');
     var box = document.getElementById('cityDropdown');
     if (!btn || !box) return;
+    // 点击按钮展开/收起
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
       box.classList.toggle('show');
     });
-    document.addEventListener('click', function(e) {
-      if (!btn.contains(e.target) && !box.contains(e.target)) {
-        box.classList.remove('show');
-      }
-    });
-    // ESC 键关闭
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') box.classList.remove('show');
-    });
+    // 点击外部关闭（document 级委托，不需要每个元素单独绑定）
+    if (!box._docClickBound) {
+      box._docClickBound = true;
+      document.addEventListener('click', function(e) {
+        var b = document.getElementById('citySelect');
+        var bx = document.getElementById('cityDropdown');
+        if (!b || !bx) return;
+        if (!b.contains(e.target) && !bx.contains(e.target)) {
+          bx.classList.remove('show');
+        }
+      });
+      // ESC 键关闭
+      document.addEventListener('keydown', function(e) {
+        var bx = document.getElementById('cityDropdown');
+        if (e.key === 'Escape' && bx) bx.classList.remove('show');
+      });
+    }
   }
 
-  // ===== 老人模式 =====
+  // ===== 大字模式 =====
   function toggleElderlyMode() {
     var cur = lsGet('ihz_elderly', 'false') === 'true';
     lsSet('ihz_elderly', cur ? 'false' : 'true');
     applyElderlyMode();
-    showToast(cur ? '已关闭老人模式' : '已开启老人模式');
+    showToast(cur ? '已关闭大字模式' : '已开启大字模式');
   }
   window.toggleElderlyMode = toggleElderlyMode;
 
@@ -3285,15 +3303,15 @@ case 'colors': showColors(); break;
     document.documentElement.setAttribute('data-elderly', on ? 'true' : 'false');
     var btn = document.getElementById('elderlyBtn');
     if (btn) {
-      if (on) { btn.classList.add('active'); btn.title = '关闭老人模式'; }
-      else { btn.classList.remove('active'); btn.title = '老人模式'; }
+      if (on) { btn.classList.add('active'); btn.title = '关闭大字模式'; }
+      else { btn.classList.remove('active'); btn.title = '大字模式'; }
     }
     var st = document.getElementById('elderlyStatus');
     if (st) st.textContent = on ? '已开启' : '关闭';
     // 同步设置面板开关
     var elTog = document.getElementById('elderlyToggle');
     if (elTog) elTog.checked = on;
-    // 老人模式自动切到大号字体
+    // 大字模式自动切到大号字体
     if (on) { lsSet('ihz_fontsize', 'xlarge'); setFontSize('xlarge'); }
   }
 
@@ -3362,7 +3380,7 @@ case 'colors': showColors(); break;
         '<div class="hero-stat"><div class="num">' + totalItems + '</div><div class="label">可搜服务</div></div>' +
         '<div class="hero-stat"><div class="num">' + DATA.phonebook.length + '</div><div class="label">常用电话</div></div>' +
         '<div class="hero-stat"><div class="num">13</div><div class="label">区县市</div></div>' +
-        '<div class="hero-stat"><div class="num">160+</div><div class="label">本地文章</div></div>';
+        '<div class="hero-stat"><div class="num">2700+</div><div class="label">本地文章</div></div>';
     }
     // 异步从 CMS 拉取最新内容（失败时静默使用兜底数据）
     loadCMSData();
@@ -3396,7 +3414,7 @@ case 'colors': showColors(); break;
           '<div class="hero-stat"><div class="num">' + totalItems + '</div><div class="label">可搜服务</div></div>' +
           '<div class="hero-stat"><div class="num">' + (DATA.phonebook ? DATA.phonebook.length : 0) + '</div><div class="label">常用电话</div></div>' +
           '<div class="hero-stat"><div class="num">13</div><div class="label">区县市</div></div>' +
-          '<div class="hero-stat"><div class="num">160+</div><div class="label">本地文章</div></div>';
+          '<div class="hero-stat"><div class="num">2700+</div><div class="label">本地文章</div></div>';
       }
     } catch (e) { console.warn('rerenderDynamic failed:', e); }
   }

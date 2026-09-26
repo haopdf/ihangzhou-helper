@@ -13,7 +13,7 @@
   <link rel="canonical" href="https://www.ihangzhou.net/traffic.html">
   <link rel="manifest" href="manifest.json">
   <title>交通出行 · iHangzhou 杭州生活助手</title>
-  <link rel="stylesheet" href="css/style.css?v=20260921g">
+  <link rel="stylesheet" href="css/style.css?v=20260921h">
   <script src="js/layout.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
 </head>
@@ -197,7 +197,9 @@
         var grid = document.getElementById('serviceGrid');
         grid.innerHTML = category.items.map(function (item) {
           if (item.url) {
-            return '<a class="sitem" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
+            var isExt = /^https?:\/\//i.test(item.url);
+            var extAttr = isExt ? ' target="_blank" rel="noopener noreferrer"' : '';
+            return '<a class="sitem" href="' + item.url + '"' + extAttr + '>'' +
               '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
               '<div class="sinfo">' +
               '<div class="sname">' + item.name + '</div>' +

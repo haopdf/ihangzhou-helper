@@ -480,7 +480,7 @@
     ],
     "type": "news",
     "title": "📚 杭州故事",
-    "desc": "杭州人物/街道/记忆/民俗，160+ 篇本地深度文章",
+    "desc": "杭州人物/街道/记忆/民俗，2700+ 篇本地深度文章",
     "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
     "url": "https://www.ihangzhou.net/articles.html"
   },
@@ -643,6 +643,6 @@
       "搜"
     ],
     "type": "text",
-    "reply": "🔍 iHangzhou 全站搜索\n\n访问 https://www.ihangzhou.net/articles.html\n在搜索框输入关键词即可查找 160+ 篇杭州本地文章\n\n例：周末/下雨/拍照/亲子/古镇/夜景"
+    "reply": "🔍 iHangzhou 全站搜索\n\n访问 https://www.ihangzhou.net/articles.html\n在搜索框输入关键词即可查找 2700+ 篇杭州本地文章\n\n例：周末/下雨/拍照/亲子/古镇/夜景"
   }
 ]

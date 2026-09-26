@@ -8,7 +8,7 @@
   <meta name="keywords" content="杭州故事,杭州文章,杭州文化,杭州历史,杭州美食,iHangzhou">
   <meta name="theme-color" content="#0ea5e9">
   <link rel="canonical" href="https://www.ihangzhou.net/articles.html">
-  <link rel="stylesheet" href="css/style.css?v=20260921g">
+  <link rel="stylesheet" href="css/style.css?v=20260921h">
   <script src="js/layout.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
   <style>
@@ -333,11 +333,22 @@
 
     // 搜索防抖
     var searchTimer = null;
-    document.getElementById('artSearchInput').addEventListener('input', function(){
+    function doSearch() {
       clearTimeout(searchTimer);
       // 用户输入新关键词时重置深度搜索状态，回到普通标题/摘要搜索
       deepSearched = false;
       searchTimer = setTimeout(render, 300);
+    }
+    document.getElementById('artSearchInput').addEventListener('input', doSearch);
+
+    // 顶栏搜索同步到文章搜索（组件 header 的 #headerSearchInput）
+    document.body.addEventListener('input', function (e) {
+      if (e.target.id !== 'headerSearchInput') return;
+      var artInput = document.getElementById('artSearchInput');
+      if (artInput && artInput.value !== e.target.value) {
+        artInput.value = e.target.value;
+        doSearch();
+      }
     });
 
     // 深度搜索正文按钮点击事件
