@@ -489,7 +489,8 @@
           <ul class="rank-list" id="topPages"></ul>
         </div>
         <div class="chart-card">
-          <h3>🖱️ 热门点击 Top 10</h3>
+          <h3>🖱️ 热门按钮 Top 20</h3>
+          <p style="font-size:12px;color:#9ca3af;margin-bottom:8px;">按每个具体按钮名统计（如：公积金、东坡肉、西湖骑行…）</p>
           <ul class="rank-list" id="topClicks"></ul>
         </div>
       </div>
@@ -1236,10 +1237,10 @@ async function loadAnalytics() {
         document.getElementById('topPages').innerHTML = d.topPages && d.topPages.length ? d.topPages.map(function(p, i) {
           return '<li><span class="rank-num">' + (i + 1) + '</span><span class="name" title="' + p.name + '">' + p.name + '</span><span class="count">' + p.count + '</span></li>';
         }).join('') : '<li class="empty">暂无数据</li>';
-        // 热门点击
-        document.getElementById('topClicks').innerHTML = d.topClicks && d.topClicks.length ? d.topClicks.map(function(c, i) {
-          return '<li><span class="rank-num">' + (i + 1) + '</span><span class="name" title="' + c.name + '">' + c.name + '</span><span class="count">' + c.count + '</span></li>';
-        }).join('') : '<li class="empty">暂无数据</li>';
+        // 热门点击 Top 20（按按钮名统计，精确到"公积金""东坡肉"）
+        document.getElementById('topClicks').innerHTML = d.topClicks && d.topClicks.length ? d.topClicks.slice(0, 20).map(function(c, i) {
+          return '<li><span class="rank-num">' + (i + 1) + '</span><span class="name" title="' + c.name + '">' + c.name + '</span><span class="count">' + c.count + ' 次</span></li>';
+        }).join('') : '<li class="empty">暂无按钮点击数据（用户点击首页按钮后在此展示）</li>';
         // 具体页面分析：按频道页 / Tab / 内容页 分组统计 PV
         var pageMap = {};
         var TAB_LABELS = { gov:'政务', food:'美食', traffic:'交通', edu:'教育', house:'住房', life:'生活', health:'健康', travel:'旅游', internet:'互联网', culture:'文化', street:'街巷' };

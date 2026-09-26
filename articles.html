@@ -540,6 +540,8 @@
         var el = document.createElement('a');
         el.className = 'art-item';
         el.href = 'articles/' + a.slug + '.html';
+        el.dataset.track = a.title;
+        el.dataset.trackCat = '故事';
         el.innerHTML =
           '<div class="art-item-title">' + a.title + '</div>' +
           '<div class="art-item-meta"><span>📂 ' + a.catClean + '</span><span>📖 ' + Math.round(a.words/100)/10 + 'k 字</span></div>' +
