@@ -1240,46 +1240,52 @@ async function loadAnalytics() {
         document.getElementById('topClicks').innerHTML = d.topClicks && d.topClicks.length ? d.topClicks.map(function(c, i) {
           return '<li><span class="rank-num">' + (i + 1) + '</span><span class="name" title="' + c.name + '">' + c.name + '</span><span class="count">' + c.count + '</span></li>';
         }).join('') : '<li class="empty">暂无数据</li>';
-        // 具体页面分析：按频道页 / Tab 分组统计 PV
+        // 具体页面分析：按频道页 / Tab / 内容页 分组统计 PV
         var pageMap = {};
-        var URL_LABELS = {
-          '/index': '🏠 首页', '/food': '🍜 美食', '/history': '🏛️ 历史', '/coffee': '☕ 咖啡',
-          '/street': '🛍️ 逛街', '/weekend': '🎉 周末', '/traffic': '🚇 交通',
+        var TAB_LABELS = { gov:'政务', food:'美食', traffic:'交通', edu:'教育', house:'住房', life:'生活', health:'健康', travel:'旅游', internet:'互联网', culture:'文化', street:'街巷' };
+        var PAGE_LABELS = {
+          '/index': '🏠 首页', '/channel': '📺 频道总览', '/food': '🍜 美食', '/history': '🏛️ 历史',
+          '/coffee': '☕ 咖啡', '/street': '🛍️ 逛街', '/weekend': '🎉 周末', '/traffic': '🚇 交通',
           '/zhaopin': '💼 招聘', '/internet': '🌐 互联网', '/banshi': '🏢 办事',
-          '/detail?item=': '📋 服务详情'
+          '/laozihao': '🏮 老字号', '/museum': '🎨 博物馆', '/travel': '🗺️ 旅游',
+          '/celebrity': '⭐ 杭州名人', '/articles': '📖 故事/文章', '/district': '🏘️ 区县详情',
+          '/place': '📍 地点'
         };
         (d.days || []).forEach(function(day) {
           Object.entries(day.pages || {}).forEach(function(entry) {
             var url = entry[0], cnt = entry[1];
-            var key = url, label = url;
-            // 匹配已知页面
-            for (var pattern in URL_LABELS) {
-              if (url === pattern || url.indexOf(pattern) === 0) {
-                if (pattern === '/detail?item=') {
-                  key = '📋 ' + decodeURIComponent(url.split('item=')[1] || '服务详情');
-                  label = key;
-                } else if (url.indexOf('/index#tab-') === 0) {
-                  var tab = url.replace('/index#tab-', '');
-                  key = '📂 ' + tab + ' Tab';
-                  label = key;
-                } else {
-                  key = URL_LABELS[pattern];
-                  label = URL_LABELS[pattern];
-                }
-                break;
-              }
-            }
+            var key = url, label = url, matched = false;
+            // 1) 匹配首页 Tab：/index#tab-xxx
             if (url.indexOf('/index#tab-') === 0) {
-              var tab2 = url.replace('/index#tab-', '');
-              key = '📂 ' + tab2 + ' Tab';
-              label = key;
+              var tabId = url.replace('/index#tab-', '').split('&')[0];
+              label = '📂 ' + (TAB_LABELS[tabId] || tabId) + ' Tab';
+              key = 'tab:' + tabId;
+              matched = true;
+            }
+            // 2) 匹配服务详情弹窗：/detail?item=xxx
+            else if (url.indexOf('/detail?item=') === 0) {
+              var item = decodeURIComponent(url.split('item=')[1] || '服务详情');
+              label = '📋 ' + item;
+              key = 'detail:' + item;
+              matched = true;
+            }
+            // 3) 匹配已知页面
+            else {
+              for (var pattern in PAGE_LABELS) {
+                if (url === pattern) { key = pattern; label = PAGE_LABELS[pattern]; matched = true; break; }
+              }
+              // 4) 未匹配的页面：去掉 .html 后缀展示
+              if (!matched) {
+                var raw = url.replace(/\.html$/, '');
+                key = raw; label = raw;
+              }
             }
             if (!pageMap[key]) pageMap[key] = { label: label, pv: 0 };
             pageMap[key].pv += cnt;
           });
         });
         var pageArr = Object.values(pageMap).sort(function(a, b) { return b.pv - a.pv; });
-        document.getElementById('pageDetailList').innerHTML = pageArr.length ? pageArr.slice(0, 15).map(function(p, i) {
+        document.getElementById('pageDetailList').innerHTML = pageArr.length ? pageArr.slice(0, 20).map(function(p, i) {
           return '<li><span class="rank-num">' + (i + 1) + '</span><span class="name" title="' + p.label + '">' + p.label + '</span><span class="count">' + p.pv + ' PV</span></li>';
         }).join('') : '<li class="empty">暂无详细页面数据（访问频道页/首页 Tab 后将在此展示）</li>';
       }
