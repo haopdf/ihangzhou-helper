@@ -246,7 +246,7 @@
           if (item.url) {
             var isExt = /^https?:\/\//i.test(item.url);
             var extAttr = isExt ? ' target="_blank" rel="noopener noreferrer"' : '';
-            return '<a class="sitem" href="' + item.url + '"' + extAttr + '>'' +
+            return '<a class="sitem" href="' + item.url + '"' + extAttr + '>' +
               '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
               '<div class="sinfo">' +
               '<div class="sname">' + item.name + '</div>' +

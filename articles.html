@@ -23,6 +23,7 @@
     .art-stats { display: flex; justify-content: center; gap: 10px; margin-top: 12px; font-size: 11px; opacity: 0.9; flex-wrap: wrap; }
     .art-stats span { background: rgba(255,255,255,0.18); padding: 4px 16px; border-radius: 12px; font-weight: 500; }
 
+    /* ========== 搜索区域 ========== */
     .art-search { padding: 14px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border); }
     .art-search-wrap { position: relative; max-width: 720px; margin: 0 auto; }
     .art-search input { width: 100%; padding: 12px 16px 12px 40px; border: 1px solid var(--border); border-radius: 22px; background: var(--bg-alt); font-size: 14px; outline: none; }
@@ -31,18 +32,181 @@
     .art-search-hint { font-size: 11px; color: var(--text-muted); margin-top: 8px; padding: 0 4px; }
     .art-search-hint b { color: var(--primary); font-weight: 500; }
 
-    .art-cats { display: flex; gap: 6px; padding: 8px 16px; overflow-x: auto; background: var(--bg-card); border-bottom: 1px solid var(--border); -webkit-overflow-scrolling: touch; flex-wrap: nowrap; position: sticky; top: 56px; z-index: 50; }
-    .art-cats::-webkit-scrollbar { display: none; }
-    .art-cat { flex-shrink: 0; padding: 6px 16px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 16px; font-size: 13px; color: var(--text-secondary); cursor: pointer; white-space: nowrap; font-weight: 500; font-family: inherit; }
-    .art-cat.active { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .art-cat-more { flex-shrink: 0; padding: 6px 14px; background: transparent; border: 1px dashed var(--border); border-radius: 16px; font-size: 13px; color: var(--text-muted); cursor: pointer; white-space: nowrap; font-weight: 500; font-family: inherit; }
-    .art-cat-more.expanded { display: none; }
-    .art-cat[data-hidden="true"] { display: none; }
+    /* ========== 分类筛选栏（替代旧水平滚动） ========== */
+    .art-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 56px;
+      z-index: 50;
+    }
+    .art-current-cat {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all .2s;
+    }
+    .art-current-cat:active { background: var(--border-light); }
+    .art-current-cat .arrow { font-size: 11px; transition: transform .25s; }
+    .art-current-cat.open .arrow { transform: rotate(180deg); }
+    .art-current-cat .count {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .art-cat-grid-toggle {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--text-secondary);
+      transition: all .2s;
+    }
+    .art-cat-grid-toggle:active { background: var(--primary); color: #fff; }
 
+    /* ========== 底部弹出分类面板 ========== */
+    .art-cat-sheet-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 9998;
+      display: none;
+      opacity: 0;
+      transition: opacity .25s;
+    }
+    .art-cat-sheet-overlay.show {
+      display: block;
+      opacity: 1;
+    }
+    .art-cat-sheet {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg-card);
+      border-radius: 20px 20px 0 0;
+      z-index: 9999;
+      max-height: 75vh;
+      transform: translateY(100%);
+      transition: transform .3s cubic-bezier(.4,0,.2,1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.12);
+    }
+    .art-cat-sheet.show { transform: translateY(0); }
+
+    .art-cat-sheet-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px 12px;
+      border-bottom: 1px solid var(--border-light);
+      flex-shrink: 0;
+    }
+    .art-cat-sheet-header h3 { font-size: 16px; font-weight: 600; }
+    .art-cat-sheet-close {
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      background: var(--bg-alt);
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--text-muted);
+      font-family: inherit;
+      border: none;
+    }
+    .art-cat-sheet-body {
+      overflow-y: auto;
+      flex: 1;
+      padding: 16px 20px 32px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .art-cat-group-title {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin: 16px 0 8px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .art-cat-group-title:first-child { margin-top: 0; }
+    .art-cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    @media (min-width: 768px) {
+      .art-cat-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .art-cat-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 8px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all .15s;
+      text-align: center;
+    }
+    .art-cat-card:active { transform: scale(0.95); }
+    .art-cat-card.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .art-cat-card.active .card-count { opacity: 0.85; color: #fff; }
+    .art-cat-card .card-name {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .art-cat-card .card-count {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* ========== 文章列表 ========== */
     .art-list { padding: 8px 16px 120px 16px; max-width: 1100px; margin: 0 auto; }
     @media (min-width: 1024px) { .art-list { max-width: 1280px; } }
     @media (min-width: 1440px) { .art-list { max-width: 1440px; } }
-    .art-item { display: block; padding: 14px; background: var(--bg-card); border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--border-light); text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
+    .art-item {
+      display: block;
+      padding: 14px;
+      background: var(--bg-card);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border-light);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
     .art-item:active { transform: scale(0.98); box-shadow: var(--shadow); }
     .art-item-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
     .art-item-meta { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
@@ -76,10 +240,6 @@
     window.IZ_SKIP_APP_THEME = true;
   </script>
 
-  <div class="art-cats" id="artCats">
-    <button class="art-cat active" data-cat="all">全部</button>
-  </div>
-
   <div class="art-hero">
     <h1>📚 杭州故事 · 本地文章合集</h1>
     <p>本地深度创作，读懂这座城市的每一面</p>
@@ -99,6 +259,27 @@
     <div id="artResultCount" class="art-result-count" style="display:none;"></div>
   </div>
 
+  <!-- 替代旧水平滚动分类 tab 的筛选栏 -->
+  <div class="art-filter-bar">
+    <button class="art-current-cat" id="currentCatBtn" aria-label="选择分类">
+      <span id="currentCatLabel">全部分类</span>
+      <span class="arrow">▼</span>
+    </button>
+    <button class="art-cat-grid-toggle" id="quickGridToggle" title="快速分类浏览" aria-label="快速分类">⊞</button>
+  </div>
+
+  <!-- 底部弹出分类面板 -->
+  <div class="art-cat-sheet-overlay" id="catSheetOverlay"></div>
+  <div class="art-cat-sheet" id="catSheet" role="dialog" aria-label="选择分类">
+    <div class="art-cat-sheet-header">
+      <h3>📂 选择分类</h3>
+      <button class="art-cat-sheet-close" id="catSheetClose" aria-label="关闭">✕</button>
+    </div>
+    <div class="art-cat-sheet-body" id="catSheetBody">
+      <!-- 动态渲染 -->
+    </div>
+  </div>
+
   <div class="art-list" id="artList">
     <div class="art-empty">加载中...</div>
   </div>
@@ -111,19 +292,131 @@
   </script>
   <script>
     var ALL_ARTICLES = [];
+    var CAT_STATS = {};      // { catName: count }
+    var SORTED_CATS = [];    // 按文章数降序的分类名数组
+    var ACTIVE_CAT = 'all';  // 当前选中分类
     var FILTERED = [];
     var PAGE_SIZE = 30;
     var CURRENT_PAGE = 0;
     var PAGE_PARAMS = new URLSearchParams(location.search);
 
     // 深度搜索（正文全文搜索）相关状态
-    var deepSearchCache = {};   // slug -> 正文纯文本（缓存，避免重复请求）
-    var deepSearched = false;    // 是否已对当前关键词执行过深度搜索
-    var deepSearchLoading = false; // 是否正在加载正文
+    var deepSearchCache = {};
+    var deepSearched = false;
+    var deepSearchLoading = false;
 
     // 清理分类名（去掉开头的 "01-" "02-" 等编号）
     function cleanCat(c) { return c.replace(/^\d+[-_\s]+/, '').replace('系列','').trim(); }
 
+    // ========== 分类面板逻辑 ==========
+    var sheetOverlay = document.getElementById('catSheetOverlay');
+    var sheet = document.getElementById('catSheet');
+    var currentCatBtn = document.getElementById('currentCatBtn');
+
+    function openSheet() {
+      sheetOverlay.classList.add('show');
+      sheet.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      currentCatBtn.classList.add('open');
+    }
+    function closeSheet() {
+      sheetOverlay.classList.remove('show');
+      sheet.classList.remove('show');
+      document.body.style.overflow = '';
+      currentCatBtn.classList.remove('open');
+    }
+
+    sheetOverlay.addEventListener('click', closeSheet);
+    document.getElementById('catSheetClose').addEventListener('click', closeSheet);
+    currentCatBtn.addEventListener('click', function(){
+      if (sheet.classList.contains('show')) closeSheet(); else openSheet();
+    });
+    document.getElementById('quickGridToggle').addEventListener('click', openSheet);
+
+    // ESC 关闭
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && sheet.classList.contains('show')) closeSheet();
+    });
+
+    // 渲染分类面板（卡片网格）
+    function renderCatSheet() {
+      var body = document.getElementById('catSheetBody');
+      var html = '';
+
+      // "全部"卡片
+      html += '<div class="art-cat-group-title">快速选择</div>';
+      html += '<div class="art-cat-grid">';
+      html += '<div class="art-cat-card ' + (ACTIVE_CAT === 'all' ? 'active' : '') + '" data-cat="all">';
+      html += '<span class="card-name">📚 全部</span>';
+      html += '<span class="card-count">' + ALL_ARTICLES.length + ' 篇</span>';
+      html += '</div>';
+      html += '</div>';
+
+      // 热门分类（文章最多的前 9 个）
+      var topCats = SORTED_CATS.slice(0, 9);
+      if (topCats.length) {
+        html += '<div class="art-cat-group-title">热门分类</div>';
+        html += '<div class="art-cat-grid">';
+        topCats.forEach(function(c){
+          html += '<div class="art-cat-card ' + (ACTIVE_CAT === c ? 'active' : '') + '" data-cat="' + esc(c) + '">';
+          html += '<span class="card-name">' + esc(shorten(c)) + '</span>';
+          html += '<span class="card-count">' + CAT_STATS[c] + ' 篇</span>';
+          html += '</div>';
+        });
+        html += '</div>';
+      }
+
+      // 其余分类
+      if (SORTED_CATS.length > 9) {
+        html += '<div class="art-cat-group-title">全部分类（' + SORTED_CATS.length + '）</div>';
+        html += '<div class="art-cat-grid">';
+        SORTED_CATS.forEach(function(c){
+          html += '<div class="art-cat-card ' + (ACTIVE_CAT === c ? 'active' : '') + '" data-cat="' + esc(c) + '">';
+          html += '<span class="card-name">' + esc(shorten(c)) + '</span>';
+          html += '<span class="card-count">' + CAT_STATS[c] + ' 篇</span>';
+          html += '</div>';
+        });
+        html += '</div>';
+      }
+
+      body.innerHTML = html;
+
+      // 绑定点击事件
+      body.querySelectorAll('.art-cat-card').forEach(function(card){
+        card.addEventListener('click', function(){
+          selectCard(card.dataset.cat);
+        });
+      });
+    }
+
+    function selectCard(cat) {
+      ACTIVE_CAT = cat;
+      var label = document.getElementById('currentCatLabel');
+      if (label) label.textContent = cat === 'all' ? '全部分类' : cat;
+      closeSheet();
+      render();
+    }
+
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function shorten(name) {
+      // 超过 7 个字截断
+      return name.length > 7 ? name.slice(0, 7) + '…' : name;
+    }
+
+    function updateCurrentCatLabel() {
+      var label = document.getElementById('currentCatLabel');
+      if (label) {
+        if (ACTIVE_CAT === 'all') {
+          label.textContent = '全部分类';
+        } else {
+          label.textContent = ACTIVE_CAT + ' (' + (CAT_STATS[ACTIVE_CAT] || 0) + ')';
+        }
+      }
+    }
+
+    // ========== 数据加载 ==========
     function loadArticles() {
       document.getElementById('artList').innerHTML = '<div class="art-empty">加载中...</div>';
       fetch('articles/index.json?t=' + Date.now())
@@ -135,53 +428,31 @@
           ALL_ARTICLES = data.map(function(a){
             return Object.assign({}, a, { catClean: cleanCat(a.cat.split(' / ')[0]) });
           });
+
+          // 统计分类
+          CAT_STATS = {};
+          ALL_ARTICLES.forEach(function(a){
+            CAT_STATS[a.catClean] = (CAT_STATS[a.catClean] || 0) + 1;
+          });
+          SORTED_CATS = Object.keys(CAT_STATS).sort(function(a,b){ return CAT_STATS[b] - CAT_STATS[a]; });
+
           var totalEl = document.getElementById('artTotalCount');
           if (totalEl) totalEl.textContent = '📖 ' + ALL_ARTICLES.length + ' 篇文章';
-
-          // 构建分类 tab：只显示前 8 个高频 + 更多按钮
-          var cats = {};
-          ALL_ARTICLES.forEach(function(a){ cats[a.catClean] = (cats[a.catClean]||0)+1; });
-          var sortedCats = Object.keys(cats).sort(function(a,b){ return cats[b]-cats[a]; });
-          var catBar = document.getElementById('artCats');
-          var TOP_N = 8;
-          sortedCats.forEach(function(c, idx){
-            var btn = document.createElement('button');
-            btn.className = 'art-cat';
-            btn.dataset.cat = c;
-            btn.textContent = c + ' (' + cats[c] + ')';
-            if (idx >= TOP_N) btn.dataset.hidden = 'true';
-            btn.addEventListener('click', function(){
-              catBar.querySelectorAll('.art-cat').forEach(function(b){ b.classList.remove('active'); });
-              btn.classList.add('active');
-              document.getElementById('artSearchInput').value = '';
-              render();
-            });
-            catBar.appendChild(btn);
-          });
-          // 更多分类按钮
-          if (sortedCats.length > TOP_N) {
-            var moreBtn = document.createElement('button');
-            moreBtn.className = 'art-cat-more';
-            moreBtn.textContent = '更多 ' + (sortedCats.length - TOP_N) + ' 个分类 ▼';
-            moreBtn.addEventListener('click', function(){
-              catBar.querySelectorAll('.art-cat[data-hidden="true"]').forEach(function(b){ b.removeAttribute('data-hidden'); });
-              moreBtn.classList.add('expanded');
-              moreBtn.style.display = 'none';
-            });
-            catBar.appendChild(moreBtn);
-          }
           var catCountEl = document.getElementById('artCatCount');
-          if (catCountEl) catCountEl.textContent = '📂 ' + Object.keys(cats).length + ' 个分类';
-          // URL 参数 ?cat= 自动选中分类（从文章页分类 chips 跳转过来）
+          if (catCountEl) catCountEl.textContent = '📂 ' + SORTED_CATS.length + ' 个分类';
+
+          // 初始化分类面板
+          updateCurrentCatLabel();
+          renderCatSheet();
+
+          // URL 参数 ?cat= 自动选中分类
           var autoCat = PAGE_PARAMS.get('cat');
-          if (autoCat) {
-            var targetBtn = null;
-            catBar.querySelectorAll('.art-cat').forEach(function(b){ if (b.dataset.cat === autoCat) targetBtn = b; });
-            if (targetBtn) {
-              targetBtn.removeAttribute('data-hidden');
-              targetBtn.click();
-            }
+          if (autoCat && CAT_STATS[autoCat]) {
+            ACTIVE_CAT = autoCat;
+            updateCurrentCatLabel();
+            renderCatSheet();
           }
+
           render();
         })
         .catch(function(err){
@@ -196,24 +467,24 @@
         });
     }
 
+    // ========== 渲染逻辑 ==========
     function render() {
       var q = document.getElementById('artSearchInput').value.trim().toLowerCase();
-      var activeCat = document.querySelector('#artCats .art-cat.active')?.dataset.cat || 'all';
       CURRENT_PAGE = 0;
+      deepSearched = false;
 
       FILTERED = ALL_ARTICLES.filter(function(a){
-        if (activeCat !== 'all' && a.catClean !== activeCat) return false;
+        if (ACTIVE_CAT !== 'all' && a.catClean !== ACTIVE_CAT) return false;
         if (q && (a.title.toLowerCase().indexOf(q) < 0) && (a.summary.toLowerCase().indexOf(q) < 0) && (a.catClean.toLowerCase().indexOf(q) < 0)) return false;
         return true;
       });
 
-      // 排序：热门（先长文章）
       FILTERED.sort(function(a,b){ return b.words - a.words; });
 
       document.getElementById('artList').innerHTML = '';
       renderPage();
 
-      // 深度搜索按钮显隐：标题/摘要搜索结果少于 3 篇且未深度搜索过时显示
+      // 深度搜索按钮显隐
       var deepBtn = document.getElementById('deepSearchBtn');
       if (deepBtn) {
         if (q && FILTERED.length < 3 && !deepSearched) {
@@ -222,6 +493,13 @@
           deepBtn.style.display = 'none';
         }
       }
+
+      // 更新当前分类标签
+      updateCurrentCatLabel();
+
+      // 同步更新面板中 active 状态
+      syncSheetActive();
+
       // 结果计数
       var countEl = document.getElementById('artResultCount');
       if (countEl) {
@@ -232,6 +510,18 @@
           countEl.style.display = 'none';
         }
       }
+    }
+
+    function syncSheetActive() {
+      var sheet = document.getElementById('catSheet');
+      if (!sheet || !sheet.classList.contains('show')) return;
+      sheet.querySelectorAll('.art-cat-card').forEach(function(card){
+        if (card.dataset.cat === ACTIVE_CAT) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      });
     }
 
     function renderPage() {
@@ -265,7 +555,7 @@
       }
     }
 
-    // 深度搜索：异步分批加载文章正文 HTML，提取纯文本后在正文中搜索关键词
+    // ========== 深度搜索（正文全文搜索） ==========
     function deepSearch(query) {
       if (!query || !ALL_ARTICLES.length || deepSearchLoading) return;
       deepSearchLoading = true;
@@ -275,10 +565,8 @@
       var pending = ALL_ARTICLES.filter(function(a){ return !deepSearchCache.hasOwnProperty(a.slug); });
       var loaded = 0;
 
-      // 分批加载，每批 5 篇，避免一次性发起过多请求
       function loadBatch(items) {
         if (!items.length) {
-          // 全部加载完成，执行搜索
           deepSearched = true;
           deepSearchLoading = false;
           doDeepSearch(query);
@@ -289,7 +577,6 @@
           return fetch('articles/' + a.slug + '.html')
             .then(function(r){ return r.text(); })
             .then(function(html){
-              // 去掉 HTML 标签，得到纯文本用于搜索
               var text = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
               deepSearchCache[a.slug] = text;
             })
@@ -313,7 +600,6 @@
       });
 
       FILTERED = results.slice();
-      // 排序：与普通搜索保持一致，长文章优先
       FILTERED.sort(function(a,b){ return b.words - a.words; });
       CURRENT_PAGE = 0;
 
@@ -335,13 +621,12 @@
     var searchTimer = null;
     function doSearch() {
       clearTimeout(searchTimer);
-      // 用户输入新关键词时重置深度搜索状态，回到普通标题/摘要搜索
       deepSearched = false;
       searchTimer = setTimeout(render, 300);
     }
     document.getElementById('artSearchInput').addEventListener('input', doSearch);
 
-    // 顶栏搜索同步到文章搜索（组件 header 的 #headerSearchInput）
+    // 顶栏搜索同步
     document.body.addEventListener('input', function (e) {
       if (e.target.id !== 'headerSearchInput') return;
       var artInput = document.getElementById('artSearchInput');
@@ -351,14 +636,13 @@
       }
     });
 
-    // 深度搜索正文按钮点击事件
     document.getElementById('deepSearchBtn')?.addEventListener('click', function(){
       var q = document.getElementById('artSearchInput').value.trim();
       if (q) deepSearch(q);
     });
 
     loadArticles();
-    // URL 参数 ?q= 自动搜索
+    // URL 参数 ?q= 自动搜索（等数据加载完成后再触发）
     var autoQ = PAGE_PARAMS.get('q');
     if (autoQ) {
       document.getElementById('artSearchInput').value = autoQ;
