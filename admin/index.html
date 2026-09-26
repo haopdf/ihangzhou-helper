@@ -714,6 +714,17 @@ function renderOverview() {
   document.getElementById('statItems').textContent = totalItems;
   document.getElementById('statHotServices').textContent = CMS_DATA.hotServices.length;
   document.getElementById('statKeywords').textContent = CMS_DATA.hotKeywords.length;
+  // 从统计 API 拉取总点击量
+  fetch(API_BASE + '/api/tools?action=track&stats=1', {
+    headers: { 'Authorization': 'Bearer ' + ADMIN_PASSWORD }
+  }).then(function(r){ return r.json(); }).then(function(resp){
+    if (resp && resp.success && resp.data) {
+      var totalClicks = 0;
+      var days = resp.data.days || [];
+      days.forEach(function(d) { totalClicks += (d.clicks || 0); });
+      document.getElementById('statClicks').textContent = totalClicks;
+    }
+  }).catch(function(){});
 }
 
 function renderCategories() {
