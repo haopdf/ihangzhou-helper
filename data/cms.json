@@ -103,21 +103,21 @@
         {
           "name": "公积金查询",
           "desc": "余额/明细/提取记录",
-          "url": "https://gjj.hangzhou.gov.cn/xxcx/",
+          "url": "https://gjj.hangzhou.gov.cn/",
           "color": "#f59e0b",
           "detail": "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州住房公积金查询覆盖个人账户余额、月缴存基数、单位缴存比例、提取记录与贷款额度测算。已开通线上全流程，浙里办与支付宝均可办理。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① 登录「浙里办」或「杭州公积金」APP<br>② 人脸认证后查看个人账户余额、缴存明细<br>③ 可下载缴存证明、贷款结清证明等电子凭证</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 公积金账号（如已开户）<br>• 手机号接收验证码</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>杭州住房公积金管理中心各网点<br>市中心网点：上城区延安路126号<br>电话：0571-12329</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://gjj.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公积金 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>线上查询即时返回；2026 年缴存基数上限 34470 元、下限 2280 元；免费服务。</p></div>"
         },
         {
           "name": "公积金提取",
           "desc": "租房/购房/离职提取",
-          "url": "https://gjj.hangzhou.gov.cn/tq/",
+          "url": "https://gjj.hangzhou.gov.cn/",
           "color": "#8b5cf6",
           "detail": "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州公积金提取支持租房、购房、偿还贷款、离职、退休等多种情形。租房提取可线上秒办，资金秒到账；购房/偿还贷款提取需上传材料审核。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p><strong>租房提取</strong>（最常用，可线上办）：① 浙里办 APP 搜索「公积金提取」 ② 选择「租赁自住住房提取」 ③ 填写银行卡号，秒到账<br><strong>购房提取</strong>：上传购房合同/不动产权证/发票<br><strong>偿还贷款</strong>：上传贷款合同与还款明细</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 银行卡（一类账户）<br>• 租房提取无需额外材料<br>• 购房提取需购房合同 + 发票 + 不动产权证</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上办理：浙里办/支付宝「杭州公积金」<br>线下网点：上城区延安路126号 等</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://gjj.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州公积金 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>租房提取：每月可提 1500 元，年度上限 18000 元，秒到账；购房/贷款提取：3 个工作日审核；免费服务。</p></div>"
         },
         {
           "name": "公积金贷款",
           "desc": "额度测算/还款计划",
-          "url": "https://gjj.hangzhou.gov.cn/dk/",
+          "url": "https://gjj.hangzhou.gov.cn/",
           "color": "#06b6d4"
         },
         {
@@ -332,14 +332,14 @@
         {
           "name": "浙A摇号",
           "desc": "小客车指标申请",
-          "url": "https://hzxkctk.cn/yhxx/yhcx.aspx",
+          "url": "https://hzxkctk.cn/",
           "color": "#f59e0b",
           "detail": "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州小客车指标通过摇号或竞价方式配置。摇号每月 1 次，免费参与，中签率较低但成本低；竞价每月 1 次，价高者得，适合急需上牌者。还有浙 M 区域指标（仅限杭州部分区域行驶）。</p><div class=\"guide-block\"><h4>📋 办事指南</h4><p>① <strong>申请资格</strong>：杭州户籍或持居住证满 2 年，连续缴纳社保满 2 年<br>② <strong>摇号申请</strong>：在 hzxkctk.cn 注册并提交申请，每月 25 日公开摇号<br>③ <strong>竞价</strong>：每月 25 日竞价，需缴 2000 元保证金<br>④ <strong>查询中签</strong>：官网或短信通知，中签后 6 个月内上牌</p></div><div class=\"guide-block\"><h4>📑 所需材料</h4><p>• 身份证<br>• 居住证（非杭户籍）<br>• 社保缴纳证明<br>• 驾驶证（部分指标类型）</p></div><div class=\"guide-block\"><h4>🏢 办理地点</h4><p>线上：杭州市小客车总量调控管理信息系统<br>线下：杭州市交警支队车管所</p></div><div class=\"guide-block\"><h4>🌐 官方入口</h4><a href=\"https://hzxkctk.cn/\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;\">前往 杭州小客车调控 →</a></div><div class=\"guide-block\"><h4>⏱ 时效 / 费用</h4><p>摇号：每月 1 次，免费；竞价：每月 1 次，保证金 2000 元，平均成交价约 3-5 万元。</p></div>"
         },
         {
           "name": "浙A竞价",
           "desc": "车牌竞价出价",
-          "url": "https://hzxkctk.cn/yhxx/jjcx.aspx",
+          "url": "https://hzxkctk.cn/",
           "color": "#10b981"
         },
         {
@@ -381,25 +381,25 @@
         {
           "name": "公交查询",
           "desc": "线路/换乘/到站",
-          "url": "https://www.hzbus.com.cn/",
+          "url": "https://www.hzbus.com.cn/LineQuery.aspx",
           "color": "#f97316"
         },
         {
           "name": "公交实时",
           "desc": "到站提醒/等待时间",
-          "url": "https://www.hzbus.com.cn/",
+          "url": "https://www.hzbus.com.cn/LineQuery.aspx",
           "color": "#a855f7"
         },
         {
           "name": "水上巴士",
           "desc": "运河线/塘栖线",
-          "url": "https://www.hzbus.com.cn/",
+          "url": "https://www.hzbus.com.cn/LineQuery.aspx",
           "color": "#0ea5e9"
         },
         {
           "name": "公共自行车",
           "desc": "小红车借还点",
-          "url": "https://www.hzbus.com.cn/",
+          "url": "https://www.hzbus.com.cn/LineQuery.aspx",
           "color": "#22c55e"
         },
         {
@@ -521,14 +521,14 @@
         {
           "name": "摇号申请",
           "desc": "浙A小客车指标",
-          "url": "https://hzxkctk.cn/sq/",
+          "url": "https://hzxkctk.cn/",
           "detail": "<p style=\"color:var(--text-secondary);line-height:1.8;\">浙A小客车增量指标按「阶梯中签」规则摇号，每月 26 日（遇节假日顺延）举行。个人/单位均可申请。</p><div class=\"guide-block\"><h4>📋 申请条件（个人）</h4><p>• 居住杭州（户籍 / 居住证 / 个税累计 2 年 / 社保 2 年）<br>• 持有效驾驶证<br>• 名下无浙A客车<br>• 未持有逾期未使用的指标</p></div><div class=\"guide-block\"><h4>📅 流程</h4><p>• 8 日 24:00 前申请当月摇号<br>• 26 日公开摇号<br>• 中签后 12 个月内必须上牌</p></div><div class=\"guide-block\"><h4>💡 阶梯中签</h4><p>• 累计参与 24 次（2 年）进入 2 倍率池<br>• 累计 48 次（4 年）进入 3 倍率池<br>• 累计 72 次（6 年）进入 4 倍率池</p></div><p style=\"margin-top:6px;\"><a href=\"https://hzxkctk.cn/\" target=\"_blank\" rel=\"noopener\">申请入口 →</a></p>",
           "color": "#ef4444"
         },
         {
           "name": "竞价申请",
           "desc": "浙A车牌竞价",
-          "url": "https://hzxkctk.cn/sq/",
+          "url": "https://hzxkctk.cn/",
           "detail": "<p style=\"color:var(--text-secondary);line-height:1.8;\">浙A小客车增量指标竞价，每月 25 日举行（遇节假日顺延）。个人/单位均需先申请资格并通过审核。</p><div class=\"guide-block\"><h4>💰 报价规则</h4><p>• 报价下限 1 万元，每次加价 1000 元<br>• 报价上限不限<br>• 同一报价按时间优先原则排序<br>• 取报价高者，至指标用完</p></div><div class=\"guide-block\"><h4>📅 流程</h4><p>• 8 日 24:00 前申请当月竞价<br>• 18 日前缴纳 2000 元保证金<br>• 25 日 9:00-15:00 报价（共两阶段）<br>• 成交后 5 个工作日内付清余款</p></div><div class=\"guide-block\"><h4>📊 历史参考价</h4><p>• 个人均价：1-3 万元（视月份）<br>• 单位均价：2-5 万元<br>• 具体以当月公布为准</p></div><p style=\"margin-top:6px;\"><a href=\"https://hzxkctk.cn/\" target=\"_blank\" rel=\"noopener\">申请入口 →</a></p>",
           "color": "#f59e0b"
         },
@@ -1309,7 +1309,7 @@
         {
           "name": "公积金贷款",
           "desc": "额度/利率",
-          "url": "https://gjj.hangzhou.gov.cn/dk/",
+          "url": "https://gjj.hangzhou.gov.cn/",
           "color": "#3b82f6"
         },
         {
