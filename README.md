@@ -123,6 +123,15 @@ npx serve .
 ### 修改公众号关键字
 直接编辑 [data/cms.json](data/cms.json#L4686) 的 `wechatKeywords` 数组，部署后即生效
 
+**批量新增关键词**（适合一次性添加多个）：
+```bash
+curl -X POST 'https://www.ihangzhou.net/api/content' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer ihangzhou2024' \
+  -d '{"type":"wechatKeywordsBatch","data":{"keywords":[...]}}'
+```
+详见 [API 文档](docs/API.md) | [可视化管理后台](/admin/)
+
 ## 🛠 开发约定
 
 - **HTML/JS/CSS/SW** 文件 `Cache-Control: max-age=0, must-revalidate`，避免 CDN 缓存
