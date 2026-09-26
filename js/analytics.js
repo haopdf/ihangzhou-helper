@@ -36,12 +36,24 @@
 
   // ===== 数据发送 =====
   function send(data) {
+    // 始终携带当前页面（含 hash）
+    if (!data.page) data.page = location.pathname + (location.hash || '');
     fetch(ANALYTICS_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).catch(function() {});
   }
 
-  // ===== PV 上报（每次页面加载自动调用） =====
+  // ===== 获取当前页面标识（含独立频道页与 hash） =====
+  function getPageName() {
+    var p = location.pathname;
+    var h = location.hash || '';
+    // 独立频道页：food.html → /food, history.html → /history
+    if (p.endsWith('.html')) p = p.replace(/\.html$/, '');
+    if (p === '/' || p === '/index' || p === '') return h ? '/#' + h : '/index';
+    return p + h;
+  }
+
+  // ===== PV 上报（每次页面加载/切换自动调用） =====
   function trackPageView() {
-    send({ action: 'pv', uuid: getUuid(), fp: getFingerprint(), page: location.pathname + location.hash, ref: document.referrer || '', day: todayStr(), t: Date.now() });
+    send({ action: 'pv', uuid: getUuid(), fp: getFingerprint(), page: getPageName(), ref: document.referrer || '', day: todayStr(), t: Date.now() });
   }
 
   // ===== 点击事件 =====
@@ -101,6 +113,10 @@
   function init() {
     // 自动 PV
     trackPageView();
+    // 监听 hash 变化（SPA 路由切换 → 上报 PV）
+    window.addEventListener('hashchange', function() {
+      setTimeout(trackPageView, 200);
+    });
     // 反馈按钮
     if (!document.getElementById('feedbackBtn')) {
       var btn = document.createElement('div');
@@ -114,7 +130,11 @@
     if (tabs) {
       tabs.addEventListener('click', function(e) {
         var tab = e.target.closest('.tab');
-        if (tab && tab.dataset.tab) trackTab(tab.dataset.tab);
+        if (tab && tab.dataset.tab) {
+          trackTab(tab.dataset.tab);
+          // Tab 切换也上报 PV，确保页面浏览被准确记录
+          setTimeout(trackPageView, 200);
+        }
       });
     }
     var searchInput = document.getElementById('searchInput');
