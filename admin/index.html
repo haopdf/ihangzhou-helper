@@ -3,1736 +3,452 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iHangzhou 管理后台 - CMS</title>
+  <title>iHangzhou 管理面板</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f1f5f9;
-      min-height: 100vh;
-    }
-    .login-bg {
-      background: linear-gradient(135deg, #0ea5e9, #0284c7);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .login-box {
-      background: #fff;
-      border-radius: 16px;
-      padding: 40px;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-    }
-    .logo { text-align: center; margin-bottom: 30px; }
-    .logo-icon { font-size: 48px; margin-bottom: 10px; }
-    .logo h1 { font-size: 24px; color: #1e293b; }
-    .logo p { font-size: 13px; color: #64748b; margin-top: 4px; }
-    .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; font-size: 13px; color: #475569; margin-bottom: 6px; font-weight: 500; }
-    .form-group input, .form-group textarea, .form-group select {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      font-size: 14px;
-      transition: border-color 0.2s;
-    }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #0ea5e9; }
-    .btn {
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-primary { background: #0ea5e9; color: #fff; }
-    .btn-primary:hover { background: #0284c7; }
-    .btn-success { background: #10b981; color: #fff; }
-    .btn-success:hover { background: #059669; }
-    .btn-danger { background: #ef4444; color: #fff; }
-    .btn-danger:hover { background: #dc2626; }
-    .btn-sm { padding: 6px 12px; font-size: 12px; }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .error { color: #ef4444; font-size: 13px; margin-top: 10px; text-align: center; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #1f2937; line-height: 1.6; }
+    .header { background: linear-gradient(135deg, #1b4d3e, #0ea5e9); color: #fff; padding: 20px 24px; position: sticky; top: 0; z-index: 100; }
+    .header h1 { font-size: 20px; font-weight: 700; }
+    .header .subtitle { font-size: 13px; opacity: 0.85; margin-top: 2px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px 16px; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab-btn { padding: 8px 18px; border: none; background: #e5e7eb; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; transition: all .2s; }
+    .tab-btn.active { background: #0ea5e9; color: #fff; }
+    .tab-btn:hover:not(.active) { background: #d1d5db; }
+    .panel { display: none; }
+    .panel.active { display: block; }
 
-    .dashboard { display: none; min-height: 100vh; }
-    .sidebar {
-      position: fixed;
-      left: 0; top: 0; bottom: 0;
-      width: 240px;
-      background: #1e293b;
-      color: #fff;
-      padding: 20px 0;
-      overflow-y: auto;
-    }
-    .sidebar-header {
-      padding: 0 20px 20px;
-      border-bottom: 1px solid #334155;
-      margin-bottom: 10px;
-    }
-    .sidebar-header h2 { font-size: 16px; }
-    .sidebar-header p { font-size: 12px; color: #94a3b8; margin-top: 4px; }
-    .nav-item {
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: background 0.2s;
-      font-size: 14px;
-      color: #cbd5e1;
-    }
-    .nav-item:hover { background: #334155; }
-    .nav-item.active { background: #0ea5e9; color: #fff; }
-    .nav-item .icon { font-size: 18px; }
-    
-    .main {
-      margin-left: 240px;
-      padding: 20px 30px;
-    }
-    .header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      background: #fff;
-      padding: 16px 24px;
-      border-radius: 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    .header-bar h1 { font-size: 20px; color: #1e293b; }
-    .user-info { display: flex; align-items: center; gap: 12px; }
-    .logout-btn {
-      padding: 8px 16px;
-      background: #f1f5f9;
-      color: #64748b;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
-    }
+    /* 统计面板 */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .stat-card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    .stat-card .label { font-size: 12px; color: #6b7280; margin-bottom: 4px; }
+    .stat-card .value { font-size: 28px; font-weight: 700; color: #111827; }
+    .stat-card .delta { font-size: 12px; margin-top: 4px; }
+    .stat-card .delta.up { color: #10b981; }
+    .stat-card .delta.down { color: #ef4444; }
+    .chart-card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    .chart-card h3 { font-size: 15px; margin-bottom: 12px; color: #111827; }
+    .trend-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .trend-row .date { font-size: 12px; color: #6b7280; width: 80px; flex-shrink: 0; }
+    .trend-row .bar-wrap { flex: 1; height: 20px; background: #f3f4f6; border-radius: 4px; overflow: hidden; display: flex; }
+    .trend-row .bar { height: 100%; background: #0ea5e9; border-radius: 4px; transition: width .3s; }
+    .trend-row .bar.click { background: #10b981; }
+    .trend-row .bar.uv { background: #8b5cf6; }
+    .trend-row .count { font-size: 12px; color: #374151; width: 60px; text-align: right; }
+    .rank-list { list-style: none; }
+    .rank-list li { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #f3f4f6; }
+    .rank-list li:last-child { border-bottom: none; }
+    .rank-list .rank-num { width: 20px; height: 20px; background: #e5e7eb; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #374151; }
+    .rank-list li:nth-child(1) .rank-num { background: #fbbf24; color: #92400e; }
+    .rank-list li:nth-child(2) .rank-num { background: #d1d5db; color: #1f2937; }
+    .rank-list li:nth-child(3) .rank-num { background: #fdba74; color: #9a3412; }
+    .rank-list .name { flex: 1; font-size: 13px; color: #1f2937; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .rank-list .count { font-size: 13px; font-weight: 600; color: #6b7280; }
 
-    .panel {
-      background: #fff;
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 20px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .panel-title { font-size: 16px; font-weight: 600; color: #1e293b; }
+    /* 关键词管理 */
+    .toolbar { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    .toolbar input, .toolbar select, .toolbar button { padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; }
+    .toolbar input { flex: 1; min-width: 180px; }
+    .toolbar input:focus { outline: none; border-color: #0ea5e9; }
+    .toolbar button { background: #0ea5e9; color: #fff; border: none; cursor: pointer; font-weight: 500; }
+    .toolbar button:hover { background: #0284c7; }
+    .toolbar button.danger { background: #ef4444; }
+    .toolbar button.danger:hover { background: #dc2626; }
+    .toolbar button.success { background: #10b981; }
+    .kw-table { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    .kw-table-header, .kw-row { display: grid; grid-template-columns: 1.2fr 1.5fr 0.8fr 2fr 0.8fr; gap: 10px; padding: 10px 16px; align-items: center; }
+    .kw-table-header { background: #f9fafb; font-size: 12px; font-weight: 600; color: #6b7280; border-bottom: 1px solid #e5e7eb; }
+    .kw-row { border-bottom: 1px solid #f3f4f6; font-size: 13px; }
+    .kw-row:hover { background: #f9fafb; }
+    .kw-row:last-child { border-bottom: none; }
+    .kw-row .keyword { font-weight: 600; color: #111827; }
+    .kw-row .aliases { font-size: 11px; color: #6b7280; }
+    .kw-row .type-badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 11px; background: #dbeafe; color: #1d4ed8; }
+    .kw-row .type-badge.news { background: #fef3c7; color: #92400e; }
+    .kw-row .reply { font-size: 12px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .kw-row .actions { display: flex; gap: 4px; }
+    .kw-row .actions button { padding: 4px 8px; font-size: 11px; }
+    .empty { text-align: center; padding: 40px 20px; color: #9ca3af; }
 
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-    .stat-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    .stat-card h3 { font-size: 12px; color: #64748b; margin-bottom: 8px; }
-    .stat-card .value { font-size: 28px; font-weight: 700; color: #0ea5e9; }
-
-    .item-list { display: flex; flex-direction: column; gap: 8px; }
-    .item-card {
-      display: flex;
-      align-items: center;
-      padding: 12px 16px;
-      background: #f8fafc;
-      border-radius: 8px;
-      border: 1px solid #e2e8f0;
-    }
-    .item-card .item-icon {
-      width: 40px; height: 40px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      margin-right: 12px;
-      flex-shrink: 0;
-    }
-    .item-card .item-info { flex: 1; }
-    .item-card .item-name { font-weight: 600; font-size: 14px; color: #1e293b; }
-    .item-card .item-desc { font-size: 12px; color: #64748b; margin-top: 2px; }
-    .item-card .item-actions { display: flex; gap: 6px; }
-
-    .category-section {
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      margin-bottom: 16px;
-      overflow: hidden;
-    }
-    .category-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 16px;
-      background: #f8fafc;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .category-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      color: #1e293b;
-    }
-    .category-count {
-      font-size: 12px;
-      color: #64748b;
-      background: #e2e8f0;
-      padding: 2px 8px;
-      border-radius: 10px;
-    }
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 20px;
-    }
+    /* 模态框 */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.4); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
     .modal-overlay.active { display: flex; }
-    .modal {
-      background: #fff;
-      border-radius: 16px;
-      padding: 30px;
-      width: 100%;
-      max-width: 500px;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    .modal-header h3 { font-size: 18px; color: #1e293b; }
-    .modal-close {
-      width: 32px; height: 32px;
-      border: none;
-      background: #f1f5f9;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 16px;
-      color: #64748b;
-    }
-
-    .feedback-card {
-      background: #fff;
-      border-radius: 10px;
-      padding: 16px 20px;
-      margin-bottom: 10px;
-      border: 1px solid #e2e8f0;
-      border-left: 4px solid #cbd5e1;
-      transition: box-shadow 0.2s;
-    }
-    .feedback-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-    .feedback-card.type-suggest { border-left-color: #3b82f6; }
-    .feedback-card.type-bug { border-left-color: #ef4444; }
-    .feedback-card.type-fix { border-left-color: #f59e0b; }
-    .feedback-card.type-praise { border-left-color: #10b981; }
-    .feedback-row1 {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .feedback-badge {
-      padding: 3px 10px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    .badge-suggest { background: #dbeafe; color: #1d4ed8; }
-    .badge-bug { background: #fee2e2; color: #dc2626; }
-    .badge-fix { background: #fef3c7; color: #b45309; }
-    .badge-praise { background: #dcfce7; color: #15803d; }
-    .feedback-time { font-size: 12px; color: #94a3b8; margin-left: auto; }
-    .feedback-body {
-      color: #334155;
-      font-size: 14px;
-      line-height: 1.7;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-    .feedback-meta {
-      margin-top: 10px;
-      padding-top: 8px;
-      border-top: 1px dashed #f1f5f9;
-      font-size: 12px;
-      color: #64748b;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .feedback-filter {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .feedback-filter button {
-      padding: 5px 14px;
-      border: 1px solid #e2e8f0;
-      border-radius: 20px;
-      background: #fff;
-      color: #64748b;
-      font-size: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .feedback-filter button.active {
-      background: #0ea5e9;
-      color: #fff;
-      border-color: #0ea5e9;
-    }
-
-    .loading { text-align: center; padding: 40px; color: #64748b; }
-    .empty { text-align: center; padding: 40px; color: #94a3b8; }
-
-    .toast {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #1e293b;
-      color: #fff;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 14px;
-      z-index: 2000;
-      opacity: 0;
-      transform: translateY(-20px);
-      transition: all 0.3s;
-    }
-    .toast.show { opacity: 1; transform: translateY(0); }
-    .toast.success { background: #10b981; }
-    .toast.error { background: #ef4444; }
-
-    .view-section { display: none; }
-    .view-section.active { display: block; }
+    .modal { background: #fff; border-radius: 12px; width: 100%; max-width: 560px; max-height: 80vh; overflow-y: auto; }
+    .modal h3 { padding: 16px 20px; border-bottom: 1px solid #e5e7eb; font-size: 16px; }
+    .modal .body { padding: 20px; }
+    .modal .field { margin-bottom: 12px; }
+    .modal .field label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 4px; color: #374151; }
+    .modal .field input, .modal .field textarea, .modal .field select { width: 100%; padding: 8px 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; }
+    .modal .field textarea { resize: vertical; min-height: 60px; font-family: inherit; }
+    .modal .field input:focus, .modal .field textarea:focus { outline: none; border-color: #0ea5e9; }
+    .modal .footer { padding: 12px 20px; border-top: 1px solid #e5e7eb; display: flex; gap: 8px; justify-content: flex-end; }
+    .modal .footer button { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; }
+    .modal .footer .cancel { background: #f3f4f6; color: #374151; }
+    .modal .footer .save { background: #0ea5e9; color: #fff; }
+    .toast-msg { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #1f2937; color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 13px; z-index: 2000; display: none; }
+    .toast-msg.show { display: block; }
+    .auth-bar { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 20px; display: flex; gap: 10px; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    .auth-bar input { flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; }
+    .auth-bar button { padding: 10px 24px; background: #0ea5e9; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; }
   </style>
 </head>
 <body>
 
-<div class="login-bg" id="loginBox">
-  <div class="login-box">
-    <div class="logo">
-      <div class="logo-icon">🏔️</div>
-      <h1>iHangzhou 管理后台</h1>
-      <p>CMS 内容管理系统</p>
+<div class="header">
+  <h1>🏔️ iHangzhou 管理面板</h1>
+  <div class="subtitle">访问统计 · 关键词回复管理</div>
+</div>
+
+<div class="container">
+  <!-- 认证 -->
+  <div class="auth-bar" id="authBar">
+    <input type="password" id="authToken" placeholder="请输入 CMS_ADMIN_PASSWORD">
+    <button onclick="authenticate()">登录</button>
+  </div>
+
+  <!-- Tab 栏 -->
+  <div class="tabs" id="tabs" style="display:none;">
+    <button class="tab-btn active" data-tab="stats">📊 访问统计</button>
+    <button class="tab-btn" data-tab="keywords">💬 关键词回复</button>
+  </div>
+
+  <!-- 统计面板 -->
+  <div class="panel active" id="panelStats">
+    <div class="stats-grid" id="statsGrid"></div>
+    <div class="chart-card">
+      <h3>📈 近 30 天 PV / UV / 点击趋势</h3>
+      <div id="trendChart"></div>
     </div>
-    <form id="loginForm">
-      <div class="form-group">
-        <label>管理密码</label>
-        <input type="password" id="password" placeholder="请输入管理密码" required>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+      <div class="chart-card">
+        <h3>🔥 热门页面 Top 10</h3>
+        <ul class="rank-list" id="topPages"></ul>
       </div>
-      <button type="submit" class="btn btn-primary" style="width:100%;">登录</button>
-      <p class="error" id="errorMsg"></p>
-    </form>
+      <div class="chart-card">
+        <h3>🖱️ 热门点击 Top 10</h3>
+        <ul class="rank-list" id="topClicks"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 关键词管理面板 -->
+  <div class="panel" id="panelKeywords">
+    <div class="toolbar">
+      <input type="text" id="kwSearch" placeholder="搜索关键词..." oninput="filterKeywords()">
+      <select id="kwTypeFilter" onchange="filterKeywords()">
+        <option value="">全部类型</option>
+        <option value="text">文字回复</option>
+        <option value="news">图文回复</option>
+      </select>
+      <button class="success" onclick="openAddModal()">+ 批量新增</button>
+      <button onclick="openImportModal()">📥 导入 JSON</button>
+      <button onclick="exportKeywords()">📤 导出</button>
+      <button class="danger" onclick="deleteSelected()">🗑️ 删除选中</button>
+    </div>
+    <div class="kw-table">
+      <div class="kw-table-header">
+        <div><input type="checkbox" id="selectAll" onchange="toggleAll()"></div>
+        <div>关键词 / 别名</div>
+        <div>类型</div>
+        <div>回复内容</div>
+        <div>操作</div>
+      </div>
+      <div id="kwList"></div>
+    </div>
   </div>
 </div>
 
-<div class="dashboard" id="dashboard">
-  <div class="sidebar">
-    <div class="sidebar-header">
-      <h2>🏔️ iHangzhou</h2>
-      <p>内容管理系统</p>
-    </div>
-    <div class="nav-item active" data-view="overview"><span class="icon">📊</span><span>数据概览</span></div>
-    <div class="nav-item" data-view="categories"><span class="icon">📁</span><span>分类管理</span></div>
-    <div class="nav-item" data-view="hotServices"><span class="icon">🔥</span><span>热门服务</span></div>
-    <div class="nav-item" data-view="hotKeywords"><span class="icon">🔍</span><span>热门搜索</span></div>
-    <div class="nav-item" data-view="channels"><span class="icon">📺</span><span>频道管理</span></div>
-    <div class="nav-item" data-view="analytics"><span class="icon">📈</span><span>访问统计</span></div>
-    <div class="nav-item" data-view="wechat"><span class="icon">💚</span><span>微信配置</span></div>
-    <div class="nav-item" data-view="feedback"><span class="icon">💬</span><span>用户反馈</span></div>
-  </div>
-
-  <div class="main">
-    <div class="view-section active" id="view-overview">
-      <div class="header-bar">
-        <h1>📊 数据概览</h1>
-        <div class="user-info">
-          <span id="versionInfo" style="font-size:12px;color:#64748b;"></span>
-          <button class="btn btn-sm btn-success" onclick="importFromAppJs()">📥 从 app.js 导入</button>
-          <button class="btn btn-sm btn-primary" onclick="exportBackup()">💾 导出备份</button>
-          <button class="btn btn-sm btn-primary" onclick="refreshFrontendCache()">🔄 刷新前端缓存</button>
-          <button class="logout-btn" onclick="logout()">退出</button>
-        </div>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card"><h3>分类数</h3><div class="value" id="statCategories">0</div></div>
-        <div class="stat-card"><h3>服务条目</h3><div class="value" id="statItems">0</div></div>
-        <div class="stat-card"><h3>热门服务</h3><div class="value" id="statHotServices">0</div></div>
-        <div class="stat-card"><h3>热门关键词</h3><div class="value" id="statKeywords">0</div></div>
-        <div class="stat-card"><h3>总点击量</h3><div class="value" id="statClicks">0</div></div>
-        <div class="stat-card"><h3>用户反馈</h3><div class="value" id="statFeedbacks">0</div></div>
-      </div>
-      <div class="panel">
-        <div class="panel-header"><span class="panel-title">📌 操作说明</span></div>
-        <div style="color:#475569;font-size:13px;line-height:1.8;">
-          • <strong>从 app.js 导入</strong>：把前端硬编码的 22 大分类、370+ 条目一键迁移到 CMS 数据库（覆盖当前数据，会自动备份）<br>
-          • <strong>导出备份</strong>：下载 cms.json 完整备份到本地<br>
-          • <strong>刷新前端缓存</strong>：升级 Service Worker 版本，用户下次访问将拿到最新内容<br>
-          • <strong>分类管理</strong>：支持搜索、上移/下移排序、富文本 detail 编辑
-        </div>
-      </div>
-    </div>
-
-    <div class="view-section" id="view-categories">
-      <div class="header-bar">
-        <h1>📁 分类管理</h1>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <input id="searchBox" placeholder="🔍 搜索条目名称/描述..." oninput="onSearch()" style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:6px;font-size:13px;width:220px;">
-          <button class="btn btn-success" onclick="showAddCategory()">+ 新增分类</button>
-        </div>
-      </div>
-      <div id="categoriesList"></div>
-    </div>
-
-    <div class="view-section" id="view-hotServices">
-      <div class="header-bar">
-        <h1>🔥 热门服务</h1>
-        <button class="btn btn-success" onclick="showAddHotService()">+ 新增</button>
-      </div>
-      <div id="hotServicesList"></div>
-    </div>
-
-    <div class="view-section" id="view-hotKeywords">
-      <div class="header-bar">
-        <h1>🔍 热门搜索词</h1>
-        <button class="btn btn-success" onclick="showAddKeyword()">+ 新增</button>
-      </div>
-      <div id="keywordsList"></div>
-    </div>
-
-    <div class="view-section" id="view-channels">
-      <div class="header-bar">
-        <h1>📺 频道管理</h1>
-        <button class="btn btn-success" onclick="showAddChannel()">+ 新增频道</button>
-      </div>
-      <div id="channelsList"></div>
-    </div>
-
-    <div class="view-section" id="view-analytics">
-      <div class="header-bar"><h1>📈 访问统计</h1></div>
-      <div class="panel">
-        <div class="panel-header"><span class="panel-title">热门服务点击排行</span></div>
-        <div id="analyticsHotList"><div class="loading">加载中...</div></div>
-      </div>
-    </div>
-
-<div class="view-section" id="view-feedback">
-<div class="header-bar"><h1>💬 用户反馈</h1></div>
-<div class="panel">
-<div class="panel-header" style="display:flex;justify-content:space-between;align-items:center;">
-<span class="panel-title">反馈列表</span>
-<div class="feedback-filter">
-<button class="active" onclick="filterFeedback('all', this)">全部</button>
-<button onclick="filterFeedback('bug', this)">🐛 报错</button>
-<button onclick="filterFeedback('feature', this)">💡 建议</button>
-<button onclick="filterFeedback('content', this)">📝 内容补充</button>
-<button onclick="filterFeedback('other', this)">💬 其他</button>
-</div>
-</div>
-<div id="feedbackList"><div class="loading">加载中...</div></div>
-</div>
-</div>
-
-<div class="view-section" id="view-wechat">
-<div class="header-bar"><h1>💚 微信公众号配置</h1></div>
-<div class="panel">
-<div class="panel-header"><span class="panel-title">接入配置（填入微信公众号后台）</span></div>
-<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px;margin-bottom:20px;">
-<p style="font-weight:600;color:#166534;margin-bottom:8px;">📋 在微信公众平台 → 开发 → 基本配置 中填写：</p>
-<table style="width:100%;font-size:14px;border-collapse:collapse;">
-<tr style="border-bottom:1px solid #bbf7d0;"><td style="padding:8px 0;color:#166534;width:120px;">URL</td><td style="padding:8px 0;color:#1e293b;font-family:monospace;" id="wechatUrl">-</td></tr>
-<tr style="border-bottom:1px solid #bbf7d0;"><td style="padding:8px 0;color:#166534;">Token</td><td style="padding:8px 0;color:#1e293b;font-family:monospace;" id="wechatToken">-</td></tr>
-<tr style="border-bottom:1px solid #bbf7d0;"><td style="padding:8px 0;color:#166534;">EncodingAESKey</td><td style="padding:8px 0;color:#1e293b;font-family:monospace;">随机生成即可</td></tr>
-<tr><td style="padding:8px 0;color:#166534;">消息加解密</td><td style="padding:8px 0;color:#1e293b;">推荐：兼容模式</td></tr>
-</table>
-</div>
-<div class="form-group"><label>回调 URL（复制到微信后台）</label><input id="wechatCallbackUrl" readonly style="background:#f8fafc;"></div>
-<div class="form-group"><label>Token（3-32位英文/数字，自定义）</label><input id="wechatTokenInput" placeholder="如: ihangzhou2024"></div>
-<div class="form-group"><label>EncodingAESKey（可选，43位随机字符）</label><input id="wechatAesKey" placeholder="留空则随机生成" maxlength="43"></div>
-<button class="btn btn-primary" onclick="saveWechatConfig()">保存配置</button>
-<button class="btn btn-success" onclick="testWechatUrl()" style="margin-left:8px;">测试 URL 验证</button>
-</div>
-
-<div class="panel">
-<div class="panel-header"><span class="panel-title">📰 关键词自动回复</span></div>
-<div class="item-list" id="wechatKeywords"></div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
-<button class="btn btn-sm btn-primary" onclick="addWechatKeyword()">+ 添加关键词</button>
-<button class="btn btn-sm btn-success" onclick="autoGenerateKeywords()">🔄 从服务自动生成</button>
-<button class="btn btn-sm btn-primary" onclick="showBatchImport()">📋 批量粘贴(JSON)</button>
-<button class="btn btn-sm btn-primary" onclick="showSimpleBatch()">📝 批量添加(简捷)</button>
-</div>
-</div>
-
-<div class="panel">
-<div class="panel-header"><span class="panel-title">📂 资料分享（网盘链接自动回复）</span></div>
-<div style="color:#64748b;font-size:13px;margin-bottom:12px;">用户回复关键词时，自动格式化网盘链接+提取码回复</div>
-<div class="item-list" id="shareList"></div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
-<button class="btn btn-sm btn-success" onclick="addShare()">+ 添加资料</button>
-<button class="btn btn-sm btn-primary" onclick="showShareBatch()">📋 批量粘贴</button>
-</div>
-</div>
-
-<div class="panel">
-<div class="panel-header"><span class="panel-title">📊 关注后自动回复（欢迎语）</span></div>
-<div class="form-group"><label>回复内容类型</label><select id="welcomeType"><option value="text">文字</option><option value="news">图文</option></select></div>
-<div class="form-group"><label>欢迎文字 / 图文标题</label><input id="welcomeTitle" value="欢迎关注 iHangzhou · 杭州生活助手 🏔️"></div>
-<div class="form-group"><label>描述 / 图文描述</label><textarea id="welcomeDesc">杭州人的数字生活工具箱。办事/出行/民生/特色服务一站导航。</textarea></div>
-<div class="form-group"><label>跳转链接</label><input id="welcomeUrl" value="https://www.ihangzhou.net/"></div>
-<button class="btn btn-primary" onclick="saveWelcomeConfig()">保存欢迎语</button>
-</div>
-
-<div class="panel">
-<div class="panel-header"><span class="panel-title">🍔 自定义菜单</span><button class="btn btn-sm btn-success" onclick="syncWechatMenu()">同步菜单到公众号</button></div>
-<p style="font-size:13px;color:#64748b;margin-bottom:12px;">点击"同步菜单"将以下菜单推送到微信公众号（需先配置 AppID/AppSecret）</p>
-<div id="wechatMenuPreview" style="border:1px solid #e2e8f0;border-radius:8px;padding:16px;background:#f8fafc;"></div>
-</div>
-</div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="editModal">
+<!-- 新增/编辑模态框 -->
+<div class="modal-overlay" id="kwModal">
   <div class="modal">
-    <div class="modal-header">
-      <h3 id="modalTitle">编辑</h3>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="kwModalTitle">新增关键词</h3>
+    <div class="body">
+      <div class="field"><label>关键词 *</label><input id="kwKeyword" placeholder="用户触发词"></div>
+      <div class="field"><label>别名（逗号分隔）</label><input id="kwAliases" placeholder="如：限号,尾号"></div>
+      <div class="field"><label>回复类型</label>
+        <select id="kwType" onchange="toggleTypeFields()">
+          <option value="text">文字回复</option>
+          <option value="news">图文回复</option>
+        </select>
+      </div>
+      <div class="field" id="fieldReply"><label>回复内容</label><textarea id="kwReply" placeholder="纯文本，支持换行"></textarea></div>
+      <div class="field" id="fieldTitle" style="display:none;"><label>图文标题 *</label><input id="kwTitle" placeholder="图文消息标题"></div>
+      <div class="field" id="fieldDesc" style="display:none;"><label>图文描述</label><textarea id="kwDesc" placeholder="图文消息摘要"></textarea></div>
+      <div class="field" id="fieldPicUrl" style="display:none;"><label>封面图 URL</label><input id="kwPicUrl" placeholder="https://..."></div>
+      <div class="field" id="fieldUrl" style="display:none;"><label>跳转链接 *</label><input id="kwUrl" placeholder="https://..."></div>
     </div>
-    <div id="modalContent"></div>
+    <div class="footer">
+      <button class="cancel" onclick="closeModal()">取消</button>
+      <button class="save" onclick="saveKeyword()">保存</button>
+    </div>
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<!-- 批量导入模态框 -->
+<div class="modal-overlay" id="importModal">
+  <div class="modal">
+    <h3>批量导入（JSON 格式）</h3>
+    <div class="body">
+      <div class="field"><label>JSON 数组</label><textarea id="importJson" style="min-height:150px; font-family:monospace; font-size:12px;" placeholder='[{"keyword":"新闻","type":"text","reply":"这是回复"}, ...]'></textarea></div>
+      <p style="font-size:12px;color:#6b7280;margin-top:8px;">支持 add（追加）/ replace（全量替换）两种模式</p>
+    </div>
+    <div class="footer">
+      <button class="cancel" onclick="closeImportModal()">取消</button>
+      <button class="save" onclick="doImport('add')">追加导入</button>
+      <button class="danger" onclick="doImport('replace')">全量替换</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-msg" id="toast"></div>
 
 <script>
-var API_BASE = '';
-var CMS_DATA = null;
-var ADMIN_PASSWORD = localStorage.getItem('ihangzhou_admin_pwd') || '';
+  var AUTH = '';
+  var KEYWORDS = [];
+  var editingKeyword = null;
 
-if (ADMIN_PASSWORD) { initDashboard(); }
-
-document.getElementById('loginForm').onsubmit = function(e) {
-  e.preventDefault();
-  var pwd = document.getElementById('password').value;
-  if (pwd) {
-    ADMIN_PASSWORD = pwd;
-    localStorage.setItem('ihangzhou_admin_pwd', pwd);
-    initDashboard();
+  // ===== 认证 =====
+  function authenticate() {
+    var t = document.getElementById('authToken').value.trim();
+    if (!t) { toast('请输入密码'); return; }
+    AUTH = 'Bearer ' + t;
+    document.getElementById('authBar').style.display = 'none';
+    document.getElementById('tabs').style.display = 'flex';
+    loadStats();
+    loadKeywords();
   }
-};
 
-function logout() {
-  localStorage.removeItem('ihangzhou_admin_pwd');
-  ADMIN_PASSWORD = '';
-  location.reload();
-}
+  // ===== Tab 切换 =====
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.onclick = function() {
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('panel' + btn.dataset.tab.charAt(0).toUpperCase() + btn.dataset.tab.slice(1)).classList.add('active');
+    };
+  });
 
-function initDashboard() {
-  document.getElementById('loginBox').style.display = 'none';
-  document.getElementById('dashboard').style.display = 'block';
-  loadCMSData();
-  setupNavigation();
-}
+  // ===== API 调用 =====
+  async function api(path, opts) {
+    opts = opts || {};
+    opts.headers = Object.assign({}, opts.headers || {}, { 'Authorization': AUTH, 'Content-Type': 'application/json' });
+    var res = await fetch(path, opts);
+    return res.json();
+  }
 
-async function loadCMSData() {
-  var loaded = false;
-  // 1) 先尝试 API（Vercel 环境）
-  try {
-    var res = await fetch(API_BASE + '/api/content');
-    var result = await res.json();
-    if (result.success) {
-      CMS_DATA = result.data;
-      loaded = true;
-    }
-  } catch (e) { /* ignore */ }
-  // 2) API 失败则回退到静态 JSON（本地预览/静态服务器）
-  if (!loaded) {
+  function toast(msg, ms) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, ms || 2500);
+  }
+
+  // ===== 统计 =====
+  async function loadStats() {
     try {
-      var staticRes = await fetch('../data/cms.json?t=' + Date.now());
-      CMS_DATA = await staticRes.json();
-      loaded = true;
-    } catch (e2) { /* ignore */ }
+      var r = await api('/api/tools?action=track&stats=1');
+      if (!r.success) { toast('加载统计失败'); return; }
+      renderStats(r.data);
+    } catch (e) { toast('加载统计失败: ' + e.message); }
   }
-  if (loaded) {
-    renderOverview();
-    renderCategories();
-    renderHotServices();
-    renderKeywords();
-    renderChannels();
-  } else {
-    showToast('加载数据失败：API 与本地 JSON 均不可用', 'error');
-  }
-}
 
-function setupNavigation() {
-  document.querySelectorAll('.nav-item').forEach(function(item) {
-    item.onclick = function() {
-      document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('active'); });
-      this.classList.add('active');
-      var view = this.dataset.view;
-      document.querySelectorAll('.view-section').forEach(function(v) { v.classList.remove('active'); });
-      document.getElementById('view-' + view).classList.add('active');
-      if (view === 'analytics') loadAnalytics();
-      if (view === 'feedback') loadFeedback();
-    };
-  });
-}
+  function renderStats(d) {
+    // 核心数据卡
+    var cards = [
+      { label: '今日 PV', value: d.today.pv, delta: null },
+      { label: '今日 UV', value: d.today.uv, delta: d.today.uvDelta },
+      { label: '今日点击', value: d.today.clicks, delta: null },
+      { label: '7 日 PV', value: d.trend7.pv, delta: d.trend7.pvDelta },
+      { label: '7 日 UV', value: d.trend7.uv, delta: d.trend7.uvDelta },
+      { label: '累计 PV', value: d.total.pv, delta: null },
+      { label: '累计 UV', value: d.total.uv, delta: null },
+      { label: '活跃 UV（7 日）', value: d.total.uv7, delta: null }
+    ];
+    document.getElementById('statsGrid').innerHTML = cards.map(function(c) {
+      var deltaHtml = c.delta != null ? '<div class="delta ' + (c.delta >= 0 ? 'up' : 'down') + '">' + (c.delta >= 0 ? '↑' : '↓') + ' ' + Math.abs(c.delta) + '% vs 昨日</div>' : '';
+      return '<div class="stat-card"><div class="label">' + c.label + '</div><div class="value">' + c.value.toLocaleString() + '</div>' + deltaHtml + '</div>';
+    }).join('');
 
-async function apiCall(method, body) {
-  var res = await fetch(API_BASE + '/api/content', {
-    method: method,
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + ADMIN_PASSWORD },
-    body: JSON.stringify(body)
-  });
-  return res.json();
-}
-
-function renderOverview() {
-  if (!CMS_DATA) return;
-  document.getElementById('versionInfo').textContent = 'v' + (CMS_DATA.version || 1);
-  var totalItems = 0;
-  CMS_DATA.categories.forEach(function(c) { totalItems += c.items.length; });
-  document.getElementById('statCategories').textContent = CMS_DATA.categories.length;
-  document.getElementById('statItems').textContent = totalItems;
-  document.getElementById('statHotServices').textContent = CMS_DATA.hotServices.length;
-  document.getElementById('statKeywords').textContent = CMS_DATA.hotKeywords.length;
-}
-
-function renderCategories() {
-  if (!CMS_DATA) return;
-  var q = (document.getElementById('searchBox') || {}).value || '';
-  q = q.trim().toLowerCase();
-  var html = '';
-  CMS_DATA.categories.forEach(function(cat, catIdx) {
-    // 分类头永远显示，但条目按搜索过滤
-    var items = cat.items;
-    if (q) {
-      items = items.filter(function(it) {
-        return (it.name || '').toLowerCase().indexOf(q) >= 0 || (it.desc || '').toLowerCase().indexOf(q) >= 0;
-      });
+    // 趋势图
+    if (d.days && d.days.length) {
+      var maxPV = Math.max.apply(null, d.days.map(function(d) { return d.pv; }).concat([1]));
+      document.getElementById('trendChart').innerHTML = d.days.slice(-14).map(function(d) {
+        var barW = Math.round(d.pv / maxPV * 100);
+        return '<div class="trend-row"><span class="date">' + d.date.slice(5) + '</span>' +
+          '<div class="bar-wrap"><div class="bar" style="width:' + barW + '%"></div></div>' +
+          '<span class="count">PV ' + d.pv + ' / UV ' + d.uv + '</span></div>';
+      }).join('');
     }
-    // 搜索时若该分类无匹配，跳过不显示
-    if (q && items.length === 0) return;
-    html += '<div class="category-section"><div class="category-header">' +
-      '<div class="category-title"><span>' + cat.icon + '</span><span>' + cat.name + '</span>' +
-      '<span class="category-count">' + items.length + (q ? '/' + cat.items.length : '') + ' 项</span></div>' +
-      '<div>' +
-      '<button class="btn btn-sm btn-primary" title="上移分类" onclick="moveCategory(' + catIdx + ',\'up\')">↑</button> ' +
-      '<button class="btn btn-sm btn-primary" title="下移分类" onclick="moveCategory(' + catIdx + ',\'down\')">↓</button> ' +
-      '<button class="btn btn-sm btn-success" onclick="showAddItem(' + catIdx + ')">+ 添加条目</button> ' +
-      '<button class="btn btn-sm btn-danger" onclick="deleteCategory(' + catIdx + ')">删除分类</button>' +
-      '</div></div>' +
-      '<div class="item-list" style="padding:12px;">';
-    // 注意：排序/编辑/删除按钮使用 cat.items 的原始下标（itemIdx），不能用过滤后的下标
-    items.forEach(function(item) {
-      // 找到原始下标
-      var origIdx = cat.items.indexOf(item);
-      html += '<div class="item-card"><div class="item-icon" style="background:' + (item.color || '#0ea5e9') + ';">' + (item.icon || '📌') + '</div>' +
-        '<div class="item-info"><div class="item-name">' + item.name + (item.detail ? ' <span style="font-size:10px;color:#10b981;">[详情]</span>' : '') + '</div><div class="item-desc">' + item.desc + '</div></div>' +
-        '<div class="item-actions">' +
-        '<button class="btn btn-sm btn-primary" title="上移" onclick="moveItem(' + catIdx + ',' + origIdx + ',\'up\')">↑</button>' +
-        '<button class="btn btn-sm btn-primary" title="下移" onclick="moveItem(' + catIdx + ',' + origIdx + ',\'down\')">↓</button>' +
-        '<button class="btn btn-sm btn-primary" onclick="editItem(' + catIdx + ',' + origIdx + ')">编辑</button>' +
-        '<button class="btn btn-sm btn-danger" onclick="deleteItem(' + catIdx + ',' + origIdx + ')">删除</button></div></div>';
+
+    // 热门页面
+    document.getElementById('topPages').innerHTML = d.topPages && d.topPages.length ? d.topPages.map(function(p, i) {
+      return '<li><span class="rank-num">' + (i + 1) + '</span><span class="name" title="' + p.name + '">' + p.name + '</span><span class="count">' + p.count + '</span></li>';
+    }).join('') : '<li class="empty">暂无数据</li>';
+
+    // 热门点击
+    document.getElementById('topClicks').innerHTML = d.topClicks && d.topClicks.length ? d.topClicks.map(function(c, i) {
+      return '<li><span class="rank-num">' + (i + 1) + '</span><span class="name" title="' + c.name + '">' + c.name + '</span><span class="count">' + c.count + '</span></li>';
+    }).join('') : '<li class="empty">暂无数据</li>';
+  }
+
+  // ===== 关键词 =====
+  async function loadKeywords() {
+    try {
+      var r = await api('/api/tools?action=keywords');
+      if (!r.success) { toast('加载关键词失败'); return; }
+      KEYWORDS = r.data || [];
+      filterKeywords();
+    } catch (e) { toast('加载失败: ' + e.message); }
+  }
+
+  function filterKeywords() {
+    var q = (document.getElementById('kwSearch').value || '').trim().toLowerCase();
+    var t = document.getElementById('kwTypeFilter').value;
+    var filtered = KEYWORDS.filter(function(k) {
+      if (t && k.type !== t) return false;
+      if (q && (k.keyword || '').toLowerCase().indexOf(q) < 0 &&
+          !(k.aliases || []).some(function(a) { return a.toLowerCase().indexOf(q) >= 0; })) return false;
+      return true;
     });
-    html += '</div></div>';
-  });
-  document.getElementById('categoriesList').innerHTML = html || '<div class="empty">暂无分类或无匹配条目</div>';
-}
-
-function onSearch() { renderCategories(); }
-
-async function moveItem(catIdx, itemIdx, direction) {
-  var cat = CMS_DATA.categories[catIdx];
-  var res = await apiCall('PUT', { type: 'moveItem', categoryId: cat.id, itemIndex: itemIdx, data: { direction: direction } });
-  if (res.success) { CMS_DATA = res.data; renderCategories(); showToast('已' + (direction === 'up' ? '上移' : '下移'), 'success'); }
-  else { showToast(res.error || '移动失败', 'error'); }
-}
-
-async function moveCategory(catIdx, direction) {
-  var res = await apiCall('PUT', { type: 'moveCategory', itemIndex: catIdx, data: { direction: direction } });
-  if (res.success) { CMS_DATA = res.data; renderCategories(); showToast('已' + (direction === 'up' ? '上移' : '下移'), 'success'); }
-  else { showToast(res.error || '移动失败', 'error'); }
-}
-
-async function importFromAppJs() {
-  if (!confirm('确定从 js/app.js 导入全部数据？\n\n这将覆盖当前的分类、热门服务、关键词等数据（旧数据会自动备份到 _backup 字段）。')) return;
-  showToast('正在导入，请稍候...', 'success');
-  try {
-    var res = await apiCall('POST', { type: 'importFromApp' });
-    if (res.success) {
-      CMS_DATA = res.data;
-      renderOverview(); renderCategories(); renderHotServices(); renderKeywords(); renderChannels();
-      showToast('导入成功！分类 ' + res.data.categories.length + ' 个 / 条目 ' + res.data.categories.reduce(function(s,c){return s+c.items.length;},0) + ' 条', 'success');
-    } else { showToast(res.error || '导入失败', 'error'); }
-  } catch (e) { showToast('导入异常: ' + e.message, 'error'); }
-}
-
-function exportBackup() {
-  if (!CMS_DATA) { showToast('数据未加载', 'error'); return; }
-  var blob = new Blob([JSON.stringify(CMS_DATA, null, 2)], { type: 'application/json' });
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a');
-  var d = new Date();
-  var fname = 'cms-backup-' + d.getFullYear() + (d.getMonth()+1) + d.getDate() + '.json';
-  a.href = url; a.download = fname;
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  showToast('备份已下载: ' + fname, 'success');
-}
-
-function refreshFrontendCache() {
-  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-    navigator.serviceWorker.controller.postMessage({ action: 'skipWaiting' });
-    showToast('已通知 Service Worker 升级，用户刷新后将拿到最新内容', 'success');
-  } else {
-    showToast('当前页面无 SW 控制。用户下次访问会自动注册新版 SW（v33）', 'success');
+    renderKeywords(filtered);
   }
-}
 
-function showAddCategory() {
-  showModal('新增分类',
-    '<div class="form-group"><label>分类ID（英文）</label><input id="catId" placeholder="如: traffic"></div>' +
-    '<div class="form-group"><label>分类名称</label><input id="catName" placeholder="如: 交通出行"></div>' +
-    '<div class="form-group"><label>图标</label><input id="catIcon" value="📁"></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="addCategory()">保存</button></div>');
-}
-
-async function addCategory() {
-  var id = document.getElementById('catId').value.trim();
-  var name = document.getElementById('catName').value.trim();
-  var icon = document.getElementById('catIcon').value.trim() || '📁';
-  if (!id || !name) { showToast('请填写完整', 'error'); return; }
-  var res = await apiCall('POST', { type: 'category', data: { id, name, icon } });
-  if (res.success) { CMS_DATA = res.data; renderCategories(); renderOverview(); closeModal(); showToast('添加成功', 'success'); }
-  else { showToast(res.error || '添加失败', 'error'); }
-}
-
-async function deleteCategory(idx) {
-  if (!confirm('确定删除该分类及其所有条目？')) return;
-  var cat = CMS_DATA.categories[idx];
-  var res = await apiCall('DELETE', { type: 'category', categoryId: cat.id });
-  if (res.success) { CMS_DATA = res.data; renderCategories(); renderOverview(); showToast('删除成功', 'success'); }
-}
-
-function showAddItem(catIdx) {
-  showModal('添加条目 - ' + CMS_DATA.categories[catIdx].name,
-    '<div class="form-group"><label>名称</label><input id="itemName" placeholder="服务名称"></div>' +
-    '<div class="form-group"><label>描述</label><input id="itemDesc" placeholder="简短描述"></div>' +
-    '<div class="form-group"><label>链接URL</label><input id="itemUrl" placeholder="https://..."></div>' +
-    '<div class="form-group"><label>颜色</label><input id="itemColor" type="color" value="#0ea5e9"></div>' +
-    '<div class="form-group"><label>图标</label><input id="itemIcon" value="📌"></div>' +
-    '<div class="form-group"><label>详情内容（HTML，可选）</label>' +
-    '<textarea id="itemDetail" rows="6" placeholder="&lt;p&gt;详情内容（支持 HTML）&lt;/p&gt;..."></textarea>' +
-    '<button class="btn btn-sm btn-primary" style="margin-top:6px;" onclick="previewDetail(\'itemDetail\')">👁 预览</button></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="addItem(' + catIdx + ')">保存</button></div>');
-}
-
-function previewDetail(textareaId) {
-  var val = document.getElementById(textareaId).value;
-  if (!val.trim()) { showToast('内容为空', 'error'); return; }
-  showModal('预览详情', '<div style="padding:12px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;max-height:60vh;overflow:auto;">' + val + '</div>' +
-    '<div class="form-actions" style="margin-top:12px;"><button class="btn btn-primary" onclick="closeModal()">关闭</button></div>');
-}
-
-async function addItem(catIdx) {
-  var cat = CMS_DATA.categories[catIdx];
-  var item = {
-    name: document.getElementById('itemName').value.trim(),
-    desc: document.getElementById('itemDesc').value.trim(),
-    url: document.getElementById('itemUrl').value.trim(),
-    color: document.getElementById('itemColor').value,
-    icon: document.getElementById('itemIcon').value.trim() || '📌'
-  };
-  var detailVal = document.getElementById('itemDetail').value.trim();
-  if (detailVal) item.detail = detailVal;
-  if (!item.name) { showToast('请填写名称', 'error'); return; }
-  var res = await apiCall('POST', { type: 'item', categoryId: cat.id, item: item });
-  if (res.success) { CMS_DATA = res.data; renderCategories(); renderOverview(); closeModal(); showToast('添加成功', 'success'); }
-  else { showToast(res.error || '添加失败', 'error'); }
-}
-
-function editItem(catIdx, itemIdx) {
-  var cat = CMS_DATA.categories[catIdx];
-  var item = cat.items[itemIdx];
-  showModal('编辑条目',
-    '<div class="form-group"><label>名称</label><input id="editName" value="' + escapeHtml(item.name) + '"></div>' +
-    '<div class="form-group"><label>描述</label><input id="editDesc" value="' + escapeHtml(item.desc) + '"></div>' +
-    '<div class="form-group"><label>链接URL</label><input id="editUrl" value="' + (item.url || '') + '"></div>' +
-    '<div class="form-group"><label>颜色</label><input id="editColor" type="color" value="' + (item.color || '#0ea5e9') + '"></div>' +
-    '<div class="form-group"><label>图标</label><input id="editIcon" value="' + (item.icon || '📌') + '"></div>' +
-    '<div class="form-group"><label>详情内容（HTML，可选）</label>' +
-    '<textarea id="editDetail" rows="6">' + escapeHtml(item.detail || '') + '</textarea>' +
-    '<button class="btn btn-sm btn-primary" style="margin-top:6px;" onclick="previewDetail(\'editDetail\')">👁 预览</button></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="updateItem(' + catIdx + ',' + itemIdx + ')">保存</button></div>');
-}
-
-async function updateItem(catIdx, itemIdx) {
-  var cat = CMS_DATA.categories[catIdx];
-  var data = {
-    name: document.getElementById('editName').value.trim(),
-    desc: document.getElementById('editDesc').value.trim(),
-    url: document.getElementById('editUrl').value.trim(),
-    color: document.getElementById('editColor').value,
-    icon: document.getElementById('editIcon').value.trim()
-  };
-  var detailVal = document.getElementById('editDetail').value.trim();
-  if (detailVal) data.detail = detailVal;
-  var res = await apiCall('PUT', { type: 'item', categoryId: cat.id, itemIndex: itemIdx, data: data });
-  if (res.success) { CMS_DATA = res.data; renderCategories(); closeModal(); showToast('保存成功', 'success'); }
-  else { showToast(res.error || '保存失败', 'error'); }
-}
-
-async function deleteItem(catIdx, itemIdx) {
-  if (!confirm('确定删除该条目？')) return;
-  var cat = CMS_DATA.categories[catIdx];
-  var res = await apiCall('DELETE', { type: 'item', categoryId: cat.id, itemIndex: itemIdx });
-  if (res.success) { CMS_DATA = res.data; renderCategories(); renderOverview(); showToast('删除成功', 'success'); }
-}
-
-function renderHotServices() {
-  if (!CMS_DATA) return;
-  var html = '';
-  CMS_DATA.hotServices.forEach(function(item, idx) {
-    html += '<div class="item-card"><div class="item-icon" style="background:' + (item.color || '#0ea5e9') + ';">' + item.icon + '</div>' +
-      '<div class="item-info"><div class="item-name">' + item.name + '</div><div class="item-desc">' + item.desc + '</div></div>' +
-      '<div class="item-actions">' +
-      '<button class="btn btn-sm btn-primary" title="上移" onclick="moveHotService(' + idx + ',\'up\')">↑</button>' +
-      '<button class="btn btn-sm btn-primary" title="下移" onclick="moveHotService(' + idx + ',\'down\')">↓</button>' +
-      '<button class="btn btn-sm btn-primary" onclick="editHotService(' + idx + ')">编辑</button>' +
-      '<button class="btn btn-sm btn-danger" onclick="deleteHotService(' + idx + ')">删除</button></div></div>';
-  });
-  document.getElementById('hotServicesList').innerHTML = html || '<div class="empty">暂无热门服务</div>';
-}
-
-function showAddHotService() {
-  showModal('添加热门服务',
-    '<div class="form-group"><label>名称</label><input id="hsName" placeholder="服务名称"></div>' +
-    '<div class="form-group"><label>描述</label><input id="hsDesc" placeholder="简短描述"></div>' +
-    '<div class="form-group"><label>图标</label><input id="hsIcon" value="🔥"></div>' +
-    '<div class="form-group"><label>颜色</label><input id="hsColor" type="color" value="#ef4444"></div>' +
-    '<div class="form-group"><label>链接URL</label><input id="hsUrl" placeholder="https://... (可选)"></div>' +
-    '<div class="form-group"><label>动作</label><input id="hsAction" placeholder="xianxing/tide/weather (可选)"></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="addHotService()">保存</button></div>');
-}
-
-async function addHotService() {
-  var item = {
-    name: document.getElementById('hsName').value.trim(),
-    desc: document.getElementById('hsDesc').value.trim(),
-    icon: document.getElementById('hsIcon').value.trim() || '🔥',
-    color: document.getElementById('hsColor').value,
-    url: document.getElementById('hsUrl').value.trim(),
-    action: document.getElementById('hsAction').value.trim()
-  };
-  if (!item.name) { showToast('请填写名称', 'error'); return; }
-  var res = await apiCall('POST', { type: 'hotService', item: item });
-  if (res.success) { CMS_DATA = res.data; renderHotServices(); renderOverview(); closeModal(); showToast('添加成功', 'success'); }
-}
-
-function editHotService(idx) {
-  var item = CMS_DATA.hotServices[idx];
-  showModal('编辑热门服务',
-    '<div class="form-group"><label>名称</label><input id="editHsName" value="' + escapeHtml(item.name) + '"></div>' +
-    '<div class="form-group"><label>描述</label><input id="editHsDesc" value="' + escapeHtml(item.desc) + '"></div>' +
-    '<div class="form-group"><label>图标</label><input id="editHsIcon" value="' + item.icon + '"></div>' +
-    '<div class="form-group"><label>颜色</label><input id="editHsColor" type="color" value="' + (item.color || '#ef4444') + '"></div>' +
-    '<div class="form-group"><label>链接URL</label><input id="editHsUrl" value="' + (item.url || '') + '"></div>' +
-    '<div class="form-group"><label>动作</label><input id="editHsAction" value="' + (item.action || '') + '"></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="updateHotService(' + idx + ')">保存</button></div>');
-}
-
-async function updateHotService(idx) {
-  var data = {
-    name: document.getElementById('editHsName').value.trim(),
-    desc: document.getElementById('editHsDesc').value.trim(),
-    icon: document.getElementById('editHsIcon').value.trim(),
-    color: document.getElementById('editHsColor').value,
-    url: document.getElementById('editHsUrl').value.trim(),
-    action: document.getElementById('editHsAction').value.trim()
-  };
-  var res = await apiCall('PUT', { type: 'hotService', itemIndex: idx, data: data });
-  if (res.success) { CMS_DATA = res.data; renderHotServices(); closeModal(); showToast('保存成功', 'success'); }
-}
-
-async function deleteHotService(idx) {
-  if (!confirm('确定删除？')) return;
-  var res = await apiCall('DELETE', { type: 'hotService', itemIndex: idx });
-  if (res.success) { CMS_DATA = res.data; renderHotServices(); renderOverview(); showToast('删除成功', 'success'); }
-}
-
-async function moveHotService(idx, direction) {
-  var res = await apiCall('PUT', { type: 'moveHotService', itemIndex: idx, data: { direction: direction } });
-  if (res.success) { CMS_DATA = res.data; renderHotServices(); }
-}
-
-function renderKeywords() {
-  if (!CMS_DATA) return;
-  var html = '';
-  CMS_DATA.hotKeywords.forEach(function(kw, idx) {
-    html += '<div class="item-card"><div class="item-info"><div class="item-name">' + kw + '</div></div>' +
-      '<div class="item-actions">' +
-      '<button class="btn btn-sm btn-primary" title="上移" onclick="moveHotKeyword(' + idx + ',\'up\')">↑</button>' +
-      '<button class="btn btn-sm btn-primary" title="下移" onclick="moveHotKeyword(' + idx + ',\'down\')">↓</button>' +
-      '<button class="btn btn-sm btn-primary" onclick="editKeyword(' + idx + ')">编辑</button>' +
-      '<button class="btn btn-sm btn-danger" onclick="deleteKeyword(' + idx + ',\'' + kw + '\')">删除</button></div></div>';
-  });
-  document.getElementById('keywordsList').innerHTML = html || '<div class="empty">暂无关键词</div>';
-}
-
-function showAddKeyword() {
-  showModal('添加热门关键词',
-    '<div class="form-group"><label>关键词</label><input id="kwValue" placeholder="如: 消费券"></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="addKeyword()">保存</button></div>');
-}
-
-async function addKeyword() {
-  var keyword = document.getElementById('kwValue').value.trim();
-  if (!keyword) { showToast('请填写关键词', 'error'); return; }
-  var res = await apiCall('POST', { type: 'hotKeyword', data: { keyword: keyword } });
-  if (res.success) { CMS_DATA = res.data; renderKeywords(); renderOverview(); closeModal(); showToast('添加成功', 'success'); }
-}
-
-function editKeyword(idx) {
-  var kw = CMS_DATA.hotKeywords[idx];
-  showModal('编辑关键词',
-    '<div class="form-group"><label>关键词</label><input id="editKwValue" value="' + escapeHtml(kw) + '"></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="updateKeyword(' + idx + ')">保存</button></div>');
-}
-
-async function updateKeyword(idx) {
-  var keyword = document.getElementById('editKwValue').value.trim();
-  if (!keyword) { showToast('请填写关键词', 'error'); return; }
-  var res = await apiCall('PUT', { type: 'hotKeyword', itemIndex: idx, data: { keyword: keyword } });
-  if (res.success) { CMS_DATA = res.data; renderKeywords(); closeModal(); showToast('保存成功', 'success'); }
-}
-
-async function deleteKeyword(idx, kw) {
-  if (!confirm('确定删除该关键词？')) return;
-  var res = await apiCall('DELETE', { type: 'hotKeyword', keyword: kw });
-  if (res.success) { CMS_DATA = res.data; renderKeywords(); renderOverview(); showToast('删除成功', 'success'); }
-}
-
-async function moveHotKeyword(idx, direction) {
-  var res = await apiCall('PUT', { type: 'moveHotKeyword', itemIndex: idx, data: { direction: direction } });
-  if (res.success) { CMS_DATA = res.data; renderKeywords(); }
-}
-
-function renderChannels() {
-  if (!CMS_DATA) return;
-  var html = '';
-  CMS_DATA.channels.forEach(function(ch, idx) {
-    // 频道卡片
-    html += '<div class="item-card" style="flex-direction:column;align-items:stretch;">' +
-      '<div style="display:flex;align-items:center;width:100%;">' +
-      '<div class="item-icon" style="background:#0ea5e9;">' + ch.icon + '</div>' +
-      '<div class="item-info"><div class="item-name">' + ch.name + '</div><div class="item-desc">ID: ' + ch.id + '</div></div>' +
-      '<div class="item-actions">' +
-      '<button class="btn btn-sm btn-primary" title="上移" onclick="moveChannel(' + idx + ',\'up\')">↑</button>' +
-      '<button class="btn btn-sm btn-primary" title="下移" onclick="moveChannel(' + idx + ',\'down\')">↓</button>' +
-      '<button class="btn btn-sm btn-primary" onclick="editChannel(' + idx + ')">编辑</button>' +
-      '<button class="btn btn-sm btn-success" onclick="showAddChannelSub(' + idx + ')">+子分类</button>' +
-      '<button class="btn btn-sm btn-danger" onclick="deleteChannel(' + idx + ')">删除</button>' +
-      '</div></div>';
-    // 子分类列表
-    var subs = ch.subs || [];
-    if (subs.length > 0) {
-      html += '<div style="margin:8px 0 0 40px;padding:8px;border-left:3px solid #e2e8f0;">';
-      subs.forEach(function(sub, sidx) {
-        var subName = typeof sub === 'string' ? sub : (sub.name || sub.id || '');
-        var subId = typeof sub === 'string' ? sub : (sub.id || '');
-        html += '<div style="display:flex;align-items:center;padding:4px 0;gap:8px;">' +
-          '<span style="font-size:13px;">📂 ' + escapeHtml(subName) + '</span>' +
-          '<span style="font-size:11px;color:#94a3b8;">' + subId + '</span>' +
-          '<span style="margin-left:auto;display:flex;gap:4px;">' +
-          '<button class="btn btn-sm btn-primary" title="上移" onclick="moveChannelSub(' + idx + ',' + sidx + ',\'up\')">↑</button>' +
-          '<button class="btn btn-sm btn-primary" title="下移" onclick="moveChannelSub(' + idx + ',' + sidx + ',\'down\')">↓</button>' +
-          '<button class="btn btn-sm btn-primary" onclick="editChannelSub(' + idx + ',' + sidx + ')">编辑</button>' +
-          '<button class="btn btn-sm btn-danger" onclick="deleteChannelSub(' + idx + ',' + sidx + ')">删</button>' +
-          '</span></div>';
-      });
-      html += '</div>';
-    }
-    html += '</div>';
-  });
-  document.getElementById('channelsList').innerHTML = html || '<div class="empty">暂无频道</div>';
-}
-
-function showAddChannel() {
-  showModal('添加频道',
-    '<div class="form-group"><label>频道ID</label><input id="chId" placeholder="如: ch_life"></div>' +
-    '<div class="form-group"><label>频道名称</label><input id="chName" placeholder="如: 生活"></div>' +
-    '<div class="form-group"><label>图标</label><input id="chIcon" value="📺"></div>' +
-    '<div class="form-group"><label>子分类ID（逗号分隔）</label><input id="chSubs" placeholder="life, tool"></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="addChannel()">保存</button></div>');
-}
-
-async function addChannel() {
-  var id = document.getElementById('chId').value.trim();
-  var name = document.getElementById('chName').value.trim();
-  var icon = document.getElementById('chIcon').value.trim() || '📺';
-  var subs = document.getElementById('chSubs').value.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
-  if (!id || !name) { showToast('请填写完整', 'error'); return; }
-  var res = await apiCall('POST', { type: 'channel', data: { id, name, icon, subs } });
-  if (res.success) { CMS_DATA = res.data; renderChannels(); closeModal(); showToast('添加成功', 'success'); }
-}
-
-function editChannel(idx) {
-  var ch = CMS_DATA.channels[idx];
-  showModal('编辑频道',
-    '<div class="form-group"><label>频道名称</label><input id="editChName" value="' + escapeHtml(ch.name) + '"></div>' +
-    '<div class="form-group"><label>图标</label><input id="editChIcon" value="' + ch.icon + '"></div>' +
-    '<div class="form-group"><label>子分类ID（逗号分隔）</label><input id="editChSubs" value="' + (ch.subs || []).join(', ') + '"></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="updateChannel(' + idx + ')">保存</button></div>');
-}
-
-async function updateChannel(idx) {
-  var ch = CMS_DATA.channels[idx];
-  var data = {
-    name: document.getElementById('editChName').value.trim(),
-    icon: document.getElementById('editChIcon').value.trim(),
-    subs: document.getElementById('editChSubs').value.split(',').map(function(s) { return s.trim(); }).filter(Boolean)
-  };
-  var res = await apiCall('PUT', { type: 'channel', categoryId: ch.id, data: data });
-  if (res.success) { CMS_DATA = res.data; renderChannels(); closeModal(); showToast('保存成功', 'success'); }
-}
-
-async function deleteChannel(idx) {
-  if (!confirm('确定删除该频道？')) return;
-  var ch = CMS_DATA.channels[idx];
-  var res = await apiCall('DELETE', { type: 'channel', categoryId: ch.id });
-  if (res.success) { CMS_DATA = res.data; renderChannels(); showToast('删除成功', 'success'); }
-}
-
-async function moveChannel(idx, direction) {
-  var res = await apiCall('PUT', { type: 'moveChannel', itemIndex: idx, data: { direction: direction } });
-  if (res.success) { CMS_DATA = res.data; renderChannels(); }
-}
-
-function showAddChannelSub(chIdx) {
-  var ch = CMS_DATA.channels[chIdx];
-  var catOptions = CMS_DATA.categories.map(function(c) { return '<option value="' + c.id + '">' + c.name + '</option>'; }).join('');
-  showModal('添加子分类到「' + ch.name + '」',
-    '<div class="form-group"><label>子分类ID</label><input id="subId" placeholder="如: life"></div>' +
-    '<div class="form-group"><label>名称</label><input id="subName" placeholder="如: 生活"></div>' +
-    '<div class="form-group"><label>关联分类</label><select id="subCatId"><option value="">不关联</option>' + catOptions + '</select></div>' +
-    '<div class="form-group"><label>图标</label><input id="subIcon" value="📂"></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="addChannelSub(' + chIdx + ')">保存</button></div>');
-}
-
-async function addChannelSub(chIdx) {
-  var ch = CMS_DATA.channels[chIdx];
-  var sub = {
-    id: document.getElementById('subId').value.trim(),
-    name: document.getElementById('subName').value.trim(),
-    icon: document.getElementById('subIcon').value.trim() || '📂',
-    catId: document.getElementById('subCatId').value
-  };
-  if (!sub.id || !sub.name) { showToast('请填写完整', 'error'); return; }
-  var res = await apiCall('POST', { type: 'channelSub', data: { channelId: ch.id, sub: sub } });
-  if (res.success) { CMS_DATA = res.data; renderChannels(); closeModal(); showToast('添加成功', 'success'); }
-}
-
-function editChannelSub(chIdx, sIdx) {
-  var ch = CMS_DATA.channels[chIdx];
-  var sub = ch.subs[sIdx];
-  var subObj = typeof sub === 'string' ? { id: sub, name: sub } : sub;
-  var catOptions = CMS_DATA.categories.map(function(c) { return '<option value="' + c.id + '"' + (subObj.catId === c.id ? ' selected' : '') + '>' + c.name + '</option>'; }).join('');
-  showModal('编辑子分类',
-    '<div class="form-group"><label>名称</label><input id="editSubName" value="' + escapeHtml(subObj.name || subObj.id) + '"></div>' +
-    '<div class="form-group"><label>关联分类</label><select id="editSubCatId"><option value="">不关联</option>' + catOptions + '</select></div>' +
-    '<div class="form-group"><label>图标</label><input id="editSubIcon" value="' + (subObj.icon || '📂') + '"></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="updateChannelSub(' + chIdx + ',' + sIdx + ')">保存</button></div>');
-}
-
-async function updateChannelSub(chIdx, sIdx) {
-  var ch = CMS_DATA.channels[chIdx];
-  var sub = { name: document.getElementById('editSubName').value.trim(), icon: document.getElementById('editSubIcon').value.trim(), catId: document.getElementById('editSubCatId').value };
-  var res = await apiCall('PUT', { type: 'channelSub', categoryId: ch.id, itemIndex: chIdx, data: { subIndex: sIdx, sub: sub } });
-  if (res.success) { CMS_DATA = res.data; renderChannels(); closeModal(); showToast('保存成功', 'success'); }
-}
-
-async function deleteChannelSub(chIdx, sIdx) {
-  if (!confirm('确定删除该子分类？')) return;
-  var res = await apiCall('DELETE', { type: 'channelSub', itemIndex: chIdx, data: { subIndex: sIdx } });
-  if (res.success) { CMS_DATA = res.data; renderChannels(); showToast('删除成功', 'success'); }
-}
-
-async function moveChannelSub(chIdx, sIdx, direction) {
-  var ch = CMS_DATA.channels[chIdx];
-  var res = await apiCall('PUT', { type: 'moveChannelSub', categoryId: ch.id, itemIndex: chIdx, data: { subIndex: sIdx, direction: direction } });
-  if (res.success) { CMS_DATA = res.data; renderChannels(); }
-}
-
-async function loadAnalytics() {
-  try {
-    var res = await fetch(API_BASE + '/api/tools?action=track&stats=1', {
-      headers: { 'Authorization': 'Bearer ' + ADMIN_PASSWORD }
-    });
-    if (res.ok) {
-      var data = await res.json();
-      if (data.success) {
-        document.getElementById('statClicks').textContent = data.data.totalClicks || 0;
-        var html = '';
-        (data.data.topItems || []).forEach(function(item, i) {
-          html += '<div class="item-card"><div class="item-info"><span style="color:#64748b;font-size:12px;margin-right:8px;">#' + (i+1) + '</span> ' + item.name + '</div>' +
-            '<div style="color:#0ea5e9;font-weight:600;">' + item.count + ' 次</div></div>';
-        });
-        document.getElementById('analyticsHotList').innerHTML = html || '<div class="empty">暂无数据</div>';
-      }
-    }
-  } catch (e) { console.log('Analytics load failed'); }
-}
-
-var _feedbackData = [];
-var _feedbackFilter = 'all';
-
-async function loadFeedback() {
-  try {
-    var res = await fetch(API_BASE + '/api/tools?action=feedback', {
-      headers: { 'Authorization': 'Bearer ' + ADMIN_PASSWORD }
-    });
-    if (res.ok) {
-      var data = await res.json();
-      if (data.success) {
-        document.getElementById('statFeedbacks').textContent = data.stats.total || 0;
-        _feedbackData = data.data || [];
-        renderFeedbackList();
-      }
-    }
-  } catch (e) { console.log('Feedback load failed'); }
-}
-
-function filterFeedback(type, btn) {
-  _feedbackFilter = type;
-  document.querySelectorAll('.feedback-filter button').forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  renderFeedbackList();
-}
-
-function renderFeedbackList() {
-  var typeMap = { bug: '🐛 报错', feature: '💡 建议', content: '📝 内容补充', other: '💬 其他', suggest: '💡 建议', fix: '✏️ 纠错', praise: '👍 好评' };
-  var list = _feedbackFilter === 'all' ? _feedbackData : _feedbackData.filter(function(f) { return f.type === _feedbackFilter; });
-  if (list.length === 0) {
-    document.getElementById('feedbackList').innerHTML = '<div class="empty">暂无' + (_feedbackFilter === 'all' ? '' : (typeMap[_feedbackFilter] || '')) + '反馈</div>';
-    return;
-  }
-  var html = '';
-  list.forEach(function(f) {
-    var typeLabel = typeMap[f.type] || f.type;
-    var time = f.time ? new Date(f.time).toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
-    var badgeClass = 'badge-' + ({ bug: 'bug', feature: 'suggest', content: 'fix', other: 'praise' }[f.type] || f.type);
-    var cardClass = 'type-' + ({ bug: 'bug', feature: 'suggest', content: 'fix', other: 'praise' }[f.type] || f.type);
-    html += '<div class="feedback-card ' + cardClass + '">' +
-      '<div class="feedback-row1">' +
-      '<span class="feedback-badge ' + badgeClass + '">' + typeLabel + '</span>' +
-      '<span class="feedback-time">' + time + '</span>' +
-      '</div>' +
-      '<div class="feedback-body">' + escapeHtml(f.content || '') + '</div>' +
-      (f.contact ? '<div class="feedback-meta"><span>📱 联系方式:</span><strong>' + escapeHtml(f.contact) + '</strong></div>' : '') +
+  function renderKeywords(list) {
+    if (!list.length) { document.getElementById('kwList').innerHTML = '<div class="empty">无匹配关键词</div>'; return; }
+    document.getElementById('kwList').innerHTML = list.map(function(k) {
+      return '<div class="kw-row">' +
+        '<div><input type="checkbox" class="kw-check" data-kw="' + k.keyword + '"></div>' +
+        '<div><div class="keyword">' + escapeHtml(k.keyword) + '</div><div class="aliases">' + (k.aliases || []).join('、') + '</div></div>' +
+        '<div><span class="type-badge ' + (k.type || 'text') + '">' + (k.type === 'news' ? '图文' : '文字') + '</span></div>' +
+        '<div class="reply" title="' + escapeHtml(k.reply || k.title || '') + '">' + escapeHtml(k.reply || k.title || '') + '</div>' +
+        '<div class="actions"><button onclick="editKeyword(\'' + escapeHtml(k.keyword) + '\')">编辑</button><button class="danger" onclick="deleteOne(\'' + escapeHtml(k.keyword) + '\')">删除</button></div>' +
       '</div>';
-  });
-  document.getElementById('feedbackList').innerHTML = html;
-}
-
-function showModal(title, content) {
-  document.getElementById('modalTitle').textContent = title;
-  document.getElementById('modalContent').innerHTML = content;
-  document.getElementById('editModal').classList.add('active');
-}
-
-function closeModal() { document.getElementById('editModal').classList.remove('active'); }
-
-function showToast(msg, type) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (type ? ' ' + type : '');
-  setTimeout(function() { t.className = 'toast'; }, 2500);
-}
-
-function escapeHtml(str) {
-  if (!str) return '';
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-}
-
-// ========== 微信配置（数据存 cms.json，公众号实时生效） ==========
-var WECHAT_KEYWORDS = [];
-var WECHAT_WELCOME = null;
-
-function initWechatView() {
-  var baseUrl = location.origin + '/api/wechat';
-  document.getElementById('wechatCallbackUrl').value = baseUrl;
-  document.getElementById('wechatUrl').textContent = baseUrl;
-  // 从 cms.json 读取微信配置
-  if (CMS_DATA && CMS_DATA.wechatKeywords) {
-    WECHAT_KEYWORDS = JSON.parse(JSON.stringify(CMS_DATA.wechatKeywords));
+    }).join('');
   }
-  if (CMS_DATA && CMS_DATA.wechatWelcome) {
-    WECHAT_WELCOME = CMS_DATA.wechatWelcome;
-    document.getElementById('welcomeType').value = WECHAT_WELCOME.type || 'text';
-    document.getElementById('welcomeTitle').value = WECHAT_WELCOME.title || '';
-    document.getElementById('welcomeDesc').value = WECHAT_WELCOME.desc || '';
-    document.getElementById('welcomeUrl').value = WECHAT_WELCOME.url || '';
+
+  function escapeHtml(s) { return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function toggleAll() {
+    var checked = document.getElementById('selectAll').checked;
+    document.querySelectorAll('.kw-check').forEach(function(c) { c.checked = checked; });
   }
-  document.getElementById('wechatTokenInput').value = 'ihangzhou2024';
-  document.getElementById('wechatToken').textContent = 'ihangzhou2024';
-  renderWechatKeywords();
-  renderShareList();
-  renderWechatMenuPreview();
-}
 
-function saveWechatConfig() {
-  var token = document.getElementById('wechatTokenInput').value.trim();
-  if (!token || token.length < 3 || token.length > 32) { showToast('Token 需为 3-32 位英文或数字', 'error'); return; }
-  showToast('✅ Token 已设置（请在 Vercel 环境变量 WECHAT_TOKEN 中配置）', 'success');
-}
-
-function testWechatUrl() {
-  fetch('/api/wechat?signature=test&timestamp=123&nonce=456&echostr=hello')
-    .then(function(r) { return r.text(); })
-    .then(function(t) {
-      if (t === '签名验证失败' || t === 'hello') { showToast('✅ URL 可访问，签名验证正常', 'success'); }
-      else { showToast('⚠️ 响应：' + t, 'error'); }
-    })
-    .catch(function() { showToast('❌ 请确认已部署到 Vercel', 'error'); });
-}
-
-function renderWechatKeywords() {
-  var html = '';
-  WECHAT_KEYWORDS.forEach(function(kw, idx) {
-    var typeBadge = kw.type === 'news' ? '<span style="background:#dbeafe;color:#1d4ed8;padding:2px 6px;border-radius:8px;font-size:10px;">图文</span>' : '<span style="background:#dcfce7;color:#16a34a;padding:2px 6px;border-radius:8px;font-size:10px;">文字</span>';
-    var aliasesText = kw.aliases && kw.aliases.length ? ' <span style="color:#64748b;font-size:11px;">/ ' + escapeHtml(kw.aliases.join(' / ')) + '</span>' : '';
-    var preview = kw.type === 'news' ? (kw.title || kw.url || '') : ((kw.reply || '').substring(0, 60) + (kw.reply && kw.reply.length > 60 ? '...' : ''));
-    html += '<div class="item-card"><div class="item-info"><div class="item-name">' + typeBadge + ' ' + escapeHtml(kw.keyword) + aliasesText + '</div>' +
-      '<div class="item-desc">' + escapeHtml(preview) + '</div></div>' +
-      '<div class="item-actions"><button class="btn btn-sm btn-primary" onclick="editWechatKeyword(' + idx + ')">编辑</button>' +
-      '<button class="btn btn-sm btn-danger" onclick="deleteWechatKeyword(' + idx + ')">删除</button></div></div>';
-  });
-  document.getElementById('wechatKeywords').innerHTML = html || '<div class="empty">暂无关键词</div>';
-}
-
-function addWechatKeyword() {
-  showModal('添加关键词回复',
-    '<div class="form-group"><label>关键词（主词，如：社保）</label><input id="kwKey" placeholder="如: 社保"></div>' +
-    '<div class="form-group"><label>同义词（逗号分隔，如：医保,养老保险,五险）</label><input id="kwAliases" placeholder="同义词，提升匹配率"></div>' +
-    '<div class="form-group"><label>回复类型</label><select id="kwType" onchange="toggleKwFields()"><option value="text">文字回复</option><option value="news">图文回复</option></select></div>' +
-    '<div id="kwTextFields"><div class="form-group"><label>回复文字内容</label><textarea id="kwReply" rows="4" placeholder="回复文字，支持链接"></textarea></div></div>' +
-    '<div id="kwNewsFields" style="display:none;"><div class="form-group"><label>图文标题</label><input id="kwTitle" placeholder="如：杭州社保查询"></div>' +
-    '<div class="form-group"><label>图文描述</label><textarea id="kwDesc" rows="3" placeholder="显示在图文卡片下方"></textarea></div>' +
-    '<div class="form-group"><label>封面图 URL</label><input id="kwPicUrl" placeholder="https://...（留空用默认）"></div>' +
-    '<div class="form-group"><label>跳转链接</label><input id="kwUrl" placeholder="https://..."></div></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="saveWechatKeyword()">保存</button></div>');
-  window._editKwIdx = -1;
-}
-
-function toggleKwFields() {
-  var type = document.getElementById('kwType').value;
-  document.getElementById('kwTextFields').style.display = type === 'text' ? 'block' : 'none';
-  document.getElementById('kwNewsFields').style.display = type === 'news' ? 'block' : 'none';
-}
-
-function editWechatKeyword(idx) {
-  var kw = WECHAT_KEYWORDS[idx];
-  showModal('编辑关键词回复',
-    '<div class="form-group"><label>关键词</label><input id="kwKey" value="' + escapeHtml(kw.keyword) + '"></div>' +
-    '<div class="form-group"><label>同义词（逗号分隔）</label><input id="kwAliases" value="' + escapeHtml((kw.aliases || []).join(', ')) + '"></div>' +
-    '<div class="form-group"><label>回复类型</label><select id="kwType" onchange="toggleKwFields()"><option value="text" ' + (kw.type !== 'news' ? 'selected' : '') + '>文字回复</option><option value="news" ' + (kw.type === 'news' ? 'selected' : '') + '>图文回复</option></select></div>' +
-    '<div id="kwTextFields" style="display:' + (kw.type === 'news' ? 'none' : 'block') + ';"><div class="form-group"><label>回复文字内容</label><textarea id="kwReply" rows="4">' + escapeHtml(kw.reply || '') + '</textarea></div></div>' +
-    '<div id="kwNewsFields" style="display:' + (kw.type === 'news' ? 'block' : 'none') + ';"><div class="form-group"><label>图文标题</label><input id="kwTitle" value="' + escapeHtml(kw.title || '') + '"></div>' +
-    '<div class="form-group"><label>图文描述</label><textarea id="kwDesc" rows="3">' + escapeHtml(kw.desc || '') + '</textarea></div>' +
-    '<div class="form-group"><label>封面图 URL</label><input id="kwPicUrl" value="' + escapeHtml(kw.picUrl || '') + '"></div>' +
-    '<div class="form-group"><label>跳转链接</label><input id="kwUrl" value="' + escapeHtml(kw.url || '') + '"></div></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="saveWechatKeyword()">保存</button></div>');
-  window._editKwIdx = idx;
-}
-
-async function saveWechatKeyword() {
-  var kw = document.getElementById('kwKey').value.trim();
-  if (!kw) { showToast('请填写关键词', 'error'); return; }
-  var aliasesRaw = document.getElementById('kwAliases').value.trim();
-  var aliases = aliasesRaw ? aliasesRaw.split(/[,，]/).map(function(s){return s.trim();}).filter(Boolean) : [];
-  var type = document.getElementById('kwType').value;
-  var obj = { keyword: kw, aliases: aliases, type: type };
-  if (type === 'news') {
-    obj.title = document.getElementById('kwTitle').value.trim();
-    obj.desc = document.getElementById('kwDesc').value.trim();
-    obj.picUrl = document.getElementById('kwPicUrl').value.trim();
-    obj.url = document.getElementById('kwUrl').value.trim();
-    if (!obj.title || !obj.url) { showToast('图文回复需填写标题和跳转链接', 'error'); return; }
-  } else {
-    obj.reply = document.getElementById('kwReply').value.trim();
-    if (!obj.reply) { showToast('请填写回复内容', 'error'); return; }
+  function openAddModal() {
+    editingKeyword = null;
+    document.getElementById('kwModalTitle').textContent = '新增关键词';
+    document.getElementById('kwKeyword').value = '';
+    document.getElementById('kwAliases').value = '';
+    document.getElementById('kwType').value = 'text';
+    document.getElementById('kwReply').value = '';
+    document.getElementById('kwTitle').value = '';
+    document.getElementById('kwDesc').value = '';
+    document.getElementById('kwPicUrl').value = '';
+    document.getElementById('kwUrl').value = '';
+    toggleTypeFields();
+    document.getElementById('kwModal').classList.add('active');
   }
-  if (window._editKwIdx >= 0) {
-    WECHAT_KEYWORDS[window._editKwIdx] = obj;
-  } else {
-    WECHAT_KEYWORDS.push(obj);
+
+  function editKeyword(kw) {
+    var k = KEYWORDS.find(function(x) { return x.keyword === kw; });
+    if (!k) return;
+    editingKeyword = kw;
+    document.getElementById('kwModalTitle').textContent = '编辑: ' + kw;
+    document.getElementById('kwKeyword').value = k.keyword;
+    document.getElementById('kwType').value = k.type || 'text';
+    document.getElementById('kwAliases').value = (k.aliases || []).join(',');
+    document.getElementById('kwReply').value = k.reply || '';
+    document.getElementById('kwTitle').value = k.title || '';
+    document.getElementById('kwDesc').value = k.desc || '';
+    document.getElementById('kwPicUrl').value = k.picUrl || '';
+    document.getElementById('kwUrl').value = k.url || '';
+    toggleTypeFields();
+    document.getElementById('kwModal').classList.add('active');
   }
-  var res = await apiCall('PUT', { type: 'full', data: { wechatKeywords: WECHAT_KEYWORDS } });
-  if (res.success) { CMS_DATA = res.data; renderWechatKeywords(); closeModal(); showToast('已保存并生效', 'success'); }
-  else { showToast('保存失败', 'error'); }
-}
 
-async function deleteWechatKeyword(idx) {
-  if (!confirm('确定删除？')) return;
-  WECHAT_KEYWORDS.splice(idx, 1);
-  var res = await apiCall('PUT', { type: 'full', data: { wechatKeywords: WECHAT_KEYWORDS } });
-  if (res.success) { CMS_DATA = res.data; renderWechatKeywords(); showToast('已删除', 'success'); }
-}
-
-// ========== 批量自动生成关键词回复（从 CMS 服务条目） ==========
-function autoGenerateKeywords() {
-  if (!CMS_DATA || !CMS_DATA.categories) { showToast('CMS 数据未加载', 'error'); return; }
-  var existingKeys = (CMS_DATA.wechatKeywords || []).map(function(k) { return k.keyword; });
-  var candidates = [];
-  CMS_DATA.categories.forEach(function(cat) {
-    cat.items.forEach(function(item) {
-      if (!item.name) return;
-      if (existingKeys.indexOf(item.name) >= 0) return; // 跳过已存在的
-      if (!item.url && !item.detail) return; // 需要有链接或详情
-      candidates.push({
-        keyword: item.name,
-        aliases: [],
-        type: 'news',
-        title: (item.icon || '📌') + ' ' + item.name,
-        desc: item.desc || cat.name,
-        picUrl: 'https://www.ihangzhou.net/images/og-cover.jpg',
-        url: item.url || ('https://www.ihangzhou.net/#' + (cat.id || ''))
-      });
-    });
-  });
-  if (candidates.length === 0) {
-    showToast('没有可生成的新关键词（所有服务项已存在或缺少链接）', 'error');
-    return;
+  function toggleTypeFields() {
+    var isNews = document.getElementById('kwType').value === 'news';
+    document.getElementById('fieldReply').style.display = isNews ? 'none' : '';
+    document.getElementById('fieldTitle').style.display = isNews ? '' : 'none';
+    document.getElementById('fieldDesc').style.display = isNews ? '' : 'none';
+    document.getElementById('fieldPicUrl').style.display = isNews ? '' : 'none';
+    document.getElementById('fieldUrl').style.display = isNews ? '' : 'none';
   }
-  // 预览候选列表
-  var previewHtml = '<div style="margin-bottom:12px;color:#475569;font-size:13px;">' +
-    '将从 CMS 服务条目自动生成 <strong style="color:#0ea5e9;">' + candidates.length + '</strong> 条关键词回复（图文类型）。' +
-    '已有 ' + existingKeys.length + ' 条关键词将保留。</div>';
-  previewHtml += '<div style="max-height:300px;overflow-y:auto;border:1px solid #e2e8f0;border-radius:8px;padding:8px;">';
-  candidates.forEach(function(c) {
-    previewHtml += '<div style="padding:6px 8px;border-bottom:1px solid #f1f5f9;font-size:13px;">' +
-      '<strong>' + escapeHtml(c.keyword) + '</strong> → ' + escapeHtml(c.url) + '</div>';
-  });
-  previewHtml += '</div>';
-  showModal('从服务自动生成关键词回复 (' + candidates.length + ' 条)',
-    previewHtml +
-    '<div class="form-actions" style="margin-top:16px;display:flex;gap:8px;">' +
-    '<button class="btn btn-success" onclick="doAutoGenerate()">✅ 确认生成</button>' +
-    '<button class="btn" onclick="closeModal()">取消</button></div>');
-  window._batchCandidates = candidates;
-}
 
-async function doAutoGenerate() {
-  var candidates = window._batchCandidates || [];
-  if (!candidates.length) { closeModal(); return; }
-  showToast('正在生成 ' + candidates.length + ' 条关键词回复...', 'success');
-  var res = await apiCall('POST', { type: 'wechatKeywordsBatch', data: { keywords: candidates } });
-  if (res.success) {
-    CMS_DATA = res.data;
-    WECHAT_KEYWORDS = JSON.parse(JSON.stringify(CMS_DATA.wechatKeywords || []));
-    renderWechatKeywords();
-    closeModal();
-    var br = res.batchResult || {};
-    showToast('✅ 新增 ' + br.added + ' 条，跳过 ' + br.skipped + ' 条已存在，共 ' + br.total + ' 条', 'success');
-  } else {
-    showToast(res.error || '生成失败', 'error');
-  }
-}
+  function closeModal() { document.getElementById('kwModal').classList.remove('active'); }
 
-// ========== 批量粘贴导入关键词 ==========
-function showBatchImport() {
-  var sample = [
-    { "keyword": "停电", "aliases": ["停水停电", "电力"], "type": "text", "reply": "⚡ 杭州停电通知\n\n查询入口：https://www.ihangzhou.net/" },
-    { "keyword": "挂号", "aliases": ["医院挂号", "预约挂号"], "type": "news", "title": "🏥 杭州医院预约挂号", "desc": "浙里办/挂号网预约挂号", "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg", "url": "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E" }
-  ];
-  showModal('批量粘贴导入关键词回复',
-    '<div style="margin-bottom:12px;color:#475569;font-size:13px;">' +
-    '粘贴 JSON 数组，每条包含 keyword（必填）、aliases、type（text/news）等字段。<br>' +
-    '已存在的同名关键词将自动跳过。</div>' +
-    '<div class="form-group"><textarea id="batchJsonInput" rows="12" style="font-family:monospace;font-size:12px;" placeholder="粘贴 JSON 数组...">' +
-    JSON.stringify(sample, null, 2) + '</textarea></div>' +
-    '<div class="form-actions" style="display:flex;gap:8px;">' +
-    '<button class="btn btn-success" onclick="importBatchKeywords()">导入</button>' +
-    '<button class="btn" onclick="closeModal()">取消</button></div>');
-}
-
-async function importBatchKeywords() {
-  var raw = document.getElementById('batchJsonInput').value.trim();
-  if (!raw) { showToast('请粘贴 JSON 内容', 'error'); return; }
-  var keywords;
-  try {
-    keywords = JSON.parse(raw);
-    if (!Array.isArray(keywords)) { showToast('JSON 必须是数组格式', 'error'); return; }
-  } catch (e) { showToast('JSON 解析失败: ' + e.message, 'error'); return; }
-  // 基本校验
-  var valid = keywords.filter(function(kw) { return kw && kw.keyword; });
-  if (valid.length === 0) { showToast('没有有效的关键词（缺少 keyword 字段）', 'error'); return; }
-  showToast('正在导入 ' + valid.length + ' 条关键词...', 'success');
-  var res = await apiCall('POST', { type: 'wechatKeywordsBatch', data: { keywords: valid } });
-  if (res.success) {
-    CMS_DATA = res.data;
-    WECHAT_KEYWORDS = JSON.parse(JSON.stringify(CMS_DATA.wechatKeywords || []));
-    renderWechatKeywords();
-    closeModal();
-    var br = res.batchResult || {};
-    showToast('✅ 新增 ' + br.added + ' 条，跳过 ' + br.skipped + ' 条已存在，共 ' + br.total + ' 条', 'success');
-  } else {
-    showToast(res.error || '导入失败', 'error');
-  }
-}
-
-// ========== 简捷批量添加（管道分隔，适合公众号文章关键词） ==========
-function showSimpleBatch() {
-  var sample = [
-    '积分落户 | 积分,落户政策 | 🏠 杭州积分落户攻略详见：https://mp.weixin.qq.com/xxx',
-    '人才认定 | 人才,高层次人才 | https://mp.weixin.qq.com/yyy',
-    '消费券 | 发票抽奖,消费有奖 | 🧾 杭州消费有奖，详见：https://www.ihangzhou.net/'
-  ].join('\n');
-  showModal('简捷批量添加关键词回复',
-    '<div style="margin-bottom:12px;color:#475569;font-size:13px;line-height:1.6;">' +
-    '每行一条，用 <code style="background:#f1f5f9;padding:1px 4px;border-radius:3px;">|</code> 分隔三段：<br>' +
-    '<strong>关键词 | 同义词(逗号分隔,可选) | 回复内容或链接</strong><br><br>' +
-    '• 内容含 http 链接 → 自动生成<strong>图文回复</strong><br>' +
-    '• 内容不含链接 → 生成<strong>文字回复</strong><br>' +
-    '• 已存在的同名关键词自动跳过</div>' +
-    '<div class="form-group"><textarea id="simpleBatchInput" rows="12" style="font-size:13px;line-height:1.8;" placeholder="每行一条，用 | 分隔">' + escapeHtml(sample) + '</textarea></div>' +
-    '<div class="form-actions" style="display:flex;gap:8px;">' +
-    '<button class="btn btn-success" onclick="importSimpleBatch()">导入</button>' +
-    '<button class="btn" onclick="closeModal()">取消</button></div>');
-}
-
-async function importSimpleBatch() {
-  var raw = document.getElementById('simpleBatchInput').value.trim();
-  if (!raw) { showToast('请输入内容', 'error'); return; }
-  var lines = raw.split('\n').map(function(s) { return s.trim(); }).filter(Boolean);
-  var keywords = [];
-  var errors = [];
-  lines.forEach(function(line, i) {
-    var parts = line.split('|').map(function(s) { return s.trim(); });
-    if (parts.length < 2) { errors.push('第' + (i+1) + '行格式不对，需至少 关键词 | 回复内容'); return; }
-    var keyword = parts[0];
-    if (!keyword) { errors.push('第' + (i+1) + '行关键词为空'); return; }
-    // 两段格式：关键词 | 回复内容
-    // 三段格式：关键词 | 同义词 | 回复内容
-    var aliases = [];
-    var content = '';
-    if (parts.length >= 3) {
-      aliases = parts[1] ? parts[1].split(/[,，]/).map(function(s){return s.trim();}).filter(Boolean) : [];
-      content = parts.slice(2).join(' | ');
-    } else {
-      content = parts[1];
-    }
-    if (!content) { errors.push('第' + (i+1) + '行回复内容为空'); return; }
-    // 判断是否含链接 → 图文 or 文字
-    var hasUrl = /https?:\/\//.test(content);
-    if (hasUrl) {
-      var urlMatch = content.match(/(https?:\/\/[^\s]+)/);
-      var url = urlMatch ? urlMatch[1] : content;
-      var textPart = content.replace(url, '').replace(/[：:\s|]+$/, '').trim() || keyword;
-      keywords.push({
-        keyword: keyword,
-        aliases: aliases,
-        type: 'news',
-        title: textPart.length > 50 ? textPart.substring(0, 50) + '...' : textPart,
-        desc: keyword,
-        picUrl: 'https://www.ihangzhou.net/images/og-cover.jpg',
-        url: url
-      });
-    } else {
-      keywords.push({
-        keyword: keyword,
-        aliases: aliases,
-        type: 'text',
-        reply: content
-      });
-    }
-  });
-  if (keywords.length === 0) {
-    showToast('没有有效数据' + (errors.length ? '，' + errors[0] : ''), 'error');
-    return;
-  }
-  if (errors.length) console.log('Simple batch errors:', errors);
-  showToast('正在导入 ' + keywords.length + ' 条关键词...', 'success');
-  var res = await apiCall('POST', { type: 'wechatKeywordsBatch', data: { keywords: keywords } });
-  if (res.success) {
-    CMS_DATA = res.data;
-    WECHAT_KEYWORDS = JSON.parse(JSON.stringify(CMS_DATA.wechatKeywords || []));
-    renderWechatKeywords();
-    closeModal();
-    var br = res.batchResult || {};
-    var msg = '✅ 新增 ' + br.added + ' 条，跳过 ' + br.skipped + ' 条已存在，共 ' + br.total + ' 条';
-    if (errors.length) msg += '，' + errors.length + ' 行格式错误已忽略';
-    showToast(msg, 'success');
-  } else {
-    showToast(res.error || '导入失败', 'error');
-  }
-}
-
-// ========== 资料分享管理 ==========
-function renderShareList() {
-  var shares = (CMS_DATA && CMS_DATA.wechatKeywords || []).filter(function(kw) { return kw.type === 'share'; });
-  var html = '';
-  shares.forEach(function(kw) {
-    var driveLabels = { baidu: '百度网盘', aliyun: '阿里云盘', quark: '夸克网盘', '115': '115网盘', other: '网盘' };
-    var driveLabel = driveLabels[kw.drive] || '网盘';
-    var aliasesText = kw.aliases && kw.aliases.length ? ' <span style="color:#64748b;font-size:11px;">/ ' + escapeHtml(kw.aliases.join(' / ')) + '</span>' : '';
-    var codeBadge = kw.code ? '<span style="background:#fef3c7;color:#d97706;padding:2px 6px;border-radius:8px;font-size:10px;">提取码:' + escapeHtml(kw.code) + '</span>' : '';
-    html += '<div class="item-card"><div class="item-icon" style="background:#8b5cf6;">📂</div>' +
-      '<div class="item-info"><div class="item-name">' + escapeHtml(kw.keyword) + aliasesText + ' <span style="background:#ede9fe;color:#6d28d9;padding:2px 6px;border-radius:8px;font-size:10px;">' + driveLabel + '</span> ' + codeBadge + '</div>' +
-      '<div class="item-desc">' + escapeHtml(kw.title || '') + ' → ' + escapeHtml((kw.url || '').substring(0, 50)) + (kw.url && kw.url.length > 50 ? '...' : '') + '</div></div>' +
-      '<div class="item-actions">' +
-      '<button class="btn btn-sm btn-primary" onclick="editShare(\'' + escapeHtml(kw.keyword) + '\')">编辑</button>' +
-      '<button class="btn btn-sm btn-danger" onclick="deleteShare(\'' + escapeHtml(kw.keyword) + '\')">删除</button></div></div>';
-  });
-  document.getElementById('shareList').innerHTML = html || '<div class="empty">暂无资料分享</div>';
-}
-
-var _driveOptions = [
-  { value: 'baidu', label: '百度网盘' },
-  { value: 'aliyun', label: '阿里云盘' },
-  { value: 'quark', label: '夸克网盘' },
-  { value: '115', label: '115网盘' },
-  { value: 'other', label: '其他网盘' }
-];
-
-function addShare() {
-  var driveOpts = _driveOptions.map(function(d) { return '<option value="' + d.value + '">' + d.label + '</option>'; }).join('');
-  showModal('添加资料分享',
-    '<div class="form-group"><label>关键词（用户发送此词触发）</label><input id="shareKw" placeholder="如：杭州落户指南"></div>' +
-    '<div class="form-group"><label>同义词（逗号分隔）</label><input id="shareAliases" placeholder="如：落户,户口迁入"></div>' +
-    '<div class="form-group"><label>资料名称</label><input id="shareTitle" placeholder="如：杭州落户指南.pdf"></div>' +
-    '<div class="form-group"><label>网盘类型</label><select id="shareDrive">' + driveOpts + '</select></div>' +
-    '<div class="form-group"><label>分享链接</label><input id="shareUrl" placeholder="https://pan.baidu.com/s/xxx"></div>' +
-    '<div class="form-group"><label>提取码（无则留空）</label><input id="shareCode" placeholder="如：abcd" maxlength="10"></div>' +
-    '<div class="form-group"><label>备注描述（可选）</label><input id="shareDesc" placeholder="如：2024最新版，含表格"></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="saveShare()">保存</button></div>');
-  window._editShareKw = null;
-}
-
-function editShare(kw) {
-  var item = (CMS_DATA.wechatKeywords || []).find(function(k) { return k.keyword === kw && k.type === 'share'; });
-  if (!item) return;
-  var driveOpts = _driveOptions.map(function(d) { return '<option value="' + d.value + '"' + (item.drive === d.value ? ' selected' : '') + '>' + d.label + '</option>'; }).join('');
-  showModal('编辑资料分享',
-    '<div class="form-group"><label>关键词</label><input id="shareKw" value="' + escapeHtml(item.keyword) + '"></div>' +
-    '<div class="form-group"><label>同义词（逗号分隔）</label><input id="shareAliases" value="' + escapeHtml((item.aliases || []).join(', ')) + '"></div>' +
-    '<div class="form-group"><label>资料名称</label><input id="shareTitle" value="' + escapeHtml(item.title || '') + '"></div>' +
-    '<div class="form-group"><label>网盘类型</label><select id="shareDrive">' + driveOpts + '</select></div>' +
-    '<div class="form-group"><label>分享链接</label><input id="shareUrl" value="' + escapeHtml(item.url || '') + '"></div>' +
-    '<div class="form-group"><label>提取码</label><input id="shareCode" value="' + escapeHtml(item.code || '') + '" maxlength="10"></div>' +
-    '<div class="form-group"><label>备注描述</label><input id="shareDesc" value="' + escapeHtml(item.desc || '') + '"></div>' +
-    '<div class="form-actions"><button class="btn btn-primary" onclick="saveShare()">保存</button></div>');
-  window._editShareKw = kw;
-}
-
-async function saveShare() {
-  var kw = document.getElementById('shareKw').value.trim();
-  var url = document.getElementById('shareUrl').value.trim();
-  if (!kw) { showToast('请填写关键词', 'error'); return; }
-  if (!url) { showToast('请填写分享链接', 'error'); return; }
-  var aliasesRaw = document.getElementById('shareAliases').value.trim();
-  var aliases = aliasesRaw ? aliasesRaw.split(/[,，]/).map(function(s){return s.trim();}).filter(Boolean) : [];
-  var obj = {
-    keyword: kw,
-    aliases: aliases,
-    type: 'share',
-    title: document.getElementById('shareTitle').value.trim() || kw,
-    drive: document.getElementById('shareDrive').value,
-    url: url,
-    code: document.getElementById('shareCode').value.trim(),
-    desc: document.getElementById('shareDesc').value.trim()
-  };
-  var allKws = JSON.parse(JSON.stringify(CMS_DATA.wechatKeywords || []));
-  if (window._editShareKw) {
-    var idx = allKws.findIndex(function(k) { return k.keyword === window._editShareKw && k.type === 'share'; });
-    if (idx >= 0) allKws[idx] = obj;
-  } else {
-    // 检查重复
-    if (allKws.some(function(k) { return k.keyword === kw; })) { showToast('关键词「' + kw + '」已存在', 'error'); return; }
-    allKws.push(obj);
-  }
-  var res = await apiCall('PUT', { type: 'full', data: { wechatKeywords: allKws } });
-  if (res.success) {
-    CMS_DATA = res.data;
-    WECHAT_KEYWORDS = JSON.parse(JSON.stringify(CMS_DATA.wechatKeywords || []));
-    renderShareList();
-    renderWechatKeywords();
-    closeModal();
-    showToast('资料已保存并生效', 'success');
-  } else { showToast('保存失败', 'error'); }
-}
-
-async function deleteShare(kw) {
-  if (!confirm('确定删除「' + kw + '」的资料分享？')) return;
-  var allKws = (CMS_DATA.wechatKeywords || []).filter(function(k) { return !(k.keyword === kw && k.type === 'share'); });
-  var res = await apiCall('PUT', { type: 'full', data: { wechatKeywords: allKws } });
-  if (res.success) {
-    CMS_DATA = res.data;
-    WECHAT_KEYWORDS = JSON.parse(JSON.stringify(CMS_DATA.wechatKeywords || []));
-    renderShareList();
-    renderWechatKeywords();
-    showToast('已删除', 'success');
-  }
-}
-
-function showShareBatch() {
-  var sample = '杭州落户指南 | https://pan.baidu.com/s/xxx | abcd | 2024最新版落户攻略\n积分落户表 | 积分,落户 | https://www.alipan.com/o/yyy | | 积分落户申请表格';
-  showModal('批量添加资料分享',
-    '<div style="margin-bottom:12px;color:#475569;font-size:13px;line-height:1.6;">' +
-    '每行一条，用 <code style="background:#f1f5f9;padding:1px 4px;border-radius:3px;">|</code> 分隔：<br>' +
-    '<strong>关键词 | 分享链接 | 提取码(可选) | 备注(可选)</strong><br><br>' +
-    '可在关键词后加同义词：<br>' +
-    '<strong>关键词,同义词1,同义词2 | 分享链接 | 提取码 | 备注</strong><br><br>' +
-    '• 网盘类型自动识别（百度/阿里/夸克/115）<br>' +
-    '• 无提取码的行留空即可<br>' +
-    '• 已存在的同名关键词自动跳过</div>' +
-    '<div class="form-group"><textarea id="shareBatchInput" rows="10" style="font-size:13px;line-height:1.8;" placeholder="每行一条">' + escapeHtml(sample) + '</textarea></div>' +
-    '<div class="form-actions" style="display:flex;gap:8px;">' +
-    '<button class="btn btn-success" onclick="importShareBatch()">导入</button>' +
-    '<button class="btn" onclick="closeModal()">取消</button></div>');
-}
-
-async function importShareBatch() {
-  var raw = document.getElementById('shareBatchInput').value.trim();
-  if (!raw) { showToast('请输入内容', 'error'); return; }
-  var lines = raw.split('\n').map(function(s) { return s.trim(); }).filter(Boolean);
-  var keywords = [];
-  var errors = [];
-  lines.forEach(function(line, i) {
-    var parts = line.split('|').map(function(s) { return s.trim(); });
-    if (parts.length < 2) { errors.push('第' + (i+1) + '行格式不对'); return; }
-    // 第一段可能含同义词：关键词,同义词1,同义词2
-    var kwParts = parts[0].split(/[,，]/).map(function(s) { return s.trim(); }).filter(Boolean);
-    var keyword = kwParts[0];
-    var aliases = kwParts.slice(1);
-    if (!keyword) { errors.push('第' + (i+1) + '行关键词为空'); return; }
-    var url = parts[1];
-    if (!url || !/^https?:\/\//.test(url)) { errors.push('第' + (i+1) + '行链接无效'); return; }
-    var code = parts[2] || '';
-    var desc = parts[3] || '';
-    // 自动识别网盘类型
-    var drive = 'other';
-    if (/pan\.baidu\.com/i.test(url)) drive = 'baidu';
-    else if (/alipan\.com|aliyundrive/i.test(url)) drive = 'aliyun';
-    else if (/quark\.cn|pan\.quark/i.test(url)) drive = 'quark';
-    else if (/115\.cn|115\.com/i.test(url)) drive = '115';
-    keywords.push({
-      keyword: keyword,
-      aliases: aliases,
-      type: 'share',
-      title: keyword,
-      drive: drive,
-      url: url,
-      code: code,
-      desc: desc
-    });
-  });
-  if (keywords.length === 0) {
-    showToast('没有有效数据' + (errors.length ? '，' + errors[0] : ''), 'error');
-    return;
-  }
-  if (errors.length) console.log('Share batch errors:', errors);
-  showToast('正在导入 ' + keywords.length + ' 条资料...', 'success');
-  var res = await apiCall('POST', { type: 'wechatKeywordsBatch', data: { keywords: keywords } });
-  if (res.success) {
-    CMS_DATA = res.data;
-    WECHAT_KEYWORDS = JSON.parse(JSON.stringify(CMS_DATA.wechatKeywords || []));
-    renderShareList();
-    renderWechatKeywords();
-    closeModal();
-    var br = res.batchResult || {};
-    var msg = '✅ 新增 ' + br.added + ' 条，跳过 ' + br.skipped + ' 条已存在，共 ' + br.total + ' 条';
-    if (errors.length) msg += '，' + errors.length + ' 行格式错误已忽略';
-    showToast(msg, 'success');
-  } else {
-    showToast(res.error || '导入失败', 'error');
-  }
-}
-
-async function saveWelcomeConfig() {
-  var config = {
-    type: document.getElementById('welcomeType').value,
-    title: document.getElementById('welcomeTitle').value,
-    desc: document.getElementById('welcomeDesc').value,
-    url: document.getElementById('welcomeUrl').value
-  };
-  WECHAT_WELCOME = config;
-  var res = await apiCall('PUT', { type: 'full', data: { wechatWelcome: config } });
-  if (res.success) { CMS_DATA = res.data; showToast('✅ 欢迎语已保存并生效', 'success'); }
-  else { showToast('保存失败', 'error'); }
-}
-
-function renderWechatMenuPreview() {
-  document.getElementById('wechatMenuPreview').innerHTML =
-    '<div style="display:flex;gap:20px;justify-content:center;">' +
-    '<div style="text-align:center;"><div style="width:60px;height:50px;background:#0ea5e9;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;">🏠</div><span style="font-size:12px;color:#64748b;">首页</span></div>' +
-    '<div style="text-align:center;"><div style="width:60px;height:50px;background:#10b981;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;">🛠️</div><span style="font-size:12px;color:#64748b;">工具</span></div>' +
-    '<div style="text-align:center;"><div style="width:60px;height:50px;background:#f59e0b;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;">📋</div><span style="font-size:12px;color:#64748b;">更多 ▼</span></div>' +
-    '</div>';
-}
-
-async function syncWechatMenu() {
-  if (!CMS_DATA || !CMS_DATA.wechatMenu) { showToast('未配置菜单数据', 'error'); return; }
-  if (!confirm('确定将菜单同步到公众号？\n\n需已配置 WX_APPID/WX_SECRET 环境变量')) return;
-  showToast('正在同步...', 'success');
-  try {
-    var res = await fetch('/api/wechat?action=syncMenu', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + ADMIN_PASSWORD }
-    });
-    var data = await res.json();
-    if (data.success) { showToast('菜单同步成功！', 'success'); }
-    else { showToast(data.error || '同步失败', 'error'); }
-  } catch (e) { showToast('同步异常: ' + e.message, 'error'); }
-}
-
-// 切换到微信配置页时初始化
-var origSetupNav = setupNavigation;
-setupNavigation = function() {
-  origSetupNav();
-  document.querySelectorAll('.nav-item').forEach(function(item) {
-    item.onclick = function() {
-      document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('active'); });
-      this.classList.add('active');
-      var view = this.dataset.view;
-      document.querySelectorAll('.view-section').forEach(function(v) { v.classList.remove('active'); });
-      document.getElementById('view-' + view).classList.add('active');
-      if (view === 'analytics') loadAnalytics();
-      if (view === 'feedback') loadFeedback();
-      if (view === 'wechat') initWechatView();
+  async function saveKeyword() {
+    var kw = {
+      keyword: document.getElementById('kwKeyword').value.trim(),
+      aliases: (document.getElementById('kwAliases').value || '').split(',').map(function(s) { return s.trim(); }).filter(Boolean),
+      type: document.getElementById('kwType').value
     };
-  });
-};
+    if (!kw.keyword) { toast('关键词不能为空'); return; }
+    if (kw.type === 'text') { kw.reply = document.getElementById('kwReply').value; }
+    else {
+      kw.title = document.getElementById('kwTitle').value.trim();
+      kw.desc = document.getElementById('kwDesc').value;
+      kw.picUrl = document.getElementById('kwPicUrl').value.trim();
+      kw.url = document.getElementById('kwUrl').value.trim();
+      if (!kw.title || !kw.url) { toast('图文类型需要标题和链接'); return; }
+    }
+
+    if (editingKeyword) {
+      var r = await api('/api/tools?action=keywords', { method: 'POST', body: JSON.stringify({ update: [kw] }) });
+      if (r.success && (!r.errors || !r.errors.length)) { toast('更新成功'); closeModal(); loadKeywords(); }
+      else { toast((r.errors || ['更新失败']).join('; ')); }
+    } else {
+      var r = await api('/api/tools?action=keywords', { method: 'POST', body: JSON.stringify({ add: [kw] }) });
+      if (r.success && (!r.errors || !r.errors.length)) { toast('新增成功'); closeModal(); loadKeywords(); }
+      else { toast((r.errors || ['新增失败']).join('; ')); }
+    }
+  }
+
+  function deleteSelected() {
+    var kws = Array.prototype.map.call(document.querySelectorAll('.kw-check:checked'), function(c) { return c.dataset.kw; });
+    if (!kws.length) { toast('请先选择'); return; }
+    if (!confirm('确认删除选中的 ' + kws.length + ' 个关键词？')) return;
+    api('/api/tools?action=keywords', { method: 'POST', body: JSON.stringify({ remove: kws }) }).then(function(r) {
+      if (r.success) { toast('已删除 ' + kws.length + ' 个'); loadKeywords(); }
+      else { toast('删除失败: ' + (r.error || '')); }
+    });
+  }
+
+  function deleteOne(kw) {
+    if (!confirm('确认删除「' + kw + '」？')) return;
+    api('/api/tools?action=keywords', { method: 'POST', body: JSON.stringify({ remove: [kw] }) }).then(function(r) {
+      if (r.success) { toast('已删除'); loadKeywords(); }
+      else { toast('删除失败: ' + (r.error || '')); }
+    });
+  }
+
+  function openImportModal() {
+    document.getElementById('importJson').value = '';
+    document.getElementById('importModal').classList.add('active');
+  }
+  function closeImportModal() { document.getElementById('importModal').classList.remove('active'); }
+
+  async function doImport(action) {
+    var txt = document.getElementById('importJson').value.trim();
+    if (!txt) { toast('请粘贴 JSON'); return; }
+    var data;
+    try { data = JSON.parse(txt); } catch (e) { toast('JSON 格式错误: ' + e.message); return; }
+    if (!Array.isArray(data)) { toast('需要 JSON 数组'); return; }
+    var body = action === 'replace' ? { action: 'replace', keywords: data } : { add: data };
+    var params = action === 'replace' ? 'action=keywords' : 'action=keywords';
+    var r = await api('/api/tools?' + params, { method: 'POST', body: JSON.stringify(body) });
+    if (r.success) {
+      toast((action === 'replace' ? '已全量替换' : '已追加') + '，当前共 ' + r.total + ' 个' + (r.errors && r.errors.length ? '，' + r.errors.length + ' 个失败' : ''));
+      closeImportModal(); loadKeywords();
+    } else { toast('导入失败: ' + (r.error || '')); }
+  }
+
+  function exportKeywords() {
+    var blob = new Blob([JSON.stringify(KEYWORDS, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'keywords-' + new Date().toISOString().slice(0,10) + '.json';
+    a.click();
+  }
 </script>
 </body>
 </html>
