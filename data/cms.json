@@ -21,7 +21,11 @@
     "国庆",
     "灯光秀",
     "音乐节",
-    "千岛湖"
+    "千岛湖",
+    "相亲",
+    "脱单",
+    "万松书院",
+    "亲青恋"
   ],
   "hotServices": [
     {
@@ -6548,6 +6552,57 @@
       "desc": "9月25日-10月7日湖山生活节，烟花秀、露营、篝火晚会，交通住宿全整理",
       "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
       "url": "https://www.ihangzhou.net/articles/杭州千岛湖国庆游玩攻略-烟花秀露营交通指南.html"
+    },
+    {
+      "keyword": "相亲",
+      "aliases": [
+        "杭州相亲",
+        "相亲角",
+        "找对象"
+      ],
+      "type": "news",
+      "title": "💕 杭州相亲脱单全攻略",
+      "desc": "三大相亲角时间地点费用+官方免费平台亲青恋，48万实名会员，0元",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州相亲脱单全攻略-三大相亲角-亲青恋.html"
+    },
+    {
+      "keyword": "脱单",
+      "aliases": [
+        "杭州脱单",
+        "单身",
+        "找另一半"
+      ],
+      "type": "news",
+      "title": "💕 杭州相亲脱单全攻略",
+      "desc": "三大相亲角时间地点费用+官方免费平台亲青恋，48万实名会员，0元",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州相亲脱单全攻略-三大相亲角-亲青恋.html"
+    },
+    {
+      "keyword": "万松书院",
+      "aliases": [
+        "万松书院相亲角",
+        "万松岭相亲"
+      ],
+      "type": "news",
+      "title": "💕 杭州相亲脱单全攻略",
+      "desc": "万松书院每周六7:30-11:30，门票10元，杭州最老牌相亲角",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州相亲脱单全攻略-三大相亲角-亲青恋.html"
+    },
+    {
+      "keyword": "亲青恋",
+      "aliases": [
+        "浙里办相亲",
+        "共青团相亲",
+        "官方相亲平台"
+      ],
+      "type": "news",
+      "title": "💕 杭州相亲脱单全攻略",
+      "desc": "共青团浙江省委官方平台，6部门数据核验，48万会员，完全免费",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州相亲脱单全攻略-三大相亲角-亲青恋.html"
     }
   ],
   "wechatWelcome": {
