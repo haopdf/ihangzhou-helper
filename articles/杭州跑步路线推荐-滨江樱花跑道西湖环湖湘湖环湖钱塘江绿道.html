@@ -40,8 +40,12 @@
   </style>
   <style>body { padding-bottom: 80px; }
 </style>
+  <script src="../js/layout.js"></script>
 </head>
 <body>
+<script>
+  window.IHZ_PAGE = { title: '杭州跑步路线推荐', icon: '📖', channelId: 'articles' };
+</script>
   <header class="topbar">
     <a href="../index.html" class="topbar-back" style="color:#fff;text-decoration:none;font-size:20px;padding:4px 8px;">‹</a>
     <div class="topbar-city"><span>iHangzhou</span></div>
@@ -191,20 +195,10 @@
     </div>
   </div>
 
-  <!-- 底部导航 -->
-  <nav class="bottom-nav">
-    <div class="bnav-item" data-page="home" onclick="location.href='../index.html'">
-      <span class="bicon">🏠</span><span>首页</span>
-    </div>
-    <div class="bnav-item" data-page="articles" onclick="location.href='../articles.html'">
-      <span class="bicon">📚</span><span>文章</span>
-    </div>
-    <div class="bnav-item" data-page="tools" onclick="location.href='../index.html#tools'">
-      <span class="bicon">🛠️</span><span>工具</span>
-    </div>
-    <div class="bnav-item" data-page="me" onclick="location.href='../index.html#me'">
-      <span class="bicon">👤</span><span>我的</span>
-    </div>
-  </nav>
+<script>
+  if (window.IZ && IZ.layout) {
+    document.addEventListener('DOMContentLoaded', IZ.layout.init);
+  }
+</script>
 </body>
 </html>

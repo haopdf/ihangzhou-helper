@@ -55,7 +55,7 @@ window.addEventListener('offline', function () {
 // ===== 内联兜底数据（CMS API 失败时使用，保证离线/PWA 可用）=====
   var DATA_FALLBACK = {
     // 热门搜索关键词（对标本地宝热门搜索）
-    hotKeywords: ["限行", "社保", "公积金", "灵隐寺", "消费券", "人才认定", "钱塘江大潮", "找工作", "公租房", "摇号", "西湖", "疫苗"],
+    hotKeywords: ["钱塘江观潮", "限行", "社保", "公积金", "灵隐寺", "消费券", "人才认定", "找工作", "公租房", "摇号", "西湖", "疫苗"],
 
     // 热门办事（顶部快捷入口）
     hotServices: [
@@ -3252,11 +3252,19 @@ function showMetro() {
         box.querySelectorAll('.city-dropdown-item').forEach(function(it) {
           it.classList.toggle('active', it.getAttribute('data-id') === id);
         });
-        // 全市不跳转，仅刷新首页
+        // 切换到"杭州"：在首页则刷新，在其他页（如 district.html）则跳回首页
         if (id === 'hangzhou') {
-          if (typeof renderTodayHangzhou === 'function') renderTodayHangzhou();
-          if (typeof renderDistrictInfo === 'function') renderDistrictInfo();
+          var isIndex = location.pathname === '/' ||
+            /\/index\.html?$/i.test(location.pathname) ||
+            location.pathname.endsWith('/ihangzhou-helper/');
+          if (isIndex) {
+            if (typeof renderTodayHangzhou === 'function') renderTodayHangzhou();
+            if (typeof renderDistrictInfo === 'function') renderDistrictInfo();
+            showToast('已切换到 ' + d.full);
+            return;
+          }
           showToast('已切换到 ' + d.full);
+          setTimeout(function () { location.href = 'index.html'; }, 400);
           return;
         }
         // 切到具体区县 → 跳转区县详情页
