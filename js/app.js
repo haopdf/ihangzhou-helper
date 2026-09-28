@@ -64,7 +64,7 @@ window.addEventListener('offline', function () {
       { name: "找工作", icon: "💼", desc: "事业单位/国企", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%9C%AC%E4%BA%BA%E6%8B%9B%E8%81%98", color: "#3b82f6" },
       { name: "公积金", icon: "🏠", desc: "查询/提取/贷款", url: "https://gjj.hangzhou.gov.cn/", color: "#10b981" },
       { name: "浙A摇号", icon: "🚘", desc: "车牌摇号申请", url: "https://hzxkctk.cn/", color: "#ef4444" },
-      { name: "灵隐寺", icon: "⛩️", desc: "门票预约", url: "https://www.lingyinsi.com/", color: "#8b5cf6" },
+      { name: "灵隐寺", icon: "⛩️", desc: "门票预约", url: "https://www.lingyinsi.com/", color: "#8b5cf6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">灵隐寺始建于东晋（326 年），距今 1700 年，是杭州最早的名刹，中国禅宗十刹之一。背靠北高峰，面朝飞来峰，含大雄宝殿（中国最大木雕佛）、飞来峰石窟（470 余尊造像）、永福禅寺、韬光寺。</p><div class=\"guide-block\"><h4>🎫 门票</h4><p>• 飞来峰 45 元 + 灵隐寺 30 元 = 共 75 元<br>• 无需预约，现场购票<br>• 杭州市民卡/公园卡免飞来峰门票<br>• 开放时间：7:00-18:00</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>• 公交：7 路、游 1 线「灵隐」站<br>• 地铁：3 号线 黄龙体育中心站换公交<br>• 自驾：节假日不建议，停车位极度紧张</p></div><div class=\"guide-block\"><h4>💡 推荐组合</h4><p>• 半日线：灵隐寺 + 永福禅寺 + 北高峰索道<br>• 全日线：上午灵隐寺 → 中午法喜寺 5 元斋饭 → 下午龙井村<br>• 天竺三寺串联：下天竺 → 中天竺 → 上天竺（法喜寺）" },
       { name: "人才认定", icon: "🎓", desc: "高层次人才申请", url: "https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E4%BA%BA%E6%89%8D%E8%AE%A4%E5%AE%9A", color: "#06b6d4" },
       { name: "市民卡", icon: "💳", desc: "服务/充值", url: "https://www.96225.com/", color: "#ec4899" }
     ],
@@ -334,7 +334,7 @@ window.addEventListener('offline', function () {
           { name: "西湖新十景", desc: "宝石流霞/黄龙吐翠等", url: "https://westlake.hangzhou.gov.cn/", color: "#0ea5e9" },
           { name: "三评西湖十景", desc: "灵隐禅踪/六和听涛等", url: "https://westlake.hangzhou.gov.cn/", color: "#22c55e" },
           { name: "西湖手划船", desc: "摇橹船预约", url: "https://westlake.hangzhou.gov.cn/", color: "#f59e0b" },
-          { name: "灵隐寺", desc: "免费预约入园", url: "https://www.lingyinsi.com/", color: "#10b981" },
+          { name: "灵隐寺", desc: "免费预约入园", url: "https://www.lingyinsi.com/", color: "#10b981", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">灵隐寺始建于东晋咸和元年（326 年），距今 1700 年，是杭州最早的名刹，中国禅宗十刹之一。背靠北高峰，面朝飞来峰，济公和尚在此出家，香火极旺。参拜路线清晰，建议配合飞来峰景区 + 北高峰索道一日游。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• <strong>飞来峰门票 45 元</strong>：含造像石窟 470 余尊，五代至宋元<br>• <strong>灵隐寺门票 30 元</strong>：含三支清香，单独在寺门口购买<br>• <strong>永福禅寺</strong>：灵隐寺旁，无需额外门票，幽静小众<br>• <strong>韬光寺</strong>：北高峰半山，可俯瞰西湖<br>• <strong>五百罗汉堂</strong>：清代木雕，神态各异</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>• 公交：7 路、游 1 线、游 2 线「灵隐」站<br>• 地铁：3 号线 黄龙体育中心站，换乘公交 7 路<br>• 自驾：节假日停车紧张，建议公交出行</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>• <strong>门票合计 75 元</strong>（飞来峰 45 + 灵隐寺 30）<br>• 无需预约，现场购票<br>• 开放时间：7:00-18:00<br>• 杭州市民卡/公园卡免飞来峰门票</p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>• 全年开放，秋季 10-11 月最佳<br>• 早 7:00 开门即入，避开人流<br>• 建议组合：灵隐寺 + 永福寺 + 北高峰索道（半天）<br>• 与法喜寺在同一方向，可安排一日联游" },
           { name: "法喜寺", desc: "网红斋饭/白玉兰", url: "https://www.lingyinsi.com/", color: "#3b82f6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">法喜寺（上天竺寺）位于西湖区天竺路，始建于后晋天福元年（936年），与灵隐寺、中天竺、下天竺并称「天竺三寺」。近年来因网红 5 元斋饭、白玉兰花期与年轻化禅意文创走红，是杭州年轻人打卡礼佛热门地。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• <strong>网红斋饭</strong>：5 元一份，两菜一饭一汤，平日限量<br>• <strong>白玉兰花期</strong>：2 月底-3 月初寺内白玉兰盛开<br>• <strong>御题「法喜寺」</strong>：乾隆御笔匾额<br>• <strong>求姻缘</strong>：寺内观音灵签据说灵验，年轻人最爱的求姻缘地</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>公交：7 路、103 路、324 路「上天竺」站<br>地铁：3 号线 黄龙体育中心站，换乘公交 7 路至「上天竺」<br>提示：天竺路步行可串联下天竺→中天竺→上天竺，约 1.5 公里</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>10 元/人（含香）<br>开放时间：6:30-18:00<br>斋饭供应：11:00-13:00（售完即止，节假日排队较长）</p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>平日清晨人少；2-3 月白玉兰期最佳；周末及节假日人流量大，建议早到。</p></div>" },
           { name: "景点预约", desc: "杭州各景点预约入口", url: "https://wap.lotsmall.cn/vue/list/ticket?m_id=163", color: "#8b5cf6" },
           { name: "西溪湿地", desc: "门票/摇橹船", url: "https://www.xixiwetland.com.cn/", color: "#06b6d4", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">西溪国家湿地公园位于西湖区与余杭区交界，距西湖约 5 公里，是国内首个国家级湿地公园，面积 11.5 平方公里。电影《非诚勿扰》取景地，与西湖、西泠并称「三西」。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• <strong>摇橹船</strong>：手摇木船，100 元/船（6 人），1 小时生态漫游<br>• <strong>深潭口</strong>：《非诚勿扰》取景地，古樟树与河渚街<br>• <strong>秋芦飞雪</strong>：秋季芦苇荡如雪，秋季最美<br>• <strong>河渚街</strong>：传统街巷、湿地博物馆、戏曲表演<br>• <strong>烟水渔庄</strong>：体验西溪传统渔业文化</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>• <strong>周家村入口</strong>（主入口）：公交 193 路、290 路、B 支 7<br>• <strong>地铁</strong>：3 号线 西溪湿地南站步行 800 米<br>• 自驾：周家村、北门、东门均有停车场（10 元/小时）</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>• 公园门票：80 元<br>• <strong>电瓶船套票</strong>：150 元（含门票+船票）<br>• <strong>摇橹船</strong>：100 元/船（6 人，1 小时）<br>• 开放时间：7:00-18:30（夏）/ 7:30-17:30（冬）<br>• 杭州市民卡 40 元/年无限次</p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>• <strong>春</strong>：3-4 月探梅、踏青<br>• <strong>夏</strong>：荷花、夜游湿地<br>• <strong>秋</strong>（最佳）：9-11 月芦苇飞雪，最美季节<br>• <strong>冬</strong>：探梅、静谧游</p></div>" },
@@ -641,7 +641,7 @@ window.addEventListener('offline', function () {
       {
         id: "internet", name: "互联网大厂", icon: "💻",
         items: [
-          { name: "阿里巴巴", desc: "淘宝/支付宝·余杭", url: "https://www.alibabagroup.com/", color: "#ff6600" },
+          { name: "阿里巴巴", desc: "淘宝/支付宝·西溪", url: "https://www.alibabagroup.com/", color: "#ff6600", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">阿里巴巴全球总部位于杭州余杭区西溪园区，占地 26 万平方米，是杭州互联网产业地标。园区设有访客中心（需预约）、盒马亲橙里、淘宝心选等对外区域。普通游客可在指定区域参观了解，感受中国数字经济第一城的心脏。</p><div class=\"guide-block\"><h4>🎯 看点</h4><p>• <strong>访客中心</strong>：展示阿里巴巴创业史与文化（工作日开放，需预约）<br>• <strong>淘宝心选</strong>：阿里自有品牌零售店，西溪园区对外开放<br>• <strong>盒马亲橙里</strong>：阿里新零售体验店<br>• <strong>园区环境</strong>：西溪湿地风格园林景观</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>• 地铁：5 号线 杭师大仓前站<br>• 自驾：文一西路 969 号阿里巴巴西溪园区<br>• 访客需提前在阿里巴巴集团官网申请预约</p></div><div class=\"guide-block\"><h4>🎫 参观方式</h4><p>• <strong>访客中心免费</strong>，需提前 7 天在阿里的官方网站提交申请<br>• 入园需出示身份证<br>• 请勿进入标注为「办公区」的区域<br>• 工作日接待，周末及节假日不开放</p></div><div class=\"guide-block\"><h4>📅 建议</h4><p>• 适合互联网从业者、学生团体参观<br>• 预约周期较长，建议提前安排<br>• 附近还有梦想小镇、中国人工智能小镇等可顺访</p></div>" },
           { name: "蚂蚁集团", desc: "支付宝/余额宝·西湖区", url: "https://www.antgroup.com/", color: "#1677ff" },
           { name: "网易", desc: "游戏/音乐·滨江区", url: "https://www.163.com/", color: "#ea4335" },
           { name: "字节跳动", desc: "抖音·余杭区", url: "https://www.bytedance.com/", color: "#fe2c55" },
@@ -1067,7 +1067,7 @@ window.addEventListener('offline', function () {
 
   // ===== 状态 =====
   var state = {
-    activeTab: 'gov',
+    activeTab: 'banshi',
     theme: localStorage.getItem('ihz-theme') || 'light',
     searchQuery: '',
     currentPage: 'home'
@@ -1185,10 +1185,13 @@ window.addEventListener('offline', function () {
 
     var items = category.items;
     if (state.searchQuery) {
-      var q = state.searchQuery.toLowerCase();
-      items = items.filter(function (item) {
-        return item.name.toLowerCase().indexOf(q) >= 0 || item.desc.toLowerCase().indexOf(q) >= 0;
+      var scoredItems = [];
+      items.forEach(function (item) {
+        var score = searchScore(state.searchQuery, item.name) + searchScore(state.searchQuery, item.desc) * 0.5;
+        if (score > 0) scoredItems.push({ item: item, score: score });
       });
+      scoredItems.sort(function (a, b) { return b.score - a.score; });
+      items = scoredItems.map(function (s) { return s.item; });
     }
 
     if (items.length === 0) {
@@ -1314,6 +1317,25 @@ window.addEventListener('offline', function () {
     return '📌';
   }
 
+  // 中文分词级匹配得分：每个查询字符在文本中出现则加分
+  function searchScore(query, text) {
+    if (!query || !text) return 0;
+    text = text.toLowerCase();
+    var q = query.toLowerCase().trim();
+    // 1. 完整子串匹配 → 最高分
+    if (text.indexOf(q) >= 0) return 100;
+    // 2. 逐字符匹配：计算查询中有多少字符出现在文本中
+    var chars = q.split('').filter(function(c) { return c.trim().length > 0; });
+    if (chars.length === 0) return 0;
+    var matched = 0;
+    for (var i = 0; i < chars.length; i++) {
+      if (text.indexOf(chars[i]) >= 0) matched++;
+    }
+    // 全部字符都匹配 → 高分，部分匹配 → 按覆盖率给分
+    if (matched === chars.length) return 50 + chars.length;
+    return (matched / chars.length) * 30;
+  }
+
   function globalSearch(query) {
     state.searchQuery = query.trim();
     var searchResult = $('#searchResult');
@@ -1326,15 +1348,18 @@ window.addEventListener('offline', function () {
       return;
     }
 
-    var q = state.searchQuery.toLowerCase();
     var results = [];
     DATA.categories.forEach(function (cat) {
       cat.items.forEach(function (item) {
-        if (item.name.toLowerCase().indexOf(q) >= 0 || item.desc.toLowerCase().indexOf(q) >= 0) {
-          results.push({ item: item, cat: cat.name });
+        var score = searchScore(state.searchQuery, item.name) + searchScore(state.searchQuery, item.desc) * 0.5;
+        if (score > 0) {
+          results.push({ item: item, cat: cat.name, score: score });
         }
       });
     });
+
+    // 按匹配得分降序排列
+    results.sort(function (a, b) { return b.score - a.score; });
 
     // 显示搜索结果区
     if (searchResult) {
@@ -2753,8 +2778,40 @@ case 'colors': showColors(); break;
       });
   }
 
-  // ===== 地铁时刻表 =====
-  function showMetro() {
+// ===== 杭州怎么玩精选攻略 =====
+function showGuide(key) {
+  var guides = {
+    lingyin: {
+      title: '⛩️ 灵隐寺 · 千年古刹祈福攻略',
+      body: '<p style="color:var(--text-secondary);line-height:1.8;">灵隐寺始建于东晋咸和元年（326 年），距今 1700 年，是杭州最早名刹，中国禅宗十刹之一。背靠北高峰，面朝飞来峰，济公和尚在此出家。建议配合飞来峰景区 + 北高峰索道一日游。</p><div class="guide-block"><h4>🎯 主要看点</h4><p>• <strong>大雄宝殿</strong>：中国最大木雕坐佛释迦牟尼（19.6 米高）<br>• <strong>飞来峰石窟</strong>：470 余尊五代至宋元造像，含著名大肚弥勒<br>• <strong>永福禅寺</strong>：灵隐旁小众秘境，无需额外门票<br>• <strong>韬光寺</strong>：北高峰半山腰，可俯瞰西湖全景<br>• <strong>药师殿/五百罗汉堂</strong>：清代文物，神态各异</p></div><div class="guide-block"><h4>🚇 交通</h4><p>• 公交：7 路、游 1 线「灵隐」站<br>• 地铁：3 号线黄龙体育中心站 → 换乘公交 7 路<br>• 自驾：节假日极度堵，强烈不推荐</p></div><div class="guide-block"><h4>🎫 门票</h4><p>• <strong>飞来峰 45 元</strong>（必购，含造像区）+ <strong>灵隐寺 30 元</strong>（含三支清香）<br>• 杭州市民卡 / 公园卡免飞来峰门票<br>• 开放时间：7:00-18:00，无需预约，现场购票</p></div><div class="guide-block"><h4>📅 推荐玩法</h4><p>• <strong>半日线</strong>：灵隐寺 → 永福禅寺 → 北高峰索道（索道 40 元）<br>• <strong>全日线</strong>：灵隐寺 → 中午法喜寺 5 元斋饭 → 下午龙井村<br>• <strong>最佳季节</strong>：秋季 10-11 月，桂花香满山<br>• <strong>避开人流</strong>：工作日早 7 点开门即入</p></div><p style="margin-top:8px;"><a href="https://www.lingyinsi.com/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">灵隐寺官网 →</a></p>'
+    },
+    westlake: {
+      title: '🌊 西湖十景 · 世界遗产游览攻略',
+      body: '<p style="color:var(--text-secondary);line-height:1.8;">西湖是世界文化遗产，三面环山一面临城，面积 6.39 平方公里。自古以来「欲把西湖比西子，淡妆浓抹总相宜」。景区免费开放，无需门票，可步行/骑行/游船三选一。</p><div class="guide-block"><h4>🎯 西湖十景（按季节）</h4><p>• <strong>春</strong>：苏堤春晓、柳浪闻莺、花港观鱼<br>• <strong>夏</strong>：曲院风荷（6-8 月荷花盛开）<br>• <strong>秋</strong>：平湖秋月、三潭印月（中秋最佳）<br>• <strong>冬</strong>：断桥残雪（杭州雪少，雪后断桥热）</p></div><div class="guide-block"><h4>🚇 经典步行路线</h4><p>• <strong>半日线（2-3h）</strong>：断桥 → 白堤 → 孤山 → 浙江省博物馆 → 苏堤南口<br>• <strong>全日线（5-6h）</strong>：断桥 → 白堤 → 孤山 → 曲院风荷 → 苏堤 → 花港观鱼 → 雷峰塔<br>• <strong>骑行</strong>：景区共享单车很多，沿苏堤骑行（全长 2.8km，约 15 分钟）</p></div><div class="guide-block"><h4>🎫 费用</h4><p>• <strong>西湖景区</strong>：免费开放<br>• <strong>雷峰塔</strong>：40 元<br>• <strong>三潭印月船票</strong>：55 元（含登岛）<br>• <strong>手划船</strong>：150-180 元/小时</p></div><div class="guide-block"><h4>📅 推荐时间</h4><p>• 全年开放，最佳 3-5 月（春花）和 9-11 月（秋桂）<br>• 清晨 6-8 时人最少，日出时分最美<br>• 周末及节假日人流密集，建议工作日</p></div>'
+    },
+    xixi: {
+      title: '🛶 西溪湿地 · 摇橹船生态游攻略',
+      body: '<p style="color:var(--text-secondary);line-height:1.8;">西溪国家湿地公园位于西湖区与余杭区交界，距西湖约 5 公里，是国内首个国家级湿地公园，面积 11.5 平方公里。电影《非诚勿扰》取景地，与西湖、西泠并称「三西」。</p><div class="guide-block"><h4>🎯 必玩体验</h4><p>• <strong>摇橹船</strong>：100 元/船（6 人），1 小时穿越芦苇荡，最诗意<br>• <strong>深潭口</strong>：《非诚勿扰》取景地，古樟树 + 河渚街<br>• <strong>秋芦飞雪</strong>：秋季芦苇荡如雪，西溪最美季节<br>• <strong>河渚街</strong>：传统街巷、湿地博物馆、戏曲表演</p></div><div class="guide-block"><h4>🚇 交通</h4><p>• 地铁：3 号线 西溪湿地南站，步行 800 米到周家村入口<br>• 公交：193 路、290 路、B 支 7 至周家村<br>• 自驾：周家村、北门、东门均有停车场（10 元/小时）</p></div><div class="guide-block"><h4>🎫 门票</h4><p>• <strong>公园门票</strong>：80 元<br>• <strong>电瓶船套票</strong>：150 元（含门票+船票）<br>• <strong>摇橹船</strong>：100 元/船（6 人平摊）<br>• 杭州市民卡：40 元/年无限次入园<br>• 开放时间：7:00-18:30（夏）/ 7:30-17:30（冬）</p></div><div class="guide-block"><h4>📅 推荐时间</h4><p>• <strong>秋季最佳</strong>：9-11 月芦苇飞雪<br>• 春季：3-4 月探梅<br>• 建议安排：半天（上午湿地 + 下午河渚街喝茶）</p></div><p style="margin-top:8px;"><a href="https://www.xixiwetland.com.cn/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">西溪湿地官网 →</a></p>'
+    },
+    songcheng: {
+      title: '🎭 宋城千古情 · 杭州必看的演出',
+      body: '<p style="color:var(--text-secondary);line-height:1.8;">杭州宋城位于之江路 148 号，是一座以南宋文化为主题的大型人造乐园，年接待超 1000 万人次。「宋城千古情」被誉为「世界三大名秀」之一（拉斯维加斯 O 秀、巴黎红磨坊并列），是杭州夜游的标志性项目。</p><div class="guide-block"><h4>🎭 演出亮点</h4><p>• 全剧 60 分钟，分「良渚之光」「宋宫宴舞」「金戈铁马」「西子传说」「魅力杭州」五幕<br>• 声光电 + 机械舞台 + 特技表演，视觉冲击强<br>• 观众席会「动」，水幕从天而降</p></div><div class="guide-block"><h4>🎫 门票</h4><p>• <strong>贵宾席</strong>：320 元（含千古情演出）<br>• <strong>豪华席</strong>：480 元（含千古情，视野更佳）<br>• <strong>尊宾席</strong>：580 元（含千古情，含茶点）<br>• 单买公园票（不含演出）：100 元</p></div><div class="guide-block"><h4>🚇 交通</h4><p>• 公交：4 路、39 路、202 路「宋城」站<br>• 地铁：6 号线 之江路站，步行约 1 公里<br>• 自驾：宋城停车场 5 元/小时，节假日早到</p></div><div class="guide-block"><h4>📅 观演攻略</h4><p>• 演出每日 4 场：14:00、16:00、19:00、20:30（节假日加场）<br>• 建议选 19:00 或 20:30 夜场，景区夜景更美<br>• 提前 30 分钟入场选座（座位不指定号，先到先占）<br>• 一票难求日期：国庆、春节、五一等长假提前 3 天抢购</p></div><p style="margin-top:8px;"><a href="https://www.songcn.com/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">宋城千古情官网 →</a></p>'
+    },
+    liangzhu: {
+      title: '🏛️ 良渚古城 · 五千年文明世界遗产',
+      body: '<p style="color:var(--text-secondary);line-height:1.8;">良渚古城遗址位于余杭区瓶窑镇，距今约 5300-4300 年，是中华五千年文明的实证。2019 年列入《世界遗产名录》，中国第 55 处世界遗产。良渚文化以精美玉器闻名，「玉琮王」为代表性器物。</p><div class="guide-block"><h4>🎯 主要看点</h4><p>• <strong>莫角山宫殿区</strong》：5000 年前的大型宫殿地基<br>• <strong>反山王陵</strong>：出土玉琮王、玉钺王（王权象征）<br>• <strong>老虎岭水坝</strong>：世界最早大型水利工程，比大禹治水早 1000 年<br>• <strong>良渚博物院</strong>：免费，展示 5000 年稻作文明与玉器精品<br>• <strong>20 万斤碳化稻谷</strong>：证明当时已有大规模稻作农业</p></div><div class="guide-block"><h4>🚇 交通</h4><p>• 地铁：2 号线 良渚站 → 换乘公交 428/781 路<br>• 自驾：杭州市区驾车约 1 小时，遗址公园停车 10 元<br>• 博物院与遗址公园相距约 3 公里，建议一日游同访</p></div><div class="guide-block"><h4>🎫 门票</h4><p>• <strong>良渚古城遗址公园</strong>：50 元（观光车另购 20 元）<br>• <strong>良渚博物院</strong>：免费，需提前在公众号预约<br>• 遗址公园开放时间：9:00-17:00（16:00 停止入场）<br>• 博物院开放时间：9:00-16:30（周一闭馆）</p></div><div class="guide-block"><h4>📅 推荐时间</h4><p>• 春秋：户外遗址区凉爽，植被最美<br>• 夏季注意防晒，公园较大建议乘观光车<br>• 最佳行程：上午博物院（室内）+ 下午遗址公园</p></div><p style="margin-top:8px;"><a href="https://www.lzsite.cn/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">良渚古城官网 →</a></p>'
+    },
+    faxi: {
+      title: '🌸 法喜寺 · 杭州最网红的祈福地',
+      body: '<p style="color:var(--text-secondary);line-height:1.8;">法喜寺（上天竺寺）位于西湖区天竺路，始建于后晋天福元年（936 年），与灵隐寺、中天竺、下天竺并称「天竺三寺」。因网红 5 元斋饭、白玉兰花期、年轻化禅意御守走红，是杭州年轻人最爱的寺庙。</p><div class="guide-block"><h4>🎯 为什么火？</h4><p>• <strong>5 元斋饭</strong>：两菜一饭一汤，平日限量，售完即止<br>• <strong>求姻缘最灵</strong>：寺内观音据说灵验，年轻女性最爱打卡<br>• <strong>黄墙拍照</strong>：黄墙黛瓦配汉服，出片率极高<br>• <strong>御守/明信片</strong>：御守（护身符）可爱，有姻缘/学业/平安三种<br>• <strong>白玉兰</strong>：2 月底-3 月初，满寺白玉兰盛开</p></div><div class="guide-block"><h4>🚇 交通</h4><p>• 公交：7 路、103 路、324 路「上天竺」站<br>• 地铁：3 号线 黄龙体育中心站 → 换乘 7 路至「上天竺」<br>• 步行天竺路串联：下天竺 → 中天竺 → 上天竺，约 1.5 公里</p></div><div class="guide-block"><h4>🎫 门票</h4><p>• <strong>10 元/人</strong>（含三支清香）<br>• 开放时间：6:30-18:00<br>• 斋饭供应：11:00-13:00（售完即止，节假日排队长）</p></div><div class="guide-block"><h4>📅 攻略</h4><p>• 最佳季节：2-3 月玉兰期<br>• 最佳时间：平日早 8 点前到，人少清幽<br>• 路线串联：灵隐寺 → 法喜寺一日联游（相距 3km）<br>• 注意着装：勿穿背心/短裙入寺</p></div>'
+    }
+  };
+  var g = guides[key];
+  if (g) openModal(g.title, g.body);
+}
+
+// ===== 地铁时刻表 =====
+function showMetro() {
     openModal('🚇 杭州地铁时刻表',
       '<div id="metroBox"><div style="text-align:center;padding:24px;"><div style="font-size:40px;">🚇</div><p style="color:var(--text-muted);">正在加载地铁时刻表...</p></div></div>'
     );
@@ -3420,7 +3477,9 @@ case 'colors': showColors(); break;
     try {
       renderHotServices();
       renderHotKeywords();
-      // 首页不再渲染 tabs 和 serviceGrid，CMS 数据更新后只刷新统计
+      // CMS 数据更新后，同步刷新首页 tabs 和服务网格（让用户立即看到后台改动）
+      renderTabs();
+      renderServices(state.activeTab);
       // 更新统计：办事条目含全部可搜索服务（不止首页 8 个 tab），强调"搜索为主"
       var totalItems = DATA.categories.reduce(function (sum, c) { return sum + c.items.length; }, 0);
       var statEl = $('#heroStats');
@@ -3439,6 +3498,7 @@ case 'colors': showColors(); break;
       if (res && res.success && res.data && hasDiff(DATA, res.data)) {
         DATA = res.data;
         rerenderDynamic();
+        console.log('[CMS] 数据已更新:', new Date().toLocaleTimeString(), '物品总数:', DATA.categories.reduce(function(s,c){return s+c.items.length;},0));
       }
     }).catch(function () { /* 静默失败，继续使用兜底数据 */ });
   }
@@ -4105,6 +4165,7 @@ case 'colors': showColors(); break;
   window.buildXianxingModal = buildXianxingModal;
   window.showLPR = showLPR;
   window.showTide = showTide;
+  window.showGuide = showGuide;
   window.showForex = showForex;
   window.showMetro = showMetro;
   window.showWeather = showWeather;

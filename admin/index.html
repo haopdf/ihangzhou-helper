@@ -689,17 +689,38 @@ async function loadCMSData() {
 
 function setupNavigation() {
   document.querySelectorAll('.nav-item').forEach(function(item) {
-    item.onclick = function() {
-      document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('active'); });
-      this.classList.add('active');
-      var view = this.dataset.view;
-      document.querySelectorAll('.view-section').forEach(function(v) { v.classList.remove('active'); });
-      document.getElementById('view-' + view).classList.add('active');
-      if (view === 'analytics') loadAnalytics();
-      if (view === 'analytics-history') loadVisitHistory();
-      if (view === 'feedback') loadFeedback();
-    };
+    item.onclick = function() activateView(this.dataset.view);
   });
+  // hash 路由：初始化时还原视图、监听后退/前进
+  function activateView(view) {
+    if (!view) return;
+    var target = document.querySelector('[data-view="' + view + '"]');
+    if (!target) return;
+    document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('active'); });
+    target.classList.add('active');
+    document.querySelectorAll('.view-section').forEach(function(v) { v.classList.remove('active'); });
+    var section = document.getElementById('view-' + view);
+    if (section) section.classList.add('active');
+    if (view === 'analytics') loadAnalytics();
+    if (view === 'analytics-history') loadVisitHistory();
+    if (view === 'feedback') loadFeedback();
+    if (view === 'wechat') initWechatView();
+    // 同步 URL hash（可分享/刷新不丢位置）
+    if (location.hash !== '#view-' + view) {
+      history.replaceState(null, '', '#view-' + view);
+    }
+  }
+  window.activateView = activateView;
+  window.addEventListener('hashchange', function() {
+    var hash = location.hash.replace('#', '');
+    if (hash.indexOf('view-') === 0) activateView(hash.substring(5));
+  });
+  // 页面加载时根据 hash 恢复视图
+  var hash = location.hash.replace('#', '');
+  if (hash.indexOf('view-') === 0) {
+    var viewId = hash.substring(5);
+    if (document.getElementById('view-' + viewId)) activateView(viewId);
+  }
 }
 
 async function apiCall(method, body) {
@@ -1963,24 +1984,6 @@ async function syncWechatMenu() {
   } catch (e) { showToast('同步异常: ' + e.message, 'error'); }
 }
 
-// 切换到微信配置页时初始化
-var origSetupNav = setupNavigation;
-setupNavigation = function() {
-  origSetupNav();
-  document.querySelectorAll('.nav-item').forEach(function(item) {
-    item.onclick = function() {
-      document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('active'); });
-      this.classList.add('active');
-      var view = this.dataset.view;
-      document.querySelectorAll('.view-section').forEach(function(v) { v.classList.remove('active'); });
-      document.getElementById('view-' + view).classList.add('active');
-      if (view === 'analytics') loadAnalytics();
-      if (view === 'analytics-history') loadVisitHistory();
-      if (view === 'feedback') loadFeedback();
-      if (view === 'wechat') initWechatView();
-    };
-  });
-};
 </script>
 </body>
 </html>
