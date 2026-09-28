@@ -1,7 +1,8 @@
 {
   "version": 5,
-  "lastModified": "2026-09-26T09:09:08.391900",
+  "lastModified": "2026-09-28",
   "hotKeywords": [
+    "钱塘江观潮",
     "限行",
     "社保",
     "公积金",
@@ -16,7 +17,8 @@
     "疫苗",
     "暖新",
     "蓝领公寓",
-    "小哥码"
+    "小哥码",
+    "国庆"
   ],
   "hotServices": [
     {
@@ -1410,6 +1412,13 @@
       "name": "旅游休闲",
       "icon": "🏞️",
       "items": [
+        {
+          "name": "国庆活动汇总",
+          "desc": "音乐节/烟花/灯光秀/免费景点",
+          "url": "https://www.ihangzhou.net/articles/杭州国庆去哪玩-2026国庆活动全整理-烟花灯会音乐节.html",
+          "color": "#d4a843",
+          "detail": "<p style=\"color:var(--text-secondary);line-height:1.8;\">杭州2026国庆7天活动全整理！天目山音乐节、千岛湖烟花秀、钱江新城灯光秀、西湖音乐喷泉、免费景点、400余项文旅消费券。</p><div class=\"guide-block\"><h4>🎵 天目山音乐节</h4><p>时间：10月2-3日<br>地点：临安天目未来谷<br>阵容：胡彦斌、许巍、叶世荣、唐汉霄</p></div><div class=\"guide-block\"><h4>🎆 千岛湖烟花秀</h4><p>时间：9月25日-10月7日<br>地点：千岛湖华美胜地<br>活动：烟花秀、露营、篝火晚会</p></div><div class=\"guide-block\"><h4>🌃 市区免费夜景</h4><p>钱江新城灯光秀：周五六19:30/20:30<br>西湖音乐喷泉：每晚19:30<br>全部免费</p></div><div class=\"guide-block\"><h4>🎁 文旅福利</h4><p>滨江千万消费券、临安满减券<br>余杭补贴机票高铁、富阳0.01元潮玩卡<br>五大国有景区中小学生免票</p></div>"
+        },
         {
           "name": "西湖景区",
           "desc": "景点/游船/预约",
@@ -6483,6 +6492,20 @@
       ],
       "type": "text",
       "reply": "📋 2026杭州本地生活办事指南\n\n常用办事入口：\n• 社保公积金：浙里办APP\n• 居住证：警察叔叔APP或派出所\n• 落户：浙里办搜索人才引进落户\n• 车牌摇号：杭州市小客车总量调控管理信息系统\n• 公租房：浙里办搜索公租房\n• 医保异地就医备案：浙里办搜索异地就医\n• 创业补贴：浙里办搜索创业补贴\n\n更多办事指南：https://www.ihangzhou.net/#banshi"
+    },
+    {
+      "keyword": "国庆",
+      "aliases": [
+        "国庆节",
+        "十一",
+        "国庆去哪玩",
+        "国庆活动"
+      ],
+      "type": "news",
+      "title": "杭州国庆去哪玩？2026国庆活动全整理",
+      "desc": "天目山音乐节、千岛湖烟花秀、钱江新城灯光秀、免费景点、文旅消费券…7天活动全整理",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州国庆去哪玩-2026国庆活动全整理-烟花灯会音乐节.html"
     }
   ],
   "wechatWelcome": {
