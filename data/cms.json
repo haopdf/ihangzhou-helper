@@ -6585,11 +6585,12 @@
         "万松书院相亲角",
         "万松岭相亲"
       ],
-      "type": "news",
+      "type": "text",
       "title": "💕 杭州相亲脱单全攻略",
       "desc": "万松书院每周六7:30-11:30，门票10元，杭州最老牌相亲角",
       "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
-      "url": "https://www.ihangzhou.net/articles/杭州相亲脱单全攻略-三大相亲角-亲青恋.html"
+      "url": "https://www.ihangzhou.net/articles/杭州相亲脱单全攻略-三大相亲角-亲青恋.html",
+      "content": "万松书院相亲角\n📍地址：万松岭路81号\n⏰时间：每周六7:30-11:30\n💰门票：10元\n🚇交通：地铁5号线候潮门站步行约10分钟\n💡Tips：10点后年轻人较多，家长主导，想感受主战场去这里"
     },
     {
       "keyword": "亲青恋",
@@ -6598,11 +6599,12 @@
         "共青团相亲",
         "官方相亲平台"
       ],
-      "type": "news",
+      "type": "text",
       "title": "💕 杭州相亲脱单全攻略",
       "desc": "共青团浙江省委官方平台，6部门数据核验，48万会员，完全免费",
       "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
-      "url": "https://www.ihangzhou.net/articles/杭州相亲脱单全攻略-三大相亲角-亲青恋.html"
+      "url": "https://www.ihangzhou.net/articles/杭州相亲脱单全攻略-三大相亲角-亲青恋.html",
+      "content": "亲青恋注册指南\n1. 下载浙里办App\n2. 搜索亲青恋\n3. 实名注册（18-45岁，浙江省内）\n4. 完全免费\n5. 6部门数据核验（民政/公安/教育/人社/司法/发改）\n6. 48万+认证会员，90后占六成"
     }
   ],
   "wechatWelcome": {
