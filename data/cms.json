@@ -18,7 +18,10 @@
     "暖新",
     "蓝领公寓",
     "小哥码",
-    "国庆"
+    "国庆",
+    "灯光秀",
+    "音乐节",
+    "千岛湖"
   ],
   "hotServices": [
     {
@@ -6506,6 +6509,45 @@
       "desc": "天目山音乐节、千岛湖烟花秀、钱江新城灯光秀、免费景点、文旅消费券…7天活动全整理",
       "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
       "url": "https://www.ihangzhou.net/articles/杭州国庆去哪玩-2026国庆活动全整理-烟花灯会音乐节.html"
+    },
+    {
+      "keyword": "灯光秀",
+      "aliases": [
+        "钱江新城灯光秀",
+        "城市阳台",
+        "杭州灯光秀"
+      ],
+      "type": "news",
+      "title": "🏙️ 杭州钱江新城灯光秀时间",
+      "desc": "周五六19:30/20:30两场，周日至周四20:30一场，免费观看",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州钱江新城灯光秀时间-最佳观赏位-交通指南.html"
+    },
+    {
+      "keyword": "音乐节",
+      "aliases": [
+        "天目山音乐节",
+        "杭州音乐节",
+        "国庆音乐节"
+      ],
+      "type": "news",
+      "title": "🎵 2026天目山音乐节购票指南",
+      "desc": "10月2-3日临安天目未来谷，胡彦斌、许巍、叶世荣，山谷里的音乐节",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/2026天目山音乐节-时间阵容购票交通指南.html"
+    },
+    {
+      "keyword": "千岛湖",
+      "aliases": [
+        "千岛湖旅游",
+        "千岛湖烟花",
+        "千岛湖露营"
+      ],
+      "type": "news",
+      "title": "🏝️ 杭州千岛湖国庆游玩攻略",
+      "desc": "9月25日-10月7日湖山生活节，烟花秀、露营、篝火晚会，交通住宿全整理",
+      "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+      "url": "https://www.ihangzhou.net/articles/杭州千岛湖国庆游玩攻略-烟花秀露营交通指南.html"
     }
   ],
   "wechatWelcome": {
