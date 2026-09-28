@@ -3687,3 +3687,14 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
   overflow: hidden;
 }
 [data-theme="dark"] .ch-hero { box-shadow: 0 4px 16px -8px rgba(0,0,0,0.5); }
+
+/* ===== 杭州怎么玩：精选攻略滑动卡片 ===== */
+.explore-section { padding: 14px 0 4px; }
+.explore-title { font-size: 15px; font-weight: 700; padding: 0 16px 10px; color: var(--text); }
+.explore-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 0 16px 8px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.explore-scroll::-webkit-scrollbar { display: none; }
+.explore-card { flex: 0 0 auto; width: 92px; background: var(--bg); border-radius: 14px; padding: 14px 8px 12px; text-align: center; scroll-snap-align: center; cursor: pointer; border: 1px solid transparent; transition: transform 0.15s ease; }
+.explore-card:active { transform: scale(0.94); }
+.ec-icon { font-size: 28px; display: block; margin-bottom: 4px; }
+.ec-name { font-size: 13px; font-weight: 700; color: var(--text); display: block; }
+.ec-tag { font-size: 10px; color: var(--text-muted); display: block; margin-top: 2px; }

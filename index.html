@@ -53,7 +53,7 @@
     }
   }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=20260921h">
+  <link rel="stylesheet" href="css/style.css?v=20260928a">
   <link rel="icon" type="image/png" href="images/logo-mark-96.png">
   <link rel="apple-touch-icon" href="images/logo-mark-192.png">
 </head>
@@ -136,7 +136,44 @@
       </a>
     </div>
 
-    <!-- 快捷入口：16 个内容栏目，4×4 网格，每项 4 字 -->
+    <!-- 杭州怎么玩：精选攻略入口 -->
+    <div class="explore-section" id="exploreSection">
+      <div class="explore-title">🗺️ 杭州怎么玩</div>
+      <div class="explore-scroll">
+        <div class="explore-card" onclick="showGuide('lingyin')">
+          <span class="ec-icon">⛩️</span>
+          <span class="ec-name">灵隐寺</span>
+          <span class="ec-tag">千年古刹</span>
+        </div>
+        <div class="explore-card" onclick="showGuide('westlake')">
+          <span class="ec-icon">🌊</span>
+          <span class="ec-name">西湖十景</span>
+          <span class="ec-tag">世界遗产</span>
+        </div>
+        <div class="explore-card" onclick="showGuide('xixi')">
+          <span class="ec-icon">🛶</span>
+          <span class="ec-name">西溪湿地</span>
+          <span class="ec-tag">摇橹船</span>
+        </div>
+        <div class="explore-card" onclick="showGuide('songcheng')">
+          <span class="ec-icon">🎭</span>
+          <span class="ec-name">宋城千古情</span>
+          <span class="ec-tag">必看演出</span>
+        </div>
+        <div class="explore-card" onclick="showGuide('liangzhu')">
+          <span class="ec-icon">🏛️</span>
+          <span class="ec-name">良渚古城</span>
+          <span class="ec-tag">5000年文明</span>
+        </div>
+        <div class="explore-card" onclick="showGuide('faxi')">
+          <span class="ec-icon">🌸</span>
+          <span class="ec-name">法喜寺</span>
+          <span class="ec-tag">求姻缘</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 快捷入口：16+ 个内容栏目，4×4 网格，每项 4 字 -->
     <div class="quick-nav">
       <a href="travel.html"><img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310b981'%3E%3Cpath d='M3 18l5-8 4 5 3-4 6 7H3z'/%3E%3Ccircle cx='8' cy='7' r='2'/%3E%3C/svg%3E"
@@ -192,6 +229,9 @@
       <a href="javascript:void(0)" data-page="tools"><img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z'/%3E%3C/svg%3E"
           alt=""><span>实用工具</span></a>
+      <a href="around.html"><img
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230ea5e9'%3E%3Cpath d='M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z'/%3E%3C/svg%3E"
+          alt=""><span>周边出行</span></a>
     </div>
     <!-- 热门资讯轮播（由 /api/news 异步填充） -->
     <div class="news-banner" id="newsBanner"></div>
@@ -228,7 +268,7 @@
       </div>
 
       <!-- 分享入口（紧凑一行） -->
-      <div class="share-row" id="shareCard" onclick="showShareTip()">
+      <div class="share-row" id="shareCard" onclick="showShareTip()" data-track="分享" data-track-cat="运营" data-track-action="share">
         <span class="share-row-icon">📤</span>
         <div class="share-row-text">
           <div class="share-row-title">分享 iHangzhou 给朋友</div>
@@ -400,13 +440,13 @@
         <div class="me-row" onclick="openUrl('https://www.hzmetro.com/')">
           <span class="micon">🚇</span><span class="mtext">杭州地铁</span><span class="marrow">›</span>
         </div>
-        <div class="me-row" id="meTheme">
+        <div class="me-row" id="meTheme" data-track="深色模式" data-track-cat="设置" data-track-action="theme">
           <span class="micon">🎨</span><span class="mtext">切换深色/浅色模式</span><span class="marrow">›</span>
         </div>
-        <div class="me-row" onclick="showShareTip()">
+        <div class="me-row" onclick="showShareTip()" data-track="分享" data-track-cat="运营" data-track-action="share-menu">
           <span class="micon">📤</span><span class="mtext">分享给朋友</span><span class="marrow">›</span>
         </div>
-        <div class="me-row" onclick="showAbout()">
+        <div class="me-row" onclick="showAbout()" data-track="关于" data-track-cat="导航" data-track-action="about">
           <span class="micon">ℹ️</span><span class="mtext">关于 iHangzhou</span><span class="marrow">›</span>
         </div>
       </div>
@@ -550,7 +590,11 @@
           title: 'iHangzhou · 杭州生活助手',
           text: '杭州人的数字生活工具箱，办事/出行/民生一站导航',
           url: location.href
-        }).catch(function () { });
+        }).then(function () {
+          // 用户未取消分享
+        }).catch(function (err) {
+          // 用户取消或分享失败时，静默处理（不提示错误打断体验）
+        });
         return;
       }
       // 回退到 toast 提示（公众号内嵌场景）
@@ -566,13 +610,17 @@
         // 公众号内嵌：引导点右上角
         t.innerHTML = '📤 点击右上角 ··· <br>选择「发送给朋友」或「分享到朋友圈」';
       } else {
-        // 普通浏览器：引导复制链接
-        t.innerHTML = '📤 复制下方链接分享给朋友';
-        try {
-          if (navigator.clipboard) {
-            navigator.clipboard.writeText(location.href);
-          }
-        } catch (e) { }
+        // 普通浏览器：直接复制链接并给反馈
+        t.innerHTML = '📤 正在复制链接...';
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(location.href).then(function () {
+            t.innerHTML = '✅ 链接已复制到剪贴板<br>发送给朋友吧';
+          }).catch(function () {
+            t.innerHTML = '❌ 复制失败，请长按下方链接手动复制';
+          });
+        } else {
+          t.innerHTML = '📤 复制下方链接分享给朋友';
+        }
       }
       t.classList.add('show');
       setTimeout(function () { t.classList.remove('show'); }, 3200);

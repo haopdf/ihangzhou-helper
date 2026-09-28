@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="description" content="杭州周边游全攻略：乌镇水乡、莫干山民宿、千岛湖骑行、安吉竹海、西塘古镇、南浔古镇…自驾/高铁交通、门票住宿、美食一站齐">
+  <meta name="keywords" content="杭州周边游,乌镇,莫干山,千岛湖,安吉,西塘,南浔,桐庐,富阳,莫干山民宿,乌镇西栅,一日游,二日游,自驾攻略,杭州出发,ihangzhou">
+  <meta name="theme-color" content="#0ea5e9">
+  <meta property="og:title" content="杭州周边游 · iHangzhou">
+  <meta property="og:description" content="杭州出发 1-2 小时生活圈 · 古镇 / 山水 / 避暑 / 度假全攻略">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://www.ihangzhou.net/around.html">
+  <link rel="manifest" href="manifest.json">
+  <title>杭州周边游攻略 · iHangzhou</title>
+  <!-- JSON-LD 结构化数据 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "杭州周边游全攻略",
+    "description": "杭州出发 1-2 小时生活圈：乌镇、莫干山、千岛湖、安吉、西塘、南浔深度游指南",
+    "author": { "@type": "Organization", "name": "iHangzhou" },
+    "publisher": { "@type": "Organization", "name": "iHangzhou", "url": "https://www.ihangzhou.net/" },
+    "inLanguage": "zh-CN"
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css?v=20260928a">
+  <script src="js/layout.js"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
+  <style>
+    /* ===== 周边游频道专属样式 ===== */
+    .around-hero {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
+      color: #fff;
+      padding: 28px 16px 22px;
+      text-align: center;
+      padding-top: max(28px, env(safe-area-inset-top));
+      position: relative;
+      overflow: hidden;
+    }
+    .around-hero::before {
+      content: "";
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .around-hero h1 {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0 0 6px;
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+    .around-hero .around-subtitle {
+      font-size: 13px;
+      opacity: 0.92;
+      line-height: 1.5;
+      position: relative;
+    }
+    .around-hero .around-stats {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 14px;
+      position: relative;
+    }
+    .around-hero .around-stat {
+      text-align: center;
+    }
+    .around-stat-num {
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .around-stat-label {
+      font-size: 11px;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+
+    /* 分区 tab */
+    .around-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 10px 16px;
+      overflow-x: auto;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 56px;
+      z-index: 50;
+      -webkit-overflow-scrolling: touch;
+    }
+    .around-tabs::-webkit-scrollbar { display: none; }
+    .around-tab {
+      flex-shrink: 0;
+      padding: 7px 14px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .around-tab.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* 分区容器 */
+    .around-section {
+      display: none;
+      padding: 14px 16px 4px;
+    }
+    .around-section.active {
+      display: block;
+      animation: aroundFade 0.25s ease-out;
+    }
+    @keyframes aroundFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 周边游大卡片 */
+    .around-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 0;
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .around-card:active {
+      transform: scale(0.99);
+    }
+    .ac-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+      pointer-events: none;
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+    .ac-body {
+      padding: 14px 16px;
+      position: relative;
+    }
+    .ac-bar {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 3px;
+    }
+    .ac-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .ac-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .ac-badges {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .ac-badge {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .ac-tag-hot { background: #fef2f2; color: #dc2626; }
+    .ac-tag-new { background: #f0fdf4; color: #16a34a; }
+    .ac-tag-top { background: #eff6ff; color: #2563eb; }
+    .ac-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .ac-info-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .ac-info-item strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .ac-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .ac-tips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .ac-tip {
+      font-size: 11px;
+      padding: 4px 10px;
+      background: var(--bg-alt);
+      border-radius: 12px;
+      color: var(--text-secondary);
+    }
+    .ac-distance {
+      position: absolute;
+      top: -32px;
+      right: 12px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(4px);
+    }
+    .ac-img-wrap {
+      position: relative;
+    }
+
+    /* 季节标签 */
+    .ac-season {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: linear-gradient(135deg, #ec4899, #db2777);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 8px;
+      margin-right: 4px;
+    }
+
+    /* 推荐路线 */
+    .around-route {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      border-top: 1px solid #f59e0b;
+      padding: 10px 16px;
+      font-size: 12px;
+      color: #92400e;
+      line-height: 1.5;
+    }
+    .around-route strong {
+      color: #78350f;
+    }
+
+    /* 色调 */
+    .around-card[data-type="water"] .ac-bar { background: #0ea5e9; }
+    .around-card[data-type="mountain"] .ac-bar { background: #10b981; }
+    .around-card[data-type="lake"] .ac-bar { background: #6366f1; }
+    .around-card[data-type="bamboo"] .ac-bar { background: #84cc16; }
+    .around-card[data-type="ancient"] .ac-bar { background: #f59e0b; }
+
+    /* 无图降级 */
+    .ac-noimg {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      background: linear-gradient(135deg, var(--bg-alt), var(--bg-hover));
+      position: relative;
+    }
+    .ac-noimg .ac-distance {
+      top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部栏（同首页结构，保证导航一致性）-->
+  <header class="topbar" id="topbar">
+    <a href="index.html" class="topbar-logo" style="text-decoration:none;">
+      <img class="logo-icon" src="images/logo-mark-96.png" alt="爱杭州" width="28" height="28">
+      <span class="logo-text">iHangzhou</span>
+    </a>
+    <div class="topbar-search">
+      <input type="text" id="searchInput" placeholder="搜索乌镇/莫干山/千岛湖..." autocomplete="off">
+      <button class="search-cancel" onclick="clearSearch()">✕</button>
+    </div>
+    <button class="topbar-settings" onclick="toggleSettings()" title="设置" aria-label="设置">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h9M19 8h2M3 16h3M13 16h8"/><circle cx="15" cy="8" r="2.6"/><circle cx="9.5" cy="16" r="2.6"/></svg>
+    </button>
+  </header>
+
+  <!-- 设置面板 -->
+  <div class="settings-overlay" id="settingsOverlay" onclick="toggleSettings()"></div>
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-title"><span>⚙️ 设置</span><button class="settings-close" onclick="toggleSettings()" aria-label="关闭">✕</button></div>
+    <div class="settings-item">
+      <span class="settings-label">🌙 暗色模式</span>
+      <label class="settings-switch"><input type="checkbox" id="darkToggle" onchange="setDarkMode(this.checked)"><span class="switch-slider"></span></label>
+    </div>
+    <div class="settings-item">
+      <span class="settings-label">📱 关于本站</span>
+      <a href="articles.html" style="color:var(--primary);font-size:13px;text-decoration:none;font-weight:500;">iHangzhou 杭州生活助手</a>
+    </div>
+    <div class="settings-item">
+      <span class="settings-label">↩️ 返回首页</span>
+      <a href="index.html" style="color:var(--primary);font-size:13px;text-decoration:none;font-weight:500;">回到 iHangzhou →</a>
+    </div>
+  </div>
+
+  <!-- 主内容 -->
+  <div class="page active">
+    <!-- Hero -->
+    <div class="around-hero">
+      <h1>🗺️ 杭州周边游全攻略</h1>
+      <p class="around-subtitle">杭州出发 1-2 小时生活圈 · 古镇 / 山水 / 竹海 / 避暑</p>
+      <div class="around-stats">
+        <div class="around-stat"><div class="around-stat-num">8+</div><div class="around-stat-label">热门目的地</div></div>
+        <div class="around-stat"><div class="around-stat-num">30+</div><div class="around-stat-label">深度攻略</div></div>
+        <div class="around-stat"><div class="around-stat-num">自驾</div><div class="around-stat-label">高铁全覆盖</div></div>
+      </div>
+    </div>
+
+    <!-- Tab 导航 -->
+    <div class="around-tabs" id="aroundTabs">
+      <div class="around-tab active" data-target="all">全部</div>
+      <div class="around-tab" data-target="water">水乡古镇</div>
+      <div class="around-tab" data-target="mountain">山水避暑</div>
+      <div class="around-tab" data-target="lake">湖岛度假</div>
+      <div class="around-tab" data-target="bamboo">竹海茶乡</div>
+    </div>
+
+    <!-- 全部 -->
+    <div class="around-section active" id="around-all" data-cat="all">
+      <!-- 卡片由 JS 渲染 -->
+    </div>
+
+    <!-- 水乡古镇 -->
+    <div class="around-section" id="around-water" data-cat="water"></div>
+    <!-- 山水避暑 -->
+    <div class="around-section" id="around-mountain" data-cat="mountain"></div>
+    <!-- 湖岛度假 -->
+    <div class="around-section" id="around-lake" data-cat="lake"></div>
+    <!-- 竹海茶乡 -->
+    <div class="around-section" id="around-bamboo" data-cat="bamboo"></div>
+
+    <!-- 推荐路线串联 -->
+    <div style="padding:0 16px;">
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-top:6px;">
+        <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px;">🗓️ 经典路线串联</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="background:var(--bg-alt);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--text-secondary);line-height:1.6;border-left:3px solid #0ea5e9;">
+            <strong style="color:var(--text);">一日休闲</strong><br>
+            杭州 → 乌镇西栅 → 南浔古镇 → 返杭（高铁+打车组合约 6h）
+          </div>
+          <div style="background:var(--bg-alt);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--text-secondary);line-height:1.6;border-left:3px solid #10b981;">
+            <strong style="color:var(--text);">两日山水</strong><br>
+            Day1 杭州 → 莫干山（民宿住一晚）→ Day2 安吉竹海 → 返杭
+          </div>
+          <div style="background:var(--bg-alt);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--text-secondary);line-height:1.6;border-left:3px solid #6366f1;">
+            <strong style="color:var(--text);">三日度假</strong><br>
+            Day1 千岛湖骑行 → Day2 千岛湖中心湖区游船 → Day3 文渊狮城 → 返杭
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 相关频道推荐 -->
+    <div class="related-channels" style="margin-top:24px;">
+      <div class="section-head" style="padding:0 16px;">
+        <h2>📌 相关频道</h2>
+        <span class="tip">探索更多</span>
+      </div>
+      <div class="channel-grid" id="relatedChannels" style="padding:0 16px;"></div>
+    </div>
+
+    <!-- 返回首页 -->
+    <div style="text-align:center;padding: 28px 16px 48px 16px;">
+      <a href="index.html" style="display:inline-block;padding: 12px 24px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;font-weight:500;">← 返回首页</a>
+    </div>
+  </div>
+
+  <!-- 模态框 -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">标题</h3>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js?v=20260928a"></script>
+  <script src="js/analytics.js?v=20260928a"></script>
+  <script>
+    // ===== 周边游频道数据 =====
+    (function () {
+      'use strict';
+
+      var AROUND_DATA = [
+        {
+          id: 'wuzhen',
+          name: '乌镇',
+          type: 'water',
+          typeLabel: '水乡古镇',
+          badges: [{ text: '热门', cls: 'ac-tag-hot' }],
+          distance: '🚗 1h / 🚄 高铁 25min',
+          traffic: '高铁桐乡站 + 公交 K282',
+          price: '西栅 150 / 东栅 110 / 联票 190',
+          best: '3-5 月 / 9-11 月',
+          desc: '江南六大古镇之一，拥有 1300 年历史，世界互联网大会永久会址。西栅夜景是乌镇之魂，摇橹船夜游堪称江南最诗意体验。',
+          tips: ['夜景必游', '含早茶客', '似水年华取景地'],
+          // 深度攻略（点击展开）
+          guide: {
+            title: '🏮 乌镇 · 江南水乡深度攻略',
+            body: '<p style="color:var(--text-secondary);line-height:1.8;">乌镇位于浙江桐乡，距杭州约 80 公里，是江南六大古镇中最具代表性的水乡。镇内河港密布、石桥横跨，保留了大量明清建筑。2014 年起成为世界互联网大会永久会址，古韵与科技在此交融。</p>' +
+              '<div class="guide-block"><h4>🗺️ 分区特色</h4><p>• <strong>西栅</strong>：夜景精华，长街深巷、酒吧民宿、摇橹船，游览时间 3-4 小时<br>• <strong>东栅</strong>：原住民生活气息最浓，茅盾故居、宏源泰染坊<br>• <strong>南栅/北栅</strong>：未开发区域，免费，适合摄影爱好者</p></div>' +
+              '<div class="guide-block"><h4>🎫 门票</h4><p>• <strong>西栅</strong>：150 元<br>• <strong>东栅</strong>：110 元<br>• <strong>东栅+西栅联票</strong>：190 元（当日有效）<br>• 60 岁以上老人半价，70 岁以上免票<br>• 西栅内民宿住客可免门票 + 免费摆渡车</p></div>' +
+              '<div class="guide-block"><h4>🚇 交通</h4><p>• <strong>高铁</strong>：桐乡站 → 打车/公交 K282 约 30 分钟<br>• <strong>自驾</strong>：杭州出发 1h，乌镇有两个大型停车场（5 元/小时）<br>• <strong>直达大巴</strong>：杭州九堡客运中心 → 乌镇汽车站</p></div>' +
+              '<div class="guide-block"><h4>🍜 美食</h4><p>• <strong>红烧羊肉</strong>：乌镇一绝，酥而不烂<br>• <strong>白水鱼</strong>：清蒸最鲜<br>• <strong>姑嫂饼</strong>：百年传统小饼<br>• <strong>三白酒</strong>：本地米酒，微甜<br>• <strong>早茶客</strong>：西栅住客可预约早晨水上集市体验</p></div>' +
+              '<div class="guide-block"><h4>📅 推荐行程</h4><p>• <strong>半日游</strong>：西栅日场 + 夜景（精华）<br>• <strong>全日游</strong>：上午东栅（人文）→ 下午西栅（休闲）→ 夜游西栅<br>• <strong>夜宿推荐</strong>：西栅内民宿 400-1500 元/晚，清晨无游客时最美</p></div>' +
+              '<div class="guide-block"><h4>💡 小贴士</h4><p>• 周末及节假日人山人海，强烈建议工作日前往<br>• 乌镇戏剧节每年 10 月，需提前数月订票<br>• 西栅内无交通工具，全程步行<br>• 水上集市清晨 6:30-7:30 有氛围感，不可错过</p></div>' +
+              '<p style="margin-top:10px;"><a href="https://www.wuzhen.com.cn/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">乌镇官网 →</a></p>'
+          }
+        },
+        {
+          id: 'xitang',
+          name: '西塘',
+          type: 'water',
+          typeLabel: '水乡古镇',
+          badges: [{ text: '夜景', cls: 'ac-tag-top' }],
+          distance: '🚗 1.5h / 🚄 高铁嘉善南',
+          traffic: '高铁嘉善南站 + 打车 15min',
+          price: '景区票 95 / 民居票 50',
+          best: '4-5 月 / 10-11 月',
+          desc: '活着的千年古镇，以廊棚烟雨长廊闻名。相比乌镇更加「生活化」，物价亲民，是杭州周边一日/两日游的性价比之王。',
+          tips: ['烟雨长廊', '夜景灯笼', ''],
+          guide: {
+            title: '🏮 西塘 · 烟雨长廊深度攻略',
+            body: '<p style="color:var(--text-secondary);line-height:1.8;">西塘位于浙江嘉善，距杭州约 100 公里，是古代吴越文化发源地之一。以「桥多、弄多、廊棚多」闻名，千米烟雨长廊是世界独一无二的建筑奇观。</p>' +
+              '<div class="guide-block"><h4>🎫 门票</h4><p>• <strong>景区大门票</strong>：95 元（含 11 个小景点）<br>• 晚 17:00 后、早 7:30 前进入免票<br>• 找民宿老板带路可走小路免票</p></div>' +
+              '<div class="guide-block"><h4>🚇 交通</h4><p>• 高铁：嘉善南站 → K222 公交/打车 15 分钟<br>• 自驾：杭州出发 1.5h，景区停车场 10 元/次</p></div>' +
+              '<div class="guide-block"><h4>📅 推荐体验</h4><p>• <strong>烟雨长廊</strong>：临河遮阳避雨的千米廊棚<br>• <strong>永宁桥</strong>：最佳摄影点，晨雾 + 倒影<br>• <strong>石皮弄</strong>：最窄处仅 80 厘米<br>• <strong>送子来凤桥</strong>：古桥打卡<br>• <strong>夜游</strong>：红灯笼亮起，酒吧一条街热闹非凡</p></div>' +
+              '<div class="guide-block"><h4>🍜 美食</h4><p>• <strong>荷叶粉蒸肉</strong>：古镇招牌<br>• <strong>八珍糕</strong>：健脾老饼<br>• <strong>芡实糕</strong>：最流行手信<br>• <strong>清蒸白丝鱼</strong>：鲜美无比</p></div>' +
+              '<div class="guide-block"><h4>💡 小贴士</h4><p>• 西塘是性价比最高的周边古镇，人均 150 元可畅游<br>• 烟雨长廊在雨天最美，故得名<br>• 酒吧一条街晚上热闹但价格偏贵</p></div>'
+          }
+        },
+        {
+          id: 'nanxun',
+          name: '南浔古镇',
+          type: 'water',
+          typeLabel: '水乡古镇',
+          badges: [{ text: '小众', cls: 'ac-tag-new' }],
+          distance: '🚗 1.5h / 🚄 高铁湖州',
+          traffic: '高铁湖州站 + 打车 20min',
+          price: '免费（小景点联票 85）',
+          best: '3-5 月 / 9-11 月',
+          desc: '江南六大古镇中唯一免费开放的，中西合璧的私家园林群是一大亮点。张石铭旧宅的法式瓷砖、刘氏梯堂的罗马柱令人惊叹。',
+          tips: ['免费开放', '中西合璧', '人少清静'],
+          guide: {
+            title: '🏛️ 南浔 · 中西合璧园林古镇',
+            body: '<p style="color:var(--text-secondary);line-height:1.8;">南浔位于湖州，距杭州约 120 公里，南宋时期已是「耕桑之富，甲于浙右」。与其他古镇不同，南浔保留了大量清末民初丝商巨贾的私家花园，融合中西建筑风格，文化底蕴深厚。</p>' +
+              '<div class="guide-block"><h4>🎫 门票</h4><p>• <strong>古镇街区</strong>：免费（！）<br>• <strong>小景点联票</strong>：85 元（含小莲庄、张石铭旧宅、刘氏梯堂等 6 个核心景点）<br>• 推荐买联票，精华在其中</p></div>' +
+              '<div class="guide-block"><h4>🚇 交通</h4><p>• 自驾：杭州出发 1.5h，停车费低<br>• 高铁：湖州站 → 打车 20 分钟或公交 101 路</p></div>' +
+              '<div class="guide-block"><h4>🎯 必看亮点</h4><p>• <strong>小莲庄</strong>：清末南浔首富刘镛私家花园<br>• <strong>张石铭旧宅</strong>：中式天井 + 法式瓷砖 + 玻璃雕花<br>• <strong>刘氏梯堂</strong>：红房子，罗马柱 + 中式砖雕<br>• <strong>百间楼</strong>：明代沿河建筑群，拍摄绝佳<br>• <strong>嘉业堂藏书楼</strong>：民国四大藏书楼之一</p></div>' +
+              '<div class="guide-block"><h4>💡 小贴士</h4><p>• 南浔是六大古镇中人最少的，体验最佳<br>• 推荐半日：小莲庄 → 张石铭旧宅 → 百间楼沿河午餐<br>• 可与乌镇串联：杭州 → 乌镇 → 南浔 → 杭州（约 3h 车程）</p></div>' +
+              '<p style="margin-top:10px;"><a href="https://www.chinananxun.com/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">南浔官网 →</a></p>'
+          }
+        },
+        {
+          id: 'moganshan',
+          name: '莫干山',
+          type: 'mountain',
+          typeLabel: '山水避暑',
+          badges: [{ text: '避暑', cls: 'ac-tag-top' }],
+          distance: '🚗 50min',
+          traffic: '自驾 / 包车 / 旅游大巴',
+          price: '景区 80 + 车费 35',
+          best: '6-9 月避暑 / 10-11 月红叶',
+          desc: '中国四大避暑胜地之一，民国名流隐居地。如今是国内最顶级的乡村民宿集群，裸心谷、法国山居等网红民宿让这里成为高端度假首选。',
+          tips: ['民宿天堂', '民国别墅', '竹林徒步'],
+          guide: {
+            title: '🏡 莫干山 · 民国民宿度假攻略',
+            body: '<p style="color:var(--text-secondary);line-height:1.8;">莫干山位于湖州德清，距杭州仅 50 公里，因春秋时期干将莫邪铸剑传说得名。民国时蒋介石、毛泽东等名人多次下榻，如今是国内高端民宿最密集的区域，「洋家乐」发源地。</p>' +
+              '<div class="guide-block"><h4>🎫 门票</h4><p>• <strong>景区门票</strong>：80 元<br>• <strong>景区交通车</strong>：35 元（必买，私家车不可上山）<br>• 民宿住客可咨询老板免费接送攻略</p></div>' +
+              '<div class="guide-block"><h4>🚇 交通</h4><p>• <strong>自驾</strong>：杭州出发 50min，到山脚游客中心换景区交通车<br>• <strong>高铁</strong>：德清站 → 打车 20min<br>• <strong>旅游大巴</strong>：杭州武林广场有直达班车（约 25 元）</p></div>' +
+              '<div class="guide-block"><h4>🏡 民宿推荐</h4><p>• <strong>裸心谷</strong>：1800-3500 元/晚，山顶树顶别墅<br>• <strong>裸心堡</strong>：2000-5000 元/晚，悬崖城堡<br>• <strong>法国山居</strong>：1500-2500 元/晚，法式乡村风<br>• <strong>三秋地 / 隐居无锡</strong>：500-800 元/晚，性价比民宿</p></div>' +
+              '<div class="guide-block"><h4>🎯 核心看点</h4><p>• <strong>毛主席下榻处</strong>：皇后饭店<br>• <strong>蒋介石官邸</strong>：武陵村 229 号<br>• <strong>剑池</strong>：莫干山标志性景点，飞瀑<br>• <strong>旭光台</strong>：日出/云海最佳机位<br>• <strong>芦花荡公园</strong>：林中散步</p></div>' +
+              '<div class="guide-block"><h4>📅 推荐安排</h4><p>• <strong>一日游</strong>：剑池 → 毛泽东下榻处 → 旭光台 → 下山<br>• <strong>两日游</strong>：第一天徒步 + 下午茶 + 住民宿；第二天日出 + 骑行下山<br>• <strong>最佳季节</strong>：夏季避暑（山上比市区低 7-10℃），秋季红叶</p></div>' +
+              '<div class="guide-block"><h4>💡 小贴士</h4><p>• 旺季（暑期/国庆）民宿需提前 1-2 月预订<br>• 山上物价高，适量带零食<br>• 下雨天山上云海绝美<br>• 周末上山堵车严重，建议早 7 点出发</p></div>' +
+              '<p style="margin-top:10px;"><a href="https://www.mogan-star.com/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">莫干山旅游 →</a></p>'
+          }
+        },
+        {
+          id: 'qiandao',
+          name: '千岛湖',
+          type: 'lake',
+          typeLabel: '湖岛度假',
+          badges: [{ text: '推荐', cls: 'ac-tag-top' }, { text: '骑行', cls: 'ac-tag-new' }],
+          distance: '🚗 2h / 🚄 高铁 1h',
+          traffic: '高铁千岛湖站 + 酒店穿梭巴士',
+          price: '中心湖区 185 / 东南湖区 185',
+          best: '4-6 月 / 9-11 月',
+          desc: '1078 个岛屿散落湖中，水质达国家 I 类标准，可直接饮用。杭州后花园式度假胜地，骑行、游船、漂流、露营四季皆宜。',
+          tips: ['水质一流', '骑行绿道', '鱼头汤'],
+          guide: {
+            title: '🏝️ 千岛湖 · 杭城后花园度假攻略',
+            body: '<p style="color:var(--text-secondary);line-height:1.8;">千岛湖（新安江水库）位于杭州淳安县，距杭州约 150 公里，因 1078 个翠岛闻名。湖水清澈见底，能见度达 12 米，是国家一级水源保护区，「农夫山泉」取水地之一。</p>' +
+              '<div class="guide-block"><h4>🚇 交通</h4><p>• <strong>高铁</strong>：杭州东 → 千岛湖站（1h），全国最快抵达方式<br>• <strong>自驾</strong>：杭州市区出发 2 小时<br>• <strong>酒店穿梭巴士</strong>：千岛湖站至各酒店专线（部分酒店免费）</p></div>' +
+              '<div class="guide-block"><h4>🎫 门票</h4><p>• <strong>中心湖区</strong>：185 元（含船票，经典线路）<br>• <strong>东南湖区</strong>：185 元（含船票，人少景美）<br>• <strong>骑行车票</strong>：免费（公共自行车/绿道）<br>• <strong>文渊狮城</strong>：80 元（水下古城复刻）</p></div>' +
+              '<div class="guide-block"><h4>🚲 骑行攻略（强烈推荐）</h4><p>• <strong>千岛湖骑行绿道</strong>：全程 140km，分城市段和湖畔段<br>• <strong>排岭半岛绿道</strong>：20km，入门级湖景路线<br>• <strong>千汾线绿道</strong》：50km-100km，最美但难度高<br>• <strong>骑行租车</strong>：码头/高铁站附近都有，30-80 元/天</p></div>' +
+              '<div class="guide-block"><h4>🎯 核心体验</h4><p>• <strong>中心湖区</strong>：梅峰岛（缆车登高看全景）、月光岛、龙山岛<br>• <strong>东南湖区</strong>：黄山尖、天池岛、桂花岛<br>• <strong>天屿山</strong>：免费观景台，日落最佳机位<br>• <strong>沪马探险乐园</strong>：玻璃栈道、缆车</p></div>' +
+              '<div class="guide-block"><h4>🍜 美食</h4><p>• <strong>千岛湖鱼头</strong>：必点！有机鱼头浓汤，一锅 200-400 元<br>• <strong>野生河虾</strong>：清水煮最鲜<br>• <strong>山笋 / 蕨菜</strong>：淳安山野味道</p></div>' +
+              '<div class="guide-block"><h4>📅 推荐行程</h4><p>• <strong>一日游</strong>：高铁往返，中心湖区游船（含午餐约 5h）<br>• <strong>两日游</strong>：Day1 天屿日落 + 鱼头汤 → Day2 骑行排岭半岛 → 下午返杭<br>• <strong>三日度假</strong>：骑行 + 游船 + 文渊狮城 + 沪马乐园</p></div>' +
+              '<div class="guide-block"><h4>🏨 住宿建议</h4><p>• 五星级：洲际、喜来登（300-600 元）<br>• 民宿排岭半岛：150-400 元/晚<br>• 酒店集中在「排岭半岛」和「羡山半岛」两个区域</p></div>' +
+              '<p style="margin-top:10px;"><a href="https://www.qiandaohu.com/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">千岛湖旅游官网 →</a></p>'
+          }
+        },
+        {
+          id: 'anji',
+          name: '安吉',
+          type: 'bamboo',
+          typeLabel: '竹海茶乡',
+          badges: [{ text: '亲子', cls: 'ac-tag-new' }],
+          distance: '🚗 1h',
+          traffic: '自驾直达 / 杭州大巴 1.5h',
+          price: '竹博园 80 / 中国大竹海 58 / 云上草原 360',
+          best: '3-5 月采笋 / 9-11 月秋茶',
+          desc: '中国竹乡，「绿水青山就是金山银山」理念发源地。中国大竹海、Hello  Kitty 乐园、云上草原、竹博园…亲子游和避暑度假的宝藏目的地。',
+          tips: ['竹海漂流', '亲子乐园', '茶园骑行'],
+          guide: {
+            title: '🎋 安吉 · 竹海茶乡亲子游攻略',
+            body: '<p style="color:var(--text-secondary);line-height:1.8;">安吉位于湖州，距杭州仅 80 公里，是「绿水青山就是金山银山」理念的诞生地。全县竹林面积 101 万亩，是中国真正的竹乡，也是亲子游和网红民宿的天堂。</p>' +
+              '<div class="guide-block"><h4>🚇 交通</h4><p>• <strong>自驾</strong>：杭州出发 1h（杭长高速）<br>• <strong>大巴</strong>：杭州汽车北站 → 安吉客运中心（约 50 元）<br>• <strong>高铁</strong>：湖州站 → 打车 40min</p></div>' +
+              '<div class="guide-block"><h4>🎯 核心景区</h4><p>• <strong>中国大竹海</strong>：58 元，《卧虎藏龙》取景地，万亩翠竹<br>• <strong>Hello Kitty 乐园</strong>：320 元，华东亲子首选<br>• <strong>云上草原</strong>：360 元，悬崖刺激网红项目（悬崖秋千、玻璃桥）<br>• <strong>安吉竹博园</strong>：80 元，看大熊猫 + 竹种园<br>• <strong>中南百草园</strong>：180 元，动物园+植物园+游乐场</p></div>' +
+              '<div class="guide-block"><h4>🍵 体验推荐</h4><p>• <strong>茶园骑行</strong>：溪龙白茶小镇，免费<br>• <strong>竹海漂流</strong>：夏季限定，峡谷漂流<br>• <strong>探访余村</strong>：「两山」理念发源地，免费<br>• <strong>挖笋体验</strong>：3-4 月，部分农场可付费体验</p></div>' +
+              '<div class="guide-block"><h4>🏨 民宿推荐</h4><p>• <strong>帐篷客酒店</strong>：1200-2000 元，茶田秘境<br>• <strong>悦榕庄</strong>：3000+ 元，顶级度假<br>• <strong>仲夏 / 大乐之野</strong>：500-1500 元<br>• <strong>普通民宿</strong>：200-500 元，选择极多</p></div>' +
+              '<div class="guide-block"><h4>💡 小贴士</h4><p>• 云上草原需提前 1 天预约，旺季排队久<br>• Hello Kitty 乐园适合 3-10 岁儿童<br>• 3-4 月春茶季最佳，白茶、黄茶当季<br>• 莫干山 + 安吉可串联为两日游</p></div>' +
+              '<p style="margin-top:10px;"><a href="http://www.anji.gov.cn/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">安吉文旅 →</a></p>'
+          }
+        },
+        {
+          id: 'tonglu',
+          name: '桐庐',
+          type: 'mountain',
+          typeLabel: '山水避暑',
+          badges: [{ text: '小众', cls: 'ac-tag-new' }],
+          distance: '🚗 1h',
+          traffic: '自驾走杭新景高速',
+          price: '大奇山 60 / 严子陵钓台 125 / 瑶琳仙境 116',
+          best: '3-5 月 / 9-11 月',
+          desc: '《富春山居图》实景地，范仲淹笔下「潇洒桐庐」。拥有严子陵钓台、瑶琳仙境、大奇山森林公园等名胜，是杭州的「山水后花园」。',
+          tips: ['严子陵钓台', '瑶琳仙境', '慢生活'],
+          guide: {
+            title: '🎨 桐庐 · 富春山居慢生活攻略',
+            body: '<p style="color:var(--text-secondary);line-height:1.8;">桐庐位于杭州西南部，距杭州仅 80 公里，是《富春山居图》实景创作地。范仲淹感慨「潇洒桐庐郡，开颜即□□」。境内山水如画，是杭州本地人最爱的周末休闲地。</p>' +
+              '<div class="guide-block"><h4>🚇 交通</h4><p>• <strong>自驾</strong>：杭州出发 1h，杭新景高速<br>• <strong>高铁</strong>：杭州东 → 桐庐站（40min）</p></div>' +
+              '<div class="guide-block"><h4>🎯 核心景区</h4><p>• <strong>严子陵钓台</strong>：125 元，富春江核心景区，乘船游览<br>• <strong>瑶琳仙境</strong>：116 元，亿年溶洞，全新「山海经」灯光秀<br>• <strong>大奇山国家森林公园</strong>：60 元，徒步 + 水潭<br>• <strong>垂云通天河</strong>：110 元，地下暗河，游船 + 玻璃栈道</p></div>' +
+              '<div class="guide-block"><h4>🎒 推荐体验</h4><p>• <strong>富春江小三峡游船</strong>：严子陵钓台含船<br>• <strong>桐庐慢生活街区</strong>：免费，咖啡馆、手作、民宿<br>• <strong>芦茨湾</strong>：免费，溪水戏水 + 渔村体验</p></div>' +
+              '<div class="guide-block"><h4>💡 小贴士</h4><p>• 桐庐周末度假性价比高，人均 300 元可两日<br>• 推荐住「芦茨湾」农家乐（100-200 元）<br>• 严子陵钓台船程约 1.5h，含讲解</p></div>' +
+              '<p style="margin-top:10px;"><a href="https://www.tonglu.gov.cn/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">桐庐文旅 →</a></p>'
+          }
+        },
+        {
+          id: 'fuyang',
+          name: '富阳',
+          type: 'mountain',
+          typeLabel: '山水避暑',
+          badges: [{ text: '当日达', cls: 'ac-tag-new' }],
+          distance: '🚗 30min / 🚄 地铁 6 号线',
+          traffic: '地铁 6 号线直达 / 自驾 30min',
+          price: '龙门古镇 60 / 野生动物世界 220 / 黄公望 30',
+          best: '3-5 月 / 6-9 月玩水',
+          desc: '距杭州最近的郊区，是名副其实的「杭州第六区」。龙门古镇是孙权故里，90% 村民为孙权后裔。黄公望隐居地是《富春山居图》原创地。',
+          tips: ['地铁直达', '孙权故里', '造纸文化'],
+          guide: {
+            title: '🏘️ 富阳 · 近郊古镇一日游攻略',
+            body: '<p style="color:var(--text-secondary);line-height:1.8;">富阳是杭州第六区，距市区仅 30-40 公里，地铁 6 号线直达。境内山水秀美，文化底蕴深厚，龙门古镇是三国孙权故里，黄公望隐居地是世界名画原创地。</p>' +
+              '<div class="guide-block"><h4>🚇 交通</h4><p>• <strong>地铁 6 号线</strong>：富阳银湖 → 杭州钱江世纪城，约 40 分钟<br>• <strong>自驾</strong>：彩虹快速路 30min<br>• <strong>公交</strong>：杭州火车东站 → 富阳客运站</p></div>' +
+              '<div class="guide-block"><h4>🎯 核心看点</h4><p>• <strong>龙门古镇</strong>：60 元，90% 村民为孙权后裔，保留明清古建筑群<br>• <strong>黄公望隐居地</strong>：30 元，《富春山居图》原创地<br>• <strong>杭州野生动物世界</strong>：220 元，华东最大野生动物园<br>• <strong>富阳造纸作坊</strong>：千年元书纸产地，非遗体验<br>• <strong>东梓关</strong>：网红富春江畔古村落</p></div>' +
+              '<div class="guide-block"><h4>🍜 特色美食</h4><p>• <strong>龙门面筋</strong>：古镇招牌小吃<br>• <strong>元书纸</strong>：可用于书写体验<br>• <strong>富春江鲜</strong>：江鲥鱼、刀鱼</p></div>' +
+              '<div class="guide-block"><h4>💡 小贴士</h4><p>• 龙门古镇游客少，几乎无商业味，适合慢逛<br>• 地铁 6 号线可直达富阳主城区，再换公交到龙门<br>• 推荐结合黄公望隐居地一日游</p></div>' +
+              '<p style="margin-top:10px;"><a href="https://www.fuyang.gov.cn/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">富阳文旅 →</a></p>'
+          }
+        }
+      ];
+
+      var TYPE_TABS = [
+        { key: 'water', label: '水乡古镇', icon: '🏮' },
+        { key: 'mountain', label: '山水避暑', icon: '🏡' },
+        { key: 'lake', label: '湖岛度假', icon: '🏝️' },
+        { key: 'bamboo', label: '竹海茶乡', icon: '🎋' }
+      ];
+
+      // 渲染卡片
+      function renderCard(item) {
+        var badgesHtml = item.badges.map(function(b) {
+          return '<span class="ac-badge ' + b.cls + '">' + b.text + '</span>';
+        }).join('');
+        var tipsHtml = item.tips.filter(function(t){ return t; }).map(function(t) {
+          return '<span class="ac-tip">' + t + '</span>';
+        }).join('');
+        // emoji占位图
+        var emojiMap = { wuzhen: '🏮', xitang: '🏮', nanxun: '🏛️', moganshan: '🏡', qiandao: '🏝️', anji: '🎋', tonglu: '🎨', fuyang: '🏘️' };
+        var icon = emojiMap[item.id] || '📍';
+        return '<div class="around-card" data-type="' + item.type + '" data-id="' + item.id + '">' +
+          '<div class="ac-img-wrap">' +
+            '<div class="ac-noimg">' + icon + '<span class="ac-distance">' + item.distance + '</span></div>' +
+          '</div>' +
+          '<div class="ac-body">' +
+            '<div class="ac-bar"></div>' +
+            '<div class="ac-head"><div class="ac-name">' + item.name + '</div>' +
+            '<div class="ac-badges">' + badgesHtml + '</div></div>' +
+            '<div class="ac-info">' +
+              '<span class="ac-info-item">🚇 ' + item.traffic + '</span>' +
+              '<span class="ac-info-item">🎫 ' + item.price + '</span>' +
+              '<span class="ac-info-item">📅 ' + item.best + '</span>' +
+            '</div>' +
+            '<div class="ac-desc">' + item.desc + '</div>' +
+            '<div class="ac-tips">' + tipsHtml + '</div>' +
+          '</div>' +
+        '</div>';
+      }
+
+      // 渲染全部
+      function renderAll() {
+        var el = document.getElementById('around-all');
+        if (!el) return;
+        el.innerHTML = AROUND_DATA.map(renderCard).join('');
+        bindCardClick(el);
+      }
+
+      // 按类型渲染
+      function renderByType(type) {
+        var el = document.getElementById('around-' + type);
+        if (!el) return;
+        var filtered = AROUND_DATA.filter(function(d){ return d.type === type; });
+        el.innerHTML = filtered.map(renderCard).join('');
+        bindCardClick(el);
+      }
+
+      // 绑定点击打开攻略
+      function bindCardClick(container) {
+        container.querySelectorAll('.around-card').forEach(function(card) {
+          card.addEventListener('click', function() {
+            var id = card.getAttribute('data-id');
+            var item = AROUND_DATA.find(function(d){ return d.id === id; });
+            if (item && item.guide && window.openModal) {
+              window.openModal(item.guide.title, item.guide.body);
+            }
+          });
+        });
+      }
+
+      // Tab 切换
+      function setupTabs() {
+        var tabs = document.querySelectorAll('.around-tab');
+        tabs.forEach(function(tab) {
+          tab.addEventListener('click', function() {
+            tabs.forEach(function(t){ t.classList.remove('active'); });
+            tab.classList.add('active');
+            var target = tab.getAttribute('data-target');
+            document.querySelectorAll('.around-section').forEach(function(sec){
+              sec.classList.remove('active');
+            });
+            var activeSec = document.getElementById('around-' + target);
+            if (activeSec) activeSec.classList.add('active');
+          });
+        });
+      }
+
+      // 渲染相关频道
+      function renderRelated() {
+        var el = document.getElementById('relatedChannels');
+        if (!el) return;
+        var channels = [
+          { id: 'travel', icon: '🏞️', name: '旅游景点' },
+          { id: 'food', icon: '🍜', name: '杭州美食' },
+          { id: 'weekend', icon: '🎯', name: '周末去哪' },
+          { id: 'banshi', icon: '🏛️', name: '办事攻略' },
+          { id: 'traffic', icon: '🚇', name: '出行交通' },
+          { id: 'articles', icon: '📖', name: '杭州故事' }
+        ];
+        el.innerHTML = channels.map(function(ch) {
+          return '<a class="channel-item" href="' + ch.id + '.html">' +
+            '<span class="ch-icon">' + ch.icon + '</span>' +
+            '<span class="ch-name">' + ch.name + '</span></a>';
+        }).join('');
+      }
+
+      // 初始化
+      function init() {
+        renderAll();
+        setupTabs();
+        TYPE_TABS.forEach(function(t){ renderByType(t.key); });
+        renderRelated();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+  </script>
+
+  <script>
+    if (window.IZ && IZ.layout) {
+      document.addEventListener('DOMContentLoaded', IZ.layout.init);
+    }
+  </script>
+
+</body>
+</html></longcat_think>
