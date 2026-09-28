@@ -44,30 +44,12 @@
   </style>
   <style>body { padding-bottom: 80px; }
 </style>
+  <script src="../js/layout.js"></script>
 </head>
 <body>
-  <header class="topbar" id="topbar">
-    <a href="../index.html" class="topbar-logo" style="text-decoration:none;">
-      <span class="logo-icon">‹</span>
-      <span class="logo-text">iHangzhou</span>
-    </a>
-    <div class="topbar-search"></div>
-    <button class="topbar-settings" onclick="toggleSettings()" title="设置">⚙️</button>
-  </header>
-
-  <!-- 设置面板 -->
-  <div class="settings-overlay" id="settingsOverlay" onclick="toggleSettings()"></div>
-  <div class="settings-panel" id="settingsPanel">
-    <div class="settings-title"><span>⚙️ 设置</span><button class="settings-close" onclick="toggleSettings()" aria-label="关闭">✕</button></div>
-    <div class="settings-item">
-      <span class="settings-label">🌙 暗色模式</span>
-      <label class="settings-switch"><input type="checkbox" id="darkToggle" onchange="setDarkMode(this.checked)"><span class="switch-slider"></span></label>
-    </div>
-    <div class="settings-item">
-      <span class="settings-label">👵 老人模式</span>
-      <label class="settings-switch"><input type="checkbox" id="elderlyToggle" onchange="setElderlyMode(this.checked)"><span class="switch-slider"></span></label>
-    </div>
-  </div>
+<script>
+  window.IHZ_PAGE = { title: 'food-series-19-杭州节庆食物的制作', icon: '📖', channelId: 'articles' };
+</script>
 
   <div class="article-breadcrumb">
     <a href="../index.html">首页</a> ›
@@ -93,27 +75,11 @@
     <a href="../articles.html">📚 查看更多杭州故事</a>
   </div>
 
-  <script src="../js/app.js"></script>
-  <script>
-    // 主题 + 老人模式持久化
-    (function(){ try{ var t=localStorage.getItem('ihz-theme')||'light'; document.documentElement.setAttribute('data-theme',t); }catch(e){} try{ var el=localStorage.getItem('ihz_elderly')==='true'; document.documentElement.setAttribute('data-elderly',el?'true':'false'); }catch(e){} })();
-  </script>
-
-  <!-- 底部导航 -->
-  <nav class="bottom-nav">
-    <div class="bnav-item" data-page="home" onclick="location.href='../index.html'">
-      <span class="bicon">🏠</span><span>首页</span>
-    </div>
-    <div class="bnav-item" data-page="articles" onclick="location.href='../articles.html'">
-      <span class="bicon">📚</span><span>文章</span>
-    </div>
-    <div class="bnav-item" data-page="tools" onclick="location.href='../index.html#tools'">
-      <span class="bicon">🛠️</span><span>工具</span>
-    </div>
-    <div class="bnav-item" data-page="me" onclick="location.href='../index.html#me'">
-      <span class="bicon">👤</span><span>我的</span>
-    </div>
-  </nav>
+<script>
+  if (window.IZ && IZ.layout) {
+    document.addEventListener('DOMContentLoaded', IZ.layout.init);
+  }
+</script>
 </body>
 </html>
 
