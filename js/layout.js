@@ -41,7 +41,7 @@
    * 加载模板并注入
    */
   function loadTemplate(url, target) {
-    return fetch(url + '?v=20260928')
+    return fetch(url + '?v=20260928a')
       .then(function (r) { return r.text(); })
       .then(function (html) {
         var wrap = document.createElement('div');
@@ -236,8 +236,16 @@
   }
 
   function init() {
-    var p1 = window.IZ_HEADER === false ? Promise.resolve(true) : loadTemplate('templates/header.html', 'prepend');
-    var p2 = window.IZ_FOOTER === false ? Promise.resolve(true) : loadTemplate('templates/footer.html', 'append');
+    // 使用根路径（/开头），从任意子目录（如 /articles/）都能正确加载模板
+    var hPath = '/templates/header.html';
+    var fPath = '/templates/footer.html';
+    // 本地 file:// 协议下根路径不可用，退回相对路径
+    if (location.protocol === 'file:') {
+      hPath = 'templates/header.html';
+      fPath = 'templates/footer.html';
+    }
+    var p1 = window.IZ_HEADER === false ? Promise.resolve(true) : loadTemplate(hPath, 'prepend');
+    var p2 = window.IZ_FOOTER === false ? Promise.resolve(true) : loadTemplate(fPath, 'append');
 
     Promise.all([p1, p2]).then(function () {
       bindSearch();

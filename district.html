@@ -520,6 +520,21 @@
   <script src="js/app.js?v=20260928c"></script>
 <script src="js/analytics.js?v=20260928c"></script>
   <script>
+    // 布局就绪后初始化区县切换器
+    window.onIHZLayoutReady = function () {
+      var btn = document.getElementById('citySwitcherBtn');
+      var dd = document.getElementById('cityDropdown');
+      if (btn) btn.style.display = '';
+      if (typeof initCityDropdown === 'function') initCityDropdown();
+      // 点击按钮切换下拉
+      if (btn && dd) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          dd.classList.toggle('show');
+        });
+        document.addEventListener('click', function () { dd.classList.remove('show'); });
+      }
+    };
     if (window.IZ && IZ.layout) {
       document.addEventListener("DOMContentLoaded", IZ.layout.init);
     }
