@@ -19,6 +19,15 @@ const ROOT = path.resolve(__dirname, '..');
 const CMS_JSON = path.join(ROOT, 'data', 'cms.json');
 const KW_BLOB_KEY = 'wechat-keywords.json';
 
+// 自动读取 .env.local
+const envLocal = path.join(ROOT, '.env.local');
+if (fs.existsSync(envLocal)) {
+  fs.readFileSync(envLocal, 'utf8').split('\n').forEach(line => {
+    const m = line.match(/^([A-Z_]+)="?([^"]*)"?$/);
+    if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
+  });
+}
+
 async function main() {
   const token = process.env.BLOB_READ_WRITE_TOKEN;
   if (!token) {

@@ -2953,6 +2953,90 @@ border-radius: 14px;
   box-shadow: 0 4px 15px rgba(8, 145, 178, 0.5);
 }
 
+/* ===== 钱塘江观潮专题（首页） ===== */
+.tide-feature {
+  margin: 0 16px 10px;
+  background: linear-gradient(135deg, #0c4a6e 0%, #0e7490 50%, #0891b2 100%);
+  border-radius: 14px;
+  color: #fff;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);
+  position: relative;
+}
+.tide-feature::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.tide-feature-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px 8px; position: relative;
+}
+.tide-feature-title { font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 4px; }
+.tide-feature-badge {
+  font-size: 10px; background: #fbbf24; color: #1e293b;
+  padding: 2px 8px; border-radius: 10px; font-weight: 600;
+  animation: tidePulse 2s ease-in-out infinite;
+}
+.tide-today-bar {
+  padding: 0 16px 10px; font-size: 13px; opacity: 0.92; position: relative;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.tide-today-bar .tide-lunar { font-weight: 600; }
+.tide-today-bar .tide-level-tag {
+  font-size: 10px; padding: 1px 7px; border-radius: 8px; font-weight: 700;
+  background: rgba(255,255,255,0.15);
+}
+.tide-today-bar .tide-level-tag.big { background: #ef4444; }
+.tide-today-bar .tide-level-tag.mid { background: #f59e0b; color: #1e293b; }
+.tide-today-bar .tide-level-tag.small { background: #10b981; }
+.tide-spots-mini {
+  display: flex; gap: 6px; padding: 0 16px 12px; overflow-x: auto;
+  -webkit-overflow-scrolling: touch; position: relative;
+}
+.tide-spots-mini::-webkit-scrollbar { display: none; }
+.tide-spots-mini .tsm-item {
+  flex-shrink: 0; font-size: 11px; padding: 3px 10px;
+  background: rgba(255,255,255,0.15); border-radius: 12px;
+  font-weight: 500; cursor: pointer;
+}
+.tide-spots-mini .tsm-item:active { background: rgba(255,255,255,0.28); }
+.tide-feature-body {
+  padding: 0 16px 12px; position: relative;
+  display: grid; gap: 10px;
+}
+.tide-fb-block {
+  background: rgba(255,255,255,0.10); border-radius: 10px; padding: 10px 12px;
+  border-left: 3px solid rgba(255,255,255,0.3);
+}
+.tide-fb-block h4 {
+  font-size: 13px; font-weight: 700; margin: 0 0 5px;
+}
+.tide-fb-block p, .tide-fb-block li {
+  font-size: 12.5px; line-height: 1.6; margin: 0; opacity: 0.92;
+}
+.tide-fb-block ul { padding-left: 16px; margin: 0; }
+.tide-fb-block li { margin-bottom: 2px; }
+.tide-fb-danger {
+  background: rgba(239,68,68,0.18); border-left-color: #fbbf24;
+}
+.tide-fb-danger h4 { color: #fef3c7; }
+.tide-spot-list { display: grid; gap: 5px; }
+.tsl-item {
+  display: flex; align-items: center; gap: 8px; font-size: 12.5px;
+}
+.tsl-item strong { font-weight: 600; flex-shrink: 0; min-width: 120px; }
+.tsl-item span { opacity: 0.8; font-size: 11.5px; }
+.tide-feature-footer {
+  padding: 8px 16px 12px; font-size: 12px; opacity: 0.8; text-align: center;
+  cursor: pointer; border-top: 1px solid rgba(255,255,255,0.12);
+}
+.tide-feature-footer:active { background: rgba(255,255,255,0.08); }
+
 /* ===== 老人模式 ===== */
 [data-elderly="true"] body { font-size: 18px; line-height: 1.7; }
 [data-elderly="true"] .topbar-city { font-size: 18px; }
@@ -3423,6 +3507,33 @@ border-radius: 14px;
 }
 .header-action:active { background: rgba(255,255,255,0.32); transform: scale(0.94); }
 .header-action svg { display: block; }
+
+/* ===== 区县切换按钮 ===== */
+.city-switcher-btn {
+  width: auto !important;
+  padding: 0 10px !important;
+  gap: 4px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+.city-name-short {
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.city-dropdown {
+  position: absolute;
+  top: 52px; right: 8px;
+  min-width: 180px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  z-index: 300;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+.city-dropdown.show { display: block !important; }
 
 /* ===== 底部导航 .app-nav ===== */
 .app-nav {

@@ -109,34 +109,22 @@
         c.innerHTML = html;
       }
 
-      // 从 cms.json 或内存数据加载
+      // 从 places.json 加载数据
       var placeId = getParam('id') || getParam('name') || '';
       var placeName = getParam('name') || '';
-
-      // 先从 app.js 的全局 PLACES 映射尝试读
-      if (window.PLACES_MAP && placeId && window.PLACES_MAP[placeId]) {
-        renderPlace(window.PLACES_MAP[placeId]);
-      } else if (window.PLACES_MAP && placeName) {
+      var dataUrl = (location.protocol === 'file__' ? '' : '/') + 'data/places.json';
+      fetch('data/places.json').then(function (r) { return r.json(); }).then(function (data) {
+        var places = data.places || [];
+        var map = {};
+        places.forEach(function (p) { map[p.id] = p; });
+        window.PLACES_MAP = map;
         var found = null;
-        for (var k in window.PLACES_MAP) {
-          if (window.PLACES_MAP[k].name === placeName) { found = window.PLACES_MAP[k]; break; }
+        if (placeId && map[placeId]) found = map[placeId];
+        else if (placeName) {
+          for (var k in map) { if (map[k].name === placeName) { found = map[k]; break; } }
         }
         renderPlace(found);
-      } else {
-        // 从 cms.json fetch
-        fetch('data/cms.json').then(function (r) { return r.json(); }).then(function (data) {
-          var places = data.places || data.PLACES || [];
-          var map = {};
-          places.forEach(function (p) { map[p.id || p.name] = p; });
-          window.PLACES_MAP = map;
-          if (placeId && map[placeId]) renderPlace(map[placeId]);
-          else if (placeName) {
-            var f = null;
-            for (var k in map) { if (map[k].name === placeName) { f = map[k]; break; } }
-            renderPlace(f);
-          } else renderPlace(null);
-        }).catch(function () { renderPlace(null); });
-      }
+      }).catch(function () { renderPlace(null); });
     })();
   </script>
 </body>
