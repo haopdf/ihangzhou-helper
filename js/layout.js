@@ -151,25 +151,30 @@
     if (overlay) overlay.addEventListener('click', close_);
     if (close) close.addEventListener('click', close_);
 
-    // ===== 分享按钮 =====
+    // ===== 分享按钮：直接复制链接 =====
     var shareBtn = document.getElementById('shareBtn');
     if (shareBtn) {
       shareBtn.addEventListener('click', function () {
-        var shareData = {
-          title: document.title || 'iHangzhou 杭州生活助手',
-          text: document.querySelector('meta[name="description"]')?.content || '杭州生活助手 - 发现杭州美好',
-          url: global.location.href
-        };
-        if (global.navigator.share) {
-          global.navigator.share(shareData).catch(function () {});
-        } else if (global.navigator.clipboard) {
-          global.navigator.clipboard.writeText(shareData.url).then(function () {
-            showToast('🔗 链接已复制到剪贴板');
+        var url = global.location.href;
+        var title = document.title || 'iHangzhou 杭州生活助手';
+        var shareText = title + '\n' + url;
+        if (global.navigator.clipboard) {
+          global.navigator.clipboard.writeText(shareText).then(function () {
+            showToast('🔗 链接已复制，粘贴给朋友吧');
           }).catch(function () {
-            showToast('请手动复制地址栏链接分享');
+            // 降级方案：用 textarea 选中复制
+            var ta = document.createElement('textarea');
+            ta.value = shareText;
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); showToast('🔗 链接已复制'); }
+            catch (e) { showToast('链接：' + url); }
+            document.body.removeChild(ta);
           });
         } else {
-          showToast('请手动复制地址栏链接分享');
+          showToast('链接：' + url);
         }
       });
     }
