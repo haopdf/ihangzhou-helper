@@ -142,11 +142,13 @@ a { color: var(--primary); text-decoration: none; }
 }
 
 /* ===== 搜索激活态：隐藏 brand / actions，扩展搜索框 ===== */
-@media (max-width: 768px) {
-  .app-header.searching { gap: 0; padding: 8px 6px; }
-  .app-header.searching .header-brand,
-  .app-header.searching .header-action { display: none; }
-  .app-header.searching .header-search { flex: 1; }
+.app-header.searching { gap: 0; padding: 8px 6px; }
+.app-header.searching .header-brand,
+.app-header.searching .header-action { display: none; }
+.app-header.searching .header-search { flex: 1; }
+.app-header.searching .header-search-cancel { display: block !important; }
+@media (min-width: 769px) {
+  .app-header.searching .header-search { max-width: 500px; margin: 0 auto; }
 }
 .header-search-cancel {
   display: none;

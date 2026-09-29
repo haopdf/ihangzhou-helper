@@ -4199,6 +4199,43 @@ function showMetro() {
   window.toggleAIChat = toggleAIChat;
   window.closeAIChat = closeAIChat;
   window.clearAIChat = clearAIChat;
+  // ===== 首页观潮专题自动显示 (8-11月) =====
+  (function initTideFeature() {
+    var el = document.getElementById('tideFeature');
+    if (!el) return;
+    var now = new Date();
+    var m = now.getMonth() + 1; // 1-12
+    // 观潮季：8月中至11月初（公历）
+    if (m < 8 || m > 11) return;
+    el.style.display = '';
+    // 填充今日潮汐信息
+    try {
+      var lunar = getLunar(now);
+      var tide = calcTideTimes(lunar.day);
+      var lunarMonths = ['正','二','三','四','五','六','七','八','九','十','冬','腊'];
+      var lunarDays = ['初一','初二','初三','初四','初五','初六','初七','初八','初九','初十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十','廿一','廿二','廿三','廿四','廿五','廿六','廿七','廿八','二十九','三十'];
+      var lunarStr = '农历' + lunarMonths[lunar.month - 1] + '月' + lunarDays[lunar.day - 1];
+      var levelClass = tide.level.label === '大潮' ? 'big' : (tide.level.label === '中潮' ? 'mid' : 'small');
+      var bar = document.getElementById('tideTodayBar');
+      if (bar) {
+        bar.innerHTML = '<span class="tide-lunar">' + lunarStr + '</span>' +
+          '<span class="tide-level-tag ' + levelClass + '">' + tide.level.label + '</span>' +
+          '<span>日潮 ' + fmtTime(tide.day) + '</span>' +
+          '<span>夜潮 ' + fmtTime(tide.night) + '</span>';
+      }
+      // mini spots bar
+      var spots = document.getElementById('tideSpotsMini');
+      if (spots && typeof TIDE_POINTS !== 'undefined') {
+        spots.innerHTML = TIDE_POINTS.map(function(p) {
+          return '<span class="tsm-item" data-spot="' + p.name + '">' + p.name + '</span>';
+        }).join('');
+      }
+      // tideFeature footer click -> showTide
+      var footer = document.getElementById('tideFeatureFooter');
+      if (footer) footer.onclick = function () { showTide(); };
+    } catch (e) { /* 静默降级 */ }
+  })();
+
   window.sendAIMessage = sendAIMessage;
   window.showFavorites = showFavorites;
   window.showHistory = showHistory;
