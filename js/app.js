@@ -320,7 +320,7 @@ window.addEventListener('offline', function () {
       {
         id: "travel", name: "旅游休闲", icon: "🏞️",
         items: [
-          { name: "西湖景区", desc: "景点/游船/预约", url: "https://westlake.hangzhou.gov.cn/", color: "#ef4444" },
+          { name: "西湖景区", desc: "景点/游船/预约", url: "https://westlake.hangzhou.gov.cn/", color: "#ef4444", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">西湖是杭州的城市名片，2011 年列入《世界遗产名录》，是中国唯一一处湖泊类世界文化遗产。三面云山一面城，免费开放 5A 景区，环湖一周约 15 公里。</p><div class=\"guide-block\"><h4>🎯 经典游法</h4><p>• <strong>半日线</strong>：断桥→白堤→孤山→苏堤（约 3 小时）<br>• <strong>全日线</strong>：断桥→白堤→孤山→曲院风荷→花港观鱼→雷峰塔→长桥<br>• <strong>游船</strong>：手划船 150 元/小时（限乘 6 人）；电瓶船 55 元/人（含三潭印月）<br>• <strong>骑行</strong>：环湖骑行约 6 小时，推荐杨公堤→南山路段</p></div><div class=\"guide-block\"><h4>🚇 地铁</h4><p>• 1 号线 龙翔桥站（西湖东侧）：步行至湖滨约 5 分钟<br>• 3 号线 黄龙体育中心站（西湖西侧）：可换公交至岳庙、曲院风荷<br>• 地铁+共享单车是最推荐方式</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>西湖景区免费开放（全国唯一免费 5A 湖泊），周边收费点：<br>• 雷峰塔 40 元、灵隐寺 75 元（飞来峰+寺院）、岳王庙 25 元<br>• 三潭印月+船票 55 元、杭州动物园 20 元</p></div><div class=\"guide-block\"><h4>📅 最佳季节</h4><p>• <strong>春（3-4 月）</strong>：苏堤春晓、柳浪闻莺、桃红柳绿<br>• <strong>夏（6-8 月）</strong>：曲院风荷赏荷、十里柳荫<br>• <strong>秋（9-11 月）</strong>：满陇桂雨、三潭印月<br>• <strong>冬（1-2 月）</strong>：断桥残雪（下雪天少而珍贵）</p></div>" },
           { name: "断桥残雪", desc: "白娘子许仙借伞定情地", url: "https://westlake.hangzhou.gov.cn/", color: "#3b82f6", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">断桥位于白堤东端，是西湖最著名的景点之一。得名有二：一说是大雪初霁，桥阳面雪融而阴面残雪，远看如断；二说是白娘子与许仙在此相会又离散，故有「断桥不断」之说。冬季雪后是经典观景时刻，春日柳色亦佳。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• 冬季雪景：杭州难得下雪，雪后断桥最为知名<br>• 春日桃柳：白堤两侧桃红柳绿，江南春景典范<br>• 历史人文：白蛇传传说地，承载古典爱情意象</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>地铁 1 号线/3 号线 西湖文化广场站，步行约 800 米<br>公交：断桥站（7 路、27 路、78 路夜等）</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>西湖景区免费开放，无需门票<br>周边景点（如孤山、浙江省博物馆）免费</p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>冬季雪后 1-2 月、春季 3-4 月最佳；清晨 6-8 时人少；周末人流密集建议工作日。</p></div>" },
           { name: "苏堤春晓", desc: "2.8公里长堤·桃红柳绿", url: "https://westlake.hangzhou.gov.cn/", color: "#10b981", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">苏堤是北宋苏轼任杭州知州时主持修筑的湖堤，全长 2.8 公里，纵贯西湖南北。堤上六桥各有特色，两侧桃柳夹岸。南宋时被列为西湖十景之首，题名「苏堤春晓」。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• 春晓桃柳：3-4 月桃花盛开，垂柳吐绿，是江南春景代表<br>• 苏堤六桥：跨虹、东浦、压堤、望山、锁澜、映波<br>• 全景漫步：步行贯通约 1 小时，沿堤可览湖光山色</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>地铁 1 号线 龙翔桥站，步行至湖滨再北上<br>公交：苏堤站（4 路、31 路、假日游线）</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>免费开放，无需预约<br>游船：50-70 元/人，可从花港码头登船</p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>3-4 月最佳；清晨 5-7 时观日出；秋季 10-11 月可赏落叶；周末人流较多。</p></div>" },
           { name: "三潭印月", desc: "小瀛洲·人民币一元背景", url: "https://westlake.hangzhou.gov.cn/", color: "#f59e0b", detail: "<p style=\"color:var(--text-secondary);line-height:1.8;\">三潭印月是西湖中最大的岛「小瀛洲」，被誉为「西湖第一胜境」。岛南湖面有三座石塔，塔中空，月夜时塔内点烛，洞口糊纸，光印湖面如三月，故名三潭印月。第五套人民币 1 元背面图案即此景。</p><div class=\"guide-block\"><h4>🎯 主要看点</h4><p>• 三座石塔：湖中三塔呈等边三角分布，造型独特<br>• 小瀛洲园林：岛上有「湖中有岛，岛中有湖」奇景<br>• 人民币背景：1 元纸币（旧版）背面图案</p></div><div class=\"guide-block\"><h4>🚇 交通</h4><p>需在西湖各码头乘船登岛<br>主要码头：湖滨、花港、中山公园、杭饭</p></div><div class=\"guide-block\"><h4>🎫 门票</h4><p>船票+门票 55 元/人（含往返）<br>开放时间：8:00-17:00<br><a href=\"https://westlake.hangzhou.gov.cn/\" target=\"_blank\" rel=\"noopener\">查看官方信息 →</a></p></div><div class=\"guide-block\"><h4>📅 推荐时间</h4><p>中秋月夜最佳（三潭印月）；白天春秋两季气候宜人；建议工作日避高峰。</p></div>" },
@@ -2852,10 +2852,10 @@ function showMetro() {
       html += '<p class="modal-tip">数据来源：' + (source || 'hzmetro.com') + '，以地铁公司公告为准</p></div>';
       $('#metroBox').innerHTML = html;
     };
-    fetch('/api/tools?action=metro')
+    fetch('/api/metro')
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        if (data && data.lines) renderMetro(data.lines, data.fare, data.source);
+        if (data && data.lines) renderMetro(data.lines, data.fare, 'hzmetro.com');
         else renderMetro(fallbackLines, null, '本地回退数据');
       })
       .catch(function () {

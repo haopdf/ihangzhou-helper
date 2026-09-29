@@ -3095,6 +3095,61 @@ border-radius: 14px;
 .city-dropdown-item.active { color: var(--primary); font-weight: 700; background: var(--bg-hover); }
 .city-dropdown-item .cd-dist { font-size: 11px; color: var(--text-muted); font-weight: 400; opacity: 0.75; }
 
+/* ===== 便民服务分区卡片 ===== */
+.bf-modules {
+  padding: 0 14px;
+  margin-bottom: 18px;
+}
+.bf-module {
+  background: var(--bg-card);
+  border-radius: 14px;
+  border: 1px solid var(--border-light);
+  margin-bottom: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.bf-module-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.bf-module-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.bf-module-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 16px 14px;
+}
+.bf-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.bf-item:hover {
+  background: color-mix(in srgb, var(--primary) 10%, var(--bg-alt));
+  border-color: color-mix(in srgb, var(--primary) 35%, var(--border-light));
+  transform: translateY(-1px);
+}
+.bf-item:active {
+  transform: scale(0.96);
+}
+
 /* ===== 区县特色卡片 ===== */
 .district-info { padding: 0 16px; margin: 12px 0; }
 .district-info-card {
