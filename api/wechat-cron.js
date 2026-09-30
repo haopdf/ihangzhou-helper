@@ -37,6 +37,14 @@ async function getDraftList(token) {
   return data;
 }
 
+// 获取当前周字符串（如 2026-W40）
+function getWeekStr() {
+  const d = new Date();
+  const onejan = new Date(d.getFullYear(), 0, 1);
+  const w = Math.ceil((((d - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+  return d.getFullYear() + '-W' + String(w).padStart(2, '0');
+}
+
 // 提取选题信息
 function extractTopics(drafts) {
   if (!drafts.item) return [];
@@ -111,6 +119,36 @@ module.exports = async (req, res) => {
       }
     });
 
+    const newCount = topics.filter(t => t.isNew).length;
+    console.log(`同步完成：${topics.length} 篇草稿，${newCount} 篇新选题`);
+
+    // ===== 热力周报草稿生成（每周一执行，或强制触发） =====
+    const DOW = new Date().getDay(); // 0=周日,1=周一
+    if (DOW === 1 || req.query.forceHeatmap) {
+      try {
+        const origin = process.env.SITE_ORIGIN || 'https://www.ihangzhou.net';
+        const hmRes = await fetch(origin + '/api/tools?action=heatmap').then(function(r){return r.json();}).catch(function(){return null;});
+        if (hmRes && hmRes.success && hmRes.topAll && hmRes.topAll.length > 0) {
+          const week = getWeekStr();
+          const topList = hmRes.topAll.slice(0, 8).map(function(it, i) {
+            return (i+1) + '. **' + it.name + '**（' + it.count + ' 次点击）';
+          }).join('\n');
+          const article = {
+            mediaId: 'heatmap-weekly-' + week,
+            title: '🔥 iHangzhou 杭州办事热力榜（' + week + '）',
+            digest: '本周用户点击量前 ' + Math.min(8, hmRes.topAll.length) + ' 的服务',
+            updateTime: Math.floor(Date.now() / 1000),
+            updateTimeStr: new Date().toISOString().split('T')[0],
+            isNew: true, isHeatmap: true,
+            summary: '🔥 本周热门服务 Top 8\n\n' + topList + '\n\n总计 ' + hmRes.totalClicks + ' 次点击',
+            heatmap: hmRes.topAll.slice(0, 8)
+          };
+          merged.push(article);
+          console.log('热力周报已生成:', article.title);
+        }
+      } catch (e) { console.warn('热力周报生成失败:', e.message); }
+    }
+
     // 写入 Blob
     const token2 = process.env.BLOB_READ_WRITE_TOKEN;
     if (token2) {
@@ -120,9 +158,6 @@ module.exports = async (req, res) => {
         allowOverwrite: true
       });
     }
-
-    const newCount = topics.filter(t => t.isNew).length;
-    console.log(`同步完成：${topics.length} 篇草稿，${newCount} 篇新选题`);
 
     res.status(200).json({
       success: true,

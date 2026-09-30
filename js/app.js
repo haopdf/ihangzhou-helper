@@ -1317,7 +1317,35 @@ window.addEventListener('offline', function () {
     return '📌';
   }
 
-  // 中文分词级匹配得分：每个查询字符在文本中出现则加分
+  // ========== 拼音首字母索引（轻量，覆盖常用政务关键词）==========
+  var PINYIN_FIRST = {
+    '社保':'sb','公积金':'gjj','落户':'lx','身份证':'sfz','护照':'hz','签证':'qz',
+    '驾照':'jz','行驶证':'xsz','车辆':'cl','交通':'jt','地铁':'dt','公交':'gj',
+    '小学':'cx','中学':'zx','大学':'dx','教育':'jy','学校':'xx','老师':'ls',
+    '医院':'yy','医生':'ys','健康':'jk','医保':'yb','养老保险':'ylbx','生育':'sy',
+    '婚姻':'hm','结婚':'jh','离婚':'lh','户口':'hk','居住证':'jzz','暂住证':'zzz',
+    '房产':'fc','房子':'zf','租房':'zf','买房':'mf','建房':'jf','土地':'td',
+    '工商','gs','企业':'qy','营业执照':'yyzz','税务':'sw','发票':'fp',
+    '12345':'12345','热线':'rx','投诉':'tz','举报':'jb','信访':'xf',
+    '公证':'gz','法律援助':'fljz','法院':'fy','律师':'ls',
+    '公积金':'gjj','贷款':'dk','买房':'mf','水费':'sf','电费':'df','燃气':'rq',
+    '人才':'rc','补贴':'bt','创业':'cy','失业':'sy','退休':'tx',
+    '博物馆':'bwg','旅游':'ly','景点':'jd','美食':'ms','酒店':'jd'
+  };
+  // 构建反向映射：首字母→中文关键词
+  var FIRST_TO_CN = {};
+  Object.keys(PINYIN_FIRST).forEach(function(cn){
+    var py = PINYIN_FIRST[cn];
+    if (!FIRST_TO_CN[py]) FIRST_TO_CN[py] = [];
+    FIRST_TO_CN[py].push(cn);
+  });
+
+  function stripTags(html) {
+    if (!html) return '';
+    return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  // 搜索匹配得分：name + desc + detail文本
   function searchScore(query, text) {
     if (!query || !text) return 0;
     text = text.toLowerCase();
@@ -1331,9 +1359,39 @@ window.addEventListener('offline', function () {
     for (var i = 0; i < chars.length; i++) {
       if (text.indexOf(chars[i]) >= 0) matched++;
     }
-    // 全部字符都匹配 → 高分，部分匹配 → 按覆盖率给分
     if (matched === chars.length) return 50 + chars.length;
     return (matched / chars.length) * 30;
+  }
+
+  // 拼音首字母扩展：查询"rsb" → 社保
+  function expandPinyin(query) {
+    var q = query.toLowerCase().trim();
+    if (FIRST_TO_CN[q]) return FIRST_TO_CN[q];
+    // 尝试按2~3字母分段（如 sbcl → 社保+车辆）
+    return null;
+  }
+
+  // 高亮匹配文本中的关键词
+  function highlightText(text, query) {
+    if (!query || !text) return text;
+    var q = query.trim();
+    if (!q) return text;
+    var lowerText = text.toLowerCase();
+    var lowerQ = q.toLowerCase();
+    var idx = lowerText.indexOf(lowerQ);
+    if (idx < 0) {
+      // 高亮单个字符
+      var result = '';
+      for (var i = 0; i < text.length; i++) {
+        if (lowerQ.indexOf(lowerText[i]) >= 0) {
+          result += '<mark>' + text[i] + '</mark>';
+        } else {
+          result += text[i];
+        }
+      }
+      return result;
+    }
+    return text.slice(0, idx) + '<mark>' + text.slice(idx, idx + q.length) + '</mark>' + text.slice(idx + q.length);
   }
 
   function globalSearch(query) {
@@ -1341,59 +1399,84 @@ window.addEventListener('offline', function () {
     var searchResult = $('#searchResult');
     var grid = $('#serviceGrid');
     if (!grid) return;
+    // 同步 tab 内搜索
+    var tabSearchInput = $('#tabSearchInput');
+    if (tabSearchInput && tabSearchInput.value !== state.searchQuery) {
+      tabSearchInput.value = state.searchQuery;
+    }
 
-    // 空搜索：隐藏结果区
     if (!state.searchQuery) {
       if (searchResult) searchResult.style.display = 'none';
       return;
     }
 
+    // 拼音首字母扩展
+    var pyExpanded = expandPinyin(state.searchQuery);
+    var pyExtraQuery = pyExpanded ? pyExpanded.join(' ') : '';
+
     var results = [];
     DATA.categories.forEach(function (cat) {
       cat.items.forEach(function (item) {
-        var score = searchScore(state.searchQuery, item.name) + searchScore(state.searchQuery, item.desc) * 0.5;
+        var detailText = stripTags(item.detail);
+        // name*1.0 + desc*0.5 + detail*0.3 + 拼音扩展*1.0
+        var score = searchScore(state.searchQuery, item.name)
+                  + searchScore(state.searchQuery, item.desc) * 0.5
+                  + searchScore(state.searchQuery, detailText) * 0.3;
+        if (pyExtraQuery) {
+          score += searchScore(pyExtraQuery, item.name) * 1.0
+                 + searchScore(pyExtraQuery, item.desc) * 0.5
+                 + searchScore(pyExtraQuery, detailText) * 0.3;
+        }
+        // 拼音首字母直接在 name/desc 内也加分
+        if (PINYIN_FIRST[item.name]) {
+          var pyFull = PINYIN_FIRST[item.name];
+          if (pyFull.indexOf(state.searchQuery.toLowerCase()) === 0) score += 60;
+          if (state.searchQuery.toLowerCase().indexOf(pyFull) === 0) score += 40;
+        }
         if (score > 0) {
-          results.push({ item: item, cat: cat.name, score: score });
+          results.push({ item: item, cat: cat.name, catId: cat.id, score: score, py: !!pyExpanded });
         }
       });
     });
 
-    // 按匹配得分降序排列
     results.sort(function (a, b) { return b.score - a.score; });
 
-    // 显示搜索结果区
+    // 分组显示：按分类聚合
     if (searchResult) {
       searchResult.style.display = 'block';
       var titleEl = $('#searchResultTitle');
-      if (titleEl) titleEl.textContent = '🔍 搜索 "' + state.searchQuery + '" 找到 ' + results.length + ' 项';
+      if (titleEl) {
+        var tip = pyExpanded ? ' (含拼音: ' + pyExpanded.join('/') + ')' : '';
+        titleEl.textContent = '� "' + state.searchQuery + '" → ' + results.length + ' 项' + tip;
+      }
     }
 
     if (results.length === 0) {
       grid.innerHTML = '<div class="empty"><div class="eicon">🔍</div><p>没有找到"' + state.searchQuery + '"相关服务</p>' +
-        '<p style="font-size:12px;color:var(--text-muted);margin-top:8px;">试试：社保 / 公积金 / 限行 / 落户 / 夜市</p></div>';
+        '<p style="font-size:12px;color:var(--text-muted);margin-top:8px;">试试：社保 / 公积金 / 限行 / 落户 / 夜市 / rsb / gjj / lx</p></div>';
       return;
     }
     grid.innerHTML = results.map(function (r) {
       var item = r.item;
-      var catBadge = ' <span class="scat">[' + r.cat + ']</span>';
-      // 有URL的用<a>标签，浏览器原生处理跳转，不会被弹窗拦截
+      var catBadge = ' <span class="scat">' + r.cat + '</span>';
+      var hName = highlightText(item.name, state.searchQuery);
+      var hDesc = highlightText(item.desc, state.searchQuery);
       if (item.url) {
         var safeUrl = item.url.indexOf('http://') === 0 ? 'https://' + item.url.substring(7) : item.url;
-        return '<a class="sitem" data-name="' + item.name + '" data-cat="' + r.cat + '" href="' + safeUrl + '" rel="noopener noreferrer" target="_blank">' +
+        return '<a class="sitem" data-name="' + item.name + '" data-cat="' + r.cat + '" data-catid="' + r.catId + '" href="' + safeUrl + '" rel="noopener noreferrer" target="_blank">' +
           '<div class="sicon">' + getServiceIcon(item.name) + '</div>' +
           '<div class="sinfo">' +
-          '<div class="sname">' + item.name + catBadge + '</div>' +
-          '<div class="sdesc">' + item.desc + '</div>' +
+          '<div class="sname">' + hName + catBadge + '</div>' +
+          '<div class="sdesc">' + hDesc + '</div>' +
           '</div>' +
           '<div class="sarrow">›</div>' +
           '</a>';
       }
-      // 无URL的用<div>，交给handleClick处理action或detail弹窗
-      return '<div class="sitem" data-name="' + item.name + '" data-cat="' + r.cat + '" data-action="' + (item.action || '') + '" data-url="">' +
+      return '<div class="sitem" data-name="' + item.name + '" data-cat="' + r.cat + '" data-catid="' + r.catId + '" data-action="' + (item.action || '') + '" data-url="">' +
         '<div class="sicon">' + getServiceIcon(item.name) + '</div>' +
         '<div class="sinfo">' +
-        '<div class="sname">' + item.name + catBadge + '</div>' +
-        '<div class="sdesc">' + item.desc + '</div>' +
+        '<div class="sname">' + hName + catBadge + '</div>' +
+        '<div class="sdesc">' + hDesc + '</div>' +
         '</div>' +
         '<div class="sarrow">›</div>' +
         '</div>';

@@ -430,6 +430,16 @@
         <div class="stat-card"><h3>总点击量</h3><div class="value" id="statClicks">0</div></div>
         <div class="stat-card"><h3>用户反馈</h3><div class="value" id="statFeedbacks">0</div></div>
       </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+        <div class="panel">
+          <div class="panel-header"><span class="panel-title">🔥 实时热力 Top 5</span></div>
+          <div id="heatmapToday" style="font-size:13px;color:#475569;line-height:2;">加载中...</div>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><span class="panel-title">📊 历史点击 Top 10</span></div>
+          <div id="heatmapAll" style="font-size:13px;color:#475569;line-height:2;">加载中...</div>
+        </div>
+      </div>
       <div class="panel">
         <div class="panel-header"><span class="panel-title">📌 操作说明</span></div>
         <div style="color:#475569;font-size:13px;line-height:1.8;">
@@ -752,7 +762,34 @@ function renderOverview() {
       document.getElementById('statClicks').textContent = totalClicks;
     }
   }).catch(function(){});
+  // 加载热力榜
+  loadHeatmap();
 }
+
+function loadHeatmap() {
+  fetch('/api/tools?action=heatmap').then(function(r){return r.json();}).then(function(res){
+    if (!res || !res.success) return;
+    var today = document.getElementById('heatmapToday');
+    var all = document.getElementById('heatmapAll');
+    if (today) {
+      if (res.topToday && res.topToday.length > 0) {
+        today.innerHTML = res.topToday.map(function(it, i) {
+          return '<div style="display:flex;justify-content:space-between;padding:2px 0;">' +
+            '<span>' + (i+1) + '. ' + it.name + '</span><span style="color:#ef4444;font-weight:600;">' + it.count + ' 次</span></div>';
+        }).join('');
+      } else { today.innerHTML = '<em>暂无数据，开启追踪后次日生效</em>'; }
+    }
+    if (all) {
+      if (res.topAll && res.topAll.length > 0) {
+        all.innerHTML = res.topAll.map(function(it, i) {
+          var colors = ['#ef4444','#f97316','#f59e0b','#22c55e','#0ea5e9','#8b5cf6','#ec4899','#14b8a6','#6366f1','#78716c'];
+          var c = colors[i] || '#78716c';
+          return '<div style="display:flex;justify-content:space-between;padding:2px 0;">' +
+            '<span><span style="display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;font-size:11px;color:#fff;border-radius:4px;background:' + c + ';margin-right:6px;">' + (i+1) + '</span>' + it.name + '</span><span style="color:#ef4444;font-weight:600;">' + it.count + ' 次</span></div>';
+        }).join('');
+      } else { all.innerHTML = '<em>暂无数据</em>'; }
+    }
+  }).catch(function(){});
 
 function renderCategories() {
   if (!CMS_DATA) return;
