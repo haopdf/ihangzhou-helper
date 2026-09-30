@@ -115,6 +115,27 @@ async function writeStats(data) {
   } catch (e) { return false; }
 }
 
+async function handleHeatmap(req, res) {
+  // 公开接口：Top 10 点击热力榜（含历史累计）
+  try {
+    const stats = await readStats();
+    const daily = stats.daily || {};
+    const allClicks = {};
+    const clickCategories = {};
+    Object.keys(daily).forEach(function (d) {
+      Object.entries(daily[d].searches || {}).forEach(function (kv) {
+        allClicks[kv[0]] = (allClicks[kv[0]] || 0) + kv[1];
+      });
+    });
+    const topAll = Object.entries(allClicks).sort(function (a, b) { return b[1] - a[1]; }).slice(0, 10).map(function (kv) { return { name: kv[0], count: kv[1] }; });
+    // 今日热力
+    var today = new Date().toISOString().slice(0, 10);
+    var todayClicks = (daily[today] && daily[today].searches) || {};
+    var topToday = Object.entries(todayClicks).sort(function (a, b) { return b[1] - a[1]; }).slice(0, 5).map(function (kv) { return { name: kv[0], count: kv[1] }; });
+    return res.status(200).json({ success: true, topAll: topAll, topToday: topToday, totalClicks: Object.values(allClicks).reduce(function (s, n) { return s + n; }, 0) });
+  } catch (e) { return res.status(200).json({ success: false, error: e.message }); }
+}
+
 async function handleTrack(req, res) {
   // GET 查看统计（需认证）
   if (req.method === 'GET' && req.query.stats === '1') {
@@ -384,6 +405,8 @@ module.exports = async (req, res) => {
         return await handleTrack(req, res);
       case 'feedback':
         return await handleFeedback(req, res);
+      case 'heatmap':
+        return await handleHeatmap(req, res);
       case 'keywords':
       case 'keywords_batch':
         return await handleKeywords(req, res);
