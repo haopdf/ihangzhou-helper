@@ -3,7 +3,7 @@
 
 const { put, get, list, del, head } = require('@vercel/blob');
 
-const ADMIN_PASSWORD = process.env.CMS_ADMIN_PASSWORD || 'ihangzhou2024';
+const ADMIN_PASSWORD = process.env.CMS_ADMIN_PASSWORD || 'ihz2024';
 const SITE_ORIGIN = process.env.SITE_ORIGIN || 'https://www.ihangzhou.net';
 
 function checkAuth(req) {
