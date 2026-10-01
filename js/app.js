@@ -1417,6 +1417,8 @@ window.addEventListener('offline', function () {
     var results = [];
     DATA.categories.forEach(function (cat) {
       cat.items.forEach(function (item) {
+        // 仅显示有实际跳转或动作的结果（有 url 或 action），纯说明卡片（仅 detail）不打扰搜索
+        if (!item.url && !item.action) return;
         var detailText = stripTags(item.detail);
         // name*1.0 + desc*0.5 + detail*0.3 + 拼音扩展*1.0
         var score = searchScore(state.searchQuery, item.name)
