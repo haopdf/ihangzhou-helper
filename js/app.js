@@ -1595,8 +1595,10 @@ window.addEventListener('offline', function () {
       if (e.key === 'Escape') closeModal();
     });
 
-    $$('.bnav-item').forEach(function (item) {
-      item.addEventListener('click', function () {
+    // 只对带 data-page 的内部页签绑切换；<a href> 项由浏览器原生导航
+    $$('.bnav-item[data-page]').forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
         switchPage(this.dataset.page);
       });
     });
