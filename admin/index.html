@@ -699,7 +699,7 @@ async function loadCMSData() {
 
 function setupNavigation() {
   document.querySelectorAll('.nav-item').forEach(function(item) {
-    item.onclick = function() activateView(this.dataset.view);
+    item.onclick = function() { activateView(this.dataset.view); };
   });
   // hash 路由：初始化时还原视图、监听后退/前进
   function activateView(view) {
@@ -790,6 +790,7 @@ function loadHeatmap() {
       } else { all.innerHTML = '<em>暂无数据</em>'; }
     }
   }).catch(function(){});
+}
 
 function renderCategories() {
   if (!CMS_DATA) return;
