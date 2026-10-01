@@ -371,9 +371,33 @@
     .history-filter { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
     .history-filter button { padding:5px 14px; border:1px solid #e2e8f0; border-radius:20px; background:#fff; color:#64748b; font-size:12px; cursor:pointer; }
     .history-filter button.active { background:#0ea5e9; color:#fff; border-color:#0ea5e9; }
+
+  /* ===== 移动端响应式 ===== */
+  .sidebar-toggle { display:none; position:fixed; top:14px; left:14px; z-index:1100; width:40px; height:40px; border:none; border-radius:10px; background:#1e293b; color:#fff; font-size:20px; cursor:pointer; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,.3); }
+  .sidebar-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:998; }
+  .sidebar-overlay.show { display:block; }
+  @media (max-width: 768px) {
+    .sidebar-toggle { display:flex; }
+    .sidebar { position:fixed; left:-260px; width:260px; z-index:999; transition:transform .25s ease; transform:translateX(-260px); }
+    .sidebar.open { transform:translateX(260px); }
+    .main { margin-left:0 !important; padding:16px 12px; }
+    .header-bar { flex-direction:column; align-items:flex-start; gap:10px; padding:14px 16px; padding-left:60px; }
+    .stats-grid { grid-template-columns:repeat(2,1fr) !important; }
+    .panel { padding:16px; }
+    .modal { width:92vw !important; max-width:92vw !important; }
+    .form-actions { flex-direction:column; }
+    .form-actions .btn { width:100%; }
+  }
+  @media (max-width: 480px) {
+    .stats-grid { grid-template-columns:1fr !important; }
+    .login-box { padding:28px 20px; }
+  }
   </style>
 </head>
 <body>
+
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="菜单"><span style="display:block;width:18px;height:2px;background:#fff;border-radius:2px;position:relative;"><span style="position:absolute;top:-6px;left:0;width:18px;height:2px;background:#fff;border-radius:2px;"></span><span style="position:absolute;top:6px;left:0;width:18px;height:2px;background:#fff;border-radius:2px;"></span></span></button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <div class="login-bg" id="loginBox">
   <div class="login-box">
@@ -660,11 +684,30 @@ function logout() {
   location.reload();
 }
 
+// ===== 移动端侧栏开关 =====
+function initSidebarToggle() {
+  var toggle = document.getElementById('sidebarToggle');
+  var sidebar = document.querySelector('.sidebar');
+  var overlay = document.getElementById('sidebarOverlay');
+  if (!toggle || !sidebar) return;
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+  toggle.addEventListener('click', function() {
+    var isOpen = sidebar.classList.contains('open');
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('show');
+  });
+  overlay.addEventListener('click', closeSidebar);
+  sidebar.querySelectorAll('.nav-item').forEach(function(item) {
+    item.addEventListener('click', function() { if (window.innerWidth <= 768) closeSidebar(); });
+  });
+}
+
 function initDashboard() {
   document.getElementById('loginBox').style.display = 'none';
   document.getElementById('dashboard').style.display = 'block';
   loadCMSData();
   setupNavigation();
+  initSidebarToggle();
 }
 
 async function loadCMSData() {
