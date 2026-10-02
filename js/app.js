@@ -1340,6 +1340,25 @@ window.addEventListener('offline', function () {
     FIRST_TO_CN[py].push(cn);
   });
 
+  // ===== 景点详情页 URL 映射（name → scenic.html?id=xxx）=====
+  var NAME_TO_SCENIC_ID = (function(){
+    // 景区数据加载后构建反向索引
+    var map = {};
+    if (window.SCENIC_SPOTS) {
+      Object.keys(window.SCENIC_SPOTS).forEach(function(id){
+        var spot = window.SCENIC_SPOTS[id];
+        if (spot && spot.name) map[spot.name] = id;
+      });
+    }
+    return map;
+  })();
+
+  function getScenicPageUrl(itemName) {
+    if (!itemName) return null;
+    var id = NAME_TO_SCENIC_ID[itemName];
+    return id ? 'scenic.html?id=' + encodeURIComponent(id) : null;
+  }
+
   function stripTags(html) {
     if (!html) return '';
     return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -1463,9 +1482,12 @@ window.addEventListener('offline', function () {
       var catBadge = ' <span class="scat">' + r.cat + '</span>';
       var hName = highlightText(item.name, state.searchQuery);
       var hDesc = highlightText(item.desc, state.searchQuery);
-      if (item.url) {
-        var safeUrl = item.url.indexOf('http://') === 0 ? 'https://' + item.url.substring(7) : item.url;
-        return '<a class="sitem" data-name="' + item.name + '" data-cat="' + r.cat + '" data-catid="' + r.catId + '" href="' + safeUrl + '" rel="noopener noreferrer" target="_blank">' +
+      // 优先外部链接 → scenic.html 内部详情页 → 弹窗
+      var linkUrl = item.url || getScenicPageUrl(item.name);
+      if (linkUrl) {
+        var safeUrl = linkUrl.indexOf('http://') === 0 ? 'https://' + linkUrl.substring(7) : linkUrl;
+        var isExternal = item.url && item.url.indexOf('http') === 0;
+        return '<a class="sitem" data-name="' + item.name + '" data-cat="' + r.cat + '" data-catid="' + r.catId + '" href="' + safeUrl + '"' + (isExternal ? ' rel="noopener noreferrer" target="_blank"' : '') + '>' +
           '<div class="sicon">' + getServiceIcon(item.name) + '</div>' +
           '<div class="sinfo">' +
           '<div class="sname">' + hName + catBadge + '</div>' +

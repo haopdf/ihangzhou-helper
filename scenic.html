@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>景点详情 · iHangzhou</title>
+  <meta name="theme-color" content="#0ea5e9">
+  <link rel="stylesheet" href="css/style.css?v=20260921h">
+  <script src="js/layout.js"></script>
+  <script src="js/scenic-data.js"></script>
+  <style>
+    /* 通用详情页样式 */
+    .scenic-hero {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0ea5e9, #075985);
+    }
+    .scenic-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+    }
+    .scenic-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 40%, rgba(0,0,0,0.55));
+    }
+    .scenic-hero .scenic-title-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 16px;
+      z-index: 2;
+      color: #fff;
+    }
+    .scenic-hero .scenic-name {
+      font-size: 24px;
+      font-weight: 800;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .scenic-hero .scenic-sub {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-top: 4px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+
+    .scenic-body { padding: 16px; }
+    .scenic-badge {
+      display: inline-block;
+      font-size: 12px;
+      padding: 4px 10px;
+      background: #e0f2fe;
+      color: #0369a1;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .scenic-info-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 8px 0 16px;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .scenic-info-row {
+      display: flex;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-light);
+      background: var(--bg-card);
+    }
+    .scenic-info-row:last-child { border-bottom: none; }
+    .scenic-info-row .s-ik {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      min-width: 56px;
+      flex-shrink: 0;
+    }
+    .scenic-info-row .s-iv {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .scenic-section {
+      margin: 20px 0 8px;
+    }
+    .scenic-section h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 10px;
+      padding-left: 8px;
+      border-left: 3px solid var(--primary);
+    }
+    .scenic-section p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+    .scenic-tips {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .scenic-tips span {
+      font-size: 13px;
+      color: var(--text);
+      padding: 6px 10px;
+      background: var(--bg);
+      border-radius: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .scenic-tips span::before {
+      content: '✓';
+      color: #10b981;
+      font-weight: 700;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .scenic-highlights {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .scenic-hl-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      background: var(--bg);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .scenic-hl-item .hl-icon { font-size: 18px; }
+
+    .scenic-empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+    .scenic-empty .ei-big { font-size: 64px; margin-bottom: 16px; }
+    .scenic-empty h2 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
+
+    @media (min-width: 768px) {
+      .scenic-hero { height: 320px; }
+      .scenic-body { max-width: 720px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    window.IHZ_PAGE = { title: '景点详情', icon: '🏞️' };
+  </script>
+
+  <div id="scenicContainer">
+    <div class="scenic-empty">
+      <div class="ei-big">�</div>
+      <h2>加载中...</h2>
+    </div>
+  </div>
+
+  <script>
+    function renderScenic(id) {
+      var data = window.SCENIC_SPOTS ? window.SCENIC_SPOTS[id] : null;
+      var container = document.getElementById('scenicContainer');
+      var headerTitle = document.getElementById('headerTitle');
+      if (!data) {
+        container.innerHTML = '<div class="scenic-empty"><div class="ei-big">�</div><h2>未找到该景点</h2><p style="margin:8px 0 16px;">ID: ' + (id || '(空)') + '</p><a href="travel.html" class="btn btn-primary" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;">返回旅游页</a></div>';
+        if (headerTitle) headerTitle.textContent = '景点详情';
+        return;
+      }
+      document.title = data.name + ' · 杭州旅游 · iHangzhou';
+      if (headerTitle) headerTitle.textContent = data.name;
+
+      var html = '<div class="scenic-hero">';
+      html += '<img src="' + data.image + '" alt="' + data.name + '" loading="lazy" onerror="this.style.display=\'none\'">';
+      html += '<div class="scenic-title-bar"><div class="scenic-name">' + data.name + '</div><div class="scenic-sub">' + data.subtitle + '</div></div></div>';
+
+      html += '<div class="scenic-body">';
+      html += '<div class="scenic-badge">' + data.badge + '</div>';
+      html += '<span style="float:right;font-size:12px;color:var(--text-muted);margin-bottom:8px;display:inline-block;">最佳：' + data.seasons + '</span>';
+      html += '<div style="clear:both"></div>';
+
+      // 实用信息
+      html += '<div class="scenic-info-grid">';
+      html += '<div class="scenic-info-row"><span class="s-ik">📍 地址</span><span class="s-iv">' + data.location + '</span></div>';
+      html += '<div class="scenic-info-row"><span class="s-ik">🎫 门票</span><span class="s-iv">' + data.ticket + '</span></div>';
+      html += '<div class="scenic-info-row"><span class="s-ik">� 时间</span><span class="s-iv">' + data.hours + '</span></div>';
+      html += '<div class="scenic-info-row"><span class="s-ik">� 交通</span><span class="s-iv">' + data.traffic + '</span></div>';
+      html += '</div>';
+
+      // 亮点
+      if (data.highlights && data.highlights.length) {
+        html += '<div class="scenic-section"><h3>✨ 亮点特色</h3><div class="scenic-highlights">';
+        data.highlights.forEach(function(h) {
+          html += '<div class="scenic-hl-item"><span class="hl-icon">' + getHlIcon(h) + '</span>' + h + '</div>';
+        });
+        html += '</div></div>';
+      }
+
+      // 简介
+      html += '<div class="scenic-section"><h3>� 景点介绍</h3><p>' + data.guide + '</p></div>';
+
+      // 贴士
+      if (data.tips && data.tips.length) {
+        html += '<div class="scenic-section"><h3>💡 实用贴士</h3><div class="scenic-tips">';
+        data.tips.forEach(function(t) {
+          html += '<span>' + t + '</span>';
+        });
+        html += '</div></div>';
+      }
+
+      html += '<a href="travel.html" class="btn btn-primary" style="display:block;margin-top:20px;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;">← 返回旅游页</a>';
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    function getHlIcon(text) {
+      if (text.indexOf('年') >= 0 || text.indexOf('史') >= 0) return '�️';
+      if (text.indexOf('花') >= 0 || text.indexOf('桂') >= 0 || text.indexOf('梅') >= 0) return '🌸';
+      if (text.indexOf('雪') >= 0 || text.indexOf('冬') >= 0) return '�️';
+      if (text.indexOf('日') >= 0 || text.indexOf('霞') >= 0 || text.indexOf('夕') >= 0) return '🌅';
+      if (text.indexOf('佛') >= 0 || text.indexOf('寺') >= 0 || text.indexOf('塔') >= 0 || text.indexOf('禅') >= 0) return '�';
+      if (text.indexOf('免') >= 0) return '�';
+      if (text.indexOf('古') >= 0) return '�';
+      if (text.indexOf('潮') >= 0 || text.indexOf('江') >= 0) return '�';
+      if (text.indexOf('出') >= 0 || text.indexOf('御') >= 0 || text.indexOf('片') >= 0) return '�';
+      if (text.indexOf('饮') >= 0 || text.indexOf('龙井') >= 0 || text.indexOf('糕') >= 0 || text.indexOf('面') >= 0) return '�';
+      if (text.split('').length <= 4) return '⭐';
+      return '✔️';
+    }
+
+    (function () {
+      var id = location.search.split('id=')[1] || '';
+      id = id.split('&')[0];
+      renderScenic(decodeURIComponent(id));
+    })();
+  </script>
+</body>
+</html>
