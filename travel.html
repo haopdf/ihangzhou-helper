@@ -13,6 +13,7 @@
   <link rel="canonical" href="https://www.ihangzhou.net/travel.html">
   <link rel="stylesheet" href="css/style.css?v=20260921h">
   <script src="js/layout.js"></script>
+  <script src="js/scenic-data.js"></script>
   <style>
     /* 旅游专题页专属样式（独立类名，全部以 .travel- / .tc- 前缀作用于本页卡片上下文） */
     .travel-hero {
@@ -1017,7 +1018,7 @@
       } catch (e) {}
     })();
 
-    // 卡片点击 — 事件委托弹详情
+    // 卡片点击 — 优先跳 scenic.html，无详情则弹 modal
     (function () {
       document.addEventListener('click', function (e) {
         var card = e.target.closest('.travel-card');
@@ -1025,6 +1026,21 @@
         var nameEl = card.querySelector('.tc-name');
         if (!nameEl) return;
         var name = nameEl.textContent.trim();
+        // 去掉月份前缀（如"3月"等 span）
+        name = name.replace(/^\d+月/, '').trim();
+
+        // 匹配 scenic 则直接跳转 detail 页
+        if (window.SCENIC_SPOTS) {
+          var matchedId = null;
+          Object.keys(window.SCENIC_SPOTS).forEach(function(id){
+            if (window.SCENIC_SPOTS[id].name === name) matchedId = id;
+          });
+          if (matchedId) {
+            location.href = 'scenic.html?id=' + encodeURIComponent(matchedId);
+            return;
+          }
+        }
+
         var badgeEl = card.querySelector('.tc-badge');
         var badge = badgeEl ? badgeEl.textContent.trim() : '';
         var metaEl = card.querySelector('.tc-meta');
