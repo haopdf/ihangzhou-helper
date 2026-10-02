@@ -1,30 +1,30 @@
 [
   {
+    "mediaId": "orZdfS8uWtatTZdyGpIsVikQD1k_fHf3TGmyAb8uc5aec8hBfAGV1LHU99qDcJUJ",
+    "title": "满城桂香来了！国庆满觉陇赏桂逛集全指南",
+    "digest": "国庆假期杭州桂花开啦！满觉陇七千株桂树进入初花期，百余家秋日市集沿街铺开，雨中赏桂别有一番味道，这份攻略请收好。",
+    "updateTime": 1790908884,
+    "updateTimeStr": "2026-10-02",
+    "isNew": true,
+    "synced": false,
+    "done": false
+  },
+  {
+    "mediaId": "orZdfS8uWtatTZdyGpIsVvimauZ5D75kM6PXqBvItg12BGKgf__Tqcplf7P5t5sY",
+    "title": "别挤西湖了！国庆滨江这个美食节，100米吃遍大杭州13个区县，还能撸异宠！",
+    "digest": "国庆不出远门，来滨江一站吃遍大杭州！杭帮菜美食嘉年华持续到10月4日，13个区县招牌美食+西兴非遗+异宠互动+巨型月亮打卡，免费入场！",
+    "updateTime": 1790908868,
+    "updateTimeStr": "2026-10-02",
+    "isNew": true,
+    "synced": false,
+    "done": false
+  },
+  {
     "mediaId": "orZdfS8uWtatTZdyGpIsVuwQYnF7fHla50DgpAXk8GTYAOfBYeF8tGGPRTRuOu2a",
     "title": "国庆西湖1天十景路线：杭州人带你避开人潮，每个景都看出门道",
     "digest": "国庆西湖人挤人？杭州人私藏路线，步行+坐船+电瓶车组合，1天走完西湖十景，不走回头路，避开旅行团高峰。附三十景介绍、音乐喷泉、河坊街夜游和国庆避坑指南。",
     "updateTime": 1790815950,
     "updateTimeStr": "2026-10-01",
-    "isNew": false,
-    "synced": true,
-    "done": false
-  },
-  {
-    "mediaId": "orZdfS8uWtatTZdyGpIsVoTLqIeA-_BO81DeoQ5iUNNjy2KmQZEEXQEMiz718V8p",
-    "title": "在杭州住了五年，我发现这座城市根本没有市中心",
-    "digest": "杭州的散装不是因为区县多，是因为它从根上就是一座反中心的城市。西湖是游客的，武林是老杭州的，钱江新城是公务员的，未来科技城是程序员的。每一个都像中心，每一个又都不是。",
-    "updateTime": 1790747360,
-    "updateTimeStr": "2026-09-30",
-    "isNew": false,
-    "synced": true,
-    "done": false
-  },
-  {
-    "mediaId": "orZdfS8uWtatTZdyGpIsVhS-1NJkrvj3PKdfV_8WoYQSOLD0XVmhsBMZ_LMv1G5C",
-    "title": "杭州单身狗越来越多了？一个人也是一种生活方式",
-    "digest": "杭州1262万人，初婚年龄男28.8女27.5。一个人吃饭、逛街、看电影、旅行越来越正常。不是年轻人不结婚，是城市把独处的成本降得越来越低。",
-    "updateTime": 1790743471,
-    "updateTimeStr": "2026-09-30",
     "isNew": false,
     "synced": true,
     "done": false
@@ -74,16 +74,6 @@
     "title": "油焖春笋：杭州人春天最不能错过的一口鲜",
     "digest": "\"春天的第一口鲜，必须留给春笋。\"",
     "updateTime": 1790649784,
-    "updateTimeStr": "2026-09-29",
-    "isNew": false,
-    "synced": true,
-    "done": false
-  },
-  {
-    "mediaId": "orZdfS8uWtatTZdyGpIsVtGEsl8KARPYv3WCvcl76uIfo61IXadG8YcZ0GKSSN1o",
-    "title": "葱包桧：杭州人恨秦桧一千年，把恨意做成了早餐",
-    "digest": "名字里藏着杭州人对秦桧的千年恨意——每天早上\"吃\"他一遍。老油条、葱白、甜面酱三要素，孙奶奶和大马弄的摊子怎么找，这篇讲全。",
-    "updateTime": 1790649485,
     "updateTimeStr": "2026-09-29",
     "isNew": false,
     "synced": true,
@@ -175,8 +165,8 @@
     "digest": "酱鸭——年节餐桌上的酱香与杭州人的腌腊记忆",
     "updateTime": 1790608164,
     "updateTimeStr": "2026-09-28",
-    "isNew": true,
-    "synced": false,
+    "isNew": false,
+    "synced": true,
     "done": false
   },
   {
@@ -185,8 +175,8 @@
     "digest": "腌笃鲜与春笋时令——咸肉鲜肉与春笋同炖的江南春味",
     "updateTime": 1790608158,
     "updateTimeStr": "2026-09-28",
-    "isNew": true,
-    "synced": false,
+    "isNew": false,
+    "synced": true,
     "done": false
   },
   {
@@ -194,6 +184,16 @@
     "title": "杭州人的深夜甜味：一碗糖水，治愈一整天的疲惫",
     "digest": "八宝饭——糯米豆沙里的宴席甜菜与团圆讲究",
     "updateTime": 1790608152,
+    "updateTimeStr": "2026-09-28",
+    "isNew": false,
+    "synced": true,
+    "done": false
+  },
+  {
+    "mediaId": "orZdfS8uWtatTZdyGpIsVhf85wyF8vEFbm9S6OAsczzpHK-Pobq51uo37idgD69Y",
+    "title": "绿茶糕：杭州把春天揉进点心里，一口就是西湖",
+    "digest": "龙井茶宴——以茶入菜，从龙井虾仁到茶香满席的现代演绎",
+    "updateTime": 1790608146,
     "updateTimeStr": "2026-09-28",
     "isNew": true,
     "synced": false,
