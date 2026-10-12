@@ -406,7 +406,8 @@ window.addEventListener('offline', function () {
           { name: "限行查询", desc: "今日尾号限行", action: "xianxing" },
           { name: "个税计算", desc: "工资个税计算器", action: "tax" },
           { name: "房贷计算", desc: "月供/利息计算", action: "loan" },
-          { name: "社保计算", desc: "缴费比例/金额", action: "sbcalc" },
+          { name: "五险一金计算", desc: "社保+公积金缴费", action: "sbcalc" },
+          { name: "退休年龄测算", desc: "渐进式延迟退休", action: "retire" },
           { name: "万年历", desc: "农历/节气/黄历", action: "calendar" },
           { name: "杭州天气", desc: "实时天气/预报", action: "weather" },
           { name: "油价查询", desc: "今日成品油价格", action: "youjia" },
@@ -1763,6 +1764,7 @@ window.addEventListener('offline', function () {
       case 'tax': showTaxCalc(); break;
       case 'loan': showLoanCalc(); break;
       case 'sbcalc': showSbCalc(); break;
+      case 'retire': showRetire(); break;
       case 'district': showDistrict(); break;
 case 'idcheck': showIdCheck(); break;
 case 'platecheck': showPlateCheck(); break;
@@ -2530,30 +2532,105 @@ case 'colors': showColors(); break;
   };
 
   function showSbCalc() {
-    openModal('🏥 社保计算器',
+    openModal('🏦 五险一金计算器',
       '<div class="calc-form">' +
-      '<div class="fg"><label>缴费基数（元/月）</label><input type="number" id="sbBase" value="8000"></div>' +
-      '<div style="padding:12px;background:var(--bg);border-radius:8px;font-size:13px;line-height:1.8;">' +
-      '<strong>杭州社保比例（参考）：</strong><br>个人：养老8%+医疗2%+失业0.5%=10.5%<br>单位：养老14%+医疗9.9%+失业0.5%+工伤0.5%+生育0.8%≈25.7%</div>' +
-      '<button class="btn btn-primary" onclick="window._calcSb()">计算社保</button>' +
+      '<div class="fg"><label>社保缴费基数（元/月）</label><input type="number" id="sbBase" value="8000" min="4812" max="24060"></div>' +
+      '<div class="fg"><label>公积金缴存基数（元/月）</label><input type="number" id="gjjBase" value="8000" min="2490" max="39530"></div>' +
+      '<div class="fg"><label>公积金缴存比例（个人 = 单位，5%~12%）</label><select id="gjjRate">' +
+        '<option value="0.05">5%</option><option value="0.06">6%</option><option value="0.07">7%</option>' +
+        '<option value="0.08">8%</option><option value="0.09">9%</option><option value="0.10">10%</option>' +
+        '<option value="0.11">11%</option><option value="0.12" selected>12%</option></select></div>' +
+      '<div style="padding:12px;background:var(--bg);border-radius:8px;font-size:12px;line-height:1.9;color:var(--text-secondary);">' +
+      '<strong>杭州 2024 年度基数</strong>：社保下限 4812 / 上限 24060；公积金下限 2490 / 上限 39530。<br>' +
+      '<strong>比例</strong>　个人：养老8%·医疗2%·失业0.5%　单位：养老14%·医疗9.9%·失业0.5%·工伤0.5%·生育0.8%</div>' +
+      '<button class="btn btn-primary" onclick="window._calcSb()">计算五险一金</button>' +
       '</div><div id="sbResult"></div>'
     );
+    // 社保基数变动时同步公积金基数（用户未手动改过的前提下）
+    var sbEl = $('#sbBase');
+    if (sbEl) sbEl.addEventListener('input', function () {
+      var g = $('#gjjBase'); if (g && !g.dataset.touched) g.value = sbEl.value;
+    });
+    var gEl = $('#gjjBase');
+    if (gEl) gEl.addEventListener('input', function () { gEl.dataset.touched = '1'; });
   }
 
   window._calcSb = function () {
     var base = parseFloat($('#sbBase').value) || 0;
+    var gjjBase = parseFloat($('#gjjBase').value) || base;
+    var rate = parseFloat($('#gjjRate').value) || 0.12;
+    if (base <= 0) { showToast('请输入正确缴费基数'); return; }
+    // 五险
     var p = { '养老': base * 0.08, '医疗': base * 0.02, '失业': base * 0.005 };
     var c = { '养老': base * 0.14, '医疗': base * 0.099, '失业': base * 0.005, '工伤': base * 0.005, '生育': base * 0.008 };
-    var pt = p.养老 + p.医疗 + p.失业;
-    var ct = c.养老 + c.医疗 + c.失业 + c.工伤 + c.生育;
+    var pSb = p.养老 + p.医疗 + p.失业;
+    var cSb = c.养老 + c.医疗 + c.失业 + c.工伤 + c.生育;
+    // 公积金
+    var pG = gjjBase * rate, cG = gjjBase * rate;
+    var pTotal = pSb + pG, cTotal = cSb + cG;
+    var fmt = function (n) { return '¥' + n.toFixed(2); };
     $('#sbResult').innerHTML =
-      '<div class="calc-result"><div class="cr-amount">¥' + pt.toFixed(2) + '</div>' +
-      '<div class="cr-label">个人每月缴纳</div>' +
-      '<div class="cr-detail">单位每月：¥' + ct.toFixed(2) + '<br>社保总费用：¥' + (pt + ct).toFixed(2) + '<br>进入个人账户：¥' + (p.养老 + p.医疗).toFixed(2) + '</div></div>' +
-      '<div style="margin-top:10px;font-size:13px;line-height:1.8;">' +
-      '<strong>个人：</strong>养老¥' + p.养老.toFixed(2) + ' · 医疗¥' + p.医疗.toFixed(2) + ' · 失业¥' + p.失业.toFixed(2) + '<br>' +
-      '<strong>单位：</strong>养老¥' + c.养老.toFixed(2) + ' · 医疗¥' + c.医疗.toFixed(2) + ' · 失业¥' + c.失业.toFixed(2) + ' · 工伤¥' + c.工伤.toFixed(2) + ' · 生育¥' + c.生育.toFixed(2) + '</div>' +
-      '<p class="modal-tip">比例为参考值，以社保局为准</p>';
+      '<div class="calc-result"><div class="cr-amount">' + fmt(pTotal) + '</div>' +
+      '<div class="cr-label">个人每月合计（五险一金）</div>' +
+      '<div class="cr-detail">单位每月合计：' + fmt(cTotal) + '<br>双方每月总计：' + fmt(pTotal + cTotal) + '<br>进入个人账户：' + fmt(p.养老 + p.医疗 + pG) + '</div></div>' +
+      '<div style="margin-top:10px;font-size:13px;line-height:1.9;">' +
+      '<strong>个人</strong>｜养老' + fmt(p.养老) + ' 医疗' + fmt(p.医疗) + ' 失业' + fmt(p.失业) + ' 公积金' + fmt(pG) + '<br>' +
+      '<strong>单位</strong>｜养老' + fmt(c.养老) + ' 医疗' + fmt(c.医疗) + ' 失业' + fmt(c.失业) + ' 工伤' + fmt(c.工伤) + ' 生育' + fmt(c.生育) + ' 公积金' + fmt(cG) +
+      '</div><p class="modal-tip">比例为杭州参考值，以社保 / 公积金中心最新公布为准</p>';
+  };
+
+  // ===== 退休年龄计算器（渐进式延迟退休，2025-01-01 起施行） =====
+  function showRetire() {
+    openModal('🎂 退休年龄计算器',
+      '<div class="calc-form">' +
+      '<div class="fg"><label>人员类别</label><select id="rtType">' +
+        '<option value="m">男职工（原 60 周岁）</option>' +
+        '<option value="f55">女职工 · 管理 / 技术岗（原 55 周岁）</option>' +
+        '<option value="f50">女职工 · 工人岗（原 50 周岁）</option>' +
+      '</select></div>' +
+      '<div class="fg"><label>出生年月</label><input type="month" id="rtBirth" value="1975-06"></div>' +
+      '<button class="btn btn-primary" onclick="window._calcRetire()">测算法定退休年龄</button>' +
+      '<div id="rtResult"></div>' +
+      '<p class="modal-tip">依据《关于实施渐进式延迟法定退休年龄的决定》（2025-01-01 起施行）</p>' +
+      '</div>'
+    );
+  }
+
+  // 渐进式延迟月数：自 startY-startM 起，每 step 个月出生延迟 1 个月，上限 cap 个月
+  function retireDelay(y, m, sy, sm, step, cap) {
+    var monthsSince = (y - sy) * 12 + (m - sm);
+    if (monthsSince < 0) return 0;
+    return Math.min(Math.floor(monthsSince / step) + 1, cap);
+  }
+
+  window._calcRetire = function () {
+    var type = $('#rtType').value;
+    var birth = $('#rtBirth').value;
+    if (!birth || birth.indexOf('-') < 0) { showToast('请选择出生年月'); return; }
+    var parts = birth.split('-');
+    var y = parseInt(parts[0], 10), m = parseInt(parts[1], 10);
+    var baseAge, delay;
+    if (type === 'm') { baseAge = 60; delay = retireDelay(y, m, 1965, 1, 4, 36); }
+    else if (type === 'f55') { baseAge = 55; delay = retireDelay(y, m, 1970, 1, 4, 36); }
+    else { baseAge = 50; delay = retireDelay(y, m, 1975, 1, 2, 60); }
+    // 原退休年月 + 延迟月数 → 实际退休年月
+    var baseY = y + baseAge, baseM = m;
+    var total = (baseM - 1) + delay;
+    var ry = baseY + Math.floor(total / 12);
+    var rm = total % 12 + 1;
+    // 最低缴费年限：2030 起每年提高 6 个月，至 20 年封顶
+    var minY = 15;
+    if (ry >= 2030) minY = Math.min(20, 15 + (ry - 2030) * 0.5);
+    var minStr = (minY % 1 === 0) ? minY + ' 年' : minY.toFixed(1) + ' 年';
+    var dy = Math.floor(delay / 12), dm = delay % 12;
+    var delayStr = delay > 0 ? ('已渐进延迟 ' + (dy ? dy + ' 年' : '') + (dm ? dm + ' 个月' : '') + (dy && dm ? '' : '')) : '未延迟（按原法定年龄）';
+    $('#rtResult').innerHTML =
+      '<div class="calc-result"><div class="cr-amount">' + baseAge + ' 岁' + (delay > 0 ? ' <span style="font-size:16px;">+' + delay + ' 月</span>' : '') + '</div>' +
+      '<div class="cr-label">法定退休年龄' + (delay > 0 ? '（' + delayStr + '）' : '') + '</div>' +
+      '<div class="cr-detail">预计退休时间：' + ry + ' 年 ' + rm + ' 月<br>' +
+      '最低缴费年限：' + minStr + '（2030 起逐年提高至 20 年）<br>' +
+      '弹性退休：可在 ±3 年内自愿选择</div></div>' +
+      '<p class="modal-tip">测算仅供参考；特殊工种、病退等政策以人社部门认定为准</p>';
   };
 
   // ===== 金价查询 =====
