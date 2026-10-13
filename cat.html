@@ -15,7 +15,7 @@
   <link rel="canonical" href="https://www.ihangzhou.net/cat.html">
   <link rel="manifest" href="manifest.json">
   <title>iHangzhou · 杭州生活栏目</title>
-  <link rel="stylesheet" href="css/style.css?v=20261013b">
+  <link rel="stylesheet" href="css/style.css?v=20261013c">
   <link rel="icon" type="image/png" href="images/logo-mark-96.png">
   <link rel="apple-touch-icon" href="images/logo-mark-192.png">
   <script src="js/layout.js"></script>
@@ -53,9 +53,15 @@
     </div>
   </div>
 
-  <script src="js/cat-data.js?v=20261013b"></script>
-  <script src="js/app.js?v=20261013b"></script>
-  <script src="js/analytics.js?v=20261013b"></script>
+  <script src="js/cat-data.js?v=20261013c"></script>
+  <script src="js/app.js?v=20261013c"></script>
+  <script src="js/analytics.js?v=20261013c"></script>
+  <script>
+    /* 统一布局（页头 / 页脚导航）——与 travel / banshi 等页一致 */
+    if (window.IZ && IZ.layout) {
+      document.addEventListener('DOMContentLoaded', IZ.layout.init);
+    }
+  </script>
   <script>
     /* ============================================
        栏目页渲染
@@ -68,9 +74,10 @@
       var params = new URLSearchParams(location.search);
       var catKey = (params.get('c') || '').trim();
       var subName = (params.get('s') || '').trim();
+      var thirdName = (params.get('t') || '').trim();
 
       var DATA = window.CAT_DATA || [];
-      var cat = null, sub = null;
+      var cat = null, sub = null, third = null;
       for (var i = 0; i < DATA.length; i++) {
         if (DATA[i].k === catKey) { cat = DATA[i]; break; }
       }
@@ -80,6 +87,12 @@
           if (cat.subs[j].n === subName) { sub = cat.subs[j]; break; }
         }
         if (!sub) { location.replace('cat.html?c=' + encodeURIComponent(catKey)); return; }
+      }
+      if (sub && thirdName) {
+        for (var k = 0; k < sub.th.length; k++) {
+          if (sub.th[k][1] === thirdName) { third = sub.th[k]; break; }
+        }
+        if (!third) { location.replace('cat.html?c=' + encodeURIComponent(catKey) + '&s=' + encodeURIComponent(sub.n)); return; }
       }
 
       var $ = function (id) { return document.getElementById(id); };
@@ -93,12 +106,20 @@
       $('catCrumb').innerHTML =
         '<a href="index.html">首页</a><span class="cc-sep">/</span>' +
         '<a href="cat.html?c=' + encodeURIComponent(cat.k) + '">' + esc(cat.n) + '</a>' +
-        (sub ? '<span class="cc-sep">/</span><b>' + esc(sub.n) + '</b>' : '');
+        (sub ? '<span class="cc-sep">/</span><a href="cat.html?c=' + encodeURIComponent(cat.k) +
+          '&s=' + encodeURIComponent(sub.n) + '">' + esc(sub.n) + '</a>' : '') +
+        (third ? '<span class="cc-sep">/</span><b>' + esc(third[1]) + '</b>' : '');
 
       /* ---------- Hero ---------- */
       var hero = $('catHero');
       hero.style.setProperty('--ci', cat.c);
-      if (sub) {
+      if (third) {
+        document.title = third[1] + ' · ' + sub.n + ' · ' + cat.n + ' · iHangzhou';
+        hero.innerHTML =
+          '<div class="ch-badge">' + sub.ic + ' ' + esc(sub.n) + '</div>' +
+          '<h1>' + third[0] + ' ' + esc(third[1]) + '</h1>' +
+          '<p>「' + esc(third[1]) + '」相关攻略、入口与文章，隶属于「' + esc(cat.n) + ' · ' + esc(sub.n) + '」。</p>';
+      } else if (sub) {
         document.title = sub.n + ' · ' + cat.n + ' · iHangzhou';
         hero.innerHTML =
           '<div class="ch-badge">' + cat.ic + ' ' + esc(cat.n) + '</div>' +
@@ -115,13 +136,22 @@
       var body = $('catBody');
 
       /* ---------- 二级栏目页 ---------- */
+      function thirdHref(t) {
+        var u = t[2] || '';
+        // 站内动作与外链保持直跳；站内页面/搜索改为进入三级栏目页
+        if (/^#act:|^https?:|^javascript:/.test(u)) return u;
+        return 'cat.html?c=' + encodeURIComponent(cat.k) + '&s=' + encodeURIComponent(sub.n) +
+          '&t=' + encodeURIComponent(t[1]);
+      }
+
       function renderSubPage() {
         var html = '';
 
         // 三级入口
-        html += '<div class="cat-block"><div class="cat-sec-ttl">📂 三级入口</div><div class="cat-third">' +
+        html += '<div class="cat-block"><div class="cat-sec-ttl">📂 三级入口 <span class="cat-more">' +
+          sub.th.length + ' 个</span></div><div class="cat-third">' +
           sub.th.map(function (t) {
-            var u = t[2] || '';
+            var u = thirdHref(t);
             var ext = /^https?:/.test(u);
             var attrs = ext ? ' href="' + esc(u) + '" target="_blank" rel="noopener"' : ' href="' + esc(u) + '"';
             return '<a class="cat-third-card"' + attrs + '>' +
@@ -157,6 +187,49 @@
         loadArticles();
       }
 
+      /* ---------- 三级栏目页 ---------- */
+      function renderThirdPage() {
+        var dest = third[2] || '';
+        // 若三级目标只是笼统的栏目主页（如 banshi.html），降级为按三级名搜索文章，避免「点哪个都回同一个页」
+        if (dest && dest === cat.home) {
+          dest = 'articles.html?q=' + encodeURIComponent(third[1]);
+        }
+        var html = '';
+
+        // 直达入口（保留该三级原本的目标）
+        if (dest && !/^#act:/.test(dest)) {
+          var ext = /^https?:/.test(dest);
+          var attrs = ext ? ' href="' + esc(dest) + '" target="_blank" rel="noopener"' : ' href="' + esc(dest) + '"';
+          html += '<div class="cat-block"><a class="cat-home-btn"' + attrs + ' style="--ci:' + cat.c + '">' +
+            '直达「' + esc(third[1]) + '」 →</a></div>';
+        }
+
+        // 相关文章（以三级名 + 二级关键词联合匹配）
+        html += '<div class="cat-block"><div class="cat-sec-ttl">📖 相关文章 <span class="cat-more" id="catArtCount"></span></div>' +
+          '<div class="cat-arts" id="catArts"><div class="cat-empty">正在加载相关文章…</div></div></div>';
+
+        // 同二级下其他三级
+        html += '<div class="cat-block"><div class="cat-sec-ttl">📂 同栏目其他三级</div><div class="cat-subnav">' +
+          sub.th.map(function (t) {
+            var on = t[1] === third[1] ? ' on' : '';
+            var u = thirdHref(t);
+            var ext = /^https?:/.test(u);
+            var attrs = ext ? ' href="' + esc(u) + '" target="_blank" rel="noopener"' : ' href="' + esc(u) + '"';
+            return '<a class="cat-subnav-btn' + on + '"' + attrs + '>' + t[0] + ' ' + esc(t[1]) + '</a>';
+          }).join('') + '</div></div>';
+
+        // 返回二级
+        html += '<div class="cat-block"><div class="cat-sec-ttl">🧭 返回上级</div><div class="cat-subnav">' +
+          '<a class="cat-subnav-btn" href="cat.html?c=' + encodeURIComponent(cat.k) +
+          '&s=' + encodeURIComponent(sub.n) + '">' + sub.ic + ' ' + esc(sub.n) + '</a>' +
+          '<a class="cat-subnav-btn" href="cat.html?c=' + encodeURIComponent(cat.k) + '">' +
+          cat.ic + ' ' + esc(cat.n) + '</a>' +
+          '<a class="cat-subnav-btn" href="index.html">🏠 首页</a>' +
+          '</div></div>';
+
+        body.innerHTML = html;
+        loadArticles();
+      }
       /* ---------- 一级栏目页 ---------- */
       function renderCatPage() {
         var html = '';
@@ -197,7 +270,13 @@
 
       /* ---------- 文章匹配 ---------- */
       function loadArticles() {
-        var kws = sub ? (sub.kw || []) : (cat.kw || []);
+        // 三级页：三级名权重最高，辅以二级关键词，避免匹配结果过窄
+        var kws = [];
+        if (third) {
+          kws = [third[1]].concat(sub.kw || []);
+        } else {
+          kws = sub ? (sub.kw || []) : (cat.kw || []);
+        }
         fetch('articles/index.json?t=' + Date.now())
           .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
           .then(function (list) {
@@ -238,7 +317,9 @@
           });
       }
 
-      if (sub) renderSubPage(); else renderCatPage();
+      if (third) renderThirdPage();
+      else if (sub) renderSubPage();
+      else renderCatPage();
 
       /* ---------- 动作链接分发（#act:xxx） ---------- */
       function toast(msg) {

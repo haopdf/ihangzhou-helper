@@ -484,7 +484,7 @@ span.logo-icon {
 /* ===== 快捷导航（本地宝风格） ===== */
 .quick-nav {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   padding: 0 16px;
   margin-bottom: 10px;
@@ -3928,7 +3928,7 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
 
 /* ---- 通用分节 ---- */
 .home-sec {
-  padding: 14px 16px 4px;
+  padding: 14px 0 4px;
 }
 .home-sec .sec-h {
   font-size: 17px;
@@ -3950,14 +3950,16 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
 /* ---- 全部分类：8 个一级栏目（2 列卡片） ---- */
 .cat-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
+  padding: 0 16px;
 }
 .cat-card {
   position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius);
@@ -4051,7 +4053,7 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
 }
 .sub-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   padding: 0 16px 16px;
 }
@@ -4059,6 +4061,7 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
   display: flex;
   align-items: center;
   gap: 11px;
+  min-width: 0;
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius);
@@ -4125,7 +4128,7 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
 }
 
 /* ---- 公众号精选：左图右文信息流 ---- */
-.wx-feed { display: flex; flex-direction: column; gap: 10px; }
+.wx-feed { display: flex; flex-direction: column; gap: 10px; padding: 0 16px; }
 .wx-post {
   display: flex;
   background: var(--bg-card);
@@ -4233,18 +4236,21 @@ body.search-mode .tide-feature {
   }
   #pageHome .home-sec,
   #pageHome .explore-section { max-width: 1180px; margin-left: auto; margin-right: auto; }
+  #pageHome .cat-grid,
+  #pageHome .wx-feed,
+  #pageHome .svc-grid { padding-left: 0; padding-right: 0; }
   #pageHome .hot-strip { max-width: 1180px; margin-left: auto; margin-right: auto; padding-left: 0; padding-right: 0; }
 
   /* 全部分类：桌面 4 列 */
-  .cat-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .cat-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
   /* 二级栏目：桌面 4 列 */
-  .sub-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .sub-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
   /* 常用服务：桌面 8 列一行 */
-  .svc-grid { grid-template-columns: repeat(8, 1fr); }
+  .svc-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
   /* 公众号精选：桌面双列 */
   .wx-feed {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
   /* 今日杭州保持 4 列（已有规则），卡片更大 */
@@ -4254,8 +4260,8 @@ body.search-mode .tide-feature {
 }
 
 @media (min-width: 1440px) {
-  .cat-grid { grid-template-columns: repeat(4, 1fr); }
-  .wx-feed { grid-template-columns: repeat(3, 1fr); }
+  .cat-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .wx-feed { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 /* ============================================
@@ -4330,12 +4336,13 @@ body.search-mode .tide-feature {
 }
 
 /* ---- 二级栏目网格（一级栏目页） ---- */
-.cat-subs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-@media (min-width: 1024px) { .cat-subs { grid-template-columns: repeat(4, 1fr); gap: 12px; } }
+.cat-subs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (min-width: 1024px) { .cat-subs { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; } }
 .cat-sub-card {
   display: flex;
   align-items: center;
   gap: 11px;
+  min-width: 0;
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius);
@@ -4380,13 +4387,14 @@ body.search-mode .tide-feature {
 .cs-ar { flex-shrink: 0; color: var(--text-muted); font-size: 18px; font-weight: 800; }
 
 /* ---- 三级入口（二级栏目页） ---- */
-.cat-third { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-@media (min-width: 1024px) { .cat-third { grid-template-columns: repeat(8, 1fr); } }
+.cat-third { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+@media (min-width: 1024px) { .cat-third { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
 .cat-third-card {
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius);
   padding: 12px 4px;
+  min-width: 0;
   text-align: center;
   text-decoration: none;
   color: var(--text);
@@ -4530,3 +4538,26 @@ body.search-mode .tide-feature {
   transition: all var(--transition-fast);
 }
 .cat-back a:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+/* ---- 三级栏目页：上级返回条 ---- */
+.cat-third-back {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.cat-third-back a {
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+.cat-third-back a:hover {
+  border-color: color-mix(in srgb, var(--ci, var(--primary)) 40%, var(--border));
+  color: var(--primary);
+}

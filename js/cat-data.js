@@ -75,10 +75,10 @@ window.CAT_DATA = [
         d: '小河直街·大兜路·馒头山 老城慢游',
         i: '避开人潮，钻进小河直街、大兜路、馒头山这些有故事的街巷，感受老杭州的烟火气。',
         th: [
-          ['🏠', '小河直街', 'street.html'], ['🛤️', '大兜路', 'street.html'],
-          ['⛰️', '馒头山', 'street.html'], ['🏮', '河坊街', 'articles.html?q=%E6%B2%B3%E5%9D%8A%E8%A1%97'],
+          ['🏠', '小河直街', 'street.html'], ['🛤️', '大兜路', 'articles.html?q=%E5%A4%A7%E5%85%9C%E8%B7%AF'],
+          ['⛰️', '馒头山', 'articles.html?q=%E9%A6%92%E5%A4%B4%E5%B1%B1'], ['🏮', '河坊街', 'articles.html?q=%E6%B2%B3%E5%9D%8A%E8%A1%97'],
           ['🌳', '五柳巷', 'history.html'], ['🏯', '南宋御街', 'history.html'],
-          ['🌅', '北山街', 'street.html'], ['🌊', '南山路', 'street.html']
+          ['🌅', '北山街', 'articles.html?q=%E5%8C%97%E5%B1%B1%E8%A1%97'], ['🌊', '南山路', 'articles.html?q=%E5%8D%97%E5%B1%B1%E8%B7%AF']
         ],
         ft: [
           ['🛍️', '逛街购物频道', '商圈、街道与城市记忆', 'street.html'],
@@ -185,10 +185,10 @@ window.CAT_DATA = [
         d: '西湖边·写字楼·独立咖啡',
         i: '西湖边景观咖啡、写字楼平价咖啡、小众独立咖啡馆，一份杭州咖啡地图。',
         th: [
-          ['🌅', '西湖边', 'coffee.html'], ['🏙️', '写字楼', 'coffee.html'],
-          ['🏡', '青芝坞', 'coffee.html'], ['⛰️', '馒头山', 'coffee.html'],
-          ['🍵', '四眼井', 'coffee.html'], ['🌿', '满觉陇', 'coffee.html'],
-          ['🏭', '天目里', 'coffee.html'], ['💡', '东信和创', 'coffee.html']
+          ['🌅', '西湖边', 'coffee.html'], ['🏙️', '写字楼', 'articles.html?q=%E5%86%99%E5%AD%97%E6%A5%BC'],
+          ['🏡', '青芝坞', 'articles.html?q=%E9%9D%92%E8%8A%9D%E5%9D%9E'], ['⛰️', '馒头山', 'articles.html?q=%E9%A6%92%E5%A4%B4%E5%B1%B1'],
+          ['🍵', '四眼井', 'articles.html?q=%E5%9B%9B%E7%9C%BC%E4%BA%95'], ['🌿', '满觉陇', 'articles.html?q=%E6%BB%A1%E8%A7%89%E9%99%87'],
+          ['🏭', '天目里', 'articles.html?q=%E5%A4%A9%E7%9B%AE%E9%87%8C'], ['💡', '东信和创', 'articles.html?q=%E4%B8%9C%E4%BF%A1%E5%92%8C%E5%88%9B']
         ],
         ft: [
           ['☕', '咖啡馆指南', '景观、平价与独立咖啡地图', 'coffee.html'],
@@ -202,10 +202,10 @@ window.CAT_DATA = [
         d: '知味观·奎元馆 百年老店',
         i: '知味观、奎元馆、王润兴——这些百年老字号的必点与避坑指南。',
         th: [
-          ['🥟', '知味观', 'laozihao.html'], ['🍜', '奎元馆', 'laozihao.html'],
-          ['🐟', '楼外楼', 'laozihao.html'], ['🍲', '王润兴', 'laozihao.html'],
-          ['🌿', '胡庆余堂', 'laozihao.html'], ['🪭', '王星记', 'laozihao.html'],
-          ['✂️', '张小泉', 'laozihao.html'], ['🏥', '方回春堂', 'laozihao.html']
+          ['🥟', '知味观', 'laozihao.html'], ['🍜', '奎元馆', 'articles.html?q=%E5%A5%8E%E5%85%83%E9%A6%86'],
+          ['🐟', '楼外楼', 'articles.html?q=%E6%A5%BC%E5%A4%96%E6%A5%BC'], ['🍲', '王润兴', 'articles.html?q=%E7%8E%8B%E6%B6%A6%E5%85%B4'],
+          ['🌿', '胡庆余堂', 'articles.html?q=%E8%83%A1%E5%BA%86%E4%BD%99%E5%A0%82'], ['🪭', '王星记', 'articles.html?q=%E7%8E%8B%E6%98%9F%E8%AE%B0'],
+          ['✂️', '张小泉', 'articles.html?q=%E5%BC%A0%E5%B0%8F%E6%B3%89'], ['🏥', '方回春堂', 'articles.html?q=%E6%96%B9%E5%9B%9E%E6%98%A5%E5%A0%82']
         ],
         ft: [
           ['🏮', '百年老店频道', '杭州老字号品牌全集', 'laozihao.html'],
@@ -456,10 +456,10 @@ window.CAT_DATA = [
         d: '缴费/余额/明细',
         i: '杭州社保查询包括五险缴费记录与个人账户余额，线上查询已对接浙里办与电子社保卡，无需到社保大厅。',
         th: [
-          ['💳', '社保查询', 'banshi.html'], ['🔁', '社保转移', 'banshi.html'],
-          ['💰', '社保缴费', 'banshi.html'], ['🏥', '医保报销', 'banshi.html'],
-          ['👴', '养老待遇', 'banshi.html'], ['💼', '失业金', 'banshi.html'],
-          ['🏭', '工伤认定', 'banshi.html'], ['📋', '灵活就业', 'banshi.html']
+          ['💳', '社保查询', 'banshi.html'], ['🔁', '社保转移', 'articles.html?q=%E7%A4%BE%E4%BF%9D%E8%BD%AC%E7%A7%BB'],
+          ['💰', '社保缴费', 'articles.html?q=%E7%A4%BE%E4%BF%9D%E7%BC%B4%E8%B4%B9'], ['🏥', '医保报销', 'articles.html?q=%E5%8C%BB%E4%BF%9D%E6%8A%A5%E9%94%80'],
+          ['👴', '养老待遇', 'articles.html?q=%E5%85%BB%E8%80%81%E5%BE%85%E9%81%87'], ['💼', '失业金', 'articles.html?q=%E5%A4%B1%E4%B8%9A%E9%87%91'],
+          ['🏭', '工伤认定', 'articles.html?q=%E5%B7%A5%E4%BC%A4%E8%AE%A4%E5%AE%9A'], ['📋', '灵活就业', 'articles.html?q=%E7%81%B5%E6%B4%BB%E5%B0%B1%E4%B8%9A']
         ],
         ft: [
           ['🧰', '办事大厅频道', '社保公积金落户全入口', 'banshi.html'],
@@ -473,10 +473,10 @@ window.CAT_DATA = [
         d: '查询/提取/贷款',
         i: '杭州住房公积金查询覆盖余额、缴存明细、提取记录与贷款额度测算，已开通线上全流程。',
         th: [
-          ['🏦', '余额查询', 'banshi.html'], ['💸', '租房提取', 'banshi.html'],
-          ['🏠', '购房提取', 'banshi.html'], ['🔁', '还贷提取', 'banshi.html'],
-          ['📄', '转移接续', 'banshi.html'], ['🏗️', '贷款测算', 'banshi.html'],
-          ['👴', '退休提取', 'banshi.html'], ['📊', '缴存证明', 'banshi.html']
+          ['🏦', '余额查询', 'banshi.html'], ['💸', '租房提取', 'articles.html?q=%E7%A7%9F%E6%88%BF%E6%8F%90%E5%8F%96'],
+          ['🏠', '购房提取', 'articles.html?q=%E8%B4%AD%E6%88%BF%E6%8F%90%E5%8F%96'], ['🔁', '还贷提取', 'articles.html?q=%E8%BF%98%E8%B4%B7%E6%8F%90%E5%8F%96'],
+          ['📄', '转移接续', 'articles.html?q=%E8%BD%AC%E7%A7%BB%E6%8E%A5%E7%BB%AD'], ['🏗️', '贷款测算', 'articles.html?q=%E8%B4%B7%E6%AC%BE%E6%B5%8B%E7%AE%97'],
+          ['👴', '退休提取', 'articles.html?q=%E9%80%80%E4%BC%91%E6%8F%90%E5%8F%96'], ['📊', '缴存证明', 'articles.html?q=%E7%BC%B4%E5%AD%98%E8%AF%81%E6%98%8E']
         ],
         ft: [
           ['🧰', '办事大厅频道', '全部办事入口', 'banshi.html'],
@@ -490,10 +490,10 @@ window.CAT_DATA = [
         d: '人才引进·积分落户',
         i: '杭州落户含人才引进、积分落户、投靠落户等渠道，附条件对照与办理入口。',
         th: [
-          ['📋', '人才引进', 'banshi.html'], ['🧮', '积分落户', 'banshi.html'],
-          ['👨‍👩‍👧', '投靠落户', 'banshi.html'], ['🎓', '学历落户', 'banshi.html'],
-          ['🏠', '购房落户', 'banshi.html'], ['💼', '就业落户', 'banshi.html'],
-          ['📄', '居住证', 'banshi.html'], ['🆔', '身份证', 'banshi.html']
+          ['📋', '人才引进', 'banshi.html'], ['🧮', '积分落户', 'articles.html?q=%E7%A7%AF%E5%88%86%E8%90%BD%E6%88%B7'],
+          ['👨‍👩‍👧', '投靠落户', 'articles.html?q=%E6%8A%95%E9%9D%A0%E8%90%BD%E6%88%B7'], ['🎓', '学历落户', 'articles.html?q=%E5%AD%A6%E5%8E%86%E8%90%BD%E6%88%B7'],
+          ['🏠', '购房落户', 'articles.html?q=%E8%B4%AD%E6%88%BF%E8%90%BD%E6%88%B7'], ['💼', '就业落户', 'articles.html?q=%E5%B0%B1%E4%B8%9A%E8%90%BD%E6%88%B7'],
+          ['📄', '居住证', 'articles.html?q=%E5%B1%85%E4%BD%8F%E8%AF%81'], ['🆔', '身份证', 'articles.html?q=%E8%BA%AB%E4%BB%BD%E8%AF%81']
         ],
         ft: [
           ['🧰', '办事大厅频道', '落户与证件办理入口', 'banshi.html'],
@@ -507,10 +507,10 @@ window.CAT_DATA = [
         d: '公交·地铁·限行',
         i: '限行查询、地铁公交、火车机票、打车租车、停车缴费、违章处理，出行无忧。',
         th: [
-          ['🚗', '尾号限行', 'banshi.html'], ['🚇', '地铁线路', 'banshi.html'],
-          ['🚌', '实时公交', 'banshi.html'], ['🚄', '火车票', 'banshi.html'],
-          ['✈️', '机票', 'banshi.html'], ['🅿️', '停车缴费', 'banshi.html'],
-          ['🚕', '打车租车', 'banshi.html'], ['⚠️', '违章处理', 'banshi.html']
+          ['🚗', '尾号限行', 'banshi.html'], ['🚇', '地铁线路', 'articles.html?q=%E5%9C%B0%E9%93%81%E7%BA%BF%E8%B7%AF'],
+          ['🚌', '实时公交', 'articles.html?q=%E5%AE%9E%E6%97%B6%E5%85%AC%E4%BA%A4'], ['🚄', '火车票', 'articles.html?q=%E7%81%AB%E8%BD%A6%E7%A5%A8'],
+          ['✈️', '机票', 'articles.html?q=%E6%9C%BA%E7%A5%A8'], ['🅿️', '停车缴费', 'articles.html?q=%E5%81%9C%E8%BD%A6%E7%BC%B4%E8%B4%B9'],
+          ['🚕', '打车租车', 'articles.html?q=%E6%89%93%E8%BD%A6%E7%A7%9F%E8%BD%A6'], ['⚠️', '违章处理', 'articles.html?q=%E8%BF%9D%E7%AB%A0%E5%A4%84%E7%90%86']
         ],
         ft: [
           ['🚌', '出行交通频道', '限行地铁公交全入口', 'traffic.html'],
@@ -524,10 +524,10 @@ window.CAT_DATA = [
         d: '杭州 13 区县',
         i: '上城、拱墅、西湖、滨江、萧山、余杭、临平、钱塘、富阳、临安、桐庐、淳安、建德——13 区县特色一站查。',
         th: [
-          ['🏙️', '上城区', 'district.html'], ['🌳', '拱墅区', 'district.html'],
-          ['⛲', '西湖区', 'district.html'], ['💻', '滨江区', 'district.html'],
-          ['✈️', '萧山区', 'district.html'], ['🏞️', '余杭区', 'district.html'],
-          ['🏭', '临平区', 'district.html'], ['🌊', '钱塘区', 'district.html'],
+          ['🏙️', '上城区', 'district.html'], ['🌳', '拱墅区', 'articles.html?q=%E6%8B%B1%E5%A2%85%E5%8C%BA'],
+          ['⛲', '西湖区', 'articles.html?q=%E8%A5%BF%E6%B9%96%E5%8C%BA'], ['💻', '滨江区', 'articles.html?q=%E6%BB%A8%E6%B1%9F%E5%8C%BA'],
+          ['✈️', '萧山区', 'articles.html?q=%E8%90%A7%E5%B1%B1%E5%8C%BA'], ['🏞️', '余杭区', 'articles.html?q=%E4%BD%99%E6%9D%AD%E5%8C%BA'],
+          ['🏭', '临平区', 'articles.html?q=%E4%B8%B4%E5%B9%B3%E5%8C%BA'], ['🌊', '钱塘区', 'articles.html?q=%E9%92%B1%E5%A1%98%E5%8C%BA'],
         ],
         ft: [
           ['🏙️', '杭州 13 区县', '区县特色与办事入口', 'district.html'],
@@ -541,10 +541,10 @@ window.CAT_DATA = [
         d: '摇号·年检·违章',
         i: '浙A摇号、年检、违章处理、驾驶证换证——车主高频事项一次办。',
         th: [
-          ['🚘', '浙A摇号', 'banshi.html'], ['🔧', '车辆年检', 'banshi.html'],
-          ['⚠️', '违章查询', 'banshi.html'], ['🪪', '驾驶证', 'banshi.html'],
-          ['🅿️', '停车位', 'banshi.html'], ['⛽', '加油充电', 'banshi.html'],
-          ['🚧', '道路施工', 'banshi.html'], ['🧾', '高速收费', 'banshi.html']
+          ['🚘', '浙A摇号', 'banshi.html'], ['🔧', '车辆年检', 'articles.html?q=%E8%BD%A6%E8%BE%86%E5%B9%B4%E6%A3%80'],
+          ['⚠️', '违章查询', 'articles.html?q=%E8%BF%9D%E7%AB%A0%E6%9F%A5%E8%AF%A2'], ['🪪', '驾驶证', 'articles.html?q=%E9%A9%BE%E9%A9%B6%E8%AF%81'],
+          ['🅿️', '停车位', 'articles.html?q=%E5%81%9C%E8%BD%A6%E4%BD%8D'], ['⛽', '加油充电', 'articles.html?q=%E5%8A%A0%E6%B2%B9%E5%85%85%E7%94%B5'],
+          ['🚧', '道路施工', 'articles.html?q=%E9%81%93%E8%B7%AF%E6%96%BD%E5%B7%A5'], ['🧾', '高速收费', 'articles.html?q=%E9%AB%98%E9%80%9F%E6%94%B6%E8%B4%B9']
         ],
         ft: [
           ['🚘', '浙A摇号申请', '指标申请与结果查询', 'banshi.html'],
@@ -558,10 +558,10 @@ window.CAT_DATA = [
         d: '21 个一键复制',
         i: '政务热线、投诉举报、急难救助、公共服务——杭州常用电话一键复制。',
         th: [
-          ['📞', '12345 热线', 'banshi.html'], ['🚨', '报警 110', 'banshi.html'],
-          ['🚑', '急救 120', 'banshi.html'], ['🔥', '火警 119', 'banshi.html'],
-          ['💧', '水电燃气', 'banshi.html'], ['🏥', '卫生热线', 'banshi.html'],
-          ['🚌', '公交服务', 'banshi.html'], ['📮', '邮政客服', 'banshi.html']
+          ['📞', '12345 热线', 'banshi.html'], ['🚨', '报警 110', 'articles.html?q=%E6%8A%A5%E8%AD%A6%20110'],
+          ['🚑', '急救 120', 'articles.html?q=%E6%80%A5%E6%95%91%20120'], ['🔥', '火警 119', 'articles.html?q=%E7%81%AB%E8%AD%A6%20119'],
+          ['💧', '水电燃气', 'articles.html?q=%E6%B0%B4%E7%94%B5%E7%87%83%E6%B0%94'], ['🏥', '卫生热线', 'articles.html?q=%E5%8D%AB%E7%94%9F%E7%83%AD%E7%BA%BF'],
+          ['🚌', '公交服务', 'articles.html?q=%E5%85%AC%E4%BA%A4%E6%9C%8D%E5%8A%A1'], ['📮', '邮政客服', 'articles.html?q=%E9%82%AE%E6%94%BF%E5%AE%A2%E6%9C%8D']
         ],
         ft: [
           ['📞', '常用电话本', '21 个号码一键复制', '#act:home'],
@@ -600,10 +600,10 @@ window.CAT_DATA = [
         d: '央企·市属国企',
         i: '央企在杭机构、杭州市属国企招聘公告与报名入口汇总。',
         th: [
-          ['🏢', '央企在杭', 'zhaopin.html'], ['🏙️', '市属国企', 'zhaopin.html'],
-          ['💼', '区县城投', 'zhaopin.html'], ['🏭', '制造业国企', 'zhaopin.html'],
-          ['⚡', '能源电力', 'zhaopin.html'], ['🚇', '轨道交通', 'zhaopin.html'],
-          ['🏥', '医疗卫生', 'zhaopin.html'], ['🎓', '校招通道', 'zhaopin.html']
+          ['🏢', '央企在杭', 'zhaopin.html'], ['🏙️', '市属国企', 'articles.html?q=%E5%B8%82%E5%B1%9E%E5%9B%BD%E4%BC%81'],
+          ['💼', '区县城投', 'articles.html?q=%E5%8C%BA%E5%8E%BF%E5%9F%8E%E6%8A%95'], ['🏭', '制造业国企', 'articles.html?q=%E5%88%B6%E9%80%A0%E4%B8%9A%E5%9B%BD%E4%BC%81'],
+          ['⚡', '能源电力', 'articles.html?q=%E8%83%BD%E6%BA%90%E7%94%B5%E5%8A%9B'], ['🚇', '轨道交通', 'articles.html?q=%E8%BD%A8%E9%81%93%E4%BA%A4%E9%80%9A'],
+          ['🏥', '医疗卫生', 'articles.html?q=%E5%8C%BB%E7%96%97%E5%8D%AB%E7%94%9F'], ['🎓', '校招通道', 'articles.html?q=%E6%A0%A1%E6%8B%9B%E9%80%9A%E9%81%93']
         ],
         ft: [
           ['💼', '求职招聘频道', '国企事业名企全入口', 'zhaopin.html'],
@@ -617,10 +617,10 @@ window.CAT_DATA = [
         d: '教师·医护·科研',
         i: '杭州事业单位统一公开招聘，教师、医护、科研岗位公告与考试安排。',
         th: [
-          ['🎓', '教师招聘', 'zhaopin.html'], ['🏥', '医护招聘', 'zhaopin.html'],
-          ['🔬', '科研岗位', 'zhaopin.html'], ['📚', '高校教辅', 'zhaopin.html'],
-          ['🏛️', '文化场馆', 'zhaopin.html'], ['🌳', '园林环卫', 'zhaopin.html'],
-          ['📋', '报名流程', 'zhaopin.html'], ['📝', '考试大纲', 'zhaopin.html']
+          ['🎓', '教师招聘', 'zhaopin.html'], ['🏥', '医护招聘', 'articles.html?q=%E5%8C%BB%E6%8A%A4%E6%8B%9B%E8%81%98'],
+          ['🔬', '科研岗位', 'articles.html?q=%E7%A7%91%E7%A0%94%E5%B2%97%E4%BD%8D'], ['📚', '高校教辅', 'articles.html?q=%E9%AB%98%E6%A0%A1%E6%95%99%E8%BE%85'],
+          ['🏛️', '文化场馆', 'articles.html?q=%E6%96%87%E5%8C%96%E5%9C%BA%E9%A6%86'], ['🌳', '园林环卫', 'articles.html?q=%E5%9B%AD%E6%9E%97%E7%8E%AF%E5%8D%AB'],
+          ['📋', '报名流程', 'articles.html?q=%E6%8A%A5%E5%90%8D%E6%B5%81%E7%A8%8B'], ['📝', '考试大纲', 'articles.html?q=%E8%80%83%E8%AF%95%E5%A4%A7%E7%BA%B2']
         ],
         ft: [
           ['🎓', '事业单位招聘', '统一招聘公告与入口', 'zhaopin.html'],
@@ -634,10 +634,10 @@ window.CAT_DATA = [
         d: '阿里·网易·海康',
         i: '阿里巴巴、网易、海康威视、蚂蚁集团——杭州名企招聘入口与内推渠道。',
         th: [
-          ['🏙️', '阿里巴巴', 'zhaopin.html'], ['📧', '网易', 'zhaopin.html'],
-          ['📹', '海康威视', 'zhaopin.html'], ['🐜', '蚂蚁集团', 'zhaopin.html'],
-          ['💻', '字节跳动', 'zhaopin.html'], ['🛒', '电商零售', 'zhaopin.html'],
-          ['🤖', 'AI 人工智能', 'zhaopin.html'], ['🚗', '智能驾驶', 'zhaopin.html']
+          ['🏙️', '阿里巴巴', 'zhaopin.html'], ['📧', '网易', 'articles.html?q=%E7%BD%91%E6%98%93'],
+          ['📹', '海康威视', 'articles.html?q=%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86'], ['🐜', '蚂蚁集团', 'articles.html?q=%E8%9A%82%E8%9A%81%E9%9B%86%E5%9B%A2'],
+          ['💻', '字节跳动', 'articles.html?q=%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8'], ['🛒', '电商零售', 'articles.html?q=%E7%94%B5%E5%95%86%E9%9B%B6%E5%94%AE'],
+          ['🤖', 'AI 人工智能', 'articles.html?q=AI%20%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD'], ['🚗', '智能驾驶', 'articles.html?q=%E6%99%BA%E8%83%BD%E9%A9%BE%E9%A9%B6']
         ],
         ft: [
           ['💻', '杭州互联网业', '大厂地图与产业分布', 'internet.html'],
@@ -651,10 +651,10 @@ window.CAT_DATA = [
         d: '学生兼职·实习',
         i: '大学生兼职、暑期实习、转正机会——杭州学生党赚钱与攒经验指南。',
         th: [
-          ['💡', '学生兼职', 'zhaopin.html'], ['🎒', '暑期实习', 'zhaopin.html'],
-          ['🔄', '转正机会', 'zhaopin.html'], ['🏫', '校园大使', 'zhaopin.html'],
-          ['🎨', '设计接单', 'zhaopin.html'], ['✍️', '文案写作', 'zhaopin.html'],
-          ['📹', '视频剪辑', 'zhaopin.html'], ['🎤', '主持礼仪', 'zhaopin.html']
+          ['💡', '学生兼职', 'zhaopin.html'], ['🎒', '暑期实习', 'articles.html?q=%E6%9A%91%E6%9C%9F%E5%AE%9E%E4%B9%A0'],
+          ['🔄', '转正机会', 'articles.html?q=%E8%BD%AC%E6%AD%A3%E6%9C%BA%E4%BC%9A'], ['🏫', '校园大使', 'articles.html?q=%E6%A0%A1%E5%9B%AD%E5%A4%A7%E4%BD%BF'],
+          ['🎨', '设计接单', 'articles.html?q=%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8D%95'], ['✍️', '文案写作', 'articles.html?q=%E6%96%87%E6%A1%88%E5%86%99%E4%BD%9C'],
+          ['📹', '视频剪辑', 'articles.html?q=%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91'], ['🎤', '主持礼仪', 'articles.html?q=%E4%B8%BB%E6%8C%81%E7%A4%BC%E4%BB%AA']
         ],
         ft: [
           ['💰', '杭州搞钱副业指南', '众包、探店、摆摊、AI 副业', 'articles.html?q=%E5%81%9A%E9%92%B1%E5%89%AF%E4%B8%9A'],
@@ -668,10 +668,10 @@ window.CAT_DATA = [
         d: '高层次人才申请',
         i: '杭州高层次人才分类认定（A-E 类），附条件对照、申请材料与补贴政策。',
         th: [
-          ['🏅', 'A 类人才', 'banshi.html'], ['🏆', 'B 类人才', 'banshi.html'],
-          ['🥇', 'C 类人才', 'banshi.html'], ['🎖️', 'D 类人才', 'banshi.html'],
-          ['📜', 'E 类人才', 'banshi.html'], ['💰', '购房补贴', 'banshi.html'],
-          ['🎓', '生活补贴', 'banshi.html'], ['🏥', '医疗待遇', 'banshi.html']
+          ['🏅', 'A 类人才', 'banshi.html'], ['🏆', 'B 类人才', 'articles.html?q=B%20%E7%B1%BB%E4%BA%BA%E6%89%8D'],
+          ['🥇', 'C 类人才', 'articles.html?q=C%20%E7%B1%BB%E4%BA%BA%E6%89%8D'], ['🎖️', 'D 类人才', 'articles.html?q=D%20%E7%B1%BB%E4%BA%BA%E6%89%8D'],
+          ['📜', 'E 类人才', 'articles.html?q=E%20%E7%B1%BB%E4%BA%BA%E6%89%8D'], ['💰', '购房补贴', 'articles.html?q=%E8%B4%AD%E6%88%BF%E8%A1%A5%E8%B4%B4'],
+          ['🎓', '生活补贴', 'articles.html?q=%E7%94%9F%E6%B4%BB%E8%A1%A5%E8%B4%B4'], ['🏥', '医疗待遇', 'articles.html?q=%E5%8C%BB%E7%96%97%E5%BE%85%E9%81%87']
         ],
         ft: [
           ['🎓', '人才认定申请', '高层次人才分类认定入口', 'banshi.html'],
@@ -685,10 +685,10 @@ window.CAT_DATA = [
         d: '杭州互联网地图',
         i: '未来科技城、滨江高新区、云栖小镇——杭州互联网产业地图与迁徙史。',
         th: [
-          ['💻', '未来科技城', 'internet.html'], ['🏙️', '滨江高新区', 'internet.html'],
-          ['☁️', '云栖小镇', 'internet.html'], ['🎮', '游戏电竞', 'internet.html'],
-          ['🤖', 'AI 六小龙', 'internet.html'], ['🛒', '电商直播', 'internet.html'],
-          ['🚗', '智能网联车', 'internet.html'], ['💾', '云计算大数据', 'internet.html']
+          ['💻', '未来科技城', 'internet.html'], ['🏙️', '滨江高新区', 'articles.html?q=%E6%BB%A8%E6%B1%9F%E9%AB%98%E6%96%B0%E5%8C%BA'],
+          ['☁️', '云栖小镇', 'articles.html?q=%E4%BA%91%E6%A0%96%E5%B0%8F%E9%95%87'], ['🎮', '游戏电竞', 'articles.html?q=%E6%B8%B8%E6%88%8F%E7%94%B5%E7%AB%9E'],
+          ['🤖', 'AI 六小龙', 'articles.html?q=AI%20%E5%85%AD%E5%B0%8F%E9%BE%99'], ['🛒', '电商直播', 'articles.html?q=%E7%94%B5%E5%95%86%E7%9B%B4%E6%92%AD'],
+          ['🚗', '智能网联车', 'articles.html?q=%E6%99%BA%E8%83%BD%E7%BD%91%E8%81%94%E8%BD%A6'], ['💾', '云计算大数据', 'articles.html?q=%E4%BA%91%E8%AE%A1%E7%AE%97%E5%A4%A7%E6%95%B0%E6%8D%AE']
         ],
         ft: [
           ['💻', '杭州互联网业', '大厂聚集地与数字经济高地', 'internet.html'],
@@ -888,10 +888,10 @@ window.CAT_DATA = [
         d: '湖滨·武林·万象城',
         i: '湖滨银泰、武林商圈、万象城、天目里——杭州商圈地图与逛街路线。',
         th: [
-          ['🏬', '湖滨商圈', 'street.html'], ['🛍️', '武林商圈', 'street.html'],
-          ['🏙️', '钱江新城', 'street.html'], ['🏭', '天目里', 'street.html'],
-          ['💻', '滨江商圈', 'street.html'], ['✈️', '萧山商圈', 'street.html'],
-          ['🏞️', '余杭商圈', 'street.html'], ['🌊', '下沙商圈', 'street.html']
+          ['🏬', '湖滨商圈', 'street.html'], ['🛍️', '武林商圈', 'articles.html?q=%E6%AD%A6%E6%9E%97%E5%95%86%E5%9C%88'],
+          ['🏙️', '钱江新城', 'articles.html?q=%E9%92%B1%E6%B1%9F%E6%96%B0%E5%9F%8E'], ['🏭', '天目里', 'articles.html?q=%E5%A4%A9%E7%9B%AE%E9%87%8C'],
+          ['💻', '滨江商圈', 'articles.html?q=%E6%BB%A8%E6%B1%9F%E5%95%86%E5%9C%88'], ['✈️', '萧山商圈', 'articles.html?q=%E8%90%A7%E5%B1%B1%E5%95%86%E5%9C%88'],
+          ['🏞️', '余杭商圈', 'articles.html?q=%E4%BD%99%E6%9D%AD%E5%95%86%E5%9C%88'], ['🌊', '下沙商圈', 'articles.html?q=%E4%B8%8B%E6%B2%99%E5%95%86%E5%9C%88']
         ],
         ft: [
           ['🛍️', '逛街购物频道', '商圈与街道故事', 'street.html'],
@@ -939,10 +939,10 @@ window.CAT_DATA = [
         d: '知味观·奎元馆',
         i: '知味观、奎元馆、王润兴、胡庆余堂——百年老字号的必点与避坑。',
         th: [
-          ['🥟', '知味观', 'laozihao.html'], ['🍜', '奎元馆', 'laozihao.html'],
-          ['🐟', '楼外楼', 'laozihao.html'], ['🍲', '王润兴', 'laozihao.html'],
-          ['🌿', '胡庆余堂', 'laozihao.html'], ['🪭', '王星记', 'laozihao.html'],
-          ['✂️', '张小泉', 'laozihao.html'], ['🏥', '方回春堂', 'laozihao.html']
+          ['🥟', '知味观', 'laozihao.html'], ['🍜', '奎元馆', 'articles.html?q=%E5%A5%8E%E5%85%83%E9%A6%86'],
+          ['🐟', '楼外楼', 'articles.html?q=%E6%A5%BC%E5%A4%96%E6%A5%BC'], ['🍲', '王润兴', 'articles.html?q=%E7%8E%8B%E6%B6%A6%E5%85%B4'],
+          ['🌿', '胡庆余堂', 'articles.html?q=%E8%83%A1%E5%BA%86%E4%BD%99%E5%A0%82'], ['🪭', '王星记', 'articles.html?q=%E7%8E%8B%E6%98%9F%E8%AE%B0'],
+          ['✂️', '张小泉', 'articles.html?q=%E5%BC%A0%E5%B0%8F%E6%B3%89'], ['🏥', '方回春堂', 'articles.html?q=%E6%96%B9%E5%9B%9E%E6%98%A5%E5%A0%82']
         ],
         ft: [
           ['🏮', '百年老店频道', '杭州老字号全集', 'laozihao.html'],
@@ -956,10 +956,10 @@ window.CAT_DATA = [
         d: '景观·独立咖啡',
         i: '西湖边景观咖啡、小众独立咖啡馆、写字楼平价咖啡——杭州咖啡地图。',
         th: [
-          ['🌅', '西湖边', 'coffee.html'], ['🏙️', '写字楼', 'coffee.html'],
-          ['🏡', '青芝坞', 'coffee.html'], ['⛰️', '馒头山', 'coffee.html'],
-          ['🍵', '四眼井', 'coffee.html'], ['🌿', '满觉陇', 'coffee.html'],
-          ['🏭', '天目里', 'coffee.html'], ['💡', '东信和创', 'coffee.html']
+          ['🌅', '西湖边', 'coffee.html'], ['🏙️', '写字楼', 'articles.html?q=%E5%86%99%E5%AD%97%E6%A5%BC'],
+          ['🏡', '青芝坞', 'articles.html?q=%E9%9D%92%E8%8A%9D%E5%9D%9E'], ['⛰️', '馒头山', 'articles.html?q=%E9%A6%92%E5%A4%B4%E5%B1%B1'],
+          ['🍵', '四眼井', 'articles.html?q=%E5%9B%9B%E7%9C%BC%E4%BA%95'], ['🌿', '满觉陇', 'articles.html?q=%E6%BB%A1%E8%A7%89%E9%99%87'],
+          ['🏭', '天目里', 'articles.html?q=%E5%A4%A9%E7%9B%AE%E9%87%8C'], ['💡', '东信和创', 'articles.html?q=%E4%B8%9C%E4%BF%A1%E5%92%8C%E5%88%9B']
         ],
         ft: [
           ['☕', '咖啡馆指南', '杭州咖啡地图', 'coffee.html'],
