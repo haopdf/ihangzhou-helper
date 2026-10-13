@@ -16,36 +16,42 @@
   <script src="js/scenic-data.js"></script>
   <style>
     /* 旅游专题页专属样式（独立类名，全部以 .travel- / .tc- 前缀作用于本页卡片上下文） */
+    /* Hero 区：与办事/美食/博物馆等频道页保持一致的 .ch-hero 品牌样式 */
     .travel-hero {
-      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 60%, #075985 100%);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: #fff;
-      padding: 14px 16px 14px 16px;
+      padding: 26px 16px 20px;
       text-align: center;
-      padding-top: max(14px, env(safe-area-inset-top));
+    }
+    .travel-hero-ic {
+      font-size: 46px;
+      line-height: 1;
+      margin-bottom: 8px;
     }
     .travel-hero h1 {
-      font-size: 22px;
-      font-weight: 800;
-      margin: 0 0 6px;
-      letter-spacing: 1px;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: 0.5px;
     }
     .travel-hero p {
       font-size: 13px;
-      opacity: 0.92;
+      opacity: 0.9;
+      margin-top: 6px;
       line-height: 1.5;
     }
     .travel-hero .travel-tags {
       display: flex;
       justify-content: center;
       gap: 6px;
-      margin-top: 12px;
+      margin-top: 14px;
       font-size: 11px;
-      opacity: 0.9;
+      opacity: 0.92;
       flex-wrap: wrap;
     }
     .travel-hero .travel-tags span {
       background: rgba(255,255,255,0.18);
-      padding: 4px 16px;
+      padding: 4px 14px;
       border-radius: 12px;
       font-weight: 500;
     }
@@ -339,8 +345,9 @@
     window.IZ_SKIP_APP_THEME = true;
   </script>
 
-  <!-- Hero 区 -->
-  <div class="travel-hero">
+  <!-- Hero 区（.ch-hero 与办事/美食等频道页同款） -->
+  <div class="ch-hero travel-hero">
+    <div class="travel-hero-ic">🏞️</div>
     <h1>杭州旅游大全</h1>
     <p>西湖 + 古镇 + 赏花 + 四季 + 夜景 一站齐</p>
     <div class="travel-tags">
