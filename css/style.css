@@ -8,36 +8,40 @@
      iHangzhou 品牌色板（源自 Logo：三潭印月·鎏金墨绿）
      松绿 = 主色 / 鎏金 = 点缀 / 帛白 = 底色
      ============================================ */
-  --primary: #1b4d3e;        /* 松绿 */
-  --primary-light: #2e7a5f;  /* 苔绿 */
-  --primary-dark: #10352a;   /* 墨绿 */
-  --gold: #c9a227;           /* 鎏金 */
-  --gold-light: #e6c96a;
-  --secondary: #c9a227;
-  --accent: #c9a227;
+  --primary: #1f7a5a;        /* 松绿（v7 改版主色） */
+  --primary-light: #2f9d74;  /* 苔绿 */
+  --primary-dark: #15603f;   /* 墨绿 */
+  --gold: #c8932b;           /* 鎏金 */
+  --gold-light: #e0b45e;
+  --secondary: #c8932b;
+  --accent: #c8932b;
   --danger: #d64541;
-  --success: #2e7a5f;
-  --warning: #c9a227;
+  --success: #2f9d74;
+  --warning: #c8932b;
 
-  --bg: #f6f4ee;             /* 帛白 */
+  --bg: #f7f4ec;             /* 帛白 */
   --bg-card: #ffffff;
   --bg-hover: #e9f0ea;
-  --bg-alt: #f0ede3;         /* 米白 */
-  --text: #1c2b22;           /* 绿调墨色 */
-  --text-secondary: #4a5b50;
+  --bg-alt: #efece1;         /* 米白 */
+  --text: #1c2522;           /* 绿调墨色 */
+  --text-secondary: #5b6b64;
   --text-muted: #8b968d;
-  --border: #e0dcce;
+  --border: #e3ddd0;
   --border-light: #ece9dd;
+
+  /* v7 改版浅色底色调：图标砖 / 热点胶囊 / 日历日期块 */
+  --primary-100: #e3f1ea;
+  --accent-100: #f7edd6;
 
   /* 阴影：绿墨色调，三层层级 + 品牌投影 */
   --shadow-sm: 0 1px 2px 0 rgba(28, 43, 34, 0.05);
   --shadow: 0 1px 2px 0 rgba(28, 43, 34, 0.05), 0 2px 8px -2px rgba(28, 43, 34, 0.07);
   --shadow-md: 0 4px 16px -4px rgba(28, 43, 34, 0.12), 0 2px 6px -2px rgba(28, 43, 34, 0.06);
-  --shadow-lg: 0 12px 32px -8px rgba(16, 53, 42, 0.20), 0 4px 12px -4px rgba(28, 43, 34, 0.08);
-  --shadow-brand: 0 6px 20px -6px rgba(27, 77, 62, 0.50);
+  --shadow-lg: 0 12px 32px -8px rgba(21, 96, 63, 0.20), 0 4px 12px -4px rgba(28, 43, 34, 0.08);
+  --shadow-brand: 0 6px 20px -6px rgba(31, 122, 90, 0.50);
 
   /* 圆角梯度：8 / 12 / 16 / 20 —— 视觉节奏统一 */
-  --radius: 12px;
+  --radius: 14px;
   --radius-sm: 8px;
   --radius-lg: 16px;
   --radius-xl: 20px;
@@ -47,7 +51,7 @@
   --transition-fast: 0.15s var(--ease);
   --transition: 0.25s var(--ease);
 
-  --focus-ring: 0 0 0 3px rgba(27, 77, 62, 0.35);
+  --focus-ring: 0 0 0 3px rgba(31, 122, 90, 0.35);
 }
 
 [data-theme="dark"] {
@@ -55,10 +59,10 @@
   --primary: #4cbe93;
   --primary-light: #7cd8b4;
   --primary-dark: #2e7a5f;
-  --gold: #d9b84a;
+  --gold: #d9a84a;
   --gold-light: #ecd48a;
-  --secondary: #d9b84a;
-  --accent: #d9b84a;
+  --secondary: #d9a84a;
+  --accent: #d9a84a;
   --danger: #e5726e;
   --success: #4cbe93;
   --warning: #d9b84a;
@@ -78,6 +82,10 @@
   --shadow-lg: 0 12px 32px -8px rgba(0, 0, 0, 0.55), 0 4px 12px -4px rgba(0, 0, 0, 0.3);
   --shadow-brand: 0 6px 20px -6px rgba(56, 189, 248, 0.35);
   --focus-ring: 0 0 0 3px rgba(76, 190, 147, 0.40);
+
+  /* v7 改版浅色底色调（暗色下调暗，避免图标砖发灰） */
+  --primary-100: #21332c;
+  --accent-100: #33291a;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -114,7 +122,7 @@ a { color: var(--primary); text-decoration: none; }
 }
 
 ::selection {
-  background: rgba(27, 77, 62, 0.18);
+  background: rgba(31, 122, 90, 0.18);
   color: var(--text);
 }
 
@@ -138,7 +146,7 @@ a { color: var(--primary); text-decoration: none; }
   display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 2px 16px -4px rgba(27, 77, 62, 0.50);
+  box-shadow: 0 2px 16px -4px rgba(31, 122, 90, 0.50);
 }
 
 /* ===== 搜索激活态：隐藏 brand / actions，扩展搜索框 ===== */
@@ -958,7 +966,7 @@ span.logo-icon {
   justify-content: center;
   font-size: 19px;
   flex-shrink: 0;
-  box-shadow: 0 3px 10px -3px rgba(27, 77, 62, 0.5);
+  box-shadow: 0 3px 10px -3px rgba(31, 122, 90, 0.5);
 }
 
 .sinfo { flex: 1; min-width: 0; }
@@ -1772,7 +1780,7 @@ body > .page, .content, .art-list,
   height: 54px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  box-shadow: 0 6px 20px rgba(27, 77, 62, 0.45);
+  box-shadow: 0 6px 20px rgba(31, 122, 90, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2182,7 +2190,7 @@ body > .page, .content, .art-list,
   padding: 12px 14px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 6px 20px -8px rgba(16, 53, 42, 0.60);
+  box-shadow: 0 6px 20px -8px rgba(21, 96, 63, 0.60);
 }
 
 /* 右上柔光，增加质感层次 */
@@ -2194,7 +2202,7 @@ body > .page, .content, .art-list,
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: rgba(201, 162, 39, 0.18);
+  background: rgba(200, 147, 43, 0.18);
   pointer-events: none;
 }
 
@@ -3911,3 +3919,341 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
 .ec-icon { font-size: 28px; display: block; margin-bottom: 4px; }
 .ec-name { font-size: 13px; font-weight: 700; color: var(--text); display: block; }
 .ec-tag { font-size: 10px; color: var(--text-muted); display: block; margin-top: 2px; }
+
+/* ============================================
+   v7 改版 · 首页信息架构组件
+   今日杭州 → 全部分类(8 一级栏目) → 快捷入口
+   → 热点栏目 → 公众号精选 → 常用服务
+   ============================================ */
+
+/* ---- 通用分节 ---- */
+.home-sec {
+  padding: 14px 16px 4px;
+}
+.home-sec .sec-h {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+  margin: 4px 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.2px;
+}
+.home-sec .sec-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin: 0 0 10px;
+}
+
+/* ---- 全部分类：8 个一级栏目（2 列卡片） ---- */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.cat-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 12px 10px;
+  text-decoration: none;
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    border-color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+.cat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: color-mix(in srgb, var(--ci, var(--primary)) 30%, var(--border-light));
+}
+.cat-card:active { transform: scale(0.97); }
+.cat-ic {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  color: #fff;
+  background: var(--ci, var(--primary));
+  box-shadow: 0 4px 10px -4px var(--ci, var(--primary));
+}
+.cat-body { min-width: 0; flex: 1; }
+.cat-nm {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: 0.2px;
+}
+.cat-ds {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cat-ar {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* ---- 一级栏目展开：二级栏目面板 ---- */
+.cat-subs-panel { display: none; }
+.cat-subs-panel.on { display: block; }
+.cat-subs-panel .back-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px 8px;
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 13px;
+}
+.cat-subs-panel .back-bar:active { opacity: 0.7; }
+.cat-subs-hero {
+  background: linear-gradient(135deg, var(--ci, var(--primary)), var(--primary-dark));
+  color: #fff;
+  padding: 16px;
+  margin: 0 16px 12px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-brand);
+}
+.cat-subs-hero h1 {
+  font-size: 20px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cat-subs-hero p {
+  font-size: 12.5px;
+  opacity: 0.92;
+  margin-top: 5px;
+  line-height: 1.6;
+}
+.sub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 0 16px 16px;
+}
+.sub-card {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 12px 10px;
+  text-decoration: none;
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+.sub-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.sub-card:active { transform: scale(0.97); }
+.sub-ic {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 21px;
+  color: #fff;
+  background: var(--ci, var(--primary));
+}
+.sub-card .nm {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+}
+.sub-card .ds {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.35;
+}
+
+/* ---- 热点栏目：横向滚动胶囊 ---- */
+.hot-strip {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 16px 6px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.hot-strip::-webkit-scrollbar { display: none; }
+.hot-strip a {
+  flex-shrink: 0;
+  background: var(--accent-100);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 7px 13px;
+  border-radius: 16px;
+  text-decoration: none;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  white-space: nowrap;
+  transition: transform var(--transition-fast);
+}
+.hot-strip a:active { transform: scale(0.94); }
+[data-theme="dark"] .hot-strip a {
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* ---- 公众号精选：左图右文信息流 ---- */
+.wx-feed { display: flex; flex-direction: column; gap: 10px; }
+.wx-post {
+  display: flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+.wx-post:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.wx-post:active { transform: scale(0.98); }
+.wx-ph {
+  width: 104px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 30px;
+}
+.wx-bd { padding: 10px 12px; flex: 1; min-width: 0; }
+.wx-bd h4 {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text);
+  font-weight: 700;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.wx-mt {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.wx-mt .wx-tag {
+  color: var(--accent);
+  font-weight: 700;
+}
+/* 运营位标识 */
+.wx-post.promo { position: relative; }
+.wx-post.promo .wx-flag {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 10px;
+  z-index: 2;
+}
+.wx-post.promo .wx-bd h4 { color: var(--accent); }
+
+/* ---- 常用服务：4 列紧凑网格（复用 .hot-grid 数据） ---- */
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.svc-grid .hot-card { padding: 12px 4px; border-radius: var(--radius); }
+.svc-grid .hot-icon {
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 6px;
+  border-radius: 11px;
+  font-size: 20px;
+}
+.svc-grid .hot-name { font-size: 12px; font-weight: 600; }
+
+/* ---- 搜索态：隐藏全部首页内容分节，只留搜索结果 ---- */
+body.search-mode .home-sec,
+body.search-mode .explore-section,
+body.search-mode .cat-subs-panel,
+body.search-mode .tide-feature {
+  display: none !important;
+}
+
+/* ============================================
+   v7 改版 · PC 宽屏「真网页」布局（≥1024px）
+   移动端保持原样，宽屏下居中容器 + 多列网格
+   ============================================ */
+@media (min-width: 1024px) {
+  /* 首页内容居中收窄，避免通栏拉太散 */
+  #pageHome { max-width: 1240px; margin: 0 auto; }
+  #pageHome .today-hangzhou,
+  #pageHome .tide-card,
+  #pageHome .district-info,
+  #pageHome .district-nav,
+  #pageHome .news-banner,
+  #pageHome .content,
+  #pageHome .cat-subs-hero,
+  #pageHome .sub-grid {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1180px;
+  }
+  #pageHome .home-sec,
+  #pageHome .explore-section { max-width: 1180px; margin-left: auto; margin-right: auto; }
+  #pageHome .hot-strip { max-width: 1180px; margin-left: auto; margin-right: auto; padding-left: 0; padding-right: 0; }
+
+  /* 全部分类：桌面 4 列 */
+  .cat-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  /* 二级栏目：桌面 4 列 */
+  .sub-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  /* 常用服务：桌面 8 列一行 */
+  .svc-grid { grid-template-columns: repeat(8, 1fr); }
+  /* 公众号精选：桌面双列 */
+  .wx-feed {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  /* 今日杭州保持 4 列（已有规则），卡片更大 */
+  .today-hangzhou { padding: 16px; }
+  /* 快捷入口桌面 8 列 */
+  .quick-nav { grid-template-columns: repeat(8, 1fr); }
+}
+
+@media (min-width: 1440px) {
+  .cat-grid { grid-template-columns: repeat(4, 1fr); }
+  .wx-feed { grid-template-columns: repeat(3, 1fr); }
+}

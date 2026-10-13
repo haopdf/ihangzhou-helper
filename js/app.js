@@ -1472,7 +1472,7 @@ function copyText(text, name) {
       var titleEl = $('#searchResultTitle');
       if (titleEl) {
         var tip = pyExpanded ? ' (含拼音: ' + pyExpanded.join('/') + ')' : '';
-        titleEl.textContent = '� "' + state.searchQuery + '" → ' + results.length + ' 项' + tip;
+        titleEl.textContent = '🔍 搜索 "' + state.searchQuery + '" 找到 ' + results.length + ' 项' + tip;
       }
     }
 
@@ -3479,13 +3479,35 @@ function showMetro() {
 
     var scenicHtml = '';
     if (info.scenic && info.scenic.length) {
+      var EMOJI_MAP = [
+        ['西湖','🪷'],['断桥','🌉'],['雷峰','🗼'],['苏堤','🌿'],['三潭','🌙'],
+        ['灵隐','⛩️'],['飞来峰','⛰️'],['龙井','🍵'],['梅家坞','🍃'],['西溪','🛶'],
+        ['运河','🚢'],['拱宸','🌉'],['小河','🏠'],['大兜','🏮'],['武林','🏙️'],
+        ['钱江','🌃'],['清河','🏮'],['南宋','🏯'],['河坊','🏮'],['白塔','🗼'],
+        ['湖滨','🌅'],['湘湖','🌊'],['白马','🐎'],['乐园','🎢'],['星光','🌟'],
+        ['极乐','🙏'],['东方','🏛️'],['观潮','🌊'],['良渚','🏺'],
+        ['径山','🍵'],['双溪','🛶'],['梦想','💡'],['超山','🌸'],['塘栖','🌉'],
+        ['艺尚','👗'],['临平','🏙️'],['金沙','💦'],['宝龙','🛍️'],['沿江','🚵'],
+        ['龙门','🏯'],['富春','🏞️'],['桃源','🍑'],['黄公','🖼️'],['野生','🦌'],
+        ['东梓','🛖'],['天目','🌲'],['大明','🏔️'],['青山','🌳'],['太湖','🌊'],
+        ['白果','🌰'],['瑶琳','🕳️'],['芦茨','🏡'],['深澳','🏘️'],['合村','⛺'],
+        ['千岛','🏝️'],['文渊','🏛️'],['大慈','🙏'],['灵栖','🕳️'],['新叶','🏘️'],
+        ['新安','🌊'],['七里','🚤'],['万松','🌲'],['胡庆','🏥'],['邵逸夫','🏥'],
+        ['市民','🏛️'],['杭大','🎓'],['植物园','🌺'],['宋城','🎭'],['博物馆','🏛️']
+      ];
+      function getEmoji(name) {
+        for (var i = 0; i < EMOJI_MAP.length; i++) {
+          if (name.indexOf(EMOJI_MAP[i][0]) >= 0) return EMOJI_MAP[i][1];
+        }
+        return '🏞️';
+      }
       scenicHtml = '<div class="di-scenic">' +
         '<div class="di-section-title">📍 特色景点</div>' +
         '<div class="di-scenic-grid">' +
         info.scenic.map(function(s) {
           var imgHtml = s.image
             ? '<img class="di-scenic-img" src="' + s.image + '" alt="' + s.name + '" loading="lazy">'
-            : '<div class="di-scenic-img di-scenic-img--placeholder">' + (s.emoji || '🏞️') + '</div>';
+            : '<div class="di-scenic-img di-scenic-img--placeholder">' + getEmoji(s.name) + '</div>';
           return '<div class="di-scenic-item">' +
             imgHtml +
             '<div class="di-scenic-name">' + s.name + '</div>' +
