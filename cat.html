@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="theme-color" content="#1f7a5a">
+  <meta name="description" content="iHangzhou 杭州生活助手 - 杭州本地生活栏目导航，旅游出行、美食餐饮、文博人文、办事大厅一站直达">
+  <meta name="keywords" content="杭州,杭州生活,杭州旅游,杭州美食,杭州办事,杭州社保,ihangzhou,杭州栏目">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="iHangzhou · 杭州生活栏目">
+  <meta property="og:description" content="杭州人的数字生活工具箱，8 大栏目 64 个二级栏目一站直达">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="iHangzhou">
+  <link rel="canonical" href="https://www.ihangzhou.net/cat.html">
+  <link rel="manifest" href="manifest.json">
+  <title>iHangzhou · 杭州生活栏目</title>
+  <link rel="stylesheet" href="css/style.css?v=20261013b">
+  <link rel="icon" type="image/png" href="images/logo-mark-96.png">
+  <link rel="apple-touch-icon" href="images/logo-mark-192.png">
+  <script src="js/layout.js"></script>
+  <script>
+    window.IHZ_PAGE = { title: '杭州栏目', icon: '🧭' };
+    window.IZ_SKIP_APP_THEME = true;
+  </script>
+</head>
+
+<body>
+  <div class="page active" id="pageCat">
+    <!-- 面包屑 -->
+    <div class="cat-crumb" id="catCrumb"></div>
+
+    <!-- 栏目头图 -->
+    <div class="cat-hero" id="catHero"></div>
+
+    <!-- 动态内容区 -->
+    <div class="cat-body" id="catBody"></div>
+
+    <!-- 返回首页 -->
+    <div class="cat-back">
+      <a href="index.html">← 返回首页</a>
+    </div>
+  </div>
+
+  <!-- 模态框 -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">标题</h3>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="js/cat-data.js?v=20261013b"></script>
+  <script src="js/app.js?v=20261013b"></script>
+  <script src="js/analytics.js?v=20261013b"></script>
+  <script>
+    /* ============================================
+       栏目页渲染
+       ?c=travel             一级栏目页：hero + 二级栏目网格 + 热门文章
+       ?c=travel&s=景点门票   二级栏目页：hero + 三级入口 + 精选 + 相关文章
+       ============================================ */
+    (function () {
+      'use strict';
+
+      var params = new URLSearchParams(location.search);
+      var catKey = (params.get('c') || '').trim();
+      var subName = (params.get('s') || '').trim();
+
+      var DATA = window.CAT_DATA || [];
+      var cat = null, sub = null;
+      for (var i = 0; i < DATA.length; i++) {
+        if (DATA[i].k === catKey) { cat = DATA[i]; break; }
+      }
+      if (!cat) { location.replace('index.html'); return; }
+      if (subName) {
+        for (var j = 0; j < cat.subs.length; j++) {
+          if (cat.subs[j].n === subName) { sub = cat.subs[j]; break; }
+        }
+        if (!sub) { location.replace('cat.html?c=' + encodeURIComponent(catKey)); return; }
+      }
+
+      var $ = function (id) { return document.getElementById(id); };
+      function esc(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+      function artUrl(slug) { return 'articles/' + encodeURIComponent(slug) + '.html'; }
+
+      /* ---------- 面包屑 ---------- */
+      $('catCrumb').innerHTML =
+        '<a href="index.html">首页</a><span class="cc-sep">/</span>' +
+        '<a href="cat.html?c=' + encodeURIComponent(cat.k) + '">' + esc(cat.n) + '</a>' +
+        (sub ? '<span class="cc-sep">/</span><b>' + esc(sub.n) + '</b>' : '');
+
+      /* ---------- Hero ---------- */
+      var hero = $('catHero');
+      hero.style.setProperty('--ci', cat.c);
+      if (sub) {
+        document.title = sub.n + ' · ' + cat.n + ' · iHangzhou';
+        hero.innerHTML =
+          '<div class="ch-badge">' + cat.ic + ' ' + esc(cat.n) + '</div>' +
+          '<h1>' + sub.ic + ' ' + esc(sub.n) + '</h1>' +
+          '<p>' + esc(sub.i) + '</p>';
+      } else {
+        document.title = cat.n + ' · iHangzhou';
+        hero.innerHTML =
+          '<div class="ch-badge">🧭 栏目导航</div>' +
+          '<h1>' + cat.ic + ' ' + esc(cat.n) + '</h1>' +
+          '<p>' + esc(cat.i) + '</p>';
+      }
+
+      var body = $('catBody');
+
+      /* ---------- 二级栏目页 ---------- */
+      function renderSubPage() {
+        var html = '';
+
+        // 三级入口
+        html += '<div class="cat-block"><div class="cat-sec-ttl">📂 三级入口</div><div class="cat-third">' +
+          sub.th.map(function (t) {
+            var u = t[2] || '';
+            var ext = /^https?:/.test(u);
+            var attrs = ext ? ' href="' + esc(u) + '" target="_blank" rel="noopener"' : ' href="' + esc(u) + '"';
+            return '<a class="cat-third-card"' + attrs + '>' +
+              '<span class="cti">' + t[0] + '</span><span class="ctn">' + esc(t[1]) + '</span></a>';
+          }).join('') + '</div></div>';
+
+        // 精选内容
+        html += '<div class="cat-block"><div class="cat-sec-ttl">⭐ 精选内容</div><div class="cat-feat">' +
+          sub.ft.map(function (f) {
+            var u = f[3] || '';
+            var ext = /^https?:/.test(u);
+            var attrs = ext ? ' href="' + esc(u) + '" target="_blank" rel="noopener"' : ' href="' + esc(u) + '"';
+            return '<a class="cat-feat-card"' + attrs + '>' +
+              '<span class="cf-ic">' + f[0] + '</span>' +
+              '<span class="cf-bd"><span class="cf-t">' + esc(f[1]) + '</span>' +
+              '<span class="cf-d">' + esc(f[2]) + '</span></span>' +
+              '<span class="cf-ar">›</span></a>';
+          }).join('') + '</div></div>';
+
+        // 相关文章（从 articles/index.json 实时匹配）
+        html += '<div class="cat-block"><div class="cat-sec-ttl">📖 相关文章 <span class="cat-more" id="catArtCount"></span></div>' +
+          '<div class="cat-arts" id="catArts"><div class="cat-empty">正在加载相关文章…</div></div></div>';
+
+        // 其他二级栏目
+        html += '<div class="cat-block"><div class="cat-sec-ttl">🧭 同栏目其他二级</div><div class="cat-subnav">' +
+          cat.subs.map(function (s) {
+            var on = s.n === sub.n ? ' on' : '';
+            return '<a class="cat-subnav-btn' + on + '" href="cat.html?c=' + encodeURIComponent(cat.k) +
+              '&s=' + encodeURIComponent(s.n) + '">' + s.ic + ' ' + esc(s.n) + '</a>';
+          }).join('') + '</div></div>';
+
+        body.innerHTML = html;
+        loadArticles();
+      }
+
+      /* ---------- 一级栏目页 ---------- */
+      function renderCatPage() {
+        var html = '';
+
+        // 二级栏目网格
+        html += '<div class="cat-block"><div class="cat-sec-ttl">🧭 二级栏目 <span class="cat-more">' +
+          cat.subs.length + ' 个</span></div><div class="cat-subs">' +
+          cat.subs.map(function (s) {
+            return '<a class="cat-sub-card" href="cat.html?c=' + encodeURIComponent(cat.k) +
+              '&s=' + encodeURIComponent(s.n) + '" style="--ci:' + cat.c + '">' +
+              '<span class="cs-ic">' + s.ic + '</span>' +
+              '<span class="cs-bd"><span class="cs-n">' + esc(s.n) + '</span>' +
+              '<span class="cs-d">' + esc(s.d) + '</span></span>' +
+              '<span class="cs-ar">›</span></a>';
+          }).join('') + '</div></div>';
+
+        // 栏目主页入口
+        if (cat.home) {
+          html += '<div class="cat-block"><a class="cat-home-btn" href="' + esc(cat.home) + '" style="--ci:' + cat.c + '">' +
+            '进入「' + esc(cat.n) + '」专题主页 →</a></div>';
+        }
+
+        // 全部栏目切换
+        html += '<div class="cat-block"><div class="cat-sec-ttl">🗂️ 切换栏目</div><div class="cat-subnav">' +
+          DATA.map(function (c) {
+            var on = c.k === cat.k ? ' on' : '';
+            return '<a class="cat-subnav-btn' + on + '" href="cat.html?c=' + encodeURIComponent(c.k) + '" ' +
+              'style="--ci:' + c.c + '">' + c.ic + ' ' + esc(c.n) + '</a>';
+          }).join('') + '</div></div>';
+
+        // 热门文章
+        html += '<div class="cat-block"><div class="cat-sec-ttl">🔥 本栏目热门文章 <span class="cat-more" id="catArtCount"></span></div>' +
+          '<div class="cat-arts" id="catArts"><div class="cat-empty">正在加载相关文章…</div></div></div>';
+
+        body.innerHTML = html;
+        loadArticles();
+      }
+
+      /* ---------- 文章匹配 ---------- */
+      function loadArticles() {
+        var kws = sub ? (sub.kw || []) : (cat.kw || []);
+        fetch('articles/index.json?t=' + Date.now())
+          .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+          .then(function (list) {
+            var scored = [];
+            list.forEach(function (a) {
+              var title = a.title || '', catg = a.cat || '', sum = a.summary || '';
+              var sc = 0;
+              kws.forEach(function (k) {
+                if (title.indexOf(k) >= 0) sc += 3;      // 标题命中权重最高
+                else if (catg.indexOf(k) >= 0) sc += 2;  // 分类命中次之
+                else if (sum.indexOf(k) >= 0) sc += 1;   // 摘要命中兜底
+              });
+              if (sc > 0) scored.push({ a: a, sc: sc });
+            });
+            scored.sort(function (x, y) {
+              if (y.sc !== x.sc) return y.sc - x.sc;
+              return (y.a.words || 0) - (x.a.words || 0);
+            });
+            var top = scored.slice(0, 12);
+            var cnt = $('catArtCount');
+            if (cnt) cnt.textContent = top.length ? '共 ' + scored.length + ' 篇匹配' : '';
+            var box = $('catArts');
+            if (!box) return;
+            if (!top.length) {
+              box.innerHTML = '<div class="cat-empty">暂无匹配文章，试试上方三级入口</div>';
+              return;
+            }
+            box.innerHTML = top.map(function (o) {
+              var a = o.a;
+              return '<a class="cat-art" href="' + artUrl(a.slug) + '">' +
+                '<span class="ca-t">' + esc(a.title) + '</span>' +
+                '<span class="ca-m">' + esc(a.cat) + ' · ' + (a.words || 0) + ' 字</span></a>';
+            }).join('');
+          })
+          .catch(function () {
+            var box = $('catArts');
+            if (box) box.innerHTML = '<div class="cat-empty">文章加载失败，请稍后重试</div>';
+          });
+      }
+
+      if (sub) renderSubPage(); else renderCatPage();
+
+      /* ---------- 动作链接分发（#act:xxx） ---------- */
+      function toast(msg) {
+        var t = document.getElementById('ihzToast');
+        if (t) { t.textContent = msg; t.classList.add('show'); setTimeout(function () { t.classList.remove('show'); }, 2200); }
+      }
+      function actToast(msg) {
+        var t = document.createElement('div');
+        t.className = 'toast';
+        t.innerHTML = msg;
+        document.body.appendChild(t);
+        setTimeout(function () { t.classList.add('show'); }, 10);
+        setTimeout(function () { t.classList.remove('show'); }, 2600);
+        setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); }, 3000);
+      }
+      var ACT = {
+        xianxing: function () { window._handleAction && window._handleAction('xianxing'); },
+        weather: function () { window._handleAction && window._handleAction('weather'); },
+        youjia: function () { window._handleAction && window._handleAction('youjia'); },
+        tide: function () { window.showTide && window.showTide(); },
+        tax: function () { window._handleAction && window._handleAction('tax'); },
+        loan: function () { window._handleAction && window._handleAction('loan'); },
+        sbcalc: function () { window._handleAction && window._handleAction('sbcalc'); },
+        retire: function () { window._handleAction && window._handleAction('retire'); },
+        calendar: function () { window._handleAction && window._handleAction('calendar'); },
+        postcode: function () { window._handleAction && window._handleAction('postcode'); },
+        fav: function () { window.showFavorites ? window.showFavorites() : (location.href = 'index.html'); },
+        hist: function () { window.showHistory ? window.showHistory() : (location.href = 'index.html'); },
+        checkin: function () { window.showCheckin ? window.showCheckin() : (location.href = 'index.html'); },
+        fontsize: function () { window.showFontSize ? window.showFontSize() : (location.href = 'index.html'); },
+        settings: function () { window.toggleSettings && window.toggleSettings(); },
+        feedback: function () {
+          if (window.showFeedback) { window.showFeedback(); return; }
+          location.href = 'index.html';
+        },
+        darkmode: function () {
+          var btn = document.getElementById('themeBtn');
+          if (btn) { btn.click(); return; }
+          var cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', cur);
+          try { localStorage.setItem('ihz-theme', cur); } catch (e) { }
+          actToast(cur === 'dark' ? '🌙 已切换暗色模式' : '☀️ 已切换浅色模式');
+        },
+        goods: function () { location.href = 'index.html#goods'; },
+        home: function () { location.href = 'index.html'; },
+        about: function () {
+          actToast('ℹ️ iHangzhou · 杭州生活助手<br>公益导航平台 · 不存储用户数据');
+        },
+        share: function () {
+          if (navigator.share) {
+            navigator.share({ title: 'iHangzhou · 杭州生活助手', text: '杭州人的数字生活工具箱', url: location.href })
+              .catch(function () { });
+            return;
+          }
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(location.href).then(function () {
+              actToast('✅ 链接已复制，发送给朋友吧');
+            }).catch(function () { actToast('📤 请复制地址栏链接分享'); });
+          } else {
+            actToast('📤 请复制地址栏链接分享');
+          }
+        },
+        wechat: function () {
+          actToast('📱 微信搜索公众号「iHangzhou」<br>每天推送限行 / 油价 / 政策解读');
+        }
+      };
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest ? e.target.closest('a[href^="#act:"]') : null;
+        if (!a) return;
+        e.preventDefault();
+        var key = a.getAttribute('href').slice(5);
+        var fn = ACT[key];
+        if (fn) fn();
+        else location.href = 'index.html';
+      });
+
+      /* 模态框关闭（与站内其他页一致） */
+      var ov = $('modalOverlay'), cl = $('modalClose');
+      if (cl) cl.addEventListener('click', function () { ov.classList.remove('active'); document.body.style.overflow = ''; });
+      if (ov) ov.addEventListener('click', function (e) {
+        if (e.target === ov) { ov.classList.remove('active'); document.body.style.overflow = ''; }
+      });
+    })();
+  </script>
+</body>
+
+</html>
