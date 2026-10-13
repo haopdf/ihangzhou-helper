@@ -12,7 +12,7 @@
   <meta name="robots" content="index, follow, all">
   <meta name="googlebot" content="index, follow">
   <meta name="revisit-after" content="7 days">
-  <meta name="theme-color" content="#1b4d3e">
+  <meta name="theme-color" content="#1f7a5a">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -53,7 +53,7 @@
     }
   }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=20260928a">
+  <link rel="stylesheet" href="css/style.css?v=20261013a">
   <link rel="icon" type="image/png" href="images/logo-mark-96.png">
   <link rel="apple-touch-icon" href="images/logo-mark-192.png">
 </head>
@@ -183,43 +183,23 @@
       </a>
     </div>
 
-    <!-- 杭州怎么玩：精选攻略入口 -->
-    <div class="explore-section" id="exploreSection">
-      <div class="explore-title">🗺️ 杭州怎么玩</div>
-      <div class="explore-scroll">
-        <div class="explore-card" onclick="location.href='place.html?id=lingyin'">
-          <span class="ec-icon">⛩️</span>
-          <span class="ec-name">灵隐寺</span>
-          <span class="ec-tag">千年古刹</span>
-        </div>
-        <div class="explore-card" onclick="location.href='place.html?id=westlake'">
-          <span class="ec-icon">🌊</span>
-          <span class="ec-name">西湖十景</span>
-          <span class="ec-tag">世界遗产</span>
-        </div>
-        <div class="explore-card" onclick="location.href='place.html?id=xixi'">
-          <span class="ec-icon">🛶</span>
-          <span class="ec-name">西溪湿地</span>
-          <span class="ec-tag">摇橹船</span>
-        </div>
-        <div class="explore-card" onclick="location.href='place.html?id=songcheng'">
-          <span class="ec-icon">🎭</span>
-          <span class="ec-name">宋城千古情</span>
-          <span class="ec-tag">必看演出</span>
-        </div>
-        <div class="explore-card" onclick="location.href='place.html?id=liangzhu'">
-          <span class="ec-icon">🏛️</span>
-          <span class="ec-name">良渚古城</span>
-          <span class="ec-tag">5000年文明</span>
-        </div>
-        <div class="explore-card" onclick="location.href='place.html?id=faxi'">
-          <span class="ec-icon">🌸</span>
-          <span class="ec-name">法喜寺</span>
-          <span class="ec-tag">求姻缘</span>
-        </div>
-      </div>
+    <!-- 🗂️ 全部分类：8 个一级栏目（点击卡片展开该栏目下的二级栏目） -->
+    <div class="home-sec cat-sec" id="catSec">
+      <div class="sec-h">🗂️ 全部分类</div>
+      <div class="sec-sub">8 个一级栏目 · 点任意卡片查看二级栏目</div>
+      <div class="cat-grid" id="catGrid"></div>
     </div>
 
+    <!-- 一级栏目展开面板：二级栏目（由本页内联脚本渲染） -->
+    <div class="cat-subs-panel" id="catSubsPanel">
+      <div class="back-bar" id="catSubsBack">‹ 返回全部分类</div>
+      <div class="cat-subs-hero" id="catSubsHero"></div>
+      <div class="sub-grid" id="catSubsGrid"></div>
+    </div>
+
+    <!-- ⚡ 快捷入口 -->
+    <div class="home-sec quick-sec">
+      <div class="sec-h">⚡ 快捷入口</div>
     <!-- 快捷入口：16+ 个内容栏目，4×4 网格，每项 4 字 -->
     <div class="quick-nav">
       <a href="travel.html"><img
@@ -278,8 +258,119 @@
           alt=""><span>实用工具</span></a>
       <a href="around.html"><img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230ea5e9'%3E%3Cpath d='M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z'/%3E%3C/svg%3E"
-          alt=""><span>周边出行</span></a>
+          alt=""><span>周边出行</span>        </a>
     </div>
+    </div>
+
+    <!-- 🔥 热点栏目：当前最值得关注的话题 -->
+    <div class="home-sec hot-sec">
+      <div class="sec-h">🔥 热点栏目</div>
+      <div class="hot-strip">
+        <a href="javascript:void(0)" onclick="window.showTide()">观潮季</a>
+        <a href="articles.html?q=%E5%9B%BD%E5%BA%86">国庆活动</a>
+        <a href="articles.html?q=%E7%A4%BE%E4%BF%9D">社保新政</a>
+        <a href="articles.html?q=%E6%B6%88%E8%B4%B9%E5%88%B8">消费补贴</a>
+        <a href="travel.html">桂花地图</a>
+        <a href="place.html?id=westlake">西湖十景</a>
+        <a href="zhaopin.html">找工作</a>
+        <a href="weekend.html">周末去哪</a>
+        <a href="food.html">夜宵地图</a>
+      </div>
+    </div>
+
+    <!-- 📱 公众号精选：iHangzhou 每日推送 -->
+    <div class="home-sec wx-sec">
+      <div class="sec-h">📱 公众号精选</div>
+      <div class="sec-sub">iHangzhou 每日推送 · 杭州生活攻略</div>
+      <div class="wx-feed">
+        <a class="wx-post" href="articles/%E6%9D%AD%E5%B7%9E%E5%9B%BD%E5%BA%86%E5%8E%BB%E5%93%AA%E7%8E%A9-2026%E5%9B%BD%E5%BA%86%E6%B4%BB%E5%8A%A8%E5%85%A8%E6%95%B4%E7%90%86-%E7%83%9F%E8%8A%B1%E7%81%AF%E4%BC%9A%E9%9F%B3%E4%B9%90%E8%8A%82.html">
+          <div class="wx-ph">🎆</div>
+          <div class="wx-bd">
+            <h4>杭州国庆去哪玩 · 2026 国庆活动全整理</h4>
+            <div class="wx-mt"><span class="wx-tag">活动</span><span>烟花 · 灯会 · 音乐节</span></div>
+          </div>
+        </a>
+        <a class="wx-post" href="articles/2026%E5%A4%A9%E7%9B%AE%E5%B1%B1%E9%9F%B3%E4%B9%90%E8%8A%82-%E6%97%B6%E9%97%B4%E9%98%B5%E5%AE%B9%E8%B4%AD%E7%A5%A8%E4%BA%A4%E9%80%9A%E6%8C%87%E5%8D%97.html">
+          <div class="wx-ph">🎵</div>
+          <div class="wx-bd">
+            <h4>2026 天目山音乐节 · 时间阵容购票交通指南</h4>
+            <div class="wx-mt"><span class="wx-tag">演出</span><span>阵容 · 购票 · 交通</span></div>
+          </div>
+        </a>
+        <a class="wx-post" href="articles/%E6%9D%AD%E5%B7%9E%E9%92%B1%E6%B1%9F%E6%96%B0%E5%9F%8E%E7%81%AF%E5%85%89%E7%A7%80%E6%97%B6%E9%97%B4-%E6%9C%80%E4%BD%B3%E8%A7%82%E8%B5%8F%E4%BD%8D-%E4%BA%A4%E9%80%9A%E6%8C%87%E5%8D%97.html">
+          <div class="wx-ph">🌃</div>
+          <div class="wx-bd">
+            <h4>钱江新城灯光秀时间 · 最佳观赏位与交通指南</h4>
+            <div class="wx-mt"><span class="wx-tag">夜景</span><span>时间 · 机位 · 地铁</span></div>
+          </div>
+        </a>
+        <a class="wx-post" href="articles/%E6%9D%AD%E5%B7%9E%E5%8D%83%E5%B2%9B%E6%B9%96%E5%9B%BD%E5%BA%86%E6%B8%B8%E7%8E%A9%E6%94%BB%E7%95%A5-%E7%83%9F%E8%8A%B1%E7%A7%80%E9%9C%B2%E8%90%A5%E4%BA%A4%E9%80%9A%E6%8C%87%E5%8D%97.html">
+          <div class="wx-ph">🏞️</div>
+          <div class="wx-bd">
+            <h4>千岛湖国庆游玩攻略 · 烟花秀露营交通指南</h4>
+            <div class="wx-mt"><span class="wx-tag">周边游</span><span>露营 · 烟花 · 自驾</span></div>
+          </div>
+        </a>
+        <a class="wx-post" href="articles/%E6%9D%AD%E5%B7%9E%E7%9B%B8%E4%BA%B2%E8%84%B1%E5%8D%95%E5%85%A8%E6%94%BB%E7%95%A5-%E4%B8%89%E5%A4%A7%E7%9B%B8%E4%BA%B2%E8%A7%92-%E4%BA%B2%E9%9D%92%E6%81%8B.html">
+          <div class="wx-ph">💕</div>
+          <div class="wx-bd">
+            <h4>杭州相亲脱单全攻略 · 三大相亲角与亲青恋</h4>
+            <div class="wx-mt"><span class="wx-tag">攻略</span><span>相亲角 · 注册指南</span></div>
+          </div>
+        </a>
+        <a class="wx-post" href="articles/%E6%9D%AD%E5%B7%9E%E8%96%85%E7%BE%8A%E6%AF%9B%E7%9C%81%E9%92%B1%E6%94%BB%E7%95%A5-%E6%B6%88%E8%B4%B9%E5%88%B8-%E5%A5%B6%E8%8C%B6-%E7%A7%AF%E5%88%86-%E5%AD%A6%E7%94%9F%E7%A6%8F%E5%88%A9.html">
+          <div class="wx-ph">💰</div>
+          <div class="wx-bd">
+            <h4>杭州薅羊毛省钱攻略 · 消费券奶茶积分学生福利</h4>
+            <div class="wx-mt"><span class="wx-tag">省钱</span><span>消费券 · 积分 · 福利</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 🧰 常用服务：高频刚需（数据来自 CMS hotServices） -->
+    <div class="home-sec svc-sec">
+      <div class="sec-h">🧰 常用服务</div>
+      <div class="svc-grid" id="hotGrid"></div>
+    </div>
+
+    <!-- 🗺️ 杭州怎么玩：精选攻略入口 -->
+    <div class="explore-section" id="exploreSection">
+      <div class="explore-title">🗺️ 杭州怎么玩</div>
+      <div class="explore-scroll">
+        <div class="explore-card" onclick="location.href='place.html?id=lingyin'">
+          <span class="ec-icon">⛩️</span>
+          <span class="ec-name">灵隐寺</span>
+          <span class="ec-tag">千年古刹</span>
+        </div>
+        <div class="explore-card" onclick="location.href='place.html?id=westlake'">
+          <span class="ec-icon">🌊</span>
+          <span class="ec-name">西湖十景</span>
+          <span class="ec-tag">世界遗产</span>
+        </div>
+        <div class="explore-card" onclick="location.href='place.html?id=xixi'">
+          <span class="ec-icon">🛶</span>
+          <span class="ec-name">西溪湿地</span>
+          <span class="ec-tag">摇橹船</span>
+        </div>
+        <div class="explore-card" onclick="location.href='place.html?id=songcheng'">
+          <span class="ec-icon">🎭</span>
+          <span class="ec-name">宋城千古情</span>
+          <span class="ec-tag">必看演出</span>
+        </div>
+        <div class="explore-card" onclick="location.href='place.html?id=liangzhu'">
+          <span class="ec-icon">🏛️</span>
+          <span class="ec-name">良渚古城</span>
+          <span class="ec-tag">5000年文明</span>
+        </div>
+        <div class="explore-card" onclick="location.href='place.html?id=faxi'">
+          <span class="ec-icon">🌸</span>
+          <span class="ec-name">法喜寺</span>
+          <span class="ec-tag">求姻缘</span>
+        </div>
+      </div>
+    </div>
+
     <!-- 热门资讯轮播（由 /api/news 异步填充） -->
     <div class="news-banner" id="newsBanner"></div>
 
@@ -597,8 +688,255 @@
       });
     }
   </script>
-  <script src="js/app.js?v=20260928c"></script>
-  <script src="js/analytics.js?v=20260926b"></script>
+  <script src="js/app.js?v=20261013a"></script>
+  <script src="js/analytics.js?v=20261013a"></script>
+  <script>
+    /* ============================================
+       v7 改版 · 全部分类（8 个一级栏目 × 8 个二级栏目）
+       数据与站点既有页面一一对应；点击一级卡片展开二级面板
+       ============================================ */
+    var HOME_CATS = [
+      {
+        key: 'travel', name: '旅游出行', icon: '🧭', desc: '景点 · 周边 · 周末 · 观潮',
+        color: '#1f7a5a', href: 'travel.html', intro: '西湖十景、灵隐古刹、西溪湿地、钱塘江大潮——杭州的好玩之处，一站搞定。',
+        subs: [
+          { n: '景点门票', ic: '🎫', d: '西湖·灵隐·西溪', h: 'travel.html' },
+          { n: '周边游', ic: '🚙', d: '乌镇·莫干山·千岛湖', h: 'around.html' },
+          { n: '周末去哪', ic: '🗓️', d: '亲子·展览·演出', h: 'weekend.html' },
+          { n: '街巷漫步', ic: '🛤️', d: '小河直街·大兜路', h: 'street.html' },
+          { n: '路线攻略', ic: '🧭', d: '一日游·两日游·自驾', h: 'articles.html?q=%E8%B7%AF%E7%BA%BF' },
+          { n: '钱塘江观潮', ic: '🌊', d: '潮时预报·观赏点', a: 'tide' },
+          { n: '西湖十景', ic: '⛲', d: '苏堤春晓·断桥残雪', h: 'place.html?id=westlake' },
+          { n: '古镇古村', ic: '🏚️', d: '塘栖·龙门·深澳', h: 'travel.html' }
+        ]
+      },
+      {
+        key: 'food', name: '美食餐饮', icon: '🍜', desc: '杭帮菜 · 咖啡 · 老字号 · 夜市',
+        color: '#d98324', href: 'food.html', intro: '从西湖醋鱼、龙井虾仁到东坡肉，杭帮菜必点清单与最正宗老店都在这里。',
+        subs: [
+          { n: '杭帮菜', ic: '🥢', d: '西湖醋鱼到东坡肉', h: 'food.html' },
+          { n: '咖啡', ic: '☕', d: '西湖边·独立咖啡', h: 'coffee.html' },
+          { n: '老字号', ic: '🏮', d: '知味观·奎元馆', h: 'laozihao.html' },
+          { n: '夜市', ic: '🌃', d: '河坊街·武林夜宵', h: 'food.html' },
+          { n: '早餐', ic: '🥟', d: '拌面·生煎·小笼', h: 'food.html' },
+          { n: '甜品', ic: '🍰', d: '定胜糕·条头糕', h: 'food.html' },
+          { n: '龙井茶', ic: '🍵', d: '狮峰·龙坞买茶', h: 'food.html' },
+          { n: '茶馆', ic: '🫖', d: '湖畔·巷里泡一下午', h: 'coffee.html' }
+        ]
+      },
+      {
+        key: 'culture', name: '文博人文', icon: '🏛️', desc: '博物馆 · 历史 · 名人 · 故事',
+        color: '#8a6fd6', href: 'museum.html', intro: '浙江省博物馆、良渚古城、西湖博物馆，镇馆之宝与参观路线一站看。',
+        subs: [
+          { n: '博物馆', ic: '🏛️', d: '浙博·良渚·西湖馆', h: 'museum.html' },
+          { n: '历史人文', ic: '📜', d: '大运河·南宋·遗产', h: 'history.html' },
+          { n: '杭州名人', ic: '👤', d: '白居易·苏轼·秋瑾', h: 'celebrity.html' },
+          { n: '杭州故事', ic: '📖', d: '老地名·传说·民俗', h: 'articles.html' },
+          { n: '古镇古建', ic: '🏯', d: '古桥·古塔·古宅', h: 'history.html' },
+          { n: '非遗', ic: '🎭', d: '评弹·杭绣·张小泉', h: 'museum.html' },
+          { n: '寺庙', ic: '⛩️', d: '灵隐·净慈·径山', h: 'place.html?id=lingyin' },
+          { n: '图书馆', ic: '📚', d: '杭图·城市书房', h: 'articles.html?q=%E5%9B%BE%E4%B9%A6%E9%A6%86' }
+        ]
+      },
+      {
+        key: 'banshi', name: '办事大厅', icon: '🧰', desc: '社保 · 公积金 · 落户 · 交通',
+        color: '#3a7bd5', href: 'banshi.html', intro: '社保、公积金、落户、交通、区县——杭州办事一次办妥，附官方入口与材料清单。',
+        subs: [
+          { n: '社保查询', ic: '💳', d: '缴费/余额/明细', h: 'banshi.html' },
+          { n: '公积金', ic: '🏦', d: '查询/提取/贷款', h: 'banshi.html' },
+          { n: '落户', ic: '📋', d: '人才引进·积分落户', h: 'banshi.html' },
+          { n: '出行交通', ic: '🚌', d: '公交·地铁·限行', h: 'traffic.html' },
+          { n: '区县导航', ic: '🏙️', d: '杭州 13 区县', h: 'district.html' },
+          { n: '车辆服务', ic: '🚗', d: '摇号·年检·违章', h: 'banshi.html' },
+          { n: '常用电话', ic: '📞', d: '21 个一键复制', p: 'phone' },
+          { n: '实用工具', ic: '🧰', d: '计算器·查询', p: 'tools' }
+        ]
+      },
+      {
+        key: 'zhaopin', name: '求职招聘', icon: '💼', desc: '国企 · 事业 · 名企 · 兼职',
+        color: '#2bb0a3', href: 'zhaopin.html', intro: '国企、事业单位、名企、兼职实习——杭州机会全收录，附官方报名入口。',
+        subs: [
+          { n: '国企招聘', ic: '🏢', d: '央企·市属国企', h: 'zhaopin.html' },
+          { n: '事业单位', ic: '🎓', d: '教师·医护·科研', h: 'zhaopin.html' },
+          { n: '名企招聘', ic: '🏙️', d: '阿里·网易·海康', h: 'zhaopin.html' },
+          { n: '兼职实习', ic: '💡', d: '学生兼职·实习', h: 'zhaopin.html' },
+          { n: '人才认定', ic: '🏅', d: '高层次人才申请', h: 'banshi.html' },
+          { n: '互联网业', ic: '💻', d: '杭州互联网地图', h: 'internet.html' },
+          { n: '简历面试', ic: '📝', d: '模板·技巧', h: 'articles.html?q=%E9%9D%A2%E8%AF%95' },
+          { n: '劳动维权', ic: '⚖️', d: '劳动合同·仲裁', h: 'banshi.html' }
+        ]
+      },
+      {
+        key: 'news', name: '资讯热点', icon: '📰', desc: '民生 · 新规 · 政策 · 活动',
+        color: '#e0584f', href: 'articles.html', intro: '民生政策、消费补贴、活动汇总、限行天气油价——杭州热点一手掌握。',
+        subs: [
+          { n: '民生政策', ic: '📢', d: '社保·公积金新政', h: 'articles.html?q=%E6%94%BF%E7%AD%96' },
+          { n: '消费补贴', ic: '🎫', d: '消费券·以旧换新', h: 'articles.html?q=%E6%B6%88%E8%B4%B9%E5%88%B8' },
+          { n: '活动汇总', ic: '🎉', d: '国庆·灯光秀·音乐节', h: 'articles.html?q=%E6%B4%BB%E5%8A%A8' },
+          { n: '今日限行', ic: '🚗', d: '尾号限行查询', a: 'xianxing' },
+          { n: '天气预警', ic: '⛈️', d: '实时天气·预报', a: 'weather' },
+          { n: '油价查询', ic: '⛽', d: '今日成品油价格', a: 'youjia' },
+          { n: '公众号精选', ic: '📱', d: '每日推送精选', h: 'articles.html' },
+          { n: '全部文章', ic: '📚', d: '2700+ 篇攻略', h: 'articles.html' }
+        ]
+      },
+      {
+        key: 'shopping', name: '逛街好物', icon: '🛍️', desc: '商圈 · 特产 · 好物 · 团购',
+        color: '#bf6a8a', href: 'street.html', intro: '商圈逛街、杭州特产、本地人精挑细选的好物与团购，买得明白。',
+        subs: [
+          { n: '商圈逛街', ic: '🏬', d: '湖滨·武林·万象城', h: 'street.html' },
+          { n: '杭州特产', ic: '🎁', d: '王星记·知味观', h: 'articles.html?q=%E7%89%B9%E4%BA%A7' },
+          { n: '杭州好物', ic: '🛒', d: '本地人精挑细选', a: 'goods' },
+          { n: '百年老店', ic: '🏮', d: '知味观·奎元馆', h: 'laozihao.html' },
+          { n: '咖啡地图', ic: '☕', d: '景观·独立咖啡', h: 'coffee.html' },
+          { n: '夜宵夜市', ic: '🌃', d: '河坊街·武林', h: 'food.html' },
+          { n: '餐饮团购', ic: '🍲', d: '美团到店', u: 'https://i.meituan.com/ahangzhou?channel=485720' },
+          { n: '酒店预订', ic: '🏨', d: '携程酒店', u: 'https://m.ctrip.com/webapp/hotels/hotelsearch/search?allianceid=10511040&sid=330893571&ouid=kfptvxtool' }
+        ]
+      },
+      {
+        key: 'my', name: '我的社区', icon: '👤', desc: '收藏 · 积分 · 反馈',
+        color: '#5b8c5a', href: '', intro: '收藏、积分、反馈与设置——你的 iHangzhou 个人中心。',
+        subs: [
+          { n: '我的收藏', ic: '⭐', d: '收藏的服务', a: 'fav' },
+          { n: '浏览历史', ic: '🕘', d: '最近看过', a: 'hist' },
+          { n: '每日签到', ic: '📅', d: '连续签到领积分', a: 'checkin' },
+          { n: '意见反馈', ic: '📨', d: '建议 · 吐槽', a: 'feedback' },
+          { n: '字体大小', ic: '🔤', d: '大字模式调节', a: 'fontsize' },
+          { n: '分享给朋友', ic: '📤', d: '复制链接 + 二维码', a: 'share' },
+          { n: '关于我们', ic: 'ℹ️', d: '平台介绍', a: 'about' },
+          { n: '设置', ic: '⚙️', d: '主题 · 城市', a: 'settings' }
+        ]
+      }
+    ];
+
+    (function initHomeCats() {
+      var grid = document.getElementById('catGrid');
+      var panel = document.getElementById('catSubsPanel');
+      var hero = document.getElementById('catSubsHero');
+      var subGrid = document.getElementById('catSubsGrid');
+      var backBtn = document.getElementById('catSubsBack');
+      var catSec = document.getElementById('catSec');
+      if (!grid || !panel || !hero || !subGrid) return;
+
+      function esc(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      /* 一级栏目卡片 */
+      grid.innerHTML = HOME_CATS.map(function (c) {
+        return '<div class="cat-card" data-cat="' + c.key + '" style="--ci:' + c.color + '" role="button" tabindex="0" aria-label="' + esc(c.name) + '">' +
+          '<span class="cat-ic">' + c.icon + '</span>' +
+          '<span class="cat-body"><span class="cat-nm">' + esc(c.name) + '</span>' +
+          '<span class="cat-ds">' + esc(c.desc) + '</span></span>' +
+          '<span class="cat-ar">›</span>' +
+          '</div>';
+      }).join('');
+
+      function openCat(key) {
+        var cat = null;
+        for (var i = 0; i < HOME_CATS.length; i++) {
+          if (HOME_CATS[i].key === key) { cat = HOME_CATS[i]; break; }
+        }
+        if (!cat) return;
+        hero.innerHTML =
+          '<h1>' + cat.icon + ' ' + esc(cat.name) + '</h1>' +
+          '<p>' + esc(cat.intro) + '</p>' +
+          (cat.href ? '<a href="' + cat.href + '" style="display:inline-block;margin-top:10px;background:rgba(255,255,255,.22);color:#fff;font-size:12.5px;font-weight:700;padding:6px 14px;border-radius:16px;text-decoration:none;">进入栏目主页 →</a>' : '');
+        subGrid.innerHTML = cat.subs.map(function (s) {
+          var attrs = ' class="sub-card" style="--ci:' + cat.color + '" role="button" tabindex="0"';
+          if (s.h) attrs += ' data-href="' + s.h + '"';
+          if (s.u) attrs += ' data-url="' + s.u + '"';
+          if (s.a) attrs += ' data-act="' + s.a + '"';
+          if (s.p) attrs += ' data-page="' + s.p + '"';
+          return '<div' + attrs + '>' +
+            '<span class="sub-ic">' + s.ic + '</span>' +
+            '<span class="cat-body"><span class="nm">' + esc(s.n) + '</span>' +
+            '<span class="ds">' + esc(s.d) + '</span></span>' +
+            '</div>';
+        }).join('');
+        panel.classList.add('on');
+        if (catSec) catSec.style.display = 'none';
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function closeCat() {
+        panel.classList.remove('on');
+        if (catSec) catSec.style.display = '';
+      }
+
+      /* 二级动作分发：优先站点既有全局函数，其次 SPA 页签，最后外链 */
+      function runAct(act) {
+        var w = window;
+        if (act === 'tide' && w.showTide) { w.showTide(); return true; }
+        if (act === 'goods') {
+          var g = document.getElementById('goodsGrid');
+          if (g) g.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return true;
+        }
+        if (act === 'fav' && w.showFavorites) { w.showFavorites(); return true; }
+        if (act === 'hist' && w.showHistory) { w.showHistory(); return true; }
+        if (act === 'checkin' && w.showCheckin) { w.showCheckin(); return true; }
+        if (act === 'feedback' && w.showFeedback) { w.showFeedback(); return true; }
+        if (act === 'fontsize' && w.showFontSize) { w.showFontSize(); return true; }
+        if (act === 'share' && w.showShareTip) { w.showShareTip(); return true; }
+        if (act === 'about' && w.showAbout) { w.showAbout(); return true; }
+        if (act === 'settings' && w.toggleSettings) { w.toggleSettings(); return true; }
+        if (w._handleAction) { w._handleAction(act); return true; }
+        return false;
+      }
+
+      function goSub(el) {
+        var act = el.dataset.act, page = el.dataset.page,
+          href = el.dataset.href, url = el.dataset.url;
+        if (act) { runAct(act); return; }
+        if (page) {
+          /* SPA 页签：复用 quick-nav 上已有的 data-page 绑定 */
+          var nav = document.querySelector('.quick-nav a[data-page="' + page + '"]');
+          if (nav) { nav.click(); return; }
+        }
+        if (url && window.openUrl) { window.openUrl(url); return; }
+        if (href) { location.href = href; }
+      }
+
+      grid.addEventListener('click', function (e) {
+        var card = e.target.closest('.cat-card');
+        if (card) openCat(card.dataset.cat);
+      });
+      grid.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        var card = e.target.closest('.cat-card');
+        if (card) { e.preventDefault(); openCat(card.dataset.cat); }
+      });
+      subGrid.addEventListener('click', function (e) {
+        var card = e.target.closest('.sub-card');
+        if (card) goSub(card);
+      });
+      subGrid.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        var card = e.target.closest('.sub-card');
+        if (card) { e.preventDefault(); goSub(card); }
+      });
+      if (backBtn) backBtn.addEventListener('click', closeCat);
+    })();
+
+    /* 常用服务（CMS hotServices）：补上点击分发，与工具卡行为一致 */
+    (function bindSvcGrid() {
+      var grid = document.getElementById('hotGrid');
+      if (!grid) return;
+      grid.addEventListener('click', function (e) {
+        var card = e.target.closest('.hot-card');
+        if (!card) return;
+        var nm = card.querySelector('.hot-name');
+        if (nm && window.iHangzhouTrack) {
+          window.iHangzhouTrack.click('首页', '常用服务', nm.textContent.trim(), '');
+        }
+        var action = card.dataset.action, url = card.dataset.url;
+        if (action && window._handleAction) window._handleAction(action);
+        else if (url && window.openUrl) window.openUrl(url);
+      });
+    })();
+  </script>
   <script>
     // 确保模态框可以关闭
     document.addEventListener('DOMContentLoaded', function () {
