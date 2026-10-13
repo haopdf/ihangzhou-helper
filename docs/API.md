@@ -37,7 +37,7 @@ Authorization: Bearer {password}
         "type": "news",
         "title": "🏞️ 西湖十景全攻略",
         "desc": "断桥残雪/苏堤春晓/三潭印月/曲院风荷/雷峰夕照",
-        "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+        "picUrl": "https://www.ihangzhou.net/images/logo-mark-192.png",
         "url": "https://www.ihangzhou.net/travel.html#sec-lake"
       },
       {

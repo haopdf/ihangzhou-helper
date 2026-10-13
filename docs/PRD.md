@@ -219,7 +219,7 @@ iHangzhou
   "type": "news",
   "title": "🏞️ 杭州周末去哪",
   "desc": "...",
-  "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+  "picUrl": "https://www.ihangzhou.net/images/logo-mark-192.png",
   "url": "https://www.ihangzhou.net/travel.html"
 }
 ```
