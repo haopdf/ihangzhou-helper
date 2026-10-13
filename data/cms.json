@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "lastModified": "2026-10-13T10:55:27.000Z",
+  "lastModified": "2026-10-13T17:02:17.000Z",
   "hotKeywords": [
     "医保",
     "钱塘江观潮",
@@ -6660,6 +6660,37 @@
       "desc": "2026杭州新医保办法：门诊去社区比三甲多报10个百分点，签约家庭医生再高3个点、起付线减300。附起付线、三档报销比例、个账共济家人和异地就医备案。",
       "picUrl": "https://www.ihangzhou.net/images/logo-mark-192.png",
       "url": "https://www.ihangzhou.net/articles/在杭州看病-社区比大医院多报10%-门诊报销比例起付线家庭医生.html"
+    },
+    {
+      "keyword": "个税",
+      "aliases": [
+        "个税专项附加扣除",
+        "个税扣除",
+        "专项附加扣除",
+        "个税退税",
+        "退税",
+        "个人所得税"
+      ],
+      "type": "news",
+      "title": "在杭州上班，这7项个税扣除没填，一年少退好几千",
+      "desc": "个税7项专项附加扣除逐项对照：婴幼儿照护、子女教育、赡养老人、住房贷款、住房租金、继续教育、大病医疗。杭州租房按1500元/月。附个税APP四步填报、三个时间节点和6个易踩坑。",
+      "picUrl": "https://www.ihangzhou.net/images/logo-mark-192.png",
+      "url": "https://www.ihangzhou.net/articles/在杭州上班-个税7项专项附加扣除没填一年少退好几千.html"
+    },
+    {
+      "keyword": "萧山",
+      "aliases": [
+        "萧山人",
+        "萧山是杭州吗",
+        "萧山杭州",
+        "萧山区",
+        "萧山认同"
+      ],
+      "type": "news",
+      "title": "萧山人为什么不认自己是杭州人？一条江隔了一千年",
+      "desc": "身份证330109、车牌浙A，萧山人为什么总先报“我是萧山人”？从近千年绍兴府、省管县独立财政、两次被分地到2024年GDP2431亿，讲透萧山身份认同的来处与融合。",
+      "picUrl": "https://www.ihangzhou.net/images/logo-mark-192.png",
+      "url": "https://www.ihangzhou.net/articles/萧山人为什么不认自己是杭州人-一条江隔了一千年.html"
     }
   ],
   "wechatWelcome": {
