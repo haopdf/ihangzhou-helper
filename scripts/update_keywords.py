@@ -255,7 +255,7 @@ def main():
             "type": "news",
             "title": art["title"],
             "desc": art["description"][:100],
-            "picUrl": "https://www.ihangzhou.net/images/og-cover.jpg",
+            "picUrl": "https://www.ihangzhou.net/images/logo-mark-192.png",
             "url": f"https://www.ihangzhou.net/articles/{art['filename']}"
         }
         new_keywords.append(kw_config)

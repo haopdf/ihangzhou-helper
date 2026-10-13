@@ -11,7 +11,7 @@ const DEFAULT_WELCOME = {
   type: 'text',
   title: '欢迎关注 iHangzhou · 杭州生活助手 🏔️',
   desc: '杭州人的数字生活工具箱\n\n【数字快捷】1限行 2天气 3地铁 4公积金 5社保\n【场景推荐】周末/下雨/拍照/亲子/夜景/赏花/古镇/寺庙/美食\n【资讯查询】故事/区县/博物馆/搜索\n\n回复「帮助」查看全部指令',
-  picUrl: 'https://www.ihangzhou.net/images/og-cover.jpg',
+  picUrl: 'https://www.ihangzhou.net/images/logo-mark-192.png',
   url: 'https://www.ihangzhou.net/'
 };
 const HELP_COMMANDS = ['帮助', '?', '？', 'help', 'h', 'H', '指令', '菜单'];
@@ -112,7 +112,7 @@ function genNewsReply(toUser, fromUser, article) {
   const ts = Math.floor(Date.now() / 1000);
   const title = article.title || 'iHangzhou';
   const desc = (article.desc || '').replace(/\n/g, ' ');
-  const picUrl = article.picUrl || 'https://www.ihangzhou.net/images/og-cover.jpg';
+  const picUrl = article.picUrl || 'https://www.ihangzhou.net/images/logo-mark-192.png';
   const url = article.url || 'https://www.ihangzhou.net/';
   return `<xml><ToUserName><![CDATA[${toUser}]]></ToUserName><FromUserName><![CDATA[${fromUser}]]></FromUserName><CreateTime>${ts}</CreateTime><MsgType><![CDATA[news]]></MsgType><ArticleCount>1</ArticleCount><Articles><item><Title><![CDATA[${title}]]></Title><Description><![CDATA[${desc}]]></Description><PicUrl><![CDATA[${picUrl}]]></PicUrl><Url><![CDATA[${url}]]></Url></item></Articles></xml>`;
 }

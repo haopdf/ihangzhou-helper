@@ -1616,14 +1616,18 @@ span.logo-icon {
   .app-header, .topbar { padding: 11px 16px; }
 
 
-  /* 内容区统一居中 */
+  /* 内容区统一全宽（PC 端各页面视觉一致对齐顶部 hero） */
   body > .page,
   .content,
   .art-list,
   .art-cat-chips,
   .art-kw-card,
-  .art-cat-nav {
-    max-width: 1100px;
+  .art-cat-nav,
+  .travel-hero,
+  .travel-section,
+  .travel-tabs,
+  .travel-tips {
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
   }
@@ -1653,21 +1657,6 @@ span.logo-icon {
   }
   .art-search { max-width: none; padding-left: 16px; padding-right: 16px; }
 
-  /* travel-hero 通栏展开 */
-  .travel-hero {
-    margin: 0;
-    border-radius: 0;
-  }
-
-  /* travel 内容区限制宽度 */
-  .travel-section,
-  .travel-tips,
-  .travel-tabs {
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .hot-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
   .hot-card { padding: 18px 8px; }
   .hot-icon { width: 44px; height: 44px; font-size: 22px; }
@@ -1682,21 +1671,20 @@ span.logo-icon {
 }
 
 @media (min-width: 1024px) {
-  .app-header, .topbar { padding: 11px 20px; }
-  body > .page, .content, .art-list,
-  .art-cat-chips, .art-kw-card, .art-cat-nav,
-  .district-hero, .channel-header { max-width: 1200px; }
+.app-header, .topbar { padding: 11px 20px; }
+body > .page, .content, .art-list,
+.art-cat-chips, .art-kw-card, .art-cat-nav,
+.district-hero, .channel-header { max-width: 100%; }
   .hot-grid { grid-template-columns: repeat(4, 1fr); }
   .service-grid { grid-template-columns: repeat(3, 1fr); }
   .tools-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 @media (min-width: 1440px) {
-  .app-header, .topbar { padding: 11px 24px; }
-  body > .page, .content, .art-list,
-  .art-cat-chips, .art-kw-card, .art-cat-nav,
-  .district-hero, .channel-header { max-width: 1320px; }
-  .art-toc { left: calc((100vw - 1320px) / 2 - 240px); }
+.app-header, .topbar { padding: 11px 24px; }
+body > .page, .content, .art-list,
+.art-cat-chips, .art-kw-card, .art-cat-nav,
+.district-hero, .channel-header { max-width: 100%; }
 }
 
 /* ===== 今日杭州实时信息流卡片 ===== */
@@ -3177,9 +3165,11 @@ border-radius: 14px;
 .di-scenic { margin-bottom: 12px; }
 .di-section-title { font-size: 12px; font-weight: 600; opacity: 0.9; margin-bottom: 8px; }
 .di-scenic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.di-scenic-item { background: rgba(255,255,255,0.12); padding: 8px 10px; border-radius: 8px; }
-.di-scenic-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
-.di-scenic-desc { font-size: 11px; opacity: 0.85; line-height: 1.4; }
+.di-scenic-item { background: rgba(255,255,255,0.12); padding: 0; border-radius: 10px; overflow: hidden; }
+.di-scenic-img { width: 100%; height: 80px; object-fit: cover; display: block; }
+.di-scenic-img--placeholder { display: flex; align-items: center; justify-content: center; font-size: 48px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); }
+.di-scenic-name { font-size: 13px; font-weight: 600; margin: 6px 10px 2px; }
+.di-scenic-desc { font-size: 11px; opacity: 0.85; line-height: 1.4; padding: 0 10px 10px; }
 .di-landmarks { margin-bottom: 12px; }
 .di-landmark-list { display: flex; flex-wrap: wrap; gap: 6px; }
 .di-landmark { font-size: 11px; background: rgba(255,255,255,0.12); padding: 4px 10px; border-radius: 8px; }

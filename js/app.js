@@ -1089,10 +1089,13 @@ window.addEventListener('offline', function () {
     t.textContent = msg;
     t.classList.add('show');
     clearTimeout(t._timer);
-    t._timer = setTimeout(function () { t.classList.remove('show'); }, 2000);
-  }
+  t._timer = setTimeout(function () { t.classList.remove('show'); }, 2000);
+}
 
-  function copyText(text, name) {
+// 暴露全局 Toast 函数，供 analytics.js 等其他脚本调用
+window.ihzShowToast = showToast;
+
+function copyText(text, name) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(function () {
         showToast('已复制' + name + '：' + text);
@@ -3480,7 +3483,11 @@ function showMetro() {
         '<div class="di-section-title">📍 特色景点</div>' +
         '<div class="di-scenic-grid">' +
         info.scenic.map(function(s) {
+          var imgHtml = s.image
+            ? '<img class="di-scenic-img" src="' + s.image + '" alt="' + s.name + '" loading="lazy">'
+            : '<div class="di-scenic-img di-scenic-img--placeholder">' + (s.emoji || '🏞️') + '</div>';
           return '<div class="di-scenic-item">' +
+            imgHtml +
             '<div class="di-scenic-name">' + s.name + '</div>' +
             '<div class="di-scenic-desc">' + s.desc + '</div>' +
           '</div>';
@@ -3617,12 +3624,14 @@ function showMetro() {
 
   // ===== 初始化 =====
   function init() {
-      applyTheme(state.theme);
-      applyFontSize();
-      applyElderlyMode();
-      initCityDropdown();
-      bindCityDropdown();
-      renderTodayHangzhou();
+    applyTheme(state.theme);
+    applyFontSize();
+    applyElderlyMode();
+    initCityDropdown();
+    bindCityDropdown();
+    // URL hash 支持：从其他页面底部导航点击"我的"跳转时自动切换到 #pageMe
+    if (location.hash === '#me') { state.currentPage = 'me'; }
+    renderTodayHangzhou();
       renderDistrictInfo();
       renderNewsBanner();
       renderHotServices();
@@ -3654,6 +3663,8 @@ function showMetro() {
     document.addEventListener('visibilitychange', function () {
       if (!document.hidden) loadCMSData();
     });
+    // 初始化页面显示状态：隐藏非当前页，确保页面刷新后状态一致
+    switchPage(state.currentPage);
   }
 
   // ===== CMS 数据异步加载（覆盖兜底）=====
@@ -4385,14 +4396,17 @@ function showMetro() {
   window.toggleAIChat = toggleAIChat;
   window.closeAIChat = closeAIChat;
   window.clearAIChat = clearAIChat;
-  // ===== 首页观潮专题自动显示 (8-11月) =====
+  // ===== 首页观潮专题自动显示（国庆后一周 ≈ 10月8日结束） =====
   (function initTideFeature() {
     var el = document.getElementById('tideFeature');
     if (!el) return;
     var now = new Date();
     var m = now.getMonth() + 1; // 1-12
-    // 观潮季：8月中至11月初（公历）
-    if (m < 8 || m > 11) return;
+    var d = now.getDate();
+    // 观潮季：8月15日 — 10月8日
+    if (m < 8 || m > 10) return;
+    if (m === 8 && d < 15) return;
+    if (m === 10 && d > 8) return;
     el.style.display = '';
     // 填充今日潮汐信息
     try {
