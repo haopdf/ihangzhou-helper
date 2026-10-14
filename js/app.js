@@ -55,7 +55,7 @@ window.addEventListener('offline', function () {
 // ===== 内联兜底数据（CMS API 失败时使用，保证离线/PWA 可用）=====
   var DATA_FALLBACK = {
     // 热门搜索关键词（对标本地宝热门搜索）
-    hotKeywords: ["钱塘江观潮", "限行", "社保", "公积金", "灵隐寺", "消费券", "人才认定", "找工作", "公租房", "摇号", "西湖", "疫苗"],
+    hotKeywords: ["钱塘江观潮", "今日限行", "社保查询", "公积金", "灵隐寺", "消费券", "人才认定", "找工作", "公租房", "浙A摇号", "西湖十景", "地铁线路"],
 
     // 热门办事（顶部快捷入口）
     hotServices: [
@@ -1005,6 +1005,23 @@ window.addEventListener('offline', function () {
           { name: "未来科技城", desc: "互联网人聚集地", detail: "<p><strong>未来科技城咖啡馆</strong></p><p>余杭未来科技城，互联网人聚集地。</p><p>• 阿里巴巴、梦想小镇周边</p><p>• 互联网人常去的咖啡馆</p><p>• 创业氛围浓厚</p>", color: "#84cc16" },
           { name: "玉皇山路", desc: "幽静书吧", detail: "<p><strong>玉皇山路咖啡馆</strong></p><p>玉皇山脚下，幽静书吧集中。</p><p>• 远离喧嚣</p><p>• 适合看书、办公</p><p>• 自然环境好</p>", color: "#f97316" }
         ]
+      },
+      {
+        id: "history", name: "历史文化", icon: "🏯",
+        items: [
+          { name: "南宋皇城", desc: "南宋临安城遗址探访", url: "place.html?id=nansong", color: "#b45309" },
+          { name: "京杭大运河", desc: "世界遗产·杭州段", url: "articles.html?q=%E8%BF%90%E6%B2%B3", color: "#1d4ed8" },
+          { name: "良渚古城", desc: "5000年文明实证", url: "place.html?id=liangzhu", color: "#7c3aed" },
+          { name: "西湖申遗", desc: "西湖文化景观世界遗产", url: "articles.html?q=%E8%A5%BF%E6%B9%96%E7%94%BB%E9%81%97", color: "#0891b2" },
+          { name: "钱塘江古海塘", desc: "千年防潮工程遗迹", url: "articles.html?q=%E5%8F%A4%E6%B5%B7%E5%A1%98", color: "#dc2626" },
+          { name: "清河坊历史街区", desc: "南宋市井文化活化石", url: "articles.html?q=%E6%B8%85%E6%B2%B3%E5%9D%8A", color: "#ea580c" },
+          { name: "南宋御街", desc: "中山路·南宋中轴大道", url: "articles.html?q=%E5%8D%97%E5%AE%8B%E5%BE%A1%E8%A1%97", color: "#65a30d" },
+          { name: "凤凰山皇城遗址", desc: "南宋皇宫所在地", url: "articles.html?q=%E5%87%A4%E5%87%B0%E5%B1%B1", color: "#059669" },
+          { name: "杭州名人故居", desc: "陆游·苏轼·白居易·秋瑾", url: "articles.html?q=%E5%90%8D%E4%BA%BA%E6%95%85%E5%B1%85", color: "#4f46e5" },
+          { name: "雷峰塔地宫", desc: "千年佛塔的前世今生", url: "scenic.html?id=leifengta", color: "#be185d" },
+          { name: "灵隐寺千年史", desc: "东晋古刹1700年", url: "articles.html?q=%E7%81%B5%E9%9A%90%E5%8F%A4%E5%8F%B2", color: "#8b5cf6" },
+          { name: "六和塔", desc: "钱塘江畔千年古塔", url: "articles.html?q=%E5%85%AD%E5%92%8C%E5%A1%94", color: "#64748b" }
+        ]
       }
     ],
 
@@ -1577,12 +1594,11 @@ function copyText(text, name) {
     });
 
     bindOn('#searchInput', 'focus', function (e) {
-      if (e.target.value.trim()) {
-        document.body.classList.add('search-mode');
-        var topbar = document.getElementById('topbar');
-        if (topbar) topbar.classList.add('searching');
-        e.target.classList.add('searching');
-      }
+      // 点击即展开搜索（覆盖其他元素），无需等输入
+      document.body.classList.add('search-mode');
+      var topbar = document.getElementById('topbar');
+      if (topbar) topbar.classList.add('searching');
+      e.target.classList.add('searching');
     });
 
     // 搜索结果区关闭按钮：清空搜索框 + 隐藏结果区
@@ -3441,6 +3457,11 @@ function showMetro() {
         box.querySelectorAll('.city-dropdown-item').forEach(function(it) {
           it.classList.toggle('active', it.getAttribute('data-id') === id);
         });
+        // 关闭设置面板，确保能看到页面更新
+        var overlay = document.getElementById('settingsOverlay');
+        var settingsPanel = document.getElementById('settingsPanel');
+        if (overlay) overlay.classList.remove('show');
+        if (settingsPanel) settingsPanel.classList.remove('show');
         // 切换到"杭州"：在首页则刷新，在其他页（如 district.html）则跳回首页
         if (id === 'hangzhou') {
           var isIndex = location.pathname === '/' ||
@@ -3508,7 +3529,9 @@ function showMetro() {
           var imgHtml = s.image
             ? '<img class="di-scenic-img" src="' + s.image + '" alt="' + s.name + '" loading="lazy">'
             : '<div class="di-scenic-img di-scenic-img--placeholder">' + getEmoji(s.name) + '</div>';
-          return '<div class="di-scenic-item">' +
+          // 景点卡片可点击：弹出详情 modal
+          var clickAttr = ' onclick="window._ihzOpenDistrictScenic && window._ihzOpenDistrictScenic(\'' + s.name.replace(/'/g, "\\'") + '\',\'' + s.desc.replace(/'/g, "\\'") + '\')"';
+          return '<div class="di-scenic-item"' + clickAttr + '>' +
             imgHtml +
             '<div class="di-scenic-name">' + s.name + '</div>' +
             '<div class="di-scenic-desc">' + s.desc + '</div>' +
@@ -3555,6 +3578,21 @@ function showMetro() {
         '<a class="di-more" href="district.html?id=' + curId + '">查看 ' + d.full + ' 详情 →</a>' +
       '</div>';
   }
+
+  // 区县景点点击弹窗：使用页面已有的 modal 组件
+  window._ihzOpenDistrictScenic = function (name, desc) {
+    var modal = document.getElementById('modalOverlay');
+    var mTitle = document.getElementById('modalTitle');
+    var mBody = document.getElementById('modalBody');
+    if (!modal || !mTitle || !mBody) return;
+    mTitle.textContent = '📍 ' + name;
+    mBody.innerHTML =
+      '<div style="background:var(--bg-alt);border-left:3px solid var(--primary);padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;color:var(--text-secondary);line-height:1.8;">' + desc + '</div>' +
+      '<a class="di-gov-link" style="display:block;text-align:center;margin-bottom:10px;" href="https://uri.amap.com/search?keyword=' + encodeURIComponent('杭州' + name) + '&city=330100" target="_blank" rel="noopener">🧭 高德地图导航</a>' +
+      '<a class="di-gov-link" style="display:block;text-align:center;margin-bottom:10px;background:var(--bg-alt);color:var(--text);border:1px solid var(--border);" href="https://www.baidu.com/s?wd=' + encodeURIComponent('杭州' + name + ' 游玩攻略') + '" target="_blank" rel="noopener">🔍 百度搜索攻略</a>' +
+      '<a class="di-gov-link" style="display:block;text-align:center;" href="travel.html" target="_blank" rel="noopener">�️ 查看更多杭州景点</a>';
+    modal.classList.add('show');
+  };
 
   function bindCityDropdown() {
     var btn = document.getElementById('citySelect');
@@ -3644,25 +3682,32 @@ function showMetro() {
     showToast(on ? '已开启老人模式' : '已关闭老人模式');
   };
 
-  // ===== 初始化 =====
-  function init() {
+// ===== 初始化 =====
+function init() {
+  // 独立栏目页（cat.html）不需要 app.js 的完整初始化（会篡改置顶栏目/服务列表）
+  if (window.IZ_SKIP_APP_INIT) {
     applyTheme(state.theme);
     applyFontSize();
     applyElderlyMode();
-    initCityDropdown();
-    bindCityDropdown();
-    // URL hash 支持：从其他页面底部导航点击"我的"跳转时自动切换到 #pageMe
-    if (location.hash === '#me') { state.currentPage = 'me'; }
-    renderTodayHangzhou();
-      renderDistrictInfo();
-      renderNewsBanner();
-      renderHotServices();
-      renderHotKeywords();
-      // 首页不再默认渲染 tabs 和 serviceGrid，搜索时才显示结果区
-    bindEvents();
-    aiLoadHistory();
-    bindAIEvents();
-    updateMeCounters();
+    return;
+  }
+  applyTheme(state.theme);
+  applyFontSize();
+  applyElderlyMode();
+  initCityDropdown();
+  bindCityDropdown();
+  // URL hash 支持：从其他页面底部导航点击"我的"跳转时自动切换到 #pageMe
+  if (location.hash === '#me') { state.currentPage = 'me'; }
+  renderTodayHangzhou();
+  renderDistrictInfo();
+  renderNewsBanner();
+  renderHotServices();
+  renderHotKeywords();
+  // 首页不再默认渲染 tabs 和 serviceGrid，搜索时才显示结果区
+  bindEvents();
+  aiLoadHistory();
+  bindAIEvents();
+  updateMeCounters();
     var now = new Date();
     var dateEl = $('#heroDate');
     if (dateEl) {
