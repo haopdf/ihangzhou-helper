@@ -532,7 +532,26 @@
       var items = FILTERED.slice(start, end);
 
       if (items.length === 0 && start === 0) {
-        list.innerHTML = '<div class="art-empty">没有找到相关文章</div>';
+        // 搜索无结果时，展示栏目内热门文章兜底，避免「空白页」
+        var q = document.getElementById('artSearchInput').value.trim();
+        if (q && ALL_ARTICLES.length) {
+          var fallback = ALL_ARTICLES.slice().sort(function(a,b){ return b.words - a.words; }).slice(0, 6);
+          list.innerHTML = '<div class="art-empty" style="margin-bottom:16px;">未找到「' + q + '」相关文章，为你推荐热门内容：</div>';
+          fallback.forEach(function(a){
+            var el = document.createElement('a');
+            el.className = 'art-item';
+            el.href = 'articles/' + a.slug + '.html';
+            el.dataset.track = a.title;
+            el.dataset.trackCat = '故事';
+            el.innerHTML =
+              '<div class="art-item-title">' + a.title + '</div>' +
+              '<div class="art-item-meta"><span>📂 ' + a.catClean + '</span><span>� ' + Math.round(a.words/100)/10 + 'k 字</span></div>' +
+              '<div class="art-item-summary">' + a.summary + '</div>';
+            list.appendChild(el);
+          });
+        } else {
+          list.innerHTML = '<div class="art-empty">没有找到相关文章</div>';
+        }
         return;
       }
 

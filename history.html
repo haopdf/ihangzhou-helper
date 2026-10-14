@@ -143,18 +143,29 @@
         return '📌';
       }
 
-      function renderChannel() {
-        if (!window._getData) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">数据加载失败，请刷新重试</div>';
-          return;
-        }
+      // 历史文化的兜底数据（CMS 数据缺失时使用）
+      var HISTORY_FALLBACK = {
+        icon: CHANNEL_ICON, name: CHANNEL_NAME,
+        items: [
+          { name: "南宋皇城", desc: "南宋临安城遗址探访", url: "articles.html?q=%E5%8D%97%E5%AE%8B%E7%9A%87%E5%9F%8E", color: "#b45309" },
+          { name: "京杭大运河", desc: "世界遗产·杭州段", url: "articles.html?q=%E8%BF%90%E6%B2%B3", color: "#1d4ed8" },
+          { name: "良渚古城", desc: "5000年文明实证", url: "place.html?id=liangzhu", color: "#7c3aed" },
+          { name: "西湖申遗", desc: "西湖文化景观世界遗产", url: "articles.html?q=%E8%A5%BF%E6%B9%96%E7%94%BB%E9%81%97", color: "#0891b2" },
+          { name: "清河坊历史街区", desc: "南宋市井文化活化石", url: "articles.html?q=%E6%B8%85%E6%B2%B3%E5%9D%8A", color: "#ea580c" },
+          { name: "南宋御街", desc: "中山路·南宋中轴大道", url: "articles.html?q=%E5%8D%97%E5%AE%8B%E5%BE%A1%E8%A1%97", color: "#65a30d" },
+          { name: "杭州名人故居", desc: "陆游·苏轼·白居易·秋瑾", url: "articles.html?q=%E5%90%8D%E4%BA%BA%E6%95%85%E5%B1%85", color: "#4f46e5" },
+          { name: "雷峰塔地宫", desc: "千年佛塔的前世今生", url: "scenic.html?id=leifengta", color: "#be185d" }
+        ]
+      };
 
-        var DATA = window._getData();
-        var category = DATA.categories.find(function (c) { return c.id === CHANNEL_ID; });
-        if (!category) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">频道「' + CHANNEL_NAME + '」数据未找到</div>';
-          return;
+      function renderChannel() {
+        var category = null;
+        if (window._getData) {
+          var DATA = window._getData();
+          category = DATA.categories.find(function (c) { return c.id === CHANNEL_ID; });
         }
+        // 兜底：CMS 数据缺失时使用本地定义
+        if (!category) category = HISTORY_FALLBACK;
 
         // 渲染频道头部
         var header = document.getElementById('channelHeader');

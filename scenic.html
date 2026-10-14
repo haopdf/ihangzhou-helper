@@ -248,5 +248,10 @@
       renderScenic(decodeURIComponent(id));
     })();
   </script>
+  <script>
+    if (window.IZ && IZ.layout) {
+      document.addEventListener('DOMContentLoaded', IZ.layout.init);
+    }
+  </script>
 </body>
 </html>
