@@ -3,267 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <meta name="description" content="杭州咖啡馆指南，西湖边、南山路、青芝坞、馒头山，寻找城市中的咖啡香气，所有链接指向官方渠道。">
-  <meta name="keywords" content="杭州咖啡馆,西湖边咖啡,南山路咖啡,青芝坞,馒头山,杭州咖啡,ihangzhou">
-  <meta name="theme-color" content="#0ea5e9">
-  <meta property="og:title" content="咖啡馆指南 · iHangzhou">
-  <meta property="og:description" content="杭州咖啡馆指南，西湖边、南山路、青芝坞、馒头山，寻找城市中的咖啡香气">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="iHangzhou 杭州生活助手">
-  <link rel="canonical" href="https://www.ihangzhou.net/coffee.html">
-  <link rel="manifest" href="manifest.json">
+  <meta name="description" content="杭州咖啡地图：西湖边、青芝坞、四眼井、馒头山、天目里、东信和创园，精选咖啡店铺推荐">
+  <meta name="keywords" content="杭州咖啡,西湖边咖啡,青芝坞,馒头山,天目里,ihangzhou">
+  <meta name="theme-color" content="#6f4e37">
   <title>咖啡馆指南 · iHangzhou 杭州生活助手</title>
   <link rel="stylesheet" href="css/style.css?v=20260921h">
   <script src="js/layout.js"></script>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+  <style>
+    .ds-cr{padding:8px 12px;border-radius:8px;font-size:12px;font-weight:600;color:#5d4037;display:inline-block;margin-bottom:8px;background:#f5f0eb}
+    .ds-hero{font-size:28px;font-weight:700;color:#3e2723;margin:2px 0 4px}
+    .ds-subtitle{font-size:15px;color:#6d4c41;margin-bottom:12px}
+    .ds-sec{background:#fff;border-radius:14px;padding:16px;margin:12px 16px;box-shadow:0 2px 8px rgba(111,78,55,.06)}
+    .ds-sec h3{font-size:15px;font-weight:600;color:#3e2723;margin:0 0 8px;display:flex;align-items:center;gap:6px}
+    .ds-ftag{display:inline-block;padding:3px 8px;background:#efebe9;border-radius:8px;font-size:11px;color:#5d4037;margin:3px 4px 0 0}
+    .ds-shp{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f5f5f5}
+    .ds-shp:last-child{border-bottom:none}
+    .ds-shico{width:36px;height:36px;background:#f5f0eb;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .ds-shn{font-size:14px;font-weight:600;color:#3e2723}
+    .ds-sha{font-size:12px;color:#888;margin-top:2px}
+    .ds-sht{font-size:11px;color:#a1887f;margin-top:2px}
+    .ds-tip{background:#fff8e1;border-left:4px solid #ffa726;padding:10px 14px;font-size:13px;color:#f57f17;margin:0 16px 8px;border-radius:0 8px 8px 0}
+    .ds-err{text-align:center;padding:40px 20px;color:#999}
+    .ds-back{display:block;text-align:center;padding:12px;background:#6f4e37;color:#fff;border-radius:24px;font-size:14px;text-decoration:none;margin:16px;max-width:180px;margin-inline:auto}
+  </style>
 </head>
 <body>
   <script>
     window.IHZ_PAGE = { title: "咖啡馆指南", icon: "☕", channelId: "coffee" };
+    window.IZ_SKIP_APP_INIT = true;
     window.IZ_SKIP_APP_THEME = true;
   </script>
-<!-- 频道内容 -->
-  <div class="page active" id="pageChannel">
-    <!-- 频道头部 -->
-    <div class="channel-header" id="channelHeader"></div>
 
-    <!-- 频道描述 -->
+  <div class="page active" id="pageChannel">
+    <div class="channel-header" id="channelHeader"></div>
     <div class="channel-desc" id="channelDesc"></div>
 
-    <!-- 频道服务网格 -->
-    <div class="content">
-      <div class="section-head">
-        <h2 id="channelTitle">咖啡馆指南 · 全部服务</h2>
-        <span class="tip" id="channelCount"></span>
-      </div>
-      <div class="service-grid" id="serviceGrid"></div>
-    </div>
+    <!-- 咖啡详情渲染容器 -->
+    <div id="coffeeContent" style="padding:16px;"></div>
 
-    <!-- 相关频道推荐 -->
-    <div class="related-channels">
-      <div class="section-head">
-        <h2>相关频道</h2>
-        <span class="tip">探索更多</span>
-      </div>
-      <div class="channel-grid" id="relatedChannels"></div>
-
-      <!-- 相关文章 -->
-      <div id="relatedArticles"></div>
-    </div>
-
-    <!-- 返回首页 -->
-    <div style="text-align:center;padding: 24px 16px 48px 16px;">
-      <a href="index.html" style="display:inline-block;padding: 12px 16px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;">← 返回首页</a>
+    <!-- 返回 -->
+    <div style="text-align:center;padding:24px 16px 48px">
+      <a href="index.html" class="ds-back">← 返回首页</a>
     </div>
   </div>
 
-  <!-- 模态框 -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal">
-      <div class="modal-header">
-        <h3 id="modalTitle">标题</h3>
-        <button class="modal-close" id="modalClose">✕</button>
-      </div>
-      <div class="modal-body" id="modalBody"></div>
-    </div>
-  </div>
-
-  <script src="js/app.js?v=20260928c"></script>
-<script src="js/analytics.js?v=20260928c"></script>
+  <script src="js/coffee-data.js"></script>
   <script>
-    // 频道专题页逻辑
-    (function () {
-      'use strict';
-
-      var CHANNEL_ID = 'coffee';
-      var CHANNEL_NAME = '咖啡馆指南';
-      var CHANNEL_ICON = '☕';
-      var CHANNEL_DESC = '杭州咖啡馆指南，西湖边、南山路、青芝坞、馒头山，寻找城市中的咖啡香气，所有链接指向官方渠道。';
-
-      // 相关频道推荐
-      var RELATED = {
-        'banshi': ['traffic', 'zhaopin', 'laozihao'],
-        'traffic': ['banshi', 'weekend', 'museum'],
-        'food': ['laozihao', 'street', 'coffee'],
-        'laozihao': ['food', 'history', 'street'],
-        'celebrity': ['history', 'street', 'museum'],
-        'history': ['celebrity', 'museum', 'laozihao'],
-        'internet': ['zhaopin', 'street', 'coffee'],
-        'zhaopin': ['banshi', 'internet', 'weekend'],
-        'street': ['food', 'coffee', 'history'],
-        'weekend': ['museum', 'food', 'street'],
-        'museum': ['history', 'weekend', 'celebrity'],
-        'coffee': ['street', 'weekend', 'food']
-      };
-
-      // 根据频道关键词从 articles/index.json 匹配相关文章
-      function fetchRelatedArticles(chips, categoryName) {
-        var el = document.getElementById('relatedArticles');
-        if (!el) return;
-        var allChips = (chips || []).slice(0, 3);
-        if (categoryName) allChips.unshift(categoryName);
-
-        fetch('articles/index.json?t=' + Date.now())
-          .then(function(r) { return r.json(); })
-          .then(function(list) {
-            var matched = [];
-            list.forEach(function(a) {
-              for (var i = 0; i < allChips.length; i++) {
-                var kw = allChips[i];
-                if (!kw) continue;
-                if (a.title.indexOf(kw) >= 0 || a.summary.indexOf(kw) >= 0 || a.cat.indexOf(kw) >= 0) {
-                  matched.push(a);
-                  break;
-                }
-              }
-            });
-            matched = matched.slice(0, 5);
-            if (!matched.length) { el.innerHTML = ''; return; }
-
-            el.innerHTML =
-              '<div class="section-head" style="margin-top:24px;padding:0 16px;">' +
-              '<h2>📚 相关杭州故事</h2>' +
-              '<span class="tip">共 ' + matched.length + ' 篇</span>' +
-              '</div>' +
-              '<div style="padding: 0 16px;">' +
-              matched.map(function(a) {
-                return '<a href="articles/' + a.slug + '.html" style="display:block;padding:12px 14px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;margin-bottom:8px;text-decoration:none;color:inherit;">' +
-                  '<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;">' + a.title + '</div>' +
-                  '<div style="font-size:12px;color:var(--text-muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">' + a.summary + '</div>' +
-                  '</a>';
-              }).join('') +
-              '<a href="articles.html" style="display:block;text-align:center;padding:12px;background:var(--bg-alt);border-radius:10px;color:var(--primary);font-size:13px;text-decoration:none;font-weight:500;margin-top:8px;">📖 查看全部杭州故事 →</a>' +
-              '</div>';
-          })
-          .catch(function() { /* 静默失败 */ });
+    function renderCoffee(id){
+      var c = document.getElementById('coffeeContent');
+      if (!c) return;
+      var data = window.COFFEE_DATA ? window.COFFEE_DATA[id] : null;
+      var keys = window.COFFEE_DATA ? Object.keys(window.COFFEE_DATA) : [];
+      if (!data) {
+        c.innerHTML = '<div class="ds-err">没有找到相关咖啡信息<br><br><a href="coffee.html" style="color:#6f4e37">← 回到咖啡首页</a></div>';
+        return;
       }
-
-      function getServiceIcon(name) {
-        if (window.getServiceIcon) return window.getServiceIcon(name);
-        return '📌';
+      var h = '';
+      h += '<span class="ds-cr">' + (data.category || '☕ 咖啡') + '</span>';
+      h += '<div class="ds-hero">' + data.name + '</div>';
+      h += '<div class="ds-subtitle">' + (data.subtitle || '') + '</div>';
+      if (data.history) {
+        h += '<div class="ds-sec"><h3>� 区域特色</h3><div style="font-size:14px;color:#444;line-height:1.7">' + data.history + '</div>';
+        if (data.features && data.features.length) {
+          h += '<div style="margin-top:8px">';
+          data.features.forEach(function(f){ h += '<span class="ds-ftag">' + f + '</span>'; });
+          h += '</div>';
+        }
+        h += '</div>';
       }
-
-      function renderChannel() {
-        if (!window._getData) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">数据加载失败，请刷新重试</div>';
-          return;
-        }
-
-        var DATA = window._getData();
-        var category = DATA.categories.find(function (c) { return c.id === CHANNEL_ID; });
-        if (!category) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">频道「' + CHANNEL_NAME + '」数据未找到</div>';
-          return;
-        }
-
-        // 渲染频道头部
-        var header = document.getElementById('channelHeader');
-        header.innerHTML =
-          '<div class="ch-hero" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding: 32px 16px 24px 16px;text-align:center;">' +
-          '<div style="font-size:56px;line-height:1;margin-bottom:8px;">' + category.icon + '</div>' +
-          '<h1 style="font-size:24px;font-weight:700;margin:0;">' + category.name + '</h1>' +
-          '<div style="font-size:13px;opacity:0.9;margin-top:6px;">iHangzhou · 杭州生活助手</div>' +
-          '</div>';
-
-        // 渲染描述 + 提取关键词变成可点击 chip
-        var descEl = document.getElementById('channelDesc');
-        var descText = CHANNEL_DESC;
-        var chips = [];
-        var tokens = descText.split(/[、，,；。]/);
-        tokens.forEach(function(t) {
-          t = t.trim();
-          if (t.length >= 2 && t.length <= 10 && !/^[a-z0-9]+$/i.test(t)) chips.push(t);
+      if (data.area) {
+        h += '<div class="ds-sec"><h3>📍 所在区域</h3><div style="font-size:14px;color:#444">' + data.area + '</div></div>';
+      }
+      if (data.tips) {
+        h += '<div class="ds-tip">💡 小贴士：' + data.tips + '</div>';
+      }
+      if (data.shops && data.shops.length) {
+        h += '<div class="ds-sec"><h3>� 推荐去处</h3>';
+        data.shops.forEach(function(s) {
+          h += '<div class="ds-shp"><div class="ds-shico">�</div><div>';
+          h += '<div class="ds-shn">' + s.n + '</div>';
+          if (s.a) h += '<div class="ds-sha">📍 ' + s.a + '</div>';
+          if (s.t) h += '<div class="ds-sht">' + s.t + '</div>';
+          h += '</div></div>';
         });
-        chips = chips.filter(function(v, i, a) { return a.indexOf(v) === i; }).slice(0, 8);
-
-        var chipsHtml = chips.length ?
-          '<div class="ch-chips" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">' +
-          chips.map(function(c) {
-            return '<a class="ch-chip" href="articles.html?q=' + encodeURIComponent(c) + '" style="display:inline-block;padding:4px 12px;background:var(--bg-alt);border:1px solid var(--border);border-radius:14px;font-size:12px;color:var(--text-secondary);text-decoration:none;font-weight:500;">' + c + '</a>';
-          }).join('') + '</div>' : '';
-
-        descEl.innerHTML =
-          '<div style="padding:16px;background:var(--bg-card);border-radius:0 0 12px 12px;margin:0 16px;font-size:14px;line-height:1.7;color:var(--text-secondary);">' +
-          descText + chipsHtml +
-          '</div>';
-
-        // 相关文章区域
-        fetchRelatedArticles(chips, category.name);
-
-        // 渲染标题与数量
-        document.getElementById('channelTitle').textContent = category.name + ' · 全部服务';
-        document.getElementById('channelCount').textContent = '共 ' + category.items.length + ' 项';
-
-        // 渲染服务网格
-        var grid = document.getElementById('serviceGrid');
-        grid.innerHTML = category.items.map(function (item) {
-          if (item.url) {
-            var isExt = /^https?:\/\//i.test(item.url);
-            var extAttr = isExt ? ' target="_blank" rel="noopener noreferrer"' : '';
-            return '<a class="sitem" href="' + item.url + '"' + extAttr + '>' +
-              '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
-              '<div class="sinfo">' +
-              '<div class="sname">' + item.name + '</div>' +
-              '<div class="sdesc">' + item.desc + '</div>' +
-              '</div>' +
-              '<div class="sarrow">›</div>' +
-              '</a>';
-          }
-          return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="">' +
-            '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
-            '<div class="sinfo">' +
-            '<div class="sname">' + item.name + '</div>' +
-            '<div class="sdesc">' + item.desc + '</div>' +
-            '</div>' +
-            '<div class="sarrow">›</div>' +
-            '</div>';
-        }).join('');
-
-        // 渲染相关频道
-        var related = RELATED[CHANNEL_ID] || [];
-        var relEl = document.getElementById('relatedChannels');
-        if (relEl && related.length) {
-          relEl.innerHTML = related.map(function (rid) {
-            var rcat = DATA.categories.find(function (c) { return c.id === rid; });
-            if (!rcat) return '';
-            return '<a class="channel-item" href="' + rid + '.html">' +
-              '<span class="ch-icon">' + rcat.icon + '</span>' +
-              '<span class="ch-name">' + rcat.name + '</span>' +
-              '</a>';
-          }).join('');
-        }
-
-        // 搜索（频道内搜索）
-        var searchInput = document.getElementById('headerSearchInput');
-        if (searchInput) {
-          searchInput.addEventListener('input', function (e) {
-            var q = e.target.value.trim().toLowerCase();
-            if (!q) {
-              grid.querySelectorAll('.sitem').forEach(function (el) { el.style.display = 'flex'; });
-              return;
-            }
-            grid.querySelectorAll('.sitem').forEach(function (el) {
-              var name = el.querySelector('.sname').textContent.toLowerCase();
-              var desc = el.querySelector('.sdesc').textContent.toLowerCase();
-              el.style.display = (name.indexOf(q) >= 0 || desc.indexOf(q) >= 0) ? 'flex' : 'none';
-            });
-          });
-        }
+        h += '</div>';
       }
-
-      // 初始化
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', renderChannel);
-      } else {
-        renderChannel();
+      var nb = keys.filter(function(k){ return k !== id; }).slice(0, 4);
+      if (nb.length) {
+        h += '<div class="ds-sec"><h3>� 更多区域</h3><div style="display:flex;flex-wrap:wrap;gap:8px">';
+        nb.forEach(function(k) {
+          var v = window.COFFEE_DATA[k];
+          h += '<a href="coffee.html?id=' + k + '" style="flex:1;min-width:45%;text-align:center;padding:14px 8px;background:#fff;border:1px solid #6f4e3720;border-radius:10px;text-decoration:none;font-size:13px;color:#3e2723;font-weight:600">' + v.name + '</a>';
+        });
+        h += '</div></div>';
       }
+      h += '<a href="cat.html?c=food&s=%E5%92%96%E5%95%A1" style="display:block;text-align:center;padding:14px;background:#6f4e37;color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:600;margin:12px 16px">← 美食频道</a>';
+      c.innerHTML = h;
+    }
+    (function(){
+      var id = (location.search.split('id=')[1] || '').split('&')[0];
+      renderCoffee(decodeURIComponent(id));
     })();
   </script>
-  <script>
-    if (window.IZ && IZ.layout) {
-      document.addEventListener("DOMContentLoaded", IZ.layout.init);
-    }
-  </script>
-
+  <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>
 </body>
 </html>
