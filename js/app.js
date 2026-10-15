@@ -3595,7 +3595,7 @@ function showMetro() {
   };
 
   function bindCityDropdown() {
-    var btn = document.getElementById('citySelect');
+    var btn = document.getElementById('citySwitcherBtn');
     var box = document.getElementById('cityDropdown');
     if (!btn || !box) return;
     // 点击按钮展开/收起
@@ -3607,7 +3607,7 @@ function showMetro() {
     if (!box._docClickBound) {
       box._docClickBound = true;
       document.addEventListener('click', function(e) {
-        var b = document.getElementById('citySelect');
+        var b = document.getElementById('citySwitcherBtn');
         var bx = document.getElementById('cityDropdown');
         if (!b || !bx) return;
         if (!b.contains(e.target) && !bx.contains(e.target)) {
