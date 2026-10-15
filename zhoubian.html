@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>周边游 · iHangzhou</title>
+  <meta name="theme-color" content="#0d9488">
+  <meta name="description" content="杭州周边游：乌镇、莫干山、千岛湖、安吉、天目山、桐庐、淳安、建德，自驾游与周末短途攻略">
+  <link rel="stylesheet" href="css/style.css?v=20261013c">
+  <script src="js/layout.js"></script>
+  <script src="js/zhoubian-data.js"></script>
+  <style>
+    .zb-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,#0d9488,#0f766e)}
+    .zb-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55))}
+    .zb-hero .zb-tb{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
+    .zb-hero .zb-name{font-size:24px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+    .zb-hero .zb-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+    .zb-body{padding:16px}
+    .zb-badge{display:inline-block;font-size:12px;padding:4px 10px;background:#ccfbf1;color:#0f766e;border-radius:10px;font-weight:600;margin-bottom:8px}
+    .zb-meta{font-size:12px;color:var(--text-muted);float:right}
+    .zb-hist{margin:12px 0;padding:12px;background:#f0fdfa;border-radius:10px;border-left:3px solid #0d9488}
+    .zb-hist p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0}
+    .zb-section{margin:20px 0 8px}
+    .zb-section h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid #0d9488}
+    .zb-ft{display:flex;flex-direction:column;gap:6px}
+    .zb-ft i{font-size:13px;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:8px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+    .zb-ft i::before{content:'\2713';color:#0d9488;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
+    .zb-drive{font-size:13px;color:var(--text-secondary);padding:6px 12px;background:#f0fdfa;border-radius:8px;margin:8px 0}
+    .zb-drive span{color:#0f766e;font-weight:600}
+    .zb-exp{display:flex;flex-direction:column;gap:8px}
+    .zb-ei{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg-card);border-radius:10px;border:1px solid var(--border-light)}
+    .zb-ei .zb-eic{font-size:22px;flex-shrink:0}
+    .zb-ei .zb-en{font-size:14px;font-weight:600;color:var(--text)}
+    .zb-ei .zb-ed{font-size:12px;color:var(--text-secondary);margin-top:2px}
+    .zb-nb{margin-top:24px;border-top:8px solid var(--bg);padding-top:16px}
+    .zb-nb h3{font-size:15px;font-weight:700;margin:0 0 12px}
+    .zb-ng{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .zb-nc{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500}
+    .zb-nc:active{opacity:.7}
+    .zb-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
+    .zb-empty .ei-big{font-size:64px;margin-bottom:16px}
+    @media(min-width:768px){.zb-hero{height:300px}.zb-body{max-width:720px;margin:0 auto}}
+  </style>
+</head>
+<body>
+  <script>window.IHZ_PAGE={title:'周边游',icon:'�'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
+  <div id="zbContainer"><div class="zb-empty"><div class="ei-big">�</div><h2>加载中...</h2></div></div>
+  <script>
+    function renderZb(id){
+      var data=window.ZHOUBIAN_DATA?window.ZHOUBIAN_DATA[id]:null;
+      var c=document.getElementById('zbContainer');
+      var ht=document.getElementById('headerTitle');
+      if(!data){
+        c.innerHTML='<div class="zb-empty"><div class="ei-big">🚙</div><h2>未找到该目的地</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=travel&s=%E5%91%A8%E8%BE%B9%E6%B8%B8" class="btn" style="display:inline-block;padding:10px 20px;background:#0d9488;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回周边游</a> <a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">旅游首页</a></div>';
+        if(ht)ht.textContent='� 周边游';
+        return;
+      }
+      document.title=data.name+' · 周边游 · iHangzhou';
+      if(ht)ht.textContent='🚙 '+data.name;
+      var h='<div class="zb-hero"><div class="zb-tb"><div class="zb-name">'+data.name+'</div><div class="zb-sub">'+data.subtitle+'</div></div></div><div class="zb-body">';
+      h+='<div class="zb-badge">'+data.badge+' '+data.name+'</div>';
+      if(data.drive)h+='<span class="zb-meta">车程 '+data.drive+'</span>';
+      h+='<div style="clear:both"></div>';
+      if(data.history)h+='<div class="zb-hist"><p>'+data.history+'</p></div>';
+      if(data.features&&data.features.length){h+='<div class="zb-section"><h3>✨ 核心特色</h3><div class="zb-ft">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
+      if(data.spots&&data.spots.length){h+='<div class="zb-section"><h3>📍 必访景点</h3><div class="zb-exp">';data.spots.forEach(function(s){h+='<div class="zb-ei"><span class="zb-eic">📍</span><div><div class="zb-en">'+s.n+'</div><div class="zb-ed">'+s.d+'</div></div></div>'});h+='</div></div>';}
+      var keys=window.ZHOUBIAN_DATA?Object.keys(window.ZHOUBIAN_DATA):[];
+      var nb=keys.filter(function(k){return k!==id}).slice(0,4);
+      if(nb.length){h+='<div class="zb-nb"><h3>🚙 更多目的地</h3><div class="zb-ng">';nb.forEach(function(k){var v=window.ZHOUBIAN_DATA[k];h+='<a class="zb-nc" href="zhoubian.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
+      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=travel&s=%E5%91%A8%E8%BE%B9%E6%B8%B8" style="flex:1;text-align:center;padding:12px;background:#0d9488;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 周边游频道</a><a href="travel.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">旅游首页</a></div>';
+      h+='</div>';c.innerHTML=h;
+    }
+    (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderZb(decodeURIComponent(id))})();
+  </script>
+  <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>杭州甜品 · iHangzhou</title>
+  <meta name="theme-color" content="#ec4899">
+  <meta name="description" content="杭州传统甜品糕点：定胜糕、条头糕、桂花糖藕、龙井酥、藕粉、青团、桂花糕">
+  <link rel="stylesheet" href="css/style.css?v=20261013c">
+  <script src="js/layout.js"></script>
+  <script src="js/dessert-data.js"></script>
+  <style>
+    .ds-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,#ec4899,#be185d)}
+    .ds-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55))}
+    .ds-hero .ds-tb{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
+    .ds-hero .ds-name{font-size:24px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+    .ds-hero .ds-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+    .ds-body{padding:16px}
+    .ds-badge{display:inline-block;font-size:12px;padding:4px 10px;background:#fce7f3;color:#be185d;border-radius:10px;font-weight:600;margin-bottom:8px}
+    .ds-period{float:right;font-size:12px;color:var(--text-muted);margin-bottom:8px}
+    .ds-hist{margin:12px 0;padding:12px;background:#fdf2f8;border-radius:10px;border-left:3px solid #ec4899}
+    .ds-hist p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0}
+    .ds-section{margin:20px 0 8px}
+    .ds-section h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid #ec4899}
+    .ds-ft{display:flex;flex-direction:column;gap:6px}
+    .ds-ft i{font-size:13px;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:8px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+    .ds-ft i::before{content:'\2713';color:#ec4899;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
+    .ds-shop{display:flex;flex-direction:column;gap:8px}
+    .ds-si{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg-card);border-radius:10px;border:1px solid var(--border-light)}
+    .ds-si .ds-sic{font-size:22px;flex-shrink:0}
+    .ds-si .ds-sn{font-size:14px;font-weight:600;color:var(--text)}
+    .ds-si .ds-sa{font-size:12px;color:var(--text-secondary);margin-top:2px}
+    .ds-nb{margin-top:24px;border-top:8px solid var(--bg);padding-top:16px}
+    .ds-nb h3{font-size:15px;font-weight:700;margin:0 0 12px}
+    .ds-ng{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .ds-nc{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500}
+    .ds-nc:active{opacity:.7}
+    .ds-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
+    .ds-empty .ei-big{font-size:64px;margin-bottom:16px}
+    @media(min-width:768px){.ds-hero{height:300px}.ds-body{max-width:720px;margin:0 auto}}
+  </style>
+</head>
+<body>
+  <script>window.IHZ_PAGE={title:'甜品糕点',icon:'�'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
+  <div id="dessertContainer"><div class="ds-empty"><div class="ei-big">🍰</div><h2>加载中...</h2></div></div>
+  <script>
+    function renderDessert(id){
+      var data=window.DESSERT_DATA?window.DESSERT_DATA[id]:null;
+      var c=document.getElementById('dessertContainer');
+      var ht=document.getElementById('headerTitle');
+      if(!data){c.innerHTML='<div class="ds-empty"><div class="ei-big">�</div><h2>未找到该甜品</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=food&s=%E7%94%9C%E5%93%81" class="btn" style="display:inline-block;padding:10px 20px;background:#ec4899;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';if(ht)ht.textContent='🍰 甜品';return;}
+      document.title=data.name+' · 甜品 · iHangzhou';
+      if(ht)ht.textContent='� '+data.name;
+      var h='<div class="ds-hero"><div class="ds-tb"><div class="ds-name">'+data.name+'</div><div class="ds-sub">'+data.subtitle+'</div></div></div><div class="ds-body">';
+      h+='<div class="ds-badge">'+data.badge+' '+data.name+'</div>';
+      if(data.period)h+='<span class="ds-period">'+data.period+'</span>';
+      h+='<div style="clear:both"></div>';
+      if(data.history)h+='<div class="ds-hist"><p>📜 '+data.history+'</p></div>';
+      if(data.features&&data.features.length){h+='<div class="ds-section"><h3>✨ 特色</h3><div class="ds-ft">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
+      if(data.shops&&data.shops.length){h+='<div class="ds-section"><h3>🏪 去哪买</h3><div class="ds-shop">';data.shops.forEach(function(s){h+='<div class="ds-si"><span class="ds-sic">�️</span><div><div class="ds-sn">'+s.n+'</div><div class="ds-sa">'+s.a+'</div></div></div>'});h+='</div></div>';}
+      var keys=window.DESSERT_DATA?Object.keys(window.DESSERT_DATA):[];
+      var nb=keys.filter(function(k){return k!==id}).slice(0,4);
+      if(nb.length){h+='<div class="ds-nb"><h3>🍰 更多甜品</h3><div class="ds-ng">';nb.forEach(function(k){var v=window.DESSERT_DATA[k];h+='<a class="ds-nc" href="dessert.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
+      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=food&s=%E7%94%9C%E5%93%81" style="flex:1;text-align:center;padding:12px;background:#ec4899;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 甜品频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
+      h+='</div>';c.innerHTML=h;
+    }
+    (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderDessert(decodeURIComponent(id))})();
+  </script>
+  <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>茶馆 · iHangzhou</title>
+  <meta name="theme-color" content="#a16207">
+  <meta name="description" content="杭州茶馆：龙井问茶、翁家山、湖畔居、河坊品茗、运河茶馆，品茶赏景好去处">
+  <link rel="stylesheet" href="css/style.css?v=20261013c">
+  <script src="js/layout.js"></script>
+  <script src="js/chaguan-data.js"></script>
+  <style>
+    .cg-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,#a16207,#854d0e)}
+    .cg-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55))}
+    .cg-hero .cg-tb{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
+    .cg-hero .cg-name{font-size:24px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+    .cg-hero .cg-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+    .cg-body{padding:16px}
+    .cg-badge{display:inline-block;font-size:12px;padding:4px 10px;background:#fef9c3;color:#854d0e;border-radius:10px;font-weight:600;margin-bottom:8px}
+    .cg-hist{margin:12px 0;padding:12px;background:#fefce8;border-radius:10px;border-left:3px solid #a16207}
+    .cg-hist p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0}
+    .cg-section{margin:20px 0 8px}
+    .cg-section h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid #a16207}
+    .cg-ft{display:flex;flex-direction:column;gap:6px}
+    .cg-ft i{font-size:13px;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:8px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+    .cg-ft i::before{content:'\2713';color:#a16207;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
+    .cg-exp{display:flex;flex-direction:column;gap:8px}
+    .cg-ei{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg-card);border-radius:10px;border:1px solid var(--border-light)}
+    .cg-ei .cg-eic{font-size:22px;flex-shrink:0}
+    .cg-ei .cg-en{font-size:14px;font-weight:600;color:var(--text)}
+    .cg-ei .cg-ed{font-size:12px;color:var(--text-secondary);margin-top:2px}
+    .cg-nb{margin-top:24px;border-top:8px solid var(--bg);padding-top:16px}
+    .cg-nb h3{font-size:15px;font-weight:700;margin:0 0 12px}
+    .cg-ng{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .cg-nc{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500}
+    .cg-nc:active{opacity:.7}
+    .cg-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
+    .cg-empty .ei-big{font-size:64px;margin-bottom:16px}
+    @media(min-width:768px){.cg-hero{height:300px}.cg-body{max-width:720px;margin:0 auto}}
+  </style>
+</head>
+<body>
+  <script>window.IHZ_PAGE={title:'茶馆',icon:'�'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
+  <div id="cgContainer"><div class="cg-empty"><div class="ei-big">�</div><h2>加载中...</h2></div></div>
+  <script>
+    function renderCg(id){
+      var data=window.CHAGUAN_DATA?window.CHAGUAN_DATA[id]:null;
+      var c=document.getElementById('cgContainer');
+      var ht=document.getElementById('headerTitle');
+      if(!data){
+        c.innerHTML='<div class="cg-empty"><div class="ei-big">🫖</div><h2>未找到该茶馆</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=tea&s=%E8%8C%B6%E9%A6%86" class="btn" style="display:inline-block;padding:10px 20px;background:#a16207;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回茶馆</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';
+        if(ht)ht.textContent='� 茶馆';
+        return;
+      }
+      document.title=data.name+' · 茶馆 · iHangzhou';
+      if(ht)ht.textContent='� '+data.name;
+      var h='<div class="cg-hero"><div class="cg-tb"><div class="cg-name">'+data.name+'</div><div class="cg-sub">'+data.subtitle+'</div></div></div><div class="cg-body">';
+      h+='<div class="cg-badge">'+data.badge+' '+data.name+'</div>';
+      h+='<div style="clear:both"></div>';
+      if(data.history)h+='<div class="cg-hist"><p>'+data.history+'</p></div>';
+      if(data.features&&data.features.length){h+='<div class="cg-section"><h3>✨ 特色</h3><div class="cg-ft">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
+      if(data.spots&&data.spots.length){h+='<div class="cg-section"><h3>📍 推荐</h3><div class="cg-exp">';data.spots.forEach(function(s){h+='<div class="cg-ei"><span class="cg-eic">📍</span><div><div class="cg-en">'+s.n+'</div><div class="cg-ed">'+s.d+'</div></div></div>'});h+='</div></div>';}
+      var keys=window.CHAGUAN_DATA?Object.keys(window.CHAGUAN_DATA):[];
+      var nb=keys.filter(function(k){return k!==id}).slice(0,4);
+      if(nb.length){h+='<div class="cg-nb"><h3>� 更多茶馆</h3><div class="cg-ng">';nb.forEach(function(k){var v=window.CHAGUAN_DATA[k];h+='<a class="cg-nc" href="chaguan.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
+      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=tea&s=%E8%8C%B6%E9%A6%86" style="flex:1;text-align:center;padding:12px;background:#a16207;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 茶馆频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
+      h+='</div>';c.innerHTML=h;
+    }
+    (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderCg(decodeURIComponent(id))})();
+  </script>
+  <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>
+</body>
+</html>

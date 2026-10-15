@@ -3173,7 +3173,8 @@ border-radius: 14px;
 .di-scenic { margin-bottom: 12px; }
 .di-section-title { font-size: 12px; font-weight: 600; opacity: 0.9; margin-bottom: 8px; }
 .di-scenic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.di-scenic-item { background: rgba(255,255,255,0.12); padding: 0; border-radius: 10px; overflow: hidden; }
+.di-scenic-item { background: rgba(255,255,255,0.12); padding: 0; border-radius: 10px; overflow: hidden; cursor: pointer; transition: transform 0.15s, background 0.15s; }
+.di-scenic-item:active { transform: scale(0.97); background: rgba(255,255,255,0.2); }
 .di-scenic-img { width: 100%; height: 80px; object-fit: cover; display: block; }
 .di-scenic-img--placeholder { display: flex; align-items: center; justify-content: center; font-size: 48px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); }
 .di-scenic-name { font-size: 13px; font-weight: 600; margin: 6px 10px 2px; }
@@ -3907,6 +3908,14 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
+/* PC 端：travel 页 .ch-hero 与 channel/cat 页对齐，减少顶部间距 */
+@media (min-width: 1024px) {
+  .travel-hero.ch-hero {
+    max-width: 1180px;
+    margin: 12px auto 0;
+    padding: 22px 20px 18px;
+  }
+}
 [data-theme="dark"] .ch-hero { box-shadow: 0 4px 16px -8px rgba(0,0,0,0.5); }
 
 /* ===== 杭州怎么玩：精选攻略滑动卡片 ===== */
@@ -4235,7 +4244,9 @@ body.search-mode .tide-feature {
     max-width: 1180px;
   }
   #pageHome .home-sec,
-  #pageHome .explore-section { max-width: 1180px; margin-left: auto; margin-right: auto; }
+  #pageHome .home-sec,
+  #pageHome .explore-section,
+  #pageHome .goods-section { max-width: 1180px; margin-left: auto; margin-right: auto; }
   #pageHome .cat-grid,
   #pageHome .wx-feed,
   #pageHome .svc-grid { padding-left: 0; padding-right: 0; }
