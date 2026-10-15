@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>周末休闲 · iHangzhou</title>
+  <meta name="description" content="杭州周末去哪：亲子、展览、演出、市集、露营、骑行、徒步、赏花一站直达。">
+  <meta name="theme-color" content="#7c3aed">
+  <link rel="stylesheet" href="css/style.css?v=20261013c">
+  <script src="js/layout.js"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+  <style>
+    .zm-hero{position:relative;width:100%;height:180px;overflow:hidden;background:linear-gradient(135deg,#7c3aed,#6d28d9)}
+    .zm-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.5))}
+    .zm-hero .zm-tb{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
+    .zm-hero .zm-name{font-size:22px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+    .zm-hero .zm-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+    .zm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:16px}
+    .zm-card{display:flex;flex-direction:column;padding:14px;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-light);text-decoration:none;gap:8px;color:var(--text)}
+    .zm-card:active{opacity:.7}
+    .zm-card .zm-ic{font-size:28px}
+    .zm-card .zm-nm{font-size:14px;font-weight:700}
+    .zm-card .zm-ds{font-size:11px;color:var(--text-secondary);line-height:1.4}
+    .zm-tips{margin:0 16px 12px;padding:12px;background:#f5f3ff;border-radius:10px;border-left:3px solid #7c3aed;font-size:13px;color:var(--text-secondary);line-height:1.6}
+    .zm-links{padding:12px 16px}
+    .zm-links h3{font-size:15px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid #7c3aed}
+    .zm-link{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-light)}
+    .zm-link:last-child{border-bottom:none}
+    .zm-link .zm-ln{font-size:13px;font-weight:500}
+    .zm-link .zm-ld{font-size:11px;color:var(--text-muted);margin-top:2px}
+    .zm-link a{font-size:12px;color:var(--primary);text-decoration:none;white-space:nowrap;padding-left:8px}
+    .zm-fl{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px}
+    .zm-fl a{font-size:12px;padding:4px 10px;background:#f5f3ff;color:#7c3aed;border-radius:12px;text-decoration:none}
+    @media(min-width:768px){.zm-grid{grid-template-columns:repeat(3,1fr)}}
+  </style>
+</head>
+<body>
+  <script>window.IHZ_PAGE={title:'周末休闲',icon:'�'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
+  <div id="zmContainer"><div style="text-align:center;padding:60px 20px;color:var(--text-muted)">加载中...</div></div>
+  <script src="js/zhoumo-data.js"></script>
+  <script>
+    function renderZm(id){
+      var data=window.ZHOUMO_DATA?window.ZHOUMO_DATA[id]:null;
+      var c=document.getElementById('zmContainer');
+      var ht=document.getElementById('headerTitle');
+      var gridHtml='';
+      var keys=window.ZHOUMO_DATA?Object.keys(window.ZHOUMO_DATA):[];
+      keys.forEach(function(k){var v=window.ZHOUMO_DATA[k];gridHtml+='<a class="zm-card" href="zhoumo.html?id='+k+'"><span class="zm-ic">'+v.badge+'</span><div><div class="zm-nm">'+v.name+'</div><div class="zm-ds">'+v.subtitle+'</div></div></a>';});
+      if(data){
+        document.title=data.name+' · 周末休闲 · iHangzhou';
+        if(ht)ht.textContent='🎪 '+data.name;
+        var h='<div class="zm-hero"><div class="zm-tb"><div class="zm-name">'+data.name+'</div><div class="zm-sub">'+data.subtitle+'</div></div></div>';
+        h+='<div class="zm-grid">'+gridHtml+'</div>';
+        h+='<div class="zm-tips">💡 '+data.tips+'</div>';
+        if(data.links&&data.links.length){
+          h+='<div class="zm-links"><h3>🔗 相关链接</h3>';
+          data.links.forEach(function(l){h+='<div class="zm-link"><div><div class="zm-ln">'+l.n+'</div><div class="zm-ld">'+l.d+'</div></div>'+(l.u?'<a href="'+l.u+'" rel="noopener noreferrer" target="_blank">前往 →</a>':'')+'</div>';});
+          h+='</div>';
+        }
+        c.innerHTML=h;
+      } else {
+        if(ht)ht.textContent='🎪 周末休闲';
+        c.innerHTML='<div class="zm-hero"><div class="zm-tb"><div class="zm-name">周末休闲</div><div class="zm-sub">周末去哪一站直达</div></div></div><div class="zm-grid">'+gridHtml+'</div>';
+      }
+    }
+    (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderZm(decodeURIComponent(id));})();
+  </script>
+  <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>
+</body>
+</html>
