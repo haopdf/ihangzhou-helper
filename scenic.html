@@ -3,255 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>景点详情 · iHangzhou</title>
-  <meta name="theme-color" content="#0ea5e9">
+  <meta name="description" content="杭州景区指南：西湖十景、灵隐寺、孤山、河坊街、龙井问茶、三潭印月">
+  <meta name="keywords" content="杭州景点,西湖十景,灵隐寺,孤山,三潭印月">
+  <meta name="theme-color" content="#1565c0">
+  <title>景区指南 · iHangzhou 杭州生活助手</title>
   <link rel="stylesheet" href="css/style.css?v=20260921h">
   <script src="js/layout.js"></script>
-  <script src="js/scenic-data.js"></script>
   <style>
-    /* 通用详情页样式 */
-    .scenic-hero {
-      position: relative;
-      width: 100%;
-      height: 220px;
-      overflow: hidden;
-      background: linear-gradient(135deg, #0ea5e9, #075985);
-    }
-    .scenic-hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.85;
-    }
-    .scenic-hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(transparent 40%, rgba(0,0,0,0.55));
-    }
-    .scenic-hero .scenic-title-bar {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 16px;
-      z-index: 2;
-      color: #fff;
-    }
-    .scenic-hero .scenic-name {
-      font-size: 24px;
-      font-weight: 800;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    }
-    .scenic-hero .scenic-sub {
-      font-size: 13px;
-      opacity: 0.9;
-      margin-top: 4px;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
-    }
-
-    .scenic-body { padding: 16px; }
-    .scenic-badge {
-      display: inline-block;
-      font-size: 12px;
-      padding: 4px 10px;
-      background: #e0f2fe;
-      color: #0369a1;
-      border-radius: 10px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .scenic-info-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin: 8px 0 16px;
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-    }
-    .scenic-info-row {
-      display: flex;
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--border-light);
-      background: var(--bg-card);
-    }
-    .scenic-info-row:last-child { border-bottom: none; }
-    .scenic-info-row .s-ik {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      min-width: 56px;
-      flex-shrink: 0;
-    }
-    .scenic-info-row .s-iv {
-      font-size: 13px;
-      color: var(--text);
-      line-height: 1.5;
-    }
-
-    .scenic-section {
-      margin: 20px 0 8px;
-    }
-    .scenic-section h3 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      margin: 0 0 10px;
-      padding-left: 8px;
-      border-left: 3px solid var(--primary);
-    }
-    .scenic-section p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.75;
-    }
-    .scenic-tips {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .scenic-tips span {
-      font-size: 13px;
-      color: var(--text);
-      padding: 6px 10px;
-      background: var(--bg);
-      border-radius: 6px;
-      display: flex;
-      align-items: flex-start;
-      gap: 6px;
-    }
-    .scenic-tips span::before {
-      content: '✓';
-      color: #10b981;
-      font-weight: 700;
-      font-size: 12px;
-      flex-shrink: 0;
-    }
-
-    .scenic-highlights {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-    }
-    .scenic-hl-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px;
-      background: var(--bg);
-      border-radius: 8px;
-      font-size: 13px;
-      color: var(--text);
-    }
-    .scenic-hl-item .hl-icon { font-size: 18px; }
-
-    .scenic-empty {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--text-muted);
-    }
-    .scenic-empty .ei-big { font-size: 64px; margin-bottom: 16px; }
-    .scenic-empty h2 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
-
-    @media (min-width: 768px) {
-      .scenic-hero { height: 320px; }
-      .scenic-body { max-width: 720px; margin: 0 auto; }
-    }
+    .sc-hero{font-size:28px;font-weight:700;color:#0d47a1;margin:2px 0 4px}
+    .sc-sub{font-size:15px;color:#1565c0;margin-bottom:12px}
+    .sc-cr{padding:8px 12px;border-radius:8px;font-size:12px;font-weight:600;display:inline-block;margin-bottom:8px;background:#e3f2fd;color:#0d47a1}
+    .sc-sec{background:#fff;border-radius:14px;padding:16px;margin:12px 16px;box-shadow:0 2px 8px rgba(21,101,192,.06)}
+    .sc-sec h3{font-size:15px;font-weight:600;color:#0d47a1;margin:0 0 8px;display:flex;align-items:center;gap:6px}
+    .sc-ftag{display:inline-block;padding:3px 8px;background:#e3f2fd;border-radius:8px;font-size:11px;color:#1565c0;margin:3px 4px 0 0}
+    .sc-shp{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f5f5f5}
+    .sc-shp:last-child{border-bottom:none}
+    .sc-shico{width:36px;height:36px;background:#e3f2fd;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .sc-shn{font-size:14px;font-weight:600;color:#0d47a1}
+    .sc-sha{font-size:12px;color:#888;margin-top:2px}
+    .sc-tip{background:#fff8e1;border-left:4px solid #ffa726;padding:10px 14px;font-size:13px;color:#f57f17;margin:0 16px 8px;border-radius:0 8px 8px 0}
+    .sc-back{display:block;text-align:center;padding:12px;background:#1565c0;color:#fff;border-radius:24px;font-size:14px;text-decoration:none;max-width:180px;margin:16px auto}
   </style>
 </head>
 <body>
   <script>
-    window.IHZ_PAGE = { title: '景点详情', icon: '🏞️' };
+    window.IHZ_PAGE = { title: "景区指南", icon: "🏛️", channelId: "scenic" };
+    window.IZ_SKIP_APP_INIT = true;
+    window.IZ_SKIP_APP_THEME = true;
   </script>
 
-  <div id="scenicContainer">
-    <div class="scenic-empty">
-      <div class="ei-big">�</div>
-      <h2>加载中...</h2>
+  <div class="page active" id="pageChannel">
+    <div class="channel-header" id="channelHeader"></div>
+    <div class="channel-desc" id="channelDesc"></div>
+    <div id="scenicContent" style="padding:16px;"></div>
+    <div style="text-align:center;padding:24px 16px 48px">
+      <a href="index.html" class="sc-back">← 返回首页</a>
     </div>
   </div>
 
+  <script src="js/scenic-data.js"></script>
   <script>
-    function renderScenic(id) {
-      var data = window.SCENIC_SPOTS ? window.SCENIC_SPOTS[id] : null;
-      var container = document.getElementById('scenicContainer');
-      var headerTitle = document.getElementById('headerTitle');
+    function renderScenic(id){
+      var c = document.getElementById('scenicContent');
+      if (!c) return;
+      var data = window.SCENIC_DATA ? window.SCENIC_DATA[id] : null;
+      var keys = window.SCENIC_DATA ? Object.keys(window.SCENIC_DATA) : [];
       if (!data) {
-        container.innerHTML = '<div class="scenic-empty"><div class="ei-big">�</div><h2>未找到该景点</h2><p style="margin:8px 0 16px;">ID: ' + (id || '(空)') + '</p><a href="travel.html" class="btn btn-primary" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;">返回旅游页</a></div>';
-        if (headerTitle) headerTitle.textContent = '景点详情';
+        c.innerHTML = '<div class="sc-sec" style="text-align:center;color:#999">没有找到相关景区信息<br><br><a href="scenic.html" style="color:#1565c0">← 返回景区首页</a></div>';
         return;
       }
-      document.title = data.name + ' · 杭州旅游 · iHangzhou';
-      if (headerTitle) headerTitle.textContent = data.name;
-
-      var html = '<div class="scenic-hero">';
-      html += '<img src="' + data.image + '" alt="' + data.name + '" loading="lazy" onerror="this.style.display=\'none\'">';
-      html += '<div class="scenic-title-bar"><div class="scenic-name">' + data.name + '</div><div class="scenic-sub">' + data.subtitle + '</div></div></div>';
-
-      html += '<div class="scenic-body">';
-      html += '<div class="scenic-badge">' + data.badge + '</div>';
-      html += '<span style="float:right;font-size:12px;color:var(--text-muted);margin-bottom:8px;display:inline-block;">最佳：' + data.seasons + '</span>';
-      html += '<div style="clear:both"></div>';
-
-      // 实用信息
-      html += '<div class="scenic-info-grid">';
-      html += '<div class="scenic-info-row"><span class="s-ik">📍 地址</span><span class="s-iv">' + data.location + '</span></div>';
-      html += '<div class="scenic-info-row"><span class="s-ik">🎫 门票</span><span class="s-iv">' + data.ticket + '</span></div>';
-      html += '<div class="scenic-info-row"><span class="s-ik">� 时间</span><span class="s-iv">' + data.hours + '</span></div>';
-      html += '<div class="scenic-info-row"><span class="s-ik">� 交通</span><span class="s-iv">' + data.traffic + '</span></div>';
-      html += '</div>';
-
-      // 亮点
-      if (data.highlights && data.highlights.length) {
-        html += '<div class="scenic-section"><h3>✨ 亮点特色</h3><div class="scenic-highlights">';
-        data.highlights.forEach(function(h) {
-          html += '<div class="scenic-hl-item"><span class="hl-icon">' + getHlIcon(h) + '</span>' + h + '</div>';
-        });
-        html += '</div></div>';
+      var h = '';
+      h += '<span class="sc-cr">' + (data.category || '🏛️ 景区') + '</span>';
+      h += '<div class="sc-hero">' + data.name + '</div>';
+      h += '<div class="sc-sub">' + (data.subtitle || '') + '</div>';
+      if (data.history) {
+        h += '<div class="sc-sec"><h3>📖 景区介绍</h3><div style="font-size:14px;color:#444;line-height:1.7">' + data.history + '</div>';
+        if (data.features && data.features.length) {
+          h += '<div style="margin-top:8px">';
+          data.features.forEach(function(f){ h += '<span class="sc-ftag">' + f + '</span>'; });
+          h += '</div>';
+        }
+        h += '</div>';
       }
-
-      // 简介
-      html += '<div class="scenic-section"><h3>� 景点介绍</h3><p>' + data.guide + '</p></div>';
-
-      // 贴士
-      if (data.tips && data.tips.length) {
-        html += '<div class="scenic-section"><h3>💡 实用贴士</h3><div class="scenic-tips">';
-        data.tips.forEach(function(t) {
-          html += '<span>' + t + '</span>';
-        });
-        html += '</div></div>';
+      if (data.area) {
+        h += '<div class="sc-sec"><h3>📍 地理位置</h3><div style="font-size:14px;color:#444">' + data.area + '</div></div>';
       }
-
-      html += '<a href="travel.html" class="btn btn-primary" style="display:block;margin-top:20px;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;">← 返回旅游页</a>';
-      html += '</div>';
-      container.innerHTML = html;
+      if (data.tips) {
+        h += '<div class="sc-tip">💡 小贴士：' + data.tips + '</div>';
+      }
+      if (data.shops && data.shops.length) {
+        h += '<div class="sc-sec"><h3>� 游玩推荐</h3>';
+        data.shops.forEach(function(s) {
+          h += '<div class="sc-shp"><div class="sc-shico">�</div><div>';
+          h += '<div class="sc-shn">' + s.n + '</div>';
+          if (s.a) h += '<div class="sc-sha">📍 ' + s.a + '</div>';
+          if (s.d) h += '<div class="sc-sha" style="color:#888;font-size:12px;margin-top:2px">' + s.d + '</div>';
+          h += '</div></div>';
+        });
+        h += '</div>';
+      }
+      var nb = keys.filter(function(k){ return k !== id; }).slice(0, 4);
+      if (nb.length) {
+        h += '<div class="sc-sec"><h3>🏛️ 更多景区</h3><div style="display:flex;flex-wrap:wrap;gap:8px">';
+        nb.forEach(function(k) {
+          var v = window.SCENIC_DATA[k];
+          h += '<a href="scenic.html?id=' + k + '" style="flex:1;min-width:45%;text-align:center;padding:14px 8px;background:#fff;border:1px solid #1565c020;border-radius:10px;text-decoration:none;font-size:13px;color:#0d47a1;font-weight:600">' + v.name + '</a>';
+        });
+        h += '</div></div>';
+      }
+      h += '<a href="cat.html?c=travel" style="display:block;text-align:center;padding:14px;background:#1565c0;color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:600;margin:12px 16px">← 旅游频道</a>';
+      c.innerHTML = h;
     }
-
-    function getHlIcon(text) {
-      if (text.indexOf('年') >= 0 || text.indexOf('史') >= 0) return '�️';
-      if (text.indexOf('花') >= 0 || text.indexOf('桂') >= 0 || text.indexOf('梅') >= 0) return '🌸';
-      if (text.indexOf('雪') >= 0 || text.indexOf('冬') >= 0) return '�️';
-      if (text.indexOf('日') >= 0 || text.indexOf('霞') >= 0 || text.indexOf('夕') >= 0) return '🌅';
-      if (text.indexOf('佛') >= 0 || text.indexOf('寺') >= 0 || text.indexOf('塔') >= 0 || text.indexOf('禅') >= 0) return '�';
-      if (text.indexOf('免') >= 0) return '�';
-      if (text.indexOf('古') >= 0) return '�';
-      if (text.indexOf('潮') >= 0 || text.indexOf('江') >= 0) return '�';
-      if (text.indexOf('出') >= 0 || text.indexOf('御') >= 0 || text.indexOf('片') >= 0) return '�';
-      if (text.indexOf('饮') >= 0 || text.indexOf('龙井') >= 0 || text.indexOf('糕') >= 0 || text.indexOf('面') >= 0) return '�';
-      if (text.split('').length <= 4) return '⭐';
-      return '✔️';
-    }
-
-    (function () {
-      var id = location.search.split('id=')[1] || '';
-      id = id.split('&')[0];
+    (function(){
+      var id = (location.search.split('id=')[1] || '').split('&')[0];
       renderScenic(decodeURIComponent(id));
     })();
   </script>
-  <script>
-    if (window.IZ && IZ.layout) {
-      document.addEventListener('DOMContentLoaded', IZ.layout.init);
-    }
-  </script>
+  <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>
 </body>
 </html>
