@@ -1,77 +1,21 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "**",
-      "use": "@vercel/static"
-    }
-  ],
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": ".",
+  "installCommand": "npm install",
   "routes": [
-    {
-      "src": "/api/wechat-cron",
-      "dest": "/api/wechat-cron.js"
-    },
-    {
-      "src": "/api/wechat-topics",
-      "dest": "/api/wechat-topics.js"
-    },
-    {
-      "src": "/api/wechat$",
-      "dest": "/api/wechat.js"
-    },
-    {
-      "src": "/api/wechat.*",
-      "dest": "/api/wechat.js"
-    },
-    {
-      "src": "/api/([a-z]+)$",
-      "dest": "/api/$1.js"
-    },
-    {
-      "src": "/api/([a-z]+).*",
-      "dest": "/api/$1.js"
-    }
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/healthz", "dest": "/api/health" },
+    { "src": "/(.*)", "dest": "/$1" }
   ],
   "headers": [
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate" }
-      ]
-    },
-    {
-      "source": "/(.*).html",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
-      ]
-    },
-    {
-      "source": "/sw.js",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
-      ]
-    },
-    {
-      "source": "/js/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
-      ]
-    },
-    {
-      "source": "/css/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
-      ]
-    },
-    {
-      "source": "/sitemap.xml",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" },
-        { "key": "Content-Type", "value": "application/xml; charset=utf-8" }
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type,Authorization" },
+        { "key": "Cache-Control", "value": "no-store" }
       ]
     }
   ]

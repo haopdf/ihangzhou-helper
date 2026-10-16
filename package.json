@@ -1,12 +1,12 @@
 {
   "name": "ihangzhou-helper",
-  "version": "1.0.0",
-  "description": "> 杭州人的数字生活工具箱 —— 政务办事、交通出行、民生服务一站导航\r >\r > 🌐 官方域名：**ihz.inanyang.com**",
-  "main": "check-links.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "version": "2.0.0",
+  "description": "杭州人的数字生活工具箱 —— 政务办事、交通出行、民生服务一站导航。API-driven content platform on Vercel + Supabase.",
+  "type": "module",
   "scripts": {
+    "dev": "vercel dev",
+    "build": "node scripts/build search-index",
+    "migrate": "node scripts/migrate.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,8 +19,9 @@
   "bugs": {
     "url": "https://github.com/haopdf/ihangzhou-helper/issues"
   },
-  "homepage": "https://github.com/haopdf/ihangzhou-helper#readme",
+  "homepage": "https://www.ihangzhou.net",
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.0",
     "@vercel/blob": "^2.8.0"
   }
 }
