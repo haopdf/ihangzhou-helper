@@ -8,6 +8,7 @@
   <meta name="description" content="杭州夜宵夜市地图：河坊街、武林夜市、滨江星光、下沙夜市、千岛湖鱼街">
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
   <script src="js/night-market-data.js"></script>
   <style>
 :root{--primary:#7c2d12;--primary-dark:#451a03;}
@@ -69,6 +70,7 @@
       if(nb.length){h+='<div class="p-neighbors"><h3>🌃 更多夜市</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.NIGHTMARKET_DATA[k];h+='<a class="p-neighbor" href="night-market.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=food&s=%E5%A4%9C%E5%B8%82" style="flex:1;text-align:center;padding:12px;background:#7c2d12;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 夜市频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
       h+='</div>';c.innerHTML=h;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderNightMarket(decodeURIComponent(id))})();
   </script>

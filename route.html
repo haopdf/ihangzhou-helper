@@ -8,6 +8,7 @@
   <meta name="description" content="杭州路线攻略：西湖一日游、灵隐两日游、千岛湖自驾、环湖骑行、山间徒步、摄影机位、杭黄高铁沿游、全景地图">
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
   <script src="js/route-data.js"></script>
   <style>
 :root{--primary:#7c3aed;--primary-dark:#5b21b6;}
@@ -79,6 +80,7 @@
       if(nb.length){h+='<div class="p-neighbors"><h3>🗺️ 更多路线</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.ROUTE_DATA[k];h+='<a class="p-neighbor" href="route.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=travel&s=%E8%B7%AF%E7%BA%BF%E6%94%BB%E7%95%A5" style="flex:1;text-align:center;padding:12px;background:#7c3aed;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 路线频道</a><a href="travel.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">旅游首页</a></div>';
       h+='</div>';c.innerHTML=h;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderRoute(decodeURIComponent(id))})();
   </script>

@@ -9,6 +9,7 @@
   <title>老字号 - iHangzhou</title>
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
   <style>
 :root{--primary:#b71c1c;--primary-dark:#7f1d1d;}
     .p-hist{font-size:28px;font-weight:700;color:var(--primary);margin:2px 0 4px}
@@ -92,6 +93,7 @@
       }
       h+='<a href="cat.html?c=food" style="display:block;text-align:center;padding:14px;background:#b71c1c;color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:600;margin:12px 16px">← 美食频道</a>';
       c.innerHTML=h;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情',true);
     }
     (function(){
       var id=(location.search.split('id=')[1]||'').split('&')[0];

@@ -8,6 +8,7 @@
   <meta name="description" content="杭州传统甜品糕点：定胜糕、条头糕、桂花糖藕、龙井酥、藕粉、青团、桂花糕">
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
   <script src="js/dessert-data.js"></script>
   <style>
 :root{--primary:#ec4899;--primary-dark:#be185d;}
@@ -65,6 +66,7 @@
       if(nb.length){h+='<div class="p-neighbors"><h3>🍰 更多甜品</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.DESSERT_DATA[k];h+='<a class="p-neighbor" href="dessert.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=food&s=%E7%94%9C%E5%93%81" style="flex:1;text-align:center;padding:12px;background:#ec4899;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 甜品频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
       h+='</div>';c.innerHTML=h;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderDessert(decodeURIComponent(id))})();
   </script>

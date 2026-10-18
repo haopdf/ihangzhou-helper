@@ -8,6 +8,7 @@
   <meta name="theme-color" content="#1f7a5a">
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
   <style>
 :root{--primary:#7c3aed;--primary-dark:#5b21b6;}
@@ -61,6 +62,7 @@
           h+='</div>';
         }
         c.innerHTML=h;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
       } else {
         if(ht)ht.textContent='🎪 周末休闲';
         c.innerHTML='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">周末休闲</div><div class="p-hero-sub">周末去哪一站直达</div></div></div><div class="p-cards">'+gridHtml+'</div>';

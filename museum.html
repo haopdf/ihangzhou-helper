@@ -9,6 +9,7 @@
   <title>博物馆指南 - iHangzhou</title>
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
   
 <style>:root{--primary:#4338ca;--primary-dark:#312e81}</style><link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
@@ -63,6 +64,7 @@
       }
       h+='<a href="cat.html?c=culture" style="display:block;text-align:center;padding:14px;background:var(--primary);color:#fff;border-radius:var(--radius-xl);text-decoration:none;font-size:14px;font-weight:600;margin:12px 16px">← 文博频道</a>';
       c.innerHTML=h;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情',true);
     }
     (function(){
       var id=(location.search.split('id=')[1]||'').split('&')[0];

@@ -8,6 +8,7 @@
   <meta name="description" content="杭州非物质文化遗产大全：杭州评话、杭绣、张小泉剪刀、王星记扇子、西湖绸伞、越窑青瓷">
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
   <script src="js/intangible-data.js"></script>
   <style>
 :root{--primary:#059669;--primary-dark:#065f46;}
@@ -100,6 +101,7 @@
         '<a href="cat.html?c=culture&s=%E9%9D%9E%E9%81%97" style="flex:1;text-align:center;padding:12px;background:#059669;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;">\u2190 \u975e\u7109\u9891\u9053</a>' +
         '<a href="museum.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;">\u6587\u535a\u9996\u9875</a></div>';
       html += '</div>'; container.innerHTML = html;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(container,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
     }
     (function() { var id = (location.search.split('id=')[1]||'').split('&')[0]; renderIntangible(decodeURIComponent(id)); })();
   </script>

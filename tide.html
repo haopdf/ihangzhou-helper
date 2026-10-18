@@ -8,6 +8,7 @@
   <meta name="description" content="钱塘江观潮：海宁盐官一线潮、萧山美女坝回头潮、下沙七格、城市阳台、六和听涛，观潮点攻略与安全提示">
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
   <script src="js/tide-data.js"></script>
   <style>
     .td-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,#0284c7,#0c4a6e)}
@@ -76,6 +77,7 @@
       if(nb.length){h+='<div class="td-nb"><h3>🌊 更多观潮点</h3><div class="td-ng">';nb.forEach(function(k){var v=window.TIDE_DATA[k];h+='<a class="td-nc" href="tide.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=travel&s=%E8%A7%82%E6%BD%AE" style="flex:1;text-align:center;padding:12px;background:#0284c7;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 观潮频道</a><a href="travel.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">旅游首页</a></div>';
       h+='</div>';c.innerHTML=h;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderTide(decodeURIComponent(id))})();
   </script>
