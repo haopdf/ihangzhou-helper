@@ -6,9 +6,9 @@
   <title>杭州夜市 · iHangzhou</title>
   <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州夜宵夜市地图：河坊街、武林夜市、滨江星光、下沙夜市、千岛湖鱼街">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <script src="js/night-market-data.js"></script>
   <style>
 :root{--primary:#7c2d12;--primary-dark:#451a03;}
@@ -43,7 +43,7 @@
     .p-empty .p-hero-icon{font-size:64px;margin-bottom:16px}
     @media(min-width:768px){.p-hero{height:300px}.p-hero-inner{max-width:1180px;margin:0 auto}.p-body{max-width:1180px;margin:0 auto}}
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
 </head>
 <body>
   <script>window.IHZ_PAGE={title:'夜市',icon:'🌃'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
@@ -53,14 +53,14 @@
       var data=window.NIGHTMARKET_DATA?window.NIGHTMARKET_DATA[id]:null;
       var c=document.getElementById('nightMarketContainer');
       var ht=document.getElementById('headerTitle');
-      if(!data){c.innerHTML='<div class="p-empty"><div class="p-hero-icon">�</div><h2>未找到</h2><a href="cat.html?c=food&s=%E5%A4%9C%E5%B8%82" class="btn" style="display:inline-block;padding:10px 20px;background:#7c2d12;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';if(ht)ht.textContent='🌃 夜市';return;}
+      if(!data){c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🌃</div><h2>未找到</h2><a href="cat.html?c=food&s=%E5%A4%9C%E5%B8%82" class="btn" style="display:inline-block;padding:10px 20px;background:#7c2d12;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';if(ht)ht.textContent='🌃 夜市';if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'夜市','未找到');return;}
       document.title=data.name+' · 夜市 · iHangzhou';
       if(ht)ht.textContent='🌃 '+data.name;
       var h='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">'+data.name+'</div><div class="p-hero-sub">'+data.subtitle+'</div></div></div><div class="p-body">';
       h+='<div class="p-badge">'+data.badge+' '+data.name+'</div><div style="clear:both"></div>';
       h+='<div class="p-infogrid">';
       if(data.address)h+='<div class="p-inforow"><span class="gk">📍</span><span class="gv">'+data.address+'</span></div>';
-      if(data.time)h+='<div class="p-inforow"><span class="gk">�</span><span class="gv">'+data.time+'</span></div>';
+      if(data.time)h+='<div class="p-inforow"><span class="gk">🕐</span><span class="gv">'+data.time+'</span></div>';
       h+='</div>';
       if(data.history)h+='<div style="margin:12px 0;padding:12px;background:#fef2f2;border-radius:10px;border-left:3px solid #7c2d12"><p style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0">📜 '+data.history+'</p></div>';
       if(data.features&&data.features.length){h+='<div class="p-section"><h3>✨ 特色</h3><div class="p-feat">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
@@ -70,7 +70,7 @@
       if(nb.length){h+='<div class="p-neighbors"><h3>🌃 更多夜市</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.NIGHTMARKET_DATA[k];h+='<a class="p-neighbor" href="night-market.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=food&s=%E5%A4%9C%E5%B8%82" style="flex:1;text-align:center;padding:12px;background:#7c2d12;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 夜市频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
       h+='</div>';c.innerHTML=h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'夜市',data.name);
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderNightMarket(decodeURIComponent(id))})();
   </script>

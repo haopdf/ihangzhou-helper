@@ -24,7 +24,7 @@ window.GUZHEN_VILLAGES = {
   'nanxun': {
     name: '南浔古镇',
     subtitle: '中西合璧 · 富甲江南',
-    badge: '�town 江南名镇',
+    badge: '🏙️ town 江南名镇',
     image: 'images/guzhen/nanxun-cover.jpg',
     imageFallback: true,
     seasons: '四季皆宜，春最佳',
@@ -45,7 +45,7 @@ window.GUZHEN_VILLAGES = {
   'wuzhen': {
     name: '乌镇',
     subtitle: '枕水人家 · 互联网大会',
-    badge: '� 水乡经典',
+    badge: '💧 水乡经典',
     image: 'images/guzhen/wuzhen-cover.jpg',
     imageFallback: true,
     seasons: '秋最佳，夏绿浓',
@@ -108,7 +108,7 @@ window.GUZHEN_VILLAGES = {
   'shengao': {
     name: '深澳古村',
     subtitle: '江南先民智慧 · 地下暗渠',
-    badge: '� 水系奇观',
+    badge: '🌊 水系奇观',
     image: 'images/guzhen/shengao-cover.jpg',
     imageFallback: true,
     seasons: '四季皆宜',
@@ -129,7 +129,7 @@ window.GUZHEN_VILLAGES = {
   'xinye': {
     name: '新叶古村',
     subtitle: '明清建筑露天博物馆',
-    badge: '� 文化遗产',
+    badge: '🏛️ 文化遗产',
     image: 'images/guzhen/xinye-cover.jpg',
     imageFallback: true,
     seasons: '夏季梯田最美',
@@ -150,7 +150,7 @@ window.GUZHEN_VILLAGES = {
   'qinchuan': {
     name: '芹川古村',
     subtitle: '徽派山水 · 卧虎藏龙',
-    badge: '� 徽派遗珠',
+    badge: '🏠 徽派遗珠',
     image: 'images/guzhen/qinchuan-cover.jpg',
     imageFallback: true,
     seasons: '春秋最佳',
@@ -171,7 +171,7 @@ window.GUZHEN_VILLAGES = {
   'zhinan': {
     name: '指南村',
     subtitle: '华东最美 · 千年银杏林',
-    badge: '� 秋摄胜地',
+    badge: '🍂 秋摄胜地',
     image: 'images/guzhen/zhinan-cover.jpg',
     imageFallback: true,
     seasons: '10月下旬-11月中旬最佳',
@@ -192,7 +192,7 @@ window.GUZHEN_VILLAGES = {
   'zhuchuan': {
     name: '株川古村',
     subtitle: '石头寨 · 山里人家',
-    badge: '� 石头寨',
+    badge: '🪨 石头寨',
     image: 'images/guzhen/zhuchuan-cover.jpg',
     imageFallback: true,
     seasons: '四季皆宜',

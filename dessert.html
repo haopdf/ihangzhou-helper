@@ -6,9 +6,9 @@
   <title>杭州甜品 · iHangzhou</title>
   <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州传统甜品糕点：定胜糕、条头糕、桂花糖藕、龙井酥、藕粉、青团、桂花糕">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <script src="js/dessert-data.js"></script>
   <style>
 :root{--primary:#ec4899;--primary-dark:#be185d;}
@@ -39,34 +39,34 @@
     .p-neighbor:active{opacity:.7}
     .p-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
     .p-empty .p-hero-icon{font-size:64px;margin-bottom:16px}
-    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:720px;margin:0 auto}}
+    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:1180px;margin:0 auto}}
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
 </head>
 <body>
-  <script>window.IHZ_PAGE={title:'甜品糕点',icon:'�'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
+  <script>window.IHZ_PAGE={title:'甜品糕点',icon:'🍰'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
   <div id="dessertContainer"><div class="p-empty"><div class="p-hero-icon">🍰</div><h2>加载中...</h2></div></div>
   <script>
     function renderDessert(id){
       var data=window.DESSERT_DATA?window.DESSERT_DATA[id]:null;
       var c=document.getElementById('dessertContainer');
       var ht=document.getElementById('headerTitle');
-      if(!data){c.innerHTML='<div class="p-empty"><div class="p-hero-icon">�</div><h2>未找到该甜品</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=food&s=%E7%94%9C%E5%93%81" class="btn" style="display:inline-block;padding:10px 20px;background:#ec4899;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';if(ht)ht.textContent='🍰 甜品';return;}
+      if(!data){c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🍰</div><h2>未找到该甜品</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=food&s=%E7%94%9C%E5%93%81" class="btn" style="display:inline-block;padding:10px 20px;background:#ec4899;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';if(ht)ht.textContent='🍰 甜品';if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'甜品糕点','未找到');return;}
       document.title=data.name+' · 甜品 · iHangzhou';
-      if(ht)ht.textContent='� '+data.name;
+      if(ht)ht.textContent='🍰 '+data.name;
       var h='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">'+data.name+'</div><div class="p-hero-sub">'+data.subtitle+'</div></div></div><div class="p-body">';
       h+='<div class="p-badge">'+data.badge+' '+data.name+'</div>';
       if(data.period)h+='<span class="p-badge">'+data.period+'</span>';
       h+='<div style="clear:both"></div>';
       if(data.history)h+='<div class="p-hist"><p>📜 '+data.history+'</p></div>';
       if(data.features&&data.features.length){h+='<div class="p-section"><h3>✨ 特色</h3><div class="p-feat">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
-      if(data.shops&&data.shops.length){h+='<div class="p-section"><h3>🏪 去哪买</h3><div class="p-cards">';data.shops.forEach(function(s){h+='<div class="p-inforow"><span class="p-ik">�️</span><div><div class="p-iv">'+s.n+'</div><div class="p-card-desc">'+s.a+'</div></div></div>'});h+='</div></div>';}
+      if(data.shops&&data.shops.length){h+='<div class="p-section"><h3>🏪 去哪买</h3><div class="p-cards">';data.shops.forEach(function(s){h+='<div class="p-inforow"><span class="p-ik">🍽️</span><div><div class="p-iv">'+s.n+'</div><div class="p-card-desc">'+s.a+'</div></div></div>'});h+='</div></div>';}
       var keys=window.DESSERT_DATA?Object.keys(window.DESSERT_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
       if(nb.length){h+='<div class="p-neighbors"><h3>🍰 更多甜品</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.DESSERT_DATA[k];h+='<a class="p-neighbor" href="dessert.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=food&s=%E7%94%9C%E5%93%81" style="flex:1;text-align:center;padding:12px;background:#ec4899;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 甜品频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
       h+='</div>';c.innerHTML=h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'甜品糕点',data.name);
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderDessert(decodeURIComponent(id))})();
   </script>

@@ -6,8 +6,9 @@
   <title>杭州早餐 · iHangzhou</title>
   <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州早餐攻略：拌面、生煎、小笼、馄饨、葱包桧、油冬儿、片儿川、豆浆">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <script src="js/breakfast-data.js"></script>
   <style>
 :root{--primary:#ea580c;--primary-dark:#c2410c;}
@@ -37,33 +38,55 @@
     .p-neighbor:active{opacity:.7}
     .p-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
     .p-empty .p-hero-icon{font-size:64px;margin-bottom:16px}
-    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:720px;margin:0 auto}}
+    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:1180px;margin:0 auto}}
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
+<style>
+  /* 桌面端内容贴齐 1180（与首页同标准；须在 channel.css 之后，!important 压过其 gutter） */
+  @media (min-width: 1024px) {
+    #breakfastContainer .p-section { padding-left: 0 !important; padding-right: 0 !important; }
+    #breakfastContainer .p-neighbors { padding-left: 0 !important; padding-right: 0 !important; }
+  }
+</style>
 </head>
 <body>
   <script>window.IHZ_PAGE={title:'早餐',icon:'🥟'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
   <div id="breakfastContainer"><div class="p-empty"><div class="p-hero-icon">🥟</div><h2>加载中...</h2></div></div>
   <script>
+
+    /* 列表视图：无 id 时渲染（面包屑栏目级默认链回本页 = 列表） */
+    function renderBreakfastList(){
+      var c=document.getElementById('breakfastContainer');
+      var ht=document.getElementById('headerTitle');
+      var keys=window.BREAKFAST_DATA?Object.keys(window.BREAKFAST_DATA):[];
+      document.title='杭州早餐 · iHangzhou';
+      if(ht)ht.textContent='🥟 早餐';
+      var cards=keys.map(function(k){var v=window.BREAKFAST_DATA[k];
+        return '<a class="p-card" href="breakfast.html?id='+k+'"><span class="p-card-ico">'+(v.badge||'🥟')+'</span><div><div class="p-card-name">'+v.name+'</div><div class="p-card-desc">'+v.subtitle+'</div></div></a>';
+      }).join('');
+      c.innerHTML='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">杭州早餐</div><div class="p-hero-sub">拌面 · 生煎 · 小笼 · 馄饨 · 葱包桧…'+keys.length+' 种一站看全</div></div></div><div class="p-card-grid">'+cards+'</div>';
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'早餐','全部早餐');
+    }
     function renderBreakfast(id){
       var data=window.BREAKFAST_DATA?window.BREAKFAST_DATA[id]:null;
       var c=document.getElementById('breakfastContainer');
       var ht=document.getElementById('headerTitle');
-      if(!data){c.innerHTML='<div class="p-empty"><div class="p-hero-icon">�</div><h2>未找到</h2><a href="cat.html?c=food&s=%E6%97%A9%E9%A4%90" class="btn" style="display:inline-block;padding:10px 20px;background:#ea580c;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';if(ht)ht.textContent='� 早餐';return;}
+      if(!data){c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🥟</div><h2>未找到</h2><a href="cat.html?c=food&s=%E6%97%A9%E9%A4%90" class="btn" style="display:inline-block;padding:10px 20px;background:#ea580c;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';if(ht)ht.textContent='🥟 早餐';if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'早餐','未找到');return;}
       document.title=data.name+' · 早餐 · iHangzhou';
       if(ht)ht.textContent='🥟 '+data.name;
       var h='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">'+data.name+'</div><div class="p-hero-sub">'+data.subtitle+'</div></div></div><div class="p-body">';
       h+='<div class="p-badge">'+data.badge+' '+data.name+'</div><div style="clear:both"></div>';
       if(data.history)h+='<div class="p-hist"><p>📜 '+data.history+'</p></div>';
       if(data.features&&data.features.length){h+='<div class="p-section"><h3>✨ 特色</h3><div class="p-feat">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
-      if(data.shops&&data.shops.length){h+='<div class="p-section"><h3>🏪 去哪吃</h3><div class="p-cards">';data.shops.forEach(function(s){h+='<div class="p-inforow"><span class="p-ik">�️</span><div><div class="p-iv">'+s.n+'</div><div class="p-card-desc">'+s.a+'</div></div></div>'});h+='</div></div>';}
+      if(data.shops&&data.shops.length){h+='<div class="p-section"><h3>🏪 去哪吃</h3><div class="p-cards">';data.shops.forEach(function(s){h+='<div class="p-inforow"><span class="p-ik">🍜</span><div><div class="p-iv">'+s.n+'</div><div class="p-card-desc">'+s.a+'</div></div></div>'});h+='</div></div>';}
       var keys=window.BREAKFAST_DATA?Object.keys(window.BREAKFAST_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
       if(nb.length){h+='<div class="p-neighbors"><h3>🥟 更多早餐</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.BREAKFAST_DATA[k];h+='<a class="p-neighbor" href="breakfast.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=food&s=%E6%97%A9%E9%A4%90" style="flex:1;text-align:center;padding:12px;background:#ea580c;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 早餐频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
       h+='</div>';c.innerHTML=h;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'早餐',data.name);
     }
-    (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderBreakfast(decodeURIComponent(id))})();
+    (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];if(!id){renderBreakfastList()}else{renderBreakfast(decodeURIComponent(id))}})();
   </script>
   <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>
 </body>

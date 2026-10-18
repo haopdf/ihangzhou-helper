@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>古镇古建 · iHangzhou</title>
   <meta name="theme-color" content="#1f7a5a">
-  <meta name="description" content="杭州古镇古建：胡雪�故居、刘庄、郭庄、六和塔、保�塔、天宁寺、西溪南�止、西湖宾馆，古建筑文化之旅">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <meta name="description" content="杭州古镇古建：拱宸桥、胡雪岩故居、刘庄、郭庄、六和塔、保俶塔、天宁寺、秋雪庵、西湖国宾馆，古建筑文化之旅">
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <script src="js/gujian-data.js"></script>
   <style>:root{--primary:#0ea5e9;--primary-dark:#0369a1;}
 
@@ -37,21 +37,50 @@
     .p-neighbor:active{opacity:.7}
     .p-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
     .p-empty .p-hero-icon{font-size:64px;margin-bottom:16px}
-    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:720px;margin:0 auto}}
-  
-<style>:root{--primary:#0ea5e9;--primary-dark:#0369a1}</style><link rel="stylesheet" href="css/channel.css?v=20261018a">
+    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:1180px;margin:0 auto}}
+  </style>
+  <style>
+    /* —— 覆盖块：必须在 channel.css 之后加载，!important 才能压过其统一化 gutter —— */
+    /* 桌面端内容贴齐 1180（与首页 #pageHome .content{padding:0} 同标准） */
+    @media (min-width: 1024px) {
+      #gjContainer .p-section { padding-left: 0 !important; padding-right: 0 !important; }
+      #gjContainer .p-neighbors { padding-left: 0 !important; padding-right: 0 !important; }
+    }
+    /* 列表视图卡片网格：移动 2 列 / 桌面 3 列；桌面去左右 gutter 贴齐 1180 */
+    #gjContainer .p-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 16px; }
+    @media (min-width: 768px) { #gjContainer .p-card-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; } }
+    @media (min-width: 1024px) { #gjContainer .p-card-grid { padding: 16px 0; } }
+  </style>
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
 </head>
 <body>
-  <script>window.IHZ_PAGE={title:'古镇古建',icon:'�'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
-  <div id="gjContainer"><div class="p-empty"><div class="p-hero-icon">�</div><h2>加载中...</h2></div></div>
+  <script>window.IHZ_PAGE={title:'古镇古建',icon:'🏯'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
+  <div id="gjContainer"><div class="p-empty"><div class="p-hero-icon">🏯</div><h2>加载中...</h2></div></div>
   <script>
+    var GJ_ICONS={'gongchen-bridge':'🌉','hu-garden':'🏠','liu-garden':'🏨','lin-garden':'🌿','six-he-six-go':'🗼','pagoda-baochu':'🗼','tian-ning-temple':'🛕','sixi-yin-cheng':'🍂','jinjiang-hotel':'🏨'};
+
+    /* 列表视图：无 id 时渲染（面包屑栏目级默认链回本页 = 列表） */
+    function renderGjList(){
+      var c=document.getElementById('gjContainer');
+      var ht=document.getElementById('headerTitle');
+      var keys=window.GUJIAN_DATA?Object.keys(window.GUJIAN_DATA):[];
+      var cards=keys.map(function(k){var v=window.GUJIAN_DATA[k];
+        return '<a class="p-card" href="gujian.html?id='+k+'"><span class="p-card-ico">'+(GJ_ICONS[k]||'🏯')+'</span><div><div class="p-card-name">'+v.name+'</div><div class="p-card-desc">'+v.subtitle+'</div></div></a>';
+      }).join('');
+      document.title='古镇古建 · iHangzhou';
+      if(ht)ht.textContent='🏯 古镇古建';
+      c.innerHTML='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">古镇古建</div><div class="p-hero-sub">拱宸桥 · 胡雪岩故居 · 郭庄 · 六和塔 · 保俶塔…'+keys.length+' 处一站看全</div></div></div><div class="p-card-grid">'+cards+'</div>';
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'古镇古建','全部古建');
+    }
+
     function renderGj(id){
       var data=window.GUJIAN_DATA?window.GUJIAN_DATA[id]:null;
       var c=document.getElementById('gjContainer');
       var ht=document.getElementById('headerTitle');
       if(!data){
-        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🏯</div><h2>未找到该古建筑</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=culture&s=%E5%8F%A4%E9%95%87%E5%8F%A4%E5%BB%BA" class="btn" style="display:inline-block;padding:10px 20px;background:#7c2d12;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回古建</a> <a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">文化首页</a></div>';
+        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🏯</div><h2>未找到该古建筑</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="gujian.html" class="btn" style="display:inline-block;padding:10px 20px;background:#7c2d12;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回古建列表</a> <a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">文化首页</a></div>';
         if(ht)ht.textContent='🏯 古镇古建';
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'古镇古建','未找到');
         return;
       }
       document.title=data.name+' · 古镇古建 · iHangzhou';
@@ -64,12 +93,12 @@
       if(data.spots&&data.spots.length){h+='<div class="p-section"><h3>📍 地址</h3><div class="p-cards">';data.spots.forEach(function(s){h+='<div class="p-inforow"><div><div class="p-badge">'+s.n+'</div><div class="p-card">'+s.d+'</div></div></div>'});h+='</div></div>';}
       var keys=window.GUJIAN_DATA?Object.keys(window.GUJIAN_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
-      if(nb.length){h+='<div class="p-neighbors"><h3>🏯 更多古建</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.GUJIAN_DATA[k];h+='<a class="p-neighbor" href="gujian.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
-      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=culture&s=%E5%8F%A4%E9%95%87%E5%8F%A4%E5%BB%BA" style="flex:1;text-align:center;padding:12px;background:#7c2d12;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 古建频道</a><a href="museum.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">文化首页</a></div>';
+      if(nb.length){h+='<div class="p-neighbors"><h3>🏯 更多古建</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.GUJIAN_DATA[k];h+='<a class="p-neighbor" href="gujian.html?id='+k+'"><span>'+(GJ_ICONS[k]||'')+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
+      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="gujian.html" style="flex:1;text-align:center;padding:12px;background:#7c2d12;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 古建列表</a><a href="museum.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">文化首页</a></div>';
       h+='</div>';c.innerHTML=h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'古镇古建',data.name);
     }
-    (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderGj(decodeURIComponent(id))})();
+    (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];if(!id){renderGjList()}else{renderGj(decodeURIComponent(id))}})();
   </script>
   <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>
 </body>

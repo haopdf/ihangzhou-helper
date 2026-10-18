@@ -7,9 +7,9 @@
   <meta name="keywords" content="杭州咖啡,西湖边咖啡,青芝坞,馒头山,天目里,ihangzhou">
   <meta name="theme-color" content="#6f4e37">
   <title>咖啡馆指南 · iHangzhou 杭州生活助手</title>
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <style>
     .p-badge{padding:8px 12px;border-radius:8px;font-size:12px;font-weight:600;color:#5d4037;display:inline-block;margin-bottom:8px;background:#f5f0eb}
     .p-name{font-size:28px;font-weight:700;color:#3e2723;margin:2px 0 4px}
@@ -27,7 +27,15 @@
     .p-empty{text-align:center;padding:40px 20px;color:#999}
     .p-back{display:block;text-align:center;padding:12px;background:#6f4e37;color:#fff;border-radius:24px;font-size:14px;text-decoration:none;margin:16px;max-width:180px;margin-inline:auto}
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
+<style>
+  /* 详情内容容器：移动 16px gutter；桌面贴齐 1180（与首页同标准） */
+  #coffeeContent{padding:16px}
+  @media (min-width:1024px){
+    #coffeeContent{padding:16px 0}
+    .p-section{margin-left:0;margin-right:0}
+  }
+</style>
 </head>
 <body>
   <script>
@@ -37,11 +45,8 @@
   </script>
 
   <div class="page active" id="pageChannel">
-    <div class="channel-header" id="channelHeader"></div>
-    <div class="channel-desc" id="channelDesc"></div>
-
-    <!-- 咖啡详情渲染容器 -->
-    <div id="coffeeContent" style="padding:16px;"></div>
+    <!-- 咖啡详情/列表渲染容器 -->
+    <div id="coffeeContent"></div>
 
     <!-- 返回 -->
     <div style="text-align:center;padding:24px 16px 48px">
@@ -51,13 +56,29 @@
 
   <script src="js/coffee-data.js"></script>
   <script>
+    /* 列表视图：无 id 时渲染（面包屑栏目级默认链回本页 = 列表） */
+    function renderCoffeeList(){
+      var c=document.getElementById('coffeeContent');
+      if(!c)return;
+      var keys=window.COFFEE_DATA?Object.keys(window.COFFEE_DATA):[];
+      var ht=document.getElementById('headerTitle');
+      document.title='咖啡馆指南 · iHangzhou';
+      if(ht)ht.textContent='☕ 咖啡馆指南';
+      c.style.padding='0';
+      var cards=keys.map(function(k){var v=window.COFFEE_DATA[k];
+        return '<a class="p-card" href="coffee.html?id='+k+'"><span class="p-card-ico">☕</span><div><div class="p-card-name">'+v.name+'</div><div class="p-card-desc">'+(v.subtitle||'')+'</div></div></a>';
+      }).join('');
+      c.innerHTML='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">咖啡馆指南</div><div class="p-hero-sub">西湖边 · 青芝坞 · 四眼井 · 馒头山 · 天目里…'+keys.length+' 个咖啡片区一站看全</div></div></div><div class="p-card-grid">'+cards+'</div>';
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'咖啡馆指南','全部片区');
+    }
     function renderCoffee(id){
       var c = document.getElementById('coffeeContent');
       if (!c) return;
       var data = window.COFFEE_DATA ? window.COFFEE_DATA[id] : null;
       var keys = window.COFFEE_DATA ? Object.keys(window.COFFEE_DATA) : [];
       if (!data) {
-        c.innerHTML = '<div class="p-empty">没有找到相关咖啡信息<br><br><a href="coffee.html" style="color:#6f4e37">← 回到咖啡首页</a></div>';
+        c.innerHTML = '<div class="p-empty">没有找到相关咖啡信息<br><br><a href="coffee.html" style="color:#6f4e37">← 回到咖啡列表</a></div>';
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'咖啡馆指南','未找到');
         return;
       }
       var h = '';
@@ -65,7 +86,7 @@
       h += '<div class="p-name">' + data.name + '</div>';
       h += '<div class="p-name-sub">' + (data.subtitle || '') + '</div>';
       if (data.history) {
-        h += '<div class="p-section"><h3>� 区域特色</h3><div style="font-size:14px;color:#444;line-height:1.7">' + data.history + '</div>';
+        h += '<div class="p-section"><h3>🗺️ 区域特色</h3><div style="font-size:14px;color:#444;line-height:1.7">' + data.history + '</div>';
         if (data.features && data.features.length) {
           h += '<div style="margin-top:8px">';
           data.features.forEach(function(f){ h += '<span class="p-feat-item">' + f + '</span>'; });
@@ -80,9 +101,9 @@
         h += '<div class="p-tip">💡 小贴士：' + data.tips + '</div>';
       }
       if (data.shops && data.shops.length) {
-        h += '<div class="p-section"><h3>� 推荐去处</h3>';
+        h += '<div class="p-section"><h3>📍 推荐去处</h3>';
         data.shops.forEach(function(s) {
-          h += '<div class="p-card"><div class="p-card-ico">�</div><div>';
+          h += '<div class="p-card"><div class="p-card-ico">☕</div><div>';
           h += '<div class="p-card-name">' + s.n + '</div>';
           if (s.a) h += '<div class="p-card-desc">📍 ' + s.a + '</div>';
           if (s.t) h += '<div class="p-card">' + s.t + '</div>';
@@ -92,7 +113,7 @@
       }
       var nb = keys.filter(function(k){ return k !== id; }).slice(0, 4);
       if (nb.length) {
-        h += '<div class="p-section"><h3>� 更多区域</h3><div style="display:flex;flex-wrap:wrap;gap:8px">';
+        h += '<div class="p-section"><h3>☕ 更多区域</h3><div style="display:flex;flex-wrap:wrap;gap:8px">';
         nb.forEach(function(k) {
           var v = window.COFFEE_DATA[k];
           h += '<a href="coffee.html?id=' + k + '" style="flex:1;min-width:45%;text-align:center;padding:14px 8px;background:#fff;border:1px solid #6f4e3720;border-radius:10px;text-decoration:none;font-size:13px;color:#3e2723;font-weight:600">' + v.name + '</a>';
@@ -101,11 +122,11 @@
       }
       h += '<a href="cat.html?c=food&s=%E5%92%96%E5%95%A1" style="display:block;text-align:center;padding:14px;background:#6f4e37;color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:600;margin:12px 16px">← 美食频道</a>';
       c.innerHTML = h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情',true);
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'咖啡馆指南',data.name);
     }
     (function(){
       var id = (location.search.split('id=')[1] || '').split('&')[0];
-      renderCoffee(decodeURIComponent(id));
+      if(!id){renderCoffeeList()}else{renderCoffee(decodeURIComponent(id))}
     })();
   </script>
   <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>

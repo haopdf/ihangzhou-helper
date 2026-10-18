@@ -15,8 +15,12 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
 
-const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
-const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE;
+const url = process.env.IHZ_PUBLIC_SUPABASE_URL
+  || process.env.SUPABASE_URL
+  || process.env.NEXT_PUBLIC_SUPABASE_URL;
+const key = process.env.IHZ_PUBLIC_SUPABASE_SERVICE_ROLE_KEY
+  || process.env.SUPABASE_SERVICE_ROLE_KEY
+  || process.env.SUPABASE_SERVICE_ROLE;
 
 if (!url || !key) {
   console.error('错误：需要环境变量 SUPABASE_URL 和 SUPABASE_SERVICE_ROLE_KEY');

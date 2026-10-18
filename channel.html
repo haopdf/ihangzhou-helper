@@ -12,13 +12,13 @@
   <link rel="canonical" href="https://www.ihangzhou.net/channel.html">
   <link rel="manifest" href="manifest.json">
   <title>iHangzhou · 频道专题</title>
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
-<style>:root{--primary:#0ea5e9;--primary-dark:#0369a1}</style><link rel="stylesheet" href="css/channel.css?v=20261018a">
+<style>:root{--primary:#0ea5e9;--primary-dark:#0369a1}</style><link rel="stylesheet" href="css/channel.css?v=20261018k">
 </head>
 <body class="ch-page">
-  <nav class="site-breadcrumb"><a href="index.html">首页</a><span class="sb-sep">›</span><b>频道专题</b></nav>
+  <nav class="site-breadcrumb"><a href="index.html">首页</a><span class="sb-sep">›</span><span>频道专题</span><span class="sb-sep">›</span><b id="chCrumbCur">频道</b></nav>
   <script>
     // 从 URL 参数读取频道 id
     var params = new URLSearchParams(window.location.search);
@@ -73,8 +73,8 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=20261016e"></script>
-  <script src="js/analytics.js?v=20260928c"></script>
+  <script src="js/app.js?v=20261018k"></script>
+  <script src="js/analytics.js?v=20261018k"></script>
   <script>
     // 频道专题页逻辑
     (function () {
@@ -161,7 +161,8 @@
         var hash = location.hash.replace('#', '');
         if (!hash) {
           var params = new URLSearchParams(location.search);
-          hash = params.get('ch') || '';
+          // 兼容三种入口：?ch= / ?id= / #hash
+          hash = params.get('ch') || params.get('id') || '';
         }
         return hash;
       }
@@ -194,6 +195,8 @@
 
         // 更新 SEO
         document.title = category.name + ' · iHangzhou 杭州生活助手';
+        var crumbCur = document.getElementById('chCrumbCur');
+        if (crumbCur) crumbCur.textContent = category.name;
         var metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) metaDesc.setAttribute('content', CHANNEL_DESC[chId] || category.name + '频道');
         var metaKw = document.querySelector('meta[name="keywords"]');

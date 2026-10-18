@@ -3424,6 +3424,7 @@ function showMetro() {
   // 暴露给专题页（travel/food/museum 等按区县过滤内容用）
   window.DISTRICTS = DISTRICTS;
   window.DISTRICT_DETAILS = DISTRICT_DETAILS;
+  window.initCityDropdown = initCityDropdown;
 
   function initCityDropdown() {
     var cur = lsGet('ihz_city', 'hangzhou');
@@ -3460,8 +3461,8 @@ function showMetro() {
         // 关闭设置面板，确保能看到页面更新
         var overlay = document.getElementById('settingsOverlay');
         var settingsPanel = document.getElementById('settingsPanel');
-        if (overlay) overlay.classList.remove('show');
-        if (settingsPanel) settingsPanel.classList.remove('show');
+        if (overlay) overlay.classList.remove('active');
+        if (settingsPanel) settingsPanel.classList.remove('active');
         // 切换到"杭州"：在首页则刷新，在其他页（如 district.html）则跳回首页
         if (id === 'hangzhou') {
           var isIndex = location.pathname === '/' ||
@@ -3590,12 +3591,12 @@ function showMetro() {
       '<div style="background:var(--bg-alt);border-left:3px solid var(--primary);padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;color:var(--text-secondary);line-height:1.8;">' + desc + '</div>' +
       '<a class="di-gov-link" style="display:block;text-align:center;margin-bottom:10px;" href="https://uri.amap.com/search?keyword=' + encodeURIComponent('杭州' + name) + '&city=330100" target="_blank" rel="noopener">🧭 高德地图导航</a>' +
       '<a class="di-gov-link" style="display:block;text-align:center;margin-bottom:10px;background:var(--bg-alt);color:var(--text);border:1px solid var(--border);" href="https://www.baidu.com/s?wd=' + encodeURIComponent('杭州' + name + ' 游玩攻略') + '" target="_blank" rel="noopener">🔍 百度搜索攻略</a>' +
-      '<a class="di-gov-link" style="display:block;text-align:center;" href="travel.html" target="_blank" rel="noopener">�️ 查看更多杭州景点</a>';
+      '<a class="di-gov-link" style="display:block;text-align:center;" href="travel.html" target="_blank" rel="noopener">🗺️ 查看更多杭州景点</a>';
     modal.classList.add('show');
   };
 
   function bindCityDropdown() {
-    var btn = document.getElementById('citySwitcherBtn');
+    var btn = document.getElementById('citySwitcherBtn') || document.getElementById('citySelect');
     var box = document.getElementById('cityDropdown');
     if (!btn || !box) return;
     // 点击按钮展开/收起
@@ -3607,7 +3608,7 @@ function showMetro() {
     if (!box._docClickBound) {
       box._docClickBound = true;
       document.addEventListener('click', function(e) {
-        var b = document.getElementById('citySwitcherBtn');
+        var b = document.getElementById('citySwitcherBtn') || document.getElementById('citySelect');
         var bx = document.getElementById('cityDropdown');
         if (!b || !bx) return;
         if (!b.contains(e.target) && !bx.contains(e.target)) {

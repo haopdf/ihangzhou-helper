@@ -6,9 +6,9 @@
   <title>周末休闲 · iHangzhou</title>
   <meta name="description" content="杭州周末去哪：亲子、展览、演出、市集、露营、骑行、徒步、赏花一站直达。">
   <meta name="theme-color" content="#1f7a5a">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
   <style>
 :root{--primary:#7c3aed;--primary-dark:#5b21b6;}
@@ -34,12 +34,13 @@
     .p-feat{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px}
     .p-feat a{font-size:12px;padding:4px 10px;background:#f5f3ff;color:var(--primary);border-radius:12px;text-decoration:none}
     @media(min-width:768px){.p-cards{grid-template-columns:repeat(3,1fr);max-width:1180px;margin:0 auto;padding:12px 16px}}
+    @media(min-width:1024px){.p-cards{padding:12px 0}}
     @media(min-width:768px){.p-hero-inner{max-width:1180px;margin:0 auto;padding:16px;left:0;right:0}}
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
 </head>
 <body>
-  <script>window.IHZ_PAGE={title:'周末休闲',icon:'�'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
+  <script>window.IHZ_PAGE={title:'周末休闲',icon:'🎪'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
   <div id="zmContainer"><div style="text-align:center;padding:60px 20px;color:var(--text-muted)">加载中...</div></div>
   <script src="js/zhoumo-data.js"></script>
   <script>
@@ -62,10 +63,11 @@
           h+='</div>';
         }
         c.innerHTML=h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'周末休闲',data.name);
       } else {
         if(ht)ht.textContent='🎪 周末休闲';
         c.innerHTML='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">周末休闲</div><div class="p-hero-sub">周末去哪一站直达</div></div></div><div class="p-cards">'+gridHtml+'</div>';
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'周末休闲','全部推荐');
       }
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderZm(decodeURIComponent(id));})();

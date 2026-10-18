@@ -4,7 +4,7 @@
   "description": "杭州人的数字生活工具箱 —— 政务办事、交通出行、民生服务一站导航。API-driven content platform on Vercel + Supabase.",
   "type": "module",
   "scripts": {
-    "dev": "vercel dev",
+    "start": "vercel dev",
     "build": "node scripts/build search-index",
     "migrate": "node scripts/migrate.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +22,10 @@
   "homepage": "https://www.ihangzhou.net",
   "dependencies": {
     "@supabase/supabase-js": "^2.49.0",
-    "@vercel/blob": "^2.8.0"
+    "@vercel/blob": "^2.8.0",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0"
   }
 }

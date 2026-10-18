@@ -6,9 +6,9 @@
   <title>钱塘江观潮 · iHangzhou</title>
   <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="钱塘江观潮：海宁盐官一线潮、萧山美女坝回头潮、下沙七格、城市阳台、六和听涛，观潮点攻略与安全提示">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <script src="js/tide-data.js"></script>
   <style>
     .td-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,#0284c7,#0c4a6e)}
@@ -40,20 +40,21 @@
     .td-nc:active{opacity:.7}
     .td-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
     .td-empty .ei-big{font-size:64px;margin-bottom:16px}
-    @media(min-width:768px){.td-hero{height:300px}.td-body{max-width:720px;margin:0 auto}}
+    @media(min-width:768px){.td-hero{height:300px}.td-body{max-width:1180px;margin:0 auto}}
   </style>
 </head>
 <body>
   <script>window.IHZ_PAGE={title:'钱塘江观潮',icon:'🌊'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
-  <div id="tideContainer"><div class="td-empty"><div class="ei-big">�</div><h2>加载中...</h2></div></div>
+  <div id="tideContainer"><div class="td-empty"><div class="ei-big">🌊</div><h2>加载中...</h2></div></div>
   <script>
     function renderTide(id){
       var data=window.TIDE_DATA?window.TIDE_DATA[id]:null;
       var c=document.getElementById('tideContainer');
       var ht=document.getElementById('headerTitle');
       if(!data){
-        c.innerHTML='<div class="td-empty"><div class="ei-big">�</div><h2>未找到该观潮点</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=travel&s=%E8%A7%82%E6%BD%AE" class="btn" style="display:inline-block;padding:10px 20px;background:#0284c7;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回观潮</a> <a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">旅游首页</a></div>';
+        c.innerHTML='<div class="td-empty"><div class="ei-big">🌊</div><h2>未找到该观潮点</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=travel&s=%E8%A7%82%E6%BD%AE" class="btn" style="display:inline-block;padding:10px 20px;background:#0284c7;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回观潮</a> <a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">旅游首页</a></div>';
         if(ht)ht.textContent='🌊 钱塘江观潮';
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'钱塘江观潮','未找到');
         return;
       }
       document.title=data.name+' · 钱塘江观潮 · iHangzhou';
@@ -67,17 +68,17 @@
         if(data.type)h+='<span style="color:#0c4a6e;font-weight:600">潮型：</span>'+data.type;
         h+='</div>';
       }
-      if(data.history)h+='<div class="td-hist"><p>� '+data.history+'</p></div>';
+      if(data.history)h+='<div class="td-hist"><p>📜 '+data.history+'</p></div>';
       if(data.features&&data.features.length){h+='<div class="td-section"><h3>✨ 亮点</h3><div class="td-ft">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
-      if(data.tips&&data.tips.length){h+='<div class="td-section"><h3>� 贴士</h3><div class="td-tips">';data.tips.forEach(function(t){h+='<span class="td-tip">'+t+'</span>'});h+='</div></div>';}
-      if(data.spots&&data.spots.length){h+='<div class="td-section"><h3>📍 景点</h3><div class="td-spots">';data.spots.forEach(function(s){h+='<div class="td-si"><span class="td-sic">�</span><div><div class="td-sn">'+s.n+'</div><div class="td-sd">'+s.d+'</div></div></div>'});h+='</div></div>';}
+      if(data.tips&&data.tips.length){h+='<div class="td-section"><h3>💡 贴士</h3><div class="td-tips">';data.tips.forEach(function(t){h+='<span class="td-tip">'+t+'</span>'});h+='</div></div>';}
+      if(data.spots&&data.spots.length){h+='<div class="td-section"><h3>📍 景点</h3><div class="td-spots">';data.spots.forEach(function(s){h+='<div class="td-si"><span class="td-sic">📍</span><div><div class="td-sn">'+s.n+'</div><div class="td-sd">'+s.d+'</div></div></div>'});h+='</div></div>';}
       if(data.guide)h+='<div class="td-section"><h3>📖 攻略</h3><p class="td-guide">'+data.guide+'</p></div>';
       var keys=window.TIDE_DATA?Object.keys(window.TIDE_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
       if(nb.length){h+='<div class="td-nb"><h3>🌊 更多观潮点</h3><div class="td-ng">';nb.forEach(function(k){var v=window.TIDE_DATA[k];h+='<a class="td-nc" href="tide.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=travel&s=%E8%A7%82%E6%BD%AE" style="flex:1;text-align:center;padding:12px;background:#0284c7;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 观潮频道</a><a href="travel.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">旅游首页</a></div>';
       h+='</div>';c.innerHTML=h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'钱塘江观潮',data.name);
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderTide(decodeURIComponent(id))})();
   </script>

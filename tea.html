@@ -6,9 +6,9 @@
   <title>龙井与茶文化 · iHangzhou</title>
   <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州龙井茶文化：狮峰龙井、龙坞茶村、梅家坞、径山茶宴、满觉陇桂花茶，名茶产区与品鉴指南">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <script src="js/tea-data.js"></script>
   <style>
 :root{--primary:#16a34a;--primary-dark:#15803d;}
@@ -41,21 +41,46 @@
     .p-neighbor:active{opacity:.7}
     .p-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
     .p-empty .p-hero-icon{font-size:64px;margin-bottom:16px}
-    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:720px;margin:0 auto}}
+    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:1180px;margin:0 auto}}
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+  <style>
+    /* —— 覆盖块：必须在 channel.css 之后加载，!important 才能压过其统一化 gutter —— */
+    /* 桌面端内容贴齐 1180（与首页 #pageHome .content{padding:0} 同标准） */
+    @media (min-width: 1024px) {
+      #teaContainer .p-section { padding-left: 0 !important; padding-right: 0 !important; }
+      #teaContainer .p-neighbors { padding-left: 0 !important; padding-right: 0 !important; }
+    }
+  </style>
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
 </head>
 <body>
   <script>window.IHZ_PAGE={title:'龙井与茶文化',icon:'🍵'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
-  <div id="teaContainer"><div class="p-empty"><div class="p-hero-icon">�</div><h2>加载中...</h2></div></div>
+  <div id="teaContainer"><div class="p-empty"><div class="p-hero-icon">🍵</div><h2>加载中...</h2></div></div>
   <script>
+    var TEA_ICONS={'shifeng':'⛰️','longwu':'🏘️','meijia':'🍃','wengjia':'🌳','manjue':'🌿','jingshan-cha':'🎋','qian':'🏝️','jingcha':'🍵'};
+
+    /* 列表视图：无 id 时渲染（面包屑栏目级默认链回本页 = 列表） */
+    function renderTeaList(){
+      var c=document.getElementById('teaContainer');
+      var ht=document.getElementById('headerTitle');
+      var keys=window.TEA_DATA?Object.keys(window.TEA_DATA):[];
+      document.title='龙井与茶文化 · iHangzhou';
+      if(ht)ht.textContent='🍵 龙井与茶文化';
+      var cards=keys.map(function(k){var v=window.TEA_DATA[k];
+        return '<a class="p-card" href="tea.html?id='+k+'"><span class="p-card-ico">'+(TEA_ICONS[k]||'🍵')+'</span><div><div class="p-card-name">'+v.name+'</div><div class="p-card-desc">'+v.subtitle+'</div></div></a>';
+      }).join('');
+      c.innerHTML='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">龙井与茶文化</div><div class="p-hero-sub">狮峰 · 龙坞 · 梅家坞 · 径山 · 满觉陇…'+keys.length+' 个茶产区一站看全</div></div></div><div class="p-card-grid">'+cards+'</div>';
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'龙井与茶文化','全部茶产区');
+    }
+
     function renderTea(id){
       var data=window.TEA_DATA?window.TEA_DATA[id]:null;
       var c=document.getElementById('teaContainer');
       var ht=document.getElementById('headerTitle');
       if(!data){
-        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🍵</div><h2>未找到该茶产区</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=tea" class="btn" style="display:inline-block;padding:10px 20px;background:#16a34a;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回茶文化</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';
+        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🍵</div><h2>未找到该茶产区</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="tea.html" class="btn" style="display:inline-block;padding:10px 20px;background:#16a34a;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回茶文化列表</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';
         if(ht)ht.textContent='🍵 龙井与茶文化';
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'龙井与茶文化','未找到');
         return;
       }
       document.title=data.name+' · 龙井与茶文化 · iHangzhou';
@@ -71,16 +96,16 @@
       }
       if(data.history)h+='<div class="p-hist"><p>📜 '+data.history+'</p></div>';
       if(data.features&&data.features.length){h+='<div class="p-section"><h3>✨ 核心特色</h3><div class="p-feat">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
-      if(data.experience&&data.experience.length){h+='<div class="p-section"><h3>🍃 体验推荐</h3><div class="p-cards">';data.experience.forEach(function(s){h+='<div class="p-card"><span class="p-card-ico">�️</span><div><div class="p-card-name">'+s.n+'</div><div class="p-card-desc">'+s.d+'</div></div></div>'});h+='</div></div>';}
-      if(data.guide)h+='<div class="p-section"><h3>� 品茗指南</h3><p class="p-infogrid">'+data.guide+'</p></div>';
+      if(data.experience&&data.experience.length){h+='<div class="p-section"><h3>🍃 体验推荐</h3><div class="p-cards">';data.experience.forEach(function(s){h+='<div class="p-card"><span class="p-card-ico">🍃</span><div><div class="p-card-name">'+s.n+'</div><div class="p-card-desc">'+s.d+'</div></div></div>'});h+='</div></div>';}
+      if(data.guide)h+='<div class="p-section"><h3>🍵 品茗指南</h3><p class="p-infogrid">'+data.guide+'</p></div>';
       var keys=window.TEA_DATA?Object.keys(window.TEA_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
-      if(nb.length){h+='<div class="p-neighbors"><h3>� 更多茶产区</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.TEA_DATA[k];h+='<a class="p-neighbor" href="tea.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
-      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=tea" style="flex:1;text-align:center;padding:12px;background:#16a34a;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 茶文化频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
+      if(nb.length){h+='<div class="p-neighbors"><h3>🍵 更多茶产区</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.TEA_DATA[k];h+='<a class="p-neighbor" href="tea.html?id='+k+'"><span>'+(TEA_ICONS[k]||'')+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
+      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="tea.html" style="flex:1;text-align:center;padding:12px;background:#16a34a;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 茶文化列表</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
       h+='</div>';c.innerHTML=h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'龙井与茶文化',data.name);
     }
-    (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderTea(decodeURIComponent(id))})();
+    (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];if(!id){renderTeaList()}else{renderTea(decodeURIComponent(id))}})();
   </script>
   <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>
 </body>

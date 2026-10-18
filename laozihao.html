@@ -7,9 +7,9 @@
   <meta name="keywords" content="杭州老字号,奎元馆,楼外楼,知味观,胡庆余堂">
   <meta name="theme-color" content="#1f7a5a">
   <title>老字号 - iHangzhou</title>
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <style>
 :root{--primary:#b71c1c;--primary-dark:#7f1d1d;}
     .p-hist{font-size:28px;font-weight:700;color:var(--primary);margin:2px 0 4px}
@@ -20,7 +20,15 @@
     .p-feat{display:inline-block;padding:3px 8px;background:#ffebee;border-radius:8px;font-size:11px;color:var(--primary);margin:3px 4px 0 0}
     .p-back{display:block;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;max-width:180px;margin:16px auto}
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
+<style>
+  /* 详情内容容器：移动 16px gutter；桌面贴齐 1180（与首页同标准） */
+  #detailContent{padding:16px}
+  @media (min-width:1024px){
+    #detailContent{padding:16px 0}
+    .p-section{margin-left:0;margin-right:0}
+  }
+</style>
 </head>
 <body>
   <script>
@@ -29,20 +37,36 @@
     window.IZ_SKIP_APP_THEME = true;
   </script>
   <div class="page active" id="pageChannel">
-    <div id="detailContent" style="padding:16px;"></div>
+    <div id="detailContent"></div>
     <div style="text-align:center;padding:24px 16px 48px">
       <a href="index.html" class="p-back">← 返回首页</a>
     </div>
   </div>
   <script src="js/laozihao-data.js"></script>
   <script>
+    /* 列表视图：无 id 时渲染（面包屑栏目级默认链回本页 = 列表） */
+    function renderLaozhaoList(){
+      var c=document.getElementById('detailContent');
+      if(!c)return;
+      var keys=window.LAOZHAO_DATA?Object.keys(window.LAOZHAO_DATA):[];
+      var ht=document.getElementById('headerTitle');
+      document.title='杭州老字号 · iHangzhou';
+      if(ht)ht.textContent='🏮 老字号';
+      c.style.padding='0';
+      var cards=keys.map(function(k){var v=window.LAOZHAO_DATA[k];
+        return '<a class="p-card" href="laozihao.html?id='+k+'"><span class="p-card-ico">🏮</span><div><div class="p-card-name">'+v.name+'</div><div class="p-card-desc">'+(v.subtitle||'')+'</div></div></a>';
+      }).join('');
+      c.innerHTML='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">杭州老字号</div><div class="p-hero-sub">奎元馆 · 楼外楼 · 知味观 · 孙大生 · 朱府铜…'+keys.length+' 家一站看全</div></div></div><div class="p-card-grid">'+cards+'</div>';
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'老字号','全部老字号');
+    }
     function renderLaozhao(id){
       var c=document.getElementById('detailContent');
       if(!c)return;
       var data=window.LAOZHAO_DATA?window.LAOZHAO_DATA[id]:null;
       var keys=window.LAOZHAO_DATA?Object.keys(window.LAOZHAO_DATA):[];
       if(!data){
-        c.innerHTML='<div style="text-align:center;padding:40px 20px;color:#999">没有找到相关信息<br><br><a href="laozihao.html" style="color:#b71c1c">← 返回老字号首页</a></div>';
+        c.innerHTML='<div style="text-align:center;padding:40px 20px;color:#999">没有找到相关信息<br><br><a href="laozihao.html" style="color:#b71c1c">← 返回老字号列表</a></div>';
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'老字号','未找到');
         return;
       }
       var nameStr=data.name;
@@ -53,7 +77,7 @@
       h+='<div class="p-section">'+subStr+'</div>';
       if(data.period) h+='<div style="background:#fff8e1;border-radius:10px;padding:10px 14px;margin:8px 16px;font-size:13px;color:#f57f17">📅 创立时间：'+data.period+'</div>';
       if(data.history){
-        h+='<div class="p-section"><h3>� 品牌故事</h3><div style="font-size:14px;color:#444;line-height:1.8">'+data.history+'</div></div>';
+        h+='<div class="p-section"><h3>📖 品牌故事</h3><div style="font-size:14px;color:#444;line-height:1.8">'+data.history+'</div></div>';
       }
       if(data.features&&data.features.length){
         h+='<div class="p-section"><h3>✨ 特色亮点</h3><div style="display:flex;flex-wrap:wrap;gap:6px">';
@@ -93,13 +117,11 @@
       }
       h+='<a href="cat.html?c=food" style="display:block;text-align:center;padding:14px;background:#b71c1c;color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:600;margin:12px 16px">← 美食频道</a>';
       c.innerHTML=h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情',true);
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'老字号',data.name);
     }
     (function(){
       var id=(location.search.split('id=')[1]||'').split('&')[0];
-      if(window.LAOZHAO_DATA&&Object.keys(window.LAOZHAO_DATA).length>0&&id){
-        renderLaozhao(decodeURIComponent(id));
-      }
+      if(!id){renderLaozhaoList()}else{renderLaozhao(decodeURIComponent(id))}
     })();
   </script>
   <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>

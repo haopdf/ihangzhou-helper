@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>古镇详情 · iHangzhou</title>
   <meta name="theme-color" content="#1f7a5a">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <script src="js/guzhen-data.js"></script>
   <style>
 :root{--primary:#8b5cf6;--primary-dark:#6d28d9;}
@@ -135,10 +136,10 @@
     .p-neighbors-card .p-card-ico { font-size: 20px; }
     @media (min-width: 768px) {
       .p-hero { height: 340px; }
-      p-body { max-width: 720px; margin: 0 auto; }
+      .p-body { max-width: 1180px; margin: 0 auto; }
     }
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
 </head>
 <body>
   <script>
@@ -156,6 +157,22 @@
 
   <script>
     /* \u53e4\u9547\u53e4\u6751\u901a\u7528\u8be6\u60c5\u9875 \u2014 guzhen.html?id=tangqi */
+
+    /* 列表视图：无 id 时渲染（面包屑栏目级默认链回本页 = 列表） */
+    function renderGuzhenList() {
+      var container = document.getElementById('guzhenContainer');
+      var headerTitle = document.getElementById('headerTitle');
+      var keys = window.GUZHEN_VILLAGES ? Object.keys(window.GUZHEN_VILLAGES) : [];
+      document.title = '古镇古村 · iHangzhou';
+      if (headerTitle) headerTitle.textContent = '🏙️ 古镇古村';
+      var cards = keys.map(function (k) {
+        var v = window.GUZHEN_VILLAGES[k];
+        var ic = (v.badge || '').split(' ')[0] || '🏙️';
+        return '<a class="p-card" href="guzhen.html?id=' + k + '"><span class="p-card-ico">' + ic + '</span><div><div class="p-card-name">' + v.name + '</div><div class="p-card-desc">' + v.subtitle + '</div></div></a>';
+      }).join('');
+      container.innerHTML = '<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">古镇古村</div><div class="p-hero-sub">塘栖 · 南浔 · 乌镇 · 深澳…' + keys.length + ' 处一站看全</div></div></div><div class="p-card-grid">' + cards + '</div>';
+      if (window.IHZW && IHZW.prependCrumb) IHZW.prependCrumb(document.body, '古镇古村', '全部古镇古村');
+    }
     function renderGuzhen(id) {
       var data = window.GUZHEN_VILLAGES ? window.GUZHEN_VILLAGES[id] : null;
       var container = document.getElementById('guzhenContainer');
@@ -169,7 +186,8 @@
           '<a href="cat.html?c=travel&s=%E5%8F%A4%E9%95%87%E5%8F%A4%E6%9D%91" class="btn" style="display:inline-block;padding:10px 20px;background:#8b5cf6;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;">\u2190 \u8fd4\u56de\u53e4\u9547\u5217\u8868</a>' +
           '<a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px;">\u65c5\u6e38\u9996\u9875</a>' +
           '</div>';
-        if (headerTitle) headerTitle.textContent = '\ud83c\udfd9\ufe0f \u53e4\u9547\u53e4\u6751';
+        if (headerTitle) headerTitle.textContent = '\ud83c\udfd9\ufe0f \u53e4\u9547\u53e1\u6751';
+        if (window.IHZW && IHZW.prependCrumb) IHZW.prependCrumb(document.body, '\u53e4\u9547\u53e4\u6751', '\u672a\u627e\u5230');
         return;
       }
 
@@ -237,12 +255,13 @@
 
       html += '</div>';
       container.innerHTML = html;
+      if (window.IHZW && IHZW.prependCrumb) IHZW.prependCrumb(document.body, '古镇古村', data.name);
     }
 
     (function () {
       var id = location.search.split('id=')[1] || '';
       id = id.split('&')[0];
-      renderGuzhen(decodeURIComponent(id));
+      if (!id) { renderGuzhenList(); } else { renderGuzhen(decodeURIComponent(id)); }
     })();
   </script>
   <script>
