@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -338,12 +338,6 @@
       -webkit-tap-highlight-color: transparent;
     }
     .travel-back:active { transform: scale(0.99); }
-
-    /* 桌面统一：内容列与 .ch-hero 同宽 1180 居中（--gutter 标准） */
-    @media (min-width: 1024px) {
-      .travel-tabs, .travel-section, .travel-tips, .travel-back {
-        max-width: 1180px; margin-left: auto; margin-right: auto;
-      }
     }
   </style>
 </head>
@@ -353,6 +347,8 @@
     window.IHZ_PAGE = { title: '杭州旅游', icon: '🏞️', channelId: 'travel' };
     window.IZ_SKIP_APP_THEME = true;
   </script>
+
+  <div class="page active" id="pageChannel">
 
   <!-- Hero 区（.ch-hero 与办事/美食等频道页同款） -->
   <div class="ch-hero travel-hero">
@@ -905,6 +901,8 @@
     ]
   }
   </script>
+
+  </div>
 
   <script src="js/app.js?v=20261016e"></script>
 <script src="js/analytics.js?v=20260928c"></script>
