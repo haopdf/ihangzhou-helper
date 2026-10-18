@@ -4,43 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>杭州非遗 · iHangzhou</title>
-  <meta name="theme-color" content="#059669">
+  <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州非物质文化遗产大全：杭州评话、杭绣、张小泉剪刀、王星记扇子、西湖绸伞、越窑青瓷">
-  <link rel="stylesheet" href="css/style.css?v=20261013c">
-  <script src="js/layout.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <script src="js/intangible-data.js"></script>
   <style>
-    .fy-hero { position: relative; width: 100%; height: 200px; overflow: hidden; background: linear-gradient(135deg, #059669, #065f46); }
-    .fy-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 30%, rgba(0,0,0,0.55)); }
-    .fy-hero .fy-title-bar { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; z-index: 2; color: #fff; }
-    .fy-hero .fy-name { font-size: 24px; font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-    .fy-hero .fy-sub { font-size: 13px; opacity: 0.92; margin-top: 4px; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
-    .fy-body { padding: 16px; }
-    .fy-badge { display: inline-block; font-size: 12px; padding: 4px 10px; background: #d1fae5; color: #065f46; border-radius: 10px; font-weight: 600; margin-bottom: 8px; }
-    .fy-history { margin: 12px 0; padding: 12px; background: #f0fdf4; border-radius: 10px; border-left: 3px solid #059669; }
-    .fy-history p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin: 0; }
-    .fy-section { margin: 20px 0 8px; }
-    .fy-section h3 { font-size: 16px; font-weight: 700; color: var(--text); margin: 0 0 10px; padding-left: 8px; border-left: 3px solid #059669; }
-    .fy-details { display: flex; flex-direction: column; gap: 6px; }
-    .fy-dt-item { font-size: 13px; color: var(--text); padding: 8px 12px; background: var(--bg); border-radius: 8px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
-    .fy-dt-item::before { content: '\2713'; color: #059669; font-weight: 700; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
-    .fy-exp { display: flex; flex-direction: column; gap: 8px; }
-    .fy-ex-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: var(--bg-card); border-radius: 10px; border: 1px solid var(--border-light); }
-    .fy-ex-item .fy-exic { font-size: 22px; flex-shrink: 0; }
-    .fy-ex-item .fy-exn { font-size: 14px; font-weight: 600; color: var(--text); }
-    .fy-ex-item .fy-exd { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
-    .fy-guide { font-size: 13px; color: var(--text-secondary); line-height: 1.8; margin: 8px 0 0; }
-    .fy-nearby { margin-top: 24px; border-top: 8px solid var(--bg); padding-top: 16px; }
-    .fy-nearby h3 { font-size: 15px; font-weight: 700; color: var(--text); margin: 0 0 12px; }
-    .fy-nearby-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .fy-nearby-card { display: flex; align-items: center; gap: 8px; padding: 10px; background: var(--bg); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 13px; font-weight: 500; }
-    .fy-nearby-card:active { opacity: 0.7; }
-    .fy-nearby-card .nc-ic { font-size: 20px; }
-    .fy-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
-    .fy-empty .ei-big { font-size: 64px; margin-bottom: 16px; }
-    .fy-empty h2 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
-    @media (min-width: 768px) { .fy-hero { height: 300px; } .fy-body { max-width: 720px; margin: 0 auto; } }
+:root{--primary:#059669;--primary-dark:#065f46;}
+    .p-hero { position: relative; width: 100%; height: 200px; overflow: hidden; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); }
+    .p-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 30%, rgba(0,0,0,0.55)); }
+    .p-hero .p-hero-inner-bar { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; z-index: 2; color: #fff; }
+    .p-hero .p-hero-title { font-size: 24px; font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+    .p-hero .p-hero-sub { font-size: 13px; opacity: 0.92; margin-top: 4px; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+    .p-body { padding: 16px; }
+    .p-badge { display: inline-block; font-size: 12px; padding: 4px 10px; background: #d1fae5; color: var(--primary-dark); border-radius: 10px; font-weight: 600; margin-bottom: 8px; }
+    .p-hist { margin: 12px 0; padding: 12px; background: #f0fdf4; border-radius: 10px; border-left: 3px solid var(--primary); }
+    .p-hist p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+    .p-section { margin: 20px 0 8px; }
+    .p-section h3 { font-size: 16px; font-weight: 700; color: var(--text); margin: 0 0 10px; padding-left: 8px; border-left: 3px solid var(--primary); }
+    .p-infogrid { display: flex; flex-direction: column; gap: 6px; }
+    .p-ik-item { font-size: 13px; color: var(--text); padding: 8px 12px; background: var(--bg); border-radius: 8px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+    .p-ik-item::before { content: '\2713'; color: var(--primary); font-weight: 700; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+    .p-cards { display: flex; flex-direction: column; gap: 8px; }
+    .p-card-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: var(--bg-card); border-radius: 10px; border: 1px solid var(--border-light); }
+    .p-card-item .p-card-ico { font-size: 22px; flex-shrink: 0; }
+    .p-card-item .p-card-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .p-card-item .p-card-desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+    .p-infogrid { font-size: 13px; color: var(--text-secondary); line-height: 1.8; margin: 8px 0 0; }
+    .p-neighbors { margin-top: 24px; border-top: 8px solid var(--bg); padding-top: 16px; }
+    .p-neighbors h3 { font-size: 15px; font-weight: 700; color: var(--text); margin: 0 0 12px; }
+    .p-neighbors-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .p-neighbors-card { display: flex; align-items: center; gap: 8px; padding: 10px; background: var(--bg); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 13px; font-weight: 500; }
+    .p-neighbors-card:active { opacity: 0.7; }
+    .p-neighbors-card .p-card-ico { font-size: 20px; }
+    .p-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .p-empty .p-hero-icon { font-size: 64px; margin-bottom: 16px; }
+    .p-empty h2 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
+    @media (min-width: 768px) { .p-hero { height: 300px; } .p-body { max-width: 720px; margin: 0 auto; } }
   </style>
+<link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>
@@ -49,7 +51,7 @@
     window.IZ_SKIP_APP_THEME = true;
   </script>
   <div id="intangibleContainer">
-    <div class="fy-empty"><div class="ei-big">\ud83c\udfad</div><h2>\u52a0\u8f7d\u4e2d...</h2></div>
+    <div class="p-empty"><div class="p-hero-icon">\ud83c\udfad</div><h2>\u52a0\u8f7d\u4e2d...</h2></div>
   </div>
   <script>
     function renderIntangible(id) {
@@ -57,7 +59,7 @@
       var container = document.getElementById('intangibleContainer');
       var headerTitle = document.getElementById('headerTitle');
       if (!data) {
-        container.innerHTML = '<div class="fy-empty"><div class="ei-big">\ud83c\udfad</div><h2>\u672a\u627e\u5230\u8be5\u975e\u9057\u9879\u76ee</h2>' +
+        container.innerHTML = '<div class="p-empty"><div class="p-hero-icon">\ud83c\udfad</div><h2>\u672a\u627e\u5230\u8be5\u975e\u9057\u9879\u76ee</h2>' +
           '<p style="margin:8px 0 16px;">ID: ' + (id||'(\u7a7a)') + '</p>' +
           '<a href="cat.html?c=culture&s=%E9%9D%9E%E9%81%97" class="btn" style="display:inline-block;padding:10px 20px;background:#059669;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;">\u2190 \u8fd4\u56de</a>' +
           '<a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px;">\u6587\u535a\u9996\u9875</a></div>';
@@ -67,30 +69,30 @@
       document.title = data.name + ' \u00b7 \u975e\u7109 \u00b7 iHangzhou';
       if (headerTitle) headerTitle.textContent = '\ud83c\udfad ' + data.name;
       var html = '';
-      html += '<div class="fy-hero"><div class="fy-title-bar"><div class="fy-name">' + data.name + '</div><div class="fy-sub">' + data.subtitle + '</div></div></div>';
-      html += '<div class="fy-body">';
-      html += '<div class="fy-badge">' + data.badge + '</div>';
+      html += '<div class="p-hero"><div class="p-hero-inner-bar"><div class="p-hero-title">' + data.name + '</div><div class="p-hero-sub">' + data.subtitle + '</div></div></div>';
+      html += '<div class="p-body">';
+      html += '<div class="p-badge">' + data.badge + '</div>';
       html += '<div style="clear:both"></div>';
-      if (data.history) html += '<div class="fy-history"><p>\ud83d\udcdc ' + data.history + '</p></div>';
+      if (data.history) html += '<div class="p-hist"><p>\ud83d\udcdc ' + data.history + '</p></div>';
       if (data.details && data.details.length) {
-        html += '<div class="fy-section"><h3>\u2728 \u5de5\u827a\u7279\u8272</h3><div class="fy-details">';
-        data.details.forEach(function(d) { html += '<div class="fy-dt-item">' + d + '</div>'; });
+        html += '<div class="p-section"><h3>\u2728 \u5de5\u827a\u7279\u8272</h3><div class="p-infogrid">';
+        data.details.forEach(function(d) { html += '<div class="p-ik-item">' + d + '</div>'; });
         html += '</div></div>';
       }
       if (data.experience && data.experience.length) {
-        html += '<div class="fy-section"><h3>\ud83d\udccd \u4f53\u9a8c\u5730\u70b9</h3><div class="fy-exp">';
+        html += '<div class="p-section"><h3>\ud83d\udccd \u4f53\u9a8c\u5730\u70b9</h3><div class="p-cards">';
         data.experience.forEach(function(e) {
-          html += '<div class="fy-ex-item"><span class="fy-exic">\ud83c\udfa8</span><div><div class="fy-exn">' + e.name + '</div><div class="fy-exd">' + e.desc + '</div></div></div>';
+          html += '<div class="p-card-item"><span class="p-card-ico">\ud83c\udfa8</span><div><div class="p-card-name">' + e.name + '</div><div class="p-card-desc">' + e.desc + '</div></div></div>';
         });
         html += '</div></div>';
       }
-      html += '<div class="fy-section"><h3>\ud83d\udcd6 \u975e\u9057\u77e5\u8bc6</h3><p class="fy-guide">' + data.guide + '</p></div>';
+      html += '<div class="p-section"><h3>\ud83d\udcd6 \u975e\u9057\u77e5\u8bc6</h3><p class="p-infogrid">' + data.guide + '</p></div>';
       var allKeys = window.INTANGIBLE_ITEMS ? Object.keys(window.INTANGIBLE_ITEMS) : [];
       var nearby = allKeys.filter(function(k) { return k !== id; }).slice(0, 4);
       if (nearby.length) {
-        html += '<div class="fy-nearby"><h3>\ud83c\udfad \u66f4\u591a\u975e\u7109</h3><div class="fy-nearby-grid">';
+        html += '<div class="p-neighbors"><h3>\ud83c\udfad \u66f4\u591a\u975e\u7109</h3><div class="p-neighbors-grid">';
         nearby.forEach(function(k) { var v = window.INTANGIBLE_ITEMS[k];
-          html += '<a class="fy-nearby-card" href="intangible.html?id=' + k + '"><span class="nc-ic">' + v.badge.split(' ')[0] + '</span><span>' + v.name + '</span></a>';
+          html += '<a class="p-neighbors-card" href="intangible.html?id=' + k + '"><span class="p-card-ico">' + v.badge.split(' ')[0] + '</span><span>' + v.name + '</span></a>';
         });
         html += '</div></div>';
       }

@@ -4,60 +4,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>杭州早餐 · iHangzhou</title>
-  <meta name="theme-color" content="#ea580c">
+  <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州早餐攻略：拌面、生煎、小笼、馄饨、葱包桧、油冬儿、片儿川、豆浆">
-  <link rel="stylesheet" href="css/style.css?v=20261013c">
-  <script src="js/layout.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <script src="js/breakfast-data.js"></script>
   <style>
-    .bf-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,#ea580c,#c2410c)}
-    .bf-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55))}
-    .bf-hero .bf-tb{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
-    .bf-hero .bf-name{font-size:24px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
-    .bf-hero .bf-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
-    .bf-body{padding:16px}
-    .bf-badge{display:inline-block;font-size:12px;padding:4px 10px;background:#fff7ed;color:#c2410c;border-radius:10px;font-weight:600;margin-bottom:8px}
-    .bf-hist{margin:12px 0;padding:12px;background:#fff7ed;border-radius:10px;border-left:3px solid #ea580c}
-    .bf-hist p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0}
-    .bf-section{margin:20px 0 8px}
-    .bf-section h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid #ea580c}
-    .bf-ft{display:flex;flex-direction:column;gap:6px}
-    .bf-ft i{font-size:13px;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:8px;display:flex;gap:8px;line-height:1.5}
-    .bf-ft i::before{content:'\2713';color:#ea580c;font-weight:700;flex-shrink:0;margin-top:1px}
-    .bf-shop{display:flex;flex-direction:column;gap:8px}
-    .bf-si{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg-card);border-radius:10px;border:1px solid var(--border-light)}
-    .bf-si .bf-sic{font-size:22px;flex-shrink:0}
-    .bf-si .bf-sn{font-size:14px;font-weight:600;color:var(--text)}
-    .bf-si .bf-sa{font-size:12px;color:var(--text-secondary);margin-top:2px}
-    .bf-nb{margin-top:24px;border-top:8px solid var(--bg);padding-top:16px}
-    .bf-nb h3{font-size:15px;font-weight:700;margin:0 0 12px}
-    .bf-ng{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-    .bf-nc{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500}
-    .bf-nc:active{opacity:.7}
-    .bf-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
-    .bf-empty .ei-big{font-size:64px;margin-bottom:16px}
-    @media(min-width:768px){.bf-hero{height:300px}.bf-body{max-width:720px;margin:0 auto}}
+:root{--primary:#ea580c;--primary-dark:#c2410c;}
+    .p-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,var(--primary),var(--primary-dark))}
+    .p-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55))}
+    .p-hero .p-hero-inner{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
+    .p-hero .p-hero-title{font-size:24px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+    .p-hero .p-hero-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+    .p-body{padding:16px}
+    .p-badge{display:inline-block;font-size:12px;padding:4px 10px;background:#fff7ed;color:var(--primary-dark);border-radius:10px;font-weight:600;margin-bottom:8px}
+    .p-hist{margin:12px 0;padding:12px;background:#fff7ed;border-radius:10px;border-left:3px solid var(--primary)}
+    .p-hist p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0}
+    .p-section{margin:20px 0 8px}
+    .p-section h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid var(--primary)}
+    .p-feat{display:flex;flex-direction:column;gap:6px}
+    .p-feat i{font-size:13px;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:8px;display:flex;gap:8px;line-height:1.5}
+    .p-feat i::before{content:'\2713';color:var(--primary);font-weight:700;flex-shrink:0;margin-top:1px}
+    .p-cards{display:flex;flex-direction:column;gap:8px}
+    .p-inforow{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg-card);border-radius:10px;border:1px solid var(--border-light)}
+    .p-inforow .p-ik{font-size:22px;flex-shrink:0}
+    .p-inforow .p-iv{font-size:14px;font-weight:600;color:var(--text)}
+    .p-inforow .p-card-desc{font-size:12px;color:var(--text-secondary);margin-top:2px}
+    .p-neighbors{margin-top:24px;border-top:8px solid var(--bg);padding-top:16px}
+    .p-neighbors h3{font-size:15px;font-weight:700;margin:0 0 12px}
+    .p-neighbor-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .p-neighbor{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500}
+    .p-neighbor:active{opacity:.7}
+    .p-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
+    .p-empty .p-hero-icon{font-size:64px;margin-bottom:16px}
+    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:720px;margin:0 auto}}
   </style>
+<link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>window.IHZ_PAGE={title:'早餐',icon:'🥟'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
-  <div id="breakfastContainer"><div class="bf-empty"><div class="ei-big">🥟</div><h2>加载中...</h2></div></div>
+  <div id="breakfastContainer"><div class="p-empty"><div class="p-hero-icon">🥟</div><h2>加载中...</h2></div></div>
   <script>
     function renderBreakfast(id){
       var data=window.BREAKFAST_DATA?window.BREAKFAST_DATA[id]:null;
       var c=document.getElementById('breakfastContainer');
       var ht=document.getElementById('headerTitle');
-      if(!data){c.innerHTML='<div class="bf-empty"><div class="ei-big">�</div><h2>未找到</h2><a href="cat.html?c=food&s=%E6%97%A9%E9%A4%90" class="btn" style="display:inline-block;padding:10px 20px;background:#ea580c;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';if(ht)ht.textContent='� 早餐';return;}
+      if(!data){c.innerHTML='<div class="p-empty"><div class="p-hero-icon">�</div><h2>未找到</h2><a href="cat.html?c=food&s=%E6%97%A9%E9%A4%90" class="btn" style="display:inline-block;padding:10px 20px;background:#ea580c;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';if(ht)ht.textContent='� 早餐';return;}
       document.title=data.name+' · 早餐 · iHangzhou';
       if(ht)ht.textContent='🥟 '+data.name;
-      var h='<div class="bf-hero"><div class="bf-tb"><div class="bf-name">'+data.name+'</div><div class="bf-sub">'+data.subtitle+'</div></div></div><div class="bf-body">';
-      h+='<div class="bf-badge">'+data.badge+' '+data.name+'</div><div style="clear:both"></div>';
-      if(data.history)h+='<div class="bf-hist"><p>📜 '+data.history+'</p></div>';
-      if(data.features&&data.features.length){h+='<div class="bf-section"><h3>✨ 特色</h3><div class="bf-ft">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
-      if(data.shops&&data.shops.length){h+='<div class="bf-section"><h3>🏪 去哪吃</h3><div class="bf-shop">';data.shops.forEach(function(s){h+='<div class="bf-si"><span class="bf-sic">�️</span><div><div class="bf-sn">'+s.n+'</div><div class="bf-sa">'+s.a+'</div></div></div>'});h+='</div></div>';}
+      var h='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">'+data.name+'</div><div class="p-hero-sub">'+data.subtitle+'</div></div></div><div class="p-body">';
+      h+='<div class="p-badge">'+data.badge+' '+data.name+'</div><div style="clear:both"></div>';
+      if(data.history)h+='<div class="p-hist"><p>📜 '+data.history+'</p></div>';
+      if(data.features&&data.features.length){h+='<div class="p-section"><h3>✨ 特色</h3><div class="p-feat">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
+      if(data.shops&&data.shops.length){h+='<div class="p-section"><h3>🏪 去哪吃</h3><div class="p-cards">';data.shops.forEach(function(s){h+='<div class="p-inforow"><span class="p-ik">�️</span><div><div class="p-iv">'+s.n+'</div><div class="p-card-desc">'+s.a+'</div></div></div>'});h+='</div></div>';}
       var keys=window.BREAKFAST_DATA?Object.keys(window.BREAKFAST_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
-      if(nb.length){h+='<div class="bf-nb"><h3>🥟 更多早餐</h3><div class="bf-ng">';nb.forEach(function(k){var v=window.BREAKFAST_DATA[k];h+='<a class="bf-nc" href="breakfast.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
+      if(nb.length){h+='<div class="p-neighbors"><h3>🥟 更多早餐</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.BREAKFAST_DATA[k];h+='<a class="p-neighbor" href="breakfast.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=food&s=%E6%97%A9%E9%A4%90" style="flex:1;text-align:center;padding:12px;background:#ea580c;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 早餐频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
       h+='</div>';c.innerHTML=h;
     }

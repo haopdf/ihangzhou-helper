@@ -4,64 +4,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>古镇古建 · iHangzhou</title>
-  <meta name="theme-color" content="#7c2d12">
+  <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州古镇古建：胡雪�故居、刘庄、郭庄、六和塔、保�塔、天宁寺、西溪南�止、西湖宾馆，古建筑文化之旅">
-  <link rel="stylesheet" href="css/style.css?v=20261013c">
-  <script src="js/layout.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <script src="js/gujian-data.js"></script>
-  <style>
-    .gj-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,#7c2d12,#6c2310)}
-    .gj-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55))}
-    .gj-hero .gj-tb{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
-    .gj-hero .gj-name{font-size:24px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
-    .gj-hero .gj-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
-    .gj-body{padding:16px}
-    .gj-badge{display:inline-block;font-size:12px;padding:4px 10px;background:#fee2e2;color:#6c2310;border-radius:10px;font-weight:600;margin-bottom:8px}
-    .gj-hist{margin:12px 0;padding:12px;background:#fef2f2;border-radius:10px;border-left:3px solid #7c2d12}
-    .gj-hist p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0}
-    .gj-section{margin:20px 0 8px}
-    .gj-section h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid #7c2d12}
-    .gj-ft{display:flex;flex-direction:column;gap:6px}
-    .gj-ft i{font-size:13px;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:8px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
-    .gj-ft i::before{content:'\2713';color:#7c2d12;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
-    .gj-spots{display:flex;flex-direction:column;gap:8px}
-    .gj-si{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg-card);border-radius:10px;border:1px solid var(--border-light)}
-    .gj-si .gj-sn{font-size:14px;font-weight:600;color:var(--text)}
-    .gj-si .gj-sd{font-size:12px;color:var(--text-secondary);margin-top:2px}
-    .gj-nb{margin-top:24px;border-top:8px solid var(--bg);padding-top:16px}
-    .gj-nb h3{font-size:15px;font-weight:700;margin:0 0 12px}
-    .gj-ng{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-    .gj-nc{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500}
-    .gj-nc:active{opacity:.7}
-    .gj-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
-    .gj-empty .ei-big{font-size:64px;margin-bottom:16px}
-    @media(min-width:768px){.gj-hero{height:300px}.gj-body{max-width:720px;margin:0 auto}}
-  </style>
+  <style>:root{--primary:#0ea5e9;--primary-dark:#0369a1;}
+
+    .p-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,#7c2d12,#6c2310)}
+    .p-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55))}
+    .p-hero .p-hero-inner{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
+    .p-hero .p-hero-title{font-size:24px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+    .p-hero .p-hero-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+    .p-body{padding:16px}
+    .p-badge{display:inline-block;font-size:12px;padding:4px 10px;background:#fee2e2;color:#6c2310;border-radius:10px;font-weight:600;margin-bottom:8px}
+    .p-hist{margin:12px 0;padding:12px;background:#fef2f2;border-radius:10px;border-left:3px solid #7c2d12}
+    .p-hist p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0}
+    .p-section{margin:20px 0 8px}
+    .p-section h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid #7c2d12}
+    .p-feat{display:flex;flex-direction:column;gap:6px}
+    .p-feat i{font-size:13px;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:8px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+    .p-feat i::before{content:'\2713';color:#7c2d12;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
+    .p-cards{display:flex;flex-direction:column;gap:8px}
+    .p-inforow{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg-card);border-radius:10px;border:1px solid var(--border-light)}
+    .p-inforow .p-badge{font-size:14px;font-weight:600;color:var(--text)}
+    .p-inforow .p-card{font-size:12px;color:var(--text-secondary);margin-top:2px}
+    .p-neighbors{margin-top:24px;border-top:8px solid var(--bg);padding-top:16px}
+    .p-neighbors h3{font-size:15px;font-weight:700;margin:0 0 12px}
+    .p-neighbor-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .p-neighbor{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500}
+    .p-neighbor:active{opacity:.7}
+    .p-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
+    .p-empty .p-hero-icon{font-size:64px;margin-bottom:16px}
+    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:720px;margin:0 auto}}
+  
+<style>:root{--primary:#0ea5e9;--primary-dark:#0369a1}</style><link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>window.IHZ_PAGE={title:'古镇古建',icon:'�'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
-  <div id="gjContainer"><div class="gj-empty"><div class="ei-big">�</div><h2>加载中...</h2></div></div>
+  <div id="gjContainer"><div class="p-empty"><div class="p-hero-icon">�</div><h2>加载中...</h2></div></div>
   <script>
     function renderGj(id){
       var data=window.GUJIAN_DATA?window.GUJIAN_DATA[id]:null;
       var c=document.getElementById('gjContainer');
       var ht=document.getElementById('headerTitle');
       if(!data){
-        c.innerHTML='<div class="gj-empty"><div class="ei-big">🏯</div><h2>未找到该古建筑</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=culture&s=%E5%8F%A4%E9%95%87%E5%8F%A4%E5%BB%BA" class="btn" style="display:inline-block;padding:10px 20px;background:#7c2d12;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回古建</a> <a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">文化首页</a></div>';
+        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🏯</div><h2>未找到该古建筑</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=culture&s=%E5%8F%A4%E9%95%87%E5%8F%A4%E5%BB%BA" class="btn" style="display:inline-block;padding:10px 20px;background:#7c2d12;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回古建</a> <a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">文化首页</a></div>';
         if(ht)ht.textContent='🏯 古镇古建';
         return;
       }
       document.title=data.name+' · 古镇古建 · iHangzhou';
       if(ht)ht.textContent='🏯 '+data.name;
-      var h='<div class="gj-hero"><div class="gj-tb"><div class="gj-name">'+data.name+'</div><div class="gj-sub">'+data.subtitle+'</div></div></div><div class="gj-body">';
-      h+='<div class="gj-badge">'+data.badge+' '+data.name+'</div>';
+      var h='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">'+data.name+'</div><div class="p-hero-sub">'+data.subtitle+'</div></div></div><div class="p-body">';
+      h+='<div class="p-badge">'+data.badge+' '+data.name+'</div>';
       h+='<div style="clear:both"></div>';
-      if(data.history)h+='<div class="gj-hist"><p>'+data.history+'</p></div>';
-      if(data.features&&data.features.length){h+='<div class="gj-section"><h3>✨ 特色</h3><div class="gj-ft">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
-      if(data.spots&&data.spots.length){h+='<div class="gj-section"><h3>📍 地址</h3><div class="gj-spots">';data.spots.forEach(function(s){h+='<div class="gj-si"><div><div class="gj-sn">'+s.n+'</div><div class="gj-sd">'+s.d+'</div></div></div>'});h+='</div></div>';}
+      if(data.history)h+='<div class="p-hist"><p>'+data.history+'</p></div>';
+      if(data.features&&data.features.length){h+='<div class="p-section"><h3>✨ 特色</h3><div class="p-feat">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
+      if(data.spots&&data.spots.length){h+='<div class="p-section"><h3>📍 地址</h3><div class="p-cards">';data.spots.forEach(function(s){h+='<div class="p-inforow"><div><div class="p-badge">'+s.n+'</div><div class="p-card">'+s.d+'</div></div></div>'});h+='</div></div>';}
       var keys=window.GUJIAN_DATA?Object.keys(window.GUJIAN_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
-      if(nb.length){h+='<div class="gj-nb"><h3>🏯 更多古建</h3><div class="gj-ng">';nb.forEach(function(k){var v=window.GUJIAN_DATA[k];h+='<a class="gj-nc" href="gujian.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
+      if(nb.length){h+='<div class="p-neighbors"><h3>🏯 更多古建</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.GUJIAN_DATA[k];h+='<a class="p-neighbor" href="gujian.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=culture&s=%E5%8F%A4%E9%95%87%E5%8F%A4%E5%BB%BA" style="flex:1;text-align:center;padding:12px;background:#7c2d12;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 古建频道</a><a href="museum.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">文化首页</a></div>';
       h+='</div>';c.innerHTML=h;
     }

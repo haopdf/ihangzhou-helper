@@ -4,60 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>古镇详情 · iHangzhou</title>
-  <meta name="theme-color" content="#8b5cf6">
-  <link rel="stylesheet" href="css/style.css?v=20261013c">
-  <script src="js/layout.js"></script>
+  <meta name="theme-color" content="#1f7a5a">
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <script src="js/guzhen-data.js"></script>
   <style>
-    .guzhen-hero {
+:root{--primary:#8b5cf6;--primary-dark:#6d28d9;}
+    .p-hero {
       position: relative;
       width: 100%;
       height: 240px;
       overflow: hidden;
-      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     }
-    .guzhen-hero img {
+    .p-hero img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       opacity: 0.85;
     }
-    .guzhen-hero::after {
+    .p-hero::after {
       content: '';
       position: absolute;
       inset: 0;
       background: linear-gradient(transparent 30%, rgba(0,0,0,0.6));
     }
-    .guzhen-hero .guzhen-title-bar {
+    .p-hero .p-hero-inner {
       position: absolute;
       bottom: 0; left: 0; right: 0;
       padding: 16px;
       z-index: 2;
       color: #fff;
     }
-    .guzhen-hero .guzhen-name {
+    .p-hero .p-hero-title {
       font-size: 26px;
       font-weight: 800;
       text-shadow: 0 2px 8px rgba(0,0,0,0.5);
     }
-    .guzhen-hero .guzhen-sub {
+    .p-hero .p-hero-sub {
       font-size: 13px;
       opacity: 0.92;
       margin-top: 4px;
       text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     }
-    .guzhen-body { padding: 16px; }
-    .guzhen-badge {
+    p-body { padding: 16px; }
+    .p-badge {
       display: inline-block;
       font-size: 12px;
       padding: 4px 10px;
       background: #ede9fe;
-      color: #6d28d9;
+      color: var(--primary-dark);
       border-radius: 10px;
       font-weight: 600;
       margin-bottom: 8px;
     }
-    .guzhen-info-grid {
+    .p-infogrid {
       display: flex;
       flex-direction: column;
       gap: 0;
@@ -66,41 +67,41 @@
       border-radius: var(--radius-md);
       overflow: hidden;
     }
-    .guzhen-info-row {
+    .p-inforow {
       display: flex;
       padding: 10px 12px;
       border-bottom: 1px solid var(--border-light);
       background: var(--bg-card);
     }
-    .guzhen-info-row:last-child { border-bottom: none; }
-    .guzhen-info-row .gi-ik {
+    .p-inforow:last-child { border-bottom: none; }
+    .p-inforow .p-ik {
       font-size: 12px;
       font-weight: 600;
       color: var(--text-secondary);
       min-width: 56px;
       flex-shrink: 0;
     }
-    .guzhen-info-row .gi-iv {
+    .p-inforow .p-iv {
       font-size: 13px;
       color: var(--text);
       line-height: 1.5;
     }
-    .guzhen-section { margin: 20px 0 8px; }
-    .guzhen-section h3 {
+    .p-section { margin: 20px 0 8px; }
+    .p-section h3 {
       font-size: 16px;
       font-weight: 700;
       color: var(--text);
       margin: 0 0 10px;
       padding-left: 8px;
-      border-left: 3px solid #8b5cf6;
+      border-left: 3px solid var(--primary);
     }
-    .guzhen-section p {
+    .p-section p {
       font-size: 13px;
       color: var(--text-secondary);
       line-height: 1.8;
     }
-    .guzhen-highlights { display: flex; flex-direction: column; gap: 6px; }
-    .guzhen-hl-item {
+    .p-cards { display: flex; flex-direction: column; gap: 6px; }
+    .p-card-item {
       font-size: 13px;
       color: var(--text);
       padding: 8px 12px;
@@ -111,32 +112,33 @@
       gap: 8px;
       line-height: 1.5;
     }
-    .guzhen-hl-item::before {
+    .p-card-item::before {
       content: '\2713';
-      color: #8b5cf6;
+      color: var(--primary);
       font-weight: 700;
       font-size: 12px;
       flex-shrink: 0;
       margin-top: 1px;
     }
-    .guzhen-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
-    .guzhen-empty .ei-big { font-size: 64px; margin-bottom: 16px; }
-    .guzhen-empty h2 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
-    .guzhen-nearby { margin-top: 24px; border-top: 8px solid var(--bg); padding-top: 16px; }
-    .guzhen-nearby h3 { font-size: 15px; font-weight: 700; color: var(--text); margin: 0 0 12px; }
-    .guzhen-nearby-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .guzhen-nearby-card {
+    p-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    p-empty .p-hero-icon { font-size: 64px; margin-bottom: 16px; }
+    p-empty h2 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
+    .p-neighbors { margin-top: 24px; border-top: 8px solid var(--bg); padding-top: 16px; }
+    .p-neighbors h3 { font-size: 15px; font-weight: 700; color: var(--text); margin: 0 0 12px; }
+    .p-neighbors-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .p-neighbors-card {
       display: flex; align-items: center; gap: 8px;
       padding: 10px; background: var(--bg); border-radius: 8px;
       text-decoration: none; color: var(--text); font-size: 13px; font-weight: 500;
     }
-    .guzhen-nearby-card:active { opacity: 0.7; }
-    .guzhen-nearby-card .nc-ic { font-size: 20px; }
+    .p-neighbors-card:active { opacity: 0.7; }
+    .p-neighbors-card .p-card-ico { font-size: 20px; }
     @media (min-width: 768px) {
-      .guzhen-hero { height: 340px; }
-      .guzhen-body { max-width: 720px; margin: 0 auto; }
+      .p-hero { height: 340px; }
+      p-body { max-width: 720px; margin: 0 auto; }
     }
   </style>
+<link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>
@@ -146,8 +148,8 @@
   </script>
 
   <div id="guzhenContainer">
-    <div class="guzhen-empty">
-      <div class="ei-big">\ud83c\udfd9\ufe0f</div>
+    <div class="p-empty">
+      <div class="p-hero-icon">\ud83c\udfd9\ufe0f</div>
       <h2>\u52a0\u8f7d\u4e2d...</h2>
     </div>
   </div>
@@ -160,8 +162,8 @@
       var headerTitle = document.getElementById('headerTitle');
 
       if (!data) {
-        container.innerHTML = '<div class="guzhen-empty">' +
-          '<div class="ei-big">\ud83c\udfd9\ufe0f</div>' +
+        container.innerHTML = '<div class="p-empty">' +
+          '<div class="p-hero-icon">\ud83c\udfd9\ufe0f</div>' +
           '<h2>\u672a\u627e\u5230\u8be5\u53e4\u9547/\u53e4\u6751</h2>' +
           '<p style="margin:8px 0 16px;">ID: ' + (id || '(\u7a7a)') + '</p>' +
           '<a href="cat.html?c=travel&s=%E5%8F%A4%E9%95%87%E5%8F%A4%E6%9D%91" class="btn" style="display:inline-block;padding:10px 20px;background:#8b5cf6;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;">\u2190 \u8fd4\u56de\u53e4\u9547\u5217\u8868</a>' +
@@ -177,51 +179,51 @@
       var html = '';
 
       /* ---- Hero ---- */
-      html += '<div class="guzhen-hero">';
+      html += '<div class="p-hero">';
       if (data.image) {
         html += '<img src="' + data.image + '" alt="' + data.name + '" loading="lazy" onerror="this.style.display=\'none\'">';
       }
-      html += '<div class="guzhen-title-bar">' +
-        '<div class="guzhen-name">' + data.name + '</div>' +
-        '<div class="guzhen-sub">' + data.subtitle + '</div>' +
+      html += '<div class="p-hero-inner">' +
+        '<div class="p-hero-title">' + data.name + '</div>' +
+        '<div class="p-hero-sub">' + data.subtitle + '</div>' +
         '</div></div>';
 
-      html += '<div class="guzhen-body">';
+      html += '<div class="p-body">';
 
       /* ---- Badge + \u5b63\u8282 ---- */
-      html += '<div class="guzhen-badge">' + data.badge + '</div>';
+      html += '<div class="p-badge">' + data.badge + '</div>';
       html += '<span style="float:right;font-size:12px;color:var(--text-muted);margin-bottom:8px;display:inline-block;">\u6700\u4f73\u65f6\u8282\uff1a' + data.seasons + '</span>';
       html += '<div style="clear:both"></div>';
 
       /* ---- \u5b9e\u7528\u4fe1\u606f ---- */
-      html += '<div class="guzhen-info-grid">';
-      if (data.location) html += '<div class="guzhen-info-row"><span class="gi-ik">\ud83d\udccd \u5730\u5740</span><span class="gi-iv">' + data.location + '</span></div>';
-      if (data.ticket) html += '<div class="guzhen-info-row"><span class="gi-ik">\ud83c\udfab \u95e8\u7968</span><span class="gi-iv">' + data.ticket + '</span></div>';
-      if (data.hours) html += '<div class="guzhen-info-row"><span class="gi-ik">\ud83d\udd50 \u65f6\u95f4</span><span class="gi-iv">' + data.hours + '</span></div>';
-      if (data.traffic) html += '<div class="guzhen-info-row"><span class="gi-ik">\ud83d\ude97 \u4ea4\u901a</span><span class="gi-iv">' + data.traffic + '</span></div>';
+      html += '<div class="p-infogrid">';
+      if (data.location) html += '<div class="p-inforow"><span class="p-ik">\ud83d\udccd \u5730\u5740</span><span class="p-iv">' + data.location + '</span></div>';
+      if (data.ticket) html += '<div class="p-inforow"><span class="p-ik">\ud83c\udfab \u95e8\u7968</span><span class="p-iv">' + data.ticket + '</span></div>';
+      if (data.hours) html += '<div class="p-inforow"><span class="p-ik">\ud83d\udd50 \u65f6\u95f4</span><span class="p-iv">' + data.hours + '</span></div>';
+      if (data.traffic) html += '<div class="p-inforow"><span class="p-ik">\ud83d\ude97 \u4ea4\u901a</span><span class="p-iv">' + data.traffic + '</span></div>';
       html += '</div>';
 
       /* ---- \u4eae\u70b9 ---- */
       if (data.highlights && data.highlights.length) {
-        html += '<div class="guzhen-section"><h3>\u2728 \u5fc5\u6e38\u4eae\u70b9</h3><div class="guzhen-highlights">';
+        html += '<div class="p-section"><h3>\u2728 \u5fc5\u6e38\u4eae\u70b9</h3><div class="p-cards">';
         data.highlights.forEach(function(h) {
-          html += '<div class="guzhen-hl-item">' + h + '</div>';
+          html += '<div class="p-card-item">' + h + '</div>';
         });
         html += '</div></div>';
       }
 
       /* ---- \u8be6\u7ec6\u4ecb\u7ecd ---- */
-      html += '<div class="guzhen-section"><h3>\ud83d\udcd6 \u53e4\u9547\u4ecb\u7ecd</h3><p>' + data.guide + '</p></div>';
+      html += '<div class="p-section"><h3>\ud83d\udcd6 \u53e4\u9547\u4ecb\u7ecd</h3><p>' + data.guide + '</p></div>';
 
       /* ---- \u5176\u4ed6\u53e4\u9547\u63a8\u8350 ---- */
       var allKeys = window.GUZHEN_VILLAGES ? Object.keys(window.GUZHEN_VILLAGES) : [];
       var nearby = allKeys.filter(function(k) { return k !== id; }).slice(0, 4);
       if (nearby.length) {
-        html += '<div class="guzhen-nearby"><h3>\ud83c\udfd8\ufe0f \u5176\u4ed6\u53e4\u9547\u63a8\u8350</h3><div class="guzhen-nearby-grid">';
+        html += '<div class="p-neighbors"><h3>\ud83c\udfd8\ufe0f \u5176\u4ed6\u53e4\u9547\u63a8\u8350</h3><div class="p-neighbors-grid">';
         nearby.forEach(function(k) {
           var v = window.GUZHEN_VILLAGES[k];
-          html += '<a class="guzhen-nearby-card" href="guzhen.html?id=' + k + '">' +
-            '<span class="nc-ic">' + v.badge.split(' ')[0] + '</span>' +
+          html += '<a class="p-neighbors-card" href="guzhen.html?id=' + k + '">' +
+            '<span class="p-card-ico">' + v.badge.split(' ')[0] + '</span>' +
             '<span>' + v.name + '</span></a>';
         });
         html += '</div></div>';

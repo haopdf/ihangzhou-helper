@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta name="description" content="iHangzhou 频道专题 - 杭州生活服务导航">
   <meta name="keywords" content="杭州,杭州生活,杭州办事,ihangzhou,杭州频道">
-  <meta name="theme-color" content="#0ea5e9">
+  <meta name="theme-color" content="#1f7a5a">
   <meta property="og:title" content="iHangzhou 频道专题">
   <meta property="og:description" content="杭州人的数字生活工具箱">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://www.ihangzhou.net/channel.html">
   <link rel="manifest" href="manifest.json">
   <title>iHangzhou · 频道专题</title>
-  <link rel="stylesheet" href="css/style.css?v=20260928c">
-  <script src="js/layout.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+<style>:root{--primary:#0ea5e9;--primary-dark:#0369a1}</style><link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>
@@ -71,7 +72,7 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=20260928c"></script>
+  <script src="js/app.js?v=20261016e"></script>
   <script src="js/analytics.js?v=20260928c"></script>
   <script>
     // 频道专题页逻辑
@@ -291,13 +292,13 @@
           relEl.innerHTML = related.map(function (rid) {
             var rcat = DATA.categories.find(function (c) { return c.id === rid; });
             if (!rcat) return '';
-            return '<a class="channel-item" href="channel.html#' + rid + '">' +
+            return '<a class="p-neighbor" href="channel.html#' + rid + '">' +
               '<span class="ch-icon">' + rcat.icon + '</span>' +
               '<span class="ch-name">' + rcat.name + '</span>' +
               '</a>';
           }).join('');
           // 点跳转后重新渲染（hashchange 会自动触发，这里补一个 scrollTo 顶部）
-          relEl.querySelectorAll('.channel-item').forEach(function (el) {
+          relEl.querySelectorAll('p-neighbor').forEach(function (el) {
             el.addEventListener('click', function () {
               setTimeout(function(){ window.scrollTo(0, 0); }, 50);
             });

@@ -1,0 +1,222 @@
+/* ============================================
+   iHangzhou · Third-Level Channel Detail 统一样式
+   覆盖所有频道详情页（guzhen/temple/chaguan/night-market/...）
+   全部引用 style.css 的 CSS vars，通过 CSS vars 切换主题（--primary）
+   ============================================ */
+
+/* ── Hero ── */
+.p-hero {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--primary, var(--primary)), var(--primary-dark, var(--primary-dark)));
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px var(--gutter, 16px) 20px;
+}
+.p-hero-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.p-hero-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+}
+.p-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 25%, rgba(0,0,0,0.55));
+  z-index: 1;
+}
+.p-hero-inner {
+  position: relative;
+  z-index: 2;
+}
+.p-hero-icon {
+  font-size: 50px;
+  line-height: 1;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 2;
+}
+.p-hero-title {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 2;
+}
+.p-hero-sub {
+  font-size: 13px;
+  opacity: 0.92;
+  margin-top: 4px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Body ── */
+.p-body { padding: 16px; max-width: 1180px; margin: 0 auto; }
+@media (min-width: 768px) {
+.p-hero { min-height: 280px; padding: 40px var(--gutter, 16px) 28px; }
+.p-hero > h1, .p-hero > div:first-child { max-width: 1180px; margin: 0 auto; }
+}
+
+/* ── Badge ── */
+.p-badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px 10px;
+  background: var(--primary-100, var(--primary-100));
+  color: var(--primary, var(--primary));
+  border-radius: 10px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* ── Info Grid (信息定义列表) ── */
+.p-infogrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 12px 0 16px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.p-inforow {
+  display: flex;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-card);
+}
+.p-inforow:last-child { border-bottom: none; }
+.p-inforow .p-ik { font-size: 12px; font-weight: 600; color: var(--text-secondary); min-width: 56px; flex-shrink: 0; }
+.p-inforow .p-iv { font-size: 13px; color: var(--text); }
+
+/* ── Section ── */
+.p-section { margin: var(--section-gap, 14px) 0 8px; padding: 0 var(--gutter, 16px); }
+.p-section h3 {
+  font-size: 16px; font-weight: 700;
+  margin: 0 0 10px;
+  padding-left: 8px;
+  border-left: 3px solid var(--primary, var(--primary));
+}
+
+/* ── Feature List (bullet list) ── */
+.p-feat { display: flex; flex-direction: column; gap: 6px; }
+.p-feat-item {
+  font-size: 13px; color: var(--text);
+  padding: 8px 12px;
+  background: var(--bg); border-radius: 8px;
+  display: flex; align-items: flex-start; gap: 8px;
+  line-height: 1.5;
+}
+.p-feat-item::before {
+  content: '\2713';
+  color: var(--primary, var(--primary));
+  font-weight: 700; font-size: 12px;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+/* ── Card Grid ── */
+.p-cards { display: flex; flex-direction: column; gap: 8px; }
+.p-card {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px; background: var(--bg-card);
+  border-radius: 10px;
+  border: 1px solid var(--border-light);
+}
+.p-card-ico { font-size: 22px; flex-shrink: 0; }
+.p-card-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.p-card-desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+/* ── History Block ── */
+.p-hist {
+  margin: 12px 0;
+  padding: 12px;
+  background: var(--bg-alt);
+  border-radius: 10px;
+  border-left: 3px solid var(--primary, var(--primary));
+}
+.p-hist p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Neighbor Grid (相关推荐) ── */
+.p-neighbors { margin-top: 24px; border-top: 8px solid var(--bg); padding-top: 16px; }
+.p-neighbors h3 { font-size: 15px; font-weight: 700; margin: 0 0 12px; }
+.p-neighbor-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
+.p-neighbor {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px; background: var(--bg);
+  border-radius: 8px; text-decoration: none;
+  color: var(--text); font-size: 13px; font-weight: 500;
+}
+.p-neighbor:active { opacity: 0.7; }
+
+/* ── Tips ── */
+.p-tip {
+  margin: 0 16px 8px;
+  padding: 10px 14px;
+  background: var(--accent-100);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* ── Empty ── */
+.p-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+.p-empty-icon { font-size: 64px; margin-bottom: 16px; }
+
+/* ── Back Button ── */
+.p-back {
+  display: block; margin: 24px 16px 48px;
+  padding: 14px; text-align: center;
+  background: var(--primary); color: #fff !important;
+  border-radius: 24px; font-size: 14px;
+  font-weight: 600; text-decoration: none;
+  max-width: 200px; margin-left: auto; margin-right: auto;
+}
+
+/* ============================================================
+   统一化覆盖层（过渡期）
+   强制所有 .p-* 频道页：左右留白 = --gutter、hero/分区圆角 = 0
+   目的：消除各页内联 <style> 各自写死的参差（有的空白多有的少、有的 hero 圆角有的没有）
+   当各频道页取消内联布局覆盖后，本块可移除
+   ============================================================ */
+.p-hero,
+.p-section,
+.p-body,
+.p-neighbors { border-radius: 0 !important; }
+
+.p-hero {
+  padding-left: var(--gutter, 16px) !important;
+  padding-right: var(--gutter, 16px) !important;
+}
+.p-section {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: var(--gutter, 16px) !important;
+  padding-right: var(--gutter, 16px) !important;
+}
+.p-body {
+  padding-left: var(--gutter, 16px) !important;
+  padding-right: var(--gutter, 16px) !important;
+}
+.p-neighbors {
+  padding-left: var(--gutter, 16px) !important;
+  padding-right: var(--gutter, 16px) !important;
+}

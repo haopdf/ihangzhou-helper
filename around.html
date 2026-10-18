@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta name="description" content="杭州周边游全攻略：乌镇水乡、莫干山民宿、千岛湖骑行、安吉竹海、西塘古镇、南浔古镇…自驾/高铁交通、门票住宿、美食一站齐">
   <meta name="keywords" content="杭州周边游,乌镇,莫干山,千岛湖,安吉,西塘,南浔,桐庐,富阳,莫干山民宿,乌镇西栅,一日游,二日游,自驾攻略,杭州出发,ihangzhou">
-  <meta name="theme-color" content="#0ea5e9">
+  <meta name="theme-color" content="#1f7a5a">
   <meta property="og:title" content="杭州周边游 · iHangzhou">
   <meta property="og:description" content="杭州出发 1-2 小时生活圈 · 古镇 / 山水 / 避暑 / 度假全攻略">
   <meta property="og:type" content="website">
@@ -24,16 +24,17 @@
     "inLanguage": "zh-CN"
   }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=20260928a">
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
   <script>
     window.IZ_SKIP_APP_INIT = true;
   </script>
-  <script src="js/layout.js"></script>
+  <script src="js/layout.js?v=20261016e"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
   <style>
+:root{--primary:#0ea5e9;--primary-dark:#0369a1;}
     /* ===== 周边游频道专属样式 ===== */
-    .around-hero {
-      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
+    .p-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #0284c7 50%, var(--primary-dark) 100%);
       color: #fff;
       padding: 28px 16px 22px;
       text-align: center;
@@ -41,7 +42,7 @@
       position: relative;
       overflow: hidden;
     }
-    .around-hero::before {
+    .p-hero::before {
       content: "";
       position: absolute;
       top: -50%; left: -50%;
@@ -49,41 +50,41 @@
       background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 60%);
       pointer-events: none;
     }
-    .around-hero h1 {
+    .p-hero h1 {
       font-size: 22px;
       font-weight: 800;
       margin: 0 0 6px;
       letter-spacing: 0.5px;
       position: relative;
     }
-    .around-hero .around-subtitle {
+    .p-hero .p-hero-sub {
       font-size: 13px;
       opacity: 0.92;
       line-height: 1.5;
       position: relative;
     }
-    .around-hero .around-stats {
+    .p-hero .p-infogrid {
       display: flex;
       justify-content: center;
       gap: 24px;
       margin-top: 14px;
       position: relative;
     }
-    .around-hero .around-stat {
+    .p-hero .p-iv {
       text-align: center;
     }
-    .around-stat-num {
+    .p-iv-num {
       font-size: 20px;
       font-weight: 800;
     }
-    .around-stat-label {
+    .p-iv-label {
       font-size: 11px;
       opacity: 0.85;
       margin-top: 2px;
     }
 
     /* 分区 tab */
-    .around-tabs {
+    .p-infogrid {
       display: flex;
       gap: 6px;
       padding: 10px 16px;
@@ -95,8 +96,8 @@
       z-index: 50;
       -webkit-overflow-scrolling: touch;
     }
-    .around-tabs::-webkit-scrollbar { display: none; }
-    .around-tab {
+    .p-infogrid::-webkit-scrollbar { display: none; }
+    .p-badge {
       flex-shrink: 0;
       padding: 7px 14px;
       background: var(--bg-alt);
@@ -110,18 +111,18 @@
       white-space: nowrap;
       font-weight: 500;
     }
-    .around-tab.active {
+    .p-badge.active {
       background: var(--primary);
       color: #fff;
       border-color: var(--primary);
     }
 
     /* 分区容器 */
-    .around-section {
+    .p-section {
       display: none;
       padding: 14px 16px 4px;
     }
-    .around-section.active {
+    .p-section.active {
       display: block;
       animation: aroundFade 0.25s ease-out;
     }
@@ -131,7 +132,7 @@
     }
 
     /* 周边游大卡片 */
-    .around-card {
+    .p-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 14px;
@@ -143,10 +144,10 @@
       transition: transform 0.15s, box-shadow 0.15s;
       -webkit-tap-highlight-color: transparent;
     }
-    .around-card:active {
+    .p-card:active {
       transform: scale(0.99);
     }
-    .ac-image {
+    .p-hero-icon {
       width: 100%;
       height: 160px;
       object-fit: cover;
@@ -156,44 +157,44 @@
       -webkit-user-drag: none;
       user-select: none;
     }
-    .ac-body {
+    .p-body {
       padding: 14px 16px;
       position: relative;
     }
-    .ac-bar {
+    .p-infogrid {
       position: absolute;
       top: 0; left: 0;
       width: 100%;
       height: 3px;
     }
-    .ac-head {
+    .p-hero-inner {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 8px;
       margin-bottom: 8px;
     }
-    .ac-name {
+    .p-hero-title {
       font-size: 17px;
       font-weight: 700;
       color: var(--text);
       line-height: 1.3;
     }
-    .ac-badges {
+    .p-infogrid {
       display: flex;
       gap: 4px;
       flex-shrink: 0;
     }
-    .ac-badge {
+    .p-badge {
       font-size: 10px;
       padding: 3px 8px;
       border-radius: 8px;
       font-weight: 600;
     }
-    .ac-tag-hot { background: #fef2f2; color: #dc2626; }
-    .ac-tag-new { background: #f0fdf4; color: #16a34a; }
-    .ac-tag-top { background: #eff6ff; color: #2563eb; }
-    .ac-info {
+    .p-badge-hot { background: #fef2f2; color: #dc2626; }
+    .p-badge-new { background: #f0fdf4; color: #16a34a; }
+    .p-badge-top { background: #eff6ff; color: #2563eb; }
+    .p-infogrid {
       display: flex;
       flex-wrap: wrap;
       gap: 8px 12px;
@@ -201,34 +202,34 @@
       font-size: 12px;
       color: var(--text-secondary);
     }
-    .ac-info-item {
+    .p-infogrid-item {
       display: inline-flex;
       align-items: center;
       gap: 3px;
     }
-    .ac-info-item strong {
+    .p-infogrid-item strong {
       color: var(--text);
       font-weight: 600;
     }
-    .ac-desc {
+    .p-card-desc {
       font-size: 13px;
       color: var(--text-secondary);
       line-height: 1.6;
       margin-bottom: 10px;
     }
-    .ac-tips {
+    .p-feat {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
-    .ac-tip {
+    .p-tip {
       font-size: 11px;
       padding: 4px 10px;
       background: var(--bg-alt);
       border-radius: 12px;
       color: var(--text-secondary);
     }
-    .ac-distance {
+    .p-inforow {
       position: absolute;
       top: -32px;
       right: 12px;
@@ -239,12 +240,12 @@
       border-radius: 10px;
       backdrop-filter: blur(4px);
     }
-    .ac-img-wrap {
+    .p-hero-icon-wrap {
       position: relative;
     }
 
     /* 季节标签 */
-    .ac-season {
+    .p-badge {
       display: inline-flex;
       align-items: center;
       gap: 3px;
@@ -258,7 +259,7 @@
     }
 
     /* 推荐路线 */
-    .around-route {
+    .p-cards {
       background: linear-gradient(135deg, #fef3c7, #fde68a);
       border-top: 1px solid #f59e0b;
       padding: 10px 16px;
@@ -266,19 +267,19 @@
       color: #92400e;
       line-height: 1.5;
     }
-    .around-route strong {
+    .p-cards strong {
       color: #78350f;
     }
 
     /* 色调 */
-    .around-card[data-type="water"] .ac-bar { background: #0ea5e9; }
-    .around-card[data-type="mountain"] .ac-bar { background: #10b981; }
-    .around-card[data-type="lake"] .ac-bar { background: #6366f1; }
-    .around-card[data-type="bamboo"] .ac-bar { background: #84cc16; }
-    .around-card[data-type="ancient"] .ac-bar { background: #f59e0b; }
+    .p-card[data-type="water"] .p-infogrid { background: var(--primary); }
+    .p-card[data-type="mountain"] .p-infogrid { background: #10b981; }
+    .p-card[data-type="lake"] .p-infogrid { background: #6366f1; }
+    .p-card[data-type="bamboo"] .p-infogrid { background: #84cc16; }
+    .p-card[data-type="ancient"] .p-infogrid { background: #f59e0b; }
 
     /* 无图降级 */
-    .ac-noimg {
+    .p-hero {
       height: 160px;
       display: flex;
       align-items: center;
@@ -287,10 +288,11 @@
       background: linear-gradient(135deg, var(--bg-alt), var(--bg-hover));
       position: relative;
     }
-    .ac-noimg .ac-distance {
+    .p-hero .p-inforow {
       top: 12px;
     }
   </style>
+<link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
 
@@ -330,38 +332,38 @@
   <!-- 主内容 -->
   <div class="page active">
     <!-- Hero -->
-    <div class="around-hero">
+    <div class="p-hero">
       <h1>🗺️ 杭州周边游全攻略</h1>
-      <p class="around-subtitle">杭州出发 1-2 小时生活圈 · 古镇 / 山水 / 竹海 / 避暑</p>
-      <div class="around-stats">
-        <div class="around-stat"><div class="around-stat-num">8+</div><div class="around-stat-label">热门目的地</div></div>
-        <div class="around-stat"><div class="around-stat-num">30+</div><div class="around-stat-label">深度攻略</div></div>
-        <div class="around-stat"><div class="around-stat-num">自驾</div><div class="around-stat-label">高铁全覆盖</div></div>
+      <p class="p-hero-sub">杭州出发 1-2 小时生活圈 · 古镇 / 山水 / 竹海 / 避暑</p>
+      <div class="p-infogrid">
+        <div class="p-iv"><div class="p-iv-num">8+</div><div class="p-iv-label">热门目的地</div></div>
+        <div class="p-iv"><div class="p-iv-num">30+</div><div class="p-iv-label">深度攻略</div></div>
+        <div class="p-iv"><div class="p-iv-num">自驾</div><div class="p-iv-label">高铁全覆盖</div></div>
       </div>
     </div>
 
     <!-- Tab 导航 -->
-    <div class="around-tabs" id="aroundTabs">
-      <div class="around-tab active" data-target="all">全部</div>
-      <div class="around-tab" data-target="water">水乡古镇</div>
-      <div class="around-tab" data-target="mountain">山水避暑</div>
-      <div class="around-tab" data-target="lake">湖岛度假</div>
-      <div class="around-tab" data-target="bamboo">竹海茶乡</div>
+    <div class="p-infogrid" id="aroundTabs">
+      <div class="p-badge active" data-target="all">全部</div>
+      <div class="p-badge" data-target="water">水乡古镇</div>
+      <div class="p-badge" data-target="mountain">山水避暑</div>
+      <div class="p-badge" data-target="lake">湖岛度假</div>
+      <div class="p-badge" data-target="bamboo">竹海茶乡</div>
     </div>
 
     <!-- 全部 -->
-    <div class="around-section active" id="around-all" data-cat="all">
+    <div class="p-section active" id="around-all" data-cat="all">
       <!-- 卡片由 JS 渲染 -->
     </div>
 
     <!-- 水乡古镇 -->
-    <div class="around-section" id="around-water" data-cat="water"></div>
+    <div class="p-section" id="around-water" data-cat="water"></div>
     <!-- 山水避暑 -->
-    <div class="around-section" id="around-mountain" data-cat="mountain"></div>
+    <div class="p-section" id="around-mountain" data-cat="mountain"></div>
     <!-- 湖岛度假 -->
-    <div class="around-section" id="around-lake" data-cat="lake"></div>
+    <div class="p-section" id="around-lake" data-cat="lake"></div>
     <!-- 竹海茶乡 -->
-    <div class="around-section" id="around-bamboo" data-cat="bamboo"></div>
+    <div class="p-section" id="around-bamboo" data-cat="bamboo"></div>
 
     <!-- 推荐路线串联 -->
     <div style="padding:0 16px;">
@@ -410,7 +412,7 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=20260928a"></script>
+  <script src="js/app.js?v=20261016e"></script>
   <script src="js/analytics.js?v=20260928a"></script>
   <script>
     // ===== 周边游频道数据 =====
@@ -423,7 +425,7 @@
           name: '乌镇',
           type: 'water',
           typeLabel: '水乡古镇',
-          badges: [{ text: '热门', cls: 'ac-tag-hot' }],
+          badges: [{ text: '热门', cls: 'p-badge-hot' }],
           distance: '🚗 1h / 🚄 高铁 25min',
           traffic: '高铁桐乡站 + 公交 K282',
           price: '西栅 150 / 东栅 110 / 联票 190',
@@ -448,7 +450,7 @@
           name: '西塘',
           type: 'water',
           typeLabel: '水乡古镇',
-          badges: [{ text: '夜景', cls: 'ac-tag-top' }],
+          badges: [{ text: '夜景', cls: 'p-badge-top' }],
           distance: '🚗 1.5h / 🚄 高铁嘉善南',
           traffic: '高铁嘉善南站 + 打车 15min',
           price: '景区票 95 / 民居票 50',
@@ -470,7 +472,7 @@
           name: '南浔古镇',
           type: 'water',
           typeLabel: '水乡古镇',
-          badges: [{ text: '小众', cls: 'ac-tag-new' }],
+          badges: [{ text: '小众', cls: 'p-badge-new' }],
           distance: '🚗 1.5h / 🚄 高铁湖州',
           traffic: '高铁湖州站 + 打车 20min',
           price: '免费（小景点联票 85）',
@@ -492,7 +494,7 @@
           name: '莫干山',
           type: 'mountain',
           typeLabel: '山水避暑',
-          badges: [{ text: '避暑', cls: 'ac-tag-top' }],
+          badges: [{ text: '避暑', cls: 'p-badge-top' }],
           distance: '🚗 50min',
           traffic: '自驾 / 包车 / 旅游大巴',
           price: '景区 80 + 车费 35',
@@ -508,7 +510,7 @@
               '<div class="guide-block"><h4>🎯 核心看点</h4><p>• <strong>毛主席下榻处</strong>：皇后饭店<br>• <strong>蒋介石官邸</strong>：武陵村 229 号<br>• <strong>剑池</strong>：莫干山标志性景点，飞瀑<br>• <strong>旭光台</strong>：日出/云海最佳机位<br>• <strong>芦花荡公园</strong>：林中散步</p></div>' +
               '<div class="guide-block"><h4>📅 推荐安排</h4><p>• <strong>一日游</strong>：剑池 → 毛泽东下榻处 → 旭光台 → 下山<br>• <strong>两日游</strong>：第一天徒步 + 下午茶 + 住民宿；第二天日出 + 骑行下山<br>• <strong>最佳季节</strong>：夏季避暑（山上比市区低 7-10℃），秋季红叶</p></div>' +
               '<div class="guide-block"><h4>💡 小贴士</h4><p>• 旺季（暑期/国庆）民宿需提前 1-2 月预订<br>• 山上物价高，适量带零食<br>• 下雨天山上云海绝美<br>• 周末上山堵车严重，建议早 7 点出发</p></div>' +
-              '<p style="margin-top:10px;"><a href="https://www.mogan-star.com/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">莫干山旅游 →</a></p>'
+              '<p style="margin-top:10px;"><a href="https://www.p-badge.com/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">莫干山旅游 →</a></p>'
           }
         },
         {
@@ -516,7 +518,7 @@
           name: '千岛湖',
           type: 'lake',
           typeLabel: '湖岛度假',
-          badges: [{ text: '推荐', cls: 'ac-tag-top' }, { text: '骑行', cls: 'ac-tag-new' }],
+          badges: [{ text: '推荐', cls: 'p-badge-top' }, { text: '骑行', cls: 'p-badge-new' }],
           distance: '🚗 2h / 🚄 高铁 1h',
           traffic: '高铁千岛湖站 + 酒店穿梭巴士',
           price: '中心湖区 185 / 东南湖区 185',
@@ -541,7 +543,7 @@
           name: '安吉',
           type: 'bamboo',
           typeLabel: '竹海茶乡',
-          badges: [{ text: '亲子', cls: 'ac-tag-new' }],
+          badges: [{ text: '亲子', cls: 'p-badge-new' }],
           distance: '🚗 1h',
           traffic: '自驾直达 / 杭州大巴 1.5h',
           price: '竹博园 80 / 中国大竹海 58 / 云上草原 360',
@@ -564,7 +566,7 @@
           name: '桐庐',
           type: 'mountain',
           typeLabel: '山水避暑',
-          badges: [{ text: '小众', cls: 'ac-tag-new' }],
+          badges: [{ text: '小众', cls: 'p-badge-new' }],
           distance: '🚗 1h',
           traffic: '自驾走杭新景高速',
           price: '大奇山 60 / 严子陵钓台 125 / 瑶琳仙境 116',
@@ -586,7 +588,7 @@
           name: '富阳',
           type: 'mountain',
           typeLabel: '山水避暑',
-          badges: [{ text: '当日达', cls: 'ac-tag-new' }],
+          badges: [{ text: '当日达', cls: 'p-badge-new' }],
           distance: '🚗 30min / 🚄 地铁 6 号线',
           traffic: '地铁 6 号线直达 / 自驾 30min',
           price: '龙门古镇 60 / 野生动物世界 220 / 黄公望 30',
@@ -615,29 +617,29 @@
       // 渲染卡片
       function renderCard(item) {
         var badgesHtml = item.badges.map(function(b) {
-          return '<span class="ac-badge ' + b.cls + '">' + b.text + '</span>';
+          return '<span class="p-badge ' + b.cls + '">' + b.text + '</span>';
         }).join('');
         var tipsHtml = item.tips.filter(function(t){ return t; }).map(function(t) {
-          return '<span class="ac-tip">' + t + '</span>';
+          return '<span class="p-tip">' + t + '</span>';
         }).join('');
         // emoji占位图
         var emojiMap = { wuzhen: '🏮', xitang: '🏮', nanxun: '🏛️', moganshan: '🏡', qiandao: '🏝️', anji: '🎋', tonglu: '🎨', fuyang: '🏘️' };
         var icon = emojiMap[item.id] || '📍';
-        return '<div class="around-card" data-type="' + item.type + '" data-id="' + item.id + '">' +
-          '<div class="ac-img-wrap">' +
-            '<div class="ac-noimg">' + icon + '<span class="ac-distance">' + item.distance + '</span></div>' +
+        return '<div class="p-card" data-type="' + item.type + '" data-id="' + item.id + '">' +
+          '<div class="p-hero-icon-wrap">' +
+            '<div class="p-hero">' + icon + '<span class="p-inforow">' + item.distance + '</span></div>' +
           '</div>' +
-          '<div class="ac-body">' +
-            '<div class="ac-bar"></div>' +
-            '<div class="ac-head"><div class="ac-name">' + item.name + '</div>' +
-            '<div class="ac-badges">' + badgesHtml + '</div></div>' +
-            '<div class="ac-info">' +
-              '<span class="ac-info-item">🚇 ' + item.traffic + '</span>' +
-              '<span class="ac-info-item">🎫 ' + item.price + '</span>' +
-              '<span class="ac-info-item">📅 ' + item.best + '</span>' +
+          '<div class="p-body">' +
+            '<div class="p-infogrid"></div>' +
+            '<div class="p-hero-inner"><div class="p-hero-title">' + item.name + '</div>' +
+            '<div class="p-infogrid">' + badgesHtml + '</div></div>' +
+            '<div class="p-infogrid">' +
+              '<span class="p-infogrid-item">🚇 ' + item.traffic + '</span>' +
+              '<span class="p-infogrid-item">🎫 ' + item.price + '</span>' +
+              '<span class="p-infogrid-item">📅 ' + item.best + '</span>' +
             '</div>' +
-            '<div class="ac-desc">' + item.desc + '</div>' +
-            '<div class="ac-tips">' + tipsHtml + '</div>' +
+            '<div class="p-card-desc">' + item.desc + '</div>' +
+            '<div class="p-feat">' + tipsHtml + '</div>' +
           '</div>' +
         '</div>';
       }
@@ -661,7 +663,7 @@
 
       // 绑定点击打开攻略
       function bindCardClick(container) {
-        container.querySelectorAll('.around-card').forEach(function(card) {
+        container.querySelectorAll('p-card').forEach(function(card) {
           card.addEventListener('click', function() {
             var id = card.getAttribute('data-id');
             var item = AROUND_DATA.find(function(d){ return d.id === id; });
@@ -674,13 +676,13 @@
 
       // Tab 切换
       function setupTabs() {
-        var tabs = document.querySelectorAll('.around-tab');
+        var tabs = document.querySelectorAll('p-badge');
         tabs.forEach(function(tab) {
           tab.addEventListener('click', function() {
             tabs.forEach(function(t){ t.classList.remove('active'); });
             tab.classList.add('active');
             var target = tab.getAttribute('data-target');
-            document.querySelectorAll('.around-section').forEach(function(sec){
+            document.querySelectorAll('p-section').forEach(function(sec){
               sec.classList.remove('active');
             });
             var activeSec = document.getElementById('around-' + target);
@@ -702,7 +704,7 @@
           { id: 'articles', icon: '📖', name: '杭州故事' }
         ];
         el.innerHTML = channels.map(function(ch) {
-          return '<a class="channel-item" href="' + ch.id + '.html">' +
+          return '<a class="p-neighbor" href="' + ch.id + '.html">' +
             '<span class="ch-icon">' + ch.icon + '</span>' +
             '<span class="ch-name">' + ch.name + '</span></a>';
         }).join('');

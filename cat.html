@@ -15,16 +15,16 @@
   <link rel="canonical" href="https://www.ihangzhou.net/cat.html">
   <link rel="manifest" href="manifest.json">
   <title>iHangzhou · 杭州生活栏目</title>
-  <link rel="stylesheet" href="css/style.css?v=20261013c">
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
   <link rel="icon" type="image/png" href="images/logo-mark-96.png">
   <link rel="apple-touch-icon" href="images/logo-mark-192.png">
-  <script src="js/layout.js"></script>
+  <script src="js/layout.js?v=20261016e"></script>
   <script>
     window.IHZ_PAGE = { title: '杭州栏目', icon: '🧭' };
     window.IZ_SKIP_APP_THEME = true;
     window.IZ_SKIP_APP_INIT = true;
   </script>
-</head>
+<style>:root{--primary:#1f7a5a;--primary-dark:#15603f}</style></head>
 
 <body>
   <div class="page active" id="pageCat">
@@ -55,7 +55,7 @@
   </div>
 
   <script src="js/cat-data.js?v=20261013c"></script>
-  <script src="js/app.js?v=20261013c"></script>
+  <script src="js/app.js?v=20261016e"></script>
   <script src="js/analytics.js?v=20261013c"></script>
   <script>
     /* 统一布局（页头 / 页脚导航）——与 travel / banshi 等页一致 */
@@ -128,21 +128,21 @@
       if (third) {
         document.title = third[1] + ' · ' + sub.n + ' · ' + cat.n + ' · iHangzhou';
         hero.innerHTML =
-          '<div class="ch-badge">' + sub.ic + ' ' + esc(sub.n) + '</div>' +
+          '<div class="cat-hero-inner"><div class="ch-badge">' + sub.ic + ' ' + esc(sub.n) + '</div>' +
           '<h1>' + third[0] + ' ' + esc(third[1]) + '</h1>' +
-          '<p>「' + esc(third[1]) + '」相关攻略、入口与文章，隶属于「' + esc(cat.n) + ' · ' + esc(sub.n) + '」。</p>';
+          '<p>「' + esc(third[1]) + '」相关攻略、入口与文章，隶属于「' + esc(cat.n) + ' · ' + esc(sub.n) + '」。</p></div>';
       } else if (sub) {
         document.title = sub.n + ' · ' + cat.n + ' · iHangzhou';
         hero.innerHTML =
-          '<div class="ch-badge">' + cat.ic + ' ' + esc(cat.n) + '</div>' +
+          '<div class="cat-hero-inner"><div class="ch-badge">' + cat.ic + ' ' + esc(cat.n) + '</div>' +
           '<h1>' + sub.ic + ' ' + esc(sub.n) + '</h1>' +
-          '<p>' + esc(sub.i) + '</p>';
+          '<p>' + esc(sub.i) + '</p></div>';
       } else {
         document.title = cat.n + ' · iHangzhou';
         hero.innerHTML =
-          '<div class="ch-badge">🧭 栏目导航</div>' +
+          '<div class="cat-hero-inner"><div class="ch-badge">🧭 栏目导航</div>' +
           '<h1>' + cat.ic + ' ' + esc(cat.n) + '</h1>' +
-          '<p>' + esc(cat.i) + '</p>';
+          '<p>' + esc(cat.i) + '</p></div>';
       }
 
       var body = $('catBody');
@@ -203,8 +203,20 @@
       function renderThirdPage() {
         var dest = third[2] || '';
         // 若三级目标只是笼统的栏目主页（如 banshi.html），降级为按三级名搜索文章，避免「点哪个都回同一个页」
-        if (dest && dest === cat.home) {
+        if (dest && !/[?&]id=/i.test(dest) && dest === cat.home) {
           dest = 'articles.html?q=' + encodeURIComponent(third[1]);
+        }
+        // 站内栏目页（如 life.html）但无 id 参数 → 自动附加 ?q= 让目标页按名筛选
+        if (dest && !/^#act:|^https?:|\?/.test(dest)) {
+          var knownFilterPages = ['life.html','scenic.html','temple.html','chaguan.html','tea.html',
+            'coffee.html','dessert.html','night-market.html','laozihao.html','zhoumo.html','route.html',
+            'food.html','hangbang.html','museum.html','gujian.html','intangible.html','tushuguan.html',
+            'breakfast.html','street.html','history.html','traffic.html','internet.html','celebrity.html',
+            'zhaopin.html','around.html','place.html','banshi.html'];
+          var destBase = dest.split('?')[0];
+          if (knownFilterPages.indexOf(destBase) >= 0) {
+            dest = destBase + '?q=' + encodeURIComponent(third[1]);
+          }
         }
         var html = '';
 
