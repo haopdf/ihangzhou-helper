@@ -48,6 +48,12 @@
     .place-loading { text-align: center; padding: 80px 16px; color: var(--text-muted); }
     .place-error { text-align: center; padding: 60px 16px; }
     .place-error h1 { font-size: 20px; color: var(--text); margin-bottom: 8px; }
+    /* 面包屑导航：与全站 detail 页（文章 / 频道）一致 */
+    .place-crumb { font-size: 12px; color: var(--text-muted); padding: 10px var(--gutter, 16px); background: var(--bg-alt); display: flex; flex-wrap: wrap; align-items: center; }
+    .place-crumb a { color: var(--primary); text-decoration: none; }
+    .place-crumb a:hover { text-decoration: underline; }
+    .place-crumb .pc-sep { margin: 0 6px; color: var(--border); }
+    .place-crumb b { color: var(--text); font-weight: 700; }
   </style>
 </head>
 <body>
@@ -76,8 +82,9 @@
       }
       function renderPlace(place) {
         var c = document.getElementById('placeContainer');
+        var crumb = '<nav class="place-crumb"><a href="index.html">首页</a><span class="pc-sep">›</span><span>杭州地点</span><span class="pc-sep">›</span><b>' + (place ? place.name : '未找到') + '</b></nav>';
         if (!place) {
-          c.innerHTML = '<div class="place-error"><h1>未找到地点</h1><p><a href="index.html">返回首页</a></p></div>';
+          c.innerHTML = crumb + '<div class="place-error"><h1>未找到地点</h1><p><a href="index.html">返回首页</a></p></div>';
           return;
         }
         var heroImg = place.image || place.cover || '';
@@ -91,7 +98,7 @@
         if (place.price) metaRows.push('<div class="place-meta-row"><span class="mi">💰</span><span>' + place.price + '</span></div>');
         if (place.rating) metaRows.push('<div class="place-meta-row"><span class="mi">⭐</span><span>评分 <strong>' + place.rating + '</strong></span></div>');
 
-        var html = '';
+        var html = crumb;
         if (heroImg) {
           html += '<div class="place-hero"><img src="' + heroImg + '" alt="' + place.name + '"><div class="place-hero-overlay"><h1>' + place.name + '</h1>' + tags + '</div></div>';
         } else {
