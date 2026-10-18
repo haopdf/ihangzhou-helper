@@ -8,6 +8,7 @@
   <meta name="description" content="杭州龙井茶文化：狮峰龙井、龙坞茶村、梅家坞、径山茶宴、满觉陇桂花茶，名茶产区与品鉴指南">
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
   <script src="js/tea-data.js"></script>
   <style>
 :root{--primary:#16a34a;--primary-dark:#15803d;}
@@ -77,6 +78,7 @@
       if(nb.length){h+='<div class="p-neighbors"><h3>� 更多茶产区</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.TEA_DATA[k];h+='<a class="p-neighbor" href="tea.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=tea" style="flex:1;text-align:center;padding:12px;background:#16a34a;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 茶文化频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
       h+='</div>';c.innerHTML=h;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderTea(decodeURIComponent(id))})();
   </script>

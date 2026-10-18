@@ -13,6 +13,7 @@
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
   <style>
     .place-hero { position: relative; height: 220px; overflow: hidden; background: var(--primary); }
@@ -82,9 +83,9 @@
       }
       function renderPlace(place) {
         var c = document.getElementById('placeContainer');
-        var crumb = '<nav class="place-crumb"><a href="index.html">首页</a><span class="pc-sep">›</span><span>杭州地点</span><span class="pc-sep">›</span><b>' + (place ? place.name : '未找到') + '</b></nav>';
+                // 面包屑改由 IHZW.breadcrumbHTML 统一渲染（见下方调用）
         if (!place) {
-          c.innerHTML = crumb + '<div class="place-error"><h1>未找到地点</h1><p><a href="index.html">返回首页</a></p></div>';
+          c.innerHTML = (window.IHZW?IHZW.breadcrumbHTML('杭州地点','未找到'):'') + '<div class="place-error"><h1>未找到地点</h1><p><a href="index.html">返回首页</a></p></div>';
           return;
         }
         var heroImg = place.image || place.cover || '';
@@ -98,7 +99,7 @@
         if (place.price) metaRows.push('<div class="place-meta-row"><span class="mi">💰</span><span>' + place.price + '</span></div>');
         if (place.rating) metaRows.push('<div class="place-meta-row"><span class="mi">⭐</span><span>评分 <strong>' + place.rating + '</strong></span></div>');
 
-        var html = crumb;
+        var html = (window.IHZW?IHZW.breadcrumbHTML('杭州地点', place.name):'');
         if (heroImg) {
           html += '<div class="place-hero"><img src="' + heroImg + '" alt="' + place.name + '"><div class="place-hero-overlay"><h1>' + place.name + '</h1>' + tags + '</div></div>';
         } else {

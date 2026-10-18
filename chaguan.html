@@ -8,6 +8,7 @@
   <meta name="description" content="杭州茶馆：龙井问茶、翁家山、湖畔居、河坊品茗、运河茶馆，品茶赏景好去处">
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
   <script src="js/chaguan-data.js"></script>
   <style>
 :root{--primary:#a16207;--primary-dark:#854d0e;}
@@ -67,6 +68,7 @@
       if(nb.length){h+='<div class="p-neighbors"><h3>� 更多茶馆</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.CHAGUAN_DATA[k];h+='<a class="p-neighbor" href="chaguan.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=tea&s=%E8%8C%B6%E9%A6%86" style="flex:1;text-align:center;padding:12px;background:#a16207;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 茶馆频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
       h+='</div>';c.innerHTML=h;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderCg(decodeURIComponent(id))})();
   </script>

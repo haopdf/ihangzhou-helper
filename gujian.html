@@ -8,6 +8,7 @@
   <meta name="description" content="杭州古镇古建：胡雪�故居、刘庄、郭庄、六和塔、保�塔、天宁寺、西溪南�止、西湖宾馆，古建筑文化之旅">
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
   <script src="js/gujian-data.js"></script>
   <style>:root{--primary:#0ea5e9;--primary-dark:#0369a1;}
 
@@ -66,6 +67,7 @@
       if(nb.length){h+='<div class="p-neighbors"><h3>🏯 更多古建</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.GUJIAN_DATA[k];h+='<a class="p-neighbor" href="gujian.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=culture&s=%E5%8F%A4%E9%95%87%E5%8F%A4%E5%BB%BA" style="flex:1;text-align:center;padding:12px;background:#7c2d12;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 古建频道</a><a href="museum.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">文化首页</a></div>';
       h+='</div>';c.innerHTML=h;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderGj(decodeURIComponent(id))})();
   </script>

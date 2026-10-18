@@ -13,6 +13,7 @@
   <link rel="canonical" href="https://www.ihangzhou.net/district.html">
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
   <style>
 :root{--primary:#0ea5e9;--primary-dark:#0369a1;}
     /* 区县列表页专属样式 */
@@ -796,7 +797,8 @@
           }) +
           '<\/script>' +
         '</div>';
-      document.getElementById('listView').style.display = 'none';
+            if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(view,'杭州区县',(d&&d.name)||'杭州');
+document.getElementById('listView').style.display = 'none';
       view.style.display = 'block';
       window.scrollTo(0, 0);
     }

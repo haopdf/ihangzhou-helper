@@ -7,6 +7,7 @@
   <title>周末休闲 · iHangzhou</title>
   <link rel="stylesheet" href="css/style.css?v=20261018e">
   <script src="js/layout.js?v=20261016e"></script>
+  <script src="js/breadcrumb.js?v=20261018f"></script>
 </head>
 <body>
   <script>
@@ -101,6 +102,7 @@
         html += '<a href="weekend.html" style="display:block;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;font-weight:500;margin-top:12px;">← 返回全部活动</a>';
         html += '<a href="cat.html?c=weekend" style="display:block;text-align:center;padding:12px;background:var(--bg-alt);border-radius:24px;font-size:14px;text-decoration:none;color:var(--primary);font-weight:500;margin-top:8px;">← 周末频道</a>';
         grid.innerHTML = html;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(grid,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
       }
       var relatedEl = document.getElementById('relatedChannels');
       if (relatedEl) {
