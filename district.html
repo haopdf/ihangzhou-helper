@@ -11,9 +11,9 @@
   <meta property="og:description" content="杭州全部 13 个区县概况/景点/政务/特色一站式查询">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://www.ihangzhou.net/district.html">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <style>
 :root{--primary:#0ea5e9;--primary-dark:#0369a1;}
     /* 区县列表页专属样式 */
@@ -81,6 +81,9 @@
       display: grid;
       gap: 12px;
     }
+    /* 列表卡片是多块级结构（标题行/标签/描述/信息行），必须保持块级堆叠；
+       channel.css .p-card{display:flex} 会把它排成一行导致桌面横向溢出 */
+    #districtList .p-card { display: block; }
 
     .p-card {
       background: var(--bg-card);
@@ -484,11 +487,11 @@
     }
     /* ========= 桌面端：区县详情页布局修正 ========= */
     @media (min-width: 1024px) {
-      /* Hero 圆角 + 居中 */
+      /* Hero 圆角 + 居中；margin:0 与面包屑底贴齐（food/travel 同标准） */
       #detailView .p-hero {
         border-radius: var(--radius-lg);
         max-width: 1180px;
-        margin: 16px auto 0;
+        margin: 0 auto;
         text-align: center;
       }
       /* 面积/人口/邮编/类型：横向排列 */
@@ -560,7 +563,7 @@
       }
     }
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
 </head>
 <body>
   <script>
@@ -570,6 +573,7 @@
 
   <!-- 列表视图 -->
   <div id="listView">
+    <nav class="site-breadcrumb"><a href="index.html">首页</a><span class="sb-sep">›</span><b>杭州区县</b></nav>
     <div class="district-hero">
       <h1>杭州 13 区县导航</h1>
       <p>10 区 · 1 县级市 · 2 县｜每个区县都有它的脾气</p>
@@ -597,8 +601,8 @@
   <!-- 详情视图 -->
   <div id="detailView" style="display:none"></div>
 
-  <script src="js/app.js?v=20261016e"></script>
-<script src="js/analytics.js?v=20260928c"></script>
+  <script src="js/app.js?v=20261018k"></script>
+<script src="js/analytics.js?v=20261018k"></script>
   <script>
     // 布局就绪后初始化区县切换器
     window.onIHZLayoutReady = function () {
@@ -748,18 +752,18 @@
       var newsHtml = extLink('https://www.baidu.com/s?wd=' + nameEnc + '+最新新闻', '📰', d.name + '新闻', '百度搜索最新资讯');
       var baiduBaike = extLink('https://baike.baidu.com/item/' + shortEnc, '📖', d.name + '百科', '百度百科词条');
       view.innerHTML =
-        '<div class="p-body">' +
-          '<div class="p-hero">' +
-            '<a class="p-back" href="district.html">← 返回列表</a>' +
-            '<h1 class="p-hero-title">' + d.name + '</h1>' +
-            '<div class="p-badge">' + d.tag + '</div>' +
-            '<div class="p-infogrid">' +
-              '<span class="p-inforow">📍 ' + d.area + '</span>' +
-              '<span class="p-inforow">👥 ' + d.population + '</span>' +
-              '<span class="p-inforow">📮 ' + d.postcode + '</span>' +
-              '<span class="p-inforow">' + d.type + '</span>' +
-            '</div>' +
+        '<div class="p-hero">' +
+          '<a class="p-back" href="district.html">← 返回列表</a>' +
+          '<h1 class="p-hero-title">' + d.name + '</h1>' +
+          '<div class="p-badge">' + d.tag + '</div>' +
+          '<div class="p-infogrid">' +
+            '<span class="p-inforow">📍 ' + d.area + '</span>' +
+            '<span class="p-inforow">👥 ' + d.population + '</span>' +
+            '<span class="p-inforow">📮 ' + d.postcode + '</span>' +
+            '<span class="p-inforow">' + d.type + '</span>' +
           '</div>' +
+        '</div>' +
+        '<div class="p-body">' +
           '<div class="p-section">' +
             '<h2>📖 区县概况</h2>' +
             '<div class="p-card-desc">' + d.desc + '</div>' +
@@ -797,7 +801,7 @@
           }) +
           '<\/script>' +
         '</div>';
-            if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(view,'杭州区县',(d&&d.name)||'杭州');
+            if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'杭州区县',(d&&d.name)||'杭州');
 document.getElementById('listView').style.display = 'none';
       view.style.display = 'block';
       window.scrollTo(0, 0);
@@ -819,6 +823,7 @@ document.getElementById('listView').style.display = 'none';
           document.getElementById('listView').style.display = 'none';
           document.getElementById('detailView').style.display = 'block';
           document.getElementById('detailView').innerHTML = '<div class="p-empty">未找到该区县，请返回列表选择</div>';
+          if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'杭州区县','未找到');
           return;
         }
       }

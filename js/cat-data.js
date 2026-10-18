@@ -77,7 +77,7 @@ window.CAT_DATA = [
         th: [
           ['🏠', '小河直街', 'xiangxiang.html?id=xiaoxi'], ['🛤️', '大兜路', 'xiangxiang.html?id=dadou'],
           ['⛰️', '馒头山', 'xiangxiang.html?id=mantou'], ['🏮', '河坊街', 'xiangxiang.html?id=hefang-street'],
-          ['🌳', '五柳巷', 'history.html'], ['�', '南宋御街', 'xiangxiang.html?id=zhedong'],
+          ['🌳', '五柳巷', 'history.html'], ['🏮', '南宋御街', 'xiangxiang.html?id=zhedong'],
           ['🌅', '北山街', 'xiangxiang.html?id=beishan'], ['🌊', '南山路', 'xiangxiang.html?id=nanshan']
         ],
         ft: [
@@ -380,14 +380,14 @@ window.CAT_DATA = [
         d: '古桥·古塔·古宅',
         i: '古桥、古塔、古宅，杭州散落各处的古建筑与打卡路线。',
         th: [
-          ['🌉', '古桥', 'gujian.html?id=six-he-six-go'], ['🗼', '古塔', 'gujian.html?id=six-he-six-go'],
+          ['🌉', '古桥', 'gujian.html?id=gongchen-bridge'], ['🗼', '古塔', 'gujian.html?id=six-he-six-go'],
           ['🏠', '古宅', 'gujian.html?id=hu-garden'], ['⛩️', '牌坊', 'gujian.html?id=hu-garden'],
           ['🏛️', '祠堂', 'gujian.html?id=tian-ning-temple'], ['📚', '书院', 'gujian.html?id=sixi-yin-cheng'],
           ['🎭', '戏台', 'gujian.html?id=jinjiang-hotel'], ['🏮', '牌楼', 'gujian.html?id=jinjiang-hotel']
         ],
         ft: [
-          ['🏯', '古建筑打卡路线', '散落各处的国保与省保', 'gujian.html?id=six-he-six-go'],
-          ['🌉', '拱宸桥', '运河终点的百年石拱', 'gujian.html?id=hu-garden'],
+          ['🏯', '古建筑打卡路线', '散落各处的国保与省保', 'gujian.html?id=gongchen-bridge'],
+          ['🌉', '拱宸桥', '运河终点的百年石拱', 'gujian.html?id=gongchen-bridge'],
           ['🗼', '六和塔', '钱塘江边的北宋巨塔', 'gujian.html?id=six-he-six-go']
         ],
         kw: ['古建', '古桥', '古塔', '拱宸桥', '六和塔']
@@ -1084,51 +1084,51 @@ window.CAT_DATA = [
     kw: ['生活', '消费', '租房', '房产', '商圈'],
     subs: [
       {
-        k: 'xiaofei', n: '消费优惠', ic: '💰', d: '消费券·�羊毛·以旧换新', i: '杭州定期发放消费券覆盖文旅商超餐饮，以旧换新补贴家电汽车。',
-        th: [['�', '消费券', 'life.html?id=xiaofei'], ['�️', '薅羊毛', 'life.html?id=xiaofei'], ['🔄', '以旧换新', 'life.html?id=xiaofei'], ['💴', '数字人民币', 'life.html?id=xiaofei'], ['�', '支付宝', 'life.html?id=xiaofei'], ['�️', '优惠券', 'life.html?id=xiaofei'], ['�', '福利活动', 'life.html?id=xiaofei'], ['💳', '信用卡活动', 'life.html?id=xiaofei']],
-        ft: [['�', '杭州消费券领取', '文旅/商超/支付宝搜索「杭州消费券」', 'life.html?id=xiaofei'], ['�', '以旧换新补贴', '家电/汽车置换最高补 15%', 'life.html?id=xiaofei']],
+        k: 'xiaofei', n: '消费优惠', ic: '💰', d: '消费券·薅羊毛·以旧换新', i: '杭州定期发放消费券覆盖文旅商超餐饮，以旧换新补贴家电汽车。',
+        th: [['🎫', '消费券', 'life.html?id=xiaofei'], ['✂️', '薅羊毛', 'life.html?id=xiaofei'], ['🔄', '以旧换新', 'life.html?id=xiaofei'], ['💴', '数字人民币', 'life.html?id=xiaofei'], ['💳', '支付宝', 'life.html?id=xiaofei'], ['🎟️', '优惠券', 'life.html?id=xiaofei'], ['🎁', '福利活动', 'life.html?id=xiaofei'], ['💳', '信用卡活动', 'life.html?id=xiaofei']],
+        ft: [['🎫', '杭州消费券领取', '文旅/商超/支付宝搜索「杭州消费券」', 'life.html?id=xiaofei'], ['🔁', '以旧换新补贴', '家电/汽车置换最高补 15%', 'life.html?id=xiaofei']],
         kw: ['消费券', '优惠', '以旧换新', '数字人民币']
       },
       {
         k: 'zufang', n: '租房攻略', ic: '🏠', d: '租金·合同·权益', i: '各区租金对比、租房合同注意事项、租房公积金提取。',
-        th: [['�️', '各区租金', 'life.html?id=zufang'], ['�', '租房合同', 'life.html?id=zufang'], ['💰', '公积金提取', 'life.html?id=zufang'], ['�', '合租', 'life.html?id=zufang'], ['�', '人才公寓', 'life.html?id=zufang'], ['�', '租房避坑', 'life.html?id=zufang'], ['📊', '租金走势', 'life.html?id=zufang'], ['🔒', '权益保障', 'life.html?id=zufang']],
+        th: [['🏘️', '各区租金', 'life.html?id=zufang'], ['📝', '租房合同', 'life.html?id=zufang'], ['💰', '公积金提取', 'life.html?id=zufang'], ['👥', '合租', 'life.html?id=zufang'], ['🏠', '人才公寓', 'life.html?id=zufang'], ['⚠️', '租房避坑', 'life.html?id=zufang'], ['📊', '租金走势', 'life.html?id=zufang'], ['🔒', '权益保障', 'life.html?id=zufang']],
         ft: [['🏠', '杭州各区租金对比', '链家租金地图实时查询', 'life.html?id=zufang'], ['💰', '公积金租房提取', '每月最高 1500 元', 'life.html?id=zufang']],
         kw: ['租房', '租金', '合同', '公积金']
       },
       {
         k: 'fangchan', n: '房产楼市', ic: '🏙️', d: '买房·卖房·过户', i: '新房摇号、二手房交易、房贷计算、税费明细。',
-        th: [['🏗️', '新房', 'life.html?id=fangchan'], ['�️', '二手房', 'life.html?id=fangchan'], ['�', '房贷计算', 'life.html?id=fangchan'], ['�', '税费', 'life.html?id=fangchan'], ['🔑', '过户', 'life.html?id=fangchan'], ['📈', '房价走势', 'life.html?id=fangchan'], ['�️', '满二唯一', 'life.html?id=fangchan'], ['�️', '限购政策', 'life.html?id=fangchan']],
+        th: [['🏗️', '新房', 'life.html?id=fangchan'], ['🏠', '二手房', 'life.html?id=fangchan'], ['🧮', '房贷计算', 'life.html?id=fangchan'], ['💰', '税费', 'life.html?id=fangchan'], ['🔑', '过户', 'life.html?id=fangchan'], ['📈', '房价走势', 'life.html?id=fangchan'], ['📜', '满二唯一', 'life.html?id=fangchan'], ['🚫', '限购政策', 'life.html?id=fangchan']],
         ft: [['🏙️', '杭州新房楼盘', '在售与摇号查询', 'life.html?id=fangchan'], ['📊', '房贷计算器', '月供与利息试算', 'life.html?id=fangchan']],
         kw: ['房产', '买房', '房贷', '房价']
       },
       {
         k: 'shangquan', n: '商圈购物', ic: '🛒', d: '武林·钱江新城·下沙', i: '杭州主要商圈导览、购物优惠、停车信息。',
-        th: [['🏛️', '武林商圈', 'life.html?id=shangquan'], ['�️', '钱江新城', 'life.html?id=shangquan'], ['�', '下沙商圈', 'life.html?id=shangquan'], ['�', '购物中心', 'life.html?id=shangquan'], ['�️', '美食街区', 'life.html?id=shangquan'], ['�️', '停车信息', 'life.html?id=shangquan'], ['🎬', '电影院', 'life.html?id=shangquan'], ['�', '娱乐休闲', 'life.html?id=shangquan']],
-        ft: [['🛒', '武林商圈', '杭州大厦/银泰/国大', 'life.html?id=shangquan'], ['�️', '钱江新城', '万象城/来福士/高德置地', 'life.html?id=shangquan']],
+        th: [['🏛️', '武林商圈', 'life.html?id=shangquan'], ['🏙️', '钱江新城', 'life.html?id=shangquan'], ['🏬', '下沙商圈', 'life.html?id=shangquan'], ['🛍️', '购物中心', 'life.html?id=shangquan'], ['🍜', '美食街区', 'life.html?id=shangquan'], ['🅿️', '停车信息', 'life.html?id=shangquan'], ['🎬', '电影院', 'life.html?id=shangquan'], ['🎮', '娱乐休闲', 'life.html?id=shangquan']],
+        ft: [['🛒', '武林商圈', '杭州大厦/银泰/国大', 'life.html?id=shangquan'], ['🏙️', '钱江新城', '万象城/来福士/高德置地', 'life.html?id=shangquan']],
         kw: ['商圈', '购物', '武林', '钱江']
       },
       {
         k: 'jiazhuang', n: '家装建材', ic: '🔨', d: '装修·家具·家电', i: '装修报价、家具家电购买、以旧换新。',
-        th: [['🔨', '装修', 'life.html?id=jiazhuang'], ['🛋️', '家具', 'life.html?id=jiazhuang'], ['�', '家电', 'life.html?id=jiazhuang'], ['�', '灯具', 'life.html?id=jiazhuang'], ['�', '建材市场', 'life.html?id=jiazhuang'], ['�', '设计公司', 'life.html?id=jiazhuang'], ['💰', '装修贷款', 'life.html?id=jiazhuang'], ['�', '装修日记', 'life.html?id=jiazhuang']],
+        th: [['🔨', '装修', 'life.html?id=jiazhuang'], ['🛋️', '家具', 'life.html?id=jiazhuang'], ['📺', '家电', 'life.html?id=jiazhuang'], ['💡', '灯具', 'life.html?id=jiazhuang'], ['🧱', '建材市场', 'life.html?id=jiazhuang'], ['📐', '设计公司', 'life.html?id=jiazhuang'], ['💰', '装修贷款', 'life.html?id=jiazhuang'], ['📓', '装修日记', 'life.html?id=jiazhuang']],
         ft: [['🔨', '装修报价', '土巴兔/齐家网对比', 'life.html?id=jiazhuang'], ['🛋️', '宜家家居', '杭宜家居(萧山)', 'life.html?id=jiazhuang']],
         kw: ['装修', '家装', '家具', '家电']
       },
       {
         k: 'shenghuo', n: '生活缴费', ic: '💡', d: '水电气暖', i: '水电气暖物业费缴纳，浙里办可查历史账单。',
-        th: [['�', '电费', 'life.html?id=shenghuo'], ['�', '水费', 'life.html?id=shenghuo'], ['🔥', '燃气', 'life.html?id=shenghuo'], ['�️', '供暖', 'life.html?id=shenghuo'], ['🏠', '物业费', 'life.html?id=shenghuo'], ['📱', '手机充值', 'life.html?id=shenghuo'], ['�', '加油充电', 'life.html?id=shenghuo'], ['📊', '账单查询', 'life.html?id=shenghuo']],
-        ft: [['�', '电费缴纳', '国家电网杭州客服', 'life.html?id=shenghuo'], ['�', '水费缴纳', '杭州水务在线缴费', 'life.html?id=shenghuo']],
+        th: [['⚡', '电费', 'life.html?id=shenghuo'], ['💧', '水费', 'life.html?id=shenghuo'], ['🔥', '燃气', 'life.html?id=shenghuo'], ['🔥', '供暖', 'life.html?id=shenghuo'], ['🏠', '物业费', 'life.html?id=shenghuo'], ['📱', '手机充值', 'life.html?id=shenghuo'], ['⛽', '加油充电', 'life.html?id=shenghuo'], ['📊', '账单查询', 'life.html?id=shenghuo']],
+        ft: [['⚡', '电费缴纳', '国家电网杭州客服', 'life.html?id=shenghuo'], ['💧', '水费缴纳', '杭州水务在线缴费', 'life.html?id=shenghuo']],
         kw: ['缴费', '电费', '水费', '燃气']
       },
       {
-        k: 'xiangqin', n: '相亲交友', ic: '�', d: '万松书院·本地圈子', i: '万松书院相亲角、本地豆瓣群、官方公益相亲活动。',
-        th: [['�', '万松书院', 'life.html?id=xiangqin'], ['👥', '本地圈子', 'life.html?id=xiangqin'], ['�', '相亲技巧', 'life.html?id=xiangqin'], ['🎯', '匹配活动', 'life.html?id=xiangqin'], ['�', '形象改造', 'life.html?id=xiangqin'], ['💌', '情书指南', 'life.html?id=xiangqin'], ['�', '同城活动', 'life.html?id=xiangqin'], ['📞', '红娘热线', 'life.html?id=xiangqin']],
-        ft: [['�', '万松书院相亲角', '每周六上午父母把关', 'life.html?id=xiangqin'], ['�', '同城活动', '豆瓣同城/贴吧聚会', 'life.html?id=xiangqin']],
+        k: 'xiangqin', n: '相亲交友', ic: '💘', d: '万松书院·本地圈子', i: '万松书院相亲角、本地豆瓣群、官方公益相亲活动。',
+        th: [['🌲', '万松书院', 'life.html?id=xiangqin'], ['👥', '本地圈子', 'life.html?id=xiangqin'], ['💡', '相亲技巧', 'life.html?id=xiangqin'], ['🎯', '匹配活动', 'life.html?id=xiangqin'], ['👔', '形象改造', 'life.html?id=xiangqin'], ['💌', '情书指南', 'life.html?id=xiangqin'], ['🎉', '同城活动', 'life.html?id=xiangqin'], ['📞', '红娘热线', 'life.html?id=xiangqin']],
+        ft: [['🌲', '万松书院相亲角', '每周六上午父母把关', 'life.html?id=xiangqin'], ['🎉', '同城活动', '豆瓣同城/贴吧聚会', 'life.html?id=xiangqin']],
         kw: ['相亲', '交友', '万松书院']
       },
       {
         k: 'jianshen', n: '运动健身', ic: '💪', d: '场馆·户外·赛事', i: '健身卡、户外运动、杭州马拉松、亚运场馆预约。',
-        th: [['💪', '健身房', 'life.html?id=jianshen'], ['🏃', '杭州马拉松', 'life.html?id=jianshen'], ['🏸', '球类场馆', 'life.html?id=jianshen'], ['�', '游泳', 'life.html?id=jianshen'], ['🚴', '户外运动', 'life.html?id=jianshen'], ['🏟️', '亚运场馆', 'life.html?id=jianshen'], ['�', '武术', 'life.html?id=jianshen'], ['🧘', '瑜伽', 'life.html?id=jianshen']],
-        ft: [['💪', '乐刻运动', '99 元/月全城通用', 'life.html?id=jianshen'], ['�', '杭州马拉松', '每年 11 月报名', 'life.html?id=jianshen']],
+        th: [['💪', '健身房', 'life.html?id=jianshen'], ['🏃', '杭州马拉松', 'life.html?id=jianshen'], ['🏸', '球类场馆', 'life.html?id=jianshen'], ['🏊', '游泳', 'life.html?id=jianshen'], ['🚴', '户外运动', 'life.html?id=jianshen'], ['🏟️', '亚运场馆', 'life.html?id=jianshen'], ['🥋', '武术', 'life.html?id=jianshen'], ['🧘', '瑜伽', 'life.html?id=jianshen']],
+        ft: [['💪', '乐刻运动', '99 元/月全城通用', 'life.html?id=jianshen'], ['🏃', '杭州马拉松', '每年 11 月报名', 'life.html?id=jianshen']],
         kw: ['健身', '运动', '马拉松', '场馆']
       }
     ]

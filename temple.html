@@ -6,9 +6,9 @@
   <title>杭州寺庙 · iHangzhou</title>
   <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州寺庙祈福指南：灵隐寺、净慈寺、径山寺、法喜寺、永福禅寺、韬光寺、香积寺">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <script src="js/temple-data.js"></script>
   <style>
 :root{--primary:#b45309;--primary-dark:#92400e;}
@@ -41,7 +41,7 @@
     .p-empty .p-hero-icon{font-size:64px;margin-bottom:16px}
     @media(min-width:768px){.p-hero{height:300px}.p-hero-inner{max-width:1180px;margin:0 auto}.p-body{max-width:1180px;margin:0 auto}}
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
 </head>
 <body>
   <script>
@@ -49,7 +49,7 @@
     window.IZ_SKIP_APP_INIT=true;
     window.IZ_SKIP_APP_THEME=true;
   </script>
-  <div id="templeContainer"><div class="p-empty"><div class="p-hero-icon">�️</div><h2>加载中...</h2></div></div>
+  <div id="templeContainer"><div class="p-empty"><div class="p-hero-icon">⛩️</div><h2>加载中...</h2></div></div>
   <script>
     function renderTemple(id){
       var data=window.TEMPLE_DATA?window.TEMPLE_DATA[id]:null;
@@ -58,6 +58,7 @@
       if(!data){
         c.innerHTML='<div class="p-empty"><div class="p-hero-icon">⛩️</div><h2>未找到该寺庙</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=culture&s=%E5%AF%BA%E5%BA%99" class="btn" style="display:inline-block;padding:10px 20px;background:#b45309;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">文博首页</a></div>';
         if(ht)ht.textContent='⛩️ 寺庙';
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'寺庙','未找到');
         return;
       }
       document.title=data.name+' · 寺庙 · iHangzhou';
@@ -81,13 +82,13 @@
       var keys=window.TEMPLE_DATA?Object.keys(window.TEMPLE_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
       if(nb.length){
-        h+='<div class="p-neighbors"><h3>�️ 更多寺庙</h3><div class="p-neighbor-grid">';
+        h+='<div class="p-neighbors"><h3>⛩️ 更多寺庙</h3><div class="p-neighbor-grid">';
         nb.forEach(function(k){var v=window.TEMPLE_DATA[k];h+='<a class="p-neighbor" href="temple.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});
         h+='</div></div>';
       }
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=culture&s=%E5%AF%BA%E5%BA%99" style="flex:1;text-align:center;padding:12px;background:#b45309;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 寺庙频道</a><a href="museum.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">文博首页</a></div>';
       h+='</div>';c.innerHTML=h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'寺庙',data.name);
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderTemple(decodeURIComponent(id))})();
   </script>

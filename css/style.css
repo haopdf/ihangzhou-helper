@@ -3102,6 +3102,20 @@ border-radius: 14px;
 .city-dropdown-item.active { color: var(--primary); font-weight: 700; background: var(--bg-hover); }
 .city-dropdown-item .cd-dist { font-size: 11px; color: var(--text-muted); font-weight: 400; opacity: 0.75; }
 
+/* 区县下拉内嵌到「设置」面板时改为静态块（不再绝对定位浮层） */
+.city-dropdown--inline {
+  position: static;
+  display: block;
+  top: auto; left: auto; right: auto;
+  min-width: 0;
+  width: 100%;
+  max-height: none;
+  box-shadow: none;
+  margin-top: 10px;
+  border: 1px solid var(--border-light);
+}
+.city-dropdown--inline .city-dropdown-title { display: none; }
+
 /* ===== 便民服务分区卡片 ===== */
 .bf-modules {
   padding: 0 14px;
@@ -3947,7 +3961,7 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
 }
   .travel-hero.ch-hero {
     max-width: 1180px;
-    margin: 12px auto 0;
+    margin: 0 auto;
     padding: 22px 20px 18px;
   }
 }

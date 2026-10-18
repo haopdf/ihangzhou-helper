@@ -15,21 +15,30 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
-  function html(channelTitle, currentTitle, bleed) {
+  /* 栏目级链接：默认链回当前页（本站详情页与频道页同文件，去掉 ?id= 即频道列表） */
+  function defaultChannelHref() {
+    var p = (location.pathname || '').split('/').pop() || '';
+    return p || 'index.html';
+  }
+  function html(channelTitle, currentTitle, bleed, channelHref) {
     var m = bleed ? ' style="margin:-16px -16px 0"' : '';
+    var href = (channelHref === undefined || channelHref === null) ? defaultChannelHref() : channelHref;
+    var ch = href
+      ? '<a href="' + esc(href) + '">' + esc(channelTitle) + '</a>'
+      : '<span>' + esc(channelTitle) + '</span>';
     return '<nav class="site-breadcrumb"' + m + '>' +
       '<a href="index.html">首页</a>' +
       '<span class="sb-sep">›</span>' +
-      '<span>' + esc(channelTitle) + '</span>' +
+      ch +
       '<span class="sb-sep">›</span>' +
       '<b>' + esc(currentTitle) + '</b></nav>';
   }
   window.IHZW = window.IHZW || {};
   window.IHZW.breadcrumbHTML = html;
-  window.IHZW.prependCrumb = function (container, channelTitle, currentTitle, bleed) {
+  window.IHZW.prependCrumb = function (container, channelTitle, currentTitle, bleed, channelHref) {
     if (!container) return;
     var wrap = document.createElement('div');
-    wrap.innerHTML = html(channelTitle, currentTitle, bleed);
+    wrap.innerHTML = html(channelTitle, currentTitle, bleed, channelHref);
     container.insertBefore(wrap.firstChild, container.firstChild);
   };
 })();

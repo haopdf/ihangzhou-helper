@@ -6,8 +6,9 @@
   <title>杭帮菜 · iHangzhou</title>
   <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭帮菜经典名菜大全：西湖醋鱼、龙井虾仁、东坡肉、宋嫂鱼羹、叫花鸡、干炸响铃，正宗老店推荐与菜品文化">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <script src="js/hangbang-data.js"></script>
   <style>
 :root{--primary:#d98324;--primary-dark:#b45309;}
@@ -79,10 +80,10 @@
     .p-empty h2 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
     @media (min-width: 768px) {
       .p-hero { height: 300px; }
-      .p-body { max-width: 720px; margin: 0 auto; }
+      .p-body { max-width: 1180px; margin: 0 auto; }
     }
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
 </head>
 <body>
   <script>
@@ -99,6 +100,22 @@
   </div>
 
   <script>
+
+    /* 列表视图：无 id 时渲染（面包屑栏目级默认链回本页 = 列表） */
+    function renderHangbangList() {
+      var container = document.getElementById('hangbangContainer');
+      var headerTitle = document.getElementById('headerTitle');
+      var keys = window.HANGBANG_DISHES ? Object.keys(window.HANGBANG_DISHES) : [];
+      document.title = '杭帮菜 · iHangzhou';
+      if (headerTitle) headerTitle.textContent = '🥢 杭帮菜';
+      var cards = keys.map(function (k) {
+        var v = window.HANGBANG_DISHES[k];
+        var ic = (v.badge || '').split(' ')[0] || '🥢';
+        return '<a class="p-card" href="hangbang.html?id=' + k + '"><span class="p-card-ico">' + ic + '</span><div><div class="p-card-name">' + v.name + '</div><div class="p-card-desc">' + v.subtitle + '</div></div></a>';
+      }).join('');
+      container.innerHTML = '<div class="p-hero"><div class="p-hero-inner-bar"><div class="p-hero-title">杭帮菜</div><div class="p-hero-sub">西湖醋鱼 · 龙井虾仁 · 东坡肉 · 叫化童鸡…' + keys.length + ' 道一站看全</div></div></div><div class="p-card-grid">' + cards + '</div>';
+      if (window.IHZW && IHZW.prependCrumb) IHZW.prependCrumb(document.body, '杭帮菜', '全部杭帮菜');
+    }
     function renderHangbang(id) {
       var data = window.HANGBANG_DISHES ? window.HANGBANG_DISHES[id] : null;
       var container = document.getElementById('hangbangContainer');
@@ -113,6 +130,7 @@
           '<a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px;">\u7f8e\u98df\u9996\u9875</a>' +
           '</div>';
         if (headerTitle) headerTitle.textContent = '\ud83e\udd62 \u676d\u5e72\u83dc';
+        if (window.IHZW && IHZW.prependCrumb) IHZW.prependCrumb(document.body, '\u676d\u5e72\u83dc', '\u672a\u627e\u5230');
         return;
       }
 
@@ -187,12 +205,13 @@
 
       html += '</div>';
       container.innerHTML = html;
+      if (window.IHZW && IHZW.prependCrumb) IHZW.prependCrumb(document.body, '杭帮菜', data.name);
     }
 
     (function () {
       var id = location.search.split('id=')[1] || '';
       id = id.split('&')[0];
-      renderHangbang(decodeURIComponent(id));
+      if (!id) { renderHangbangList(); } else { renderHangbang(decodeURIComponent(id)); }
     })();
   </script>
   <script>

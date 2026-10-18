@@ -216,7 +216,24 @@
   padding-left: var(--gutter, 16px) !important;
   padding-right: var(--gutter, 16px) !important;
 }
+/* 桌面端内容列贴齐 1180：与首页 #pageHome .content{padding:0} 同标准，
+   .p-body 不再留 16px 左右 gutter（否则 hero 1180 / 内容 1148 视觉错位） */
+@media (min-width: 1024px) {
+  .p-body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
 .p-neighbors {
   padding-left: var(--gutter, 16px) !important;
   padding-right: var(--gutter, 16px) !important;
+}
+
+/* ── 列表视图（详情页无 id 时的频道汇总页）：hero + 卡片网格 ── */
+.p-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 16px; }
+@media (min-width: 768px) {
+  .p-card-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+}
+@media (min-width: 1024px) {
+  .p-card-grid { padding: 16px 0; }
 }

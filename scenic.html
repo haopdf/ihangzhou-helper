@@ -7,9 +7,9 @@
   <meta name="keywords" content="杭州景点,西湖十景,灵隐寺,孤山,三潭印月">
   <meta name="theme-color" content="#1565c0">
   <title>景区指南 · iHangzhou 杭州生活助手</title>
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <style>
     .p-name{font-size:28px;font-weight:700;color:#0d47a1;margin:2px 0 4px}
     .p-name-sub{font-size:15px;color:#1565c0;margin-bottom:12px}
@@ -25,7 +25,15 @@
     .p-tip{background:#fff8e1;border-left:4px solid #ffa726;padding:10px 14px;font-size:13px;color:#f57f17;margin:0 16px 8px;border-radius:0 8px 8px 0}
     .p-back{display:block;text-align:center;padding:12px;background:#1565c0;color:#fff;border-radius:24px;font-size:14px;text-decoration:none;max-width:180px;margin:16px auto}
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
+<style>
+  /* 详情内容容器：移动 16px gutter；桌面贴齐 1180（与首页同标准） */
+  #scenicContent{padding:16px}
+  @media (min-width:1024px){
+    #scenicContent{padding:16px 0}
+    .p-section{margin-left:0;margin-right:0}
+  }
+</style>
 </head>
 <body>
   <script>
@@ -35,9 +43,7 @@
   </script>
 
   <div class="page active" id="pageChannel">
-    <div class="channel-header" id="channelHeader"></div>
-    <div class="channel-desc" id="channelDesc"></div>
-    <div id="scenicContent" style="padding:16px;"></div>
+    <div id="scenicContent"></div>
     <div style="text-align:center;padding:24px 16px 48px">
       <a href="index.html" class="p-back">← 返回首页</a>
     </div>
@@ -45,13 +51,29 @@
 
   <script src="js/scenic-data.js"></script>
   <script>
+    /* 列表视图：无 id 时渲染（面包屑栏目级默认链回本页 = 列表） */
+    function renderScenicList(){
+      var c=document.getElementById('scenicContent');
+      if(!c)return;
+      var keys=window.SCENIC_DATA?Object.keys(window.SCENIC_DATA):[];
+      var ht=document.getElementById('headerTitle');
+      document.title='景区指南 · iHangzhou';
+      if(ht)ht.textContent='🏛️ 景区指南';
+      c.style.padding='0';
+      var cards=keys.map(function(k){var v=window.SCENIC_DATA[k];
+        return '<a class="p-card" href="scenic.html?id='+k+'"><span class="p-card-ico">🏛️</span><div><div class="p-card-name">'+v.name+'</div><div class="p-card-desc">'+(v.subtitle||'')+'</div></div></a>';
+      }).join('');
+      c.innerHTML='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">景区指南</div><div class="p-hero-sub">西湖十景 · 灵隐寺 · 孤山 · 河坊街 · 龙井问茶…'+keys.length+' 处一站看全</div></div></div><div class="p-card-grid">'+cards+'</div>';
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'景区指南','全部景区');
+    }
     function renderScenic(id){
       var c = document.getElementById('scenicContent');
       if (!c) return;
       var data = window.SCENIC_DATA ? window.SCENIC_DATA[id] : null;
       var keys = window.SCENIC_DATA ? Object.keys(window.SCENIC_DATA) : [];
       if (!data) {
-        c.innerHTML = '<div class="p-section" style="text-align:center;color:#999">没有找到相关景区信息<br><br><a href="scenic.html" style="color:#1565c0">← 返回景区首页</a></div>';
+        c.innerHTML = '<div class="p-section" style="text-align:center;color:#999">没有找到相关景区信息<br><br><a href="scenic.html" style="color:#1565c0">← 返回景区列表</a></div>';
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'景区指南','未找到');
         return;
       }
       var h = '';
@@ -95,11 +117,11 @@
       }
       h += '<a href="cat.html?c=travel" style="display:block;text-align:center;padding:14px;background:#1565c0;color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:600;margin:12px 16px">← 旅游频道</a>';
       c.innerHTML = h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情',true);
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'景区指南',data.name);
     }
     (function(){
       var id = (location.search.split('id=')[1] || '').split('&')[0];
-      renderScenic(decodeURIComponent(id));
+      if(!id){renderScenicList()}else{renderScenic(decodeURIComponent(id))}
     })();
   </script>
   <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>

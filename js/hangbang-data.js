@@ -24,7 +24,7 @@ window.HANGBANG_DISHES = {
   'longjing-xiaren': {
     name: '龙井虾仁',
     nameAlt: '龙井茶香配河虾仁',
-    subtitle: '茶�一绝 · 清明前最佳',
+    subtitle: '茶中一绝 · 清明前最佳',
     badge: '🦐 时令名菜',
     imageFallback: true,
     history: '相传清代乾隆帝下江南时品尝后赞不绝口。以龙井新茶配西湖河虾，清明前后茶叶最为鲜嫩，此时制作的龙井虾仁品质最佳。',
@@ -46,7 +46,7 @@ window.HANGBANG_DISHES = {
   'dongporou': {
     name: '东坡肉',
     subtitle: '苏东坡发明的千年名菜',
-    badge: '� 历史名菜',
+    badge: '📜 历史名菜',
     imageFallback: true,
     history: '北宋熙宁十年（1077），苏轼任杭州知州，疏浚西湖，百姓送猪慰劳。苏轼命人按家乡眉山之法烹制，"慢著火，少著水"，回赠民工。此菜遂称"东坡肉"。',
     features: [
@@ -153,7 +153,7 @@ window.HANGBANG_DISHES = {
     subtitle: '金华火腿登大雅之堂',
     badge: '🍯 席面大菜',
     imageFallback: true,
-    history: '"火方"为火腿上方，杭州地处浙中，多用金华火腿入�。蜜汁火方以冰糖反复蒸制，冰糖渗入火腿，甜咸交融。',
+    history: '"火方"为火腿上方，杭州地处浙中，多用金华火腿入味。蜜汁火方以冰糖反复蒸制，冰糖渗入火腿，甜咸交融。',
     features: [
       '选用金华火腿最嫩的"上方"',
       '切成大块，以冰糖和水蒸制',

@@ -7,41 +7,64 @@
   <meta name="keywords" content="杭州博物馆,浙江省博物馆,丝绸博物馆,茶叶博物馆">
   <meta name="theme-color" content="#1f7a5a">
   <title>博物馆指南 - iHangzhou</title>
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
-  
-<style>:root{--primary:#4338ca;--primary-dark:#312e81}</style><link rel="stylesheet" href="css/channel.css?v=20261018a">
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
+
+<style>:root{--primary:#4338ca;--primary-dark:#312e81}</style><link rel="stylesheet" href="css/channel.css?v=20261018k">
+<style>
+  /* 详情内容容器：移动 16px gutter；桌面贴齐 1180（与首页同标准） */
+  #detailContent{padding:16px}
+  @media (min-width:1024px){
+    #detailContent{padding:16px 0}
+    .mu-sec{margin-left:0;margin-right:0}
+  }
+</style>
 </head>
 <body>
   <script>
-    window.IHZ_PAGE = { title: "博物馆指南", icon: "�️", channelId: "museum" };
+    window.IHZ_PAGE = { title: "博物馆指南", icon: "🏛️", channelId: "museum" };
     window.IZ_SKIP_APP_INIT = true;
     window.IZ_SKIP_APP_THEME = true;
   </script>
   <div class="page active" id="pageChannel">
-    <div id="detailContent" style="padding:16px;"></div>
+    <div id="detailContent"></div>
     <div style="text-align:center;padding:24px 16px 48px">
       <a href="index.html" class="mu-bk">← 返回首页</a>
     </div>
   </div>
   <script src="js/museum-data.js"></script>
   <script>
+    /* 列表视图：无 id 时渲染（面包屑栏目级默认链回本页 = 列表） */
+    function renderMuseumList(){
+      var c=document.getElementById('detailContent');
+      if(!c)return;
+      var keys=window.MUSEUM_DATA?Object.keys(window.MUSEUM_DATA):[];
+      var ht=document.getElementById('headerTitle');
+      document.title='博物馆指南 · iHangzhou';
+      if(ht)ht.textContent='🏛️ 博物馆指南';
+      c.style.padding='0';
+      var cards=keys.map(function(k){var v=window.MUSEUM_DATA[k];
+        return '<a class="p-card" href="museum.html?id='+k+'"><span class="p-card-ico">🏛️</span><div><div class="p-card-name">'+v.name+'</div><div class="p-card-desc">'+v.subtitle+'</div></div></a>';
+      }).join('');
+      c.innerHTML='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">博物馆指南</div><div class="p-hero-sub">浙江省博物馆 · 杭州博物馆 · 丝绸 · 茶叶 · 良渚…'+keys.length+' 馆一站看全</div></div></div><div class="p-card-grid">'+cards+'</div>';
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'博物馆指南','全部博物馆');
+    }
     function renderMuseum(id){
       var c=document.getElementById('detailContent');
       if(!c)return;
       var data=window.MUSEUM_DATA?window.MUSEUM_DATA[id]:null;
-      var keys=window.MUSEUM_DATA?Object.keys(window.MUSEUM_DATA):[];
       if(!data){
-        c.innerHTML='<div style="text-align:center;padding:40px 20px;color:#999">没有找到相关信息<br><br><a href="museum.html" style="color:var(--primary)">← 返回博物馆首页</a></div>';
+        c.innerHTML='<div style="text-align:center;padding:40px 20px;color:#999">没有找到相关信息<br><br><a href="museum.html" style="color:var(--primary)">← 返回博物馆列表</a></div>';
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'博物馆指南','未找到');
         return;
       }
       var nameStr = data.name;
       var h='';
-      h+='<span class="mu-cr">�️ 博物馆</span>';
+      h+='<span class="mu-cr">🏛️ 博物馆</span>';
       h+='<div class="mu-h">'+nameStr+'</div>';
       h+='<div class="mu-s">'+(data.subtitle||'')+'</div>';
-      if(data.open_time) h+='<div style="background:var(--primary-100);border-radius:10px;padding:10px 14px;margin:8px 16px;font-size:13px;color:var(--primary-dark)">� 开放时间：'+data.open_time+'</div>';
+      if(data.open_time) h+='<div style="background:var(--primary-100);border-radius:10px;padding:10px 14px;margin:8px 16px;font-size:13px;color:var(--primary-dark)">🕐 开放时间：'+data.open_time+'</div>';
       if(data.history){
         h+='<div class="mu-sec"><h3>🏛️ 博物馆介绍</h3><div style="font-size:14px;color:#444;line-height:1.8">'+data.history+'</div></div>';
       }
@@ -50,10 +73,10 @@
         for(var i=0;i<data.features.length;i++){h+='<span class="mu-fg">'+data.features[i]+'</span>'}
         h+='</div></div>';
       }
-      if(data.shops&&data.shops.length){
+      if(data.spots&&data.spots.length){
         h+='<div class="mu-sec"><h3>📍 场馆信息</h3>';
-        for(var i=0;i<data.shops.length;i++){
-          var s=data.shops[i];
+        for(var i=0;i<data.spots.length;i++){
+          var s=data.spots[i];
           h+='<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f5f5f5">';
           h+='<div><div style="font-size:14px;font-weight:600">'+s.n+'</div>';
           if(s.a) h+='<div style="font-size:12px;color:#888;margin-top:2px">📍 '+s.a+'</div>';
@@ -62,15 +85,13 @@
         }
         h+='</div>';
       }
-      h+='<a href="cat.html?c=culture" style="display:block;text-align:center;padding:14px;background:var(--primary);color:#fff;border-radius:var(--radius-xl);text-decoration:none;font-size:14px;font-weight:600;margin:12px 16px">← 文博频道</a>';
+      h+='<a href="museum.html" style="display:block;text-align:center;padding:14px;background:var(--primary);color:#fff;border-radius:var(--radius-xl);text-decoration:none;font-size:14px;font-weight:600;margin:12px 16px">← 返回博物馆列表</a>';
       c.innerHTML=h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情',true);
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'博物馆指南',data.name);
     }
     (function(){
       var id=(location.search.split('id=')[1]||'').split('&')[0];
-      if(window.MUSEUM_DATA&&Object.keys(window.MUSEUM_DATA).length>0&&id){
-        renderMuseum(decodeURIComponent(id));
-      }
+      if(!id){renderMuseumList()}else{renderMuseum(decodeURIComponent(id))}
     })();
   </script>
   <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>

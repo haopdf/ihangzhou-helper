@@ -6,9 +6,9 @@
   <title>路线攻略 · iHangzhou</title>
   <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州路线攻略：西湖一日游、灵隐两日游、千岛湖自驾、环湖骑行、山间徒步、摄影机位、杭黄高铁沿游、全景地图">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <script src="js/route-data.js"></script>
   <style>
 :root{--primary:#7c3aed;--primary-dark:#5b21b6;}
@@ -44,19 +44,20 @@
     .p-empty .p-hero-icon{font-size:64px;margin-bottom:16px}
     @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:720px;margin:0 auto}}
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
 </head>
 <body>
-  <script>window.IHZ_PAGE={title:'路线攻略',icon:'�️'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
-  <div id="routeContainer"><div class="p-empty"><div class="p-hero-icon">�</div><h2>加载中...</h2></div></div>
+  <script>window.IHZ_PAGE={title:'路线攻略',icon:'🗺️'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
+  <div id="routeContainer"><div class="p-empty"><div class="p-hero-icon">🗺️</div><h2>加载中...</h2></div></div>
   <script>
     function renderRoute(id){
       var data=window.ROUTE_DATA?window.ROUTE_DATA[id]:null;
       var c=document.getElementById('routeContainer');
       var ht=document.getElementById('headerTitle');
       if(!data){
-        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">�️</div><h2>未找到该路线</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=travel&s=%E8%B7%AF%E7%BA%BF%E6%94%BB%E7%95%A5" class="btn" style="display:inline-block;padding:10px 20px;background:#7c3aed;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回路线</a> <a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">旅游首页</a></div>';
+        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🗺️</div><h2>未找到该路线</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=travel&s=%E8%B7%AF%E7%BA%BF%E6%94%BB%E7%95%A5" class="btn" style="display:inline-block;padding:10px 20px;background:#7c3aed;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回路线</a> <a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">旅游首页</a></div>';
         if(ht)ht.textContent='🗺️ 路线攻略';
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'路线攻略','未找到');
         return;
       }
       document.title=data.name+' · 路线攻略 · iHangzhou';
@@ -72,7 +73,7 @@
       }
       if(data.history)h+='<div class="p-hist"><p>📜 '+data.history+'</p></div>';
       if(data.features&&data.features.length){h+='<div class="p-section"><h3>✨ 路线特点</h3><div class="p-feat">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
-      if(data.tips&&data.tips.length){h+='<div class="p-section"><h3>� 贴士</h3><div class="p-feat">';data.tips.forEach(function(t){h+='<span class="p-tip">'+t+'</span>'});h+='</div></div>';}
+      if(data.tips&&data.tips.length){h+='<div class="p-section"><h3>💡 贴士</h3><div class="p-feat">';data.tips.forEach(function(t){h+='<span class="p-tip">'+t+'</span>'});h+='</div></div>';}
       if(data.spots&&data.spots.length){h+='<div class="p-section"><h3>📍 途经点</h3><div class="p-cards">';data.spots.forEach(function(s){h+='<div class="p-inforow"><span class="p-ik">📍</span><div><div class="p-iv">'+s.n+'</div><div class="p-card-desc">'+s.d+'</div></div></div>'});h+='</div></div>';}
       if(data.guide)h+='<div class="p-section"><h3>📖 行程安排</h3><p class="p-infogrid">'+data.guide+'</p></div>';
       var keys=window.ROUTE_DATA?Object.keys(window.ROUTE_DATA):[];
@@ -80,7 +81,7 @@
       if(nb.length){h+='<div class="p-neighbors"><h3>🗺️ 更多路线</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.ROUTE_DATA[k];h+='<a class="p-neighbor" href="route.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=travel&s=%E8%B7%AF%E7%BA%BF%E6%94%BB%E7%95%A5" style="flex:1;text-align:center;padding:12px;background:#7c3aed;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 路线频道</a><a href="travel.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">旅游首页</a></div>';
       h+='</div>';c.innerHTML=h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(c,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'路线攻略',data.name);
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderRoute(decodeURIComponent(id))})();
   </script>

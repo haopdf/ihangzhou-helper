@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="杭州周末休闲指南">
   <title>周末休闲 · iHangzhou</title>
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
 </head>
 <body>
   <script>
@@ -22,7 +22,7 @@
       <div style="font-size:13px;opacity:0.9;margin-top:6px;">iHangzhou · 杭州生活助手</div>
     </div>
     <div style="padding:16px;background:var(--bg-card);margin:0 16px;border-radius:12px;font-size:14px;line-height:1.7;color:var(--text-secondary);">
-      🏕️ 露营 · 🌸 赏花 · ��亲子 · 🖼️ 展览 · 🎪 市集 · 🚴 骑行 · 🎤 演出 · 🎬 观影
+      🏕️ 露营 · 🌸 赏花 · 👨‍👩‍👧 亲子 · 🖼️ 展览 · 🎪 市集 · 🚴 骑行 · 🎤 演出 · 🎬 观影
     </div>
     <div class="content">
       <div class="section-head" style="margin-top:24px;">
@@ -63,12 +63,13 @@
             '<div class="sarrow">›</div></a>';
         }).join('');
       }
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'周末休闲','全部推荐');
       function renderDetail(data, id) {
         var header = document.getElementById('channelHeader');
         var titleEl = document.getElementById('channelTitle');
         var grid = document.getElementById('serviceGrid');
         var h = '<div style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:40px 16px 28px;text-align:center;">' +
-          '<span style="display:inline-block;padding:4px 12px;border-radius:8px;background:rgba(255,255,255,0.2);font-size:12px;margin-bottom:8px;font-weight:600;">' + (data.badge || '�') + '</span>' +
+          '<span style="display:inline-block;padding:4px 12px;border-radius:8px;background:rgba(255,255,255,0.2);font-size:12px;margin-bottom:8px;font-weight:600;">' + (data.badge || '🎉') + '</span>' +
           '<div style="font-size:32px;line-height:1;margin-bottom:6px;">' + (data.badge || '🎯') + '</div>' +
           '<h1 style="font-size:24px;font-weight:700;margin:0;">' + data.name + '</h1>' +
           '<div style="font-size:14px;opacity:0.9;margin-top:8px;">' + data.subtitle + '</div></div>';
@@ -102,7 +103,7 @@
         html += '<a href="weekend.html" style="display:block;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;font-weight:500;margin-top:12px;">← 返回全部活动</a>';
         html += '<a href="cat.html?c=weekend" style="display:block;text-align:center;padding:12px;background:var(--bg-alt);border-radius:24px;font-size:14px;text-decoration:none;color:var(--primary);font-weight:500;margin-top:8px;">← 周末频道</a>';
         grid.innerHTML = html;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(grid,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'周末休闲',(data&&(data.name||data.title))||'详情');
       }
       var relatedEl = document.getElementById('relatedChannels');
       if (relatedEl) {

@@ -6,9 +6,9 @@
   <title>杭州非遗 · iHangzhou</title>
   <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州非物质文化遗产大全：杭州评话、杭绣、张小泉剪刀、王星记扇子、西湖绸伞、越窑青瓷">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
-  <script src="js/breadcrumb.js?v=20261018f"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <script src="js/intangible-data.js"></script>
   <style>
 :root{--primary:#059669;--primary-dark:#065f46;}
@@ -41,9 +41,9 @@
     .p-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
     .p-empty .p-hero-icon { font-size: 64px; margin-bottom: 16px; }
     .p-empty h2 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
-    @media (min-width: 768px) { .p-hero { height: 300px; } .p-body { max-width: 720px; margin: 0 auto; } }
+    @media (min-width: 768px) { .p-hero { height: 300px; } .p-body { max-width: 1180px; margin: 0 auto; } }
   </style>
-<link rel="stylesheet" href="css/channel.css?v=20261018a">
+<link rel="stylesheet" href="css/channel.css?v=20261018k">
 </head>
 <body>
   <script>
@@ -55,6 +55,21 @@
     <div class="p-empty"><div class="p-hero-icon">\ud83c\udfad</div><h2>\u52a0\u8f7d\u4e2d...</h2></div>
   </div>
   <script>
+    /* 列表视图：无 id 时渲染（面包屑栏目级默认链回本页 = 列表） */
+    function renderIntangibleList() {
+      var container = document.getElementById('intangibleContainer');
+      var headerTitle = document.getElementById('headerTitle');
+      var keys = window.INTANGIBLE_ITEMS ? Object.keys(window.INTANGIBLE_ITEMS) : [];
+      document.title = '杭州非遗 · iHangzhou';
+      if (headerTitle) headerTitle.textContent = '🎭 杭州非遗';
+      var cards = keys.map(function (k) {
+        var v = window.INTANGIBLE_ITEMS[k];
+        var ic = (v.badge || '').split(' ')[0] || '🎭';
+        return '<a class="p-card" href="intangible.html?id=' + k + '"><span class="p-card-ico">' + ic + '</span><div><div class="p-card-name">' + v.name + '</div><div class="p-card-desc">' + v.subtitle + '</div></div></a>';
+      }).join('');
+      container.innerHTML = '<div class="p-hero"><div class="p-hero-inner-bar"><div class="p-hero-title">杭州非遗</div><div class="p-hero-sub">评话 · 杭绣 · 张小泉剪刀 · 王星记扇子 · 西湖绸伞…' + keys.length + ' 项一站看全</div></div></div><div class="p-card-grid">' + cards + '</div>';
+      if (window.IHZW && IHZW.prependCrumb) IHZW.prependCrumb(document.body, '非遗', '全部非遗');
+    }
     function renderIntangible(id) {
       var data = window.INTANGIBLE_ITEMS ? window.INTANGIBLE_ITEMS[id] : null;
       var container = document.getElementById('intangibleContainer');
@@ -64,10 +79,11 @@
           '<p style="margin:8px 0 16px;">ID: ' + (id||'(\u7a7a)') + '</p>' +
           '<a href="cat.html?c=culture&s=%E9%9D%9E%E9%81%97" class="btn" style="display:inline-block;padding:10px 20px;background:#059669;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;">\u2190 \u8fd4\u56de</a>' +
           '<a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px;">\u6587\u535a\u9996\u9875</a></div>';
-        if (headerTitle) headerTitle.textContent = '\ud83c\udfad \u975e\u7109';
+        if (headerTitle) headerTitle.textContent = '\ud83c\udfad \u975e\u9057';
+        if (window.IHZW && IHZW.prependCrumb) IHZW.prependCrumb(document.body, '\u975e\u9057', '\u672a\u627e\u5230');
         return;
       }
-      document.title = data.name + ' \u00b7 \u975e\u7109 \u00b7 iHangzhou';
+      document.title = data.name + ' \u00b7 \u975e\u9057 \u00b7 iHangzhou';
       if (headerTitle) headerTitle.textContent = '\ud83c\udfad ' + data.name;
       var html = '';
       html += '<div class="p-hero"><div class="p-hero-inner-bar"><div class="p-hero-title">' + data.name + '</div><div class="p-hero-sub">' + data.subtitle + '</div></div></div>';
@@ -91,19 +107,19 @@
       var allKeys = window.INTANGIBLE_ITEMS ? Object.keys(window.INTANGIBLE_ITEMS) : [];
       var nearby = allKeys.filter(function(k) { return k !== id; }).slice(0, 4);
       if (nearby.length) {
-        html += '<div class="p-neighbors"><h3>\ud83c\udfad \u66f4\u591a\u975e\u7109</h3><div class="p-neighbors-grid">';
+        html += '<div class="p-neighbors"><h3>\ud83c\udfad \u66f4\u591a\u975e\u9057</h3><div class="p-neighbors-grid">';
         nearby.forEach(function(k) { var v = window.INTANGIBLE_ITEMS[k];
           html += '<a class="p-neighbors-card" href="intangible.html?id=' + k + '"><span class="p-card-ico">' + v.badge.split(' ')[0] + '</span><span>' + v.name + '</span></a>';
         });
         html += '</div></div>';
       }
       html += '<div style="margin-top:24px;display:flex;gap:10px;">' +
-        '<a href="cat.html?c=culture&s=%E9%9D%9E%E9%81%97" style="flex:1;text-align:center;padding:12px;background:#059669;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;">\u2190 \u975e\u7109\u9891\u9053</a>' +
+        '<a href="cat.html?c=culture&s=%E9%9D%9E%E9%81%97" style="flex:1;text-align:center;padding:12px;background:#059669;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;">\u2190 \u975e\u9057\u9891\u9053</a>' +
         '<a href="museum.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;">\u6587\u535a\u9996\u9875</a></div>';
       html += '</div>'; container.innerHTML = html;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(container,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'杭州',(data&&(data.name||data.title))||'详情');
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'非遗',data.name);
     }
-    (function() { var id = (location.search.split('id=')[1]||'').split('&')[0]; renderIntangible(decodeURIComponent(id)); })();
+    (function() { var id = (location.search.split('id=')[1]||'').split('&')[0]; if(!id){renderIntangibleList()}else{renderIntangible(decodeURIComponent(id))} })();
   </script>
   <script>if (window.IZ && IZ.layout) { document.addEventListener('DOMContentLoaded', IZ.layout.init); }</script>
 </body>

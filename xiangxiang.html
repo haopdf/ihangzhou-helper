@@ -6,8 +6,9 @@
   <title>街巷漫步 · iHangzhou</title>
   <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州街巷漫步：小河直街、大兜路、馒头山、河坊街、五柳巷、南山路、北山街、浙东运河老街，漫步老城故事">
-  <link rel="stylesheet" href="css/style.css?v=20261018g">
-  <script src="js/layout.js?v=20261016e"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/breadcrumb.js?v=20261018k"></script>
   <script src="js/xiangxiang-data.js"></script>
   <style>:root{--primary:#059669;--primary-dark:#065f46;}
 
@@ -36,38 +37,61 @@
     .p-neighbor:active{opacity:.7}
     .p-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
     .p-empty .p-hero-icon{font-size:64px;margin-bottom:16px}
-    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:720px;margin:0 auto}}
+    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:1180px;margin:0 auto}}
   
-<style>:root{--primary:#059669;--primary-dark:#065f46}</style><link rel="stylesheet" href="css/channel.css?v=20261018a">
+<style>:root{--primary:#059669;--primary-dark:#065f46}</style><link rel="stylesheet" href="css/channel.css?v=20261018k">
+<style>
+  /* 桌面端内容贴齐 1180（与首页同标准；须在 channel.css 之后，!important 压过其 gutter） */
+  @media (min-width: 1024px) {
+    #xxContainer .p-section { padding-left: 0 !important; padding-right: 0 !important; }
+    #xxContainer .p-neighbors { padding-left: 0 !important; padding-right: 0 !important; }
+  }
+</style>
 </head>
 <body>
   <script>window.IHZ_PAGE={title:'街巷漫步',icon:'🛤️'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
-  <div id="xxContainer"><div class="p-empty"><div class="p-hero-icon">�</div><h2>加载中...</h2></div></div>
+  <div id="xxContainer"><div class="p-empty"><div class="p-hero-icon">🛤️</div><h2>加载中...</h2></div></div>
   <script>
+
+    /* 列表视图：无 id 时渲染（面包屑栏目级默认链回本页 = 列表） */
+    function renderXxList(){
+      var c=document.getElementById('xxContainer');
+      var ht=document.getElementById('headerTitle');
+      var keys=window.XIANGXIANG_DATA?Object.keys(window.XIANGXIANG_DATA):[];
+      document.title='街巷漫步 · iHangzhou';
+      if(ht)ht.textContent='🛤️ 街巷漫步';
+      var cards=keys.map(function(k){var v=window.XIANGXIANG_DATA[k];
+        return '<a class="p-card" href="xiangxiang.html?id='+k+'"><span class="p-card-ico">🛤️</span><div><div class="p-card-name">'+v.name+'</div><div class="p-card-desc">'+v.subtitle+'</div></div></a>';
+      }).join('');
+      c.innerHTML='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">街巷漫步</div><div class="p-hero-sub">小河直街 · 大兜路 · 馒头山 · 河坊街 · 五柳巷…'+keys.length+' 条一站看全</div></div></div><div class="p-card-grid">'+cards+'</div>';
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'街巷漫步','全部街巷');
+    }
     function renderXx(id){
       var data=window.XIANGXIANG_DATA?window.XIANGXIANG_DATA[id]:null;
       var c=document.getElementById('xxContainer');
       var ht=document.getElementById('headerTitle');
       if(!data){
-        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">�️</div><h2>未找到该街巷</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=travel&s=%E8%A1%97%E5%B7%B7%E6%BC%AB%E6%AD%A5" class="btn" style="display:inline-block;padding:10px 20px;background:#92400e;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回街巷漫步</a> <a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">旅游首页</a></div>';
+        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🛤️</div><h2>未找到该街巷</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=travel&s=%E8%A1%97%E5%B7%B7%E6%BC%AB%E6%AD%A5" class="btn" style="display:inline-block;padding:10px 20px;background:#92400e;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回街巷漫步</a> <a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">旅游首页</a></div>';
         if(ht)ht.textContent='🛤️ 街巷漫步';
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'街巷漫步','未找到');
         return;
       }
       document.title=data.name+' · 街巷漫步 · iHangzhou';
-      if(ht)ht.textContent='�️ '+data.name;
+      if(ht)ht.textContent='🛤️ '+data.name;
       var h='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">'+data.name+'</div><div class="p-hero-sub">'+data.subtitle+'</div></div></div><div class="p-body">';
       h+='<div class="p-badge">'+data.badge+' '+data.name+'</div>';
       h+='<div style="clear:both"></div>';
       if(data.history)h+='<div class="p-hist"><p>'+data.history+'</p></div>';
       if(data.features&&data.features.length){h+='<div class="p-section"><h3>✨ 特色</h3><div class="p-feat">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
-      if(data.spots&&data.spots.length){h+='<div class="p-section"><h3>� 漫步点</h3><div class="p-cards">';data.spots.forEach(function(s){h+='<div class="p-inforow"><div><div class="p-badge">'+s.n+'</div><div class="p-card">'+s.d+'</div></div></div>'});h+='</div></div>';}
+      if(data.spots&&data.spots.length){h+='<div class="p-section"><h3>📍 漫步点</h3><div class="p-cards">';data.spots.forEach(function(s){h+='<div class="p-inforow"><div><div class="p-badge">'+s.n+'</div><div class="p-card">'+s.d+'</div></div></div>'});h+='</div></div>';}
       var keys=window.XIANGXIANG_DATA?Object.keys(window.XIANGXIANG_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
-      if(nb.length){h+='<div class="p-neighbors"><h3>�️ 更多街巷</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.XIANGXIANG_DATA[k];h+='<a class="p-neighbor" href="xiangxiang.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
+      if(nb.length){h+='<div class="p-neighbors"><h3>🛤️ 更多街巷</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.XIANGXIANG_DATA[k];h+='<a class="p-neighbor" href="xiangxiang.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=travel&s=%E8%A1%97%E5%B7%B7%E6%BC%AB%E6%AD%A5" style="flex:1;text-align:center;padding:12px;background:#92400e;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 街巷漫步频道</a><a href="travel.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">旅游首页</a></div>';
       h+='</div>';c.innerHTML=h;
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'街巷漫步',data.name);
     }
-    (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderXx(decodeURIComponent(id))})();
+    (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];if(!id){renderXxList()}else{renderXx(decodeURIComponent(id))}})();
   </script>
   <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>
 </body>
