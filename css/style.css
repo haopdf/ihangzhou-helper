@@ -146,7 +146,7 @@ a { color: var(--primary); text-decoration: none; }
   top: 0;
   z-index: 100;
   background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 55%, var(--primary-dark) 100%);
-  padding: 11px 14px;
+  padding: 11px var(--gutter, 16px);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -565,7 +565,7 @@ span.logo-icon {
 .news-banner {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  margin: 0 16px 10px;
+  margin: 0 var(--gutter, 16px) 10px;
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow);
   overflow: hidden;
@@ -652,7 +652,7 @@ span.logo-icon {
 }
 
 /* ===== 内容容器 ===== */
-.content { max-width: 1180px; margin: 0 auto; padding: 12px 16px; }
+.content { max-width: 1240px; margin: 0 auto; padding: 12px var(--gutter, 16px); }
 
 /* ===== Hero ===== */
 .hero {
@@ -1702,7 +1702,7 @@ body > .page, .art-list,
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  margin: 10px 16px 0;
+  margin: 10px var(--gutter, 16px) 0;
   padding: 12px 10px;
   background: linear-gradient(165deg, var(--primary-light) 0%, var(--primary) 45%, var(--primary-dark) 100%);
   border-radius: var(--radius-lg);
@@ -2186,7 +2186,7 @@ body > .page, .art-list,
 
 /* 公众号关注卡片（紧凑单行式） */
 .follow-card {
-  margin: 12px 16px;
+  margin: 12px 0;
   background: linear-gradient(135deg, #2e7a5f 0%, #1b4d3e 55%, #10352a 100%);
   border-radius: var(--radius-lg);
   padding: 12px 14px;
@@ -2344,7 +2344,7 @@ body > .page, .art-list,
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 12px 16px;
+  margin: 12px 0;
   padding: 10px 14px;
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -2768,7 +2768,7 @@ transition: transform var(--transition-fast), box-shadow var(--transition-fast);
    ============================================ */
 
 .district-nav {
-  margin: 10px 14px;
+  margin: 10px var(--gutter, 16px);
 }
 
 .district-nav-item {
@@ -2890,8 +2890,8 @@ border-radius: 14px;
   display: none;
   background: linear-gradient(135deg, #0c4a6e 0%, #0e7490 50%, #0891b2 100%);
   border-radius: 14px;
-  padding: 14px 16px;
-  margin: 0 16px 10px;
+  padding: 14px var(--gutter, 16px);
+  margin: 0 var(--gutter, 16px) 10px;
   color: #fff;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);
@@ -2964,7 +2964,7 @@ border-radius: 14px;
 
 /* ===== 钱塘江观潮专题（首页） ===== */
 .tide-feature {
-  margin: 0 16px 10px;
+  margin: 0 var(--gutter, 16px) 10px;
   background: linear-gradient(135deg, #0c4a6e 0%, #0e7490 50%, #0891b2 100%);
   border-radius: 14px;
   color: #fff;
@@ -3158,7 +3158,7 @@ border-radius: 14px;
 }
 
 /* ===== 区县特色卡片 ===== */
-.district-info { padding: 0 16px; margin: 12px 0; }
+.district-info { padding: 0 var(--gutter, 16px); margin: 12px 0; }
 .district-info-card {
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: #fff;
@@ -4281,7 +4281,7 @@ body.search-mode .tide-feature {
   #pageHome .home-sec,
   #pageHome .home-sec,
   #pageHome .explore-section,
-  #pageHome .goods-section { max-width: 1180px; margin-left: auto; margin-right: auto; }
+  #pageHome .goods-section { max-width: 1180px; margin-left: auto; margin-right: auto; padding-left: 0; padding-right: 0; }
   #pageHome .cat-grid,
   #pageHome .wx-feed,
   #pageHome .svc-grid { padding-left: 0; padding-right: 0; }
