@@ -3953,6 +3953,11 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
 }
 [data-theme="dark"] .ch-hero { box-shadow: 0 4px 16px -8px rgba(0,0,0,0.5); }
 
+/* ===== 频道页(ch-page)桌面统一：内容列 1180 居中，与 .ch-hero 同宽 ===== */
+@media (min-width: 1024px) {
+  body.ch-page #pageChannel { max-width: 1180px; margin: 0 auto; }
+}
+
 /* ===== 杭州怎么玩：精选攻略滑动卡片 ===== */
 .explore-section { padding: 14px var(--gutter, 16px) 4px; }
 .explore-title { font-size: 15px; font-weight: 700; padding: 0 16px 10px; color: var(--text); }
@@ -4334,6 +4339,24 @@ body.search-mode .tide-feature {
 .cat-crumb a:hover { text-decoration: underline; }
 .cat-crumb .cc-sep { margin: 0 6px; color: var(--border); }
 .cat-crumb b { color: var(--text); font-weight: 700; }
+
+/* ============================================
+   全站详情页面包屑（SPA 单条详情页统一标准，与文章页 .article-breadcrumb 风格一致）
+   用法：<nav class="site-breadcrumb"><a href="index.html">首页</a><span class="sb-sep">›</span><span>栏目</span><span class="sb-sep">›</span><b>当前</b></nav>
+   ============================================ */
+.site-breadcrumb {
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 10px var(--gutter, 16px);
+  background: var(--bg-alt);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.site-breadcrumb a { color: var(--primary); text-decoration: none; }
+.site-breadcrumb a:hover { text-decoration: underline; }
+.site-breadcrumb .sb-sep { margin: 0 6px; color: var(--border); }
+.site-breadcrumb b { color: var(--text); font-weight: 700; }
 
 .cat-hero {
   background: linear-gradient(135deg, var(--ci, var(--primary)), var(--primary-dark));

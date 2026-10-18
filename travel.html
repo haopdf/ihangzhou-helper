@@ -11,7 +11,7 @@
   <meta property="og:description" content="西湖 + 古镇 + 赏花 + 四季 + 夜景 一站齐，杭州旅游全攻略">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://www.ihangzhou.net/travel.html">
-  <link rel="stylesheet" href="css/style.css?v=20261018e">
+  <link rel="stylesheet" href="css/style.css?v=20261018g">
   <script src="js/layout.js?v=20261016e"></script>
   <script src="js/scenic-data.js"></script>
   <style>
@@ -338,9 +338,17 @@
       -webkit-tap-highlight-color: transparent;
     }
     .travel-back:active { transform: scale(0.99); }
+
+    /* 桌面统一：内容列与 .ch-hero 同宽 1180 居中（--gutter 标准） */
+    @media (min-width: 1024px) {
+      .travel-tabs, .travel-section, .travel-tips, .travel-back {
+        max-width: 1180px; margin-left: auto; margin-right: auto;
+      }
+    }
   </style>
 </head>
-<body>
+<body class="ch-page">
+  <nav class="site-breadcrumb"><a href="index.html">首页</a><span class="sb-sep">›</span><b>杭州旅游</b></nav>
   <script>
     window.IHZ_PAGE = { title: '杭州旅游', icon: '🏞️', channelId: 'travel' };
     window.IZ_SKIP_APP_THEME = true;
