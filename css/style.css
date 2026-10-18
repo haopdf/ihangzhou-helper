@@ -490,7 +490,7 @@ span.logo-icon {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
-  padding: 0 16px;
+  padding: 0;
   margin-bottom: 10px;
 }
 
@@ -3954,9 +3954,9 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
 [data-theme="dark"] .ch-hero { box-shadow: 0 4px 16px -8px rgba(0,0,0,0.5); }
 
 /* ===== 杭州怎么玩：精选攻略滑动卡片 ===== */
-.explore-section { padding: 14px 0 4px; }
+.explore-section { padding: 14px var(--gutter, 16px) 4px; }
 .explore-title { font-size: 15px; font-weight: 700; padding: 0 16px 10px; color: var(--text); }
-.explore-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 0 16px 8px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.explore-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 0 0 8px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
 .explore-scroll::-webkit-scrollbar { display: none; }
 .explore-card { flex: 0 0 auto; width: 92px; background: var(--bg); border-radius: 14px; padding: 14px 8px 12px; text-align: center; scroll-snap-align: center; cursor: pointer; border: 1px solid transparent; transition: transform 0.15s ease; }
 .explore-card:active { transform: scale(0.94); }
@@ -3972,7 +3972,7 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
 
 /* ---- 通用分节 ---- */
 .home-sec {
-  padding: 14px 0 4px;
+  padding: 14px var(--gutter, 16px) 4px;
 }
 .home-sec .sec-h {
   font-size: 17px;
@@ -3996,7 +3996,7 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
-  padding: 0 16px;
+  padding: 0;
 }
 .cat-card {
   position: relative;
@@ -4067,7 +4067,7 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 16px 8px;
+  padding: 10px var(--gutter, 16px) 8px;
   cursor: pointer;
   color: var(--primary);
   font-weight: 700;
@@ -4099,7 +4099,7 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
-  padding: 0 16px 16px;
+  padding: 0 var(--gutter, 16px) 16px;
 }
 .sub-card {
   display: flex;
@@ -4148,7 +4148,7 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding: 2px 16px 6px;
+  padding: 2px 0 6px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -4172,7 +4172,7 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
 }
 
 /* ---- 公众号精选：左图右文信息流 ---- */
-.wx-feed { display: flex; flex-direction: column; gap: 10px; padding: 0 16px; }
+.wx-feed { display: flex; flex-direction: column; gap: 10px; padding: 0; }
 .wx-post {
   display: flex;
   background: var(--bg-card);
