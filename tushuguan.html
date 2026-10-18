@@ -4,65 +4,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>图书馆 · iHangzhou</title>
-  <meta name="theme-color" content="#4338ca">
+  <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州图书馆：浙江图书馆、杭州图书馆、钱江新图书馆、西湖书房、高校图书馆，自习借阅一应俱全">
-  <link rel="stylesheet" href="css/style.css?v=20261013c">
-  <script src="js/layout.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <script src="js/tushuguan-data.js"></script>
   <style>
-    .ts-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,#4338ca,#373a7a)}
-    .ts-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55))}
-    .ts-hero .ts-tb{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
-    .ts-hero .ts-name{font-size:24px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
-    .ts-hero .ts-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
-    .ts-body{padding:16px}
-    .ts-badge{display:inline-block;font-size:12px;padding:4px 10px;background:#e0e7ff;color:#373a7a;border-radius:10px;font-weight:600;margin-bottom:8px}
-    .ts-hist{margin:12px 0;padding:12px;background:#eff6ff;border-radius:10px;border-left:3px solid #4338ca}
-    .ts-hist p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0}
-    .ts-section{margin:20px 0 8px}
-    .ts-section h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid #4338ca}
-    .ts-ft{display:flex;flex-direction:column;gap:6px}
-    .ts-ft i{font-size:13px;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:8px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
-    .ts-ft i::before{content:'\2713';color:#4338ca;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
-    .ts-exp{display:flex;flex-direction:column;gap:8px}
-    .ts-ei{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg-card);border-radius:10px;border:1px solid var(--border-light)}
-    .ts-ei .ts-eic{font-size:22px;flex-shrink:0}
-    .ts-ei .ts-en{font-size:14px;font-weight:600;color:var(--text)}
-    .ts-ei .ts-ed{font-size:12px;color:var(--text-secondary);margin-top:2px}
-    .ts-nb{margin-top:24px;border-top:8px solid var(--bg);padding-top:16px}
-    .ts-nb h3{font-size:15px;font-weight:700;margin:0 0 12px}
-    .ts-ng{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-    .ts-nc{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500}
-    .ts-nc:active{opacity:.7}
-    .ts-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
-    .ts-empty .ei-big{font-size:64px;margin-bottom:16px}
-    @media(min-width:768px){.ts-hero{height:300px}.ts-body{max-width:720px;margin:0 auto}}
+:root{--primary:#4338ca;--primary-dark:#312e81;}
+    .p-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,var(--primary),#373a7a)}
+    .p-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55))}
+    .p-hero .p-hero-inner{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
+    .p-hero .p-hero-title{font-size:24px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+    .p-hero .p-hero-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+    .p-body{padding:16px}
+    .p-badge{display:inline-block;font-size:12px;padding:4px 10px;background:#e0e7ff;color:#373a7a;border-radius:10px;font-weight:600;margin-bottom:8px}
+    .p-hist{margin:12px 0;padding:12px;background:#eff6ff;border-radius:10px;border-left:3px solid var(--primary)}
+    .p-hist p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0}
+    .p-section{margin:20px 0 8px}
+    .p-section h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid var(--primary)}
+    .p-feat{display:flex;flex-direction:column;gap:6px}
+    .p-feat i{font-size:13px;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:8px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+    .p-feat i::before{content:'\2713';color:var(--primary);font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
+    .p-cards{display:flex;flex-direction:column;gap:8px}
+    .p-card{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg-card);border-radius:10px;border:1px solid var(--border-light)}
+    .p-card .p-card-ico{font-size:22px;flex-shrink:0}
+    .p-card .p-card-name{font-size:14px;font-weight:600;color:var(--text)}
+    .p-card .p-card-desc{font-size:12px;color:var(--text-secondary);margin-top:2px}
+    .p-neighbors{margin-top:24px;border-top:8px solid var(--bg);padding-top:16px}
+    .p-neighbors h3{font-size:15px;font-weight:700;margin:0 0 12px}
+    .p-neighbor-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .p-neighbor{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500}
+    .p-neighbor:active{opacity:.7}
+    .p-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
+    .p-empty .p-hero-icon{font-size:64px;margin-bottom:16px}
+    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:720px;margin:0 auto}}
   </style>
+<link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>window.IHZ_PAGE={title:'图书馆',icon:'📚'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
-  <div id="tsContainer"><div class="ts-empty"><div class="ei-big">�</div><h2>加载中...</h2></div></div>
+  <div id="tsContainer"><div class="p-empty"><div class="p-hero-icon">�</div><h2>加载中...</h2></div></div>
   <script>
     function renderTs(id){
       var data=window.TUSHUGUAN_DATA?window.TUSHUGUAN_DATA[id]:null;
       var c=document.getElementById('tsContainer');
       var ht=document.getElementById('headerTitle');
       if(!data){
-        c.innerHTML='<div class="ts-empty"><div class="ei-big">📚</div><h2>未找到该图书馆</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=culture&s=%E5%9B%BE%E4%B9%A6%E9%A6%86" class="btn" style="display:inline-block;padding:10px 20px;background:#4338ca;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回图书馆</a> <a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">文化首页</a></div>';
+        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">📚</div><h2>未找到该图书馆</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=culture&s=%E5%9B%BE%E4%B9%A6%E9%A6%86" class="btn" style="display:inline-block;padding:10px 20px;background:#4338ca;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回图书馆</a> <a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">文化首页</a></div>';
         if(ht)ht.textContent='📚 图书馆';
         return;
       }
       document.title=data.name+' · 图书馆 · iHangzhou';
       if(ht)ht.textContent='📚 '+data.name;
-      var h='<div class="ts-hero"><div class="ts-tb"><div class="ts-name">'+data.name+'</div><div class="ts-sub">'+data.subtitle+'</div></div></div><div class="ts-body">';
-      h+='<div class="ts-badge">'+data.badge+' '+data.name+'</div>';
+      var h='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">'+data.name+'</div><div class="p-hero-sub">'+data.subtitle+'</div></div></div><div class="p-body">';
+      h+='<div class="p-badge">'+data.badge+' '+data.name+'</div>';
       h+='<div style="clear:both"></div>';
-      if(data.history)h+='<div class="ts-hist"><p>'+data.history+'</p></div>';
-      if(data.features&&data.features.length){h+='<div class="ts-section"><h3>✨ 特色</h3><div class="ts-ft">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
-      if(data.spots&&data.spots.length){h+='<div class="ts-section"><h3>📍 推荐</h3><div class="ts-exp">';data.spots.forEach(function(s){h+='<div class="ts-ei"><span class="ts-eic">�</span><div><div class="ts-en">'+s.n+'</div><div class="ts-ed">'+s.d+'</div></div></div>'});h+='</div></div>';}
+      if(data.history)h+='<div class="p-hist"><p>'+data.history+'</p></div>';
+      if(data.features&&data.features.length){h+='<div class="p-section"><h3>✨ 特色</h3><div class="p-feat">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
+      if(data.spots&&data.spots.length){h+='<div class="p-section"><h3>📍 推荐</h3><div class="p-cards">';data.spots.forEach(function(s){h+='<div class="p-card"><span class="p-card-ico">�</span><div><div class="p-card-name">'+s.n+'</div><div class="p-card-desc">'+s.d+'</div></div></div>'});h+='</div></div>';}
       var keys=window.TUSHUGUAN_DATA?Object.keys(window.TUSHUGUAN_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
-      if(nb.length){h+='<div class="ts-nb"><h3>📚 更多图书馆</h3><div class="ts-ng">';nb.forEach(function(k){var v=window.TUSHUGUAN_DATA[k];h+='<a class="ts-nc" href="tushuguan.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
+      if(nb.length){h+='<div class="p-neighbors"><h3>📚 更多图书馆</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.TUSHUGUAN_DATA[k];h+='<a class="p-neighbor" href="tushuguan.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=culture&s=%E5%9B%BE%E4%B9%A6%E9%A6%86" style="flex:1;text-align:center;padding:12px;background:#4338ca;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 图书馆频道</a><a href="museum.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">文化首页</a></div>';
       h+='</div>';c.innerHTML=h;
     }

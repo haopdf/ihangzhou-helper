@@ -6,32 +6,33 @@
   <title>杭州区县导航 · iHangzhou</title>
   <meta name="description" content="杭州 13 大区县（10 区 + 1 县级市 + 2 县）一站式导航：上城/拱墅/西湖/滨江/萧山/余杭/临平/钱塘/富阳/临安/桐庐/淳安/建德">
   <meta name="keywords" content="杭州区县,杭州行政区,上城区,拱墅区,西湖区,滨江区,萧山区,余杭区,临平区,钱塘区,富阳区,临安区,桐庐县,淳安县,建德市,杭州生活,ihangzhou">
-  <meta name="theme-color" content="#0ea5e9">
+  <meta name="theme-color" content="#1f7a5a">
   <meta property="og:title" content="杭州 13 区县导航 · iHangzhou">
   <meta property="og:description" content="杭州全部 13 个区县概况/景点/政务/特色一站式查询">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://www.ihangzhou.net/district.html">
-  <link rel="stylesheet" href="css/style.css?v=20260921h">
-  <script src="js/layout.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <style>
+:root{--primary:#0ea5e9;--primary-dark:#0369a1;}
     /* 区县列表页专属样式 */
-    .district-hero {
-      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    .p-hero {
+      background: linear-gradient(135deg, var(--primary), #0284c7);
       color: #fff;
       padding: 22px 16px 18px 16px;
       text-align: center;
     }
-    .district-hero h1 {
+    .p-hero h1 {
       font-size: 20px;
       font-weight: 700;
       margin: 0 0 6px;
     }
-    .district-hero p {
+    .p-hero p {
       font-size: 13px;
       opacity: 0.92;
       line-height: 1.5;
     }
-    .district-stats {
+    .p-infogrid {
       display: flex;
       justify-content: center;
       gap: 14px;
@@ -46,7 +47,7 @@
       font-weight: 500;
     }
 
-    .district-filter {
+    .p-section {
       display: flex;
       gap: 6px;
       padding: 10px 16px;
@@ -55,8 +56,8 @@
       border-bottom: 1px solid var(--border);
       -webkit-overflow-scrolling: touch;
     }
-    .district-filter::-webkit-scrollbar { display: none; }
-    .filter-btn {
+    .p-section::-webkit-scrollbar { display: none; }
+    .p-badge {
       flex-shrink: 0;
       padding: 6px 16px;
       background: var(--bg-alt);
@@ -68,19 +69,19 @@
       -webkit-tap-highlight-color: transparent;
       transition: all 0.2s;
     }
-    .filter-btn.active {
+    .p-badge.active {
       background: var(--primary);
       color: #fff;
       border-color: var(--primary);
     }
 
-    .district-list {
+    .p-cards {
       padding: 12px 16px 80px 16px;
       display: grid;
       gap: 12px;
     }
 
-    .district-card {
+    .p-card {
       background: var(--bg-card);
       border-radius: 12px;
       padding: 14px;
@@ -93,57 +94,57 @@
       color: var(--text);
       display: block;
     }
-    .district-card:active {
+    .p-card:active {
       transform: scale(0.98);
       box-shadow: var(--shadow-md);
     }
-    .dc-head {
+    .p-hero-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 8px;
     }
-    .dc-name-row {
+    .p-hero-title-row {
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    .dc-name {
+    .p-hero-title {
       font-size: 16px;
       font-weight: 700;
       color: var(--text);
     }
-    .dc-type-badge {
+    .p-badge-badge {
       font-size: 10px;
       padding: 2px 16px;
       border-radius: 8px;
       font-weight: 600;
     }
-    .dc-type-badge.主城 { background: #fef3c7; color: #92400e; }
-    .dc-type-badge.副城 { background: #dbeafe; color: #1e40af; }
-    .dc-type-badge.县级市 { background: #dcfce7; color: #166534; }
-    .dc-type-badge.县 { background: #fce7f3; color: #9f1239; }
-    [data-theme="dark"] .dc-type-badge.主城 { background: #78350f; color: #fef3c7; }
-    [data-theme="dark"] .dc-type-badge.副城 { background: #1e3a8a; color: #dbeafe; }
-    [data-theme="dark"] .dc-type-badge.县级市 { background: #14532d; color: #dcfce7; }
-    [data-theme="dark"] .dc-type-badge.县 { background: #831843; color: #fce7f3; }
-    .dc-arrow {
+    .p-badge-badge.主城 { background: #fef3c7; color: #92400e; }
+    .p-badge-badge.副城 { background: #dbeafe; color: #1e40af; }
+    .p-badge-badge.县级市 { background: #dcfce7; color: #166534; }
+    .p-badge-badge.县 { background: #fce7f3; color: #9f1239; }
+    [data-theme="dark"] .p-badge-badge.主城 { background: #78350f; color: #fef3c7; }
+    [data-theme="dark"] .p-badge-badge.副城 { background: #1e3a8a; color: #dbeafe; }
+    [data-theme="dark"] .p-badge-badge.县级市 { background: #14532d; color: #dcfce7; }
+    [data-theme="dark"] .p-badge-badge.县 { background: #831843; color: #fce7f3; }
+    .p-card-desc {
       font-size: 18px;
       color: var(--text-muted);
     }
-    .dc-tag {
+    .p-badge {
       font-size: 12px;
       color: var(--primary);
       font-weight: 500;
       margin-bottom: 6px;
     }
-    .dc-desc {
+    .p-card-desc {
       font-size: 12px;
       color: var(--text-secondary);
       line-height: 1.5;
       margin-bottom: 10px;
     }
-    .dc-meta {
+    .p-inforow {
       display: flex;
       gap: 12px;
       font-size: 11px;
@@ -151,23 +152,23 @@
       padding-top: 8px;
       border-top: 1px dashed var(--border);
     }
-    .dc-meta-item {
+    .p-inforow-item {
       display: flex;
       align-items: center;
       gap: 3px;
     }
 
     /* 区县详情页样式 */
-    .district-detail {
+    .p-body {
       padding-bottom: 80px;
     }
-    .dd-hero {
+    .p-hero {
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: #fff;
       padding: 26px 16px 20px 16px;
       padding-top: max(24px, env(safe-area-inset-top));
     }
-    .dd-back {
+    .p-back {
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -181,28 +182,28 @@
       margin-bottom: 12px;
       -webkit-tap-highlight-color: transparent;
     }
-    .dd-name {
+    .p-hero-title {
       font-size: 24px;
       font-weight: 700;
       margin: 0 0 4px;
     }
-    .dd-tag {
+    .p-badge {
       font-size: 13px;
       opacity: 0.92;
       margin-bottom: 12px;
     }
-    .dd-stats {
+    .p-infogrid {
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
     }
-    .dd-stat {
+    .p-inforow {
       background: rgba(255,255,255,0.18);
       padding: 4px 16px;
       border-radius: 10px;
       font-size: 11px;
     }
-    .dd-section {
+    .p-section {
       margin: 14px;
       background: var(--bg-card);
       border-radius: 12px;
@@ -210,7 +211,7 @@
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
     }
-    .dd-section h2 {
+    .p-section h2 {
       font-size: 15px;
       font-weight: 700;
       color: var(--text);
@@ -219,12 +220,12 @@
       align-items: center;
       gap: 6px;
     }
-    .dd-desc {
+    .p-card-desc {
       font-size: 14px;
       color: var(--text-secondary);
       line-height: 1.7;
     }
-    .dd-features {
+    .p-feat {
       font-size: 13px;
       color: var(--text-secondary);
       background: var(--bg-alt);
@@ -233,12 +234,12 @@
       border-left: 3px solid var(--primary);
       line-height: 1.6;
     }
-    .dd-scenic-list {
+    .p-cards-list {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
-    .dd-scenic-item {
+    .p-cards-item {
       padding: 0 0 10px 0;
       background: var(--bg-card);
       border-radius: 12px;
@@ -248,11 +249,11 @@
       transition: transform 0.2s, box-shadow 0.2s;
       -webkit-tap-highlight-color: transparent;
     }
-    .dd-scenic-item:active {
+    .p-cards-item:active {
       transform: scale(0.98);
       box-shadow: var(--shadow-md);
     }
-    .dd-scenic-img {
+    .p-cards-img {
       width: 100%;
       height: 120px;
       background: linear-gradient(135deg, var(--bg-alt), var(--bg));
@@ -262,23 +263,23 @@
       font-size: 36px;
       overflow: hidden;
     }
-    .dd-scenic-img img {
+    .p-cards-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       pointer-events: none;
       -webkit-user-drag: none;
     }
-    .dd-scenic-img-ph {
+    .p-cards-img-ph {
       opacity: 0.4;
     }
-    .dd-scenic-name {
+    .p-cards-name {
       font-size: 14px;
       font-weight: 600;
       color: var(--text);
       margin: 8px 10px 3px 10px;
     }
-    .dd-scenic-type {
+    .p-cards-type {
       display: inline-block;
       background: var(--secondary);
       color: #fff;
@@ -289,13 +290,13 @@
       vertical-align: middle;
       font-weight: 500;
     }
-    .dd-scenic-desc {
+    .p-cards-desc {
       font-size: 12px;
       color: var(--text-secondary);
       line-height: 1.5;
       margin: 4px 10px 8px 10px;
     }
-    .dd-scenic-actions {
+    .p-cards-actions {
       font-size: 12px;
       color: var(--primary);
       text-align: right;
@@ -304,16 +305,16 @@
       margin-top: 6px;
     }
     @media (max-width: 480px) {
-      .dd-scenic-list { grid-template-columns: 1fr 1fr; }
+      .p-cards-list { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 360px) {
-      .dd-scenic-list { grid-template-columns: 1fr; }
+      .p-cards-list { grid-template-columns: 1fr; }
     }
-    .dd-scenic-group {
+    .p-cards-group {
       margin-bottom: 18px;
     }
-    .dd-scenic-group:last-child { margin-bottom: 0; }
-    .dd-scenic-group-title {
+    .p-cards-group:last-child { margin-bottom: 0; }
+    .p-cards-group-title {
       font-size: 13px;
       font-weight: 600;
       color: var(--text-secondary);
@@ -321,12 +322,12 @@
       padding-left: 8px;
       border-left: 3px solid var(--secondary);
     }
-    .dd-highlights {
+    .p-hist {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
-    .dd-highlight {
+    .p-hist {
       display: inline-block;
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: #fff;
@@ -336,11 +337,11 @@
       font-weight: 500;
     }
     /* 在地入口外链列表 */
-    .dd-ext-list {
+    .p-feat-list {
       display: grid;
       gap: 8px;
     }
-    .dd-ext-link {
+    .p-feat-link {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -353,41 +354,41 @@
       transition: transform 0.15s, background 0.15s;
       -webkit-tap-highlight-color: transparent;
     }
-    .dd-ext-link:active {
+    .p-feat-link:active {
       transform: scale(0.99);
       background: var(--bg);
     }
-    .dd-ext-icon {
+    .p-feat-icon {
       font-size: 22px;
       flex-shrink: 0;
       width: 28px;
       text-align: center;
     }
-    .dd-ext-text {
+    .p-feat-text {
       flex: 1;
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
-    .dd-ext-title {
+    .p-feat-title {
       font-size: 14px;
       font-weight: 600;
       color: var(--text);
     }
-    .dd-ext-sub {
+    .p-feat-sub {
       font-size: 11px;
       color: var(--text-muted);
     }
-    .dd-ext-arrow {
+    .p-feat-arrow {
       color: var(--text-muted);
       font-size: 18px;
     }
-    .dd-landmarks {
+    .p-cards {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
-    .dd-landmark {
+    .p-card {
       background: var(--bg-hover);
       color: var(--primary);
       font-size: 12px;
@@ -395,7 +396,7 @@
       border-radius: 12px;
       font-weight: 500;
     }
-    .dd-gov-link {
+    .p-infogrid-link {
       display: block;
       margin-top: 10px;
       padding: 10px;
@@ -408,20 +409,20 @@
       text-decoration: none;
       -webkit-tap-highlight-color: transparent;
     }
-    .dd-loading {
+    .p-empty {
       text-align: center;
       padding: 60px 16px;
       color: var(--text-muted);
       font-size: 14px;
     }
-    .dd-error {
+    .p-empty {
       text-align: center;
       padding: 60px 16px;
       color: var(--danger);
       font-size: 14px;
     }
     /* 景点详情弹窗 */
-    .dd-modal-overlay {
+    .p-cards-overlay {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.55);
@@ -431,7 +432,7 @@
       z-index: 9999;
       padding: 20px;
     }
-    .dd-modal-card {
+    .p-cards-card {
       background: var(--bg-card);
       border-radius: 14px;
       padding: 22px 18px;
@@ -439,18 +440,18 @@
       width: 100%;
       box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     }
-    .dd-modal-title {
+    .p-cards-title {
       font-size: 18px;
       font-weight: 700;
       color: var(--text);
       margin-bottom: 4px;
     }
-    .dd-modal-subtitle {
+    .p-cards-subtitle {
       font-size: 12px;
       color: var(--text-muted);
       margin-bottom: 18px;
     }
-    .dd-modal-btn {
+    .p-cards-btn {
       display: block;
       padding: 12px;
       margin-bottom: 10px;
@@ -461,15 +462,15 @@
       font-weight: 500;
       -webkit-tap-highlight-color: transparent;
     }
-    .dd-modal-btn.amap {
-      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    .p-cards-btn.amap {
+      background: linear-gradient(135deg, var(--primary), #0284c7);
       color: #fff;
     }
-    .dd-modal-btn.baidu {
+    .p-cards-btn.baidu {
       background: linear-gradient(135deg, #2962ff, #1e40af);
       color: #fff;
     }
-    .dd-modal-close {
+    .p-cards-close {
       width: 100%;
       padding: 10px;
       background: var(--bg-alt);
@@ -480,7 +481,85 @@
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
     }
+    /* ========= 桌面端：区县详情页布局修正 ========= */
+    @media (min-width: 1024px) {
+      /* Hero 圆角 + 居中 */
+      #detailView .p-hero {
+        border-radius: var(--radius-lg);
+        max-width: 1180px;
+        margin: 16px auto 0;
+        text-align: center;
+      }
+      /* 面积/人口/邮编/类型：横向排列 */
+      #detailView .p-infogrid {
+        flex-direction: row !important;
+        gap: 18px;
+        justify-content: center;
+        border: none;
+        background: transparent;
+        margin: 16px auto 0;
+      }
+      #detailView .p-infogrid .p-inforow {
+        display: inline-flex;
+        border: none;
+        background: rgba(255,255,255,0.16);
+        border-radius: 12px;
+        padding: 6px 18px;
+        min-width: auto;
+      }
+      /* 内容区 */
+      #detailView .p-section {
+        max-width: 1180px;
+        margin: 0 auto;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        overflow: visible;
+        flex-wrap: wrap;
+      }
+      #detailView .p-section h2 { width: 100%; flex-shrink: 0; }
+      /* 重要地标：改为横向多列 */
+      #detailView .p-body > .p-section .p-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 10px;
+        width: 100%;
+      }
+      #detailView .p-cards .p-card {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        text-align: left;
+      }
+      /* 在地入口：改为横向多列 */
+      #detailView .p-feat-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        width: 100%;
+      }
+      #detailView .p-feat-link {
+        width: 100%;
+      }
+      /* 景点列表：多列 */
+      #detailView .p-cards-list {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      }
+      /* 城市名片：横排 */
+      #detailView .p-hist {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      /* 特色亮点：居中 */
+      #detailView .p-feat { max-width: 100%; }
+      /* 返回按钮位置 */
+      #detailView .p-back {
+        margin-left: 0;
+      }
+    }
   </style>
+<link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>
@@ -501,23 +580,23 @@
       </div>
     </div>
 
-    <div class="district-filter" id="filterBar">
-      <button class="filter-btn active" data-type="all">全部</button>
-      <button class="filter-btn" data-type="主城">主城</button>
-      <button class="filter-btn" data-type="副城">副城</button>
-      <button class="filter-btn" data-type="县级市">县级市</button>
-      <button class="filter-btn" data-type="县">县</button>
+    <div class="p-section" id="filterBar">
+      <button class="p-badge active" data-type="all">全部</button>
+      <button class="p-badge" data-type="主城">主城</button>
+      <button class="p-badge" data-type="副城">副城</button>
+      <button class="p-badge" data-type="县级市">县级市</button>
+      <button class="p-badge" data-type="县">县</button>
     </div>
 
-    <div class="district-list" id="districtList">
-      <div class="dd-loading">加载中...</div>
+    <div class="p-cards" id="districtList">
+      <div class="p-empty">加载中...</div>
     </div>
   </div>
 
   <!-- 详情视图 -->
   <div id="detailView" style="display:none"></div>
 
-  <script src="js/app.js?v=20260928c"></script>
+  <script src="js/app.js?v=20261016e"></script>
 <script src="js/analytics.js?v=20260928c"></script>
   <script>
     // 布局就绪后初始化区县切换器
@@ -535,7 +614,8 @@
         document.addEventListener('click', function () { dd.classList.remove('show'); });
       }
     };
-    if (window.IZ && IZ.layout) {
+      // 兜底：布局就绪回调触发后再次确保下拉数据就绪
+      if (window.IZ && IZ.layout) {
       document.addEventListener("DOMContentLoaded", IZ.layout.init);
     }
   </script>
@@ -578,24 +658,24 @@
         return true;
       });
       if (!filtered.length) {
-        box.innerHTML = '<div class="dd-loading">未找到匹配的区县</div>';
+        box.innerHTML = '<div class="p-empty">未找到匹配的区县</div>';
         return;
       }
       box.innerHTML = filtered.map(function (d) {
-        var metaHtml = '<div class="dc-meta-item">📍 ' + d.area + '</div>' +
-                       '<div class="dc-meta-item">👥 ' + d.population + '</div>' +
-                       '<div class="dc-meta-item">📮 ' + d.postcode + '</div>';
-        return '<a class="district-card" href="district.html?id=' + d.id + '">' +
-          '<div class="dc-head">' +
-            '<div class="dc-name-row">' +
-              '<div class="dc-name">' + d.name + '</div>' +
-              '<span class="dc-type-badge ' + d.type + '">' + d.type + '</span>' +
+        var metaHtml = '<div class="p-inforow-item">📍 ' + d.area + '</div>' +
+                       '<div class="p-inforow-item">👥 ' + d.population + '</div>' +
+                       '<div class="p-inforow-item">📮 ' + d.postcode + '</div>';
+        return '<a class="p-card" href="district.html?id=' + d.id + '">' +
+          '<div class="p-hero-inner">' +
+            '<div class="p-hero-title-row">' +
+              '<div class="p-hero-title">' + d.name + '</div>' +
+              '<span class="p-badge-badge ' + d.type + '">' + d.type + '</span>' +
             '</div>' +
-            '<div class="dc-arrow">›</div>' +
+            '<div class="p-card-desc">›</div>' +
           '</div>' +
-          '<div class="dc-tag">' + d.tag + '</div>' +
-          '<div class="dc-desc">' + d.desc + '</div>' +
-          '<div class="dc-meta">' + metaHtml + '</div>' +
+          '<div class="p-badge">' + d.tag + '</div>' +
+          '<div class="p-card-desc">' + d.desc + '</div>' +
+          '<div class="p-inforow">' + metaHtml + '</div>' +
         '</a>';
       }).join('');
     }
@@ -604,7 +684,7 @@
     function renderDetail(d) {
       var view = document.getElementById('detailView');
       var landmarks = (d.landmarks || []).map(function (l) {
-        return '<span class="dd-landmark">' + l + '</span>';
+        return '<span class="p-card">' + l + '</span>';
       }).join('');
 
       // 按 type 分组渲染景点（景区/古村/寺院/溶洞/工业旅游/博物馆/主题公园等）
@@ -620,24 +700,24 @@
         var items = groups[type].map(function (s) {
           var imgName = (s.name || '').replace(/[\s（）()·、]/g, '-');
           var imgSrc = 'images/scenic/district/' + d.id + '-' + (s._idx+1) + '-' + imgName + '.jpg';
-          return '<div class="dd-scenic-item" data-name="' + s.name + '" data-district="' + d.name + '">' +
-            '<div class="dd-scenic-img" data-img="' + imgSrc + '">' +
-              '<span class="dd-scenic-img-ph">🏞️</span>' +
+          return '<div class="p-cards-item" data-name="' + s.name + '" data-district="' + d.name + '">' +
+            '<div class="p-cards-img" data-img="' + imgSrc + '">' +
+              '<span class="p-cards-img-ph">🏞️</span>' +
             '</div>' +
-            '<div class="dd-scenic-name">' + s.name + '</div>' +
-            '<div class="dd-scenic-desc">' + s.desc + '</div>' +
-            '<div class="dd-scenic-actions">查看详情 ›</div>' +
+            '<div class="p-cards-name">' + s.name + '</div>' +
+            '<div class="p-cards-desc">' + s.desc + '</div>' +
+            '<div class="p-cards-actions">查看详情 ›</div>' +
           '</div>';
         }).join('');
-        return '<div class="dd-scenic-group">' +
-          '<h3 class="dd-scenic-group-title">' + type + '</h3>' +
-          '<div class="dd-scenic-list">' + items + '</div>' +
+        return '<div class="p-cards-group">' +
+          '<h3 class="p-cards-group-title">' + type + '</h3>' +
+          '<div class="p-cards-list">' + items + '</div>' +
         '</div>';
       }).join('');
 
       // 高亮亮点
       var highlights = (d.highlights || []).map(function (h) {
-        return '<span class="dd-highlight">' + h + '</span>';
+        return '<span class="p-hist">' + h + '</span>';
       }).join('');
 
       // 外链入口（复用现有页面 + 政务/资讯外链）
@@ -645,61 +725,61 @@
       var shortName = d.name.replace(/区|市|县$/g, '');
       var shortEnc = encodeURIComponent(shortName);
       function extLink(url, icon, text, sub) {
-        return '<a class="dd-ext-link" href="' + url + '" target="_blank" rel="noopener">' +
-          '<span class="dd-ext-icon">' + icon + '</span>' +
-          '<span class="dd-ext-text"><span class="dd-ext-title">' + text + '</span>' +
-          (sub ? '<span class="dd-ext-sub">' + sub + '</span>' : '') + '</span>' +
-          '<span class="dd-ext-arrow">›</span>' +
+        return '<a class="p-feat-link" href="' + url + '" target="_blank" rel="noopener">' +
+          '<span class="p-feat-icon">' + icon + '</span>' +
+          '<span class="p-feat-text"><span class="p-feat-title">' + text + '</span>' +
+          (sub ? '<span class="p-feat-sub">' + sub + '</span>' : '') + '</span>' +
+          '<span class="p-feat-arrow">›</span>' +
         '</a>';
       }
       // 复用站内页：人物故事（articles.html 搜索） / 美食（food.html?city= 过滤）
-      var foodLink = '<a class="dd-ext-link" href="food.html?city=' + d.id + '">' +
-        '<span class="dd-ext-icon">🍜</span>' +
-        '<span class="dd-ext-text"><span class="dd-ext-title">' + d.name + '美食</span>' +
-        '<span class="dd-ext-sub">本地杭帮名菜 / 餐厅推荐</span></span>' +
-        '<span class="dd-ext-arrow">›</span></a>';
-      var storyLink = '<a class="dd-ext-link" href="articles.html?q=' + shortEnc + '">' +
-        '<span class="dd-ext-icon">📚</span>' +
-        '<span class="dd-ext-text"><span class="dd-ext-title">' + d.name + '人物故事</span>' +
-        '<span class="dd-ext-sub">杭州故事库 - ' + shortName + '相关文章</span></span>' +
-        '<span class="dd-ext-arrow">›</span></a>';
+      var foodLink = '<a class="p-feat-link" href="food.html?city=' + d.id + '">' +
+        '<span class="p-feat-icon">🍜</span>' +
+        '<span class="p-feat-text"><span class="p-feat-title">' + d.name + '美食</span>' +
+        '<span class="p-feat-sub">本地杭帮名菜 / 餐厅推荐</span></span>' +
+        '<span class="p-feat-arrow">›</span></a>';
+      var storyLink = '<a class="p-feat-link" href="articles.html?q=' + shortEnc + '">' +
+        '<span class="p-feat-icon">📚</span>' +
+        '<span class="p-feat-text"><span class="p-feat-title">' + d.name + '人物故事</span>' +
+        '<span class="p-feat-sub">杭州故事库 - ' + shortName + '相关文章</span></span>' +
+        '<span class="p-feat-arrow">›</span></a>';
       var policyHtml = extLink(d.govUrl, '🏛️', '区县政府官网', '政策文件 / 公告公示 / 办事指南');
       var newsHtml = extLink('https://www.baidu.com/s?wd=' + nameEnc + '+最新新闻', '📰', d.name + '新闻', '百度搜索最新资讯');
       var baiduBaike = extLink('https://baike.baidu.com/item/' + shortEnc, '📖', d.name + '百科', '百度百科词条');
       view.innerHTML =
-        '<div class="district-detail">' +
-          '<div class="dd-hero">' +
-            '<a class="dd-back" href="district.html">← 返回列表</a>' +
-            '<h1 class="dd-name">' + d.name + '</h1>' +
-            '<div class="dd-tag">' + d.tag + '</div>' +
-            '<div class="dd-stats">' +
-              '<span class="dd-stat">📍 ' + d.area + '</span>' +
-              '<span class="dd-stat">👥 ' + d.population + '</span>' +
-              '<span class="dd-stat">📮 ' + d.postcode + '</span>' +
-              '<span class="dd-stat">' + d.type + '</span>' +
+        '<div class="p-body">' +
+          '<div class="p-hero">' +
+            '<a class="p-back" href="district.html">← 返回列表</a>' +
+            '<h1 class="p-hero-title">' + d.name + '</h1>' +
+            '<div class="p-badge">' + d.tag + '</div>' +
+            '<div class="p-infogrid">' +
+              '<span class="p-inforow">📍 ' + d.area + '</span>' +
+              '<span class="p-inforow">👥 ' + d.population + '</span>' +
+              '<span class="p-inforow">📮 ' + d.postcode + '</span>' +
+              '<span class="p-inforow">' + d.type + '</span>' +
             '</div>' +
           '</div>' +
-          '<div class="dd-section">' +
+          '<div class="p-section">' +
             '<h2>📖 区县概况</h2>' +
-            '<div class="dd-desc">' + d.desc + '</div>' +
+            '<div class="p-card-desc">' + d.desc + '</div>' +
           '</div>' +
-          (highlights ? '<div class="dd-section"><h2>✨ 城市名片</h2><div class="dd-highlights">' + highlights + '</div></div>' : '') +
-          '<div class="dd-section">' +
+          (highlights ? '<div class="p-section"><h2>✨ 城市名片</h2><div class="p-hist">' + highlights + '</div></div>' : '') +
+          '<div class="p-section">' +
             '<h2>✨ 特色亮点</h2>' +
-            '<div class="dd-features">' + d.features + '</div>' +
+            '<div class="p-feat">' + d.features + '</div>' +
           '</div>' +
-          (scenicHtml ? '<div class="dd-section"><h2>🏞️ 在地景点</h2>' + scenicHtml + '</div>' : '') +
-          (landmarks ? '<div class="dd-section"><h2>🏢 重要地标</h2><div class="dd-landmarks">' + landmarks + '</div></div>' : '') +
-          '<div class="dd-section dd-ext-group">' +
+          (scenicHtml ? '<div class="p-section"><h2>🏞️ 在地景点</h2>' + scenicHtml + '</div>' : '') +
+          (landmarks ? '<div class="p-section"><h2>🏢 重要地标</h2><div class="p-cards">' + landmarks + '</div></div>' : '') +
+          '<div class="p-section p-feat-group">' +
             '<h2>🔗 在地入口</h2>' +
-            '<div class="dd-ext-list">' +
+            '<div class="p-feat-list">' +
               foodLink + storyLink +
               policyHtml + newsHtml + baiduBaike +
             '</div>' +
           '</div>' +
-          '<div class="dd-section">' +
+          '<div class="p-section">' +
             '<h2>🏛️ 区政府官网</h2>' +
-            '<a class="dd-gov-link" href="' + d.govUrl + '" target="_blank" rel="noopener">访问 ' + d.name + '人民政府 →</a>' +
+            '<a class="p-infogrid-link" href="' + d.govUrl + '" target="_blank" rel="noopener">访问 ' + d.name + '人民政府 →</a>' +
           '</div>' +
           // SEO JSON-LD
           '<script type="application/ld+json">' +
@@ -736,7 +816,7 @@
         } else {
           document.getElementById('listView').style.display = 'none';
           document.getElementById('detailView').style.display = 'block';
-          document.getElementById('detailView').innerHTML = '<div class="dd-error">未找到该区县，请返回列表选择</div>';
+          document.getElementById('detailView').innerHTML = '<div class="p-empty">未找到该区县，请返回列表选择</div>';
           return;
         }
       }
@@ -758,26 +838,28 @@
 
       // 筛选
       document.getElementById('filterBar').addEventListener('click', function (e) {
-        var btn = e.target.closest('.filter-btn');
+        var btn = e.target.closest('.p-badge');
         if (!btn) return;
-        document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+        document.querySelectorAll('.p-badge').forEach(function (b) { b.classList.remove('active'); });
         btn.classList.add('active');
         renderList(btn.dataset.type, document.getElementById('headerSearchInput').value);
       });
 
       // 搜索
       var searchInput = document.getElementById('headerSearchInput');
-      searchInput.addEventListener('input', function () {
-        var active = document.querySelector('.filter-btn.active');
-        renderList(active ? active.dataset.type : 'all', searchInput.value);
-      });
+      if (searchInput) {
+        searchInput.addEventListener('input', function () {
+          var active = document.querySelector('.p-badge.active');
+          renderList(active ? active.dataset.type : 'all', searchInput.value);
+        });
+      }
 
       // 路由变化（前进/后退）
       window.addEventListener('popstate', route);
 
       // 景点卡片点击：弹详情 + 尝试加载图片
       document.getElementById('detailView').addEventListener('click', function (e) {
-        var item = e.target.closest('.dd-scenic-item');
+        var item = e.target.closest('.p-cards-item');
         if (!item) return;
         var name = item.getAttribute('data-name');
         var district = item.getAttribute('data-district');
@@ -785,23 +867,23 @@
         // 弹详情：高德导航 + 百度攻略
         var amap = 'https://uri.amap.com/marker?position=&name=' + encodeURIComponent(district + name);
         var baidu = 'https://www.baidu.com/s?wd=' + encodeURIComponent(district + name + ' 攻略');
-        var html = '<div class="dd-modal-overlay" onclick="if(event.target===this)this.remove()">' +
-          '<div class="dd-modal-card">' +
-            '<div class="dd-modal-title">' + name + '</div>' +
-            '<div class="dd-modal-subtitle">' + district + '</div>' +
-            '<a class="dd-modal-btn amap" href="' + amap + '" target="_blank" rel="noopener">📍 高德地图导航</a>' +
-            '<a class="dd-modal-btn baidu" href="' + baidu + '" target="_blank" rel="noopener">🔍 百度搜攻略</a>' +
-            '<button class="dd-modal-close" onclick="this.closest(\'.dd-modal-overlay\').remove()">关闭</button>' +
+        var html = '<div class="p-cards-overlay" onclick="if(event.target===this)this.remove()">' +
+          '<div class="p-cards-card">' +
+            '<div class="p-cards-title">' + name + '</div>' +
+            '<div class="p-cards-subtitle">' + district + '</div>' +
+            '<a class="p-cards-btn amap" href="' + amap + '" target="_blank" rel="noopener">📍 高德地图导航</a>' +
+            '<a class="p-cards-btn baidu" href="' + baidu + '" target="_blank" rel="noopener">🔍 百度搜攻略</a>' +
+            '<button class="p-cards-close" onclick="this.closest(\'.p-cards-overlay\').remove()">关闭</button>' +
           '</div>' +
         '</div>';
-        var old = document.querySelector('.dd-modal-overlay');
+        var old = document.querySelector('.p-cards-overlay');
         if (old) old.remove();
         document.body.insertAdjacentHTML('beforeend', html);
       });
 
       // 图片懒加载：尝试加载，失败保留占位
       setTimeout(function () {
-        document.querySelectorAll('.dd-scenic-img[data-img]').forEach(function (box) {
+        document.querySelectorAll('.p-cards-img[data-img]').forEach(function (box) {
           var src = box.getAttribute('data-img');
           var img = new Image();
           img.onload = function () {

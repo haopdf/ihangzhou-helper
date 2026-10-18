@@ -6,15 +6,16 @@
   <title>杭州旅游大全 · iHangzhou</title>
   <meta name="description" content="杭州旅游大全：西湖十景、灵隐寺、西溪湿地、千岛湖、良渚、杭州古镇、赏花四季、寺庙古塔、夜景灯光一站齐，西湖/灵隐寺/西溪湿地/千岛湖/良渚/古镇/赏花/夜景全攻略">
   <meta name="keywords" content="杭州旅游,西湖十景,断桥残雪,苏堤春晓,三潭印月,灵隐寺,法喜寺,雷峰塔,保俶塔,六和塔,西溪湿地,千岛湖,良渚,塘栖古镇,龙门古镇,深澳,新叶,严州古城,超山梅花,太子湾郁金香,满觉陇桂花,花港银杏,钱江新城灯光秀,西湖音乐喷泉,运河夜景,河坊街,北山街,杭州赏花,杭州夜景,杭州寺庙,ihangzhou">
-  <meta name="theme-color" content="#0ea5e9">
+  <meta name="theme-color" content="#1f7a5a">
   <meta property="og:title" content="杭州旅游大全 · iHangzhou">
   <meta property="og:description" content="西湖 + 古镇 + 赏花 + 四季 + 夜景 一站齐，杭州旅游全攻略">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://www.ihangzhou.net/travel.html">
-  <link rel="stylesheet" href="css/style.css?v=20260921h">
-  <script src="js/layout.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <script src="js/scenic-data.js"></script>
   <style>
+:root{--primary:#0ea5e9;--primary-dark:#0369a1;}
     /* 旅游专题页专属样式（独立类名，全部以 .travel- / .tc- 前缀作用于本页卡片上下文） */
     /* Hero 区：与办事/美食/博物馆等频道页保持一致的 .ch-hero 品牌样式 */
     .travel-hero {
@@ -235,7 +236,7 @@
     }
 
     /* 古镇/赏花/夜景等不同分区色调 */
-    .travel-section[data-cat="lake"] .travel-card { --tc-bar: #0ea5e9; }
+    .travel-section[data-cat="lake"] .travel-card { --tc-bar: var(--primary); }
     .travel-section[data-cat="town"] .travel-card { --tc-bar: #f59e0b; }
     .travel-section[data-cat="flower"] .travel-card { --tc-bar: #ec4899; }
     .travel-section[data-cat="temple"] .travel-card { --tc-bar: #8b5cf6; }
@@ -897,7 +898,7 @@
   }
   </script>
 
-  <script src="js/app.js?v=20260928c"></script>
+  <script src="js/app.js?v=20261016e"></script>
 <script src="js/analytics.js?v=20260928c"></script>
   <script>
     if (window.IZ && IZ.layout) {

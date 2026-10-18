@@ -4,83 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>杭帮菜 · iHangzhou</title>
-  <meta name="theme-color" content="#d98324">
+  <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭帮菜经典名菜大全：西湖醋鱼、龙井虾仁、东坡肉、宋嫂鱼羹、叫花鸡、干炸响铃，正宗老店推荐与菜品文化">
-  <link rel="stylesheet" href="css/style.css?v=20261013c">
-  <script src="js/layout.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <script src="js/hangbang-data.js"></script>
   <style>
-    .hb-hero {
+:root{--primary:#d98324;--primary-dark:#b45309;}
+    .p-hero {
       position: relative; width: 100%; height: 200px; overflow: hidden;
-      background: linear-gradient(135deg, #d98324, #b84c1c);
+      background: linear-gradient(135deg, var(--primary), #b84c1c);
     }
-    .hb-hero img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
-    .hb-hero::after {
+    .p-hero img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+    .p-hero::after {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(transparent 30%, rgba(0,0,0,0.55));
     }
-    .hb-hero .hb-title-bar {
+    .p-hero .p-hero-inner-bar {
       position: absolute; bottom: 0; left: 0; right: 0;
       padding: 16px; z-index: 2; color: #fff;
     }
-    .hb-hero .hb-name { font-size: 24px; font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-    .hb-hero .hb-sub { font-size: 13px; opacity: 0.92; margin-top: 4px; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
-    .hb-body { padding: 16px; }
-    .hb-badge {
+    .p-hero .p-hero-title { font-size: 24px; font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+    .p-hero .p-hero-sub { font-size: 13px; opacity: 0.92; margin-top: 4px; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+    .p-body { padding: 16px; }
+    .p-badge {
       display: inline-block; font-size: 12px; padding: 4px 10px;
       background: #fef3c7; color: #b84c1c; border-radius: 10px; font-weight: 600; margin-bottom: 8px;
     }
-    .hb-history {
+    .p-hist {
       margin: 12px 0; padding: 12px; background: #fffaf5; border-radius: 10px;
-      border-left: 3px solid #d98324;
+      border-left: 3px solid var(--primary);
     }
-    .hb-history p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin: 0; }
-    .hb-history .hb-hist-icon { font-size: 14px; margin-right: 4px; }
-    .hb-section { margin: 20px 0 8px; }
-    .hb-section h3 {
+    .p-hist p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+    .p-hist .p-hist-icon { font-size: 14px; margin-right: 4px; }
+    .p-section { margin: 20px 0 8px; }
+    .p-section h3 {
       font-size: 16px; font-weight: 700; color: var(--text);
-      margin: 0 0 10px; padding-left: 8px; border-left: 3px solid #d98324;
+      margin: 0 0 10px; padding-left: 8px; border-left: 3px solid var(--primary);
     }
-    .hb-features { display: flex; flex-direction: column; gap: 6px; }
-    .hb-ft-item {
+    .p-feat { display: flex; flex-direction: column; gap: 6px; }
+    .p-feat-item {
       font-size: 13px; color: var(--text); padding: 8px 12px;
       background: var(--bg); border-radius: 8px;
       display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;
     }
-    .hb-ft-item::before { content: '\2713'; color: #d98324; font-weight: 700; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
-    .hb-restaurants { display: flex; flex-direction: column; gap: 8px; }
-    .hb-rest-item {
+    .p-feat-item::before { content: '\2713'; color: var(--primary); font-weight: 700; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+    .p-cards { display: flex; flex-direction: column; gap: 8px; }
+    .p-cards-item {
       display: flex; align-items: center; gap: 10px;
       padding: 12px; background: var(--bg-card); border-radius: 10px;
       border: 1px solid var(--border-light);
     }
-    .hb-rest-item .hb-ric { font-size: 22px; flex-shrink: 0; }
-    .hb-rest-item .hb-rib { flex: 1; }
-    .hb-rest-item .hb-rin { font-size: 14px; font-weight: 600; color: var(--text); }
-    .hb-rest-item .hb-ria { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
-    .hb-rest-item .hb-rip { font-size: 12px; color: #d98324; font-weight: 500; white-space: nowrap; }
-    .hb-guide {
+    .p-cards-item .p-card-ico { font-size: 22px; flex-shrink: 0; }
+    .p-cards-item .p-ik { flex: 1; }
+    .p-cards-item .p-card-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .p-cards-item .p-inforow { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+    .p-cards-item .p-card-desc { font-size: 12px; color: var(--primary); font-weight: 500; white-space: nowrap; }
+    .p-infogrid {
       font-size: 13px; color: var(--text-secondary);
       line-height: 1.8; margin: 8px 0 0;
     }
-    .hb-nearby { margin-top: 24px; border-top: 8px solid var(--bg); padding-top: 16px; }
-    .hb-nearby h3 { font-size: 15px; font-weight: 700; color: var(--text); margin: 0 0 12px; }
-    .hb-nearby-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .hb-nearby-card {
+    .p-neighbors { margin-top: 24px; border-top: 8px solid var(--bg); padding-top: 16px; }
+    .p-neighbors h3 { font-size: 15px; font-weight: 700; color: var(--text); margin: 0 0 12px; }
+    .p-neighbors-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .p-neighbors-card {
       display: flex; align-items: center; gap: 8px;
       padding: 10px; background: var(--bg); border-radius: 8px;
       text-decoration: none; color: var(--text); font-size: 13px; font-weight: 500;
     }
-    .hb-nearby-card:active { opacity: 0.7; }
-    .hb-nearby-card .nc-ic { font-size: 20px; }
-    .hb-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
-    .hb-empty .ei-big { font-size: 64px; margin-bottom: 16px; }
-    .hb-empty h2 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
+    .p-neighbors-card:active { opacity: 0.7; }
+    .p-neighbors-card .p-card-ico { font-size: 20px; }
+    .p-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .p-empty .p-hero-icon { font-size: 64px; margin-bottom: 16px; }
+    .p-empty h2 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
     @media (min-width: 768px) {
-      .hb-hero { height: 300px; }
-      .hb-body { max-width: 720px; margin: 0 auto; }
+      .p-hero { height: 300px; }
+      .p-body { max-width: 720px; margin: 0 auto; }
     }
   </style>
+<link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>
@@ -90,8 +92,8 @@
   </script>
 
   <div id="hangbangContainer">
-    <div class="hb-empty">
-      <div class="ei-big">\ud83e\udd62</div>
+    <div class="p-empty">
+      <div class="p-hero-icon">\ud83e\udd62</div>
       <h2>\u52a0\u8f7d\u4e2d...</h2>
     </div>
   </div>
@@ -103,8 +105,8 @@
       var headerTitle = document.getElementById('headerTitle');
 
       if (!data) {
-        container.innerHTML = '<div class="hb-empty">' +
-          '<div class="ei-big">\ud83e\udd62</div>' +
+        container.innerHTML = '<div class="p-empty">' +
+          '<div class="p-hero-icon">\ud83e\udd62</div>' +
           '<h2>\u672a\u627e\u5230\u8be5\u83dc\u54c1</h2>' +
           '<p style="margin:8px 0 16px;">ID: ' + (id || '(\u7a7a)') + '</p>' +
           '<a href="cat.html?c=food&s=%E6%9D%AD%E5%B9%B2%E8%8F%9C" class="btn" style="display:inline-block;padding:10px 20px;background:#d98324;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;">\u2190 \u8fd4\u56de\u676d\u5e72\u83dc</a>' +
@@ -120,58 +122,58 @@
       var html = '';
 
       /* ---- Hero ---- */
-      html += '<div class="hb-hero">';
-      html += '<div class="hb-title-bar">' +
-        '<div class="hb-name">' + data.name + '</div>' +
-        '<div class="hb-sub">' + data.subtitle + '</div>' +
+      html += '<div class="p-hero">';
+      html += '<div class="p-hero-inner-bar">' +
+        '<div class="p-hero-title">' + data.name + '</div>' +
+        '<div class="p-hero-sub">' + data.subtitle + '</div>' +
         '</div></div>';
 
-      html += '<div class="hb-body">';
+      html += '<div class="p-body">';
 
       /* ---- Badge ---- */
-      html += '<div class="hb-badge">' + data.badge + '</div>';
+      html += '<div class="p-badge">' + data.badge + '</div>';
       html += '<div style="clear:both"></div>';
 
       /* ---- 历史典故 ---- */
       if (data.history) {
-        html += '<div class="hb-history"><p><span class="hb-hist-icon">\ud83d\udcdc</span>' + data.history + '</p></div>';
+        html += '<div class="p-hist"><p><span class="p-hist-icon">\ud83d\udcdc</span>' + data.history + '</p></div>';
       }
 
       /* ---- 菜品特色 ---- */
       if (data.features && data.features.length) {
-        html += '<div class="hb-section"><h3>\u2728 \u83dc\u54c1\u7279\u8272</h3><div class="hb-features">';
+        html += '<div class="p-section"><h3>\u2728 \u83dc\u54c1\u7279\u8272</h3><div class="p-feat">';
         data.features.forEach(function(f) {
-          html += '<div class="hb-ft-item">' + f + '</div>';
+          html += '<div class="p-feat-item">' + f + '</div>';
         });
         html += '</div></div>';
       }
 
       /* ---- 推荐餐厅 ---- */
       if (data.restaurants && data.restaurants.length) {
-        html += '<div class="hb-section"><h3>\ud83c\udfdb\ufe0f \u63a8\u8350\u9910\u5385</h3><div class="hb-restaurants">';
+        html += '<div class="p-section"><h3>\ud83c\udfdb\ufe0f \u63a8\u8350\u9910\u5385</h3><div class="p-cards">';
         data.restaurants.forEach(function(r) {
-          html += '<div class="hb-rest-item">' +
-            '<span class="hb-ric">\ud83c\udf7d\ufe0f</span>' +
-            '<div class="hb-rib"><div class="hb-rin">' + r.name + '</div>' +
-            '<div class="hb-ria">' + r.address + '</div></div>' +
-            '<span class="hb-rip">' + r.price + '</span>' +
+          html += '<div class="p-cards-item">' +
+            '<span class="p-card-ico">\ud83c\udf7d\ufe0f</span>' +
+            '<div class="p-ik"><div class="p-card-name">' + r.name + '</div>' +
+            '<div class="p-inforow">' + r.address + '</div></div>' +
+            '<span class="p-card-desc">' + r.price + '</span>' +
             '</div>';
         });
         html += '</div></div>';
       }
 
       /* ---- 详细介绍 ---- */
-      html += '<div class="hb-section"><h3>\ud83d\udcd6 \u54c8\u83dc\u70b9\u8bc4</h3><p class="hb-guide">' + data.guide + '</p></div>';
+      html += '<div class="p-section"><h3>\ud83d\udcd6 \u54c8\u83dc\u70b9\u8bc4</h3><p class="p-infogrid">' + data.guide + '</p></div>';
 
       /* ---- 其他名菜推荐 ---- */
       var allKeys = window.HANGBANG_DISHES ? Object.keys(window.HANGBANG_DISHES) : [];
       var nearby = allKeys.filter(function(k) { return k !== id; }).slice(0, 4);
       if (nearby.length) {
-        html += '<div class="hb-nearby"><h3>\ud83e\udd62 \u5176\u4ed6\u540d\u83dc\u63a8\u8350</h3><div class="hb-nearby-grid">';
+        html += '<div class="p-neighbors"><h3>\ud83e\udd62 \u5176\u4ed6\u540d\u83dc\u63a8\u8350</h3><div class="p-neighbors-grid">';
         nearby.forEach(function(k) {
           var v = window.HANGBANG_DISHES[k];
-          html += '<a class="hb-nearby-card" href="hangbang.html?id=' + k + '">' +
-            '<span class="nc-ic">' + v.badge.split(' ')[0] + '</span>' +
+          html += '<a class="p-neighbors-card" href="hangbang.html?id=' + k + '">' +
+            '<span class="p-card-ico">' + v.badge.split(' ')[0] + '</span>' +
             '<span>' + v.name + '</span></a>';
         });
         html += '</div></div>';

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta name="description" content="杭州街道故事，河坊街、南山路、延安路、湖滨路，每条街道都是城市记忆，所有链接指向官方渠道。">
   <meta name="keywords" content="杭州街道,河坊街,南山路,延安路,湖滨路,杭州老街,ihangzhou">
-  <meta name="theme-color" content="#0ea5e9">
+  <meta name="theme-color" content="#1f7a5a">
   <meta property="og:title" content="街道故事 · iHangzhou">
   <meta property="og:description" content="杭州街道故事，河坊街、南山路、延安路、湖滨路，每条街道都是城市记忆">
   <meta property="og:type" content="website">
@@ -13,9 +13,10 @@
   <link rel="canonical" href="https://www.ihangzhou.net/street.html">
   <link rel="manifest" href="manifest.json">
   <title>街道故事 · iHangzhou 杭州生活助手</title>
-  <link rel="stylesheet" href="css/style.css?v=20260921h">
-  <script src="js/layout.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+<style>:root{--primary:#6b7280;--primary-dark:#374151}</style><link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>
@@ -69,7 +70,8 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=20260928c"></script>
+  <script src="js/channel-route.js?v=20261016e"></script>
+  <script src="js/app.js?v=20261016e"></script>
 <script src="js/analytics.js?v=20260928c"></script>
   <script>
     // 频道专题页逻辑
@@ -191,6 +193,9 @@
         // 相关文章区域
         fetchRelatedArticles(chips, category.name);
 
+        // id 路由：?id=xxx 直达筛选
+        if (window.applyChannelRoute) category = applyChannelRoute(category, {});
+
         // 渲染标题与数量
         document.getElementById('channelTitle').textContent = category.name + ' · 全部服务';
         document.getElementById('channelCount').textContent = '共 ' + category.items.length + ' 项';
@@ -227,7 +232,7 @@
           relEl.innerHTML = related.map(function (rid) {
             var rcat = DATA.categories.find(function (c) { return c.id === rid; });
             if (!rcat) return '';
-            return '<a class="channel-item" href="' + rid + '.html">' +
+            return '<a class="p-neighbor" href="' + rid + '.html">' +
               '<span class="ch-icon">' + rcat.icon + '</span>' +
               '<span class="ch-name">' + rcat.name + '</span>' +
               '</a>';

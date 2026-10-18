@@ -5,19 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta name="description" content="杭州老字号：奎元馆、楼外楼、知味观、胡庆余堂">
   <meta name="keywords" content="杭州老字号,奎元馆,楼外楼,知味观,胡庆余堂">
-  <meta name="theme-color" content="#b71c1c">
+  <meta name="theme-color" content="#1f7a5a">
   <title>老字号 - iHangzhou</title>
-  <link rel="stylesheet" href="css/style.css?v=20260921h">
-  <script src="js/layout.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <style>
-    .lz-h{font-size:28px;font-weight:700;color:#b71c1c;margin:2px 0 4px}
-    .lz-s{font-size:15px;color:#666;margin-bottom:12px}
-    .lz-cr{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;display:inline-block;background:#ffebee;color:#b71c1c;margin-bottom:8px}
-    .lz-sec{background:#fff;border-radius:14px;padding:16px;margin:12px 16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-    .lz-sec h3{font-size:15px;font-weight:600;margin:0 0 8px;display:flex;align-items:center;gap:6px}
-    .lz-fg{display:inline-block;padding:3px 8px;background:#ffebee;border-radius:8px;font-size:11px;color:#b71c1c;margin:3px 4px 0 0}
-    .lz-bk{display:block;text-align:center;padding:12px;background:#b71c1c;color:#fff;border-radius:24px;font-size:14px;text-decoration:none;max-width:180px;margin:16px auto}
+:root{--primary:#b71c1c;--primary-dark:#7f1d1d;}
+    .p-hist{font-size:28px;font-weight:700;color:var(--primary);margin:2px 0 4px}
+    .p-section{font-size:15px;color:#666;margin-bottom:12px}
+    .p-badge{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;display:inline-block;background:#ffebee;color:var(--primary);margin-bottom:8px}
+    .p-section{background:#fff;border-radius:14px;padding:16px;margin:12px 16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    .p-section h3{font-size:15px;font-weight:600;margin:0 0 8px;display:flex;align-items:center;gap:6px}
+    .p-feat{display:inline-block;padding:3px 8px;background:#ffebee;border-radius:8px;font-size:11px;color:var(--primary);margin:3px 4px 0 0}
+    .p-back{display:block;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;max-width:180px;margin:16px auto}
   </style>
+<link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>
@@ -28,7 +30,7 @@
   <div class="page active" id="pageChannel">
     <div id="detailContent" style="padding:16px;"></div>
     <div style="text-align:center;padding:24px 16px 48px">
-      <a href="index.html" class="lz-bk">← 返回首页</a>
+      <a href="index.html" class="p-back">← 返回首页</a>
     </div>
   </div>
   <script src="js/laozihao-data.js"></script>
@@ -45,20 +47,20 @@
       var nameStr=data.name;
       var subStr=data.subtitle||'';
       var h='';
-      if(data.badge) h+='<span class="lz-cr">'+data.badge+'</span>';
-      h+='<div class="lz-h">'+nameStr+'</div>';
-      h+='<div class="lz-s">'+subStr+'</div>';
+      if(data.badge) h+='<span class="p-badge">'+data.badge+'</span>';
+      h+='<div class="p-hist">'+nameStr+'</div>';
+      h+='<div class="p-section">'+subStr+'</div>';
       if(data.period) h+='<div style="background:#fff8e1;border-radius:10px;padding:10px 14px;margin:8px 16px;font-size:13px;color:#f57f17">📅 创立时间：'+data.period+'</div>';
       if(data.history){
-        h+='<div class="lz-sec"><h3>� 品牌故事</h3><div style="font-size:14px;color:#444;line-height:1.8">'+data.history+'</div></div>';
+        h+='<div class="p-section"><h3>� 品牌故事</h3><div style="font-size:14px;color:#444;line-height:1.8">'+data.history+'</div></div>';
       }
       if(data.features&&data.features.length){
-        h+='<div class="lz-sec"><h3>✨ 特色亮点</h3><div style="display:flex;flex-wrap:wrap;gap:6px">';
-        for(var i=0;i<data.features.length;i++){h+='<span class="lz-fg">'+data.features[i]+'</span>'}
+        h+='<div class="p-section"><h3>✨ 特色亮点</h3><div style="display:flex;flex-wrap:wrap;gap:6px">';
+        for(var i=0;i<data.features.length;i++){h+='<span class="p-feat">'+data.features[i]+'</span>'}
         h+='</div></div>';
       }
       if(data.shops&&data.shops.length){
-        h+='<div class="lz-sec"><h3>📍 门店信息</h3>';
+        h+='<div class="p-section"><h3>📍 门店信息</h3>';
         for(var i=0;i<data.shops.length;i++){
           var s=data.shops[i];
           h+='<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f5f5f5">';
@@ -69,7 +71,7 @@
         h+='</div>';
       }
       if(data.spots&&data.spots.length){
-        h+='<div class="lz-sec"><h3>📍 主要看点</h3>';
+        h+='<div class="p-section"><h3>📍 主要看点</h3>';
         for(var i=0;i<data.spots.length;i++){
           var s=data.spots[i];
           h+='<div style="padding:8px 0;border-bottom:1px solid #f5f5f5"><div style="font-size:14px;font-weight:600">'+s.n+'</div>';
@@ -80,7 +82,7 @@
       }
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
       if(nb.length){
-        h+='<div class="lz-sec"><h3>🏮 更多老字号</h3><div style="display:flex;flex-wrap:wrap;gap:8px">';
+        h+='<div class="p-section"><h3>🏮 更多老字号</h3><div style="display:flex;flex-wrap:wrap;gap:8px">';
         for(var i=0;i<nb.length;i++){
           var k=nb[i];
           var v=window.LAOZHAO_DATA[k];

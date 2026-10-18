@@ -4,41 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>杭州寺庙 · iHangzhou</title>
-  <meta name="theme-color" content="#b45309">
+  <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州寺庙祈福指南：灵隐寺、净慈寺、径山寺、法喜寺、永福禅寺、韬光寺、香积寺">
-  <link rel="stylesheet" href="css/style.css?v=20261013c">
-  <script src="js/layout.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <script src="js/temple-data.js"></script>
   <style>
-    .tp-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,#b45309,#92400e)}
-    .tp-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55))}
-    .tp-hero .tp-tb{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
-    .tp-hero .tp-name{font-size:24px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
-    .tp-hero .tp-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
-    .tp-body{padding:16px}
-    .tp-badge{display:inline-block;font-size:12px;padding:4px 10px;background:#fef3c7;color:#92400e;border-radius:10px;font-weight:600;margin-bottom:8px}
-    .tp-period{float:right;font-size:12px;color:var(--text-muted);margin-bottom:8px}
-    .tp-hist{margin:12px 0;padding:12px;background:#fffaf5;border-radius:10px;border-left:3px solid #b45309}
-    .tp-hist p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0}
-    .tp-section{margin:20px 0 8px}
-    .tp-section h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid #b45309}
-    .tp-ft{display:flex;flex-direction:column;gap:6px}
-    .tp-ft i{font-size:13px;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:8px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
-    .tp-ft i::before{content:'\2713';color:#b45309;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
-    .tp-guide{display:flex;flex-direction:column;gap:0;border:1px solid var(--border-light);border-radius:10px;overflow:hidden;margin:12px 0}
-    .tp-gi{display:flex;padding:10px 12px;border-bottom:1px solid var(--border-light);background:var(--bg-card)}
-    .tp-gi:last-child{border-bottom:none}
-    .tp-gi .gk{font-size:12px;font-weight:600;color:var(--text-secondary);min-width:56px;flex-shrink:0}
-    .tp-gi .gv{font-size:13px;color:var(--text)}
-    .tp-nb{margin-top:24px;border-top:8px solid var(--bg);padding-top:16px}
-    .tp-nb h3{font-size:15px;font-weight:700;margin:0 0 12px}
-    .tp-ng{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-    .tp-nc{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500}
-    .tp-nc:active{opacity:.7}
-    .tp-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
-    .tp-empty .ei-big{font-size:64px;margin-bottom:16px}
-    @media(min-width:768px){.tp-hero{height:300px}.tp-body{max-width:720px;margin:0 auto}}
+:root{--primary:#b45309;--primary-dark:#92400e;}
+    .p-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,var(--primary),var(--primary-dark))}
+    .p-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55))}
+    .p-hero .p-hero-inner{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
+    .p-hero .p-hero-title{font-size:24px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+    .p-hero .p-hero-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+    .p-body{padding:16px}
+    .p-badge{display:inline-block;font-size:12px;padding:4px 10px;background:#fef3c7;color:var(--primary-dark);border-radius:10px;font-weight:600;margin-bottom:8px}
+    .p-badge{float:right;font-size:12px;color:var(--text-muted);margin-bottom:8px}
+    .p-hist{margin:12px 0;padding:12px;background:#fffaf5;border-radius:10px;border-left:3px solid var(--primary)}
+    .p-hist p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0}
+    .p-section{margin:20px 0 8px}
+    .p-section h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid var(--primary)}
+    .p-feat{display:flex;flex-direction:column;gap:6px}
+    .p-feat i{font-size:13px;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:8px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+    .p-feat i::before{content:'\2713';color:var(--primary);font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
+    .p-infogrid{display:flex;flex-direction:column;gap:0;border:1px solid var(--border-light);border-radius:10px;overflow:hidden;margin:12px 0}
+    .p-inforow{display:flex;padding:10px 12px;border-bottom:1px solid var(--border-light);background:var(--bg-card)}
+    .p-inforow:last-child{border-bottom:none}
+    .p-inforow .gk{font-size:12px;font-weight:600;color:var(--text-secondary);min-width:56px;flex-shrink:0}
+    .p-inforow .gv{font-size:13px;color:var(--text)}
+    .p-neighbors{margin-top:24px;border-top:8px solid var(--bg);padding-top:16px}
+    .p-neighbors h3{font-size:15px;font-weight:700;margin:0 0 12px}
+    .p-neighbor-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .p-neighbor{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500}
+    .p-neighbor:active{opacity:.7}
+    .p-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
+    .p-empty .p-hero-icon{font-size:64px;margin-bottom:16px}
+    @media(min-width:768px){.p-hero{height:300px}.p-hero-inner{max-width:1180px;margin:0 auto}.p-body{max-width:1180px;margin:0 auto}}
   </style>
+<link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>
@@ -46,40 +48,40 @@
     window.IZ_SKIP_APP_INIT=true;
     window.IZ_SKIP_APP_THEME=true;
   </script>
-  <div id="templeContainer"><div class="tp-empty"><div class="ei-big">�️</div><h2>加载中...</h2></div></div>
+  <div id="templeContainer"><div class="p-empty"><div class="p-hero-icon">�️</div><h2>加载中...</h2></div></div>
   <script>
     function renderTemple(id){
       var data=window.TEMPLE_DATA?window.TEMPLE_DATA[id]:null;
       var c=document.getElementById('templeContainer');
       var ht=document.getElementById('headerTitle');
       if(!data){
-        c.innerHTML='<div class="tp-empty"><div class="ei-big">⛩️</div><h2>未找到该寺庙</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=culture&s=%E5%AF%BA%E5%BA%99" class="btn" style="display:inline-block;padding:10px 20px;background:#b45309;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">文博首页</a></div>';
+        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">⛩️</div><h2>未找到该寺庙</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=culture&s=%E5%AF%BA%E5%BA%99" class="btn" style="display:inline-block;padding:10px 20px;background:#b45309;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">文博首页</a></div>';
         if(ht)ht.textContent='⛩️ 寺庙';
         return;
       }
       document.title=data.name+' · 寺庙 · iHangzhou';
       if(ht)ht.textContent='⛩️ '+data.name;
-      var h='<div class="tp-hero"><div class="tp-tb"><div class="tp-name">'+data.name+'</div><div class="tp-sub">'+data.subtitle+'</div></div></div><div class="tp-body">';
-      h+='<div class="tp-badge">'+data.badge+' '+data.name+'</div>';
-      if(data.period)h+='<span class="tp-period">'+data.period+'</span>';
+      var h='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">'+data.name+'</div><div class="p-hero-sub">'+data.subtitle+'</div></div></div><div class="p-body">';
+      h+='<div class="p-badge">'+data.badge+' '+data.name+'</div>';
+      if(data.period)h+='<span class="p-badge">'+data.period+'</span>';
       h+='<div style="clear:both"></div>';
-      if(data.history)h+='<div class="tp-hist"><p>📜 '+data.history+'</p></div>';
+      if(data.history)h+='<div class="p-hist"><p>📜 '+data.history+'</p></div>';
       if(data.deity)h+='<p style="font-size:13px;color:var(--text-secondary);margin:0 0 12px">主奉：<b>'+data.deity+'</b></p>';
       if(data.features&&data.features.length){
-        h+='<div class="tp-section"><h3>✨ 特色</h3><div class="tp-ft">';
+        h+='<div class="p-section"><h3>✨ 特色</h3><div class="p-feat">';
         data.features.forEach(function(f){h+='<i>'+f+'</i>'});
         h+='</div></div>';
       }
       if(data.guide&&data.guide.length){
-        h+='<div class="tp-section"><h3>📋 参观指南</h3><div class="tp-guide">';
-        data.guide.forEach(function(g){h+='<div class="tp-gi"><span class="gk">'+g.k+'</span><span class="gv">'+g.v+'</span></div>'});
+        h+='<div class="p-section"><h3>📋 参观指南</h3><div class="p-infogrid">';
+        data.guide.forEach(function(g){h+='<div class="p-inforow"><span class="gk">'+g.k+'</span><span class="gv">'+g.v+'</span></div>'});
         h+='</div></div>';
       }
       var keys=window.TEMPLE_DATA?Object.keys(window.TEMPLE_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
       if(nb.length){
-        h+='<div class="tp-nb"><h3>�️ 更多寺庙</h3><div class="tp-ng">';
-        nb.forEach(function(k){var v=window.TEMPLE_DATA[k];h+='<a class="tp-nc" href="temple.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});
+        h+='<div class="p-neighbors"><h3>�️ 更多寺庙</h3><div class="p-neighbor-grid">';
+        nb.forEach(function(k){var v=window.TEMPLE_DATA[k];h+='<a class="p-neighbor" href="temple.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});
         h+='</div></div>';
       }
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=culture&s=%E5%AF%BA%E5%BA%99" style="flex:1;text-align:center;padding:12px;background:#b45309;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 寺庙频道</a><a href="museum.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">文博首页</a></div>';

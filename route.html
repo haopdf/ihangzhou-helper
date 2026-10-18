@@ -4,77 +4,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>路线攻略 · iHangzhou</title>
-  <meta name="theme-color" content="#7c3aed">
+  <meta name="theme-color" content="#1f7a5a">
   <meta name="description" content="杭州路线攻略：西湖一日游、灵隐两日游、千岛湖自驾、环湖骑行、山间徒步、摄影机位、杭黄高铁沿游、全景地图">
-  <link rel="stylesheet" href="css/style.css?v=20261013c">
-  <script src="js/layout.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <script src="js/route-data.js"></script>
   <style>
-    .rt-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,#7c3aed,#5b21b6)}
-    .rt-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55))}
-    .rt-hero .rt-tb{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
-    .rt-hero .rt-name{font-size:24px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
-    .rt-hero .rt-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
-    .rt-body{padding:16px}
-    .rt-badge{display:inline-block;font-size:12px;padding:4px 10px;background:#ede9fe;color:#5b21b6;border-radius:10px;font-weight:600;margin-bottom:8px}
-    .rt-meta{font-size:12px;color:var(--text-muted);float:right}
-    .rt-hist{margin:12px 0;padding:12px;background:#f5f3ff;border-radius:10px;border-left:3px solid #7c3aed}
-    .rt-hist p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0}
-    .rt-section{margin:20px 0 8px}
-    .rt-section h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid #7c3aed}
-    .rt-ft{display:flex;flex-direction:column;gap:6px}
-    .rt-ft i{font-size:13px;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:8px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
-    .rt-ft i::before{content:'\2713';color:#7c3aed;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
-    .rt-guide{font-size:13px;color:var(--text-secondary);line-height:1.8;margin:8px 0 0}
-    .rt-spots{display:flex;flex-direction:column;gap:8px}
-    .rt-si{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg-card);border-radius:10px;border:1px solid var(--border-light)}
-    .rt-si .rt-sic{font-size:22px;flex-shrink:0}
-    .rt-si .rt-sn{font-size:14px;font-weight:600;color:var(--text)}
-    .rt-si .rt-sd{font-size:12px;color:var(--text-secondary);margin-top:2px}
-    .rt-tips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-    .rt-tip{font-size:12px;padding:4px 10px;background:#fef3c7;color:#92400e;border-radius:8px;font-weight:600}
-    .rt-nb{margin-top:24px;border-top:8px solid var(--bg);padding-top:16px}
-    .rt-nb h3{font-size:15px;font-weight:700;margin:0 0 12px}
-    .rt-ng{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-    .rt-nc{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500}
-    .rt-nc:active{opacity:.7}
-    .rt-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
-    .rt-empty .ei-big{font-size:64px;margin-bottom:16px}
-    @media(min-width:768px){.rt-hero{height:300px}.rt-body{max-width:720px;margin:0 auto}}
+:root{--primary:#7c3aed;--primary-dark:#5b21b6;}
+    .p-hero{position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,var(--primary),var(--primary-dark))}
+    .p-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.55))}
+    .p-hero .p-hero-inner{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
+    .p-hero .p-hero-title{font-size:24px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+    .p-hero .p-hero-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+    .p-body{padding:16px}
+    .p-badge{display:inline-block;font-size:12px;padding:4px 10px;background:#ede9fe;color:var(--primary-dark);border-radius:10px;font-weight:600;margin-bottom:8px}
+    .p-inforow{font-size:12px;color:var(--text-muted);float:right}
+    .p-hist{margin:12px 0;padding:12px;background:#f5f3ff;border-radius:10px;border-left:3px solid var(--primary)}
+    .p-hist p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0}
+    .p-section{margin:20px 0 8px}
+    .p-section h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid var(--primary)}
+    .p-feat{display:flex;flex-direction:column;gap:6px}
+    .p-feat i{font-size:13px;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:8px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+    .p-feat i::before{content:'\2713';color:var(--primary);font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
+    .p-infogrid{font-size:13px;color:var(--text-secondary);line-height:1.8;margin:8px 0 0}
+    .p-cards{display:flex;flex-direction:column;gap:8px}
+    .p-inforow{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg-card);border-radius:10px;border:1px solid var(--border-light)}
+    .p-inforow .p-ik{font-size:22px;flex-shrink:0}
+    .p-inforow .p-iv{font-size:14px;font-weight:600;color:var(--text)}
+    .p-inforow .p-card-desc{font-size:12px;color:var(--text-secondary);margin-top:2px}
+    .p-feat{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+    .p-tip{font-size:12px;padding:4px 10px;background:#fef3c7;color:#92400e;border-radius:8px;font-weight:600}
+    .p-neighbors{margin-top:24px;border-top:8px solid var(--bg);padding-top:16px}
+    .p-neighbors h3{font-size:15px;font-weight:700;margin:0 0 12px}
+    .p-neighbor-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .p-neighbor{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500}
+    .p-neighbor:active{opacity:.7}
+    .p-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
+    .p-empty .p-hero-icon{font-size:64px;margin-bottom:16px}
+    @media(min-width:768px){.p-hero{height:300px}.p-body{max-width:720px;margin:0 auto}}
   </style>
+<link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>window.IHZ_PAGE={title:'路线攻略',icon:'�️'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
-  <div id="routeContainer"><div class="rt-empty"><div class="ei-big">�</div><h2>加载中...</h2></div></div>
+  <div id="routeContainer"><div class="p-empty"><div class="p-hero-icon">�</div><h2>加载中...</h2></div></div>
   <script>
     function renderRoute(id){
       var data=window.ROUTE_DATA?window.ROUTE_DATA[id]:null;
       var c=document.getElementById('routeContainer');
       var ht=document.getElementById('headerTitle');
       if(!data){
-        c.innerHTML='<div class="rt-empty"><div class="ei-big">�️</div><h2>未找到该路线</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=travel&s=%E8%B7%AF%E7%BA%BF%E6%94%BB%E7%95%A5" class="btn" style="display:inline-block;padding:10px 20px;background:#7c3aed;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回路线</a> <a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">旅游首页</a></div>';
+        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">�️</div><h2>未找到该路线</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=travel&s=%E8%B7%AF%E7%BA%BF%E6%94%BB%E7%95%A5" class="btn" style="display:inline-block;padding:10px 20px;background:#7c3aed;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回路线</a> <a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">旅游首页</a></div>';
         if(ht)ht.textContent='🗺️ 路线攻略';
         return;
       }
       document.title=data.name+' · 路线攻略 · iHangzhou';
       if(ht)ht.textContent='🗺️ '+data.name;
-      var h='<div class="rt-hero"><div class="rt-tb"><div class="rt-name">'+data.name+'</div><div class="rt-sub">'+data.subtitle+'</div></div></div><div class="rt-body">';
-      h+='<div class="rt-badge">'+data.badge+' '+data.name+'</div>';
-      if(data.duration)h+='<span class="rt-meta">'+data.duration+'</span>';
+      var h='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">'+data.name+'</div><div class="p-hero-sub">'+data.subtitle+'</div></div></div><div class="p-body">';
+      h+='<div class="p-badge">'+data.badge+' '+data.name+'</div>';
+      if(data.duration)h+='<span class="p-inforow">'+data.duration+'</span>';
       h+='<div style="clear:both"></div>';
       if(data.area){
         h+='<div style="font-size:13px;color:var(--text-secondary);padding:6px 12px;background:#f5f3ff;border-radius:8px;margin:8px 0">';
         h+='<span style="color:#5b21b6;font-weight:600">区域：</span>'+data.area;
         h+='</div>';
       }
-      if(data.history)h+='<div class="rt-hist"><p>📜 '+data.history+'</p></div>';
-      if(data.features&&data.features.length){h+='<div class="rt-section"><h3>✨ 路线特点</h3><div class="rt-ft">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
-      if(data.tips&&data.tips.length){h+='<div class="rt-section"><h3>� 贴士</h3><div class="rt-tips">';data.tips.forEach(function(t){h+='<span class="rt-tip">'+t+'</span>'});h+='</div></div>';}
-      if(data.spots&&data.spots.length){h+='<div class="rt-section"><h3>📍 途经点</h3><div class="rt-spots">';data.spots.forEach(function(s){h+='<div class="rt-si"><span class="rt-sic">📍</span><div><div class="rt-sn">'+s.n+'</div><div class="rt-sd">'+s.d+'</div></div></div>'});h+='</div></div>';}
-      if(data.guide)h+='<div class="rt-section"><h3>📖 行程安排</h3><p class="rt-guide">'+data.guide+'</p></div>';
+      if(data.history)h+='<div class="p-hist"><p>📜 '+data.history+'</p></div>';
+      if(data.features&&data.features.length){h+='<div class="p-section"><h3>✨ 路线特点</h3><div class="p-feat">';data.features.forEach(function(f){h+='<i>'+f+'</i>'});h+='</div></div>';}
+      if(data.tips&&data.tips.length){h+='<div class="p-section"><h3>� 贴士</h3><div class="p-feat">';data.tips.forEach(function(t){h+='<span class="p-tip">'+t+'</span>'});h+='</div></div>';}
+      if(data.spots&&data.spots.length){h+='<div class="p-section"><h3>📍 途经点</h3><div class="p-cards">';data.spots.forEach(function(s){h+='<div class="p-inforow"><span class="p-ik">📍</span><div><div class="p-iv">'+s.n+'</div><div class="p-card-desc">'+s.d+'</div></div></div>'});h+='</div></div>';}
+      if(data.guide)h+='<div class="p-section"><h3>📖 行程安排</h3><p class="p-infogrid">'+data.guide+'</p></div>';
       var keys=window.ROUTE_DATA?Object.keys(window.ROUTE_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
-      if(nb.length){h+='<div class="rt-nb"><h3>🗺️ 更多路线</h3><div class="rt-ng">';nb.forEach(function(k){var v=window.ROUTE_DATA[k];h+='<a class="rt-nc" href="route.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
+      if(nb.length){h+='<div class="p-neighbors"><h3>🗺️ 更多路线</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.ROUTE_DATA[k];h+='<a class="p-neighbor" href="route.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
       h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=travel&s=%E8%B7%AF%E7%BA%BF%E6%94%BB%E7%95%A5" style="flex:1;text-align:center;padding:12px;background:#7c3aed;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 路线频道</a><a href="travel.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">旅游首页</a></div>';
       h+='</div>';c.innerHTML=h;
     }

@@ -4,42 +4,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta name="description" content="杭州生活指南：消费优惠、租房、房产、商圈、生活缴费、家装、相亲交友、运动健身一站直达。">
-  <meta name="theme-color" content="#0ea5e9">
+  <meta name="theme-color" content="#1f7a5a">
   <meta property="og:title" content="杭州生活 · iHangzhou">
   <meta property="og:description" content="杭州生活指南：消费优惠、租房房产、商圈购物、缴费、家装、相亲、健身一站直达">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="iHangzhou 杭州生活助手">
   <title>杭州生活 · iHangzhou</title>
-  <link rel="stylesheet" href="css/style.css?v=20260921h">
-  <script src="js/layout.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
   <style>
-    .lf-hero{position:relative;width:100%;height:180px;overflow:hidden;background:linear-gradient(135deg,#0ea5e9,#0284c7)}
-    .lf-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.5))}
-    .lf-hero .lf-tb{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
-    .lf-hero .lf-name{font-size:22px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
-    .lf-hero .lf-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
-    .lf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:16px}
-    .lf-card{display:flex;flex-direction:column;padding:14px;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-light);text-decoration:none;gap:8px;color:var(--text)}
-    .lf-card:active{opacity:.7}
-    .lf-card .lf-ic{font-size:28px}
-    .lf-card .lf-nm{font-size:14px;font-weight:700}
-    .lf-card .lf-ds{font-size:11px;color:var(--text-secondary);line-height:1.4}
-    .lf-tips{margin:0 16px 12px;padding:12px;background:#f0f9ff;border-radius:10px;border-left:3px solid #0ea5e9;font-size:13px;color:var(--text-secondary);line-height:1.6}
-    .lf-links{padding:12px 16px}
-    .lf-links h3{font-size:15px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid #0ea5e9}
-    .lf-link{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-light)}
-    .lf-link:last-child{border-bottom:none}
-    .lf-link .lf-ln{font-size:13px;font-weight:500}
-    .lf-link .lf-ld{font-size:11px;color:var(--text-muted);margin-top:2px}
-    .lf-link a{font-size:12px;color:var(--primary);text-decoration:none;white-space:nowrap;padding-left:8px}
-    .lf-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
-    @media(min-width:768px){.lf-grid{grid-template-columns:repeat(3,1fr)}}
+:root{--primary:#0ea5e9;--primary-dark:#0369a1;}
+    .p-hero{position:relative;width:100%;height:180px;overflow:hidden;background:linear-gradient(135deg,var(--primary),#0284c7)}
+    .p-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.5))}
+    .p-hero .p-hero-inner{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2;color:#fff}
+    .p-hero .p-hero-title{font-size:22px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+    .p-hero .p-hero-sub{font-size:13px;opacity:.92;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+    .p-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:16px}
+    .p-card{display:flex;flex-direction:column;padding:14px;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-light);text-decoration:none;gap:8px;color:var(--text)}
+    .p-card:active{opacity:.7}
+    .p-card .p-card-ico{font-size:28px}
+    .p-card .p-neighbor-grid{font-size:14px;font-weight:700}
+    .p-card .p-card-desc{font-size:11px;color:var(--text-secondary);line-height:1.4}
+    .p-feat{margin:0 16px 12px;padding:12px;background:#f0f9ff;border-radius:10px;border-left:3px solid var(--primary);font-size:13px;color:var(--text-secondary);line-height:1.6}
+    .p-cards{padding:12px 16px}
+    .p-cards h3{font-size:15px;font-weight:700;margin:0 0 10px;padding-left:8px;border-left:3px solid var(--primary)}
+    .p-neighbor{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-light)}
+    .p-neighbor:last-child{border-bottom:none}
+    .p-neighbor .p-card-name{font-size:13px;font-weight:500}
+    .p-neighbor .p-iv{font-size:11px;color:var(--text-muted);margin-top:2px}
+    .p-neighbor a{font-size:12px;color:var(--primary);text-decoration:none;white-space:nowrap;padding-left:8px}
+    .p-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
+    @media(min-width:768px){.p-cards{grid-template-columns:repeat(3,1fr);max-width:1180px;margin:0 auto}}
   </style>
+  <style>
+    #lfContainer .p-cards{padding:16px}
+    #lfContainer .p-hero .p-hero-inner{max-width:1180px;margin:0 auto}
+  </style>
+<link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>window.IHZ_PAGE={title:'杭州生活',icon:'🏠'};window.IZ_SKIP_APP_INIT=true;window.IZ_SKIP_APP_THEME=true;</script>
-  <div id="lfContainer"><div class="lf-empty">加载中...</div></div>
+  <div id="lfContainer"><div class="p-empty">加载中...</div></div>
   <script src="js/life-data.js"></script>
   <script>
     function renderLife(id){
@@ -49,22 +55,43 @@
       var badgeClean=function(s){return s.replace(/[\[\]]/g,'');};
       var gridHtml='';
       var keys=window.LIFE_DATA?Object.keys(window.LIFE_DATA):[];
-      keys.forEach(function(k){var v=window.LIFE_DATA[k];gridHtml+='<a class="lf-card" href="life.html?id='+k+'"><span class="lf-ic">'+badgeClean(v.badge)+'</span><div><div class="lf-nm">'+v.name+'</div><div class="lf-ds">'+v.subtitle+'</div></div></a>';});
+      keys.forEach(function(k){var v=window.LIFE_DATA[k];gridHtml+='<a class="p-card" href="life.html?id='+k+'"><span class="p-card-ico">'+badgeClean(v.badge)+'</span><div><div class="p-neighbor-grid">'+v.name+'</div><div class="p-card-desc">'+v.subtitle+'</div></div></a>';});
+
+      // 支持 ?q= 按名称筛选（来自 cat.html 三级直达）
+      var params = new URLSearchParams(location.search);
+      var q = (params.get('q') || '').trim();
+      if (q && !data) {
+        var matchedKeys = keys.filter(function(k){
+          var v = window.LIFE_DATA[k];
+          return (v.name && v.name.indexOf(q) >= 0) || (v.subtitle && v.subtitle.indexOf(q) >= 0) || k === q;
+        });
+        if (matchedKeys.length) {
+          var grid2 = '';
+          matchedKeys.forEach(function(k){var v=window.LIFE_DATA[k];grid2+='<a class="p-card" href="life.html?id='+k+'"><span class="p-card-ico">'+badgeClean(v.badge)+'</span><div><div class="p-neighbor-grid">'+v.name+'</div><div class="p-card-desc">'+v.subtitle+'</div></div></a>';});
+          // 更新标题为筛选名
+          var matchedName = matchedKeys.map(function(k){return window.LIFE_DATA[k].name;}).join('/');
+          document.title = matchedName + ' · 杭州生活 · iHangzhou';
+          if(ht)ht.textContent='🏠 ' + matchedName;
+          c.innerHTML='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">'+matchedName+'</div><div class="p-hero-sub">由「'+q+'」筛选</div></div></div><div class="p-cards">'+grid2+'</div>';
+          return;
+        }
+      }
+
       if(data){
         document.title=data.name+' · 杭州生活 · iHangzhou';
         if(ht)ht.textContent='🏠 '+data.name;
-        var h='<div class="lf-hero"><div class="lf-tb"><div class="lf-name">'+data.name+'</div><div class="lf-sub">'+data.subtitle+'</div></div></div>';
-        h+='<div class="lf-grid">'+gridHtml+'</div>';
-        h+='<div class="lf-tips">💡 '+data.tips+'</div>';
+        var h='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">'+data.name+'</div><div class="p-hero-sub">'+data.subtitle+'</div></div></div>';
+        h+='<div class="p-cards">'+gridHtml+'</div>';
+        h+='<div class="p-feat">💡 '+data.tips+'</div>';
         if(data.links&&data.links.length){
-          h+='<div class="lf-links"><h3>🔗 相关链接</h3>';
-          data.links.forEach(function(l){h+='<div class="lf-link"><div><div class="lf-ln">'+l.n+'</div><div class="lf-ld">'+l.d+'</div></div>'+(l.u?'<a href="'+l.u+'" rel="noopener noreferrer" target="_blank">前往 →</a>':'')+'</div>';});
+          h+='<div class="p-cards"><h3>🔗 相关链接</h3>';
+          data.links.forEach(function(l){h+='<div class="p-neighbor"><div><div class="p-card-name">'+l.n+'</div><div class="p-iv">'+l.d+'</div></div>'+(l.u?'<a href="'+l.u+'" rel="noopener noreferrer" target="_blank">前往 →</a>':'')+'</div>';});
           h+='</div>';
         }
         c.innerHTML=h;
       } else {
         if(ht)ht.textContent='🏠 杭州生活';
-        c.innerHTML='<div class="lf-hero"><div class="lf-tb"><div class="lf-name">杭州生活</div><div class="lf-sub">实用生活信息一站直达</div></div></div><div class="lf-grid">'+gridHtml+'</div>';
+        c.innerHTML='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">杭州生活</div><div class="p-hero-sub">实用生活信息一站直达</div></div></div><div class="p-cards">'+gridHtml+'</div>';
       }
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderLife(decodeURIComponent(id));})();

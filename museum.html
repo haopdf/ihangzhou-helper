@@ -5,19 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta name="description" content="杭州博物馆地图，省博物馆、丝绸博物馆、茶叶博物馆、浙江美术馆">
   <meta name="keywords" content="杭州博物馆,浙江省博物馆,丝绸博物馆,茶叶博物馆">
-  <meta name="theme-color" content="#8a6fd6">
+  <meta name="theme-color" content="#1f7a5a">
   <title>博物馆指南 - iHangzhou</title>
-  <link rel="stylesheet" href="css/style.css?v=20260921h">
-  <script src="js/layout.js"></script>
-  <style>
-    .mu-h{font-size:28px;font-weight:700;margin:2px 0 4px}
-    .mu-s{font-size:15px;color:#666;margin-bottom:12px}
-    .mu-cr{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;display:inline-block;background:#f3e5f5;color:#6a1b9a;margin-bottom:8px}
-    .mu-sec{background:#fff;border-radius:14px;padding:16px;margin:12px 16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-    .mu-sec h3{font-size:15px;font-weight:600;margin:0 0 8px;display:flex;align-items:center;gap:6px}
-    .mu-fg{display:inline-block;padding:3px 8px;background:#f3e5f5;border-radius:8px;font-size:11px;color:#6a1b9a;margin:3px 4px 0 0}
-    .mu-bk{display:block;text-align:center;padding:12px;background:#8a6fd6;color:#fff;border-radius:24px;font-size:14px;text-decoration:none;max-width:180px;margin:16px auto}
-  </style>
+  <link rel="stylesheet" href="css/style.css?v=20261018a">
+  <script src="js/layout.js?v=20261016e"></script>
+  
+<style>:root{--primary:#4338ca;--primary-dark:#312e81}</style><link rel="stylesheet" href="css/channel.css?v=20261018a">
 </head>
 <body>
   <script>
@@ -39,7 +32,7 @@
       var data=window.MUSEUM_DATA?window.MUSEUM_DATA[id]:null;
       var keys=window.MUSEUM_DATA?Object.keys(window.MUSEUM_DATA):[];
       if(!data){
-        c.innerHTML='<div style="text-align:center;padding:40px 20px;color:#999">没有找到相关信息<br><br><a href="museum.html" style="color:#8a6fd6">← 返回博物馆首页</a></div>';
+        c.innerHTML='<div style="text-align:center;padding:40px 20px;color:#999">没有找到相关信息<br><br><a href="museum.html" style="color:var(--primary)">← 返回博物馆首页</a></div>';
         return;
       }
       var nameStr = data.name;
@@ -47,7 +40,7 @@
       h+='<span class="mu-cr">�️ 博物馆</span>';
       h+='<div class="mu-h">'+nameStr+'</div>';
       h+='<div class="mu-s">'+(data.subtitle||'')+'</div>';
-      if(data.open_time) h+='<div style="background:#f3e5f5;border-radius:10px;padding:10px 14px;margin:8px 16px;font-size:13px;color:#6a1b9a">� 开放时间：'+data.open_time+'</div>';
+      if(data.open_time) h+='<div style="background:var(--primary-100);border-radius:10px;padding:10px 14px;margin:8px 16px;font-size:13px;color:var(--primary-dark)">� 开放时间：'+data.open_time+'</div>';
       if(data.history){
         h+='<div class="mu-sec"><h3>🏛️ 博物馆介绍</h3><div style="font-size:14px;color:#444;line-height:1.8">'+data.history+'</div></div>';
       }
@@ -68,7 +61,7 @@
         }
         h+='</div>';
       }
-      h+='<a href="cat.html?c=culture" style="display:block;text-align:center;padding:14px;background:#8a6fd6;color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:600;margin:12px 16px">← 文博频道</a>';
+      h+='<a href="cat.html?c=culture" style="display:block;text-align:center;padding:14px;background:var(--primary);color:#fff;border-radius:var(--radius-xl);text-decoration:none;font-size:14px;font-weight:600;margin:12px 16px">← 文博频道</a>';
       c.innerHTML=h;
     }
     (function(){
