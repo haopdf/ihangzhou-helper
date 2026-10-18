@@ -9,7 +9,9 @@
 1. [README.md](README.md) —— 项目总览
 2. [docs/PRD.md](docs/PRD.md) —— 产品需求文档（v3.0 双重身份版）
 3. 本文档 —— 开发接手指南
-4. [memory/projects/.../project_memory.md](file:///c:\Users\asind\.trae-cn\memory\projects\-d-py-project-ihangzhou-helper--p2-9b9f1f08a823e702ac44\project_memory.md) —— 项目记忆（约束/惯例/踩坑）
+4. [docs/UI统一策略.md](docs/UI统一策略.md) —— 视觉 token 宪法（颜色/圆角/组件/禁止内联 style），**改样式前必读**
+5. [docs/布局与导航规范.md](docs/布局与导航规范.md) —— 列宽与面包屑强制标准（桌面 1180 / 移动 16px / 面包屑两级三级），**新增页面必守**
+6. [memory/projects/.../project_memory.md](file:///c:\Users\asind\.trae-cn\memory\projects\-d-py-project-ihangzhou-helper--p2-9b9f1f08a823e702ac44\project_memory.md) —— 项目记忆（约束/惯例/踩坑）
 
 ## 2. 本地开发
 
