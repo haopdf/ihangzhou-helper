@@ -49,7 +49,7 @@ function genPlaceArticle(p) {
     '  <meta property="og:image" content="' + p.cover + '">\n' +
     '  <link rel="canonical" href="https://www.ihangzhou.net/place/' + p.id + '.html">\n' +
     '  <link rel="manifest" href="../manifest.json">\n' +
-    '  <link rel="stylesheet" href="../css/style.css?v=20261018k">\n' +
+    '  <link rel="stylesheet" href="../css/style.css?v=20261018l">\n' +
     '  <link rel="icon" href="data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><text y=\'.9em\' font-size=\'90\'>🏔️</text></svg>">\n' +
     '  <style>\n' +
     '    .pa-hero { position: relative; height: 220px; overflow: hidden; background: #0ea5e9; }\n' +
@@ -114,7 +114,7 @@ function genPlaceArticle(p) {
     '      <a class="pa-action" href="../index.html#discover">← 返回发现</a>\n' +
     '    </div>\n' +
     '  </article>\n\n' +
-    '  <script src="../js/app.js?v=20261018k"></script>\n' +
+    '  <script src="../js/app.js?v=20261018l"></script>\n' +
     '  <script>\n' +
     '    window.toggleFavoritePlace = function (id, name) {\n' +
     '      try {\n' +

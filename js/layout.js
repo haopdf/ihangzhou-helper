@@ -41,7 +41,7 @@
    * 加载模板并注入
    */
   function loadTemplate(url, target) {
-    return fetch(url + '?v=20261018k')
+    return fetch(url + '?v=20261018l')
       .then(function (r) { return r.text(); })
       .then(function (html) {
         var wrap = document.createElement('div');

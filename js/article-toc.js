@@ -155,7 +155,7 @@
 
     // === 注入全站分类 chips（与文章首页一致：全部 / 美食 (5) / 记忆 (5)...）===
     if (breadcrumb) {
-      fetch('index.json?t=' + Date.now())
+      fetch('index.json')
         .then(function (r) { return r.ok ? r.json() : []; })
         .then(function (list) {
           if (!Array.isArray(list) || !list.length) return;
