@@ -35,7 +35,7 @@ function genChannelHtml(ch) {
   <link rel="canonical" href="https://www.ihangzhou.net/${ch.id}.html">
   <link rel="manifest" href="manifest.json">
   <title>${ch.name} · iHangzhou 杭州生活助手</title>
-  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <link rel="stylesheet" href="css/style.css?v=20261018l">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
 </head>
 <body>
@@ -123,7 +123,7 @@ function genChannelHtml(ch) {
     </div>
   </div>
 
-  <script src="js/app.js?v=20261018k"></script>
+  <script src="js/app.js?v=20261018l"></script>
   <script>
     // 频道专题页逻辑
     (function () {

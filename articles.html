@@ -8,8 +8,8 @@
   <meta name="keywords" content="杭州故事,杭州文章,杭州文化,杭州历史,杭州美食,iHangzhou">
   <meta name="theme-color" content="#1f7a5a">
   <link rel="canonical" href="https://www.ihangzhou.net/articles.html">
-  <link rel="stylesheet" href="css/style.css?v=20261018k">
-  <script src="js/layout.js?v=20261018k"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261018l">
+  <script src="js/layout.js?v=20261018l"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
   <style>
 :root{--primary:#0ea5e9;--primary-dark:#0369a1;}
@@ -285,8 +285,8 @@
     <div class="art-empty">加载中...</div>
   </div>
 
-  <script src="js/app.js?v=20261018k"></script>
-<script src="js/analytics.js?v=20261018k"></script>
+  <script src="js/app.js?v=20261018l"></script>
+<script src="js/analytics.js?v=20261018l"></script>
   <script>
     if (window.IZ && IZ.layout) {
       document.addEventListener("DOMContentLoaded", IZ.layout.init);
@@ -421,7 +421,7 @@
     // ========== 数据加载 ==========
     function loadArticles() {
       document.getElementById('artList').innerHTML = '<div class="art-empty">加载中...</div>';
-      fetch('articles/index.json?t=' + Date.now())
+      fetch('articles/index.json')
         .then(function(r){
           if (!r.ok) throw new Error('HTTP ' + r.status);
           return r.json();

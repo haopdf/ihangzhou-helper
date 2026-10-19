@@ -15,10 +15,10 @@
   <link rel="canonical" href="https://www.ihangzhou.net/cat.html">
   <link rel="manifest" href="manifest.json">
   <title>iHangzhou · 杭州生活栏目</title>
-  <link rel="stylesheet" href="css/style.css?v=20261018k">
+  <link rel="stylesheet" href="css/style.css?v=20261018l">
   <link rel="icon" type="image/png" href="images/logo-mark-96.png">
   <link rel="apple-touch-icon" href="images/logo-mark-192.png">
-  <script src="js/layout.js?v=20261018k"></script>
+  <script src="js/layout.js?v=20261018l"></script>
   <script>
     window.IHZ_PAGE = { title: '杭州栏目', icon: '🧭' };
     window.IZ_SKIP_APP_THEME = true;
@@ -54,9 +54,9 @@
     </div>
   </div>
 
-  <script src="js/cat-data.js?v=20261018k"></script>
-  <script src="js/app.js?v=20261018k"></script>
-  <script src="js/analytics.js?v=20261018k"></script>
+  <script src="js/cat-data.js?v=20261018l"></script>
+  <script src="js/app.js?v=20261018l"></script>
+  <script src="js/analytics.js?v=20261018l"></script>
   <script>
     /* 统一布局（页头 / 页脚导航）——与 travel / banshi 等页一致 */
     if (window.IZ && IZ.layout) {
@@ -301,7 +301,7 @@
         } else {
           kws = sub ? (sub.kw || []) : (cat.kw || []);
         }
-        fetch('articles/index.json?t=' + Date.now())
+        fetch('articles/index.json')
           .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
           .then(function (list) {
             var scored = [];
