@@ -6,3 +6,5 @@ __pycache__
 *.log
 node_modules/
 .vercel/
+# 归档的旧 API 函数（已移出 api/，保留在 git 供追溯，但不部署、不计入 Serverless Function 数）
+api-archive/
