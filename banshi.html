@@ -3,437 +3,175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <meta name="description" content="杭州政务办事一站导航，涵盖社保、公积金、落户、证件、人才、补贴等高频办事服务，所有链接指向官方渠道。">
-  <meta name="keywords" content="杭州办事,社保查询,公积金,落户,杭州政务,ihangzhou">
-  <meta name="theme-color" content="#1f7a5a">
-  <meta property="og:title" content="办事指南 · iHangzhou">
-  <meta property="og:description" content="杭州政务办事一站导航，涵盖社保、公积金、落户、证件、人才、补贴等高频办事服务">
+  <meta name="description" content="iHangzhou · 办事大厅 - 社保、公积金、落户、交通、区县、车辆服务一站办妥。">
+  <meta name="keywords" content="杭州办事,社保查询,公积金,落户,交通,办事指南">
+  <meta name="theme-color" content="#3a7bd5">
+  <meta property="og:title" content="办事大厅 · iHangzhou">
+  <meta property="og:description" content="社保、公积金、落户、交通、区县——杭州办事一次办妥">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="iHangzhou 杭州生活助手">
-  <link rel="canonical" href="https://www.ihangzhou.net/banshi.html">
   <link rel="manifest" href="manifest.json">
-  <!-- JSON-LD 结构化数据 -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "办事指南 · 杭州生活助手",
-    "url": "https://www.ihangzhou.net/banshi.html",
-    "description": "杭州政务办事一站导航，涵盖社保、公积金、落户、证件、人才、补贴等高频办事服务",
-    "inLanguage": "zh-CN",
-    "isPartOf": { "@type": "WebSite", "url": "https://www.ihangzhou.net/" }
-  }
-  </script>
-  <title>办事指南 · iHangzhou 杭州生活助手</title>
+  <title>办事大厅 · iHangzhou 杭州生活助手</title>
   <link rel="stylesheet" href="css/style.css?v=20261018l">
   <script src="js/layout.js?v=20261018l"></script>
-  <script src="js/p-cards.js"></script>
+  <script src="js/breadcrumb.js?v=20261018l"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
-<style>:root{--primary:#0ea5e9;--primary-dark:#0369a1}</style><link rel="stylesheet" href="css/channel.css?v=20261018l">
+  <style>
+    :root{--primary:#3a7bd5;--primary-dark:#2a5fa8}
+    .sub-page{max-width:720px;margin:0 auto;padding:0 0 40px}
+    .sub-hero{background:linear-gradient(135deg,#3a7bd5dd,#2a5fa899);padding:24px 16px 20px;color:#fff;text-align:center}
+    .sub-hero h1{font-size:22px;font-weight:700;margin:6px 0 8px;display:flex;align-items:center;justify-content:center;gap:8px}
+    .sub-hero h1 .hero-icon{font-size:32px}
+    .sub-hero p{font-size:14px;opacity:0.9;line-height:1.6;max-width:480px;margin:0 auto}
+    .sub-body{padding:16px;max-width:720px;margin:0 auto}
+    .sub-block{margin-bottom:20px}
+    .sub-sec-ttl{font-size:16px;font-weight:700;margin:0 0 12px;display:flex;align-items:center;gap:6px;color:var(--text)}
+    .sub-third{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    @media(min-width:600px){.sub-third{grid-template-columns:repeat(4,1fr)}}
+    .sub-third-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:14px;text-decoration:none;text-align:center;transition:transform .15s,box-shadow .15s}
+    .sub-third-card:active{transform:scale(0.96)}
+    .sti{font-size:28px}
+    .stn{font-size:13px;color:var(--text);line-height:1.3;font-weight:600}
+    .std{font-size:11px;color:var(--text-muted);line-height:1.3}
+    .sub-feat{display:flex;flex-direction:column;gap:8px}
+    .sub-feat-card{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:14px;text-decoration:none;transition:background .15s}
+    .sub-feat-card:active{background:var(--bg-hover)}
+    .sf-ic{font-size:28px;flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--bg-alt);border-radius:10px}
+    .sf-bd{flex:1;min-width:0}
+    .sf-t{font-size:14px;font-weight:600;color:var(--text)}
+    .sf-d{font-size:12px;color:var(--text-muted);display:block;margin-top:2px}
+    .sf-ar{font-size:18px;color:var(--text-muted);flex-shrink:0}
+    .sub-crumb{padding:12px 16px;font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:6px;background:var(--bg-alt)}
+    .sub-crumb a{color:var(--primary);text-decoration:none;font-weight:500}
+    .sub-crumb b{color:var(--text);font-weight:600}
+    .sub-crumb .sep{color:var(--text-muted)}
+    .sub-back{display:inline-block;padding:10px 20px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:10px;color:var(--text);text-decoration:none;font-size:14px;margin-top:12px}
+  </style>
 </head>
-<body class="ch-page">
-  <nav class="site-breadcrumb"><a href="index.html">首页</a><span class="sb-sep">›</span><b>办事指南</b></nav>
-
+<body>
   <script>
-    window.IHZ_PAGE = { title: '办事指南', icon: '📋', channelId: 'banshi' };
-    window.IZ_SKIP_APP_THEME = true;
+    window.IHZ_PAGE = { title: '办事大厅', icon: '🧰' };
     window.IZ_SKIP_APP_INIT = true;
   </script>
 
-  <!-- 频道内容 -->
-  <div class="page active" id="pageChannel">
-    <!-- 频道头部 -->
-    <div class="channel-header" id="channelHeader"></div>
-
-    <!-- 频道描述 -->
-    <div class="channel-desc" id="channelDesc"></div>
-
-    <!-- 便民服务6大分区 -->
-    <div class="p-cards bf-modules" id="bfModules">
-      <div class="section-head" style="padding: 0 0 8px 0;">
-        <h2>📋 便民服务</h2>
-        <span class="tip">高频办事场景</span>
-      </div>
-
-      <!-- 模块1：政务办事 -->
-      <div class="bf-module">
-        <div class="bf-module-head"><span class="bf-module-icon">🏛️</span>政务办事</div>
-        <div class="bf-module-items">
-          <a class="p-card" href="https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E4%BA%BA%E6%89%8D%E8%AE%A4%E5%AE%9A" target="_blank" rel="noopener">人才认定</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E5%B1%85%E4%BD%8F%E8%AF%81" target="_blank" rel="noopener">居住证</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E4%BF%9D%E9%9A%9C%E6%88%BF" target="_blank" rel="noopener">保障房</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E5%85%AC%E7%A7%AF%E9%87%91" target="_blank" rel="noopener">公积金</a>
-          <a class="p-card" href="javascript:void(0)" data-key="社保">社保</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E8%90%BD%E6%88%B7" target="_blank" rel="noopener">落户</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E5%87%BA%E5%85%A5%E5%A2%83" target="_blank" rel="noopener">出入境</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E8%BA%AB%E4%BB%BD%E8%AF%81" target="_blank" rel="noopener">身份证</a>
-          <a class="p-card" href="javascript:void(0)" data-action="今日限行">今日限行</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E6%B8%85%E5%8D%88" target="_blank" rel="noopener">消费券</a>
-          <a class="p-card" href="javascript:void(0)" data-action="开学攻略">开学攻略</a>
-          <a class="p-card" href="javascript:void(0)" data-key="灵隐寺免票">灵隐寺免票</a>
-        </div>
-      </div>
-
-      <!-- 模块2：找工作指南 -->
-      <div class="bf-module">
-        <div class="bf-module-head"><span class="bf-module-icon">💼</span>找工作指南</div>
-        <div class="bf-module-items">
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E6%97%A5%E6%9B%B4%E6%8B%9B%E8%81%98" target="_blank" rel="noopener">今日日更招聘</a>
-          <a class="p-card" href="javascript:void(0)" data-action="浙江省考">浙江省考</a>
-          <a class="p-card" href="javascript:void(0)" data-key="国考攻略">国考攻略</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E5%A4%A7%E5%8E%82%E6%8B%9B%E8%81%98" target="_blank" rel="noopener">大厂招聘</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E4%BA%8B%E4%B8%9A%E5%8D%95%E4%BD%8D" target="_blank" rel="noopener">事业单位</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E6%A0%A1%E6%8B%9B2027" target="_blank" rel="noopener">2027校招</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E5%9B%BD%E4%BC%81%E6%8B%9B%E8%81%98" target="_blank" rel="noopener">国企招聘</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E7%BD%91%E4%B8%8A%E7%AE%80%E5%8E%86" target="_blank" rel="noopener">在线简历生成</a>
-          <a class="p-card" href="javascript:void(0)" data-action="免费简历模板">免费简历模板</a>
-          <a class="p-card" href="javascript:void(0)" data-action="杭州免费住">杭州免费住</a>
-        </div>
-      </div>
-
-      <!-- 模块3：民生服务 -->
-      <div class="bf-module">
-        <div class="bf-module-head"><span class="bf-module-icon">🏠</span>民生服务</div>
-        <div class="bf-module-items">
-          <a class="p-card" href="javascript:void(0)" data-key="找工作入口">找工作入口</a>
-          <a class="p-card" href="javascript:void(0)" data-key="2026浙江省考">2026浙江省考</a>
-          <a class="p-card" href="javascript:void(0)" data-key="2026国考">2026国考</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E5%8F%91%E7%A5%A8%E6%8A%BD%E5%A5%96" target="_blank" rel="noopener">发票抽奖</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E6%B8%85%E5%8D%88" target="_blank" rel="noopener">杭州消费券</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E8%87%91%E8%9A%8A%E5%9F%B9%E8%AE%AD%E8%A1%A5%E8%B4%B4" target="_blank" rel="noopener">免费培训+考证</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E5%85%AC%E5%9B%AD%E5%B9%B4%E5%8D%A1" target="_blank" rel="noopener">公园年卡</a>
-          <a class="p-card" href="javascript:void(0)" data-key="钱塘江大潮查询">钱塘江大潮查询</a>
-        </div>
-      </div>
-
-      <!-- 模块4：旅游指南 -->
-      <div class="bf-module">
-        <div class="bf-module-head"><span class="bf-module-icon">🗺️</span>旅游指南</div>
-        <div class="bf-module-items">
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=BA%E5%9F%8E%E5%B8%82%E7%AF%AE%E7%90%83%E8%81%94%E8%B5%9B" target="_blank" rel="noopener">浙BA篮球联赛</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search=%E6%BC%94%E5%94%B1%E4%BC%9A" target="_blank" rel="noopener">演唱会时间表</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E4%BD%93%E8%82%B2%E8%B5%9B%E4%BA%8B" target="_blank" rel="noopener">体育赛事</a>
-          <a class="p-card" href="articles.html?q=杭州一日游攻略" rel="noopener">杭州一日游</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E9%A9%AC%E6%8B%89%E6%9D%BE" target="_blank" rel="noopener">杭州马拉松</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E5%85%83%E5%AE%B5%E7%AF%80" target="_blank" rel="noopener">元宵攻略</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E8%B5%8F%E8%8A%B1" target="_blank" rel="noopener">赏花攻略</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E4%B8%83%E5%A4%95" target="_blank" rel="noopener">七夕攻略</a>
-          <a class="p-card" href="food.html" rel="noopener">杭州美食推荐</a>
-        </div>
-      </div>
-
-      <!-- 模块5：交通出行 -->
-      <div class="bf-module">
-        <div class="bf-module-head"><span class="bf-module-icon">🚗</span>交通出行</div>
-        <div class="bf-module-items">
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E6%98%A5%E8%BF%902026" target="_blank" rel="noopener">2026春运</a>
-          <a class="p-card" href="javascript:void(0)" data-action="今日限行">今日限行</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E5%A4%96%E5%9C%B0%E8%BD%A6%E5%85%8D%E9%99%90" target="_blank" rel="noopener">外地车免限行</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E7%9A%84%E5%8F%B8" target="_blank" rel="noopener">打车+顺风车</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E7%AB%99%E7%AB%8B" target="_blank" rel="noopener">火车/高铁购票</a>
-          <a class="p-card" href="javascript:void(0)" data-action="杭州地铁线路">杭州地铁线路</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=ETC%E5%8A%9E%E7%90%86" target="_blank" rel="noopener">浙江ETC办理</a>
-        </div>
-      </div>
-
-      <!-- 模块6：车辆服务 -->
-      <div class="bf-module">
-        <div class="bf-module-head"><span class="bf-module-icon">🚙</span>车辆服务</div>
-        <div class="bf-module-items">
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E6%B5%99A%E6%8B%9B%E5%8F%B7" target="_blank" rel="noopener">浙A摇号申请</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E7%BD%91%E7%BA%A6%E8%BD%A6" target="_blank" rel="noopener">网约车</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E8%BD%A6%E8%BE%86%E5%B9%B4%E6%A3%80" target="_blank" rel="noopener">车辆年检</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E8%BF%9D%E7%AB%A0%E6%9F%A5%E8%AF%A2" target="_blank" rel="noopener">违章查询</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E6%B5%99M%E5%8F%B7%E7%89%8C" target="_blank" rel="noopener">浙M号牌</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E5%81%9C%E8%BD%A6%E5%8C%85%E6%9C%88" target="_blank" rel="noopener">停车包月</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E9%A9%BE%E9%A9%B6%E8%AF%81%E5%AD%A6%E5%88%86" target="_blank" rel="noopener">驾照学分</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E9%A9%BE%E7%85%A7%E4%B8%9A%E5%8A%A1" target="_blank" rel="noopener">驾驶证业务</a>
-        </div>
-      </div>
-
-      <!-- 模块7：教育办事 -->
-      <div class="bf-module">
-        <div class="bf-module-head"><span class="bf-module-icon">🏓️</span>教育办事</div>
-        <div class="bf-module-items">
-          <a class="p-card" href="javascript:void(0)" data-action="开学攻略">开学攻略</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E4%B8%93%E5%8D%87%E6%9C%AC" target="_blank" rel="noopener">浙江专升本</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E8%80%83%E7%A0%942026" target="_blank" rel="noopener">2026考研</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E9%AB%98%E8%80%83%E6%94%BB%E7%95%A5" target="_blank" rel="noopener">2026高考攻略</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E6%9C%AC%E5%9C%B0%E4%B8%AD%E8%80%83" target="_blank" rel="noopener">杭州中考</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E5%B9%BC%E5%84%BF%E5%9B%AD%E5%85%A5%E5%9B%AD" target="_blank" rel="noopener">幼儿园入园</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E5%B0%8F%E5%8D%87%E5%88%9D" target="_blank" rel="noopener">小升初攻略</a>
-          <a class="p-card" href="https://search.zj.gov.cn/search?q=%E5%AD%A6%E5%8C%BA%E5%88%92%E5%88%86" target="_blank" rel="noopener">查学区划分</a>
-        </div>
-      </div>
+  <div class="page active" id="pageSub">
+    <!-- 面包屑 -->
+    <div class="sub-crumb">
+      <a href="index.html">首页</a>
+      <span class="sep">/</span>
+      <b>办事大厅</b>
     </div>
 
-    <!-- 频道服务网格 -->
-    <div class="content">
-      <div class="section-head">
-        <h2 id="channelTitle">办事指南 · 全部服务</h2>
-        <span class="tip" id="channelCount"></span>
-      </div>
-      <div class="service-grid" id="serviceGrid"></div>
+    <!-- Hero -->
+    <div class="sub-hero">
+      <h1><span class="hero-icon">🧰</span> 办事大厅</h1>
+      <p>社保查询 · 公积金 · 落户 · 出行交通 · 区县导航 · 车辆服务 · 常用电话 · 实用工具</p>
     </div>
 
-    <!-- 相关频道推荐 -->
-    <div class="related-channels">
-      <div class="section-head">
-        <h2>相关频道</h2>
-        <span class="tip">探索更多</span>
+    <!-- 主体内容 -->
+    <div class="sub-body">
+      <!-- 子栏目 -->
+      <div class="sub-block">
+        <div class="sub-sec-ttl">📂 子栏目 <span class="sub-more">8 个</span></div>
+        <div class="sub-third">
+          <a class="sub-third-card" href="banshi-shebao.html"><span class="sti">💳</span><span class="stn">社保查询</span><span class="std">缴费/余额/明细</span></a>
+          <a class="sub-third-card" href="banshi-gjj.html"><span class="sti">🏦</span><span class="stn">公积金</span><span class="std">查询/提取/贷款</span></a>
+          <a class="sub-third-card" href="banshi-luohu.html"><span class="sti">📋</span><span class="stn">落户</span><span class="std">人才引进·积分落户</span></a>
+          <a class="sub-third-card" href="traffic.html"><span class="sti">🚌</span><span class="stn">出行交通</span><span class="std">公交·地铁·限行</span></a>
+          <a class="sub-third-card" href="district.html"><span class="sti">🏙️</span><span class="stn">区县导航</span><span class="std">杭州 13 区县</span></a>
+          <a class="sub-third-card" href="banshi-cheliang.html"><span class="sti">🚗</span><span class="stn">车辆服务</span><span class="std">摇号·年检·违章</span></a>
+          <a class="sub-third-card" href="banshi-dianhua.html"><span class="sti">📞</span><span class="stn">常用电话</span><span class="std">21 个一键复制</span></a>
+          <a class="sub-third-card" href="banshi-gongju.html"><span class="sti">🧰</span><span class="stn">实用工具</span><span class="std">计算器·查询</span></a>
+        </div>
       </div>
-      <div class="channel-grid" id="relatedChannels"></div>
+
+      <!-- 精选内容 -->
+      <div class="sub-block">
+        <div class="sub-sec-ttl">⭐ 精选内容</div>
+        <div class="sub-feat">
+          <a class="sub-feat-card" href="banshi-shebao.html">
+            <span class="sf-ic">💳</span>
+            <span class="sf-bd"><span class="sf-t">社保查询指南</span><span class="sf-d">缴费基数·余额查询·明细打印</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+          <a class="sub-feat-card" href="banshi-gjj.html">
+            <span class="sf-ic">🏦</span>
+            <span class="sf-bd"><span class="sf-t">公积金提取攻略</span><span class="sf-d">租房秒到账，购房 3 个工作日</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+          <a class="sub-feat-card" href="banshi-luohu.html">
+            <span class="sf-ic">📋</span>
+            <span class="sf-bd"><span class="sf-t">杭州落户政策</span><span class="sf-d">人才引进·积分落户·投靠落户</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+        </div>
+      </div>
 
       <!-- 相关文章 -->
-      <div id="relatedArticles"></div>
+      <div class="sub-block">
+        <div class="sub-sec-ttl">📖 相关文章 <span class="sub-more" id="subArtCount"></span></div>
+        <div class="sub-arts" id="subArts"><div class="sub-empty">正在加载相关文章…</div></div>
+      </div>
+
+      <!-- 相关频道 -->
+      <div class="sub-block">
+        <div class="sub-sec-ttl">🧭 相关频道</div>
+        <div class="sub-third" style="grid-template-columns:repeat(3,1fr)">
+          <a class="sub-third-card" href="news.html"><span class="sti">📰</span><span class="stn">资讯热点</span></a>
+          <a class="sub-third-card" href="zhaopin.html"><span class="sti">💼</span><span class="stn">求职招聘</span></a>
+          <a class="sub-third-card" href="district.html"><span class="sti">🏙️</span><span class="stn">区县导航</span></a>
+        </div>
+      </div>
     </div>
 
     <!-- 返回首页 -->
-    <div style="text-align:center;padding: 24px 16px 48px 16px;">
-      <a href="index.html" style="display:inline-block;padding: 12px 16px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;">← 返回首页</a>
+    <div style="padding:0 16px;text-align:center">
+      <a href="index.html" class="sub-back">← 返回首页</a>
     </div>
   </div>
 
-  <!-- 模态框 -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal">
-      <div class="modal-header">
-        <h3 id="modalTitle">标题</h3>
-        <button class="modal-close" id="modalClose">✕</button>
-      </div>
-      <div class="modal-body" id="modalBody"></div>
-    </div>
-  </div>
-
-  <script src="js/channel-route.js?v=20261018l"></script>
   <script src="js/app.js?v=20261018l"></script>
-  <script src="js/analytics.js?v=20261018l"></script>
-  <!-- banshi 页面自己的脚本：p-card pill 复用 DATA.categories 的数据弹窗 -->
   <script>
-    (function () {
-      'use strict';
-      function ready(fn) {
-        if (document.readyState !== 'loading') fn();
-        else document.addEventListener('DOMContentLoaded', fn);
-      }
-      ready(function () {
-        var items = document.querySelectorAll('.p-cards .p-card');
-        Array.prototype.forEach.call(items, function (a) {
-          var name = a.textContent.trim();
-          // 如果已经有真实外链（target=_blank 等）不处理
-          if (a.getAttribute('data-keep-url') === '1') return;
-          a.addEventListener('click', function (e) {
-            e.preventDefault();
-            if (window._openItemByName) {
-              window._openItemByName(name);
-            } else {
-              // fallback
-              var href = a.getAttribute('href');
-              if (href && href !== 'javascript:void(0)' && /^https?:/.test(href)) {
-                window.open(href, '_blank', 'noopener,noreferrer');
-              }
-            }
-          });
-        });
-      });
-    })();
-  </script>
-  <script>
-    if (window.IZ && IZ.layout) {
-      document.addEventListener("DOMContentLoaded", IZ.layout.init);
-    }
-  </script>
-  <script>
-    // 频道专题页逻辑
-    (function () {
-      'use strict';
-
-      var CHANNEL_ID = 'banshi';
-      var CHANNEL_NAME = '办事指南';
-      var CHANNEL_ICON = '🏛️';
-      var CHANNEL_DESC = '杭州政务办事一站导航，涵盖社保、公积金、落户、证件、人才、补贴等高频办事服务，所有链接指向官方渠道。';
-
-      // 相关频道推荐
-      var RELATED = {
-        'banshi': ['traffic', 'zhaopin', 'laozihao'],
-        'traffic': ['banshi', 'weekend', 'museum'],
-        'food': ['laozihao', 'street', 'coffee'],
-        'laozihao': ['food', 'history', 'street'],
-        'celebrity': ['history', 'street', 'museum'],
-        'history': ['celebrity', 'museum', 'laozihao'],
-        'internet': ['zhaopin', 'street', 'coffee'],
-        'zhaopin': ['banshi', 'internet', 'weekend'],
-        'street': ['food', 'coffee', 'history'],
-        'weekend': ['museum', 'food', 'street'],
-        'museum': ['history', 'weekend', 'celebrity'],
-        'coffee': ['street', 'weekend', 'food']
-      };
-
-      // 根据频道关键词从 articles/index.json 匹配相关文章
-      function fetchRelatedArticles(chips, categoryName) {
-        var el = document.getElementById('relatedArticles');
-        if (!el) return;
-        var allChips = (chips || []).slice(0, 3);
-        if (categoryName) allChips.unshift(categoryName);
-
-        fetch('articles/index.json')
-          .then(function(r) { return r.json(); })
-          .then(function(list) {
-            var matched = [];
-            list.forEach(function(a) {
-              for (var i = 0; i < allChips.length; i++) {
-                var kw = allChips[i];
-                if (!kw) continue;
-                if (a.title.indexOf(kw) >= 0 || a.summary.indexOf(kw) >= 0 || a.cat.indexOf(kw) >= 0) {
-                  matched.push(a);
-                  break;
-                }
-              }
+    (function() {
+      var KW = ["办事","社保","公积金","落户","交通","杭州办事","政策","手续"];
+      var countEl = document.getElementById('subArtCount');
+      var box = document.getElementById('subArts');
+      fetch('articles/index.json')
+        .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+        .then(function(list) {
+          var scored = [];
+          list.forEach(function(a) {
+            var title = a.title || '', catg = a.cat || '', sum = a.summary || '';
+            var sc = 0;
+            KW.forEach(function(k) {
+              if (title.indexOf(k) >= 0) sc += 3;
+              else if (catg.indexOf(k) >= 0) sc += 2;
+              else if (sum.indexOf(k) >= 0) sc += 1;
             });
-            matched = matched.slice(0, 5);
-            if (!matched.length) { el.innerHTML = ''; return; }
-
-            el.innerHTML =
-              '<div class="section-head" style="margin-top:24px;padding:0 16px;">' +
-              '<h2>📚 相关杭州故事</h2>' +
-              '<span class="tip">共 ' + matched.length + ' 篇</span>' +
-              '</div>' +
-              '<div style="padding: 0 16px;">' +
-              matched.map(function(a) {
-                return '<a href="articles/' + a.slug + '.html" style="display:block;padding:12px 14px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;margin-bottom:8px;text-decoration:none;color:inherit;">' +
-                  '<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;">' + a.title + '</div>' +
-                  '<div style="font-size:12px;color:var(--text-muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">' + a.summary + '</div>' +
-                  '</a>';
-              }).join('') +
-              '<a href="articles.html" style="display:block;text-align:center;padding:12px;background:var(--bg-alt);border-radius:10px;color:var(--primary);font-size:13px;text-decoration:none;font-weight:500;margin-top:8px;">📖 查看全部杭州故事 →</a>' +
-              '</div>';
-          })
-          .catch(function() { /* 静默失败 */ });
-      }
-
-      function getServiceIcon(name) {
-        if (window.getServiceIcon) return window.getServiceIcon(name);
-        return '📌';
-      }
-
-      function renderChannel() {
-        if (!window._getData) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">数据加载失败，请刷新重试</div>';
-          return;
-        }
-
-        var DATA = window._getData();
-        var category = DATA.categories.find(function (c) { return c.id === CHANNEL_ID; });
-        if (!category) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">频道「' + CHANNEL_NAME + '」数据未找到</div>';
-          return;
-        }
-
-        // 渲染频道头部
-        var header = document.getElementById('channelHeader');
-        header.innerHTML =
-          '<div class="ch-hero" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding: 32px 16px 24px 16px;text-align:center;">' +
-          '<div style="font-size:56px;line-height:1;margin-bottom:8px;">' + category.icon + '</div>' +
-          '<h1 style="font-size:24px;font-weight:700;margin:0;">' + category.name + '</h1>' +
-          '<div style="font-size:13px;opacity:0.9;margin-top:6px;">iHangzhou · 杭州生活助手</div>' +
-          '</div>';
-
-        // 渲染描述 + 提取关键词变成可点击 chip
-        var descEl = document.getElementById('channelDesc');
-        var descText = CHANNEL_DESC;
-        var chips = [];
-        var tokens = descText.split(/[、，,；。]/);
-        tokens.forEach(function(t) {
-          t = t.trim();
-          if (t.length >= 2 && t.length <= 10 && !/^[a-z0-9]+$/i.test(t)) chips.push(t);
-        });
-        chips = chips.filter(function(v, i, a) { return a.indexOf(v) === i; }).slice(0, 8);
-
-        var chipsHtml = chips.length ?
-          '<div class="ch-chips" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">' +
-          chips.map(function(c) {
-            return '<a class="ch-chip" href="articles.html?q=' + encodeURIComponent(c) + '" style="display:inline-block;padding:4px 12px;background:var(--bg-alt);border:1px solid var(--border);border-radius:14px;font-size:12px;color:var(--text-secondary);text-decoration:none;font-weight:500;">' + c + '</a>';
-          }).join('') + '</div>' : '';
-
-        descEl.innerHTML =
-          '<div style="padding:16px;background:var(--bg-card);border-radius:0 0 12px 12px;margin:0 16px;font-size:14px;line-height:1.7;color:var(--text-secondary);">' +
-          descText + chipsHtml +
-          '</div>';
-
-        // 相关文章区域
-        fetchRelatedArticles(chips, category.name);
-
-        // id 路由：?id=xxx 直达筛选
-        if (window.applyChannelRoute) category = applyChannelRoute(category, {});
-
-        // 渲染标题与数量
-        document.getElementById('channelTitle').textContent = category.name + ' · 全部服务';
-        document.getElementById('channelCount').textContent = '共 ' + category.items.length + ' 项';
-
-        // 渲染服务网格
-        var grid = document.getElementById('serviceGrid');
-        grid.innerHTML = category.items.map(function (item) {
-          if (item.url) {
-            var isExt = /^https?:\/\//i.test(item.url);
-            var extAttr = isExt ? ' target="_blank" rel="noopener noreferrer"' : '';
-            return '<a class="sitem" href="' + item.url + '"' + extAttr + '>' +
-              '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
-              '<div class="sinfo">' +
-              '<div class="sname">' + item.name + '</div>' +
-              '<div class="sdesc">' + item.desc + '</div>' +
-              '</div>' +
-              '<div class="sarrow">›</div>' +
-              '</a>';
+            if (sc > 0) scored.push({ a: a, sc: sc });
+          });
+          scored.sort(function(x, y) {
+            if (y.sc !== x.sc) return y.sc - x.sc;
+            return (y.a.words || 0) - (x.a.words || 0);
+          });
+          var top = scored.slice(0, 12);
+          if (countEl) countEl.textContent = top.length ? '共 ' + scored.length + ' 篇匹配' : '';
+          if (!top.length) {
+            box.innerHTML = '<div class="sub-empty">暂无匹配文章，试试上方子栏目入口</div>';
+            return;
           }
-          return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="">' +
-            '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
-            '<div class="sinfo">' +
-            '<div class="sname">' + item.name + '</div>' +
-            '<div class="sdesc">' + item.desc + '</div>' +
-            '</div>' +
-            '<div class="sarrow">›</div>' +
-            '</div>';
-        }).join('');
-
-        // 渲染相关频道
-        var related = RELATED[CHANNEL_ID] || [];
-        var relEl = document.getElementById('relatedChannels');
-        if (relEl && related.length) {
-          relEl.innerHTML = related.map(function (rid) {
-            var rcat = DATA.categories.find(function (c) { return c.id === rid; });
-            if (!rcat) return '';
-            return '<a class="p-neighbor" href="' + rid + '.html">' +
-              '<span class="ch-icon">' + rcat.icon + '</span>' +
-              '<span class="ch-name">' + rcat.name + '</span>' +
-              '</a>';
+          box.innerHTML = top.map(function(o) {
+            var a = o.a;
+            return '<a class="sub-art" href="articles/' + encodeURIComponent(a.slug) + '.html">' +
+              '<span class="sa-t">' + (a.title || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</span>' +
+              '<span class="sa-m">' + (a.cat || '') + ' · ' + (a.words || 0) + ' 字</span></a>';
           }).join('');
-        }
-
-        // 搜索（频道内搜索）
-        var searchInput = document.getElementById('headerSearchInput');
-        if (searchInput) {
-          searchInput.addEventListener('input', function (e) {
-            var q = e.target.value.trim().toLowerCase();
-            if (!q) {
-              grid.querySelectorAll('.sitem').forEach(function (el) { el.style.display = 'flex'; });
-              return;
-            }
-            grid.querySelectorAll('.sitem').forEach(function (el) {
-              var name = el.querySelector('.sname').textContent.toLowerCase();
-              var desc = el.querySelector('.sdesc').textContent.toLowerCase();
-              el.style.display = (name.indexOf(q) >= 0 || desc.indexOf(q) >= 0) ? 'flex' : 'none';
-            });
-          });
-        }
-      }
-
-      // 初始化
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', renderChannel);
-      } else {
-        renderChannel();
-      }
+        })
+        .catch(function() {
+          if (box) box.innerHTML = '<div class="sub-empty">文章加载失败，请稍后重试</div>';
+        });
     })();
   </script>
+  <script>IZ.layout.init();</script>
 </body>
 </html>

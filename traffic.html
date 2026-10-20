@@ -3,274 +3,167 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <meta name="description" content="杭州交通出行全攻略，限行查询、地铁公交、火车机票、打车租车、停车缴费、违章处理，所有链接指向官方渠道。">
-  <meta name="keywords" content="杭州交通,限行查询,地铁,公交,火车,杭州出行,ihangzhou">
+  <meta name="description" content="iHangzhou · 出行交通 - 限行查询、地铁公交、火车机票、打车租车、停车缴费、违章处理一站直达。">
+  <meta name="keywords" content="杭州限行,地铁,公交,火车,杭州出行,交通">
   <meta name="theme-color" content="#1f7a5a">
-  <meta property="og:title" content="交通出行 · iHangzhou">
-  <meta property="og:description" content="杭州交通出行全攻略，限行查询、地铁公交、火车机票、打车租车、停车缴费、违章处理">
+  <meta property="og:title" content="出行交通 · iHangzhou">
+  <meta property="og:description" content="限行查询·地铁公交·火车机票·打车租车·停车缴费·违章处理——一站直达">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="iHangzhou 杭州生活助手">
-  <link rel="canonical" href="https://www.ihangzhou.net/traffic.html">
   <link rel="manifest" href="manifest.json">
-  <title>交通出行 · iHangzhou 杭州生活助手</title>
+  <title>出行交通 · iHangzhou 杭州生活助手</title>
   <link rel="stylesheet" href="css/style.css?v=20261018l">
   <script src="js/layout.js?v=20261018l"></script>
+  <script src="js/breadcrumb.js?v=20261018l"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
-<style>:root{--primary:#0ea5e9;--primary-dark:#0369a1}</style><link rel="stylesheet" href="css/channel.css?v=20261018l">
+  <style>
+    :root{--primary:#1f7a5a;--primary-dark:#155a42}
+    .sub-page{max-width:720px;margin:0 auto;padding:0 0 40px}
+    .sub-hero{background:linear-gradient(135deg,#1f7a5add,#155a4299);padding:24px 16px 20px;color:#fff;text-align:center}
+    .sub-hero h1{font-size:22px;font-weight:700;margin:6px 0 8px;display:flex;align-items:center;justify-content:center;gap:8px}
+    .sub-hero h1 .hero-icon{font-size:32px}
+    .sub-hero p{font-size:14px;opacity:0.9;line-height:1.6;max-width:480px;margin:0 auto}
+    .sub-body{padding:16px;max-width:720px;margin:0 auto}
+    .sub-block{margin-bottom:20px}
+    .sub-sec-ttl{font-size:16px;font-weight:700;margin:0 0 12px;display:flex;align-items:center;gap:6px;color:var(--text)}
+    .sub-third{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    @media(min-width:600px){.sub-third{grid-template-columns:repeat(4,1fr)}}
+    .sub-third-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:14px;text-decoration:none;text-align:center;transition:transform .15s,box-shadow .15s}
+    .sub-third-card:active{transform:scale(0.96)}
+    .sti{font-size:28px}
+    .stn{font-size:13px;color:var(--text);line-height:1.3;font-weight:600}
+    .std{font-size:11px;color:var(--text-muted);line-height:1.3}
+    .sub-feat{display:flex;flex-direction:column;gap:8px}
+    .sub-feat-card{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:14px;text-decoration:none;transition:background .15s}
+    .sub-feat-card:active{background:var(--bg-hover)}
+    .sf-ic{font-size:28px;flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--bg-alt);border-radius:10px}
+    .sf-bd{flex:1;min-width:0}
+    .sf-t{font-size:14px;font-weight:600;color:var(--text)}
+    .sf-d{font-size:12px;color:var(--text-muted);display:block;margin-top:2px}
+    .sf-ar{font-size:18px;color:var(--text-muted);flex-shrink:0}
+    .sub-crumb{padding:12px 16px;font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:6px;background:var(--bg-alt)}
+    .sub-crumb a{color:var(--primary);text-decoration:none;font-weight:500}
+    .sub-crumb b{color:var(--text);font-weight:600}
+    .sub-crumb .sep{color:var(--text-muted)}
+    .sub-back{display:inline-block;padding:10px 20px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:10px;color:var(--text);text-decoration:none;font-size:14px;margin-top:12px}
+  </style>
 </head>
-<body class="ch-page">
-  <nav class="site-breadcrumb"><a href="index.html">首页</a><span class="sb-sep">›</span><b>交通出行</b></nav>
+<body>
   <script>
-    window.IHZ_PAGE = { title: "交通出行", icon: "🗺️", channelId: "traffic" };
-    window.IZ_SKIP_APP_THEME = true;
+    window.IHZ_PAGE = { title: '出行交通', icon: '🚌' };
     window.IZ_SKIP_APP_INIT = true;
   </script>
-<!-- 频道内容 -->
-  <div class="page active" id="pageChannel">
-    <!-- 频道头部 -->
-    <div class="channel-header" id="channelHeader"></div>
 
-    <!-- 频道描述 -->
-    <div class="channel-desc" id="channelDesc"></div>
-
-    <!-- 频道服务网格 -->
-    <div class="content">
-      <div class="section-head">
-        <h2 id="channelTitle">交通出行 · 全部服务</h2>
-        <span class="tip" id="channelCount"></span>
-      </div>
-      <div class="service-grid" id="serviceGrid"></div>
+  <div class="page active" id="pageSub">
+    <div class="sub-crumb">
+      <a href="index.html">首页</a>
+      <span class="sep">/</span>
+      <b>出行交通</b>
     </div>
 
-    <!-- 相关频道推荐 -->
-    <div class="related-channels">
-      <div class="section-head">
-        <h2>相关频道</h2>
-        <span class="tip">探索更多</span>
-      </div>
-      <div class="channel-grid" id="relatedChannels"></div>
-
-      <!-- 相关文章 -->
-      <div id="relatedArticles"></div>
+    <div class="sub-hero">
+      <h1><span class="hero-icon">🚌</span> 出行交通</h1>
+      <p>限行查询 · 地铁公交 · 火车机票 · 打车租车 · 停车缴费 · 违章处理 · 高速路况 · 城际出行一站直达</p>
     </div>
 
-    <!-- 返回首页 -->
-    <div style="text-align:center;padding: 24px 16px 48px 16px;">
-      <a href="index.html" style="display:inline-block;padding: 12px 16px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;">← 返回首页</a>
+    <div class="sub-body">
+      <div class="sub-block">
+        <div class="sub-sec-ttl">📂 子栏目 <span class="sub-more">8 个</span></div>
+        <div class="sub-third">
+          <a class="sub-third-card" href="news-xianxing.html"><span class="sti">🚗</span><span class="stn">今日限行</span><span class="std">尾号·区域查询</span></a>
+          <a class="sub-third-card" href="articles.html?q=%E5%9C%B0%E9%93%81"><span class="sti">🚇</span><span class="stn">地铁查询</span><span class="std">杭州地铁线路</span></a>
+          <a class="sub-third-card" href="articles.html?q=%E5%85%AC%E4%BA%A4"><span class="sti">🚌</span><span class="stn">公交路线</span><span class="std">实时公交</span></a>
+          <a class="sub-third-card" href="articles.html?q=%E7%81%AB%E8%BD%A6"><span class="sti">🚄</span><span class="stn">火车高铁</span><span class="std">杭州东站·城站</span></a>
+          <a class="sub-third-card" href="articles.html?q=%E6%9C%BA%E7%A5%A8"><span class="sti">✈️</span><span class="stn">机票航班</span><span class="std">萧山机场</span></a>
+          <a class="sub-third-card" href="articles.html?q=%E6%89%93%E8%BD%A6"><span class="sti">🚕</span><span class="stn">打车租车</span><span class="std">滴滴·曹操</span></a>
+          <a class="sub-third-card" href="articles.html?q=%E5%81%9C%E8%BD%A6"><span class="sti">🅿️</span><span class="stn">停车缴费</span><span class="std">杭州停车</span></a>
+          <a class="sub-third-card" href="articles.html?q=%E8%BF%9D%E7%AB%A0"><span class="sti">📋</span><span class="stn">违章处理</span><span class="std">查询·处理</span></a>
+        </div>
+      </div>
+
+      <div class="sub-block">
+        <div class="sub-sec-ttl">⭐ 高频服务</div>
+        <div class="sub-feat">
+          <a class="sub-feat-card" href="news-xianxing.html">
+            <span class="sf-ic">🚗</span>
+            <span class="sf-bd"><span class="sf-t">今日限行查询</span><span class="sf-d">杭州工作日尾号限行规则与区域</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+          <a class="sub-feat-card" href="articles.html?q=%E5%9C%B0%E9%93%81">
+            <span class="sf-ic">🚇</span>
+            <span class="sf-bd"><span class="sf-t">杭州地铁线路</span><span class="sf-d">12 条线路·运营时刻</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+          <a class="sub-feat-card" href="articles.html?q=%E8%BF%9D%E7%AB%A0">
+            <span class="sf-ic">📋</span>
+            <span class="sf-bd"><span class="sf-t">违章查询处理</span><span class="sf-d">杭州交通违章查询与处理指南</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="sub-block">
+        <div class="sub-sec-ttl">📖 相关文章 <span class="sub-more" id="subArtCount"></span></div>
+        <div class="sub-arts" id="subArts"><div class="sub-empty">正在加载相关文章…</div></div>
+      </div>
+
+      <div class="sub-block">
+        <div class="sub-sec-ttl">🧭 相关频道</div>
+        <div class="sub-third" style="grid-template-columns:repeat(3,1fr)">
+          <a class="sub-third-card" href="banshi.html"><span class="sti">🧰</span><span class="stn">办事大厅</span></a>
+          <a class="sub-third-card" href="zhaopin.html"><span class="sti">💼</span><span class="stn">求职招聘</span></a>
+          <a class="sub-third-card" href="news.html"><span class="sti">📰</span><span class="stn">资讯热点</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:0 16px;text-align:center">
+      <a href="index.html" class="sub-back">← 返回首页</a>
     </div>
   </div>
 
-  <!-- 模态框 -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal">
-      <div class="modal-header">
-        <h3 id="modalTitle">标题</h3>
-        <button class="modal-close" id="modalClose">✕</button>
-      </div>
-      <div class="modal-body" id="modalBody"></div>
-    </div>
-  </div>
-
-  <script src="js/channel-route.js?v=20261018l"></script>
   <script src="js/app.js?v=20261018l"></script>
-<script src="js/analytics.js?v=20261018l"></script>
   <script>
-    // 频道专题页逻辑
-    (function () {
-      'use strict';
-
-      var CHANNEL_ID = 'traffic';
-      var CHANNEL_NAME = '交通出行';
-      var CHANNEL_ICON = '🗺️';
-      var CHANNEL_DESC = '杭州交通出行全攻略，限行查询、地铁公交、火车机票、打车租车、停车缴费、违章处理，所有链接指向官方渠道。';
-
-      // 相关频道推荐
-      var RELATED = {
-        'banshi': ['traffic', 'zhaopin', 'laozihao'],
-        'traffic': ['banshi', 'weekend', 'museum'],
-        'food': ['laozihao', 'street', 'coffee'],
-        'laozihao': ['food', 'history', 'street'],
-        'celebrity': ['history', 'street', 'museum'],
-        'history': ['celebrity', 'museum', 'laozihao'],
-        'internet': ['zhaopin', 'street', 'coffee'],
-        'zhaopin': ['banshi', 'internet', 'weekend'],
-        'street': ['food', 'coffee', 'history'],
-        'weekend': ['museum', 'food', 'street'],
-        'museum': ['history', 'weekend', 'celebrity'],
-        'coffee': ['street', 'weekend', 'food']
-      };
-
-      // 根据频道关键词从 articles/index.json 匹配相关文章
-      function fetchRelatedArticles(chips, categoryName) {
-        var el = document.getElementById('relatedArticles');
-        if (!el) return;
-        var allChips = (chips || []).slice(0, 3);
-        if (categoryName) allChips.unshift(categoryName);
-
-        fetch('articles/index.json')
-          .then(function(r) { return r.json(); })
-          .then(function(list) {
-            var matched = [];
-            list.forEach(function(a) {
-              for (var i = 0; i < allChips.length; i++) {
-                var kw = allChips[i];
-                if (!kw) continue;
-                if (a.title.indexOf(kw) >= 0 || a.summary.indexOf(kw) >= 0 || a.cat.indexOf(kw) >= 0) {
-                  matched.push(a);
-                  break;
-                }
-              }
+    (function() {
+      var KW = ["交通","限行","地铁","公交","火车","飞机","违章","出行","杭州","打车","停车"];
+      var countEl = document.getElementById('subArtCount');
+      var box = document.getElementById('subArts');
+      fetch('articles/index.json')
+        .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+        .then(function(list) {
+          var scored = [];
+          list.forEach(function(a) {
+            var title = a.title || '', catg = a.cat || '', sum = a.summary || '';
+            var sc = 0;
+            KW.forEach(function(k) {
+              if (title.indexOf(k) >= 0) sc += 3;
+              else if (catg.indexOf(k) >= 0) sc += 2;
+              else if (sum.indexOf(k) >= 0) sc += 1;
             });
-            matched = matched.slice(0, 5);
-            if (!matched.length) { el.innerHTML = ''; return; }
-
-            el.innerHTML =
-              '<div class="section-head" style="margin-top:24px;padding:0 16px;">' +
-              '<h2>📚 相关杭州故事</h2>' +
-              '<span class="tip">共 ' + matched.length + ' 篇</span>' +
-              '</div>' +
-              '<div style="padding: 0 16px;">' +
-              matched.map(function(a) {
-                return '<a href="articles/' + a.slug + '.html" style="display:block;padding:12px 14px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;margin-bottom:8px;text-decoration:none;color:inherit;">' +
-                  '<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;">' + a.title + '</div>' +
-                  '<div style="font-size:12px;color:var(--text-muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">' + a.summary + '</div>' +
-                  '</a>';
-              }).join('') +
-              '<a href="articles.html" style="display:block;text-align:center;padding:12px;background:var(--bg-alt);border-radius:10px;color:var(--primary);font-size:13px;text-decoration:none;font-weight:500;margin-top:8px;">📖 查看全部杭州故事 →</a>' +
-              '</div>';
-          })
-          .catch(function() { /* 静默失败 */ });
-      }
-
-      function getServiceIcon(name) {
-        if (window.getServiceIcon) return window.getServiceIcon(name);
-        return '📌';
-      }
-
-      function renderChannel() {
-        if (!window._getData) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">数据加载失败，请刷新重试</div>';
-          return;
-        }
-
-        var DATA = window._getData();
-        var category = DATA.categories.find(function (c) { return c.id === CHANNEL_ID; });
-        if (!category) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">频道「' + CHANNEL_NAME + '」数据未找到</div>';
-          return;
-        }
-
-        // 渲染频道头部
-        var header = document.getElementById('channelHeader');
-        header.innerHTML =
-          '<div class="ch-hero" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding: 32px 16px 24px 16px;text-align:center;">' +
-          '<div style="font-size:56px;line-height:1;margin-bottom:8px;">' + category.icon + '</div>' +
-          '<h1 style="font-size:24px;font-weight:700;margin:0;">' + category.name + '</h1>' +
-          '<div style="font-size:13px;opacity:0.9;margin-top:6px;">iHangzhou · 杭州生活助手</div>' +
-          '</div>';
-
-        // 渲染描述 + 提取关键词变成可点击 chip
-        var descEl = document.getElementById('channelDesc');
-        var descText = CHANNEL_DESC;
-        var chips = [];
-        var tokens = descText.split(/[、，,；。]/);
-        tokens.forEach(function(t) {
-          t = t.trim();
-          if (t.length >= 2 && t.length <= 10 && !/^[a-z0-9]+$/i.test(t)) chips.push(t);
-        });
-        chips = chips.filter(function(v, i, a) { return a.indexOf(v) === i; }).slice(0, 8);
-
-        var chipsHtml = chips.length ?
-          '<div class="ch-chips" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">' +
-          chips.map(function(c) {
-            return '<a class="ch-chip" href="articles.html?q=' + encodeURIComponent(c) + '" style="display:inline-block;padding:4px 12px;background:var(--bg-alt);border:1px solid var(--border);border-radius:14px;font-size:12px;color:var(--text-secondary);text-decoration:none;font-weight:500;">' + c + '</a>';
-          }).join('') + '</div>' : '';
-
-        descEl.innerHTML =
-          '<div style="padding:16px;background:var(--bg-card);border-radius:0 0 12px 12px;margin:0 16px;font-size:14px;line-height:1.7;color:var(--text-secondary);">' +
-          descText + chipsHtml +
-          '</div>';
-
-        // 相关文章区域
-        fetchRelatedArticles(chips, category.name);
-
-        // id 路由：?id=xxx 直达筛选
-        if (window.applyChannelRoute) category = applyChannelRoute(category, {});
-
-        // 渲染标题与数量
-        document.getElementById('channelTitle').textContent = category.name + ' · 全部服务';
-        document.getElementById('channelCount').textContent = '共 ' + category.items.length + ' 项';
-
-        // 渲染服务网格
-        var grid = document.getElementById('serviceGrid');
-        grid.innerHTML = category.items.map(function (item) {
-          if (item.url) {
-            var isExt = /^https?:\/\//i.test(item.url);
-            var extAttr = isExt ? ' target="_blank" rel="noopener noreferrer"' : '';
-            return '<a class="sitem" href="' + item.url + '"' + extAttr + '>' +
-              '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
-              '<div class="sinfo">' +
-              '<div class="sname">' + item.name + '</div>' +
-              '<div class="sdesc">' + item.desc + '</div>' +
-              '</div>' +
-              '<div class="sarrow">›</div>' +
-              '</a>';
-          }
-          return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="">' +
-            '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
-            '<div class="sinfo">' +
-            '<div class="sname">' + item.name + '</div>' +
-            '<div class="sdesc">' + item.desc + '</div>' +
-            '</div>' +
-            '<div class="sarrow">›</div>' +
-            '</div>';
-        }).join('');
-
-        // 渲染相关频道
-        var related = RELATED[CHANNEL_ID] || [];
-        var relEl = document.getElementById('relatedChannels');
-        if (relEl && related.length) {
-          relEl.innerHTML = related.map(function (rid) {
-            var rcat = DATA.categories.find(function (c) { return c.id === rid; });
-            if (!rcat) return '';
-            return '<a class="p-neighbor" href="' + rid + '.html">' +
-              '<span class="ch-icon">' + rcat.icon + '</span>' +
-              '<span class="ch-name">' + rcat.name + '</span>' +
-              '</a>';
-          }).join('');
-        }
-
-        // 搜索（频道内搜索）
-        var searchInput = document.getElementById('headerSearchInput');
-        if (searchInput) {
-          searchInput.addEventListener('input', function (e) {
-            var q = e.target.value.trim().toLowerCase();
-            if (!q) {
-              grid.querySelectorAll('.sitem').forEach(function (el) { el.style.display = 'flex'; });
-              return;
-            }
-            grid.querySelectorAll('.sitem').forEach(function (el) {
-              var name = el.querySelector('.sname').textContent.toLowerCase();
-              var desc = el.querySelector('.sdesc').textContent.toLowerCase();
-              el.style.display = (name.indexOf(q) >= 0 || desc.indexOf(q) >= 0) ? 'flex' : 'none';
-            });
+            if (sc > 0) scored.push({ a: a, sc: sc });
           });
-        }
-      }
-
-      // 初始化
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', renderChannel);
-      } else {
-        renderChannel();
-      }
+          scored.sort(function(x, y) {
+            if (y.sc !== x.sc) return y.sc - x.sc;
+            return (y.a.words || 0) - (x.a.words || 0);
+          });
+          var top = scored.slice(0, 12);
+          if (countEl) countEl.textContent = top.length ? '共 ' + scored.length + ' 篇匹配' : '';
+          if (!top.length) {
+            box.innerHTML = '<div class="sub-empty">暂无匹配文章，试试上方子栏目入口</div>';
+            return;
+          }
+          box.innerHTML = top.map(function(o) {
+            var a = o.a;
+            return '<a class="sub-art" href="articles/' + encodeURIComponent(a.slug) + '.html">' +
+              '<span class="sa-t">' + (a.title || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</span>' +
+              '<span class="sa-m">' + (a.cat || '') + ' · ' + (a.words || 0) + ' 字</span></a>';
+          }).join('');
+        })
+        .catch(function() {
+          if (box) box.innerHTML = '<div class="sub-empty">文章加载失败，请稍后重试</div>';
+        });
     })();
   </script>
-  <script>
-    if (window.IZ && IZ.layout) {
-      document.addEventListener("DOMContentLoaded", IZ.layout.init);
-    }
-  </script>
-
+  <script>IZ.layout.init();</script>
 </body>
 </html>
