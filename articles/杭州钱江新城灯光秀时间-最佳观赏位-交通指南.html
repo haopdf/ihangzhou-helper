@@ -36,7 +36,7 @@
 <script>
   window.IHZ_PAGE = { title: '杭州钱江新城灯光秀时间', icon: '🏙️', channelId: 'articles' };
 </script>
-<div class="article-breadcrumb">
+<div class="article-breadcrumb" id="articleBreadcrumb">
   <a href="../index.html">首页</a> <span>›</span> <a href="../articles.html">文章合集</a> <span>›</span> <span>钱江新城灯光秀</span>
 </div>
 <div class="article-body">
@@ -47,6 +47,12 @@
       <span>✍️ iHangzhou</span>
       <span>👀 杭州本地生活</span>
     </div>
+  <script>
+    if (location.search.indexOf('ref=wxfeed') >= 0) {
+      var bc = document.getElementById('articleBreadcrumb');
+      if (bc) bc.innerHTML = bc.innerHTML.replace(/<a href="..\/articles.html">文章<\/a>/, '<a href="../index.html#wxfeed">公众号精选</a>');
+    }
+  </script>
   </div>
   <div class="article-content">
 

@@ -51,11 +51,17 @@
   window.IHZ_PAGE = { title: '现代杭州-27-杭州住房问题解决路径：从保障房建设到租赁市场', icon: '📖', channelId: 'articles' };
 </script>
 
-  <div class="article-breadcrumb">
+  <div class="article-breadcrumb" id="articleBreadcrumb">
     <a href="../index.html">首页</a> ›
     <a href="../articles.html">文章</a> ›
     <span>08-现代杭州系列</span>
   </div>
+  <script>
+    if (location.search.indexOf('ref=wxfeed') >= 0) {
+      var bc = document.getElementById('articleBreadcrumb');
+      if (bc) bc.innerHTML = bc.innerHTML.replace(/<a href="..\/articles.html">文章<\/a>/, '<a href="../index.html#wxfeed">公众号精选</a>');
+    }
+  </script>
 
   <div class="article-header">
     <h1>现代杭州-27-杭州住房问题解决路径：从保障房建设到租赁市场规范化的住房居住条件改善</h1>

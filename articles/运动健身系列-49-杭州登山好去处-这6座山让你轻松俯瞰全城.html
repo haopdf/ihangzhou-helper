@@ -50,11 +50,17 @@
 <script>
   window.IHZ_PAGE = { title: '运动健身系列-49：杭州登山好去处：这6座山让你轻松俯瞰全城', icon: '📖', channelId: 'articles' };
 </script>
-  <div class="article-breadcrumb">
+  <div class="article-breadcrumb" id="articleBreadcrumb">
     <a href="../index.html">首页</a> ›
     <a href="../articles.html">文章</a> ›
     <span>13-运动健身系列</span>
   </div>
+  <script>
+    if (location.search.indexOf('ref=wxfeed') >= 0) {
+      var bc = document.getElementById('articleBreadcrumb');
+      if (bc) bc.innerHTML = bc.innerHTML.replace(/<a href="..\/articles.html">文章<\/a>/, '<a href="../index.html#wxfeed">公众号精选</a>');
+    }
+  </script>
 
   <div class="article-header">
     <h1>运动健身系列-49：杭州登山好去处：这6座山让你轻松俯瞰全城</h1>

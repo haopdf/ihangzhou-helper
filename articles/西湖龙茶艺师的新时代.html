@@ -51,11 +51,17 @@
   window.IHZ_PAGE = { title: '西湖龙茶艺师的新时代', icon: '📖', channelId: 'articles' };
 </script>
 
-  <div class="article-breadcrumb">
+  <div class="article-breadcrumb" id="articleBreadcrumb">
     <a href="../index.html">首页</a> ›
     <a href="../articles.html">文章</a> ›
     <span>文化生活</span> › <span>传统文化</span>
   </div>
+  <script>
+    if (location.search.indexOf('ref=wxfeed') >= 0) {
+      var bc = document.getElementById('articleBreadcrumb');
+      if (bc) bc.innerHTML = bc.innerHTML.replace(/<a href="..\/articles.html">文章<\/a>/, '<a href="../index.html#wxfeed">公众号精选</a>');
+    }
+  </script>
 
   <div class="article-header">
     <h1>西湖龙茶艺师的新时代</h1>

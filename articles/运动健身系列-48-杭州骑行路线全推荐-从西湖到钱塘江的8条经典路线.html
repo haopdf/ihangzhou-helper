@@ -50,11 +50,17 @@
 <script>
   window.IHZ_PAGE = { title: '运动健身系列-48：杭州骑行路线全推荐：从西湖到钱塘江的8条', icon: '📖', channelId: 'articles' };
 </script>
-  <div class="article-breadcrumb">
+  <div class="article-breadcrumb" id="articleBreadcrumb">
     <a href="../index.html">首页</a> ›
     <a href="../articles.html">文章</a> ›
     <span>13-运动健身系列</span>
   </div>
+  <script>
+    if (location.search.indexOf('ref=wxfeed') >= 0) {
+      var bc = document.getElementById('articleBreadcrumb');
+      if (bc) bc.innerHTML = bc.innerHTML.replace(/<a href="..\/articles.html">文章<\/a>/, '<a href="../index.html#wxfeed">公众号精选</a>');
+    }
+  </script>
 
   <div class="article-header">
     <h1>运动健身系列-48：杭州骑行路线全推荐：从西湖到钱塘江的8条经典路线</h1>

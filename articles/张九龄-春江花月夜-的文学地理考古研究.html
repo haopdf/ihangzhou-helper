@@ -51,11 +51,17 @@
   window.IHZ_PAGE = { title: '杭州地域文化的空间特征与文学表达的文学地理学研究：宋代杭州的', icon: '📖', channelId: 'articles' };
 </script>
 
-  <div class="article-breadcrumb">
+  <div class="article-breadcrumb" id="articleBreadcrumb">
     <a href="../index.html">首页</a> ›
     <a href="../articles.html">文章</a> ›
     <span>06-历史文化系列</span> › <span>杭州文学系列</span> › <span>即兴创作</span>
   </div>
+  <script>
+    if (location.search.indexOf('ref=wxfeed') >= 0) {
+      var bc = document.getElementById('articleBreadcrumb');
+      if (bc) bc.innerHTML = bc.innerHTML.replace(/<a href="..\/articles.html">文章<\/a>/, '<a href="../index.html#wxfeed">公众号精选</a>');
+    }
+  </script>
 
   <div class="article-header">
     <h1>杭州地域文化的空间特征与文学表达的文学地理学研究：宋代杭州的地理空间塑造诗歌空间意象</h1>

@@ -51,11 +51,17 @@
   window.IHZ_PAGE = { title: '历史类-景点-28：杭州景点发展', icon: '📖', channelId: 'articles' };
 </script>
 
-  <div class="article-breadcrumb">
+  <div class="article-breadcrumb" id="articleBreadcrumb">
     <a href="../index.html">首页</a> ›
     <a href="../articles.html">文章</a> ›
     <span>06-历史文化系列</span> › <span>历史文化系列</span>
   </div>
+  <script>
+    if (location.search.indexOf('ref=wxfeed') >= 0) {
+      var bc = document.getElementById('articleBreadcrumb');
+      if (bc) bc.innerHTML = bc.innerHTML.replace(/<a href="..\/articles.html">文章<\/a>/, '<a href="../index.html#wxfeed">公众号精选</a>');
+    }
+  </script>
 
   <div class="article-header">
     <h1>历史类-景点-28：杭州景点发展</h1>

@@ -51,11 +51,17 @@
   window.IHZ_PAGE = { title: '温庭筠《菩萨蛮》中江南词风的文学成就', icon: '📖', channelId: 'articles' };
 </script>
 
-  <div class="article-breadcrumb">
+  <div class="article-breadcrumb" id="articleBreadcrumb">
     <a href="../index.html">首页</a> ›
     <a href="../articles.html">文章</a> ›
     <span>06-历史文化系列</span> › <span>杭州文学系列</span> › <span>唐代文学</span>
   </div>
+  <script>
+    if (location.search.indexOf('ref=wxfeed') >= 0) {
+      var bc = document.getElementById('articleBreadcrumb');
+      if (bc) bc.innerHTML = bc.innerHTML.replace(/<a href="..\/articles.html">文章<\/a>/, '<a href="../index.html#wxfeed">公众号精选</a>');
+    }
+  </script>
 
   <div class="article-header">
     <h1>温庭筠《菩萨蛮》中江南词风的文学成就</h1>
