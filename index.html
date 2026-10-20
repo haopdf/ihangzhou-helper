@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <meta name="description" content="iHangzhou 杭州生活助手 - 杭州人的数字生活工具箱，政务办事、交通出行、民生服务一站导�?| www.ihangzhou.net">
-  <meta name="keywords" content="杭州,杭州生活,杭州办事,社保查询,公积�?限行,杭州天气,便民服务,ihangzhou,杭州本地助手,杭州政务,杭州交�?>
+  <meta name="description" content="iHangzhou 杭州生活助手 - 杭州人的数字生活工具箱，政务办事、交通出行、民生服务一站导航 | www.ihangzhou.net">
+  <meta name="keywords" content="杭州,杭州生活,杭州办事,社保查询,公积金,限行,杭州天气,便民服务,ihangzhou,杭州本地助手,杭州政务,杭州交通">
   <meta name="author" content="iHangzhou">
   <meta name="baidu-site-verification" content="codeva-kkOBBt6nC9">
   <meta name="sogou_site_verification" content="i7QXDwRncp">
@@ -18,7 +18,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="iHangzhou">
   <meta property="og:title" content="iHangzhou 杭州生活助手">
-  <meta property="og:description" content="杭州人的数字生活工具箱，政务办事、交通出行、民生服务一站导�?>
+  <meta property="og:description" content="杭州人的数字生活工具箱，政务办事、交通出行、民生服务一站导航">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:site_name" content="iHangzhou">
@@ -27,11 +27,11 @@
   <meta name="twitter:site" content="@iHangzhou">
   <meta property="al:web:url" content="https://www.ihangzhou.net/">
   <meta name="twitter:title" content="iHangzhou 杭州生活助手">
-  <meta name="twitter:description" content="杭州人的数字生活工具�?>
+  <meta name="twitter:description" content="杭州人的数字生活工具箱">
   <link rel="canonical" href="https://www.ihangzhou.net/">
   <link rel="manifest" href="manifest.json">
   <title>iHangzhou · 杭州生活助手</title>
-  <!-- JSON-LD 结构化数�?-->
+  <!-- JSON-LD 结构化数据 -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -39,7 +39,7 @@
     "name": "iHangzhou",
     "alternateName": "杭州生活助手",
     "url": "https://www.ihangzhou.net/",
-    "description": "杭州人的数字生活工具箱，政务办事、交通出行、民生服务一站导�?,
+    "description": "杭州人的数字生活工具箱，政务办事、交通出行、民生服务一站导航",
     "inLanguage": "zh-CN",
     "potentialAction": {
       "@type": "SearchAction",
@@ -63,12 +63,12 @@
   <!-- 顶部栏：logo + 搜索 + 设置 -->
   <header class="topbar" id="topbar">
     <a href="index.html" class="topbar-logo" style="text-decoration:none;">
-      <img class="logo-icon" src="images/logo-mark-96.png" alt="爱杭�? width="28" height="28">
+      <img class="logo-icon" src="images/logo-mark-96.png" alt="爱杭州" width="28" height="28">
       <span class="logo-text">iHangzhou</span>
     </a>
     <div class="topbar-search">
-      <input type="text" id="searchInput" placeholder="搜索办事/社保/公积�?出行/景点..." autocomplete="off">
-      <button class="search-cancel" onclick="clearSearch()">�?/button>
+      <input type="text" id="searchInput" placeholder="搜索办事/社保/公积金/出行/景点..." autocomplete="off">
+      <button class="search-cancel" onclick="clearSearch()">✕</button>
     </div>
     <button class="topbar-settings" onclick="toggleSettings()" title="设置" aria-label="设置">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h9M19 8h2M3 16h3M13 16h8"/><circle cx="15" cy="8" r="2.6"/><circle cx="9.5" cy="16" r="2.6"/></svg>
@@ -79,13 +79,13 @@
   <div class="settings-overlay" id="settingsOverlay" onclick="toggleSettings()"></div>
   <div class="settings-panel" id="settingsPanel">
     <div class="settings-title"><span>⚙️ 设置</span><button class="settings-close" onclick="toggleSettings()"
-        aria-label="关闭">�?/button></div>
+        aria-label="关闭">✕</button></div>
     <div class="settings-item">
       <span class="settings-label">📍 当前城市</span>
       <div class="city-wrap" style="position:relative;">
         <div class="topbar-city" id="citySelect"
           style="display:inline-flex;align-items:center;gap:4px;cursor:pointer;color:var(--primary);font-weight:600;">
-          <span id="cityName">杭州</span><span class="city-arrow">�?/span>
+          <span id="cityName">杭州</span><span class="city-arrow">▼</span>
         </div>
         <div class="city-dropdown" id="cityDropdown">
           <div class="city-dropdown-title">选择区县</div>
@@ -106,13 +106,13 @@
 
   <!-- 首页 -->
   <div class="page active" id="pageHome">
-    <!-- 今日杭州�? 张实时信息卡片（限行/天气/油价/金价�?-->
+    <!-- 今日杭州：4 张实时信息卡片（限行/天气/油价/金价） -->
     <div class="today-hangzhou" id="todayHangzhou"></div>
 
-    <!-- 钱塘江看潮入�?-->
+    <!-- 钱塘江看潮入口 -->
     <div class="tide-card" id="tideCard" onclick="showTide()">
       <div class="tide-card-header">
-        <div class="tide-card-title">🌊 钱塘江潮汐预�?/div>
+        <div class="tide-card-title">🌊 钱塘江潮汐预报</div>
         <span class="tide-card-badge" id="tideBadge">今日</span>
       </div>
       <div class="tide-card-body">
@@ -120,85 +120,85 @@
           <span id="tideTime">点击查询各观潮点潮时</span>
           <strong id="tideLevel"></strong>
         </div>
-        <span class="tide-card-arrow">�?/span>
+        <span class="tide-card-arrow">›</span>
       </div>
     </div>
 
-    <!-- 🐲 钱塘江观潮专�?(9-10月观潮季自动显示) -->
+    <!-- 🐲 钱塘江观潮专题 (9-10月观潮季自动显示) -->
     <div class="tide-feature" id="tideFeature" style="display:none">
       <div class="tide-feature-header">
-        <div class="tide-feature-title">🐲 钱塘江观�?/div>
-        <span class="tide-feature-badge" id="tideFeatureBadge">观潮�?/span>
+        <div class="tide-feature-title">🐲 钱塘江观潮</div>
+        <span class="tide-feature-badge" id="tideFeatureBadge">观潮季</span>
       </div>
       <div class="tide-today-bar" id="tideTodayBar"></div>
       <div class="tide-spots-mini" id="tideSpotsMini"></div>
       <div class="tide-feature-body">
         <div class="tide-fb-block">
           <h4>🌊 潮水来由</h4>
-          <p>钱塘江入海口呈喇叭形，外宽内窄，潮水涌入时受窄江道抬涌形成涌潮。加上江底沙坎阻挡，潮头立如一线，气势磅礴，为世界三大涌潮之一�?/p>
+          <p>钱塘江入海口呈喇叭形，外宽内窄，潮水涌入时受窄江道抬涌形成涌潮。加上江底沙坎阻挡，潮头立如一线，气势磅礴，为世界三大涌潮之一。</p>
         </div>
         <div class="tide-fb-block">
           <h4>📅 观潮时间</h4>
-          <p>每年农历八月十五至二十为最佳观潮期（通常公历9月中旬至10月中旬），其�?strong>农历八月十八</strong>潮最大。每月大潮出现在农历初一（朔）和十五（望）前后各3天。观潮需在潮水到达前30分钟抵达�?/p>
+          <p>每年农历八月十五至二十为最佳观潮期（通常公历9月中旬至10月中旬），其中<strong>农历八月十八</strong>潮最大。每月大潮出现在农历初一（朔）和十五（望）前后各3天。观潮需在潮水到达前30分钟抵达。</p>
         </div>
         <div class="tide-fb-block">
-          <h4>📍 杭州周边观潮�?/h4>
+          <h4>📍 杭州周边观潮点</h4>
           <div class="tide-spot-list">
             <div class="tsl-item"><strong>海宁盐官</strong><span>一线潮 · 最佳观赏点</span></div>
-            <div class="tsl-item"><strong>老盐�?/strong><span>回头�?· 气势恢宏</span></div>
-            <div class="tsl-item"><strong>萧山美女�?/strong><span>美女二回�?/span></div>
-            <div class="tsl-item"><strong>下沙七格</strong><span>冲天�?/span></div>
+            <div class="tsl-item"><strong>老盐仓</strong><span>回头潮 · 气势恢宏</span></div>
+            <div class="tsl-item"><strong>萧山美女坝</strong><span>美女二回头</span></div>
+            <div class="tsl-item"><strong>下沙七格</strong><span>冲天潮</span></div>
             <div class="tsl-item"><strong>钱江新城城市阳台</strong><span>市区最近观潮点</span></div>
           </div>
         </div>
         <div class="tide-fb-block">
           <h4>📜 观潮传统</h4>
-          <p>钱塘江观潮习俗始于汉魏，盛于唐宋，至今已有两千余年。南宋时八月十八日为「潮神诞辰」，朝廷在此日检阅水师，民间结社观潮。如今每年观潮节期间还举办世界级冲浪赛事�?/p>
+          <p>钱塘江观潮习俗始于汉魏，盛于唐宋，至今已有两千余年。南宋时八月十八日为「潮神诞辰」，朝廷在此日检阅水师，民间结社观潮。如今每年观潮节期间还举办世界级冲浪赛事。</p>
         </div>
         <div class="tide-fb-block tide-fb-danger">
           <h4>⚠️ 观潮注意事项</h4>
           <ul>
-            <li>务必�?strong>安全区域</strong>观潮，严禁翻越堤坝或下江</li>
+            <li>务必在<strong>安全区域</strong>观潮，严禁翻越堤坝或下江</li>
             <li>提前30分钟占位，潮水到达速度可达30km/h</li>
             <li>带儿童者需格外小心，切勿让儿童脱离视线</li>
-            <li>注意听现场警报，一旦警报响起立即撤�?/li>
-            <li>涨潮后江堤湿滑，小心慢行防摔�?/li>
+            <li>注意听现场警报，一旦警报响起立即撤离</li>
+            <li>涨潮后江堤湿滑，小心慢行防摔倒</li>
           </ul>
         </div>
       </div>
       <div class="tide-feature-footer" id="tideFeatureFooter">
-        <span>点击此处查看各观潮点逐日潮时 �?/span>
+        <span>点击此处查看各观潮点逐日潮时 →</span>
       </div>
     </div>
 
-    <!-- 当前区县特色卡片（切换区县后变化�?-->
+    <!-- 当前区县特色卡片（切换区县后变化） -->
     <div class="district-info" id="districtInfo"></div>
 
-    <!-- 杭州 13 区县快速导�?-->
+    <!-- 杭州 13 区县快速导航 -->
     <div class="district-nav" id="districtNav">
       <a class="district-nav-item" href="district.html">
-        <span class="dn-name">🏙�?杭州13区县</span>
+        <span class="dn-name">🏙️ 杭州13区县</span>
         <span class="dn-desc">上城/拱墅/西湖/滨江/萧山/余杭/临平/钱塘/富阳/临安/桐庐/淳安/建德</span>
-        <span class="dn-arrow">�?/span>
+        <span class="dn-arrow">›</span>
       </a>
     </div>
 
-    <!-- 🗂�?全部分类�? 个一级栏目（点击卡片展开该栏目下的二级栏目） -->
+    <!-- 🗂️ 全部分类：8 个一级栏目（点击卡片展开该栏目下的二级栏目） -->
     <div class="home-sec cat-sec" id="catSec">
       <div class="cat-grid" id="catGrid"></div>
     </div>
 
     <!-- 一级栏目展开面板：二级栏目（由本页内联脚本渲染） -->
     <div class="cat-subs-panel" id="catSubsPanel">
-      <div class="back-bar" id="catSubsBack">�?返回</div>
+      <div class="back-bar" id="catSubsBack">‹ 返回</div>
       <div class="cat-subs-hero" id="catSubsHero"></div>
       <div class="sub-grid" id="catSubsGrid"></div>
     </div>
 
-    <!-- �?快捷入口 -->
+    <!-- ⚡ 快捷入口 -->
     <div class="home-sec quick-sec">
-      <div class="sec-h">�?快捷入口</div>
-    <!-- 快捷入口�?6+ 个内容栏目，4×4 网格，每�?4 �?-->
+      <div class="sec-h">⚡ 快捷入口</div>
+    <!-- 快捷入口：16+ 个内容栏目，4×4 网格，每项 4 字 -->
     <div class="quick-nav">
       <a href="travel.html"><img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310b981'%3E%3Cpath d='M3 18l5-8 4 5 3-4 6 7H3z'/%3E%3Ccircle cx='8' cy='7' r='2'/%3E%3C/svg%3E"
@@ -209,7 +209,7 @@
       <a href="street.html"><img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ec4899'%3E%3Cpath d='M5 7h14l-1 14H6L5 7z'/%3E%3Cpath d='M9 7V5a3 3 0 0 1 6 0v2' stroke='%23ec4899' stroke-width='2' fill='none'/%3E%3C/svg%3E"
           alt=""><span>逛街购物</span></a>
-      <a href="food-coffee.html"><img
+      <a href="coffee.html"><img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 8h12v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8z' fill='%23b45309'/%3E%3Cpath d='M17 9h2a2 2 0 0 1 0 4h-2' stroke='%23b45309' stroke-width='2' fill='none'/%3E%3Cpath d='M8 5V3M12 5V2M16 5V3' stroke='%23b45309' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"
           alt=""><span>咖啡馆店</span></a>
       <a href="laozihao.html"><img
@@ -241,7 +241,7 @@
           alt=""><span>办事攻略</span></a>
       <a href="traffic.html"><img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M5 11h14v6H5z M7 11V7a5 5 0 0 1 10 0v4' stroke='%238b5cf6' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"
-          alt=""><span>出行交�?/span></a>
+          alt=""><span>出行交通</span></a>
       <a href="zhaopin.html"><img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2314b8a6'%3E%3Crect x='3' y='7' width='18' height='13' rx='2'/%3E%3Cpath d='M8 7V4h8v3M12 12v4' stroke='%2314b8a6' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"
           alt=""><span>求职招聘</span></a>
@@ -257,85 +257,85 @@
     </div>
     </div>
 
-    <!-- 🔥 热点栏目：当前最值得关注的话�?-->
+    <!-- 🔥 热点栏目：当前最值得关注的话题 -->
     <div class="home-sec hot-sec">
       <div class="sec-h">🔥 热点栏目</div>
       <div class="hot-strip">
-        <a href="javascript:void(0)" onclick="window.showTide()">观潮�?/a>
+        <a href="javascript:void(0)" onclick="window.showTide()">观潮季</a>
         <a href="articles.html?q=%E5%9B%BD%E5%BA%86">国庆活动</a>
         <a href="articles.html?q=%E7%A4%BE%E4%BF%9D">社保新政</a>
         <a href="articles.html?q=%E6%B6%88%E8%B4%B9%E5%88%B8">消费补贴</a>
         <a href="travel.html">桂花地图</a>
         <a href="place.html?id=westlake">西湖十景</a>
-        <a href="zhaopin.html">找工�?/a>
+        <a href="zhaopin.html">找工作</a>
         <a href="weekend.html">周末去哪</a>
         <a href="food.html">夜宵地图</a>
       </div>
     </div>
 
-    <!-- 📱 公众号精选：iHangzhou 每日推�?-->
+    <!-- 📱 公众号精选：iHangzhou 每日推送 -->
     <div class="home-sec wx-sec">
-      <div class="sec-h">📱 公众号精�?/div>
-      <div class="sec-sub">iHangzhou 每日推�?· 杭州生活攻略</div>
+      <div class="sec-h">📱 公众号精选</div>
+      <div class="sec-sub">iHangzhou 每日推送 · 杭州生活攻略</div>
       <div class="wx-feed">
         <a class="wx-post" href="articles/%E6%9D%AD%E5%B7%9E%E5%9B%BD%E5%BA%86%E5%8E%BB%E5%93%AA%E7%8E%A9-2026%E5%9B%BD%E5%BA%86%E6%B4%BB%E5%8A%A8%E5%85%A8%E6%95%B4%E7%90%86-%E7%83%9F%E8%8A%B1%E7%81%AF%E4%BC%9A%E9%9F%B3%E4%B9%90%E8%8A%82.html">
           <div class="wx-ph">🎆</div>
           <div class="wx-bd">
-            <h4>杭州国庆去哪�?· 2026 国庆活动全整�?/h4>
-            <div class="wx-mt"><span class="wx-tag">活动</span><span>烟花 · 灯会 · 音乐�?/span></div>
+            <h4>杭州国庆去哪玩 · 2026 国庆活动全整理</h4>
+            <div class="wx-mt"><span class="wx-tag">活动</span><span>烟花 · 灯会 · 音乐节</span></div>
           </div>
         </a>
         <a class="wx-post" href="articles/2026%E5%A4%A9%E7%9B%AE%E5%B1%B1%E9%9F%B3%E4%B9%90%E8%8A%82-%E6%97%B6%E9%97%B4%E9%98%B5%E5%AE%B9%E8%B4%AD%E7%A5%A8%E4%BA%A4%E9%80%9A%E6%8C%87%E5%8D%97.html">
           <div class="wx-ph">🎵</div>
           <div class="wx-bd">
-            <h4>2026 天目山音乐节 · 时间阵容购票交通指�?/h4>
-            <div class="wx-mt"><span class="wx-tag">演出</span><span>阵容 · 购票 · 交�?/span></div>
+            <h4>2026 天目山音乐节 · 时间阵容购票交通指南</h4>
+            <div class="wx-mt"><span class="wx-tag">演出</span><span>阵容 · 购票 · 交通</span></div>
           </div>
         </a>
         <a class="wx-post" href="articles/%E6%9D%AD%E5%B7%9E%E9%92%B1%E6%B1%9F%E6%96%B0%E5%9F%8E%E7%81%AF%E5%85%89%E7%A7%80%E6%97%B6%E9%97%B4-%E6%9C%80%E4%BD%B3%E8%A7%82%E8%B5%8F%E4%BD%8D-%E4%BA%A4%E9%80%9A%E6%8C%87%E5%8D%97.html">
           <div class="wx-ph">🌃</div>
           <div class="wx-bd">
-            <h4>钱江新城灯光秀时间 · 最佳观赏位与交通指�?/h4>
+            <h4>钱江新城灯光秀时间 · 最佳观赏位与交通指南</h4>
             <div class="wx-mt"><span class="wx-tag">夜景</span><span>时间 · 机位 · 地铁</span></div>
           </div>
         </a>
         <a class="wx-post" href="articles/%E6%9D%AD%E5%B7%9E%E5%8D%83%E5%B2%9B%E6%B9%96%E5%9B%BD%E5%BA%86%E6%B8%B8%E7%8E%A9%E6%94%BB%E7%95%A5-%E7%83%9F%E8%8A%B1%E7%A7%80%E9%9C%B2%E8%90%A5%E4%BA%A4%E9%80%9A%E6%8C%87%E5%8D%97.html">
-          <div class="wx-ph">🏞�?/div>
+          <div class="wx-ph">🏞️</div>
           <div class="wx-bd">
-            <h4>千岛湖国庆游玩攻�?· 烟花秀露营交通指�?/h4>
-            <div class="wx-mt"><span class="wx-tag">周边�?/span><span>露营 · 烟花 · 自驾</span></div>
+            <h4>千岛湖国庆游玩攻略 · 烟花秀露营交通指南</h4>
+            <div class="wx-mt"><span class="wx-tag">周边游</span><span>露营 · 烟花 · 自驾</span></div>
           </div>
         </a>
         <a class="wx-post" href="articles/%E6%9D%AD%E5%B7%9E%E7%9B%B8%E4%BA%B2%E8%84%B1%E5%8D%95%E5%85%A8%E6%94%BB%E7%95%A5-%E4%B8%89%E5%A4%A7%E7%9B%B8%E4%BA%B2%E8%A7%92-%E4%BA%B2%E9%9D%92%E6%81%8B.html">
           <div class="wx-ph">💕</div>
           <div class="wx-bd">
-            <h4>杭州相亲脱单全攻�?· 三大相亲角与亲青�?/h4>
-            <div class="wx-mt"><span class="wx-tag">攻略</span><span>相亲�?· 注册指南</span></div>
+            <h4>杭州相亲脱单全攻略 · 三大相亲角与亲青恋</h4>
+            <div class="wx-mt"><span class="wx-tag">攻略</span><span>相亲角 · 注册指南</span></div>
           </div>
         </a>
         <a class="wx-post" href="articles/%E6%9D%AD%E5%B7%9E%E8%96%85%E7%BE%8A%E6%AF%9B%E7%9C%81%E9%92%B1%E6%94%BB%E7%95%A5-%E6%B6%88%E8%B4%B9%E5%88%B8-%E5%A5%B6%E8%8C%B6-%E7%A7%AF%E5%88%86-%E5%AD%A6%E7%94%9F%E7%A6%8F%E5%88%A9.html">
           <div class="wx-ph">💰</div>
           <div class="wx-bd">
-            <h4>杭州薅羊毛省钱攻�?· 消费券奶茶积分学生福�?/h4>
-            <div class="wx-mt"><span class="wx-tag">省钱</span><span>消费�?· 积分 · 福利</span></div>
+            <h4>杭州薅羊毛省钱攻略 · 消费券奶茶积分学生福利</h4>
+            <div class="wx-mt"><span class="wx-tag">省钱</span><span>消费券 · 积分 · 福利</span></div>
           </div>
         </a>
       </div>
     </div>
 
-    <!-- 🧰 常用服务：高频刚需（数据来�?CMS hotServices�?-->
+    <!-- 🧰 常用服务：高频刚需（数据来自 CMS hotServices） -->
     <div class="home-sec svc-sec">
       <div class="sec-h">🧰 常用服务</div>
       <div class="svc-grid" id="hotGrid"></div>
     </div>
 
-    <!-- 🗺�?杭州怎么玩：精选攻略入�?-->
+    <!-- 🗺️ 杭州怎么玩：精选攻略入口 -->
     <div class="explore-section" id="exploreSection">
-      <div class="explore-title">🗺�?杭州怎么�?/div>
+      <div class="explore-title">🗺️ 杭州怎么玩</div>
       <div class="explore-scroll">
         <div class="explore-card" onclick="location.href='place.html?id=lingyin'">
           <span class="ec-icon">⛩️</span>
-          <span class="ec-name">灵隐�?/span>
+          <span class="ec-name">灵隐寺</span>
           <span class="ec-tag">千年古刹</span>
         </div>
         <div class="explore-card" onclick="location.href='place.html?id=westlake'">
@@ -346,27 +346,27 @@
         <div class="explore-card" onclick="location.href='place.html?id=xixi'">
           <span class="ec-icon">🛶</span>
           <span class="ec-name">西溪湿地</span>
-          <span class="ec-tag">摇橹�?/span>
+          <span class="ec-tag">摇橹船</span>
         </div>
         <div class="explore-card" onclick="location.href='place.html?id=songcheng'">
           <span class="ec-icon">🎭</span>
-          <span class="ec-name">宋城千古�?/span>
+          <span class="ec-name">宋城千古情</span>
           <span class="ec-tag">必看演出</span>
         </div>
         <div class="explore-card" onclick="location.href='place.html?id=liangzhu'">
-          <span class="ec-icon">🏛�?/span>
+          <span class="ec-icon">🏛️</span>
           <span class="ec-name">良渚古城</span>
-          <span class="ec-tag">5000年文�?/span>
+          <span class="ec-tag">5000年文明</span>
         </div>
         <div class="explore-card" onclick="location.href='place.html?id=faxi'">
           <span class="ec-icon">🌸</span>
-          <span class="ec-name">法喜�?/span>
-          <span class="ec-tag">求姻�?/span>
+          <span class="ec-name">法喜寺</span>
+          <span class="ec-tag">求姻缘</span>
         </div>
       </div>
     </div>
 
-    <!-- 热门资讯轮播（由 /api/news 异步填充�?-->
+    <!-- 热门资讯轮播（由 /api/news 异步填充） -->
     <div class="news-banner" id="newsBanner"></div>
 
     <!-- 内容区域 -->
@@ -374,25 +374,25 @@
       <!-- 热门搜索 -->
       <div class="hot-keywords" id="hotKeywords"></div>
 
-      <!-- 搜索结果区（默认隐藏，输入搜索词时才展开�?-->
+      <!-- 搜索结果区（默认隐藏，输入搜索词时才展开） -->
       <div class="search-result" id="searchResult" style="display:none;">
         <div class="search-result-head">
           <span id="searchResultTitle">搜索结果</span>
-          <button class="search-result-close" id="searchResultClose">�?/button>
+          <button class="search-result-close" id="searchResultClose">✕</button>
         </div>
         <div class="service-grid" id="serviceGrid"></div>
       </div>
 
       <!-- 首屏 Slogan（站点定位一眼可见） -->
       <div class="hero-slogan">
-        <h1>杭州人的数字生活工具�?/h1>
-        <p>办事 · 出行 · 民生 · 一站导�?/p>
+        <h1>杭州人的数字生活工具箱</h1>
+        <p>办事 · 出行 · 民生 · 一站导航</p>
       </div>
 
       <!-- 公众号关注卡片（精简为单行） -->
       <div class="follow-card" id="followCard">
         <div class="follow-inner">
-          <img class="follow-qr" id="followQr" alt="爱杭州公众号二维�? src="images/qrcode-ihangzhou.jpg" width="48" height="48">
+          <img class="follow-qr" id="followQr" alt="爱杭州公众号二维码" src="images/qrcode-ihangzhou.jpg" width="48" height="48">
           <div class="follow-text">
             <div class="follow-title">📌 关注「爱杭州」公众号</div>
             <div class="follow-desc">每天推送：限行 / 油价 / 政策解读 / 生活攻略</div>
@@ -404,32 +404,32 @@
       <div class="share-row" id="shareCard" onclick="showShareTip()" data-track="分享" data-track-cat="运营" data-track-action="share">
         <span class="share-row-icon">📤</span>
         <div class="share-row-text">
-          <div class="share-row-title">分享 iHangzhou 给朋�?/div>
-          <div class="share-row-desc">复制网址 + 公众号二维码，粘贴发�?/div>
+          <div class="share-row-title">分享 iHangzhou 给朋友</div>
+          <div class="share-row-desc">复制网址 + 公众号二维码，粘贴发送</div>
         </div>
-        <span class="share-row-arrow">�?/span>
+        <span class="share-row-arrow">›</span>
       </div>
 
-      <!-- 杭州好物推荐（渐变色�?+ �?emoji�?列布局�?-->
+      <!-- 杭州好物推荐（渐变色底 + 大 emoji，2列布局） -->
       <div class="goods-section">
         <div class="section-head">
           <h2>🎁 杭州好物推荐</h2>
-          <span class="tip">本地人精挑细�?/span>
+          <span class="tip">本地人精挑细选</span>
         </div>
         <div class="goods-grid" id="goodsGrid">
           <a class="goods-card" href="https://m.tb.cn/h.8ptSIg4" target="_blank" rel="noopener"
             style="background:linear-gradient(135deg,#fef3c7,#fde68a)">
             <div class="goods-img">🌿</div>
-            <div class="goods-name">王星记折�?/div>
+            <div class="goods-name">王星记折扇</div>
             <div class="goods-price">¥65.10</div>
-            <div class="goods-tag">国家级非�?/div>
+            <div class="goods-tag">国家级非遗</div>
           </a>
           <a class="goods-card" href="https://m.tb.cn/h.8JaDM4V" target="_blank" rel="noopener"
             style="background:linear-gradient(135deg,#fee2e2,#fecaca)">
             <div class="goods-img">🥟</div>
             <div class="goods-name">知味观小笼包</div>
             <div class="goods-price">¥59.90</div>
-            <div class="goods-tag">超千人疯�?/div>
+            <div class="goods-tag">超千人疯抢</div>
           </a>
           <a class="goods-card" href="https://m.tb.cn/h.8KGLUJb" target="_blank" rel="noopener"
             style="background:linear-gradient(135deg,#dcfce7,#bbf7d0)">
@@ -443,29 +443,29 @@
             <div class="goods-img">🧣</div>
             <div class="goods-name">苏绣丝巾礼盒</div>
             <div class="goods-price">¥325.00</div>
-            <div class="goods-tag">送长辈高�?/div>
+            <div class="goods-tag">送长辈高端</div>
           </a>
           <a class="goods-card" href="https://search.jd.com/Search?keyword=杭州特产&enc=utf-8&cu=true&utm_source=2038468850"
             target="_blank" rel="noopener" style="background:linear-gradient(135deg,#fae8ff,#f5d0fe)">
             <div class="goods-img">📦</div>
             <div class="goods-name">杭州特产京东</div>
             <div class="goods-price">京东自营</div>
-            <div class="goods-tag">次日�?/div>
+            <div class="goods-tag">次日达</div>
           </a>
           <a class="goods-card" href="https://search.jd.com/Search?keyword=西湖龙井&enc=utf-8&cu=true&utm_source=2038468850"
             target="_blank" rel="noopener" style="background:linear-gradient(135deg,#cffafe,#a5f3fc)">
             <div class="goods-img">🍃</div>
             <div class="goods-name">西湖龙井京东</div>
-            <div class="goods-price">¥168 �?/div>
+            <div class="goods-price">¥168 起</div>
             <div class="goods-tag">品质保证</div>
           </a>
         </div>
       </div>
 
-      <!-- 本地服务（原 OTA/美团/商家/小程�?合并为一个九宫格�?-->
+      <!-- 本地服务（原 OTA/美团/商家/小程序 合并为一个九宫格） -->
       <div class="goods-section">
         <div class="section-head">
-          <h2>🏙�?本地服务</h2>
+          <h2>🏙️ 本地服务</h2>
           <span class="tip">酒店 / 门票 / 商旅</span>
         </div>
         <div class="ota-grid" id="otaGrid">
@@ -483,7 +483,7 @@
           </a>
           <a class="ota-card" href="https://m.ctrip.com/html5/?allianceid=10511040&sid=330893571&ouid=kfptvxtool"
             target="_blank" rel="noopener">
-            <div class="ota-icon">🛍�?/div>
+            <div class="ota-icon">🛍️</div>
             <div class="ota-name">携程旅行</div>
           </a>
           <a class="ota-card" href="https://i.meituan.com/ahangzhou?channel=485720" target="_blank" rel="noopener">
@@ -504,18 +504,18 @@
     </div>
   </div>
 
-  <!-- 工具�?-->
+  <!-- 工具页 -->
   <div class="page" id="pageTools">
     <div class="content">
       <div class="section-head">
         <h2>实用工具</h2>
-        <span class="tip">内置计算与查�?/span>
+        <span class="tip">内置计算与查询</span>
       </div>
       <div class="tools-grid" id="toolsPageContent"></div>
     </div>
   </div>
 
-  <!-- 电话�?-->
+  <!-- 电话页 -->
   <div class="page" id="pagePhone">
     <div class="content">
       <div class="section-head">
@@ -526,70 +526,70 @@
     </div>
   </div>
 
-  <!-- 我的�?-->
+  <!-- 我的页 -->
   <div class="page" id="pageMe">
     <div class="content">
       <div class="me-card">
-        <div class="me-avatar">🏔�?/div>
+        <div class="me-avatar">🏔️</div>
         <div class="me-name">iHangzhou 用户</div>
-        <div class="me-desc">杭州人的数字生活工具�?/div>
+        <div class="me-desc">杭州人的数字生活工具箱</div>
       </div>
 
       <div class="me-list">
         <div class="me-row" onclick="showCheckin()">
           <span class="micon">📅</span><span class="mtext">每日签到 <span id="checkinHint"
-              style="color:var(--accent);font-size:12px;">领积�?/span></span><span class="marrow">�?/span>
+              style="color:var(--accent);font-size:12px;">领积分</span></span><span class="marrow">›</span>
         </div>
         <div class="me-row" onclick="showFavorites()">
-          <span class="micon">�?/span><span class="mtext">我的收藏 <span id="favCount"
-              style="color:var(--text-muted);font-size:12px;">0</span></span><span class="marrow">�?/span>
+          <span class="micon">⭐</span><span class="mtext">我的收藏 <span id="favCount"
+              style="color:var(--text-muted);font-size:12px;">0</span></span><span class="marrow">›</span>
         </div>
         <div class="me-row" onclick="showHistory()">
           <span class="micon">📜</span><span class="mtext">浏览历史 <span id="histCount"
-              style="color:var(--text-muted);font-size:12px;">0</span></span><span class="marrow">�?/span>
+              style="color:var(--text-muted);font-size:12px;">0</span></span><span class="marrow">›</span>
         </div>
         <div class="me-row" onclick="showFeedback()">
-          <span class="micon">📨</span><span class="mtext">意见反馈</span><span class="marrow">�?/span>
+          <span class="micon">📨</span><span class="mtext">意见反馈</span><span class="marrow">›</span>
         </div>
         <div class="me-row" onclick="showFontSize()">
-          <span class="micon">📏</span><span class="mtext">字体大小</span><span class="marrow">�?/span>
+          <span class="micon">📏</span><span class="mtext">字体大小</span><span class="marrow">›</span>
         </div>
         <div class="me-row" onclick="toggleElderlyMode()">
           <span class="micon">🔤</span><span class="mtext">大字模式 <span id="elderlyStatus"
-              style="color:var(--text-muted);font-size:12px;">关闭</span></span><span class="marrow">�?/span>
+              style="color:var(--text-muted);font-size:12px;">关闭</span></span><span class="marrow">›</span>
         </div>
         <div class="me-row" onclick="switchPage('tools')">
-          <span class="micon">🧰</span><span class="mtext">实用工具</span><span class="marrow">�?/span>
+          <span class="micon">🧰</span><span class="mtext">实用工具</span><span class="marrow">›</span>
         </div>
       </div>
 
       <div class="me-list" style="margin-top:12px;">
         <div class="me-row" onclick="openUrl('https://www.hangzhou.gov.cn/')">
-          <span class="micon">🏛�?/span><span class="mtext">杭州市政府官�?/span><span class="marrow">�?/span>
+          <span class="micon">🏛️</span><span class="mtext">杭州市政府官网</span><span class="marrow">›</span>
         </div>
         <div class="me-row" onclick="openUrl('https://search.zj.gov.cn/api-gateway/jpaas-jsearch-web-server/search?serviceId=YcTOd1ftgC5dxzJ8RhCBN&websiteid=330000000000000&cateid=ShhDNU0SGB3DPrgh3GxyA&p=1&q=%E6%B5%99%E9%87%8C%E5%8A%9E')">
-          <span class="micon">📱</span><span class="mtext">浙里办（浙江政务服务网）</span><span class="marrow">�?/span>
+          <span class="micon">📱</span><span class="mtext">浙里办（浙江政务服务网）</span><span class="marrow">›</span>
         </div>
         <div class="me-row" onclick="openUrl('https://www.hzbus.com.cn/')">
-          <span class="micon">🚌</span><span class="mtext">杭州公交集团</span><span class="marrow">�?/span>
+          <span class="micon">🚌</span><span class="mtext">杭州公交集团</span><span class="marrow">›</span>
         </div>
         <div class="me-row" onclick="openUrl('https://www.hzmetro.com/')">
-          <span class="micon">🚇</span><span class="mtext">杭州地铁</span><span class="marrow">�?/span>
+          <span class="micon">🚇</span><span class="mtext">杭州地铁</span><span class="marrow">›</span>
         </div>
         <div class="me-row" id="meTheme" data-track="深色模式" data-track-cat="设置" data-track-action="theme">
-          <span class="micon">🎨</span><span class="mtext">切换深色/浅色模式</span><span class="marrow">�?/span>
+          <span class="micon">🎨</span><span class="mtext">切换深色/浅色模式</span><span class="marrow">›</span>
         </div>
         <div class="me-row" onclick="showShareTip()" data-track="分享" data-track-cat="运营" data-track-action="share-menu">
-          <span class="micon">📤</span><span class="mtext">分享给朋�?/span><span class="marrow">�?/span>
+          <span class="micon">📤</span><span class="mtext">分享给朋友</span><span class="marrow">›</span>
         </div>
         <div class="me-row" onclick="showAbout()" data-track="关于" data-track-cat="导航" data-track-action="about">
-          <span class="micon">ℹ️</span><span class="mtext">关于 iHangzhou</span><span class="marrow">�?/span>
+          <span class="micon">ℹ️</span><span class="mtext">关于 iHangzhou</span><span class="marrow">›</span>
         </div>
       </div>
 
       <div style="text-align:center;margin-top:20px;font-size:11px;color:var(--text-muted);line-height:1.8;">
         <p>iHangzhou · 杭州生活助手</p>
-        <p>公益导航平台 · 不存储用户数�?/p>
+        <p>公益导航平台 · 不存储用户数据</p>
         <p>所有外部链接均指向官方渠道</p>
       </div>
     </div>
@@ -601,7 +601,7 @@
       <span class="bicon">🏠</span><span>首页</span>
     </div>
     <a class="bnav-item" href="travel.html">
-      <span class="bicon">🏞�?/span><span>旅游</span>
+      <span class="bicon">🏞️</span><span>旅游</span>
     </a>
     <a class="bnav-item" href="banshi.html">
       <span class="bicon">📋</span><span>办事</span>
@@ -615,7 +615,7 @@
   </nav>
 
   <!-- AI 助手浮动按钮 -->
-  <div class="ai-fab" id="aiFab" onclick="toggleAIChat()" title="问问�?>
+  <div class="ai-fab" id="aiFab" onclick="toggleAIChat()" title="问问我">
     <span class="ai-fab-icon">🤖</span>
     <span class="ai-fab-pulse"></span>
   </div>
@@ -624,28 +624,28 @@
   <div class="ai-chat" id="aiChat">
     <div class="ai-chat-header">
       <div class="ai-chat-title">
-        <span class="ai-avatar">🏔�?/span>
+        <span class="ai-avatar">🏔️</span>
         <div>
           <div class="ai-name">iHangzhou 助手</div>
-          <div class="ai-status" id="aiStatus">在线 · 杭州万事�?/div>
+          <div class="ai-status" id="aiStatus">在线 · 杭州万事通</div>
         </div>
       </div>
       <div class="ai-chat-actions">
-        <button class="ai-action-btn" id="aiClearBtn" title="清空对话">🗑�?/button>
-        <button class="ai-action-btn" id="aiCloseBtn" title="收起">�?/button>
+        <button class="ai-action-btn" id="aiClearBtn" title="清空对话">🗑️</button>
+        <button class="ai-action-btn" id="aiCloseBtn" title="收起">✕</button>
       </div>
     </div>
     <div class="ai-chat-body" id="aiMessages"></div>
     <div class="ai-chat-quick" id="aiQuickAsk">
-      <button class="ai-quick-btn" data-q="社保怎么�?>社保怎么�?/button>
-      <button class="ai-quick-btn" data-q="今天限行�?>今天限行�?/button>
+      <button class="ai-quick-btn" data-q="社保怎么查">社保怎么查</button>
+      <button class="ai-quick-btn" data-q="今天限行吗">今天限行吗</button>
       <button class="ai-quick-btn" data-q="西湖一日游推荐">西湖一日游</button>
-      <button class="ai-quick-btn" data-q="灵隐寺怎么�?>灵隐寺怎么�?/button>
+      <button class="ai-quick-btn" data-q="灵隐寺怎么去">灵隐寺怎么去</button>
       <button class="ai-quick-btn" data-q="杭州医保门诊报销">医保报销</button>
     </div>
     <div class="ai-chat-input">
       <textarea id="aiInput" placeholder="问我任何杭州生活问题..." rows="1" maxlength="800"></textarea>
-      <button class="ai-send-btn" id="aiSendBtn">发�?/button>
+      <button class="ai-send-btn" id="aiSendBtn">发送</button>
     </div>
     <div class="ai-chat-footer">
       <span>AI 由通义千问驱动 · 仅供参考，请以官方信息为准</span>
@@ -657,7 +657,7 @@
     <div class="modal">
       <div class="modal-header">
         <h3 id="modalTitle">标题</h3>
-        <button class="modal-close" id="modalClose">�?/button>
+        <button class="modal-close" id="modalClose">✕</button>
       </div>
       <div class="modal-body" id="modalBody"></div>
     </div>
@@ -669,13 +669,14 @@
       window.addEventListener('load', function () {
         navigator.serviceWorker.register('/sw.js').then(function (reg) {
           console.log('iHangzhou SW registered:', reg.scope);
-          // 每次加载都检�?SW 更新
+          // 每次加载都检查 SW 更新
           reg.update().then(function () {
             if (reg.active && reg.waiting) {
-              // 有等待激活的�?SW，强制跳过等�?              reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+              // 有等待激活的新 SW，强制跳过等待
+              reg.waiting.postMessage({ type: 'SKIP_WAITING' });
             }
           });
-          // �?SW 激活后刷新页面
+          // 新 SW 激活后刷新页面
           navigator.serviceWorker.addEventListener('controllerchange', function () {
             location.reload();
           });
@@ -689,118 +690,118 @@
   <script src="js/analytics.js?v=20261018l"></script>
   <script>
     /* ============================================
-       v7 改版 · 全部分类�? 个一级栏�?× 8 个二级栏目）
+       v7 改版 · 全部分类（8 个一级栏目 × 8 个二级栏目）
        数据与站点既有页面一一对应；点击一级卡片展开二级面板
        ============================================ */
     var HOME_CATS = [
       {
         key: 'travel', name: '旅游出行', icon: '🧭', desc: '景点 · 周边 · 周末 · 观潮',
-        color: '#1f7a5a', href: 'travel.html', intro: '西湖十景、灵隐古刹、西溪湿地、钱塘江大潮——杭州的好玩之处，一站搞定�?,
+        color: '#1f7a5a', href: 'travel.html', intro: '西湖十景、灵隐古刹、西溪湿地、钱塘江大潮——杭州的好玩之处，一站搞定。',
         subs: [
-          { n: '景点门票', ic: '🎫', d: '西湖·灵隐·西溪', h: 'scenic.html' },
-          { n: '周边�?, ic: '🚙', d: '乌镇·莫干山·千岛湖', h: 'zhoubian.html' },
-          { n: '周末去哪', ic: '🗓�?, d: '亲子·展览·演出', h: 'weekend.html' },
-          { n: '街巷漫步', ic: '🛤�?, d: '小河直街·大兜�?, h: 'xiangxiang.html' },
-          { n: '路线攻略', ic: '🧭', d: '一日游·两日游·自�?, h: 'route.html' },
-          { n: '钱塘江观�?, ic: '🌊', d: '潮时预报·观赏�?, a: 'tide' },
-          { n: '西湖十景', ic: '�?, d: '苏堤春晓·断桥残雪', h: 'travel-xihu.html' },
-          { n: '古镇古村', ic: '🏚�?, d: '塘栖·龙门·深澳', h: 'travel-guzhen.html' }
+          { n: '景点门票', ic: '🎫', d: '西湖·灵隐·西溪', h: 'cat.html?c=travel&s=%E6%99%AF%E7%82%B9%E9%97%A8%E7%A5%A8' },
+          { n: '周边游', ic: '🚙', d: '乌镇·莫干山·千岛湖', h: 'cat.html?c=travel&s=%E5%91%A8%E8%BE%B9%E6%B8%B8' },
+          { n: '周末去哪', ic: '🗓️', d: '亲子·展览·演出', h: 'cat.html?c=travel&s=%E5%91%A8%E6%9C%AB%E5%8E%BB%E5%93%AA' },
+          { n: '街巷漫步', ic: '🛤️', d: '小河直街·大兜路', h: 'cat.html?c=travel&s=%E8%A1%97%E5%B7%B7%E6%BC%AB%E6%AD%A5' },
+          { n: '路线攻略', ic: '🧭', d: '一日游·两日游·自驾', h: 'cat.html?c=travel&s=%E8%B7%AF%E7%BA%BF%E6%94%BB%E7%95%A5' },
+          { n: '钱塘江观潮', ic: '🌊', d: '潮时预报·观赏点', a: 'tide' },
+          { n: '西湖十景', ic: '⛲', d: '苏堤春晓·断桥残雪', h: 'cat.html?c=travel&s=%E8%A5%BF%E6%B9%96%E5%8D%81%E6%99%AF' },
+          { n: '古镇古村', ic: '🏚️', d: '塘栖·龙门·深澳', h: 'cat.html?c=travel&s=%E5%8F%A4%E9%95%87%E5%8F%A4%E6%9D%91' }
         ]
       },
       {
-        key: 'food', name: '美食餐饮', icon: '🍜', desc: '杭帮�?· 咖啡 · 老字�?· 夜市',
-        color: '#d98324', href: 'food.html', intro: '从西湖醋鱼、龙井虾仁到东坡肉，杭帮菜必点清单与最正宗老店都在这里�?,
+        key: 'food', name: '美食餐饮', icon: '🍜', desc: '杭帮菜 · 咖啡 · 老字号 · 夜市',
+        color: '#d98324', href: 'food.html', intro: '从西湖醋鱼、龙井虾仁到东坡肉，杭帮菜必点清单与最正宗老店都在这里。',
         subs: [
-          { n: '杭帮�?, ic: '🥢', d: '西湖醋鱼到东坡肉', h: 'food.html' },
-          { n: '咖啡', ic: '�?, d: '西湖边·独立咖�?, h: 'food-coffee.html' },
-          { n: '老字�?, ic: '🏮', d: '知味观·奎元馆', h: 'laozihao.html' },
-          { n: '夜市', ic: '🌃', d: '河坊街·武林夜�?, h: 'night-market.html' },
-          { n: '早餐', ic: '🥟', d: '拌面·生煎·小笼', h: 'breakfast.html' },
-          { n: '甜品', ic: '🍰', d: '定胜糕·条头糕', h: 'dessert.html' },
-          { n: '龙井�?, ic: '🍵', d: '狮峰·龙坞买茶', h: 'tea.html' },
-          { n: '茶馆', ic: '🫖', d: '湖畔·巷里泡一下午', h: 'chaguan.html' }
+          { n: '杭帮菜', ic: '🥢', d: '西湖醋鱼到东坡肉', h: 'cat.html?c=food&s=%E6%9D%AD%E5%B8%AE%E8%8F%9C' },
+          { n: '咖啡', ic: '☕', d: '西湖边·独立咖啡', h: 'cat.html?c=food&s=%E5%92%96%E5%95%A1' },
+          { n: '老字号', ic: '🏮', d: '知味观·奎元馆', h: 'cat.html?c=food&s=%E8%80%81%E5%AD%97%E5%8F%B7' },
+          { n: '夜市', ic: '🌃', d: '河坊街·武林夜宵', h: 'cat.html?c=food&s=%E5%A4%9C%E5%B8%82' },
+          { n: '早餐', ic: '🥟', d: '拌面·生煎·小笼', h: 'cat.html?c=food&s=%E6%97%A9%E9%A4%90' },
+          { n: '甜品', ic: '🍰', d: '定胜糕·条头糕', h: 'cat.html?c=food&s=%E7%94%9C%E5%93%81' },
+          { n: '龙井茶', ic: '🍵', d: '狮峰·龙坞买茶', h: 'cat.html?c=food&s=%E9%BE%99%E4%BA%95%E8%8C%B6' },
+          { n: '茶馆', ic: '🫖', d: '湖畔·巷里泡一下午', h: 'cat.html?c=food&s=%E8%8C%B6%E9%A6%86' }
         ]
       },
       {
-        key: 'culture', name: '文博人文', icon: '🏛�?, desc: '博物�?· 历史 · 名人 · 故事',
-        color: '#8a6fd6', href: 'museum.html', intro: '浙江省博物馆、良渚古城、西湖博物馆，镇馆之宝与参观路线一站看�?,
+        key: 'culture', name: '文博人文', icon: '🏛️', desc: '博物馆 · 历史 · 名人 · 故事',
+        color: '#8a6fd6', href: 'museum.html', intro: '浙江省博物馆、良渚古城、西湖博物馆，镇馆之宝与参观路线一站看。',
         subs: [
-          { n: '博物�?, ic: '🏛�?, d: '浙博·良渚·西湖�?, h: 'museum.html' },
-          { n: '历史人文', ic: '📜', d: '大运河·南宋·遗�?, h: 'history.html' },
-          { n: '杭州名人', ic: '👤', d: '白居易·苏轼·秋�?, h: 'celebrity.html' },
-          { n: '杭州故事', ic: '📖', d: '老地名·传说·民�?, h: 'story.html' },
-          { n: '古镇古建', ic: '🏯', d: '古桥·古塔·古宅', h: 'guzhen.html' },
-          { n: '非遗', ic: '🎭', d: '评弹·杭绣·张小�?, h: 'intangible.html' },
-          { n: '寺庙', ic: '⛩️', d: '灵隐·净慈·径�?, h: 'temple.html' },
-          { n: '图书�?, ic: '📚', d: '杭图·城市书房', h: 'tushuguan.html' }
+          { n: '博物馆', ic: '🏛️', d: '浙博·良渚·西湖馆', h: 'cat.html?c=culture&s=%E5%8D%9A%E7%89%A9%E9%A6%86' },
+          { n: '历史人文', ic: '📜', d: '大运河·南宋·遗产', h: 'cat.html?c=culture&s=%E5%8E%86%E5%8F%B2%E4%BA%BA%E6%96%87' },
+          { n: '杭州名人', ic: '👤', d: '白居易·苏轼·秋瑾', h: 'cat.html?c=culture&s=%E6%9D%AD%E5%B7%9E%E5%90%8D%E4%BA%BA' },
+          { n: '杭州故事', ic: '📖', d: '老地名·传说·民俗', h: 'cat.html?c=culture&s=%E6%9D%AD%E5%B7%9E%E6%95%85%E4%BA%8B' },
+          { n: '古镇古建', ic: '🏯', d: '古桥·古塔·古宅', h: 'cat.html?c=culture&s=%E5%8F%A4%E9%95%87%E5%8F%A4%E5%BB%BA' },
+          { n: '非遗', ic: '🎭', d: '评弹·杭绣·张小泉', h: 'cat.html?c=culture&s=%E9%9D%9E%E9%81%97' },
+          { n: '寺庙', ic: '⛩️', d: '灵隐·净慈·径山', h: 'cat.html?c=culture&s=%E5%AF%BA%E5%BA%99' },
+          { n: '图书馆', ic: '📚', d: '杭图·城市书房', h: 'cat.html?c=culture&s=%E5%9B%BE%E4%B9%A6%E9%A6%86' }
         ]
       },
       {
-        key: 'banshi', name: '办事大厅', icon: '🧰', desc: '社保 · 公积�?· 落户 · 交�?,
-        color: '#3a7bd5', href: 'banshi.html', intro: '社保、公积金、落户、交通、区县——杭州办事一次办妥，附官方入口与材料清单�?,
+        key: 'banshi', name: '办事大厅', icon: '🧰', desc: '社保 · 公积金 · 落户 · 交通',
+        color: '#3a7bd5', href: 'banshi.html', intro: '社保、公积金、落户、交通、区县——杭州办事一次办妥，附官方入口与材料清单。',
         subs: [
-          { n: '社保查询', ic: '💳', d: '缴费/余额/明细', h: 'banshi-shebao.html' },
-          { n: '公积�?, ic: '🏦', d: '查询/提取/贷款', h: 'banshi-gjj.html' },
-          { n: '落户', ic: '📋', d: '人才引进·积分落户', h: 'banshi-luohu.html' },
-          { n: '出行交�?, ic: '🚌', d: '公交·地铁·限行', h: 'traffic.html' },
-          { n: '区县导航', ic: '🏙�?, d: '杭州 13 区县', h: 'district.html' },
-          { n: '车辆服务', ic: '🚗', d: '摇号·年检·违章', h: 'banshi-cheliang.html' },
-          { n: '常用电话', ic: '📞', d: '21 个一键复�?, h: 'banshi-dianhua.html' },
-          { n: '实用工具', ic: '🧰', d: '计算器·查�?, h: 'banshi-gongju.html' }
+          { n: '社保查询', ic: '💳', d: '缴费/余额/明细', h: 'cat.html?c=banshi&s=%E7%A4%BE%E4%BF%9D%E6%9F%A5%E8%AF%A2' },
+          { n: '公积金', ic: '🏦', d: '查询/提取/贷款', h: 'cat.html?c=banshi&s=%E5%85%AC%E7%A7%AF%E9%87%91' },
+          { n: '落户', ic: '📋', d: '人才引进·积分落户', h: 'cat.html?c=banshi&s=%E8%90%BD%E6%88%B7' },
+          { n: '出行交通', ic: '🚌', d: '公交·地铁·限行', h: 'cat.html?c=banshi&s=%E5%87%BA%E8%A1%8C%E4%BA%A4%E9%80%9A' },
+          { n: '区县导航', ic: '🏙️', d: '杭州 13 区县', h: 'cat.html?c=banshi&s=%E5%8C%BA%E5%8E%BF%E5%AF%BC%E8%88%AA' },
+          { n: '车辆服务', ic: '🚗', d: '摇号·年检·违章', h: 'cat.html?c=banshi&s=%E8%BD%A6%E8%BE%86%E6%9C%8D%E5%8A%A1' },
+          { n: '常用电话', ic: '📞', d: '21 个一键复制', p: 'phone' },
+          { n: '实用工具', ic: '🧰', d: '计算器·查询', p: 'tools' }
         ]
       },
       {
         key: 'zhaopin', name: '求职招聘', icon: '💼', desc: '国企 · 事业 · 名企 · 兼职',
-        color: '#2bb0a3', href: 'zhaopin.html', intro: '国企、事业单位、名企、兼职实习——杭州机会全收录，附官方报名入口�?,
+        color: '#2bb0a3', href: 'zhaopin.html', intro: '国企、事业单位、名企、兼职实习——杭州机会全收录，附官方报名入口。',
         subs: [
-          { n: '国企招聘', ic: '🏢', d: '央企·市属国企', h: 'zhaopin.html' },
-          { n: '事业单位', ic: '🎓', d: '教师·医护·科研', h: 'zhaopin.html' },
-          { n: '名企招聘', ic: '🏙�?, d: '阿里·网易·海康', h: 'zhaopin.html' },
-          { n: '兼职实习', ic: '💡', d: '学生兼职·实习', h: 'zhaopin.html' },
-          { n: '人才认定', ic: '🏅', d: '高层次人才申�?, h: 'zhaopin.html' },
-          { n: '互联网业', ic: '💻', d: '杭州互联网地�?, h: 'zhaopin.html' },
-          { n: '简历面�?, ic: '📝', d: '模板·技�?, h: 'zhaopin.html' },
-          { n: '劳动维权', ic: '⚖️', d: '劳动合同·仲裁', h: 'zhaopin.html' }
+          { n: '国企招聘', ic: '🏢', d: '央企·市属国企', h: 'cat.html?c=zhaopin&s=%E5%9B%BD%E4%BC%81%E6%8B%9B%E8%81%98' },
+          { n: '事业单位', ic: '🎓', d: '教师·医护·科研', h: 'cat.html?c=zhaopin&s=%E4%BA%8B%E4%B8%9A%E5%8D%95%E4%BD%8D' },
+          { n: '名企招聘', ic: '🏙️', d: '阿里·网易·海康', h: 'cat.html?c=zhaopin&s=%E5%90%8D%E4%BC%81%E6%8B%9B%E8%81%98' },
+          { n: '兼职实习', ic: '💡', d: '学生兼职·实习', h: 'cat.html?c=zhaopin&s=%E5%85%BC%E8%81%8C%E5%AE%9E%E4%B9%A0' },
+          { n: '人才认定', ic: '🏅', d: '高层次人才申请', h: 'cat.html?c=zhaopin&s=%E4%BA%BA%E6%89%8D%E8%AE%A4%E5%AE%9A' },
+          { n: '互联网业', ic: '💻', d: '杭州互联网地图', h: 'cat.html?c=zhaopin&s=%E4%BA%92%E8%81%94%E7%BD%91%E4%B8%9A' },
+          { n: '简历面试', ic: '📝', d: '模板·技巧', h: 'cat.html?c=zhaopin&s=%E7%AE%80%E5%8E%86%E9%9D%A2%E8%AF%95' },
+          { n: '劳动维权', ic: '⚖️', d: '劳动合同·仲裁', h: 'cat.html?c=zhaopin&s=%E5%8A%B3%E5%8A%A8%E7%BB%B4%E6%9D%83' }
         ]
       },
       {
         key: 'news', name: '资讯热点', icon: '📰', desc: '民生 · 新规 · 政策 · 活动',
-        color: '#e0584f', href: 'news.html', intro: '民生政策、消费补贴、活动汇总、限行天气油价——杭州热点一手掌握�?,
+        color: '#e0584f', href: 'articles.html', intro: '民生政策、消费补贴、活动汇总、限行天气油价——杭州热点一手掌握。',
         subs: [
-          { n: '民生政策', ic: '📢', d: '社保·公积金新�?, h: 'news-zhengce.html' },
-          { n: '消费补贴', ic: '🎫', d: '消费券·以旧换�?, h: 'news-butie.html' },
-          { n: '活动汇�?, ic: '🎉', d: '国庆·灯光秀·音乐�?, h: 'news-huodong.html' },
-          { n: '今日限行', ic: '🚗', d: '尾号限行查询', h: 'news-xianxing.html' },
-          { n: '天气预警', ic: '⛈️', d: '实时天气·预报', h: 'news-tianqi.html' },
-          { n: '油价查询', ic: '�?, d: '今日成品油价�?, h: 'news-youjia.html' },
-          { n: '公众号精�?, ic: '📱', d: '每日推送精�?, h: 'news-wxfeed.html' },
-          { n: '全部文章', ic: '📚', d: '2700+ 篇攻�?, h: 'articles.html' }
+          { n: '民生政策', ic: '📢', d: '社保·公积金新政', h: 'cat.html?c=news&s=%E6%B0%91%E7%94%9F%E6%94%BF%E7%AD%96' },
+          { n: '消费补贴', ic: '🎫', d: '消费券·以旧换新', h: 'cat.html?c=news&s=%E6%B6%88%E8%B4%B9%E8%A1%A5%E8%B4%B4' },
+          { n: '活动汇总', ic: '🎉', d: '国庆·灯光秀·音乐节', h: 'cat.html?c=news&s=%E6%B4%BB%E5%8A%A8%E6%B1%87%E6%80%BB' },
+          { n: '今日限行', ic: '🚗', d: '尾号限行查询', a: 'xianxing' },
+          { n: '天气预警', ic: '⛈️', d: '实时天气·预报', a: 'weather' },
+          { n: '油价查询', ic: '⛽', d: '今日成品油价格', a: 'youjia' },
+          { n: '公众号精选', ic: '📱', d: '每日推送精选', h: 'cat.html?c=news&s=%E5%85%AC%E4%BC%97%E5%8F%B7%E7%B2%BE%E9%80%89' },
+          { n: '全部文章', ic: '📚', d: '2700+ 篇攻略', h: 'cat.html?c=news&s=%E5%85%A8%E9%83%A8%E6%96%87%E7%AB%A0' }
         ]
       },
       {
-        key: 'shopping', name: '逛街好物', icon: '🛍�?, desc: '商圈 · 特产 · 好物 · 团购',
-        color: '#bf6a8a', href: 'street.html', intro: '商圈逛街、杭州特产、本地人精挑细选的好物与团购，买得明白�?,
+        key: 'shopping', name: '逛街好物', icon: '🛍️', desc: '商圈 · 特产 · 好物 · 团购',
+        color: '#bf6a8a', href: 'street.html', intro: '商圈逛街、杭州特产、本地人精挑细选的好物与团购，买得明白。',
         subs: [
-          { n: '商圈逛街', ic: '🏬', d: '湖滨·武林·万象�?, h: 'street.html' },
-          { n: '杭州特产', ic: '🎁', d: '王星记·知味观', h: 'laozihao.html' },
-          { n: '杭州好物', ic: '🛒', d: '本地人精挑细�?, a: 'goods' },
-          { n: '百年老店', ic: '🏮', d: '知味观·奎元馆', h: 'laozihao.html' },
-          { n: '咖啡地图', ic: '�?, d: '景观·独立咖啡', h: 'food-coffee.html' },
-          { n: '夜宵夜市', ic: '🌃', d: '河坊街·武�?, h: 'night-market.html' },
+          { n: '商圈逛街', ic: '🏬', d: '湖滨·武林·万象城', h: 'cat.html?c=shopping&s=%E5%95%86%E5%9C%88%E9%80%9B%E8%A1%97' },
+          { n: '杭州特产', ic: '🎁', d: '王星记·知味观', h: 'cat.html?c=shopping&s=%E6%9D%AD%E5%B7%9E%E7%89%B9%E4%BA%A7' },
+          { n: '杭州好物', ic: '🛒', d: '本地人精挑细选', a: 'goods' },
+          { n: '百年老店', ic: '🏮', d: '知味观·奎元馆', h: 'cat.html?c=shopping&s=%E7%99%BE%E5%B9%B4%E8%80%81%E5%BA%97' },
+          { n: '咖啡地图', ic: '☕', d: '景观·独立咖啡', h: 'cat.html?c=shopping&s=%E5%92%96%E5%95%A1%E5%9C%B0%E5%9B%BE' },
+          { n: '夜宵夜市', ic: '🌃', d: '河坊街·武林', h: 'cat.html?c=shopping&s=%E5%A4%9C%E5%AE%B5%E5%A4%9C%E5%B8%82' },
           { n: '餐饮团购', ic: '🍲', d: '美团到店', u: 'https://i.meituan.com/ahangzhou?channel=485720' },
           { n: '酒店预订', ic: '🏨', d: '携程酒店', u: 'https://m.ctrip.com/webapp/hotels/hotelsearch/search?allianceid=10511040&sid=330893571&ouid=kfptvxtool' }
         ]
       },
       {
         key: 'my', name: '我的社区', icon: '👤', desc: '收藏 · 积分 · 反馈',
-        color: '#5b8c5a', href: '', intro: '收藏、积分、反馈与设置——你�?iHangzhou 个人中心�?,
+        color: '#5b8c5a', href: '', intro: '收藏、积分、反馈与设置——你的 iHangzhou 个人中心。',
         subs: [
-          { n: '我的收藏', ic: '�?, d: '收藏的服�?, a: 'fav' },
-          { n: '浏览历史', ic: '🕘', d: '最近看�?, a: 'hist' },
-          { n: '每日签到', ic: '📅', d: '连续签到领积�?, a: 'checkin' },
+          { n: '我的收藏', ic: '⭐', d: '收藏的服务', a: 'fav' },
+          { n: '浏览历史', ic: '🕘', d: '最近看过', a: 'hist' },
+          { n: '每日签到', ic: '📅', d: '连续签到领积分', a: 'checkin' },
           { n: '意见反馈', ic: '📨', d: '建议 · 吐槽', a: 'feedback' },
           { n: '字体大小', ic: '🔤', d: '大字模式调节', a: 'fontsize' },
-          { n: '分享给朋�?, ic: '📤', d: '复制链接 + 二维�?, a: 'share' },
+          { n: '分享给朋友', ic: '📤', d: '复制链接 + 二维码', a: 'share' },
           { n: '关于我们', ic: 'ℹ️', d: '平台介绍', a: 'about' },
           { n: '设置', ic: '⚙️', d: '主题 · 城市', a: 'settings' }
         ]
@@ -820,13 +821,13 @@
         return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       }
 
-      /* 一级栏目卡�?*/
+      /* 一级栏目卡片 */
       grid.innerHTML = HOME_CATS.map(function (c) {
         return '<div class="cat-card" data-cat="' + c.key + '" style="--ci:' + c.color + '" role="button" tabindex="0" aria-label="' + esc(c.name) + '">' +
           '<span class="cat-ic">' + c.icon + '</span>' +
           '<span class="cat-body"><span class="cat-nm">' + esc(c.name) + '</span>' +
           '<span class="cat-ds">' + esc(c.desc) + '</span></span>' +
-          '<span class="cat-ar">�?/span>' +
+          '<span class="cat-ar">›</span>' +
           '</div>';
       }).join('');
 
@@ -839,7 +840,7 @@
         hero.innerHTML =
           '<h1>' + cat.icon + ' ' + esc(cat.name) + '</h1>' +
           '<p>' + esc(cat.intro) + '</p>' +
-          (cat.href ? '<a href="' + cat.href + '" style="display:inline-block;margin-top:10px;background:rgba(255,255,255,.22);color:#fff;font-size:12.5px;font-weight:700;padding:6px 14px;border-radius:16px;text-decoration:none;">进入栏目主页 �?/a>' : '');
+          (cat.href ? '<a href="' + cat.href + '" style="display:inline-block;margin-top:10px;background:rgba(255,255,255,.22);color:#fff;font-size:12.5px;font-weight:700;padding:6px 14px;border-radius:16px;text-decoration:none;">进入栏目主页 →</a>' : '');
         subGrid.innerHTML = cat.subs.map(function (s) {
           var attrs = ' class="sub-card" style="--ci:' + cat.color + '" role="button" tabindex="0"';
           if (s.h) attrs += ' data-href="' + s.h + '"';
@@ -862,7 +863,7 @@
         if (catSec) catSec.style.display = '';
       }
 
-      /* 二级动作分发：优先站点既有全局函数，其�?SPA 页签，最后外�?*/
+      /* 二级动作分发：优先站点既有全局函数，其次 SPA 页签，最后外链 */
       function runAct(act) {
         var w = window;
         if (act === 'tide' && w.showTide) { w.showTide(); return true; }
@@ -888,7 +889,7 @@
           href = el.dataset.href, url = el.dataset.url;
         if (act) { runAct(act); return; }
         if (page) {
-          /* SPA 页签：复�?quick-nav 上已有的 data-page 绑定 */
+          /* SPA 页签：复用 quick-nav 上已有的 data-page 绑定 */
           var nav = document.querySelector('.quick-nav a[data-page="' + page + '"]');
           if (nav) { nav.click(); return; }
         }
@@ -917,7 +918,7 @@
       if (backBtn) backBtn.addEventListener('click', closeCat);
     })();
 
-    /* 常用服务（CMS hotServices）：补上点击分发，与工具卡行为一�?*/
+    /* 常用服务（CMS hotServices）：补上点击分发，与工具卡行为一致 */
     (function bindSvcGrid() {
       var grid = document.getElementById('hotGrid');
       if (!grid) return;
@@ -964,21 +965,23 @@
       });
     });
 
-    // 我的页额外功�?+ 分享引导
+    // 我的页额外功能 + 分享引导
     function showShareTip() {
       // 优先用浏览器原生分享（移动端 Safari / 微信均支持）
       if (navigator.share) {
         navigator.share({
           title: 'iHangzhou · 杭州生活助手',
-          text: '杭州人的数字生活工具箱，办事/出行/民生一站导�?,
+          text: '杭州人的数字生活工具箱，办事/出行/民生一站导航',
           url: location.href
         }).then(function () {
-          // 用户未取消分�?        }).catch(function (err) {
+          // 用户未取消分享
+        }).catch(function (err) {
           // 用户取消或分享失败时，静默处理（不提示错误打断体验）
         });
         return;
       }
-      // 回退�?toast 提示（公众号内嵌场景�?      var t = document.getElementById('toast');
+      // 回退到 toast 提示（公众号内嵌场景）
+      var t = document.getElementById('toast');
       if (!t) {
         t = document.createElement('div');
         t.id = 'toast';
@@ -988,17 +991,18 @@
       var ua = navigator.userAgent.toLowerCase();
       if (ua.indexOf('micromessenger') > -1) {
         // 公众号内嵌：引导点右上角
-        t.innerHTML = '📤 点击右上�?··· <br>选择「发送给朋友」或「分享到朋友圈�?;
+        t.innerHTML = '📤 点击右上角 ··· <br>选择「发送给朋友」或「分享到朋友圈」';
       } else {
-        // 普通浏览器：直接复制链接并给反�?        t.innerHTML = '📤 正在复制链接...';
+        // 普通浏览器：直接复制链接并给反馈
+        t.innerHTML = '📤 正在复制链接...';
         if (navigator.clipboard) {
           navigator.clipboard.writeText(location.href).then(function () {
-            t.innerHTML = '�?链接已复制到剪贴�?br>发送给朋友�?;
+            t.innerHTML = '✅ 链接已复制到剪贴板<br>发送给朋友吧';
           }).catch(function () {
-            t.innerHTML = '�?复制失败，请长按下方链接手动复制';
+            t.innerHTML = '❌ 复制失败，请长按下方链接手动复制';
           });
         } else {
-          t.innerHTML = '📤 复制下方链接分享给朋�?;
+          t.innerHTML = '📤 复制下方链接分享给朋友';
         }
       }
       t.classList.add('show');
@@ -1011,14 +1015,14 @@
       title.innerHTML = 'ℹ️ 关于 iHangzhou';
       body.innerHTML = '<div style="line-height:2;font-size:14px;">' +
         '<p><strong>iHangzhou · 杭州生活助手</strong></p>' +
-        '<p style="color:var(--text-secondary);">杭州人的数字生活工具箱，致力于让每一位杭州市民的生活更便捷�?/p>' +
-        '<p style="margin-top:12px;"><strong>功能�?/strong></p>' +
-        '<p style="color:var(--text-secondary);">�?153项政�?交�?民生/特色服务导航<br>' +
-        '�?限行查询、个�?房贷/五险一�?退休年龄计算器<br>' +
-        '�?21个常用电话一键复�?br>' +
-        '�?杭州天气、油价、万年历</p>' +
-        '<p style="margin-top:12px;"><strong>声明�?/strong></p>' +
-        '<p style="color:var(--text-secondary);font-size:13px;">本平台为公益导航，所有外部链接均指向官方渠道，数据仅供参考，不存储任何用户数据�?/p>' +
+        '<p style="color:var(--text-secondary);">杭州人的数字生活工具箱，致力于让每一位杭州市民的生活更便捷。</p>' +
+        '<p style="margin-top:12px;"><strong>功能：</strong></p>' +
+        '<p style="color:var(--text-secondary);">• 153项政务/交通/民生/特色服务导航<br>' +
+        '• 限行查询、个税/房贷/五险一金/退休年龄计算器<br>' +
+        '• 21个常用电话一键复制<br>' +
+        '• 杭州天气、油价、万年历</p>' +
+        '<p style="margin-top:12px;"><strong>声明：</strong></p>' +
+        '<p style="color:var(--text-secondary);font-size:13px;">本平台为公益导航，所有外部链接均指向官方渠道，数据仅供参考，不存储任何用户数据。</p>' +
         '</div>';
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -1030,13 +1034,13 @@
       title.innerHTML = '🤝 本地商家入驻';
       body.innerHTML = '<div style="line-height:1.8;font-size:14px;">' +
         '<p style="color:var(--text-secondary);">iHangzhou 是杭州本地生活门户，月活用户稳步增长。欢迎杭州本地商家免费入驻：</p>' +
-        '<p style="margin-top:12px;"><strong>�?可入驻类�?/strong></p>' +
-        '<p style="color:var(--text-secondary);">�?餐饮美食 / 杭帮�?/ 小吃<br>�?景区景点 / 演出 / 文创<br>�?杭州特产 / 老字�?/ 茶叶<br>�?生活服务 / 家政 / 美业<br>�?教育 / 培训 / 亲子</p>' +
+        '<p style="margin-top:12px;"><strong>✅ 可入驻类型</strong></p>' +
+        '<p style="color:var(--text-secondary);">• 餐饮美食 / 杭帮菜 / 小吃<br>• 景区景点 / 演出 / 文创<br>• 杭州特产 / 老字号 / 茶叶<br>• 生活服务 / 家政 / 美业<br>• 教育 / 培训 / 亲子</p>' +
         '<p style="margin-top:12px;"><strong>🎁 入驻权益</strong></p>' +
-        '<p style="color:var(--text-secondary);">�?首页「杭州好物」推荐位<br>�?对应分类下永久展�?br>�?公众号文章推�?br>�?免费 · 不抽�?/p>' +
+        '<p style="color:var(--text-secondary);">• 首页「杭州好物」推荐位<br>• 对应分类下永久展示<br>• 公众号文章推荐<br>• 免费 · 不抽佣</p>' +
         '<p style="margin-top:12px;"><strong>📞 联系方式</strong></p>' +
-        '<p style="color:var(--text-secondary);">�?微信：添加公众号「iHangzhou」留言<br>�?邮箱：biz@ihangzhou.net<br>�?准备材料：店铺名 / 地址 / 招牌产品 / 联系方式</p>' +
-        '<p style="margin-top:14px;color:var(--text-muted);font-size:12px;">入驻免费，iHangzhou 保留上架审核权，仅收录杭州本地优质商家�?/p>' +
+        '<p style="color:var(--text-secondary);">• 微信：添加公众号「iHangzhou」留言<br>• 邮箱：biz@ihangzhou.net<br>• 准备材料：店铺名 / 地址 / 招牌产品 / 联系方式</p>' +
+        '<p style="margin-top:14px;color:var(--text-muted);font-size:12px;">入驻免费，iHangzhou 保留上架审核权，仅收录杭州本地优质商家。</p>' +
         '</div>';
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -1051,19 +1055,21 @@
       }
       var ua = navigator.userAgent.toLowerCase();
       if (ua.indexOf('micromessenger') > -1) {
-        // 微信内：引导下拉搜一�?        t.innerHTML = '🔍 在微信顶部下�?�?点击「搜一搜�?br>输入「iHangzhou」即可找�?;
+        // 微信内：引导下拉搜一搜
+        t.innerHTML = '🔍 在微信顶部下拉 → 点击「搜一搜」<br>输入「iHangzhou」即可找到';
       } else {
         // 非微信：提示需要去微信
-        t.innerHTML = '🔍 打开微信 �?顶部搜索�?br>输入「iHangzhou」即可找到本�?;
+        t.innerHTML = '🔍 打开微信 → 顶部搜索框<br>输入「iHangzhou」即可找到本站';
       }
       t.classList.add('show');
       setTimeout(function () { t.classList.remove('show'); }, 3500);
     }
-    // 打开携程小程序（微信内）或携�?H5（其他环境）
+    // 打开携程小程序（微信内）或携程 H5（其他环境）
     function openCtripMp() {
       var ua = navigator.userAgent.toLowerCase();
       if (ua.indexOf('micromessenger') > -1) {
-        // 微信内：尝试�?wx-open-launch-weapp 跳小程序（需�?jsapi 签名 + 携程小程序原�?ID gh_xxx�?        // 当前未配置原�?ID，先 fallback �?H5 链接
+        // 微信内：尝试用 wx-open-launch-weapp 跳小程序（需要 jsapi 签名 + 携程小程序原始 ID gh_xxx）
+        // 当前未配置原始 ID，先 fallback 到 H5 链接
         // 如拿到携程小程序原始 ID，可在此插入 <wx-open-launch-weapp> 标签
         var t = document.getElementById('toast') || (function () {
           var el = document.createElement('div');
@@ -1078,22 +1084,25 @@
           location.href = 'https://m.ctrip.com/html5/?allianceid=10511040&sid=330893571&ouid=kfptvxtool';
         }, 1500);
       } else {
-        // 非微信：直接跳手机版 H5（带分销参数�?        location.href = 'https://m.ctrip.com/html5/?allianceid=10511040&sid=330893571&ouid=kfptvxtool';
+        // 非微信：直接跳手机版 H5（带分销参数）
+        location.href = 'https://m.ctrip.com/html5/?allianceid=10511040&sid=330893571&ouid=kfptvxtool';
       }
     }
-    // 搜索�?placeholder 按时段轮换（低成本小惊喜�?    (function rotateSearchPlaceholder() {
+    // 搜索框 placeholder 按时段轮换（低成本小惊喜）
+    (function rotateSearchPlaceholder() {
       var hour = new Date().getHours();
-      var ph = '搜索社保/公积�?限行/落户/夜市...';
-      if (hour >= 6 && hour < 10) ph = '早上好！今天限行几号�?;
-      else if (hour >= 10 && hour < 12) ph = '搜索社保/公积�?落户...';
-      else if (hour >= 12 && hour < 14) ph = '午饭吃什么？搜美食团�?;
-      else if (hour >= 14 && hour < 18) ph = '搜索博物�?周末去哪...';
-      else if (hour >= 18 && hour < 22) ph = '今晚去哪逛？搜夜�?演出';
-      else ph = '深夜也在，搜索生活攻�?..';
+      var ph = '搜索社保/公积金/限行/落户/夜市...';
+      if (hour >= 6 && hour < 10) ph = '早上好！今天限行几号？';
+      else if (hour >= 10 && hour < 12) ph = '搜索社保/公积金/落户...';
+      else if (hour >= 12 && hour < 14) ph = '午饭吃什么？搜美食团购';
+      else if (hour >= 14 && hour < 18) ph = '搜索博物馆/周末去哪...';
+      else if (hour >= 18 && hour < 22) ph = '今晚去哪逛？搜夜市/演出';
+      else ph = '深夜也在，搜索生活攻略...';
       var si = document.getElementById('searchInput');
       if (si) si.placeholder = ph;
     })();
-    // 我的页主题切�?    document.addEventListener('DOMContentLoaded', function () {
+    // 我的页主题切换
+    document.addEventListener('DOMContentLoaded', function () {
       var meTheme = document.getElementById('meTheme');
       if (meTheme) {
         meTheme.addEventListener('click', function () {
