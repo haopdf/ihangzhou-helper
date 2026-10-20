@@ -3,390 +3,175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <meta name="description" content="杭帮菜经典名菜与街头小吃，西湖醋鱼、龙井虾仁、东坡肉、片儿川，品味千年饮食文化，所有链接指向官方渠道。">
-  <meta name="keywords" content="杭州美食,杭帮菜,西湖醋鱼,龙井虾仁,东坡肉,片儿川,ihangzhou">
-  <meta name="theme-color" content="#1f7a5a">
+  <meta name="description" content="iHangzhou · 杭州美食 - 杭帮菜、咖啡、老字号、夜市、早餐、甜品、龙井茶、茶馆一站直达。">
+  <meta name="keywords" content="杭州美食,杭帮菜,西湖醋鱼,龙井虾仁,东坡肉,片儿川">
+  <meta name="theme-color" content="#d98324">
   <meta property="og:title" content="杭州美食 · iHangzhou">
-  <meta property="og:description" content="杭帮菜经典名菜与街头小吃，西湖醋鱼、龙井虾仁、东坡肉、片儿川，品味千年饮食文化">
+  <meta property="og:description" content="杭帮菜、咖啡、老字号、夜市、早餐、甜品、龙井茶、茶馆">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="iHangzhou 杭州生活助手">
-  <link rel="canonical" href="https://www.ihangzhou.net/food.html">
   <link rel="manifest" href="manifest.json">
   <title>杭州美食 · iHangzhou 杭州生活助手</title>
   <link rel="stylesheet" href="css/style.css?v=20261018l">
   <script src="js/layout.js?v=20261018l"></script>
+  <script src="js/breadcrumb.js?v=20261018l"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
-<style>:root{--primary:#dc2626;--primary-dark:#991b1b}</style><link rel="stylesheet" href="css/channel.css?v=20261018l">
+  <style>
+    :root{--primary:#d98324;--primary-dark:#b86a1a}
+    .sub-page{max-width:720px;margin:0 auto;padding:0 0 40px}
+    .sub-hero{background:linear-gradient(135deg,#d98324dd,#b86a1a99);padding:24px 16px 20px;color:#fff;text-align:center}
+    .sub-hero h1{font-size:22px;font-weight:700;margin:6px 0 8px;display:flex;align-items:center;justify-content:center;gap:8px}
+    .sub-hero h1 .hero-icon{font-size:32px}
+    .sub-hero p{font-size:14px;opacity:0.9;line-height:1.6;max-width:480px;margin:0 auto}
+    .sub-body{padding:16px;max-width:720px;margin:0 auto}
+    .sub-block{margin-bottom:20px}
+    .sub-sec-ttl{font-size:16px;font-weight:700;margin:0 0 12px;display:flex;align-items:center;gap:6px;color:var(--text)}
+    .sub-third{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    @media(min-width:600px){.sub-third{grid-template-columns:repeat(4,1fr)}}
+    .sub-third-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:14px;text-decoration:none;text-align:center;transition:transform .15s,box-shadow .15s}
+    .sub-third-card:active{transform:scale(0.96)}
+    .sti{font-size:28px}
+    .stn{font-size:13px;color:var(--text);line-height:1.3;font-weight:600}
+    .std{font-size:11px;color:var(--text-muted);line-height:1.3}
+    .sub-feat{display:flex;flex-direction:column;gap:8px}
+    .sub-feat-card{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:14px;text-decoration:none;transition:background .15s}
+    .sub-feat-card:active{background:var(--bg-hover)}
+    .sf-ic{font-size:28px;flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--bg-alt);border-radius:10px}
+    .sf-bd{flex:1;min-width:0}
+    .sf-t{font-size:14px;font-weight:600;color:var(--text)}
+    .sf-d{font-size:12px;color:var(--text-muted);display:block;margin-top:2px}
+    .sf-ar{font-size:18px;color:var(--text-muted);flex-shrink:0}
+    .sub-crumb{padding:12px 16px;font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:6px;background:var(--bg-alt)}
+    .sub-crumb a{color:var(--primary);text-decoration:none;font-weight:500}
+    .sub-crumb b{color:var(--text);font-weight:600}
+    .sub-crumb .sep{color:var(--text-muted)}
+    .sub-back{display:inline-block;padding:10px 20px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:10px;color:var(--text);text-decoration:none;font-size:14px;margin-top:12px}
+  </style>
 </head>
-<body class="ch-page">
-  <nav class="site-breadcrumb"><a href="index.html">首页</a><span class="sb-sep">›</span><b>杭州美食</b></nav>
+<body>
   <script>
-    window.IHZ_PAGE = { title: "杭州美食", icon: "🍜", channelId: "food" };
-    window.IZ_SKIP_APP_THEME = true;
+    window.IHZ_PAGE = { title: '杭州美食', icon: '🍜' };
     window.IZ_SKIP_APP_INIT = true;
   </script>
-<!-- 频道内容 -->
-  <div class="page active" id="pageChannel">
-    <!-- 频道头部 -->
-    <div class="channel-header" id="channelHeader"></div>
 
-    <!-- 频道描述 -->
-    <div class="channel-desc" id="channelDesc"></div>
-
-    <!-- 频道服务网格 -->
-    <div class="content">
-      <div class="section-head">
-        <h2 id="channelTitle">杭州美食 · 全部服务</h2>
-        <span class="tip" id="channelCount"></span>
-      </div>
-      <div class="service-grid" id="serviceGrid"></div>
+  <div class="page active" id="pageSub">
+    <!-- 面包屑 -->
+    <div class="sub-crumb">
+      <a href="index.html">首页</a>
+      <span class="sep">/</span>
+      <b>杭州美食</b>
     </div>
 
-    <!-- 相关频道推荐 -->
-    <div class="related-channels">
-      <div class="section-head">
-        <h2>相关频道</h2>
-        <span class="tip">探索更多</span>
+    <!-- Hero -->
+    <div class="sub-hero">
+      <h1><span class="hero-icon">🍜</span> 杭州美食</h1>
+      <p>杭帮菜 · 咖啡 · 老字号 · 夜市 · 早餐 · 甜品 · 龙井茶 · 茶馆</p>
+    </div>
+
+    <!-- 主体内容 -->
+    <div class="sub-body">
+      <!-- 子栏目 -->
+      <div class="sub-block">
+        <div class="sub-sec-ttl">📂 子栏目 <span class="sub-more">8 个</span></div>
+        <div class="sub-third">
+          <a class="sub-third-card" href="food.html"><span class="sti">🥢</span><span class="stn">杭帮菜</span><span class="std">西湖醋鱼·东坡肉</span></a>
+          <a class="sub-third-card" href="food-coffee.html"><span class="sti">☕</span><span class="stn">咖啡</span><span class="std">西湖边·独立咖啡</span></a>
+          <a class="sub-third-card" href="laozihao.html"><span class="sti">🏮</span><span class="stn">老字号</span><span class="std">知味观·奎元馆</span></a>
+          <a class="sub-third-card" href="night-market.html"><span class="sti">🌃</span><span class="stn">夜市</span><span class="std">河坊街·武林夜宵</span></a>
+          <a class="sub-third-card" href="breakfast.html"><span class="sti">🥟</span><span class="stn">早餐</span><span class="std">拌面·生煎·小笼</span></a>
+          <a class="sub-third-card" href="dessert.html"><span class="sti">🍰</span><span class="stn">甜品</span><span class="std">定胜糕·条头糕</span></a>
+          <a class="sub-third-card" href="tea.html"><span class="sti">🍵</span><span class="stn">龙井茶</span><span class="std">狮峰·龙坞买茶</span></a>
+          <a class="sub-third-card" href="chaguan.html"><span class="sti">🫖</span><span class="stn">茶馆</span><span class="std">湖畔·巷里泡一下午</span></a>
+        </div>
       </div>
-      <div class="channel-grid" id="relatedChannels"></div>
+
+      <!-- 精选内容 -->
+      <div class="sub-block">
+        <div class="sub-sec-ttl">⭐ 精选内容</div>
+        <div class="sub-feat">
+          <a class="sub-feat-card" href="food.html">
+            <span class="sf-ic">🥢</span>
+            <span class="sf-bd"><span class="sf-t">杭帮菜经典</span><span class="sf-d">西湖醋鱼·龙井虾仁·东坡肉·片儿川</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+          <a class="sub-feat-card" href="food-coffee.html">
+            <span class="sf-ic">☕</span>
+            <span class="sf-bd"><span class="sf-t">杭州咖啡地图</span><span class="sf-d">景观咖啡·独立咖啡馆推荐</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+          <a class="sub-feat-card" href="laozihao.html">
+            <span class="sf-ic">🏮</span>
+            <span class="sf-bd"><span class="sf-t">杭州老字号</span><span class="sf-d">知味观·奎元馆·楼外楼</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+        </div>
+      </div>
 
       <!-- 相关文章 -->
-      <div id="relatedArticles"></div>
+      <div class="sub-block">
+        <div class="sub-sec-ttl">📖 相关文章 <span class="sub-more" id="subArtCount"></span></div>
+        <div class="sub-arts" id="subArts"><div class="sub-empty">正在加载相关文章…</div></div>
+      </div>
+
+      <!-- 同栏目其他二级 -->
+      <div class="sub-block">
+        <div class="sub-sec-ttl">🧭 相关频道</div>
+        <div class="sub-third" style="grid-template-columns:repeat(3,1fr)">
+          <a class="sub-third-card" href="street.html"><span class="sti">🛍️</span><span class="stn">逛街好物</span></a>
+          <a class="sub-third-card" href="laozihao.html"><span class="sti">🏮</span><span class="stn">老字号</span></a>
+          <a class="sub-third-card" href="travel.html"><span class="sti">🧭</span><span class="stn">旅游出行</span></a>
+        </div>
+      </div>
     </div>
 
     <!-- 返回首页 -->
-    <div style="text-align:center;padding: 24px 16px 48px 16px;">
-      <a href="index.html" style="display:inline-block;padding: 12px 16px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;">← 返回首页</a>
-    </div>
-  </div>
-
-  <!-- 模态框 -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal">
-      <div class="modal-header">
-        <h3 id="modalTitle">标题</h3>
-        <button class="modal-close" id="modalClose">✕</button>
-      </div>
-      <div class="modal-body" id="modalBody"></div>
+    <div style="padding:0 16px;text-align:center">
+      <a href="index.html" class="sub-back">← 返回首页</a>
     </div>
   </div>
 
   <script src="js/app.js?v=20261018l"></script>
-<script src="js/analytics.js?v=20261018l"></script>
   <script>
-    // 频道专题页逻辑
-    (function () {
-      'use strict';
-
-      var CHANNEL_ID = 'food';
-      var CHANNEL_NAME = '杭州美食';
-      var CHANNEL_ICON = '🍜';
-      var CHANNEL_DESC = '杭帮菜经典名菜与街头小吃，西湖醋鱼、龙井虾仁、东坡肉、片儿川，品味千年饮食文化，所有链接指向官方渠道。';
-
-      // 相关频道推荐
-      var RELATED = {
-        'banshi': ['traffic', 'zhaopin', 'laozihao'],
-        'traffic': ['banshi', 'weekend', 'museum'],
-        'food': ['laozihao', 'street', 'coffee'],
-        'laozihao': ['food', 'history', 'street'],
-        'celebrity': ['history', 'street', 'museum'],
-        'history': ['celebrity', 'museum', 'laozihao'],
-        'internet': ['zhaopin', 'street', 'coffee'],
-        'zhaopin': ['banshi', 'internet', 'weekend'],
-        'street': ['food', 'coffee', 'history'],
-        'weekend': ['museum', 'food', 'street'],
-        'museum': ['history', 'weekend', 'celebrity'],
-        'coffee': ['street', 'weekend', 'food']
-      };
-
-      // 根据频道关键词从 articles/index.json 匹配相关文章
-      function fetchRelatedArticles(chips, categoryName) {
-        var el = document.getElementById('relatedArticles');
-        if (!el) return;
-        var allChips = (chips || []).slice(0, 3);
-        if (categoryName) allChips.unshift(categoryName);
-
-        fetch('articles/index.json')
-          .then(function(r) { return r.json(); })
-          .then(function(list) {
-            var matched = [];
-            list.forEach(function(a) {
-              for (var i = 0; i < allChips.length; i++) {
-                var kw = allChips[i];
-                if (!kw) continue;
-                if (a.title.indexOf(kw) >= 0 || a.summary.indexOf(kw) >= 0 || a.cat.indexOf(kw) >= 0) {
-                  matched.push(a);
-                  break;
-                }
-              }
+    (function() {
+      var KW = ["杭帮菜","西湖醋鱼","龙井虾仁","东坡肉","片儿川","杭州美食","美食"];
+      var countEl = document.getElementById('subArtCount');
+      var box = document.getElementById('subArts');
+      fetch('articles/index.json')
+        .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+        .then(function(list) {
+          var scored = [];
+          list.forEach(function(a) {
+            var title = a.title || '', catg = a.cat || '', sum = a.summary || '';
+            var sc = 0;
+            KW.forEach(function(k) {
+              if (title.indexOf(k) >= 0) sc += 3;
+              else if (catg.indexOf(k) >= 0) sc += 2;
+              else if (sum.indexOf(k) >= 0) sc += 1;
             });
-            matched = matched.slice(0, 5);
-            if (!matched.length) { el.innerHTML = ''; return; }
-
-            el.innerHTML =
-              '<div class="section-head" style="margin-top:24px;padding:0 16px;">' +
-              '<h2>📚 相关杭州故事</h2>' +
-              '<span class="tip">共 ' + matched.length + ' 篇</span>' +
-              '</div>' +
-              '<div style="padding: 0 16px;">' +
-              matched.map(function(a) {
-                return '<a href="articles/' + a.slug + '.html" style="display:block;padding:12px 14px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;margin-bottom:8px;text-decoration:none;color:inherit;">' +
-                  '<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;">' + a.title + '</div>' +
-                  '<div style="font-size:12px;color:var(--text-muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">' + a.summary + '</div>' +
-                  '</a>';
-              }).join('') +
-              '<a href="articles.html" style="display:block;text-align:center;padding:12px;background:var(--bg-alt);border-radius:10px;color:var(--primary);font-size:13px;text-decoration:none;font-weight:500;margin-top:8px;">📖 查看全部杭州故事 →</a>' +
-              '</div>';
-          })
-          .catch(function() { /* 静默失败 */ });
-      }
-
-      function getServiceIcon(name) {
-        if (window.getServiceIcon) return window.getServiceIcon(name);
-        return '📌';
-      }
-
-      function renderChannel() {
-        if (!window._getData) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">数据加载失败，请刷新重试</div>';
-          return;
-        }
-
-        var DATA = window._getData();
-        var category = DATA.categories.find(function (c) { return c.id === CHANNEL_ID; });
-        if (!category) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">频道「' + CHANNEL_NAME + '」数据未找到</div>';
-          return;
-        }
-
-        // 渲染频道头部
-        var header = document.getElementById('channelHeader');
-        header.innerHTML =
-          '<div class="ch-hero" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;text-align:center;">' +
-          '<div style="font-size:56px;line-height:1;margin-bottom:8px;">' + category.icon + '</div>' +
-          '<h1 style="font-size:24px;font-weight:700;margin:0;">' + category.name + '</h1>' +
-          '<div style="font-size:13px;opacity:0.9;margin-top:6px;">iHangzhou · 杭州生活助手</div>' +
-          '</div>';
-
-        // 渲染描述 + 提取关键词变成可点击 chip
-        var descEl = document.getElementById('channelDesc');
-        var descText = CHANNEL_DESC;
-        var chips = [];
-        var tokens = descText.split(/[、，,；。]/);
-        tokens.forEach(function(t) {
-          t = t.trim();
-          if (t.length >= 2 && t.length <= 10 && !/^[a-z0-9]+$/i.test(t)) chips.push(t);
-        });
-        chips = chips.filter(function(v, i, a) { return a.indexOf(v) === i; }).slice(0, 8);
-
-        var chipsHtml = chips.length ?
-          '<div class="ch-chips" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">' +
-          chips.map(function(c) {
-            return '<a class="ch-chip" href="articles.html?q=' + encodeURIComponent(c) + '" style="display:inline-block;padding:4px 12px;background:var(--bg-alt);border:1px solid var(--border);border-radius:14px;font-size:12px;color:var(--text-secondary);text-decoration:none;font-weight:500;">' + c + '</a>';
-          }).join('') + '</div>' : '';
-
-        descEl.innerHTML =
-          '<div style="padding:16px;background:var(--bg-card);border-radius:0 0 12px 12px;margin:0 16px;font-size:14px;line-height:1.7;color:var(--text-secondary);">' +
-          descText + chipsHtml +
-          '</div>';
-
-        // 相关文章区域
-        fetchRelatedArticles(chips, category.name);
-
-        // 渲染标题与数量
-        // 支持 ?city= 区县过滤：item.districts 包含 cityId 才显示
-        var params = new URLSearchParams(location.search);
-        var cityId = params.get('city') || '';
-        var cityObj = null;
-        if (cityId && window.DISTRICTS) {
-          cityObj = window.DISTRICTS.find(function (d) { return d.id === cityId; });
-        }
-        // 兜底推断 districts：item.districts 不存在时，从 detail/name 文本推断
-        function inferDistricts(item) {
-          if (Array.isArray(item.districts)) return item.districts;
-          var d = (item.detail || '') + ' ' + (item.name || '') + ' ' + (item.desc || '');
-          var ds = [];
-          if (/楼外楼|孤山路|岳王庙|西湖/.test(d)) ds.push('xihu');
-          if (/知味观|仁和路|奎元馆|解放路|杭州酒家|延安路|河坊街|吴山/.test(d)) ds.push('shangcheng');
-          if (/拱宸桥|运河|小河/.test(d)) ds.push('gongshu');
-          if (/滨江|网易|阿里/.test(d)) ds.push('binjiang');
-          if (/萧山/.test(d)) ds.push('xiaoshan');
-          if (/余杭|良渚|径山|梦想小镇/.test(d)) ds.push('yuhang');
-          if (/临平/.test(d)) ds.push('linping');
-          if (/下沙/.test(d)) ds.push('qiantang');
-          if (/富阳|富春/.test(d)) ds.push('fuyang');
-          if (/临安|天目|青山湖/.test(d)) ds.push('linan');
-          if (/桐庐/.test(d)) ds.push('tonglu');
-          if (/千岛湖|淳安/.test(d)) ds.push('chunan');
-          if (/建德|新安江|严州/.test(d)) ds.push('jiande');
-          if (ds.length === 0) ds = ['hangzhou'];
-          ds.push('hangzhou');
-          return ds;
-        }
-        var filteredItems = cityId ?
-          category.items.filter(function (item) {
-            return inferDistricts(item).indexOf(cityId) >= 0;
-          }) :
-          category.items;
-        // 标题前缀：切了区县显示区县名
-        var cityPrefix = cityObj ? cityObj.full + ' · ' : '';
-        document.getElementById('channelTitle').textContent = cityPrefix + category.name + ' · 美食推荐';
-        document.getElementById('channelCount').textContent = cityId ?
-          (filteredItems.length + ' 项匹配 ' + (cityObj ? cityObj.full : cityId)) :
-          ('共 ' + category.items.length + ' 项');
-
-        // 切了区县但无数据时的提示
-        if (cityId && filteredItems.length === 0) {
-          document.getElementById('serviceGrid').innerHTML =
-            '<div style="grid-column:1/-1;text-align:center;padding:40px 16px;color:var(--text-muted);font-size:14px;">' +
-            '本区暂无标记美食，<a href="food.html" style="color:var(--primary);">查看全市美食 →</a>' +
-            '</div>';
-          return;
-        }
-
-        // 渲染服务网格
-        var grid = document.getElementById('serviceGrid');
-        grid.innerHTML = filteredItems.map(function (item) {
-          if (item.url) {
-            var isExt = /^https?:\/\//i.test(item.url);
-            var extAttr = isExt ? ' target="_blank" rel="noopener noreferrer"' : '';
-            return '<a class="sitem" href="' + item.url + '"' + extAttr + '>' +
-              '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
-              '<div class="sinfo">' +
-              '<div class="sname">' + item.name + '</div>' +
-              '<div class="sdesc">' + item.desc + '</div>' +
-              '</div>' +
-              '<div class="sarrow">›</div>' +
-              '</a>';
-          }
-          return '<div class="sitem" data-action="' + (item.action || '') + '" data-url="">' +
-            '<div class="sicon">' + (getServiceIcon(item.name) || '📌') + '</div>' +
-            '<div class="sinfo">' +
-            '<div class="sname">' + item.name + '</div>' +
-            '<div class="sdesc">' + item.desc + '</div>' +
-            '</div>' +
-            '<div class="sarrow">›</div>' +
-            '</div>';
-        }).join('');
-
-        // 渲染相关频道
-        var related = RELATED[CHANNEL_ID] || [];
-        var relEl = document.getElementById('relatedChannels');
-        if (relEl && related.length) {
-          relEl.innerHTML = related.map(function (rid) {
-            var rcat = DATA.categories.find(function (c) { return c.id === rid; });
-            if (!rcat) return '';
-            return '<a class="p-neighbor" href="' + rid + '.html">' +
-              '<span class="ch-icon">' + rcat.icon + '</span>' +
-              '<span class="ch-name">' + rcat.name + '</span>' +
-              '</a>';
-          }).join('');
-        }
-
-        // 搜索（频道内搜索）- 用事件委托，避免 header 模板未加载时绑定失效
-        document.body.addEventListener('input', function (e) {
-          if (e.target.id !== 'headerSearchInput') return;
-          var q = e.target.value.trim().toLowerCase();
-          var grid = document.getElementById('serviceGrid');
-          if (!grid) return;
-          if (!q) {
-            grid.querySelectorAll('.sitem').forEach(function (el) { el.style.display = 'flex'; });
+            if (sc > 0) scored.push({ a: a, sc: sc });
+          });
+          scored.sort(function(x, y) {
+            if (y.sc !== x.sc) return y.sc - x.sc;
+            return (y.a.words || 0) - (x.a.words || 0);
+          });
+          var top = scored.slice(0, 12);
+          if (countEl) countEl.textContent = top.length ? '共 ' + scored.length + ' 篇匹配' : '';
+          if (!top.length) {
+            box.innerHTML = '<div class="sub-empty">暂无匹配文章，试试上方子栏目入口</div>';
             return;
           }
-          grid.querySelectorAll('.sitem').forEach(function (el) {
-            var name = el.querySelector('.sname') ? el.querySelector('.sname').textContent.toLowerCase() : '';
-            var desc = el.querySelector('.sdesc') ? el.querySelector('.sdesc').textContent.toLowerCase() : '';
-            el.style.display = (name.indexOf(q) >= 0 || desc.indexOf(q) >= 0) ? 'flex' : 'none';
-          });
+          box.innerHTML = top.map(function(o) {
+            var a = o.a;
+            return '<a class="sub-art" href="articles/' + encodeURIComponent(a.slug) + '.html">' +
+              '<span class="sa-t">' + (a.title || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</span>' +
+              '<span class="sa-m">' + (a.cat || '') + ' · ' + (a.words || 0) + ' 字</span></a>';
+          }).join('');
+        })
+        .catch(function() {
+          if (box) box.innerHTML = '<div class="sub-empty">文章加载失败，请稍后重试</div>';
         });
-      }
-
-      // 同步顶部区县名与 URL ?city= 参数
-      function syncCityName() {
-        var params = new URLSearchParams(location.search);
-        var cityId = params.get('city') || '';
-        // 无 city 参数时显示"杭州"（全市）
-        var el = document.getElementById('cityName');
-        if (!el) return;
-        if (!cityId) { el.textContent = '杭州'; return; }
-        if (!window.DISTRICTS) return;
-        var d = window.DISTRICTS.find(function (x) { return x.id === cityId; });
-        if (d) el.textContent = d.full;
-        // 标记当前选中项
-        document.querySelectorAll('#cityDropdown .p-neighbor-grid-item').forEach(function (it) {
-          it.classList.toggle('active', it.getAttribute('data-id') === cityId);
-        });
-      }
-
-      // 切换区县：用 history.pushState 更新 URL，不刷新页面，只重新渲染
-      // 这样浏览器后退能逐步回到上一个区县，最终回到进入本页之前的状态
-      function switchCity(id) {
-        var newUrl = id === 'hangzhou' ? 'food.html' : 'food.html?city=' + id;
-        history.pushState({ city: id }, '', newUrl);
-        renderChannel();
-        syncCityName();
-      }
-
-      // 覆盖 app.js 的区县跳转：在 food.html 上切换区县时不跳走，仅更新 URL 并重新渲染
-      function overrideCityDropdown() {
-        var box = document.getElementById('cityDropdown');
-        if (!box || box._foodOverrideBound) return;
-        box._foodOverrideBound = true;
-        box.addEventListener('click', function (e) {
-          var item = e.target.closest('.p-neighbor-grid-item');
-          if (!item) return;
-          e.preventDefault();
-          e.stopPropagation();
-          var id = item.getAttribute('data-id');
-          try { localStorage.setItem('ihz_city', id); } catch (ex) {}
-          box.classList.remove('show');
-          // 更新选中态
-          box.querySelectorAll('.p-neighbor-grid-item').forEach(function (it) {
-            it.classList.toggle('active', it.getAttribute('data-id') === id);
-          });
-          switchCity(id);
-        });
-      }
-
-      // 浏览器后退/前进时重新渲染（与 pushState 配合）
-      window.addEventListener('popstate', function () {
-        renderChannel();
-        syncCityName();
-      });
-
-      // 顶部"‹"返回按钮：用 history.back()，与浏览器后退行为一致
-      function overrideBackButton() {
-        var btn = document.querySelector('.topbar-back');
-        if (!btn) return;
-        btn.addEventListener('click', function (e) {
-          e.preventDefault();
-          if (window.history.length > 1) {
-            window.history.back();
-          } else {
-            window.location.href = 'index.html';
-          }
-        });
-      }
-
-      // 初始化
-      function initPage() {
-        renderChannel();
-        syncCityName();
-        overrideCityDropdown();
-        overrideBackButton();
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initPage);
-      } else {
-        initPage();
-      }
     })();
   </script>
-  <script>
-    if (window.IZ && IZ.layout) {
-      document.addEventListener("DOMContentLoaded", IZ.layout.init);
-    }
-  </script>
-
+  <script>IZ.layout.init();</script>
 </body>
 </html>
