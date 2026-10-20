@@ -150,8 +150,9 @@
       /* ---------- 二级栏目页 ---------- */
       function thirdHref(t) {
         var u = t[2] || '';
-        // 站内动作与外链保持直跳；站内页面/搜索改为进入三级栏目页
+        // 站内动作、外链、已有页面直跳；其余（无链接的文本项）进入三级栏目页
         if (/^#act:|^https?:|^javascript:/.test(u)) return u;
+        if (/\.html(\?|$)/i.test(u)) return u;
         return 'cat.html?c=' + encodeURIComponent(cat.k) + '&s=' + encodeURIComponent(sub.n) +
           '&t=' + encodeURIComponent(t[1]);
       }

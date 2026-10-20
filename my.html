@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="description" content="iHangzhou · 我的社区 - 收藏、历史、签到、设置——你的杭州生活个人中心。">
+  <meta name="keywords" content="我的社区,个人中心,我的收藏,浏览历史,每日签到,设置">
+  <meta name="theme-color" content="#5b8c5a">
+  <meta property="og:title" content="我的社区 · iHangzhou">
+  <meta property="og:description" content="收藏、历史、签到、设置——你的杭州生活个人中心。">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="iHangzhou 杭州生活助手">
+  <link rel="manifest" href="manifest.json">
+  <title>我的社区 · iHangzhou 杭州生活助手</title>
+  <link rel="stylesheet" href="css/style.css?v=20261018l">
+  <script src="js/layout.js?v=20261018l"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+  <style>
+    :root{--primary:#5b8c5a;--primary-dark:#3f6b3e}
+    .sub-page{max-width:720px;margin:0 auto;padding:0 0 40px}
+    .sub-hero{background:linear-gradient(135deg,#5b8c5add,#3f6b3e99);padding:24px 16px 20px;color:#fff;text-align:center}
+    .sub-hero-badge{display:inline-block;background:rgba(255,255,255,0.2);padding:4px 12px;border-radius:12px;font-size:12px;margin-bottom:8px;backdrop-filter:blur(4px)}
+    .sub-hero h1{font-size:22px;font-weight:700;margin:6px 0 8px;display:flex;align-items:center;justify-content:center;gap:8px}
+    .sub-hero h1 .hero-icon{font-size:32px}
+    .sub-hero p{font-size:14px;opacity:0.9;line-height:1.6;max-width:480px;margin:0 auto}
+    .sub-body{padding:16px}
+    .sub-block{margin-bottom:20px}
+    .sub-sec-ttl{font-size:16px;font-weight:700;margin:0 0 12px;display:flex;align-items:center;gap:6px;color:var(--text)}
+    .sub-more{font-size:12px;font-weight:400;color:var(--text-muted);margin-left:auto}
+    .sub-third{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .sub-third-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:14px;text-decoration:none;transition:transform .15s,box-shadow .15s}
+    .sub-third-card:active{transform:scale(0.96)}
+    .sti{font-size:28px}
+    .stn{font-size:12px;color:var(--text);text-align:center;line-height:1.3}
+    .sub-feat{display:flex;flex-direction:column;gap:8px}
+    .sub-feat-card{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:14px;text-decoration:none;transition:background .15s}
+    .sub-feat-card:active{background:var(--bg-hover)}
+    .sf-ic{font-size:24px;flex-shrink:0}
+    .sf-bd{flex:1;min-width:0}
+    .sf-t{font-size:14px;font-weight:600;color:var(--text);display:block}
+    .sf-d{font-size:12px;color:var(--text-muted);display:block;margin-top:2px}
+    .sf-ar{font-size:20px;color:var(--text-muted);flex-shrink:0}
+    .sub-arts{display:flex;flex-direction:column;gap:8px}
+    .sub-art{display:flex;flex-direction:column;gap:4px;padding:12px 14px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:14px;text-decoration:none;transition:background .15s}
+    .sub-art:active{background:var(--bg-hover)}
+    .sa-t{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
+    .sa-m{font-size:12px;color:var(--text-muted)}
+    .sub-empty{text-align:center;padding:20px;color:var(--text-muted);font-size:13px}
+    .sub-back{display:inline-block;padding:10px 20px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:10px;color:var(--text);text-decoration:none;font-size:14px;margin-top:12px}
+    .sub-crumb{padding:12px 16px;font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:6px;background:var(--bg-alt)}
+    .sub-crumb a{color:var(--primary);text-decoration:none;font-weight:500}
+    .sub-crumb b{color:var(--text);font-weight:600}
+    .sub-crumb .sep{color:var(--text-muted)}
+  </style>
+</head>
+<body>
+  <script>
+    window.IHZ_PAGE = { title: '我的社区', icon: '👤' };
+  </script>
+
+  <div class="page active" id="pageSub">
+    <!-- 面包屑 -->
+    <div class="sub-crumb">
+      <a href="index.html">首页</a>
+      <span class="sep">/</span>
+      <b>我的社区</b>
+    </div>
+
+    <!-- Hero -->
+    <div class="sub-hero">
+      <div class="sub-hero-badge">👤 我的社区</div>
+      <h1><span class="hero-icon">👤</span> 我的社区</h1>
+      <p>收藏服务、浏览历史、每日签到、个人设置——你的杭州生活个人中心。</p>
+    </div>
+
+    <!-- 内容区 -->
+    <div class="sub-body">
+      <!-- 子栏目 -->
+      <div class="sub-block">
+        <div class="sub-sec-ttl">📂 全部功能 <span class="sub-more">8 个</span></div>
+        <div class="sub-third">
+          <a class="sub-third-card" href="my-fav.html"><span class="sti">⭐</span><span class="stn">我的收藏</span></a>
+          <a class="sub-third-card" href="my-hist.html"><span class="sti">🕘</span><span class="stn">浏览历史</span></a>
+          <a class="sub-third-card" href="my-checkin.html"><span class="sti">📅</span><span class="stn">每日签到</span></a>
+          <a class="sub-third-card" href="my-feedback.html"><span class="sti">📨</span><span class="stn">意见反馈</span></a>
+          <a class="sub-third-card" href="my-fontsize.html"><span class="sti">🔤</span><span class="stn">字体大小</span></a>
+          <a class="sub-third-card" href="my-share.html"><span class="sti">📤</span><span class="stn">分享好友</span></a>
+          <a class="sub-third-card" href="my-about.html"><span class="sti">ℹ️</span><span class="stn">关于我们</span></a>
+          <a class="sub-third-card" href="my-settings.html"><span class="sti">⚙️</span><span class="stn">设置</span></a>
+        </div>
+      </div>
+
+      <!-- 精选入口 -->
+      <div class="sub-block">
+        <div class="sub-sec-ttl">⭐ 常用入口</div>
+        <div class="sub-feat">
+          <a class="sub-feat-card" href="my-fav.html">
+            <span class="sf-ic">⭐</span>
+            <span class="sf-bd"><span class="sf-t">我的收藏</span><span class="sf-d">收藏的服务与攻略，随时一键直达</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+          <a class="sub-feat-card" href="my-hist.html">
+            <span class="sf-ic">🕘</span>
+            <span class="sf-bd"><span class="sf-t">浏览历史</span><span class="sf-d">最近浏览过的服务与文章，方便回看</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+          <a class="sub-feat-card" href="my-settings.html">
+            <span class="sf-ic">⚙️</span>
+            <span class="sf-bd"><span class="sf-t">偏好设置</span><span class="sf-d">暗色模式、大字模式、当前区县</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 返回首页 -->
+    <div style="padding:0 16px">
+      <a href="index.html" class="sub-back">← 返回首页</a>
+    </div>
+  </div>
+
+  <script src="js/app.js?v=20261018l"></script>
+  <script>IZ.layout.init();</script>
+</body>
+</html>

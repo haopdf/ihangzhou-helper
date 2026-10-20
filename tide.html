@@ -52,9 +52,9 @@
       var c=document.getElementById('tideContainer');
       var ht=document.getElementById('headerTitle');
       if(!data){
-        c.innerHTML='<div class="td-empty"><div class="ei-big">🌊</div><h2>未找到该观潮点</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=travel&s=%E8%A7%82%E6%BD%AE" class="btn" style="display:inline-block;padding:10px 20px;background:#0284c7;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回观潮</a> <a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">旅游首页</a></div>';
+        c.innerHTML='<div class="td-empty"><div class="ei-big">🌊</div><h2>未找到该观潮点</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="tide.html" class="btn" style="display:inline-block;padding:10px 20px;background:#0284c7;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回观潮</a> <a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">旅游首页</a></div>';
         if(ht)ht.textContent='🌊 钱塘江观潮';
-        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'钱塘江观潮','未找到');
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb4(document.body,'旅游出行','钱塘江观潮','未找到',false,'travel.html');
         return;
       }
       document.title=data.name+' · 钱塘江观潮 · iHangzhou';
@@ -76,12 +76,13 @@
       var keys=window.TIDE_DATA?Object.keys(window.TIDE_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
       if(nb.length){h+='<div class="td-nb"><h3>🌊 更多观潮点</h3><div class="td-ng">';nb.forEach(function(k){var v=window.TIDE_DATA[k];h+='<a class="td-nc" href="tide.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
-      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=travel&s=%E8%A7%82%E6%BD%AE" style="flex:1;text-align:center;padding:12px;background:#0284c7;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 观潮频道</a><a href="travel.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">旅游首页</a></div>';
+      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="tide.html" style="flex:1;text-align:center;padding:12px;background:#0284c7;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 观潮频道</a><a href="travel.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">旅游首页</a></div>';
       h+='</div>';c.innerHTML=h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'钱塘江观潮',data.name);
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb4(document.body,'旅游出行','钱塘江观潮',data.name,false,'travel.html');
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderTide(decodeURIComponent(id))})();
   </script>
   <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>
 </body>
 </html>
+

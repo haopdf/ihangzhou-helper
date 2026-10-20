@@ -56,7 +56,7 @@
       var c=document.getElementById('templeContainer');
       var ht=document.getElementById('headerTitle');
       if(!data){
-        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">⛩️</div><h2>未找到该寺庙</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=culture&s=%E5%AF%BA%E5%BA%99" class="btn" style="display:inline-block;padding:10px 20px;background:#b45309;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">文博首页</a></div>';
+        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">⛩️</div><h2>未找到该寺庙</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="temple.html" class="btn" style="display:inline-block;padding:10px 20px;background:#b45309;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">文博首页</a></div>';
         if(ht)ht.textContent='⛩️ 寺庙';
         if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'寺庙','未找到');
         return;
@@ -86,7 +86,7 @@
         nb.forEach(function(k){var v=window.TEMPLE_DATA[k];h+='<a class="p-neighbor" href="temple.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});
         h+='</div></div>';
       }
-      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=culture&s=%E5%AF%BA%E5%BA%99" style="flex:1;text-align:center;padding:12px;background:#b45309;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 寺庙频道</a><a href="museum.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">文博首页</a></div>';
+      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="temple.html" style="flex:1;text-align:center;padding:12px;background:#b45309;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 寺庙频道</a><a href="museum.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">文博首页</a></div>';
       h+='</div>';c.innerHTML=h;
       if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'寺庙',data.name);
     }

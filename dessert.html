@@ -51,7 +51,7 @@
       var data=window.DESSERT_DATA?window.DESSERT_DATA[id]:null;
       var c=document.getElementById('dessertContainer');
       var ht=document.getElementById('headerTitle');
-      if(!data){c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🍰</div><h2>未找到该甜品</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=food&s=%E7%94%9C%E5%93%81" class="btn" style="display:inline-block;padding:10px 20px;background:#ec4899;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';if(ht)ht.textContent='🍰 甜品';if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'甜品糕点','未找到');return;}
+      if(!data){c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🍰</div><h2>未找到该甜品</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="dessert.html" class="btn" style="display:inline-block;padding:10px 20px;background:#ec4899;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';if(ht)ht.textContent='🍰 甜品';if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'甜品糕点','未找到');return;}
       document.title=data.name+' · 甜品 · iHangzhou';
       if(ht)ht.textContent='🍰 '+data.name;
       var h='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">'+data.name+'</div><div class="p-hero-sub">'+data.subtitle+'</div></div></div><div class="p-body">';
@@ -64,7 +64,7 @@
       var keys=window.DESSERT_DATA?Object.keys(window.DESSERT_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
       if(nb.length){h+='<div class="p-neighbors"><h3>🍰 更多甜品</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.DESSERT_DATA[k];h+='<a class="p-neighbor" href="dessert.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
-      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=food&s=%E7%94%9C%E5%93%81" style="flex:1;text-align:center;padding:12px;background:#ec4899;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 甜品频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
+      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="dessert.html" style="flex:1;text-align:center;padding:12px;background:#ec4899;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 甜品频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
       h+='</div>';c.innerHTML=h;
       if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'甜品糕点',data.name);
     }

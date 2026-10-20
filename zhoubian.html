@@ -49,16 +49,30 @@
   <div id="zbContainer"><div class="zb-empty"><div class="ei-big">🚗</div><h2>加载中...</h2></div></div>
   <script>
     function renderZb(id){
-      var data=window.ZHOUBIAN_DATA?window.ZHOUBIAN_DATA[id]:null;
+      var allData=window.ZHOUBIAN_DATA||{};
       var c=document.getElementById('zbContainer');
       var ht=document.getElementById('headerTitle');
-      if(!data){
-        c.innerHTML='<div class="zb-empty"><div class="ei-big">🚙</div><h2>未找到该目的地</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="cat.html?c=travel&s=%E5%91%A8%E8%BE%B9%E6%B8%B8" class="btn" style="display:inline-block;padding:10px 20px;background:#0d9488;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回周边游</a> <a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">旅游首页</a></div>';
+      if(!id){
+        // 无 id 参数：渲染周边游目的地列表
+        var keys=Object.keys(allData);
+        var h='<div class="zb-body" style="padding-top:24px"><div class="zb-section"><h3>🚙 热门目的地</h3><div class="zb-ng" style="grid-template-columns:repeat(2,1fr)">';
+        keys.forEach(function(k){var v=allData[k];h+='<a class="zb-nc" href="zhoubian.html?id='+k+'" style="display:flex;align-items:center;gap:10px;padding:14px;background:var(--bg);border-radius:10px;text-decoration:none;color:var(--text);font-size:14px;font-weight:500"><span style="font-size:24px">'+v.badge+'</span><span><span style="display:block;font-weight:600;margin-bottom:2px">'+v.name+'</span><span style="display:block;font-size:12px;color:var(--text-muted)">'+v.subtitle+'</span></span></a>';});
+        h+='</div></div>';
+        h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="travel.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">旅游首页</a></div></div>';
+        c.innerHTML=h;
+        document.title='周边游 · 旅游出行 · iHangzhou';
         if(ht)ht.textContent='🚙 周边游';
-        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'周边游','未找到');
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'旅游出行','周边游',false,'travel.html');
         return;
       }
-      document.title=data.name+' · 周边游 · iHangzhou';
+      var data=allData[id];
+      if(!data){
+        c.innerHTML='<div class="zb-empty"><div class="ei-big">🚙</div><h2>未找到该目的地</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="zhoubian.html" class="btn" style="display:inline-block;padding:10px 20px;background:#0d9488;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回周边游</a> <a href="travel.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">旅游首页</a></div>';
+        if(ht)ht.textContent='🚙 周边游';
+        if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb4(document.body,'旅游出行','周边游','未找到',false,'travel.html');
+        return;
+      }
+      document.title=data.name+' · 周边游 · 旅游出行 · iHangzhou';
       if(ht)ht.textContent='🚙 '+data.name;
       var h='<div class="zb-hero"><div class="zb-tb"><div class="zb-name">'+data.name+'</div><div class="zb-sub">'+data.subtitle+'</div></div></div><div class="zb-body">';
       h+='<div class="zb-badge">'+data.badge+' '+data.name+'</div>';
@@ -70,9 +84,9 @@
       var keys=window.ZHOUBIAN_DATA?Object.keys(window.ZHOUBIAN_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
       if(nb.length){h+='<div class="zb-nb"><h3>🚙 更多目的地</h3><div class="zb-ng">';nb.forEach(function(k){var v=window.ZHOUBIAN_DATA[k];h+='<a class="zb-nc" href="zhoubian.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
-      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=travel&s=%E5%91%A8%E8%BE%B9%E6%B8%B8" style="flex:1;text-align:center;padding:12px;background:#0d9488;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 周边游频道</a><a href="travel.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">旅游首页</a></div>';
+      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="zhoubian.html" style="flex:1;text-align:center;padding:12px;background:#0d9488;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 周边游频道</a><a href="travel.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">旅游首页</a></div>';
       h+='</div>';c.innerHTML=h;
-      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'周边游',data.name);
+      if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb4(document.body,'旅游出行','周边游',data.name,false,'travel.html');
     }
     (function(){var id=(location.search.split('id=')[1]||'').split('&')[0];renderZb(decodeURIComponent(id))})();
   </script>

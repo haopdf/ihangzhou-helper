@@ -71,7 +71,7 @@
       var data=window.BREAKFAST_DATA?window.BREAKFAST_DATA[id]:null;
       var c=document.getElementById('breakfastContainer');
       var ht=document.getElementById('headerTitle');
-      if(!data){c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🥟</div><h2>未找到</h2><a href="cat.html?c=food&s=%E6%97%A9%E9%A4%90" class="btn" style="display:inline-block;padding:10px 20px;background:#ea580c;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';if(ht)ht.textContent='🥟 早餐';if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'早餐','未找到');return;}
+      if(!data){c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🥟</div><h2>未找到</h2><a href="breakfast.html" class="btn" style="display:inline-block;padding:10px 20px;background:#ea580c;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回</a> <a href="food.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">美食首页</a></div>';if(ht)ht.textContent='🥟 早餐';if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'早餐','未找到');return;}
       document.title=data.name+' · 早餐 · iHangzhou';
       if(ht)ht.textContent='🥟 '+data.name;
       var h='<div class="p-hero"><div class="p-hero-inner"><div class="p-hero-title">'+data.name+'</div><div class="p-hero-sub">'+data.subtitle+'</div></div></div><div class="p-body">';
@@ -82,7 +82,7 @@
       var keys=window.BREAKFAST_DATA?Object.keys(window.BREAKFAST_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
       if(nb.length){h+='<div class="p-neighbors"><h3>🥟 更多早餐</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.BREAKFAST_DATA[k];h+='<a class="p-neighbor" href="breakfast.html?id='+k+'"><span>'+v.badge+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
-      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="cat.html?c=food&s=%E6%97%A9%E9%A4%90" style="flex:1;text-align:center;padding:12px;background:#ea580c;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 早餐频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
+      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="breakfast.html" style="flex:1;text-align:center;padding:12px;background:#ea580c;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 早餐频道</a><a href="food.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">美食首页</a></div>';
       h+='</div>';c.innerHTML=h;
       if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'早餐',data.name);
     }

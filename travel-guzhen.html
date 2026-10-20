@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="theme-color" content="#1f7a5a">
+  <meta name="description" content="iHangzhou · 古镇古村 - 塘栖·龙门·深澳 江南古韵">
+  <meta name="keywords" content="古镇,塘栖,龙门,古村,深澳">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="古镇古村 · 旅游出行 · iHangzhou">
+  <meta property="og:description" content="塘栖·龙门·深澳 江南古韵">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="iHangzhou">
+  <link rel="manifest" href="manifest.json">
+  <title>古镇古村 · 旅游出行 · iHangzhou</title>
+  <link rel="stylesheet" href="css/style.css?v=20261018l">
+  <link rel="icon" type="image/png" href="images/logo-mark-96.png">
+  <link rel="apple-touch-icon" href="images/logo-mark-192.png">
+  <script src="js/layout.js?v=20261018l"></script>
+  <style>
+    :root{--primary:#1f7a5a;--primary-dark:#1f7a5a}
+    .sub-page{max-width:720px;margin:0 auto;padding:0 0 40px}
+    .sub-hero{background:linear-gradient(135deg,#1f7a5add,#1f7a5a99);padding:24px 16px 20px;color:#fff;text-align:center}
+    .sub-hero-badge{display:inline-block;background:rgba(255,255,255,0.2);padding:4px 12px;border-radius:12px;font-size:12px;margin-bottom:8px;backdrop-filter:blur(4px)}
+    .sub-hero h1{font-size:22px;font-weight:700;margin:6px 0 8px;display:flex;align-items:center;justify-content:center;gap:8px}
+    .sub-hero h1 .hero-icon{font-size:32px}
+    .sub-hero p{font-size:14px;opacity:0.9;line-height:1.6;max-width:480px;margin:0 auto}
+    .sub-body{padding:12px 10px}
+    .sub-block{margin-bottom:16px}
+    .sub-sec-ttl{font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+    .sub-more{margin-left:auto;font-size:11px;color:var(--text-secondary);font-weight:400;background:var(--bg-secondary);padding:2px 8px;border-radius:10px}
+    .sub-third{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .sub-third-card{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 4px;background:#fff;border-radius:12px;text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,0.06);transition:transform 0.15s}
+    .sub-third-card:active{transform:scale(0.96)}
+    .sti{font-size:24px}
+    .stn{font-size:11px;color:var(--text-primary);font-weight:600;text-align:center;line-height:1.3}
+    .sub-feat{display:flex;flex-direction:column;gap:8px}
+    .sub-feat-card{display:flex;align-items:center;gap:12px;padding:12px;background:#fff;border-radius:12px;text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,0.06);transition:transform 0.15s}
+    .sub-feat-card:active{transform:scale(0.98)}
+    .sf-ic{font-size:28px;flex-shrink:0}
+    .sf-bd{flex:1;min-width:0}
+    .sf-t{font-size:13px;font-weight:700;color:var(--text-primary);display:block}
+    .sf-d{font-size:11px;color:var(--text-secondary);display:block;margin-top:2px;line-height:1.4}
+    .sf-ar{color:var(--text-secondary);font-size:18px;flex-shrink:0}
+    .sub-arts{display:flex;flex-direction:column;gap:6px}
+    .sub-art{display:flex;flex-direction:column;gap:2px;padding:10px 12px;background:#fff;border-radius:10px;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+    .sub-art:active{background:var(--bg-secondary)}
+    .sa-t{font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.4}
+    .sa-m{font-size:11px;color:var(--text-secondary)}
+    .sub-empty{text-align:center;padding:24px 16px;color:var(--text-secondary);font-size:13px}
+    .sub-back{display:block;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;max-width:200px;margin:20px auto 0}
+    .sub-crumb{padding:10px 14px;font-size:12px;color:var(--text-secondary);display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+    .sub-crumb a{color:var(--primary);text-decoration:none}
+    .sub-crumb .sep{opacity:0.4}
+    @media(min-width:768px){
+      .sub-third{grid-template-columns:repeat(4,1fr);gap:10px}
+      .sub-third-card{padding:16px 8px}
+      .sti{font-size:28px}
+      .stn{font-size:12px}
+    }
+  </style>
+</head>
+<body>
+  <script>
+    window.IHZ_PAGE = { title: '古镇古村', icon: '🏚️' };
+</script>
+
+  <div class="page active" id="pageSub">
+    <!-- 面包屑 -->
+    <div class="sub-crumb">
+      <a href="index.html">首页</a>
+      <span class="sep">/</span>
+      <a href="travel.html">🧭 旅游出行</a>
+      <span class="sep">/</span>
+      <b>古镇古村</b>
+    </div>
+
+    <!-- Hero -->
+    <div class="sub-hero">
+      <div class="sub-hero-badge">🧭 旅游出行</div>
+      <h1><span class="hero-icon">🏚️</span> 古镇古村</h1>
+      <p>塘栖古镇、龙门古镇、深澳古村，离杭州不过一小时，适合半日慢游的江南古韵。</p>
+    </div>
+
+    <!-- 内容区 -->
+    <div class="sub-body">
+      <div class="sub-block"><div class="sub-sec-ttl">📂 子栏目 <span class="sub-more">8 个</span></div><div class="sub-third"><a class="sub-third-card" href="guzhen.html?id=tangqi"><span class="sti">🏮</span><span class="stn">塘栖</span></a><a class="sub-third-card" href="guzhen.html?id=longmen"><span class="sti">🏯</span><span class="stn">龙门</span></a><a class="sub-third-card" href="guzhen.html?id=shengao"><span class="sti">🏘️</span><span class="stn">深澳</span></a><a class="sub-third-card" href="guzhen.html?id=xinye"><span class="sti">🌳</span><span class="stn">新叶</span></a><a class="sub-third-card" href="guzhen.html?id=qinchuan"><span class="sti">🍵</span><span class="stn">芹川</span></a><a class="sub-third-card" href="guzhen.html?id=zhinan"><span class="sti">🍁</span><span class="stn">指南村</span></a><a class="sub-third-card" href="guzhen.html?id=zhuchuan"><span class="sti">🏞️</span><span class="stn">株川</span></a><a class="sub-third-card" href="guzhen.html?id=xiajiang"><span class="sti">🌾</span><span class="stn">下姜</span></a></div></div>
+      <div class="sub-block"><div class="sub-sec-ttl">⭐ 精选内容</div><div class="sub-feat"><a class="sub-feat-card" href="travel-guzhen.html"><span class="sf-ic">🏚️</span><span class="sf-bd"><span class="sf-t">古镇古村合集</span><span class="sf-d">杭州周边一小时车程古韵地图</span></span><span class="sf-ar">›</span></a><a class="sub-feat-card" href="guzhen.html?id=tangqi"><span class="sf-ic">🏮</span><span class="sf-bd"><span class="sf-t">塘栖古镇</span><span class="sf-d">运河第一庄的桥与枇杷</span></span><span class="sf-ar">›</span></a><a class="sub-feat-card" href="guzhen.html?id=longmen"><span class="sf-ic">🏯</span><span class="sf-bd"><span class="sf-t">龙门古镇</span><span class="sf-d">孙权故里的迷宫街巷</span></span><span class="sf-ar">›</span></a></div></div>
+
+      <!-- 相关文章 -->
+      <div class="sub-block">
+        <div class="sub-sec-ttl">📖 相关文章 <span class="sub-more" id="subArtCount"></span></div>
+        <div class="sub-arts" id="subArts"><div class="sub-empty">正在加载相关文章…</div></div>
+      </div>
+
+      <!-- 同栏目其他二级 -->
+      <div class="sub-block">
+        <div class="sub-sec-ttl">🧭 同栏目其他版块</div>
+        <div class="sub-third" style="grid-template-columns:repeat(4,1fr)">
+          <a class="sub-third-card" href="scenic.html"><span class="sti">🎫</span><span class="stn">景点门票</span></a><a class="sub-third-card" href="zhoubian.html"><span class="sti">🚙</span><span class="stn">周边游</span></a><a class="sub-third-card" href="weekend.html"><span class="sti">🗓️</span><span class="stn">周末去哪</span></a><a class="sub-third-card" href="xiangxiang.html"><span class="sti">🛤️</span><span class="stn">街巷漫步</span></a><a class="sub-third-card" href="route.html"><span class="sti">🧭</span><span class="stn">路线攻略</span></a><a class="sub-third-card" href="tide.html"><span class="sti">🌊</span><span class="stn">钱塘江观潮</span></a><a class="sub-third-card" href="travel-xihu.html"><span class="sti">⛲</span><span class="stn">西湖十景</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 返回首页 -->
+    <div style="padding:0 16px">
+      <a href="index.html" class="sub-back">← 返回首页</a>
+    </div>
+  </div>
+
+  <script src="js/app.js?v=20261018l"></script>
+  <script>
+    (function() {
+      var KW = ["古镇","塘栖","龙门","古村","深澳"];
+      var countEl = document.getElementById('subArtCount');
+      var box = document.getElementById('subArts');
+      fetch('articles/index.json')
+        .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+        .then(function(list) {
+          var scored = [];
+          list.forEach(function(a) {
+            var title = a.title || '', catg = a.cat || '', sum = a.summary || '';
+            var sc = 0;
+            KW.forEach(function(k) {
+              if (title.indexOf(k) >= 0) sc += 3;
+              else if (catg.indexOf(k) >= 0) sc += 2;
+              else if (sum.indexOf(k) >= 0) sc += 1;
+            });
+            if (sc > 0) scored.push({ a: a, sc: sc });
+          });
+          scored.sort(function(x, y) {
+            if (y.sc !== x.sc) return y.sc - x.sc;
+            return (y.a.words || 0) - (x.a.words || 0);
+          });
+          var top = scored.slice(0, 12);
+          if (countEl) countEl.textContent = top.length ? '共 ' + scored.length + ' 篇匹配' : '';
+          if (!top.length) {
+            box.innerHTML = '<div class="sub-empty">暂无匹配文章，试试上方子栏目入口</div>';
+            return;
+          }
+          box.innerHTML = top.map(function(o) {
+            var a = o.a;
+            return '<a class="sub-art" href="articles/' + encodeURIComponent(a.slug) + '.html">' +
+              '<span class="sa-t">' + (a.title || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</span>' +
+              '<span class="sa-m">' + (a.cat || '') + ' · ' + (a.words || 0) + ' 字</span></a>';
+          }).join('');
+        })
+        .catch(function() {
+          if (box) box.innerHTML = '<div class="sub-empty">文章加载失败，请稍后重试</div>';
+        });
+    })();
+  </script>
+  <script>IZ.layout.init();</script>
+</body>
+</html>

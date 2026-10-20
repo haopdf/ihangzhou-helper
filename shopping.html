@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="description" content="iHangzhou · 逛街好物 - 商圈逛街、杭州特产、好物推荐、咖啡地图、夜宵夜市、餐饮团购、酒店预订一站直达。">
+  <meta name="keywords" content="逛街好物,商圈,杭州特产,咖啡,夜宵,团购,酒店">
+  <meta name="theme-color" content="#bf6a8a">
+  <meta property="og:title" content="逛街好物 · iHangzhou">
+  <meta property="og:description" content="商圈逛街、杭州特产、好物推荐、咖啡地图、夜宵夜市、餐饮团购、酒店预订一站直达。">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="iHangzhou 杭州生活助手">
+  <link rel="manifest" href="manifest.json">
+  <title>逛街好物 · iHangzhou 杭州生活助手</title>
+  <link rel="stylesheet" href="css/style.css?v=20261018l">
+  <script src="js/layout.js?v=20261018l"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+  <style>
+    :root{--primary:#bf6a8a;--primary-dark:#9c4f6e}
+    .sub-page{max-width:720px;margin:0 auto;padding:0 0 40px}
+    .sub-hero{background:linear-gradient(135deg,#bf6a8add,#9c4f6e99);padding:24px 16px 20px;color:#fff;text-align:center}
+    .sub-hero-badge{display:inline-block;background:rgba(255,255,255,0.2);padding:4px 12px;border-radius:12px;font-size:12px;margin-bottom:8px;backdrop-filter:blur(4px)}
+    .sub-hero h1{font-size:22px;font-weight:700;margin:6px 0 8px;display:flex;align-items:center;justify-content:center;gap:8px}
+    .sub-hero h1 .hero-icon{font-size:32px}
+    .sub-hero p{font-size:14px;opacity:0.9;line-height:1.6;max-width:480px;margin:0 auto}
+    .sub-body{padding:16px}
+    .sub-block{margin-bottom:20px}
+    .sub-sec-ttl{font-size:16px;font-weight:700;margin:0 0 12px;display:flex;align-items:center;gap:6px;color:var(--text)}
+    .sub-more{font-size:12px;font-weight:400;color:var(--text-muted);margin-left:auto}
+    .sub-third{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .sub-third-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:14px;text-decoration:none;transition:transform .15s,box-shadow .15s}
+    .sub-third-card:active{transform:scale(0.96)}
+    .sti{font-size:28px}
+    .stn{font-size:12px;color:var(--text);text-align:center;line-height:1.3}
+    .sub-feat{display:flex;flex-direction:column;gap:8px}
+    .sub-feat-card{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:14px;text-decoration:none;transition:background .15s}
+    .sub-feat-card:active{background:var(--bg-hover)}
+    .sf-ic{font-size:24px;flex-shrink:0}
+    .sf-bd{flex:1;min-width:0}
+    .sf-t{font-size:14px;font-weight:600;color:var(--text);display:block}
+    .sf-d{font-size:12px;color:var(--text-muted);display:block;margin-top:2px}
+    .sf-ar{font-size:20px;color:var(--text-muted);flex-shrink:0}
+    .sub-arts{display:flex;flex-direction:column;gap:8px}
+    .sub-art{display:flex;flex-direction:column;gap:4px;padding:12px 14px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:14px;text-decoration:none;transition:background .15s}
+    .sub-art:active{background:var(--bg-hover)}
+    .sa-t{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
+    .sa-m{font-size:12px;color:var(--text-muted)}
+    .sub-empty{text-align:center;padding:20px;color:var(--text-muted);font-size:13px}
+    .sub-back{display:inline-block;padding:10px 20px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:10px;color:var(--text);text-decoration:none;font-size:14px;margin-top:12px}
+    .sub-crumb{padding:12px 16px;font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:6px;background:var(--bg-alt)}
+    .sub-crumb a{color:var(--primary);text-decoration:none;font-weight:500}
+    .sub-crumb b{color:var(--text);font-weight:600}
+    .sub-crumb .sep{color:var(--text-muted)}
+  </style>
+</head>
+<body>
+  <script>
+    window.IHZ_PAGE = { title: '逛街好物', icon: '🛍️' };
+  </script>
+
+  <div class="page active" id="pageSub">
+    <!-- 面包屑 -->
+    <div class="sub-crumb">
+      <a href="index.html">首页</a>
+      <span class="sep">/</span>
+      <b>逛街好物</b>
+    </div>
+
+    <!-- Hero -->
+    <div class="sub-hero">
+      <div class="sub-hero-badge">🛍️ 逛街好物</div>
+      <h1><span class="hero-icon">🛍️</span> 逛街好物</h1>
+      <p>商圈逛街、杭州特产、好物推荐、咖啡地图、夜宵夜市、餐饮团购、酒店预订一站直达。</p>
+    </div>
+
+    <!-- 内容区 -->
+    <div class="sub-body">
+      <!-- 子栏目 -->
+      <div class="sub-block">
+        <div class="sub-sec-ttl">📂 全部栏目 <span class="sub-more">8 个</span></div>
+        <div class="sub-third">
+          <a class="sub-third-card" href="street.html"><span class="sti">🏬</span><span class="stn">商圈逛街</span></a>
+          <a class="sub-third-card" href="laozihao.html"><span class="sti">🏮</span><span class="stn">百年老店</span></a>
+          <a class="sub-third-card" href="shopping-haowu.html"><span class="sti">🛒</span><span class="stn">杭州好物</span></a>
+          <a class="sub-third-card" href="food-coffee.html"><span class="sti">☕</span><span class="stn">咖啡地图</span></a>
+          <a class="sub-third-card" href="night-market.html"><span class="sti">🌃</span><span class="stn">夜宵夜市</span></a>
+          <a class="sub-third-card" href="food.html"><span class="sti">🎁</span><span class="stn">杭州特产</span></a>
+          <a class="sub-third-card" href="shopping-tuangou.html"><span class="sti">🍲</span><span class="stn">餐饮团购</span></a>
+          <a class="sub-third-card" href="shopping-jiudian.html"><span class="sti">🏨</span><span class="stn">酒店预订</span></a>
+        </div>
+      </div>
+
+      <!-- 精选入口 -->
+      <div class="sub-block">
+        <div class="sub-sec-ttl">⭐ 精选入口</div>
+        <div class="sub-feat">
+          <a class="sub-feat-card" href="street.html">
+            <span class="sf-ic">🏬</span>
+            <span class="sf-bd"><span class="sf-t">商圈逛街</span><span class="sf-d">武林·湖滨·钱江新城·下沙主要商圈</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+          <a class="sub-feat-card" href="food-coffee.html">
+            <span class="sf-ic">☕</span>
+            <span class="sf-bd"><span class="sf-t">杭州咖啡地图</span><span class="sf-d">西湖边·青芝坞·天目里精品咖啡</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+          <a class="sub-feat-card" href="laozihao.html">
+            <span class="sf-ic">🏮</span>
+            <span class="sf-bd"><span class="sf-t">百年老店</span><span class="sf-d">杭州字号最老的一些店铺</span></span>
+            <span class="sf-ar">›</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 返回首页 -->
+    <div style="padding:0 16px">
+      <a href="index.html" class="sub-back">← 返回首页</a>
+    </div>
+  </div>
+
+  <script src="js/app.js?v=20261018l"></script>
+  <script>IZ.layout.init();</script>
+</body>
+</html>

@@ -129,7 +129,8 @@ window.CAT_DATA = [
           ['🌿', '苏堤春晓', 'scenic.html?id=xihu-sudi'], ['🌉', '断桥残雪', 'scenic.html?id=xihu-duanqiao'],
           ['🌙', '三潭印月', 'scenic.html?id=xihu-san'], ['🪷', '曲院风荷', 'scenic.html?id=xihu-qu'],
           ['🗼', '雷峰夕照', 'scenic.html?id=leifengta'], ['🌕', '平湖秋月', 'scenic.html?id=xihu-ping'],
-          ['🔔', '南屏晚钟', 'scenic.html?id=xihu-nan'], ['🌾', '柳浪闻莺', 'scenic.html?id=xihu-liu']
+          ['🔔', '南屏晚钟', 'scenic.html?id=xihu-nan'], ['🌾', '柳浪闻莺', 'scenic.html?id=xihu-liu'],
+          ['🐠', '花港观鱼', 'scenic.html?id=xihu-hua'], ['⛰️', '双峰插云', 'scenic.html?id=xihu-shuangfeng']
         ],
         ft: [
           ['⛲', '西湖十景全攻略', '十景串联路线与最佳时段', 'place.html?id=westlake'],
@@ -149,7 +150,7 @@ window.CAT_DATA = [
           ['🏞️', '株川', 'guzhen.html?id=zhuchuan'], ['🌾', '下姜', 'guzhen.html?id=xiajiang']
         ],
         ft: [
-          ['🏚️', '古镇古村合集', '杭州周边一小时车程古韵地图', 'cat.html?c=travel&s=%E5%8F%A4%E9%95%87%E5%8F%A4%E6%9D%91'],
+          ['🏚️', '古镇古村合集', '杭州周边一小时车程古韵地图', 'travel-guzhen.html'],
           ['🏮', '塘栖古镇', '运河第一庄的桥与枇杷', 'guzhen.html?id=tangqi'],
           ['🏯', '龙门古镇', '孙权故里的迷宫街巷', 'guzhen.html?id=longmen']
         ],
@@ -185,14 +186,14 @@ window.CAT_DATA = [
         d: '西湖边·写字楼·独立咖啡',
         i: '西湖边景观咖啡、写字楼平价咖啡、小众独立咖啡馆，一份杭州咖啡地图。',
         th: [
-          ['🌅', '西湖边', 'coffee.html?id=hu-pan'], ['🏙️', '写字楼', 'coffee.html?id=xiezilou'],
-          ['🏡', '青芝坞', 'coffee.html?id=qinzhaizi'], ['⛰️', '馒头山', 'xiangxiang.html?id=mantou'],
-          ['🍵', '四眼井', 'coffee.html?id=siyanku'], ['🌿', '满觉陇', 'coffee.html?id=manjue-cafe'],
-          ['🏭', '天目里', 'coffee.html?id=tianmuli'], ['💡', '东信和创', 'coffee.html?id=dongxin']
+          ['🌅', '西湖边', 'food-coffee.html?id=hu-pan'], ['🏙️', '写字楼', 'food-coffee.html?id=xiezilou'],
+          ['🏡', '青芝坞', 'food-coffee.html?id=qinzhaizi'], ['⛰️', '馒头山', 'xiangxiang.html?id=mantou'],
+          ['🍵', '四眼井', 'food-coffee.html?id=siyanku'], ['🌿', '满觉陇', 'food-coffee.html?id=manjue-cafe'],
+          ['🏭', '天目里', 'food-coffee.html?id=tianmuli'], ['💡', '东信和创', 'food-coffee.html?id=dongxin']
         ],
         ft: [
-          ['☕', '咖啡馆指南', '景观、平价与独立咖啡地图', 'coffee.html'],
-          ['👨‍👩‍👧', '亲子咖啡馆攻略', '周末溜娃好去处', 'coffee.html?id=hu-pan'],
+          ['☕', '咖啡馆指南', '景观、平价与独立咖啡地图', 'food-coffee.html'],
+          ['👨‍👩‍👧', '亲子咖啡馆攻略', '周末溜娃好去处', 'food-coffee.html?id=hu-pan'],
           ['🫖', '20 个茶空间', '茶馆文化深度体验攻略', 'chaguan.html?id=chaguan-zongguan']
         ],
         kw: ['咖啡', '咖啡馆', '茶空间']
@@ -456,14 +457,14 @@ window.CAT_DATA = [
         d: '缴费/余额/明细',
         i: '杭州社保查询包括五险缴费记录与个人账户余额，线上查询已对接浙里办与电子社保卡，无需到社保大厅。',
         th: [
-          ['💳', '社保查询', 'banshi.html'], ['🔁', '社保转移', 'banshi.html?id=shebao'],
+          ['💳', '社保查询', 'banshi-shebao.html'], ['🔁', '社保转移', 'banshi.html?id=shebao'],
           ['💰', '社保缴费', 'banshi.html?id=shebao'], ['🏥', '医保报销', 'banshi.html?id=shebao-yibao'],
           ['👴', '养老待遇', 'banshi.html?id=shebao-laoyang'], ['💼', '失业金', 'banshi.html?id=shebao-shiye'],
           ['🏭', '工伤认定', 'banshi.html?id=shebao-gongshang'], ['📋', '灵活就业', 'banshi.html?id=shebao-linghuo']
         ],
         ft: [
-          ['🧰', '办事大厅频道', '社保公积金落户全入口', 'banshi.html'],
-          ['💳', '社保查询指南', '浙里办与电子社保卡流程', 'banshi.html'],
+          ['🧰', '办事大厅频道', '社保公积金落户全入口', 'banshi-shebao.html'],
+          ['💳', '社保查询指南', '浙里办与电子社保卡流程', 'banshi-shebao.html'],
           ['📋', '杭州医保门诊报销', '报销比例与流程', 'banshi.html?id=shebao-yibao']
         ],
         kw: ['社保', '医保', '缴费', '报销']
@@ -473,14 +474,14 @@ window.CAT_DATA = [
         d: '查询/提取/贷款',
         i: '杭州住房公积金查询覆盖余额、缴存明细、提取记录与贷款额度测算，已开通线上全流程。',
         th: [
-          ['🏦', '余额查询', 'banshi.html'], ['💸', '租房提取', 'banshi.html?id=gjj'],
+          ['🏦', '余额查询', 'banshi-gjj.html'], ['💸', '租房提取', 'banshi.html?id=gjj'],
           ['🏠', '购房提取', 'banshi.html?id=gjj-goufang'], ['🔁', '还贷提取', 'banshi.html?id=gjj-huandai'],
           ['📄', '转移接续', 'banshi.html?id=gjj-zhuanyi'], ['🏗️', '贷款测算', 'banshi.html?id=gjj-daikuan'],
           ['👴', '退休提取', 'banshi.html?id=gjj-tuixiu'], ['📊', '缴存证明', 'banshi.html?id=gij-cunzheng']
         ],
         ft: [
-          ['🧰', '办事大厅频道', '全部办事入口', 'banshi.html'],
-          ['🏦', '公积金提取指南', '租房秒到账，购房 3 个工作日', 'banshi.html'],
+          ['🧰', '办事大厅频道', '全部办事入口', 'banshi-gjj.html'],
+          ['🏦', '公积金提取指南', '租房秒到账，购房 3 个工作日', 'banshi-gjj.html'],
           ['🏠', '杭州购房全攻略', '从看房到过户', 'banshi.html?id=luohu-goufang']
         ],
         kw: ['公积金', '提取', '贷款', '购房']
@@ -490,14 +491,14 @@ window.CAT_DATA = [
         d: '人才引进·积分落户',
         i: '杭州落户含人才引进、积分落户、投靠落户等渠道，附条件对照与办理入口。',
         th: [
-          ['📋', '人才引进', 'banshi.html'], ['🧮', '积分落户', 'banshi.html?id=luohu-jifen'],
+          ['📋', '人才引进', 'banshi-luohu.html'], ['🧮', '积分落户', 'banshi.html?id=luohu-jifen'],
           ['👨‍👩‍👧', '投靠落户', 'banshi.html?id=luohu-toukao'], ['🎓', '学历落户', 'banshi.html?id=luohu-xueli'],
           ['🏠', '购房落户', 'banshi.html?id=luohu-goufang-luohu'], ['💼', '就业落户', 'banshi.html?id=luohu-jiuye'],
           ['📄', '居住证', 'banshi.html?id=luohu-juzhuzheng'], ['🆔', '身份证', 'banshi.html?id=luohu-shenfenzheng']
         ],
         ft: [
-          ['🧰', '办事大厅频道', '落户与证件办理入口', 'banshi.html'],
-          ['🎓', '人才认定申请', '高层次人才分类认定', 'banshi.html'],
+          ['🧰', '办事大厅频道', '落户与证件办理入口', 'banshi-luohu.html'],
+          ['🎓', '人才认定申请', '高层次人才分类认定', 'banshi-luohu.html'],
           ['🏫', '教育资源与公平', '学区房到机会公平', 'banshi.html?id=luohu-jiaoyu']
         ],
         kw: ['落户', '人才引进', '积分', '居住证']
@@ -507,14 +508,14 @@ window.CAT_DATA = [
         d: '公交·地铁·限行',
         i: '限行查询、地铁公交、火车机票、打车租车、停车缴费、违章处理，出行无忧。',
         th: [
-          ['🚗', '尾号限行', 'banshi.html'], ['🚇', '地铁线路', 'banshi.html?id=jiaotong-ditie'],
+          ['🚗', '尾号限行', 'banshi-jiaotong.html'], ['🚇', '地铁线路', 'banshi.html?id=jiaotong-ditie'],
           ['🚌', '实时公交', 'banshi.html?id=jiaotong-gongjiao'], ['🚄', '火车票', 'banshi.html?id=jiaotong-huoche'],
           ['✈️', '机票', 'banshi.html?id=jiaotong-jipiao'], ['🅿️', '停车缴费', 'banshi.html?id=jiaotong-tingche'],
           ['🚕', '打车租车', 'banshi.html?id=jiaotong-dache'], ['⚠️', '违章处理', 'banshi.html?id=jiaotong-weizhang']
         ],
         ft: [
           ['🚌', '出行交通频道', '限行地铁公交全入口', 'traffic.html'],
-          ['🚗', '今日尾号限行', '浙A 与外地车规则', 'banshi.html'],
+          ['🚗', '今日尾号限行', '浙A 与外地车规则', 'banshi-jiaotong.html'],
           ['🚇', '杭州地铁指南', '线路与换乘', 'banshi.html?id=jiaotong-ditie']
         ],
         kw: ['交通', '地铁', '公交', '限行', '停车']
@@ -541,13 +542,13 @@ window.CAT_DATA = [
         d: '摇号·年检·违章',
         i: '浙A摇号、年检、违章处理、驾驶证换证——车主高频事项一次办。',
         th: [
-          ['🚘', '浙A摇号', 'banshi.html'], ['🔧', '车辆年检', 'banshi.html?id=cheliang-nianjian'],
-          ['⚠️', '违章查询', 'banshi.html?id=cheliang-weizhang'], ['🪪', '驾驶证', 'banshi.html'],
+          ['🚘', '浙A摇号', 'banshi-cheliang.html'], ['🔧', '车辆年检', 'banshi.html?id=cheliang-nianjian'],
+          ['⚠️', '违章查询', 'banshi.html?id=cheliang-weizhang'], ['🪪', '驾驶证', 'banshi-cheliang.html'],
           ['🅿️', '停车位', 'banshi.html?id=cheliang-tingche'], ['⛽', '加油充电', 'banshi.html?id=cheliang-jiayou'],
           ['🚧', '道路施工', 'banshi.html?id=cheliang-shigong'], ['🧾', '高速收费', 'banshi.html?id=cheliang-gaosu']
         ],
         ft: [
-          ['🚘', '浙A摇号申请', '指标申请与结果查询', 'banshi.html'],
+          ['🚘', '浙A摇号申请', '指标申请与结果查询', 'banshi-cheliang.html'],
           ['🅿️', '杭州停车攻略', '停车现状与省钱办法', 'banshi.html?id=cheliang-tingche'],
           ['🚗', '驾考全流程', 'C1/C2 从报名到拿证', 'banshi.html?id=cheliang-kaoshi']
         ],
@@ -558,7 +559,7 @@ window.CAT_DATA = [
         d: '21 个一键复制',
         i: '政务热线、投诉举报、急难救助、公共服务——杭州常用电话一键复制。',
         th: [
-          ['📞', '12345 热线', 'banshi.html'], ['🚨', '报警 110', 'banshi.html?id=dianhua-baojing'],
+          ['📞', '12345 热线', 'banshi-dianhua.html'], ['🚨', '报警 110', 'banshi.html?id=dianhua-baojing'],
           ['🚑', '急救 120', 'banshi.html?id=dianhua-jiuzhu'], ['🔥', '火警 119', 'banshi.html?id=dianhua-huojing'],
           ['💧', '水电燃气', 'banshi.html?id=dianhua-shuidian'], ['🏥', '卫生热线', 'banshi.html?id=dianhua-weisheng'],
           ['🚌', '公交服务', 'banshi.html?id=jiaotong-huoche'], ['📮', '邮政客服', 'banshi.html?id=dianhua-youzheng']
@@ -734,7 +735,7 @@ window.CAT_DATA = [
     ]
   },
   {
-    k: 'news', n: '资讯热点', ic: '📰', c: '#e0584f', home: 'articles.html',
+    k: 'news', n: '资讯热点', ic: '📰', c: '#e0584f', home: 'news.html',
     d: '民生 · 新规 · 政策 · 活动 一手掌握',
     i: '民生政策、消费补贴、活动汇总、限行天气油价——杭州热点一手掌握。',
     kw: ['资讯', '政策', '活动', '民生'],
@@ -744,15 +745,15 @@ window.CAT_DATA = [
         d: '社保·公积金新政',
         i: '社保、公积金、落户、教育、医疗——杭州民生新政解读与影响分析。',
         th: [
-          ['💳', '社保新政', 'life.html'], ['🏦', '公积金调整', 'life.html'],
-          ['🏠', '住房政策', 'life.html'], ['🎓', '教育新政', 'life.html'],
+          ['💳', '社保新政', 'articles.html?q=社保+新政'], ['🏦', '公积金调整', 'banshi-gjj.html'],
+          ['🏠', '住房政策', 'articles.html?q=杭州+住房政策'], ['🎓', '教育新政', 'articles.html?q=杭州+教育'],
           ['🏥', '医保变化', 'banshi.html?id=shebao-laoyang'], ['👴', '养老待遇', 'banshi.html?id=shebao'],
-          ['💼', '就业补贴', 'life.html'], ['🧾', '税费调整', 'life.html']
+          ['💼', '就业补贴', 'articles.html?q=就业补贴'], ['🧾', '税费调整', 'articles.html?q=税费+政策']
         ],
         ft: [
-          ['📰', '资讯热点频道', '全部文章与热点', 'articles.html'],
+          ['📰', '资讯热点频道', '全部文章与热点', 'news-zhengce.html'],
           ['💳', '社保政策解读', '缴费基数与待遇变化', 'banshi.html?id=shebao'],
-          ['🏠', '杭州房产政策', '限购、贷款与以旧换新', 'life.html']
+          ['🏠', '杭州房产政策', '限购、贷款与以旧换新', 'news-zhengce.html']
         ],
         kw: ['政策', '社保', '公积金', '房产']
       },
@@ -761,15 +762,15 @@ window.CAT_DATA = [
         d: '消费券·以旧换新',
         i: '杭州消费券发放时间、领取入口与使用规则，家电以旧换新补贴全流程。',
         th: [
-          ['🎫', '消费券', 'life.html'], ['🛋️', '家电换新', 'life.html'],
-          ['🚗', '汽车补贴', 'life.html'], ['🏠', '家装补贴', 'life.html'],
-          ['🧾', '发票抽奖', 'life.html'], ['🎫', '文旅消费券', 'around.html'],
-          ['🍚', '餐饮消费券', 'life.html'], ['📱', '数字人民币', 'internet.html']
+          ['🎫', '消费券', 'articles.html?q=杭州+消费券'], ['🛋️', '家电换新', 'articles.html?q=以旧换新+家电'],
+          ['🚗', '汽车补贴', 'articles.html?q=汽车+补贴'], ['🏠', '家装补贴', 'articles.html?q=家装+补贴'],
+          ['🧾', '发票抽奖', 'articles.html?q=发票抽奖'], ['🎫', '文旅消费券', 'articles.html?q=文旅+消费券'],
+          ['🍚', '餐饮消费券', 'articles.html?q=餐饮+消费券'], ['📱', '数字人民币', 'articles.html?q=数字人民币']
         ],
         ft: [
-          ['💰', '薅羊毛省钱攻略', '消费券奶茶积分学生福利', 'life.html'],
-          ['🎫', '消费券领取指南', '时间、入口与使用规则', 'life.html'],
-          ['🛋️', '以旧换新补贴', '家电汽车全流程', 'life.html']
+          ['💰', '薅羊毛省钱攻略', '消费券奶茶积分学生福利', 'news-butie.html'],
+          ['🎫', '消费券领取指南', '时间、入口与使用规则', 'news-butie.html'],
+          ['🛋️', '以旧换新补贴', '家电汽车全流程', 'news-butie.html']
         ],
         kw: ['消费券', '补贴', '以旧换新', '薅羊毛']
       },
@@ -778,15 +779,15 @@ window.CAT_DATA = [
         d: '国庆·灯光秀·音乐节',
         i: '国庆活动、灯光秀、音乐节、展览市集——杭州近期活动全整理。',
         th: [
-          ['🎆', '国庆活动', 'zhoumo.html'], ['🌃', '灯光秀', 'zhoumo.html'],
-          ['🎵', '音乐节', 'zhoumo.html'], ['🖼️', '展览', 'weekend.html?id=zhanluan'],
-          ['🎪', '市集', 'weekend.html?id=shiji'], ['🏮', '灯会', 'zhoumo.html'],
-          ['🎭', '演出', 'weekend.html?id=yanchang'], ['🌸', '赏花季', 'zhoumo.html']
+          ['🎆', '国庆活动', 'articles.html?q=国庆+杭州'], ['🌃', '灯光秀', 'articles.html?q=灯光秀+杭州'],
+          ['🎵', '音乐节', 'articles.html?q=音乐节+杭州'], ['🖼️', '展览', 'weekend.html?id=zhanluan'],
+          ['🎪', '市集', 'weekend.html?id=shiji'], ['🏮', '灯会', 'articles.html?q=灯会+杭州'],
+          ['🎭', '演出', 'weekend.html?id=yanchang'], ['🌸', '赏花季', 'news-huodong.html']
         ],
         ft: [
-          ['🎆', '2026 国庆活动全整理', '烟花灯会音乐节一网打尽', 'zhoumo.html'],
-          ['🌃', '钱江新城灯光秀', '时间、机位与交通', 'zhoumo.html'],
-          ['🎵', '天目山音乐节', '阵容购票交通指南', 'zhoumo.html']
+          ['🎆', '2026 国庆活动全整理', '烟花灯会音乐节一网打尽', 'news-huodong.html'],
+          ['🌃', '钱江新城灯光秀', '时间、机位与交通', 'news-huodong.html'],
+          ['🎵', '天目山音乐节', '阵容购票交通指南', 'news-huodong.html']
         ],
         kw: ['国庆', '活动', '音乐节', '灯光秀']
       },
@@ -796,7 +797,7 @@ window.CAT_DATA = [
         i: '杭州工作日高峰时段错峰限行，浙A 与外地号牌规则，含节假日调整提示。',
         th: [
           ['🚗', '今日限行', '#act:xianxing'], ['📅', '限行日历', '#act:xianxing'],
-          ['🚙', '外地车牌', '#act:xianxing'], ['🚌', '公交地铁', '#act:xianxing'],
+          ['🚙', '外地车牌', '#act:xianxing'], ['🚌', '公交地铁', 'traffic.html'],
           ['🅿️', '停车攻略', 'banshi.html?id=cheliang-tingche'], ['⚠️', '违章处理', '#act:xianxing'],
           ['🚧', '施工路段', '#act:xianxing'], ['🚕', '打车出行', '#act:xianxing']
         ],
@@ -819,8 +820,8 @@ window.CAT_DATA = [
         ],
         ft: [
           ['🌤️', '杭州天气查询', '实时天气与预报', '#act:weather'],
-          ['⛈️', '梅雨与台风', '杭州的雨季怎么过', 'life.html'],
-          ['🌸', '四季赏花日历', '跟着花期游杭州', 'zhoumo.html']
+          ['⛈️', '梅雨与台风', '杭州的雨季怎么过', 'news-tianqi.html'],
+          ['🌸', '四季赏花日历', '跟着花期游杭州', 'news-tianqi.html']
         ],
         kw: ['天气', '梅雨', '台风', '季节']
       },
@@ -836,8 +837,8 @@ window.CAT_DATA = [
         ],
         ft: [
           ['⛽', '今日油价查询', '92/95/98 号汽油柴油', '#act:youjia'],
-          ['🚗', '杭州用车成本', '油耗、停车与保险', 'traffic.html'],
-          ['⚡', '新能源充电指南', '充电桩分布与电价', 'traffic.html']
+          ['🚗', '杭州用车成本', '油耗、停车与保险', 'news-youjia.html'],
+          ['⚡', '新能源充电指南', '充电桩分布与电价', 'news-youjia.html']
         ],
         kw: ['油价', '加油', '充电', '油耗']
       },
@@ -846,15 +847,15 @@ window.CAT_DATA = [
         d: '每日推送精选',
         i: 'iHangzhou 公众号每日推送——限行、油价、政策解读与生活攻略精选。',
         th: [
-          ['📅', '今日杭州', 'traffic.html'], ['🚗', '限行提醒', 'traffic.html'],
-          ['⛽', '油价速报', 'traffic.html'], ['💳', '政策解读', 'life.html'],
-          ['🎉', '活动推荐', 'zhoumo.html'], ['🍜', '美食攻略', 'food.html'],
-          ['🏞️', '周末去哪', 'zhoumo.html'], ['📚', '全部文章', 'articles.html']
+          ['📅', '今日杭州', 'articles.html?q=今日杭州'], ['🚗', '限行提醒', 'news-xianxing.html'],
+          ['⛽', '油价速报', 'news-youjia.html'], ['💳', '政策解读', 'news-zhengce.html'],
+          ['🎉', '活动推荐', 'news-huodong.html'], ['🍜', '美食攻略', 'food.html'],
+          ['🏞️', '周末去哪', 'news-huodong.html'], ['📚', '全部文章', 'articles.html']
         ],
         ft: [
-          ['🎆', '国庆去哪玩', '2026 国庆活动全整理', 'zhoumo.html'],
-          ['💕', '相亲脱单攻略', '三大相亲角与亲青恋', 'life.html'],
-          ['🏃', '免费健身指南', '骑行跑步登山公园', 'life.html']
+          ['🎆', '国庆去哪玩', '2026 国庆活动全整理', 'news-wxfeed.html'],
+          ['💕', '相亲脱单攻略', '三大相亲角与亲青恋', 'news-wxfeed.html'],
+          ['🏃', '免费健身指南', '骑行跑步登山公园', 'news-wxfeed.html']
         ],
         kw: ['攻略', '指南', '生活', '杭州']
       },
@@ -889,7 +890,7 @@ window.CAT_DATA = [
         i: '湖滨银泰、武林商圈、万象城、天目里——杭州商圈地图与逛街路线。',
         th: [
           ['🏬', '湖滨商圈', 'street.html'], ['🛍️', '武林商圈', 'life.html'],
-          ['🏙️', '钱江新城', 'life.html'], ['🏭', '天目里', 'coffee.html?id=tianmuli'],
+          ['🏙️', '钱江新城', 'life.html'], ['🏭', '天目里', 'food-coffee.html?id=tianmuli'],
           ['💻', '滨江商圈', 'district.html?id=xihu'], ['✈️', '萧山商圈', 'district.html?id=xihu'],
           ['🏞️', '余杭商圈', 'district.html?id=xihu'], ['🌊', '下沙商圈', 'life.html']
         ],
@@ -956,14 +957,14 @@ window.CAT_DATA = [
         d: '景观·独立咖啡',
         i: '西湖边景观咖啡、小众独立咖啡馆、写字楼平价咖啡——杭州咖啡地图。',
         th: [
-          ['🌅', '西湖边', 'coffee.html?id=hu-pan'], ['🏙️', '写字楼', 'coffee.html?id=xiezilou'],
-          ['🏡', '青芝坞', 'coffee.html?id=qinzhaizi'], ['⛰️', '馒头山', 'xiangxiang.html?id=mantou'],
-          ['🍵', '四眼井', 'coffee.html?id=siyanku'], ['🌿', '满觉陇', 'coffee.html?id=manjue-cafe'],
-          ['🏭', '天目里', 'coffee.html?id=tianmuli'], ['💡', '东信和创', 'coffee.html?id=dongxin']
+          ['🌅', '西湖边', 'food-coffee.html?id=hu-pan'], ['🏙️', '写字楼', 'food-coffee.html?id=xiezilou'],
+          ['🏡', '青芝坞', 'food-coffee.html?id=qinzhaizi'], ['⛰️', '馒头山', 'xiangxiang.html?id=mantou'],
+          ['🍵', '四眼井', 'food-coffee.html?id=siyanku'], ['🌿', '满觉陇', 'food-coffee.html?id=manjue-cafe'],
+          ['🏭', '天目里', 'food-coffee.html?id=tianmuli'], ['💡', '东信和创', 'food-coffee.html?id=dongxin']
         ],
         ft: [
-          ['☕', '咖啡馆指南', '杭州咖啡地图', 'coffee.html'],
-          ['👨‍👩‍👧', '亲子咖啡馆攻略', '周末溜娃好去处', 'coffee.html?id=hu-pan'],
+          ['☕', '咖啡馆指南', '杭州咖啡地图', 'food-coffee.html'],
+          ['👨‍👩‍👧', '亲子咖啡馆攻略', '周末溜娃好去处', 'food-coffee.html?id=hu-pan'],
           ['🫖', '20 个茶空间', '茶馆文化深度体验', 'chaguan.html?id=qianjiang-chaguan']
         ],
         kw: ['咖啡', '咖啡馆', '茶空间']
