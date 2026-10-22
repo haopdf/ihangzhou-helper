@@ -118,10 +118,29 @@
         c.innerHTML = html;
       }
 
+      // 渲染地点列表（无 ID 参数时）
+      function renderPlaceList(places) {
+        var c = document.getElementById('placeContainer');
+        var breadcrumb = window.IHZW ? IHZW.breadcrumbHTML('杭州地点', '热门地点') : '';
+        var h = breadcrumb;
+        h += '<div style="padding:16px 16px 8px;font-size:16px;font-weight:700;display:flex;align-items:center;gap:6px">📍 热门地点 <span style="font-size:12px;font-weight:400;color:var(--text-muted);margin-left:4px">' + places.length + ' 个</span></div>';
+        h += '<div style="padding:0 16px 16px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px">';
+        places.forEach(function (p) {
+          var tags = (p.tags || []).slice(0, 3).join(' ').substring(0, 30);
+          h += '<a href="place.html?id=' + p.id + '" style="display:flex;flex-direction:column;gap:4px;padding:12px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:12px;text-decoration:none;color:inherit;transition:transform .15s" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'scale(1)\'">' +
+            '<div style="font-size:14px;font-weight:600">' + p.name + '</div>' +
+            (p.address ? '<div style="font-size:11px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + p.address.substring(0, 25) + '</div>' : '') +
+            '<div style="font-size:11px;color:var(--text-muted)">' + tags + '</div>' +
+            '</a>';
+        });
+        h += '</div>';
+        h += '<div style="padding:0 16px 24px;text-align:center"><a href="index.html" class="sub-back">← 返回首页</a></div>';
+        c.innerHTML = h;
+      }
+
       // 从 places.json 加载数据
       var placeId = getParam('id') || getParam('name') || '';
       var placeName = getParam('name') || '';
-      var dataUrl = (location.protocol === 'file__' ? '' : '/') + 'data/places.json';
       fetch('data/places.json').then(function (r) { return r.json(); }).then(function (data) {
         var places = data.places || [];
         var map = {};
@@ -131,6 +150,11 @@
         if (placeId && map[placeId]) found = map[placeId];
         else if (placeName) {
           for (var k in map) { if (map[k].name === placeName) { found = map[k]; break; } }
+        }
+        if (!found) {
+          // 无 ID 参数时渲染热门地点列表
+          renderPlaceList(places);
+          return;
         }
         renderPlace(found);
       }).catch(function () { renderPlace(null); });

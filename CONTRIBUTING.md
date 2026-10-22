@@ -73,7 +73,7 @@ ihangzhou-helper/
 ├── travel.html              # i杭州玩（6 个分区 tab + 博物馆入口）
 ├── food.html                # i杭州吃
 ├── articles.html            # i杭州人（2700+ 文章搜索）
-├── museum.html              # 博物馆专题
+├── bowuguan.html              # 博物馆专题
 ├── district.html            # 13 区县
 ├── channel.html             # 频道聚合页（?ch=chId）
 ├── place.html               # 地点详情（?id=placeId）
@@ -84,7 +84,7 @@ ihangzhou-helper/
 ├── history.html            # 历史频道
 ├── internet.html            # 互联网频道
 ├── laozihao.html            # 老字号频道
-├── museum.html              # 博物馆频道
+├── bowuguan.html              # 博物馆频道
 ├── street.html              # 街道频道
 ├── traffic.html             # 交通频道
 ├── weekend.html             # 周末频道

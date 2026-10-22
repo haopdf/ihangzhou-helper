@@ -203,21 +203,11 @@
       /* ---------- 三级栏目页 ---------- */
       function renderThirdPage() {
         var dest = third[2] || '';
-        // 若三级目标只是笼统的栏目主页（如 banshi.html），降级为按三级名搜索文章，避免「点哪个都回同一个页」
-        if (dest && !/[?&]id=/i.test(dest) && dest === cat.home) {
+        // 去掉所有自动附加 ?q= 的逻辑：目标页面已改为卡片导航页，
+        // 附加 ?q= 不会被页面处理，形如 street.html?q=xxx 反而不如跳回卡片页让用户自选
+        // 仅保留 cat.home 降级为文章搜索，避免「所有三级都回到同一个频道页」
+        if (dest && !/[?&]id=/i.test(dest) && !/\?/.test(dest) && dest === cat.home) {
           dest = 'articles.html?q=' + encodeURIComponent(third[1]);
-        }
-        // 站内栏目页（如 life.html）但无 id 参数 → 自动附加 ?q= 让目标页按名筛选
-        if (dest && !/^#act:|^https?:|\?/.test(dest)) {
-          var knownFilterPages = ['life.html','scenic.html','temple.html','chaguan.html','tea.html',
-            'coffee.html','dessert.html','night-market.html','laozihao.html','zhoumo.html','route.html',
-            'food.html','hangbang.html','museum.html','gujian.html','intangible.html','tushuguan.html',
-            'breakfast.html','street.html','history.html','traffic.html','internet.html','celebrity.html',
-            'zhaopin.html','around.html','place.html','banshi.html'];
-          var destBase = dest.split('?')[0];
-          if (knownFilterPages.indexOf(destBase) >= 0) {
-            dest = destBase + '?q=' + encodeURIComponent(third[1]);
-          }
         }
         var html = '';
 

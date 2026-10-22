@@ -3657,7 +3657,8 @@ html[data-theme="dark"] #themeBtn:hover {
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
   z-index: 300;
-  overflow: hidden;
+  max-height: 70vh;
+  overflow-y: auto;
   border: 1px solid var(--border-light);
 }
 .city-dropdown.show { display: block !important; }
@@ -4655,7 +4656,7 @@ body.search-mode .tide-feature {
 }
 
 /* ============================================
-   博物馆详情页统一组件（抽自 museum.html · 色调统一松绿，复用全局 token）
+   博物馆详情页统一组件（抽自 bowuguan.html · 色调统一松绿，复用全局 token）
    ============================================ */
 .mu-h{font-size:28px;font-weight:700;margin:2px 0 4px}
 .mu-s{font-size:15px;color:var(--text-secondary);margin-bottom:12px}

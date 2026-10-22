@@ -78,7 +78,7 @@
       var c=document.getElementById('gjContainer');
       var ht=document.getElementById('headerTitle');
       if(!data){
-        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🏯</div><h2>未找到该古建筑</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="gujian.html" class="btn" style="display:inline-block;padding:10px 20px;background:#7c2d12;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回古建列表</a> <a href="museum.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">文化首页</a></div>';
+        c.innerHTML='<div class="p-empty"><div class="p-hero-icon">🏯</div><h2>未找到该古建筑</h2><p style="margin:8px 0 16px">ID:'+(id||'(空)')+'</p><a href="gujian.html" class="btn" style="display:inline-block;padding:10px 20px;background:#7c2d12;color:#fff;border-radius:8px;text-decoration:none;font-size:14px">← 返回古建列表</a> <a href="bowuguan.html" class="btn" style="display:inline-block;padding:10px 20px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;margin-left:8px">文化首页</a></div>';
         if(ht)ht.textContent='🏯 古镇古建';
         if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,'古镇古建','未找到');
         return;
@@ -94,7 +94,7 @@
       var keys=window.GUJIAN_DATA?Object.keys(window.GUJIAN_DATA):[];
       var nb=keys.filter(function(k){return k!==id}).slice(0,4);
       if(nb.length){h+='<div class="p-neighbors"><h3>🏯 更多古建</h3><div class="p-neighbor-grid">';nb.forEach(function(k){var v=window.GUJIAN_DATA[k];h+='<a class="p-neighbor" href="gujian.html?id='+k+'"><span>'+(GJ_ICONS[k]||'')+'</span><span>'+v.name+'</span></a>'});h+='</div></div>';}
-      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="gujian.html" style="flex:1;text-align:center;padding:12px;background:#7c2d12;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 古建列表</a><a href="museum.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">文化首页</a></div>';
+      h+='<div style="margin-top:24px;display:flex;gap:10px"><a href="gujian.html" style="flex:1;text-align:center;padding:12px;background:#7c2d12;color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">← 古建列表</a><a href="bowuguan.html" style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">文化首页</a></div>';
       h+='</div>';c.innerHTML=h;
       if(window.IHZW&&IHZW.prependCrumb)IHZW.prependCrumb(document.body,(window.IHZ_PAGE&&window.IHZ_PAGE.title)||'古镇古建',data.name);
     }

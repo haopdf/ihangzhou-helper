@@ -303,7 +303,7 @@ window.CAT_DATA = [
     ]
   },
   {
-    k: 'culture', n: '文博人文', ic: '🏛️', c: '#8a6fd6', home: 'museum.html',
+    k: 'culture', n: '文博人文', ic: '🏛️', c: '#8a6fd6', home: 'bowuguan.html',
     d: '博物馆 · 历史 · 名人 · 故事 读懂杭州',
     i: '浙江省博物馆、良渚古城、西湖博物馆——镇馆之宝与参观路线一站看。',
     kw: ['文化', '博物馆', '历史', '人文'],
@@ -313,15 +313,15 @@ window.CAT_DATA = [
         d: '浙博·良渚·西湖馆',
         i: '浙江省博物馆、良渚古城、西湖博物馆——镇馆之宝与参观路线一站看。',
         th: [
-          ['🏛️', '浙江省博', 'museum.html'], ['🏺', '良渚博物院', 'place.html?id=liangzhu'],
-          ['⛲', '西湖博物馆', 'museum.html'], ['🧵', '丝绸博物馆', 'museum.html?id=china-silk'],
-          ['🍵', '茶叶博物馆', 'museum.html?id=zhemo'], ['✂️', '刀剪剑博物馆', 'museum.html?id=zhemo'],
-          ['🛶', '湿地博物馆', 'museum.html?id=zhejiang-art'], ['🚢', '运河博物馆', 'history.html']
+          ['🏛️', '浙江省博', 'bowuguan.html'], ['🏺', '良渚博物院', 'place.html?id=liangzhu'],
+          ['⛲', '西湖博物馆', 'bowuguan.html'], ['🧵', '丝绸博物馆', 'bowuguan.html?id=china-silk'],
+          ['🍵', '茶叶博物馆', 'bowuguan.html?id=zhemo'], ['✂️', '刀剪剑博物馆', 'bowuguan.html?id=zhemo'],
+          ['🛶', '湿地博物馆', 'bowuguan.html?id=zhejiang-art'], ['🚢', '运河博物馆', 'history.html']
         ],
         ft: [
-          ['🏛️', '杭州博物馆地图', '免费文化之旅全入口', 'museum.html'],
+          ['🏛️', '杭州博物馆地图', '免费文化之旅全入口', 'bowuguan.html'],
           ['🏺', '良渚古城', '5000 年文明实证', 'place.html?id=liangzhu'],
-          ['🏛️', '浙江省博物馆深度游', '镇馆之宝怎么看', 'museum.html?id=zhemo']
+          ['🏛️', '浙江省博物馆深度游', '镇馆之宝怎么看', 'bowuguan.html?id=zhemo']
         ],
         kw: ['博物馆', '良渚', '浙江省博物馆', '美术馆']
       },
@@ -347,15 +347,15 @@ window.CAT_DATA = [
         d: '白居易·苏轼·秋瑾',
         i: '白居易、苏轼、秋瑾——他们与杭州的故事，附打卡地点。',
         th: [
-          ['✍️', '白居易', 'celebrity.html?id=bai-juyi'], ['📜', '苏轼', 'celebrity.html?id=sushi'],
-          ['⚔️', '秋瑾', 'celebrity.html?id=gen-shi'], ['📚', '章太炎', 'celebrity.html?id=gen-shi'],
-          ['🏛️', '林徽因', 'celebrity.html?id=linhe-jing'], ['🖊️', '郁达夫', 'celebrity.html?id=linhe-jing'],
-          ['🌧️', '戴望舒', 'celebrity.html?id=hong-xue-yan'], ['🥤', '宗庆后', 'celebrity.html?id=feng-meng-zhen']
+          ['✍️', '白居易', 'celebrity.html?id=bai-juyi'], ['📜', '苏东坡', 'celebrity.html?id=su-dongpo'],
+          ['⚔️', '于谦', 'celebrity.html?id=yu-qian'], ['📚', '章太炎', 'celebrity.html?id=zhang-taiyan'],
+          ['🏛️', '林徽因', 'celebrity.html?id=lin-huiyin'], ['🖊️', '郁达夫', 'celebrity.html?id=yu-dafu'],
+          ['🌧️', '戴望舒', 'celebrity.html?id=dai-wangshu'], ['🗡️', '陆游', 'celebrity.html?id=lu-you']
         ],
         ft: [
           ['👤', '杭州名人录', '历史与当代名人全集', 'celebrity.html'],
-          ['🗿', '西湖边的文人塑像', '白居易与苏轼的守望', 'celebrity.html?id=sushi'],
-          ['🖊️', '鲁迅与杭州', '从桐乡到杭州的文化斗士', 'celebrity.html?id=gen-shi']
+          ['🗿', '西湖边的文人塑像', '白居易与苏轼的守望', 'celebrity.html?id=su-dongpo'],
+          ['🖊️', '鲁迅与杭州', '从桐乡到杭州的文化斗士', 'celebrity.html?id=zhang-taiyan']
         ],
         kw: ['名人', '白居易', '苏轼', '秋瑾', '鲁迅']
       },
@@ -906,8 +906,8 @@ window.CAT_DATA = [
         d: '王星记·知味观',
         i: '王星记折扇、知味观糕点、张小泉剪刀、塘栖枇杷——杭州特产送礼指南。',
         th: [
-          ['🪭', '王星记扇子', 'laozihao.html'], ['🥮', '知味观糕点', 'laozihao.html'],
-          ['✂️', '张小泉剪刀', 'laozihao.html'], ['🍵', '西湖龙井', 'tea.html'],
+          ['🪭', '王星记扇子', 'intangible.html?id=wangxingji'], ['🥮', '知味观糕点', 'laozihao.html'],
+          ['✂️', '张小泉剪刀', 'intangible.html?id=zhangxiaoquan'], ['🍵', '西湖龙井', 'tea.html'],
           ['🪷', '西湖藕粉', 'food.html'], ['🍶', '塘栖枇杷', 'food.html'],
           ['🧵', '杭绣丝绸', 'food.html'], ['☂️', '西湖绸伞', 'district.html?id=xihu']
         ],

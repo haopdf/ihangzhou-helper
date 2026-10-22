@@ -198,7 +198,7 @@ channel_pages = {
     'banshi': 'banshi.html',
     'celebrity': 'celebrity.html',
     'laozihao': 'laozihao.html',
-    'museum': 'museum.html',
+    'museum': 'bowuguan.html',
     'travel': 'travel.html',
     'district': 'district.html',
     'place': 'place.html',

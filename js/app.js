@@ -1180,7 +1180,7 @@ function copyText(text, name) {
   }
 
   // 首页只显示 8 个高频刚需分类Tab；其他分类（美食/老字号/名人/夜市/赏花/民宿等）
-  // 都有独立专题页（travel.html/food.html/articles.html/museum.html），用户可通过搜索访问
+  // 都有独立专题页（travel.html/food.html/articles.html/bowuguan.html），用户可通过搜索访问
   var HOME_TAB_WHITELIST = ['banshi','traffic','vehicle','life','edu','job','housing','tool'];
 
   function renderTabs() {
@@ -1604,6 +1604,16 @@ function copyText(text, name) {
     // 搜索结果区关闭按钮：清空搜索框 + 隐藏结果区
     bindOn('#searchResultClose', 'click', function () {
       clearSearch();
+    });
+
+    bindOn('#hotGrid', 'click', function (e) {
+      var card = e.target.closest('.hot-card');
+      if (!card) return;
+      // 统计点击
+      var nmEl = card.querySelector('.hot-name');
+      var btnName = nmEl ? nmEl.textContent.trim() : '';
+      if (btnName && window.iHangzhouTrack) window.iHangzhouTrack.click('常用服务', btnName, btnName, '');
+      handleClick(card);
     });
 
     bindOn('#hotKeywords', 'click', function (e) {

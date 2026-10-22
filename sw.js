@@ -13,7 +13,7 @@ var CACHE_URLS = [
   '/js/cat-data.js',
   '/articles/index.json',
   '/banshi.html',
-  '/museum.html',
+  '/bowuguan.html',
   '/css/style.css',
   '/manifest.json',
   '/js/app.js',

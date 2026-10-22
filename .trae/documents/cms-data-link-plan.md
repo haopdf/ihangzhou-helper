@@ -97,7 +97,7 @@
 ## 范围说明
 
 **本次不做**：
-- 专题页 food.html / museum.html / travel.html 的 CMS 化（它们独立运作，结构不同，留作下一阶段）
+- 专题页 food.html / bowuguan.html / travel.html 的 CMS 化（它们独立运作，结构不同，留作下一阶段）
 - 拖拽排序（用上移/下移按钮替代，简单可靠）
 - 多用户/角色/密码 hash（当前是单管理员，安全收益低）
 - 文件上传（图标用 emoji，无需图片）

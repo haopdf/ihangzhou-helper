@@ -215,7 +215,7 @@
       <a href="laozihao.html"><img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23dc2626'%3E%3Cpath d='M8 4h8v4a4 4 0 0 1-8 0V4z'/%3E%3Cpath d='M10 4V2M14 4V2M9 12v8M15 12v8M7 20h10' stroke='%23dc2626' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"
           alt=""><span>百年老店</span></a>
-      <a href="museum.html"><img
+      <a href="bowuguan.html"><img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M12 2L2 8h20z M4 10h16v2H4z M6.5 12h2.5v9H6.5z M10.75 12h2.5v9h-2.5z M15 12h2.5v9H15z M3.5 21h17v1.8H3.5z'/%3E%3C/svg%3E"
           alt=""><span>博物馆游</span></a>
       <a href="weekend.html"><img
@@ -724,7 +724,7 @@
       },
       {
         key: 'culture', name: '文博人文', icon: '🏛️', desc: '博物馆 · 历史 · 名人 · 故事',
-        color: '#8a6fd6', href: 'museum.html', intro: '浙江省博物馆、良渚古城、西湖博物馆，镇馆之宝与参观路线一站看。',
+        color: '#8a6fd6', href: 'bowuguan.html', intro: '浙江省博物馆、良渚古城、西湖博物馆，镇馆之宝与参观路线一站看。',
         subs: [
           { n: '博物馆', ic: '🏛️', d: '浙博·良渚·西湖馆', h: 'cat.html?c=culture&s=%E5%8D%9A%E7%89%A9%E9%A6%86' },
           { n: '历史人文', ic: '📜', d: '大运河·南宋·遗产', h: 'cat.html?c=culture&s=%E5%8E%86%E5%8F%B2%E4%BA%BA%E6%96%87' },
@@ -744,7 +744,6 @@
           { n: '公积金', ic: '🏦', d: '查询/提取/贷款', h: 'cat.html?c=banshi&s=%E5%85%AC%E7%A7%AF%E9%87%91' },
           { n: '落户', ic: '📋', d: '人才引进·积分落户', h: 'cat.html?c=banshi&s=%E8%90%BD%E6%88%B7' },
           { n: '出行交通', ic: '🚌', d: '公交·地铁·限行', h: 'cat.html?c=banshi&s=%E5%87%BA%E8%A1%8C%E4%BA%A4%E9%80%9A' },
-          { n: '区县导航', ic: '🏙️', d: '杭州 13 区县', h: 'cat.html?c=banshi&s=%E5%8C%BA%E5%8E%BF%E5%AF%BC%E8%88%AA' },
           { n: '车辆服务', ic: '🚗', d: '摇号·年检·违章', h: 'cat.html?c=banshi&s=%E8%BD%A6%E8%BE%86%E6%9C%8D%E5%8A%A1' },
           { n: '常用电话', ic: '📞', d: '21 个一键复制', p: 'phone' },
           { n: '实用工具', ic: '🧰', d: '计算器·查询', p: 'tools' }
@@ -793,17 +792,17 @@
         ]
       },
       {
-        key: 'my', name: '我的社区', icon: '👤', desc: '收藏 · 积分 · 反馈',
-        color: '#5b8c5a', href: '', intro: '收藏、积分、反馈与设置——你的 iHangzhou 个人中心。',
+        key: 'district', name: '区县风采', icon: '🏙️', desc: '上城 · 拱墅 · 西湖 · 13 区县',
+        color: '#2563eb', href: 'district.html', intro: '杭州 13 区县市——上城、拱墅、西湖、滨江、萧山、余杭、临平、钱塘、富阳、临安、桐庐、淳安、建德，每区每县一站尽览。',
         subs: [
-          { n: '我的收藏', ic: '⭐', d: '收藏的服务', a: 'fav' },
-          { n: '浏览历史', ic: '🕘', d: '最近看过', a: 'hist' },
-          { n: '每日签到', ic: '📅', d: '连续签到领积分', a: 'checkin' },
-          { n: '意见反馈', ic: '📨', d: '建议 · 吐槽', a: 'feedback' },
-          { n: '字体大小', ic: '🔤', d: '大字模式调节', a: 'fontsize' },
-          { n: '分享给朋友', ic: '📤', d: '复制链接 + 二维码', a: 'share' },
-          { n: '关于我们', ic: 'ℹ️', d: '平台介绍', a: 'about' },
-          { n: '设置', ic: '⚙️', d: '主题 · 城市', a: 'settings' }
+          { n: '上城区', ic: '🏯', d: '南宋皇城 · 河坊街', h: 'district.html?id=shangcheng' },
+          { n: '拱墅区', ic: '🌉', d: '运河文化 · 拱宸桥', h: 'district.html?id=gongshu' },
+          { n: '西湖区', ic: '⛲', d: '西湖十景 · 灵隐', h: 'district.html?id=xihu' },
+          { n: '滨江区', ic: '💡', d: '高新产业 · 物联网', h: 'district.html?id=binjiang' },
+          { n: '萧山区', ic: '🛫', d: '机场 · 湘湖 · 机器人', h: 'district.html?id=xiaoshan' },
+          { n: '余杭区', ic: '🏺', d: '良渚 · 仓前 · 未来科技', h: 'district.html?id=yuhang' },
+          { n: '临平区', ic: '🏔️', d: '运河 · 超山 · 塘栖', h: 'district.html?id=linping' },
+          { n: '钱塘区', ic: '🏭', d: '下沙 · 江东 · 大学城', h: 'district.html?id=qiantang' },
         ]
       }
     ];

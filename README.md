@@ -45,7 +45,7 @@ ihangzhou-helper/
 ├── travel.html             # i杭州玩（西湖/古镇/赏花/寺庙/夜景 + 博物馆）
 ├── food.html               # i杭州吃
 ├── articles.html           # i杭州人（2700+ 篇文章搜索 + 分类）
-├── museum.html             # 博物馆专题（从 travel.html tab 进入）
+├── bowuguan.html             # 博物馆专题（从 travel.html tab 进入）
 ├── district.html           # 13 区县
 ├── channel.html            # 频道页（按分类聚合工具）
 ├── banshi.html / traffic.html / coffee.html / ...  # 频道子页

@@ -25,7 +25,7 @@ let totalFixed = 0;
 const ROOT_PAGES = [
   'index.html', 'banshi.html', 'articles.html', 'cat.html',
   'food.html', 'life.html', 'traffic.html', 'district.html',
-  'museum.html', 'weekend.html', 'zhoumo.html', 'travel.html',
+  'bowuguan.html', 'weekend.html', 'zhoumo.html', 'travel.html',
   'scenic.html', 'story.html', 'place.html', 'channel.html',
   'internet.html', 'coffee.html', 'temple.html', 'guzhen.html',
   'laozihao.html', 'scenic.html', 'tide.html', 'history.html',

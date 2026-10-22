@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/style.css?v=20261018l">
   <script src="js/layout.js?v=20261018l"></script>
   <script src="js/breadcrumb.js?v=20261018l"></script>
+  <script src="js/celebrity_data.js?v=20261018l"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
   <style>
     :root{--primary:#7c3aed;--primary-dark:#5b21b6}
@@ -46,6 +47,27 @@
     .sub-crumb b{color:var(--text);font-weight:600}
     .sub-crumb .sep{color:var(--text-muted)}
     .sub-back{display:inline-block;padding:10px 20px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:10px;color:var(--text);text-decoration:none;font-size:14px;margin-top:12px}
+    /* 详情视图样式 */
+    .celeb-detail{padding:0 0 40px}
+    .celeb-d-hero{padding:28px 20px 24px;text-align:center;color:#fff}
+    .celeb-d-hero h1{font-size:26px;font-weight:700;margin:0 0 6px;display:flex;align-items:center;justify-content:center;gap:8px}
+    .celeb-d-hero .hero-emoji{font-size:36px}
+    .celeb-d-hero .celeb-d-sub{font-size:15px;opacity:0.9;margin-bottom:4px}
+    .celeb-d-hero .celeb-d-meta{font-size:13px;opacity:0.75}
+    .celeb-d-body{padding:16px;max-width:720px;margin:0 auto}
+    .celeb-d-quote{margin:0 16px 16px;padding:16px 18px;border-left:4px solid var(--primary);background:var(--bg-alt);border-radius:0 12px 12px 0;font-size:15px;line-height:1.7;color:var(--text-secondary);font-style:italic}
+    .celeb-d-section{margin-bottom:18px}
+    .celeb-d-section h3{font-size:16px;font-weight:700;margin:0 0 10px;display:flex;align-items:center;gap:6px;color:var(--text)}
+    .celeb-d-section p,.celeb-d-section .celeb-d-text{font-size:14px;line-height:1.8;color:var(--text-secondary);white-space:pre-line;margin:0}
+    .celeb-d-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+    .celeb-d-tag{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:var(--bg-alt);border-radius:20px;font-size:12px;color:var(--text-secondary)}
+    .celeb-d-monuments{display:flex;flex-wrap:wrap;gap:8px}
+    .celeb-d-monument{padding:6px 12px;background:var(--bg-card);border:1px solid var(--bg-hover);border-radius:10px;font-size:13px;color:var(--text)}
+    .celeb-d-actions{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}
+    .celeb-d-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;transition:transform .15s}
+    .celeb-d-btn:active{transform:scale(0.96)}
+    .celeb-d-btn.articles{background:linear-gradient(135deg,#059669,#047857);color:#fff}
+    .celeb-d-btn.amap{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff}
   </style>
 </head>
 <body>
@@ -55,76 +77,127 @@
   </script>
 
   <div class="page active" id="pageSub">
-    <div class="sub-crumb">
-      <a href="index.html">首页</a>
-      <span class="sep">/</span>
-      <b>杭州名人</b>
-    </div>
-
-    <div class="sub-hero">
-      <h1><span class="hero-icon">👤</span> 杭州名人</h1>
-      <p>白居易 · 苏东坡 · 林徽因 · 章太炎 · 秋瑾 · 于谦 · 陆游 · 更多名人故居诗作为证</p>
-    </div>
-
-    <div class="sub-body">
-      <div class="sub-block">
-        <div class="sub-sec-ttl">📂 子栏目 <span class="sub-more">8 个</span></div>
-        <div class="sub-third">
-          <a class="sub-third-card" href="articles.html?q=%E7%99%BD%E5%B1%85%E6%98%93"><span class="sti">🖋️</span><span class="stn">白居易</span><span class="std">杭州刺史·白堤</span></a>
-          <a class="sub-third-card" href="articles.html?q=%E8%8B%8F%E4%B8%9C%E5%9D%A1"><span class="sti">📜</span><span class="stn">苏东坡</span><span class="std">苏东坡纪念馆</span></a>
-          <a class="sub-third-card" href="articles.html?q=%E6%9E%97%E5%BE%BD%E5%9B%A0"><span class="sti">🏛️</span><span class="stn">林徽因</span><span class="std">建筑学家</span></a>
-          <a class="sub-third-card" href="articles.html?q=%E7%AB%A0%E5%A4%AA%E7%82%8E"><span class="sti">📚</span><span class="stn">章太炎</span><span class="std">国学大师·故居</span></a>
-          <a class="sub-third-card" href="articles.html?q=%E7%99%BD%E5%B8%85"><span class="sti">⚔️</span><span class="stn">秋瑾</span><span class="std">鉴湖女侠·风雨亭</span></a>
-          <a class="sub-third-card" href="articles.html?q=%E4%BA%8E%E8%B0%A6"><span class="sti">🏮</span><span class="stn">于谦</span><span class="std">明朝名臣·于谦祠</span></a>
-          <a class="sub-third-card" href="articles.html?q=%E9%99%86%E6%B8%B8"><span class="sti">🗡️</span><span class="stn">陆游</span><span class="std">放翁·铁马秋风</span></a>
-          <a class="sub-third-card" href="articles.html?q=%E5%90%8D%E4%BA%BA%E6%95%85%E5%B1%85"><span class="sti">🏠</span><span class="stn">名人故居</span><span class="std">杭州 15+ 故居</span></a>
-        </div>
-      </div>
-
-      <div class="sub-block">
-        <div class="sub-sec-ttl">⭐ 名人推荐</div>
-        <div class="sub-feat">
-          <a class="sub-feat-card" href="articles.html?q=%E8%8B%8F%E4%B8%9C%E5%9D%A1">
-            <span class="sf-ic">📜</span>
-            <span class="sf-bd"><span class="sf-t">苏东坡与杭州</span><span class="sf-d">两任杭州官·苏堤春晓</span></span>
-            <span class="sf-ar">›</span>
-          </a>
-          <a class="sub-feat-card" href="articles.html?q=%E7%99%BD%E5%B1%85%E6%98%93">
-            <span class="sf-ic">🖋️</span>
-            <span class="sf-bd"><span class="sf-t">白居易治杭</span><span class="sf-d">钱塘湖春行·白堤往事</span></span>
-            <span class="sf-ar">›</span>
-          </a>
-          <a class="sub-feat-card" href="articles.html?q=%E7%99%BD%E5%B8%85">
-            <span class="sf-ic">⚔️</span>
-            <span class="sf-bd"><span class="sf-t">秋瑾在杭州</span><span class="sf-d">"秋风秋雨愁煞人"</span></span>
-            <span class="sf-ar">›</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="sub-block">
-        <div class="sub-sec-ttl">📖 相关文章 <span class="sub-more" id="subArtCount"></span></div>
-        <div class="sub-arts" id="subArts"><div class="sub-empty">正在加载相关文章…</div></div>
-      </div>
-
-      <div class="sub-block">
-        <div class="sub-sec-ttl">🧭 相关频道</div>
-        <div class="sub-third" style="grid-template-columns:repeat(3,1fr)">
-          <a class="sub-third-card" href="history.html"><span class="sti">🏯</span><span class="stn">历史文化</span></a>
-          <a class="sub-third-card" href="museum.html"><span class="sti">🏛️</span><span class="stn">文博人文</span></a>
-          <a class="sub-third-card" href="travel.html"><span class="sti">🧭</span><span class="stn">旅游出行</span></a>
-        </div>
-      </div>
-    </div>
-
-    <div style="padding:0 16px;text-align:center">
-      <a href="index.html" class="sub-back">← 返回首页</a>
-    </div>
+    <!-- 面包屑 + 内容区由 JS 填充 -->
+    <div id="celebCrumb" class="sub-crumb"></div>
+    <div id="celebContent"></div>
   </div>
 
   <script src="js/app.js?v=20261018l"></script>
   <script>
     (function() {
+      var DATA = window.CELEBRITY_DATA || {};
+      var params = new URLSearchParams(location.search);
+      var detailId = params.get('id');
+      var content = document.getElementById('celebContent');
+      var crumb = document.getElementById('celebCrumb');
+
+      // ===== 详情视图 =====
+      if (detailId && DATA[detailId]) {
+        var d = DATA[detailId];
+        document.title = d.name + ' · 杭州名人 · 文博人文 · iHangzhou';
+        crumb.innerHTML = '<a href="index.html">首页</a>' +
+          '<span class="sep">/</span><a href="bowuguan.html">文博人文</a>' +
+          '<span class="sep">/</span><a href="celebrity.html">杭州名人</a>' +
+          '<span class="sep">/</span><b>' + d.name + '</b>';
+
+        var color = d.color || '#7c3aed';
+        var h = '<div class="celeb-detail">' +
+          '<div class="celeb-d-hero" style="background:linear-gradient(135deg,' + color + 'dd,' + color + '99)">' +
+            '<h1><span class="hero-emoji">👤</span> ' + d.name + '</h1>' +
+            '<div class="celeb-d-sub">' + (d.title || d.desc || '') + '</div>' +
+            '<div class="celeb-d-meta">' + (d.era || '') + ' · ' + (d.birthplace || '') + '</div>' +
+          '</div>' +
+          '<div class="celeb-d-body">';
+
+        // 名句
+        if (d.quote) {
+          h += '<div class="celeb-d-quote">「' + d.quote + '」</div>';
+        }
+
+        // 生平
+        if (d.bio) {
+          h += '<div class="celeb-d-section"><h3>📋 人物简介</h3><p class="celeb-d-text">' + d.bio + '</p></div>';
+        }
+
+        // 故事
+        if (d.story) {
+          h += '<div class="celeb-d-section"><h3>📖 生平故事</h3><p class="celeb-d-text">' + d.story + '</p></div>';
+        }
+
+        // 杭州故事
+        if (d.hangzhouStory) {
+          h += '<div class="celeb-d-section"><h3>🏞️ 杭州情缘</h3><p class="celeb-d-text">' + d.hangzhouStory + '</p></div>';
+        }
+
+        // 相关景点/纪念地
+        if (d.monuments && d.monuments.length) {
+          h += '<div class="celeb-d-section"><h3>📍 相关景点 / 纪念地</h3><div class="celeb-d-monuments">';
+          d.monuments.forEach(function(m) {
+            h += '<a class="celeb-d-monument" href="articles.html?q=' + encodeURIComponent(m) + '">' + m + '</a>';
+          });
+          h += '</div></div>';
+        }
+
+        // 相关文章 + 高德入口
+        var articlesUrl = 'articles.html?q=' + encodeURIComponent(d.name);
+        var amapUrl = 'https://uri.amap.com/marker?position=&name=' + encodeURIComponent(d.name + ' 杭州');
+        h += '<div class="celeb-d-actions">' +
+          '<a class="celeb-d-btn articles" href="' + articlesUrl + '">📖 看相关文章</a>' +
+          '<a class="celeb-d-btn amap" href="' + amapUrl + '" target="_blank" rel="noopener">📍 高德地图</a>' +
+        '</div>';
+
+        h += '<a href="celebrity.html" class="sub-back">← 返回杭州名人</a>';
+        h += '</div></div>';
+        content.innerHTML = h;
+        return;
+      }
+
+      // ===== 列表视图 =====
+      document.title = '杭州名人 · iHangzhou';
+      crumb.innerHTML = '<a href="index.html">首页</a>' +
+        '<span class="sep">/</span><a href="bowuguan.html">文博人文</a>' +
+        '<span class="sep">/</span><b>杭州名人</b>';
+
+      var keys = Object.keys(DATA);
+      var h = '<div class="sub-hero">' +
+        '<h1><span class="hero-icon">👤</span> 杭州名人</h1>' +
+        '<p>白居易 · 苏东坡 · 林徽因 · 章太炎 · 更多名人故居诗作为证</p>' +
+      '</div>' +
+      '<div class="sub-body">' +
+        '<div class="sub-block">' +
+          '<div class="sub-sec-ttl">📂 全部名人 <span class="sub-more">' + keys.length + ' 位</span></div>' +
+          '<div class="sub-third">';
+
+      // 按名人 ID 顺序渲染卡片
+      keys.forEach(function(k) {
+        var v = DATA[k];
+        h += '<a class="sub-third-card" href="celebrity.html?id=' + k + '">' +
+          '<span class="sti">👤</span>' +
+          '<span class="stn">' + v.name + '</span>' +
+          '<span class="std">' + v.desc + '</span>' +
+        '</a>';
+      });
+
+      h += '</div></div>' +
+        '<div class="sub-block">' +
+          '<div class="sub-sec-ttl">📖 相关文章 <span class="sub-more" id="subArtCount"></span></div>' +
+          '<div class="sub-arts" id="subArts"><div class="sub-empty">正在加载相关文章…</div></div>' +
+        '</div>' +
+        '<div class="sub-block">' +
+          '<div class="sub-sec-ttl">🧭 相关频道</div>' +
+          '<div class="sub-third" style="grid-template-columns:repeat(3,1fr)">' +
+            '<a class="sub-third-card" href="history.html"><span class="sti">🏯</span><span class="stn">历史文化</span></a>' +
+            '<a class="sub-third-card" href="bowuguan.html"><span class="sti">🏛️</span><span class="stn">文博人文</span></a>' +
+            '<a class="sub-third-card" href="travel.html"><span class="sti">🧭</span><span class="stn">旅游出行</span></a>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="padding:0 16px;text-align:center">' +
+        '<a href="index.html" class="sub-back">← 返回首页</a>' +
+      '</div>';
+      content.innerHTML = h;
+
+      // 加载相关文章
       var KW = ["白居易","苏东坡","林徽因","章太炎","秋瑾","于谦","陆游","名人","故居","杭州文化","人文"];
       var countEl = document.getElementById('subArtCount');
       var box = document.getElementById('subArts');
@@ -149,7 +222,7 @@
           var top = scored.slice(0, 12);
           if (countEl) countEl.textContent = top.length ? '共 ' + scored.length + ' 篇匹配' : '';
           if (!top.length) {
-            box.innerHTML = '<div class="sub-empty">暂无匹配文章，试试上方子栏目入口</div>';
+            box.innerHTML = '<div class="sub-empty">暂无匹配文章，试试上方名人卡片</div>';
             return;
           }
           box.innerHTML = top.map(function(o) {

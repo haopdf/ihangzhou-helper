@@ -184,7 +184,34 @@ print(r.json()["data"])
 ---
 ## 申请 API Key
 
-联系管理员获取 `api_key`。每个 key 带以下属性：
+### 首次使用（管理员操作）
+
+1. 在 Supabase Dashboard → SQL Editor 执行 `scripts/supabase-schema.sql` 建表
+2. 执行 `scripts/init-api-key.sql` 生成初始 API Key
+3. 从执行结果中保存输出的 Key（格式：`ihz_xxx...`，只显示一次）
+
+### 一键发布脚本
+
+```bash
+# 设置 key
+export IHZ_API_KEY="ihz_your_key_here"
+
+# 新增文章（自动进入 pending 状态）
+python scripts/publish.py article "文章标题" content.md "分类"
+
+# 新增关键词
+python scripts/publish.py keyword "关键词" "分类"
+
+# 审核发布（需 admin key）
+python scripts/publish.py approve "文章标题"
+
+# 本地测试时设置 base URL
+export IHZ_API_BASE="http://localhost:3000/api"
+```
+
+### Key 属性说明
+
+每个 key 带以下属性：
 - `name`: 调用方名称
 - `role`: 权限角色（`admin` / `writer` / `readonly`）
 - `rate_limit`: 每分钟请求数上限

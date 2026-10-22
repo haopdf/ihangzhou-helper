@@ -9,7 +9,7 @@ const path = require('path');
 const EXISTING_PAGES = {
   travel: 'travel.html',
   food: 'food.html',
-  culture: 'museum.html',
+  culture: 'bowuguan.html',
   banshi: 'banshi.html',
   zhaopin: 'zhaopin.html',
   news: 'articles.html',
@@ -32,7 +32,7 @@ const EXISTING_SUB_PAGES = {
   '早餐': 'breakfast.html',
   '甜品': 'dessert.html',
   '龙井茶': 'tea.html',
-  '博物馆': 'museum.html',
+  '博物馆': 'bowuguan.html',
   '历史人文': 'history.html',
   '杭州名人': 'celebrity.html',
   '杭州故事': 'story.html',

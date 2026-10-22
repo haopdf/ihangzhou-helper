@@ -34,7 +34,7 @@ def fix_channel_file(filepath):
 channel_files = [
     'banshi.html', 'traffic.html', 'food.html', 'laozihao.html',
     'celebrity.html', 'history.html', 'internet.html', 'zhaopin.html',
-    'street.html', 'weekend.html', 'museum.html', 'coffee.html'
+    'street.html', 'weekend.html', 'bowuguan.html', 'coffee.html'
 ]
 
 fixed = []

@@ -474,6 +474,19 @@
       background: linear-gradient(135deg, #2962ff, #1e40af);
       color: #fff;
     }
+    .p-cards-btn.articles {
+      background: linear-gradient(135deg, #059669, #047857);
+      color: #fff;
+    }
+    .p-cards-desc-box {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      padding: 10px;
+      background: var(--bg-alt);
+      border-radius: 8px;
+    }
     .p-cards-close {
       width: 100%;
       padding: 10px;
@@ -870,14 +883,20 @@ document.getElementById('listView').style.display = 'none';
         if (!item) return;
         var name = item.getAttribute('data-name');
         var district = item.getAttribute('data-district');
+        var desc = item.querySelector('.p-cards-desc');
+        var descText = desc ? desc.textContent.trim() : '';
         if (!name) return;
-        // 弹详情：高德导航 + 百度攻略
+        // 弹详情：高德导航 + 百度攻略 + 站内相关文章
         var amap = 'https://uri.amap.com/marker?position=&name=' + encodeURIComponent(district + name);
         var baidu = 'https://www.baidu.com/s?wd=' + encodeURIComponent(district + name + ' 攻略');
+        var articlesUrl = 'articles.html?q=' + encodeURIComponent(name);
+        var descHtml = descText ? '<div class="p-cards-desc-box">' + descText + '</div>' : '';
         var html = '<div class="p-cards-overlay" onclick="if(event.target===this)this.remove()">' +
           '<div class="p-cards-card">' +
             '<div class="p-cards-title">' + name + '</div>' +
             '<div class="p-cards-subtitle">' + district + '</div>' +
+            descHtml +
+            '<a class="p-cards-btn articles" href="' + articlesUrl + '">📖 站内相关文章</a>' +
             '<a class="p-cards-btn amap" href="' + amap + '" target="_blank" rel="noopener">📍 高德地图导航</a>' +
             '<a class="p-cards-btn baidu" href="' + baidu + '" target="_blank" rel="noopener">🔍 百度搜攻略</a>' +
             '<button class="p-cards-close" onclick="this.closest(\'.p-cards-overlay\').remove()">关闭</button>' +

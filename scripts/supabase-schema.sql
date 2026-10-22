@@ -67,13 +67,31 @@ ALTER TABLE articles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE keywords ENABLE ROW LEVEL SECURITY;
 ALTER TABLE api_keys  ENABLE ROW LEVEL SECURITY;
 
--- 已登录读者可查看已发布 articles
+-- 已登录读者可查看已发布 articles（幂等）
+DROP POLICY IF EXISTS articles_select_policy ON articles;
 CREATE POLICY articles_select_policy ON articles
   FOR SELECT USING (status = 'published');
 
--- 仅 service_role 可写
+-- 仅 service_role 可写（幂等）
+DROP POLICY IF EXISTS articles_insert_policy ON articles;
 CREATE POLICY articles_insert_policy ON articles
   FOR INSERT WITH CHECK (true);
 
+DROP POLICY IF EXISTS articles_update_policy ON articles;
 CREATE POLICY articles_update_policy ON articles
   FOR UPDATE USING (true);
+
+-- keywords 表 RLS（幂等）
+DROP POLICY IF EXISTS keywords_select_policy ON keywords;
+CREATE POLICY keywords_select_policy ON keywords
+  FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS keywords_insert_policy ON keywords;
+CREATE POLICY keywords_insert_policy ON keywords
+  FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS keywords_update_policy ON keywords;
+CREATE POLICY keywords_update_policy ON keywords
+  FOR UPDATE USING (true);
+
+-- api_keys 表 RLS（仅 service_role 读写，客户端不直连）

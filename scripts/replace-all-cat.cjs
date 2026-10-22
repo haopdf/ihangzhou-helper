@@ -10,7 +10,7 @@ const subDir = path.join(rootDir, 'sub');
 const CAT_HOME = {
   travel:   'travel.html',
   food:     'food.html',
-  culture:  'museum.html',
+  culture:  'bowuguan.html',
   banshi:   'banshi.html',
   zhaopin:  'zhaopin.html',
   news:     'articles.html',
@@ -41,7 +41,7 @@ const SUB_MAP = {
   'food|甜品': 'dessert.html',
   'food|龙井茶': 'tea.html',
   'food|茶馆': 'chaguan.html',
-  'culture|博物馆': 'museum.html',
+  'culture|博物馆': 'bowuguan.html',
   'culture|历史人文': 'history.html',
   'culture|杭州名人': 'celebrity.html',
   'culture|杭州故事': 'story.html',

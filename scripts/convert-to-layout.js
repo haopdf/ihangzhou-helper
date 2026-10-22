@@ -9,7 +9,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const pages = [
   'food.html', 'laozihao.html', 'traffic.html', 'street.html',
-  'museum.html', 'coffee.html', 'celebrity.html', 'history.html',
+  'bowuguan.html', 'coffee.html', 'celebrity.html', 'history.html',
   'internet.html', 'zhaopin.html', 'weekend.html', 'channel.html'
 ];
 

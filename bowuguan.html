@@ -106,9 +106,8 @@
       if (detailId && DATA[detailId]) {
         var data = DATA[detailId];
         document.title = data.name + ' · 博物馆 · 文博人文 · iHangzhou';
-        crumb.innerHTML = '<a href="index.html">首页</a><span class="sep">/</span><a href="museum.html">文博人文</a><span class="sep">/</span><a href="museum.html?sublist=museum">博物馆</a><span class="sep">/</span><b>' + data.name + '</b>';
+        crumb.innerHTML = '<a href="index.html">首页</a><span class="sep">/</span><a href="bowuguan.html">文博人文</a><span class="sep">/</span><a href="bowuguan.html?sublist=museum">博物馆</a><span class="sep">/</span><b>' + data.name + '</b>';
         var h = '<div class="mu-detail"><div class="mu-d-hero">';
-        h += '<div style="font-size:48px;line-height:1;margin-bottom:8px">🏛️</div>';
         h += '<h1>' + data.name + '</h1>';
         h += '<div class="mu-d-hero-sub">' + (data.subtitle || '') + '</div></div>';
         h += '<div class="mu-d-body">';
@@ -132,7 +131,7 @@
           });
           h += '</div>';
         }
-        h += '<a href="museum.html?sublist=museum" class="sub-back">← 返回博物馆列表</a>';
+        h += '<a href="bowuguan.html?sublist=museum" class="sub-back">← 返回博物馆列表</a>';
         h += '</div></div>';
         content.outerHTML = h;
         return;
@@ -142,12 +141,12 @@
       if (sublist === 'museum') {
         var keys = Object.keys(DATA);
         document.title = '博物馆 · 文博人文 · iHangzhou';
-        crumb.innerHTML = '<a href="index.html">首页</a><span class="sep">/</span><a href="museum.html">文博人文</a><span class="sep">/</span><b>博物馆</b>';
+        crumb.innerHTML = '<a href="index.html">首页</a><span class="sep">/</span><a href="bowuguan.html">文博人文</a><span class="sep">/</span><b>博物馆</b>';
         var h = '<h3 style="font-size:15px;font-weight:600;margin:0 0 14px">🏛️ 全部博物馆 <span style="font-size:12px;font-weight:400;color:var(--text-muted);margin-left:8px">' + keys.length + ' 座</span></h3>';
         h += '<div class="mu-cards">';
         keys.forEach(function(k) {
           var v = DATA[k];
-          h += '<a class="mu-card" href="museum.html?id=' + k + '">';
+          h += '<a class="mu-card" href="bowuguan.html?id=' + k + '">';
           h += '<div class="mu-card-ico">🏛️</div>';
           h += '<div class="mu-card-name">' + v.name + '</div>';
           h += '<div class="mu-card-desc">' + v.subtitle + '</div></a>';
@@ -160,7 +159,7 @@
       // 默认视图：8 个子分类
       document.title = '文博人文 · iHangzhou';
       var subs = [
-        { k: 'museum', ic: '🏛️', n: '博物馆', d: '浙江省博物馆 · 丝绸 · 茶叶 · 良渚', url: 'museum.html?sublist=museum' },
+        { k: 'museum', ic: '🏛️', n: '博物馆', d: '浙江省博物馆 · 丝绸 · 茶叶 · 良渚', url: 'bowuguan.html?sublist=museum' },
         { k: 'lishi', ic: '📜', n: '历史人文', d: '南宋史 · 运河史 · 城防与民居', url: 'history.html' },
         { k: 'mingren', ic: '👤', n: '杭州名人', d: '白居易 · 苏轼 · 岳飞 · 李清照', url: 'celebrity.html' },
         { k: 'guzhen', ic: '🏯', n: '古镇古建', d: '乌镇 · 南塘 · 历史建筑保护', url: 'guzhen.html' },
@@ -177,7 +176,7 @@
       var grid = document.createElement('div');
       grid.className = 'sub-third';
       subs.forEach(function(s) {
-        var url = s.url || ('museum.html?sublist=' + s.k);
+        var url = s.url || ('bowuguan.html?sublist=' + s.k);
         var a = document.createElement('a');
         a.className = 'sub-third-card';
         a.href = url;
@@ -194,7 +193,7 @@
       var featWrap = document.createElement('div');
       featWrap.className = 'sub-feat';
       [
-        { ic: '🏛️', t: '浙江省博物馆', d: '免费，孤山馆区与武林馆区', url: 'museum.html?id=zjbwg' },
+        { ic: '🏛️', t: '浙江省博物馆', d: '免费，孤山馆区与武林馆区', url: 'bowuguan.html?id=zjbwg' },
         { ic: '📜', t: '南宋历史', d: '南宋定都杭州的不解之缘', url: 'history.html' },
         { ic: '⛩️', t: '灵隐寺', d: '千年古刹，禅宗圣地', url: 'temple.html' }
       ].forEach(function(f) {
