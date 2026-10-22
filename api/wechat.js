@@ -20,23 +20,22 @@ const DEFAULT_KEYWORDS = require('../data/cms.json').wechatKeywords || [];
 // ========== 关键词数据缓存（10 秒内复用，减少 Blob 调用） ==========
 let KW_CACHE = { data: null, expires: 0 };
 
-// 从 Supabase keywords 表读取关键词并转换为 wechat 匹配格式
+// 安全地从 Supabase 读取关键词（任何错误都返回 null，不向上传播）
 async function loadKeywordsFromSupabase() {
   try {
-    const { hasDB, query } = await import('../lib/db.js');
-    if (!hasDB) return null;
-    const rows = await query('keywords', { limit: 500 });
+    const db = await import('../lib/db.js');
+    if (!db.hasDB) return null;
+    const rows = await db.query('keywords', { limit: 500 });
     if (!rows || !rows.length) return null;
-    // 转换为 wechat.js 匹配格式: { keyword, type, reply, ... }
     return rows.map(r => ({
       keyword: r.word,
       aliases: [],
       type: 'text',
-      reply: `「${r.word}」相关内容正在整理中，敬请期待。点击查看更多：https://www.ihangzhou.net/articles.html?q=${encodeURIComponent(r.word)}`,
+      reply: '「' + r.word + '」相关内容正在整理中。点击查看更多：https://www.ihangzhou.net/articles.html?q=' + encodeURIComponent(r.word),
       source: 'supabase',
     }));
   } catch (e) {
-    console.error('loadKeywordsFromSupabase error:', e.message);
+    console.error('[WX] Supabase FB fail (silent):', e.message);
     return null;
   }
 }
@@ -44,6 +43,8 @@ async function loadKeywordsFromSupabase() {
 async function loadKeywords() {
   const now = Date.now();
   if (KW_CACHE.data && KW_CACHE.expires > now) return KW_CACHE.data;
+
+  // 路径 1: 从 Blob 读取
   try {
     const token = process.env.BLOB_READ_WRITE_TOKEN;
     if (token) {
@@ -58,26 +59,33 @@ async function loadKeywords() {
           if (r.value) chunks.push(r.value);
         }
         var text = Buffer.concat(chunks).toString('utf-8');
-        var data = JSON.parse(text);
-        // 合并 Supabase 关键词（防止 Blobs 漏同步）
-        const supa = await loadKeywordsFromSupabase();
-        if (supa && supa.length) {
-          const existingWords = new Set((data || []).map(k => (k.keyword || '').toLowerCase()));
-          supa.forEach(k => {
-            if (!existingWords.has(k.keyword.toLowerCase())) data.push(k);
-          });
-        }
+        var data = JSON.parse(text) || [];
+        // 合并 Supabase 关键词（静默，失败不影响）
+        try {
+          const supa = await loadKeywordsFromSupabase();
+          if (supa && supa.length) {
+            var existingWords = new Set(data.map(k => (k.keyword || '').toLowerCase()));
+            supa.forEach(k => {
+              if (!existingWords.has(k.keyword.toLowerCase())) data.push(k);
+            });
+          }
+        } catch (_) { /* ignore */ }
         KW_CACHE = { data: data, expires: now + 10000 };
         return data;
       }
     }
-  } catch (e) { console.error('loadKeywords error:', e.message); }
-  // 兜底：Supabase → 本地 cms.json
+  } catch (e) {
+    console.error('[WX] Blob read error:', e.message);
+  }
+
+  // 路径 2: Supabase 兜底
   const supa = await loadKeywordsFromSupabase();
   if (supa && supa.length) {
     KW_CACHE = { data: supa, expires: now + 5000 };
     return supa;
   }
+
+  // 路径 3: 本地默认关键词
   KW_CACHE = { data: DEFAULT_KEYWORDS, expires: now + 2000 };
   return DEFAULT_KEYWORDS;
 }
