@@ -1,6 +1,6 @@
 // 杭州地铁数据 API — 12 条线（1-19 号线）+ 票价规则
 // 缓存 1 周（s-maxage=604800）
-module.exports = (req, res) => {
+export default (req, res) => {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.setHeader('Cache-Control', 'public, s-maxage=604800, max-age=604800');
 

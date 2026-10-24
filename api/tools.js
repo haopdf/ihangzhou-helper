@@ -1,7 +1,10 @@
 // Vercel Serverless Function - 工具类接口合集
 // 通过 ?action=xxx 区分不同功能
 
-const { get, put } = require('@vercel/blob');
+import { createRequire } from 'node:module';
+const __require = createRequire(import.meta.url);
+function reqJson(rel) { try { return __require(rel); } catch (e) { return null; } }
+import { get, put } from '@vercel/blob';
 const ADMIN_PASSWORD = process.env.CMS_ADMIN_PASSWORD || 'ihangzhou2024';
 const FEEDBACK_BLOB = 'feedbacks.json';
 
@@ -303,7 +306,7 @@ async function handleKeywords(req, res) {
     let kws = await readKeywordsBlob();
     if (!kws) {
       // 从本地文件兜底
-      try { kws = require('../articles/keywords.json'); } catch (e) { kws = []; }
+      try { kws = reqJson('../articles/keywords.json'); } catch (e) { kws = []; }
     }
     return res.status(200).json({ success: true, data: kws, total: kws.length });
   }
@@ -378,7 +381,7 @@ async function handleKeywords(req, res) {
 }
 
 // ===== 主入口 =====
-module.exports = async (req, res) => {
+export default async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');

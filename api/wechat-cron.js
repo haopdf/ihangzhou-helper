@@ -3,7 +3,7 @@
 // 功能：获取草稿箱标题列表 → 存储到 Vercel Blob（wechat-topics.json）
 // 注意：只拉取标题和摘要，不拉取全文，用于选题参考
 
-const { get, put } = require('@vercel/blob');
+import { get, put } from '@vercel/blob';
 
 const WX_APPID = process.env.WX_APPID;
 const WX_SECRET = process.env.WX_SECRET;
@@ -60,7 +60,7 @@ function extractTopics(drafts) {
   });
 }
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   // 只允许 GET 请求和 Vercel Cron 调用
   // Vercel Cron 会带 CRON_SECRET header
   const cronSecret = process.env.CRON_SECRET;

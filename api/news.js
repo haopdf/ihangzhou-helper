@@ -1,6 +1,6 @@
 // 杭州本地资讯聚合 API (Vercel Serverless)
 // 升级版：返回「今日要闻」+「明日预告」+「本周提醒」三段式，制造每日回访钩子
-module.exports = async (req, res) => {
+export default async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cache-Control', 's-maxage=1800, stale-while-revalidate=3600'); // 30 分钟缓存
 

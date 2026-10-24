@@ -1,7 +1,7 @@
 // iHangzhou AI 杭州本地助手 - Vercel Serverless
 // 调用阿里云百炼（DashScope）OpenAI 兼容模式
 // 环境变量：DASHSCOPE_API_KEY (在 Vercel Dashboard 配置)
-module.exports = async (req, res) => {
+export default async (req, res) => {
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');

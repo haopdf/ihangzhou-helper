@@ -1,7 +1,10 @@
 // Vercel Serverless Function - CMS 内容管理 API（使用 Vercel Blob 持久化）
 // 需要配置: BLOB_READ_WRITE_TOKEN（在 Vercel 创建 Blob Storage 后自动获得）
 
-const { put, get, list, del, head } = require('@vercel/blob');
+import { createRequire } from 'node:module';
+const __require = createRequire(import.meta.url);
+function reqJson(rel) { try { return __require(rel); } catch (e) { return null; } }
+import { put, get, list, del, head } from '@vercel/blob';
 
 const ADMIN_PASSWORD = process.env.CMS_ADMIN_PASSWORD || 'ihz2024';
 const SITE_ORIGIN = process.env.SITE_ORIGIN || 'https://www.ihangzhou.net';
@@ -48,7 +51,7 @@ function extractDataFromAppJs(content) {
 }
 
 // 备用默认内容
-const DEFAULT_CMS = require('../data/cms.json');
+const DEFAULT_CMS = reqJson('../data/cms.json') || {};
 
 const BLOB_KEY = 'cms-data.json';
 
@@ -126,7 +129,7 @@ async function readKeywords() {
   return DEFAULT_CMS.wechatKeywords || [];
 }
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');

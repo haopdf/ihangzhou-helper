@@ -1,6 +1,6 @@
 // 杭州三级医院目录 API (Vercel Serverless)
 // 静态数据，包含杭州主要三甲及三级医院，含预约挂号入口
-module.exports = async (req, res) => {
+export default async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate=172800'); // 1天缓存
   res.status(200).json({

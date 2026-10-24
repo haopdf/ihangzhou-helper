@@ -1,10 +1,13 @@
 // Vercel Serverless Function - 微信公众号回调接口（增强版）
 // 功能：URL 验证 / 消息回调 / 智能关键词匹配 / 图文回复 / 菜单同步
 // 依赖：@vercel/blob（读取关键词数据，独立存储，快 100 倍）
-const { get, put } = require('@vercel/blob');
+import { createRequire } from 'node:module';
+const __require = createRequire(import.meta.url);
+function reqJson(rel) { try { return __require(rel); } catch (e) { return null; } }
+import { get, put } from '@vercel/blob';
 // 配置：环境变量 WECHAT_TOKEN（签名验证）、WX_APPID/WX_SECRET（菜单同步可选）
 
-const crypto = require('crypto');
+import crypto from 'node:crypto';
 
 const WECHAT_TOKEN = process.env.WECHAT_TOKEN || 'ihangzhou2024';
 const DEFAULT_WELCOME = {
@@ -15,7 +18,7 @@ const DEFAULT_WELCOME = {
   url: 'https://www.ihangzhou.net/'
 };
 const HELP_COMMANDS = ['帮助', '?', '？', 'help', 'h', 'H', '指令', '菜单'];
-const DEFAULT_KEYWORDS = require('../data/cms.json').wechatKeywords || [];
+const DEFAULT_KEYWORDS = (reqJson('../data/cms.json') || {}).wechatKeywords || [];
 
 // ========== 关键词数据缓存（10 秒内复用，减少 Blob 调用） ==========
 let KW_CACHE = { data: null, expires: 0 };
@@ -74,7 +77,7 @@ async function loadCMS() {
       }
     }
   } catch (e) { console.error('loadCMS error:', e.message); }
-  const fallback = require('../data/cms.json');
+  const fallback = reqJson('../data/cms.json');
   CMS_CACHE = { data: fallback, expires: now + 1000 };
   return fallback;
 }
@@ -291,7 +294,7 @@ async function handleMessage(msg, keywords) {
 }
 
 // ========== Vercel Serverless Function 入口 ==========
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -369,4 +372,4 @@ module.exports = async function handler(req, res) {
 };
 
 // 导出内部函数用于测试（不影响运行时）
-module.exports._test = { handleMessage, matchKeyword, parseXML, genReply, genHelpReply, genNewsReply, genTextReply };
+export const _test = { handleMessage, matchKeyword, parseXML, genReply, genHelpReply, genNewsReply, genTextReply };
