@@ -223,11 +223,8 @@
 
       function renderThirdPage() {
         var dest = third[2] || '';
-        // 若三级目标只是笼统的栏目主页（如 banshi.html），降级为按三级名搜索文章，避免「点哪个都回同一个页」
-        if (dest && !/[?&]id=/i.test(dest) && dest === cat.home) {
-          dest = 'articles.html?q=' + encodeURIComponent(third[1]);
-        }
-        // 站内栏目页（如 life.html）但无 id 参数 → 自动附加 ?q= 让目标页按名筛选
+        // 站内栏目页（如 life.html）但无 id 参数 → 自动附加 ?q= 让目标页按名筛选，
+        // 避免「点哪个三级都回同一个笼统主页」
         if (dest && !/^#act:|^https?:|\?/.test(dest)) {
           var knownFilterPages = ['life.html','scenic.html','temple.html','chaguan.html','tea.html',
             'coffee.html','dessert.html','night-market.html','laozihao.html','zhoumo.html','route.html',
@@ -404,12 +401,6 @@
               '<span class="cs-d">' + esc(s.d) + '</span></span>' +
               '<span class="cs-ar">›</span></a>';
           }).join('') + '</div></div>';
-
-        // 栏目主页入口
-        if (cat.home) {
-          html += '<div class="cat-block"><a class="cat-home-btn" href="' + esc(cat.home) + '" style="--ci:' + cat.c + '">' +
-            '进入「' + esc(cat.n) + '」专题主页 →</a></div>';
-        }
 
         // 全部栏目切换
         html += '<div class="cat-block"><div class="cat-sec-ttl">🗂️ 切换栏目</div><div class="cat-subnav">' +
