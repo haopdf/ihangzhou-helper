@@ -4446,6 +4446,56 @@ function init() {
   window.getServiceIcon = getServiceIcon;
   window._getData = function () { return DATA; };
   window._handleAction = handleAction;
+
+  // 频道专题页（banshi/food/history/street 等设置 IZ_SKIP_APP_INIT 的页面）专用初始化：
+  // 这些页面不执行完整 init()，bindEvents() 不会跑，导致两个问题：
+  //   ① #serviceGrid 无点击委托，无 url 的 <div class="sitem"> 点击完全无反应；
+  //   ② modal 打开后关闭按钮/遮罩/ESC 均无绑定，弹窗关不掉。
+  // 页面初始化时显式调用本函数一次性补上。行为与 bindEvents() 内一致：
+  // <a> 不拦截（原生跳转），<div> 走 handleClick（action/url/详情弹窗）。
+  window.IZ_INIT_CHANNEL_PAGE = function () {
+    // ① 服务网格点击委托
+    var grid = document.getElementById('serviceGrid');
+    if (grid && !grid._izBound) {
+      grid._izBound = true;
+      grid.addEventListener('click', function (e) {
+        var item = e.target.closest('.sitem');
+        if (!item) return;
+        // 点击统计（与首页行为一致）
+        var btnName = item.dataset.name || '';
+        var btnCat = item.dataset.cat || '';
+        if (!btnName) {
+          var nmEl = item.querySelector('.sname');
+          if (nmEl) btnName = nmEl.textContent.replace(/\s*\[.*?\]\s*$/, '').trim();
+        }
+        if (btnName && window.iHangzhouTrack) {
+          window.iHangzhouTrack.click(btnCat || '频道', btnName, btnName, '');
+        }
+        // <a>标签由浏览器原生处理跳转，不拦截
+        if (item.tagName === 'A') return;
+        handleClick(item);
+      });
+    }
+    // ② modal 关闭三途径（按钮 / 点遮罩 / ESC）
+    var closeBtn = document.getElementById('modalClose');
+    if (closeBtn && !closeBtn._izBound) {
+      closeBtn._izBound = true;
+      closeBtn.addEventListener('click', closeModal);
+    }
+    var overlay = document.getElementById('modalOverlay');
+    if (overlay && !overlay._izBound) {
+      overlay._izBound = true;
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+    }
+    if (!document._izEscBound) {
+      document._izEscBound = true;
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeModal();
+      });
+    }
+  };
   window.openUrl = openUrl;
   window.showGold = showGold;
   window.showYaohao = showYaohao;

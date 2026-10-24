@@ -433,6 +433,8 @@
       } else {
         renderChannel();
       }
+      // 频道页专用初始化（网格点击 + modal 关闭）：app.js 完整 init 被 IZ_SKIP_APP_INIT 跳过，bindEvents() 不执行，需显式调用
+      if (window.IZ_INIT_CHANNEL_PAGE) window.IZ_INIT_CHANNEL_PAGE();
     })();
   </script>
 </body>
