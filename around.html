@@ -295,39 +295,9 @@
 <link rel="stylesheet" href="css/channel.css?v=20261018l">
 </head>
 <body>
-
-  <!-- 顶部栏（同首页结构，保证导航一致性）-->
-  <header class="topbar" id="topbar">
-    <a href="index.html" class="topbar-logo" style="text-decoration:none;">
-      <img class="logo-icon" src="images/logo-mark-96.png" alt="爱杭州" width="28" height="28">
-      <span class="logo-text">iHangzhou</span>
-    </a>
-    <div class="topbar-search">
-      <input type="text" id="searchInput" placeholder="搜索乌镇/莫干山/千岛湖..." autocomplete="off">
-      <button class="search-cancel" onclick="clearSearch()">✕</button>
-    </div>
-    <button class="topbar-settings" onclick="toggleSettings()" title="设置" aria-label="设置">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h9M19 8h2M3 16h3M13 16h8"/><circle cx="15" cy="8" r="2.6"/><circle cx="9.5" cy="16" r="2.6"/></svg>
-    </button>
-  </header>
-
-  <!-- 设置面板 -->
-  <div class="settings-overlay" id="settingsOverlay" onclick="toggleSettings()"></div>
-  <div class="settings-panel" id="settingsPanel">
-    <div class="settings-title"><span>⚙️ 设置</span><button class="settings-close" onclick="toggleSettings()" aria-label="关闭">✕</button></div>
-    <div class="settings-item">
-      <span class="settings-label">🌙 暗色模式</span>
-      <label class="settings-switch"><input type="checkbox" id="darkToggle" onchange="setDarkMode(this.checked)"><span class="switch-slider"></span></label>
-    </div>
-    <div class="settings-item">
-      <span class="settings-label">📱 关于本站</span>
-      <a href="articles.html" style="color:var(--primary);font-size:13px;text-decoration:none;font-weight:500;">iHangzhou 杭州生活助手</a>
-    </div>
-    <div class="settings-item">
-      <span class="settings-label">↩️ 返回首页</span>
-      <a href="index.html" style="color:var(--primary);font-size:13px;text-decoration:none;font-weight:500;">回到 iHangzhou →</a>
-    </div>
-  </div>
+  <script>
+    window.IHZ_PAGE = { title: "周边游攻略", icon: "🗺️", channelId: "around" };
+  </script>
 
   <!-- 主内容 -->
   <div class="page active">
