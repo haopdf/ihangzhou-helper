@@ -24,7 +24,7 @@
     window.IZ_SKIP_APP_THEME = true;
     window.IZ_SKIP_APP_INIT = true;
   </script>
-<style>:root{--primary:#1f7a5a;--primary-dark:#15603f}</style></head>
+<style>:root{--primary:#1f7a5a;--primary-dark:#15603f}.cat-dest{margin-left:-16px;margin-right:-16px}</style></head>
 
 <body>
   <div class="page active" id="pageCat">
@@ -66,8 +66,10 @@
   <script>
     /* ============================================
        栏目页渲染
-       ?c=travel             一级栏目页：hero + 二级栏目网格 + 热门文章
-       ?c=travel&s=景点门票   二级栏目页：hero + 三级入口 + 精选 + 相关文章
+       ?c=travel                    一级栏目页：hero + 二级栏目网格 + 热门文章
+       ?c=travel&s=景点门票          二级栏目页：hero + 三级入口 + 精选 + 相关文章
+       ?c=travel&s=景点门票&t=西湖十景 三级栏目页：hero + 目标页内容内嵌渲染 + 相关文章
+       （三级页即内容页：站内目标经同源 iframe 提取渲染结果注入本页，无跳转）
        ============================================ */
     (function () {
       'use strict';
@@ -200,6 +202,25 @@
       }
 
       /* ---------- 三级栏目页 ---------- */
+      /* 站内目标页的内容容器选择器：转述时提取目标页渲染后的内容注入本页 */
+      var DEST_SEL = {
+        'place.html': '#placeContainer', 'life.html': '#lfContainer', 'zhoubian.html': '#zbContainer',
+        'coffee.html': '#coffeeContent', 'night-market.html': '#nightMarketContainer',
+        'intangible.html': '#intangibleContainer', 'district.html': '#detailView',
+        'laozihao.html': '#detailContent', 'museum.html': '#detailContent',
+        'guzhen.html': '#guzhenContainer', 'xiangxiang.html': '#xxContainer', 'story.html': '#storyContainer',
+        'route.html': '#routeContainer', 'hangbang.html': '#hangbangContainer',
+        'breakfast.html': '#breakfastContainer', 'dessert.html': '#dessertContainer',
+        'chaguan.html': '#cgContainer', 'gujian.html': '#gjContainer', 'tushuguan.html': '#tsContainer',
+        'tide.html': '#tideContainer', 'tea.html': '#teaContainer', 'temple.html': '#templeContainer',
+        'zhoumo.html': '#zmContainer', 'articles.html': '#artList', 'scenic.html': '#scenicContent'
+      };
+      function destSelector(dest) {
+        var base = (dest.split('?')[0] || '').split('#')[0];
+        if (base === 'district.html') return /[?&]id=/i.test(dest) ? '#detailView' : '#listView';
+        return DEST_SEL[base] || '#pageChannel, .page.active';
+      }
+
       function renderThirdPage() {
         var dest = third[2] || '';
         // 若三级目标只是笼统的栏目主页（如 banshi.html），降级为按三级名搜索文章，避免「点哪个都回同一个页」
@@ -220,13 +241,9 @@
         }
         var html = '';
 
-        // 直达入口（保留该三级原本的目标）
-        if (dest && !/^#act:/.test(dest)) {
-          var ext = /^https?:/.test(dest);
-          var attrs = ext ? ' href="' + esc(dest) + '" target="_blank" rel="noopener"' : ' href="' + esc(dest) + '"';
-          html += '<div class="cat-block"><a class="cat-home-btn"' + attrs + ' style="--ci:' + cat.c + '">' +
-            '直达「' + esc(third[1]) + '」 →</a></div>';
-        }
+        // 本页正文：不再放「直达」跳转提示，直接在本页渲染目标页内容
+        html += '<div class="cat-block cat-dest" id="catDestBlock">' +
+          '<div class="cat-empty">正在加载「' + esc(third[1]) + '」…</div></div>';
 
         // 相关文章（以三级名 + 二级关键词联合匹配）
         html += '<div class="cat-block"><div class="cat-sec-ttl">📖 相关文章 <span class="cat-more" id="catArtCount"></span></div>' +
@@ -253,6 +270,124 @@
 
         body.innerHTML = html;
         loadArticles();
+        loadDestContent(dest);
+      }
+
+      /* ---------- 三级页目标内容加载 ----------
+         站内目标（place/scenic/banshi…）：隐藏 iframe 同源加载目标页，
+         提取其渲染后的内容容器注入本页——本页即内容页，无跳转、无“直达”提示。
+         外链 / #act: 功能入口：保留为可点击的入口按钮（无内容可内嵌）。 */
+      function loadDestContent(dest) {
+        var box = $('catDestBlock');
+        if (!box) return;
+        if (!dest) { box.parentNode.removeChild(box); return; }
+        if (/^#act:/.test(dest)) {
+          box.innerHTML = '<a class="cat-home-btn" href="' + esc(dest) + '" style="--ci:' + cat.c + '">' +
+            third[0] + ' ' + esc(third[1]) + '</a>';
+          return;
+        }
+        if (/^https?:/i.test(dest)) {
+          box.innerHTML = '<a class="cat-home-btn" href="' + esc(dest) + '" target="_blank" rel="noopener" style="--ci:' + cat.c + '">' +
+            third[0] + ' 前往「' + esc(third[1]) + '」 ↗</a>';
+          return;
+        }
+        transcludeDest(dest, box);
+      }
+
+      function transcludeDest(dest, box) {
+        var ifr = document.createElement('iframe');
+        ifr.setAttribute('aria-hidden', 'true');
+        ifr.setAttribute('tabindex', '-1');
+        ifr.style.cssText = 'position:fixed;left:-9999px;top:0;width:1280px;height:1800px;opacity:0;pointer-events:none;border:0;';
+        var settled = false;
+        function cleanup() { try { ifr.remove(); } catch (e) {} }
+        function fail() {
+          if (settled) return; settled = true; cleanup();
+          box.innerHTML = '<div class="cat-empty">「' + esc(third[1]) + '」内容加载失败，请稍后重试</div>' +
+            '<a class="cat-home-btn" href="' + esc(dest) + '" style="--ci:' + cat.c + '">直接打开「' + esc(third[1]) + '」 →</a>';
+        }
+        setTimeout(function () { if (!settled) fail(); }, 12000);
+        ifr.onload = function () {
+          var tries = 0;
+          (function poll() {
+            if (settled) return;
+            tries++;
+            var d = null;
+            try { d = ifr.contentDocument; } catch (e) { fail(); return; }
+            var main = d ? d.querySelector(destSelector(dest)) : null;
+            var txt = main ? (main.textContent || '').replace(/\s+/g, '') : '';
+            var busy = main ? /正在加载|加载中|加载失败/.test(main.textContent || '') : true;
+            if (main && txt.length > 8 && !busy) { extract(d, main); return; }
+            if (tries >= 60) { fail(); return; }
+            setTimeout(poll, 100);
+          })();
+        };
+        ifr.onerror = fail;
+        document.body.appendChild(ifr);
+        ifr.src = dest;
+
+        function extract(d, main) {
+          try {
+            // 1) 补齐目标页的样式表链接（如 channel.css，本页未加载）
+            var links = d.querySelectorAll('link[rel="stylesheet"]');
+            var mine = document.querySelectorAll('link[rel="stylesheet"]');
+            for (var i = 0; i < links.length; i++) {
+              var href = (links[i].getAttribute('href') || '').split('?')[0];
+              if (!href) continue;
+              var has = false;
+              for (var j = 0; j < mine.length; j++) {
+                if ((mine[j].getAttribute('href') || '').split('?')[0] === href) { has = true; break; }
+              }
+              if (!has) {
+                var lk = document.createElement('link');
+                lk.rel = 'stylesheet';
+                lk.href = links[i].getAttribute('href');
+                document.head.appendChild(lk);
+              }
+            }
+            // 2) 复制目标页内联样式；:root 变量改挂到包裹容器，避免污染本页配色
+            var rootVars = [], css = '';
+            var styles = d.querySelectorAll('style');
+            for (var s = 0; s < styles.length; s++) {
+              var t = styles[s].textContent || '';
+              t = t.replace(/:root\s*\{([^}]*)\}/g, function (m, body) {
+                body.split(';').forEach(function (decl) {
+                  var idx = decl.indexOf(':');
+                  if (idx > 0) rootVars.push(decl.slice(0, idx).trim() + ':' + decl.slice(idx + 1).trim());
+                });
+                return '';
+              });
+              css += t + '\n';
+            }
+            // 3) 克隆内容容器（保留 class/id 延续样式上下文），剥掉面包屑与脚本
+            var node = main.cloneNode(true);
+            var junk = node.querySelectorAll('script, nav.site-breadcrumb, .site-header, #appHeader, .app-footer, .site-footer, .ihz-toast, .toast');
+            for (var q = 0; q < junk.length; q++) {
+              if (junk[q].parentNode) junk[q].parentNode.removeChild(junk[q]);
+            }
+            // 4) 注入本页
+            box.innerHTML = '';
+            box.appendChild(node);
+            if (rootVars.length) {
+              var st = document.createElement('style');
+              st.textContent = '#catDestBlock{' + rootVars.join(';') + '}';
+              document.head.appendChild(st);
+            }
+            if (css.trim()) {
+              var st2 = document.createElement('style');
+              st2.textContent = css;
+              document.head.appendChild(st2);
+            }
+            // 5) 目标内容通常自带 hero/标题 → 收起本页 hero，避免双标题
+            if (node.querySelector('h1, .p-hero, .ch-hero, .place-hero, .p-name, [class*="hero"]')) {
+              var hero = $('catHero');
+              if (hero) hero.style.display = 'none';
+            }
+            // 6) 空内容兜底
+            if ((box.textContent || '').replace(/\s+/g, '').length < 8) { fail(); return; }
+            settled = true; cleanup();
+          } catch (e) { fail(); }
+        }
       }
       /* ---------- 一级栏目页 ---------- */
       function renderCatPage() {
