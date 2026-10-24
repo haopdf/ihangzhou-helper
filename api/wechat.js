@@ -170,10 +170,12 @@ function matchKeyword(userText, keywords) {
     }
   }
   // 3. 包含匹配（用户输入包含关键词或同义词）
+  // 单字符关键词（如数字快捷键 1-5）不做包含匹配：否则任何含数字的消息
+  // （如"zzqwxyz123"、房间号 502）都会误命中第一条数字关键词
   for (const kw of keywords) {
     const candidates = [kw.keyword, ...(kw.aliases || [])].filter(Boolean);
     for (const c of candidates) {
-      if (c && text.includes(c.toLowerCase())) return kw;
+      if (c && c.length >= 2 && text.includes(c.toLowerCase())) return kw;
     }
   }
   return null;
