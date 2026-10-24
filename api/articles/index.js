@@ -3,8 +3,8 @@ import { hasDB, query } from '../../lib/db.js';
 /**
  * GET /api/articles?q=xxx&cat=xxx&page=1&limit=20&status=published
  */
-export default async function handler(req) {
-  const url = new URL(req.url);
+export default async function handler(req, res) {
+  const url = new URL(req.url, 'https://www.ihangzhou.net');
   const q      = url.searchParams.get('q')      || '';
   const cat    = url.searchParams.get('cat')    || '';
   const page   = Math.max(1, parseInt(url.searchParams.get('page')  || '1'));
@@ -29,19 +29,19 @@ export default async function handler(req) {
 
     const rows = await query('articles', opt);
 
-    return new Response(JSON.stringify({
+    return res.status(200).json({
       ok: true,
       data: rows,
       page, limit,
       total: rows.length, // In production: SELECT count(*) first
       mode: 'supabase'
-    }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    });
   }
 
   // --- JSON fallback mode ---
   try {
     const fs = await import('fs');
-    const p = new URL('../../../articles/index.json', import.meta.url);
+    const p = new URL('../../articles/index.json', import.meta.url);
     const raw = fs.readFileSync(p, 'utf8');
     let rows = JSON.parse(raw);
 
@@ -59,15 +59,15 @@ export default async function handler(req) {
     const total = rows.length;
     const paged = rows.slice(offset, offset + limit);
 
-    return new Response(JSON.stringify({
+    return res.status(200).json({
       ok: true,
       data: paged,
       page, limit, total,
       mode: 'json-fallback'
-    }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    });
   } catch (e) {
-    return new Response(JSON.stringify({
+    return res.status(500).json({
       ok: false, error: 'load failed: ' + e.message
-    }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    });
   }
 }

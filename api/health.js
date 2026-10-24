@@ -4,7 +4,7 @@ import { hasDB } from '../lib/db.js';
  * GET /api/health
  * Health check: reports whether DB env is connected.
  */
-export default async function handler() {
+export default async function handler(req, res) {
   const resp = {
     ok: true,
     mode: hasDB ? 'supabase' : 'json-fallback',
@@ -20,6 +20,5 @@ export default async function handler() {
     ]
   };
 
-  return new Response(JSON.stringify(resp),
-    { status: 200, headers: { 'Content-Type': 'application/json' } });
+  return res.status(200).json(resp);
 }
