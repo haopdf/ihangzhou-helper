@@ -1,4 +1,4 @@
-import { hasDB, query } from '../../../lib/db.js';
+import { hasDB, query } from '../../lib/db.js';
 
 /**
  * GET /api/articles/:slug

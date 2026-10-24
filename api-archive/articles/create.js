@@ -1,6 +1,6 @@
-import { hasDB, insert, query } from '../../../lib/db.js';
-import { authenticate } from '../../../lib/auth.js';
-import { requireFields, clampStr, slugify } from '../../../lib/validate.js';
+import { hasDB, insert, query } from '../../lib/db.js';
+import { authenticate } from '../../lib/auth.js';
+import { requireFields, clampStr, slugify } from '../../lib/validate.js';
 
 /**
  * POST /api/articles/create

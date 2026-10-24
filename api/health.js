@@ -1,4 +1,4 @@
-import { hasDB } from '../../lib/db.js';
+import { hasDB } from '../lib/db.js';
 
 /**
  * GET /api/health
