@@ -3677,6 +3677,20 @@ function showMetro() {
     applyTheme(theme);
   };
 
+  // ESC 关闭设置面板（与 modal 的 ESC 行为一致；只绑一次）
+  if (!window._izSettingsEscBound) {
+    window._izSettingsEscBound = true;
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      var panel = document.getElementById('settingsPanel');
+      var overlay = document.getElementById('settingsOverlay');
+      if (panel && panel.classList.contains('show')) {
+        panel.classList.remove('show');
+        if (overlay) overlay.classList.remove('show');
+      }
+    });
+  }
+
   window.setElderlyMode = function (on) {
     lsSet('ihz_elderly', on ? 'true' : 'false');
     applyElderlyMode();
