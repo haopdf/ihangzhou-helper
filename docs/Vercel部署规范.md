@@ -1,50 +1,13 @@
 # iHangzhou Vercel 部署规范（Deployment Standards）
 
 > 配套文档：[docs/API.md](API.md)（接口清单）、[docs/architecture-v2.md](architecture-v2.md)
-> 本文件管**部署侧硬约束**：① 用哪个 Vercel 项目 ② Serverless Function 数量上限 ③ build 命令 ④ 新增 API 前的检查清单。
-> 定位：部署出问题先读本文件。**2026-10-19 因连续两次部署失败 + 部署错项目而立，属踩坑后的强制规范。**
-> 版本：2026-10-24 修订（新增 §6 API 函数代码规范）
+> 本文件管**部署侧硬约束**：① 用哪个 Vercel 项目 ② Serverless Function 数量上限 ③ build 命令 ④ 新增 API 前的检查清单 ⑤ API 函数代码规范。
+> 定位：部署出问题先读本文件。**2026-10-19 因连续两次部署失败 + 部署错项目而立；2026-10-24 因全站 API 500 事故扩充，属踩坑后的强制规范。**
+> 版本：2026-10-24 修订
 
 ---
 
 ## 0. 一句话铁律（最重要）
-
-vercel.json 未指定 runtime → Vercel 默认 **Node.js runtime（Express 风格）**。所有 `api/**/*.js` 必须同时满足：
-
-### 6.1 模块语法 = ESM（与 package.json `"type": "module"` 一致）
-
-- `require('@vercel/blob')` → `import { get, put } from '@vercel/blob'`；`require('crypto')` → `import crypto from 'node:crypto'`
-- `module.exports = async (req, res) => {...}` → `export default async (req, res) {...}`
-- JSON 文件读取（如 `data/cms.json`）用 `createRequire` 封装并兜底：
-
-  ```js
-  import { createRequire } from 'node:module';
-  const __require = createRequire(import.meta.url);
-  function reqJson(rel) { try { return __require(rel); } catch (e) { return null; } }
-  const DEFAULT_CMS = reqJson('../data/cms.json') || {};
-  ```
-
-- **验证方法**（本地秒测，不用等部署）：
-  ```bash
-  node --input-type=module -e "import('./api/xxx.js').then(()=>console.log('OK')).catch(e=>console.log('FAIL:',e.message))"
-  ```
-
-### 6.2 handler 签名与响应 = Express 风格
-
-- `export default async function handler(req, res)`，响应用 `res.status(200).json({...})`。
-- **禁止 Web 风格**：`return new Response(...)` 不被 Node runtime 采纳（函数无响应、超时 000）；`handler(req, { params })` 解构第二参数直接 TypeError（FUNCTION_INVOCATION_FAILED）。动态路由（如 `/api/articles/:slug`）的 slug 从 `req.url` 末段自己解析。
-- `new URL(req.url)` **必须带 base**（`new URL(req.url, 'https://www.ihangzhou.net')`）——Node runtime 的 `req.url` 只是路径，无 base 会抛 Invalid URL。
-
-### 6.3 相对路径按实际目录深度数（最易错）
-
-- `api/foo.js`（深度1）：到仓库根 = `../`，到 `lib/` = `../lib/`
-- `api/articles/foo.js`、`api/_templates/foo.js`（深度2）：到根 = `../../`，到 `lib/` = `../../lib/`
-- 读 `articles/index.json` 等同级大文件：`api/articles/*.js` 用 `new URL('../../articles/index.json', import.meta.url)`
-- **教训**：2026-10-24 前 `api/articles/*.js` 写 `../../../lib/`（多一级）、`api/health.js` 写 `../../lib/`（少一级），两拨文件互相抄反，模块解析到仓库外 `/Users/asind/PycharmProjects/lib/` → 500。**路径错在本地 `node import` 立刻现形，部署前必测。**
-
----
-
-## 7. 踩坑记录（持续追加）
 
 > **这个仓库只 `git push` 到 GitHub，正主 Vercel 项目 `ihangzhou` 会自动部署。禁止手动 `vercel deploy`，禁止新建 Vercel 项目。**
 
@@ -68,7 +31,7 @@ Error: No more than 12 Serverless Functions can be added to a Deployment on the 
 - `api/_templates/xxx.js`、`api/.hidden.js` → **不计入**（Vercel 忽略 `_` 和 `.` 前缀的目录/文件）
 - 非 `.js` 文件（README.md、json 等）→ 不计入
 
-**当前状态（2026-10-19）**：`api/` 下 **11 个函数**（留 1 个余量），已归档 8 个孤儿到 `api-archive/`（见 §4）。
+**当前状态（2026-10-24）**：`api/` 下 **11 个函数**（留 1 个余量），已归档 8 个孤儿到 `api-archive/`（见 §4）。
 
 ---
 
@@ -85,7 +48,7 @@ find api -name '*.js' -not -path '*/_templates/*' | wc -l
   1. **合并**：把新逻辑并进某个现有函数（用 `?action=xxx` 或请求路径分流，参考 `api/tools.js` 一个文件扛十几个 action 的做法）；
   2. **归档僵尸函数**：把确认零调用的旧函数移到 `api-archive/`（见 §4）腾出名额。
 - **结果 < 12**：可以加，但加完再数一次，别顶到 12（留余量给以后）。
-- 加完后 `npm run build` 本地验证，再 push（push 即触发正主自动部署）。
+- 加完后 `npm run build` 本地验证 + §6 的三条 import 自测，再 push（push 即触发正主自动部署）。
 
 ---
 
@@ -112,7 +75,7 @@ find api -name '*.js' -not -path '*/_templates/*' | wc -l
 
 ---
 
-## 5. 踩坑记录（2026-10-19，勿再犯）
+## 5. 踩坑记录（持续追加，勿再犯）
 
 | # | 现象 | 根因 | 教训 |
 |---|---|---|---|
