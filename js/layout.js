@@ -268,7 +268,7 @@
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
   var DISTRICTS = [
-    { id: 'hangzhou', name: '杭州', full: '杭州市', desc: '湖滨/望江/清波' },
+    { id: 'hangzhou', name: '杭州', full: '杭州市', desc: '全市通用' },
     { id: 'shangcheng', name: '上城', full: '上城区', desc: '湖滨/望江/清波' },
     { id: 'gongshu', name: '拱墅', full: '拱墅区', desc: '湖墅/小河/祥符' },
     { id: 'xihu', name: '西湖', full: '西湖区', desc: '灵隐/文新/留下' },
