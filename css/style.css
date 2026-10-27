@@ -3102,8 +3102,6 @@ border-radius: 14px;
 .city-dropdown-item.active { color: var(--primary); font-weight: 700; background: var(--bg-hover); }
 .city-dropdown-item .cd-dist { font-size: 11px; color: var(--text-muted); font-weight: 400; opacity: 0.75; }
 
-/* 区县下拉内嵌到「设置」面板时改为静态块（不再绝对定位浮层）——规则见文件末尾 .city-dropdown 之后 */
-
 /* ===== 便民服务分区卡片 ===== */
 .bf-modules {
   padding: 0 14px;
@@ -3640,32 +3638,16 @@ html[data-theme="dark"] #themeBtn:hover {
 .city-dropdown {
   position: absolute;
   top: 52px; right: 8px;
-  min-width: 180px;
+  min-width: 240px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
   background: var(--bg-card);
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
   z-index: 300;
-  overflow: hidden;
   border: 1px solid var(--border-light);
 }
 .city-dropdown.show { display: block !important; }
-
-/* ===== 设置面板内的区县下拉：静态块模式（必须放在 .city-dropdown 之后，双类特异性确保覆盖浮层定位）===== */
-.city-dropdown.city-dropdown--inline {
-  position: static;
-  display: block;
-  top: auto; right: auto; left: auto;
-  min-width: 0;
-  width: 100%;
-  max-height: none;
-  overflow: visible;
-  box-shadow: none;
-  margin-top: 10px;
-  border: 1px solid var(--border-light);
-  border-radius: 10px;
-}
-.city-dropdown.city-dropdown--inline .city-dropdown-title { display: none; }
-.city-dropdown.city-dropdown--inline .city-dropdown-item { padding: 12px 14px; }
 
 /* ===== 底部导航 .app-nav ===== */
 .app-nav {
