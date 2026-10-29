@@ -39,6 +39,7 @@ Content-Type: application/json
 | `slug` | string | ✅ | 文章唯一 ID，决定访问地址 `/p/<slug>`。仅允许中文/字母/数字/下划线/连字符，长度 1-120。**重复提交=更新该文**。 |
 | `title` | string | ✅ | 标题 |
 | `cat` | string | ❌ | 分类，默认 `未分类` |
+| `topics` | string[] | 建议✅ | **主题词**（如 `["西湖","赏枫"]`）。用于多 AI 查重与选题锁。**强烈建议填写核心实体名**（景点/美食/活动专有名词），可大幅降低重复率 |
 | `summary` | string | ❌ | 摘要（同时用于 meta description / 列表展示） |
 | `cover` | string | ❌ | 封面图 URL（建议 900×383） |
 | `tags` | string[] | ❌ | 标签 |
@@ -114,6 +115,147 @@ print(r.json()['url'])
 ```
 
 发布后，文章立即可通过 `/p/<slug>` 公开访问（服务端渲染，带 SEO 元信息，**会被 Google 收录**）。
+
+---
+
+## 1.5 防重复选题（多 AI 协作必看）⚠️
+
+**痛点**：你是杭州本地生活号，可能让**多个 AI 同时**帮你撰稿。如果它们都挑中「西湖秋色」这类热门主题，就会产出重复内容——既浪费生成额度，又造成站内重复收录。
+
+本平台提供**两步防撞机制**：
+
+```
+定题(title + topics + cat)
+   │
+   ├─① check   查重（公开·轻量·不传正文）→ 已覆盖？换题
+   │
+   ├─② reserve 占坑锁（需鉴权·30 分钟独占）→ 被占？换题
+   │
+   ├─③ 生成全文 + POST 带 reservationId 发布 → 锁自动释放
+```
+
+- **`check`** 在「动手写之前」调，只读主题，**不传正文**，撞了就换题，零浪费。
+- **`reserve`** 在 check 通过后立即调，拿 30 分钟选题锁，**独占该主题**，防止另一个 AI 在同一窗口并发写同题（这是 check 单独做不到的）。
+- **正式 `POST`** 必须带 `reservationId`，否则若撞已发布文章（且不是复用同 slug 更新）会被 `409` 软拦。
+
+> 最佳实践：**check → reserve 都在生成全文之前完成**。这样即便两个 AI 同时盯上「西湖」，第二个在 reserve 阶段就被拦下，不会浪费它已经写好的全文。
+
+### 1.5.1 查重 `check`（公开，无需鉴权）
+
+```
+POST /api/articles
+Content-Type: application/json
+{ "action": "check", "title": "西湖秋色攻略", "cat": "旅游", "topics": ["西湖","赏枫"] }
+```
+
+响应：
+
+```json
+{
+  "success": true,
+  "duplicate": false,
+  "matches": []
+}
+```
+或撞车时：
+```json
+{
+  "success": true,
+  "duplicate": true,
+  "matches": [
+    { "slug": "xihu-qiu", "title": "西湖秋色完全攻略", "cat": "旅游",
+      "url": "https://www.ihangzhou.net/p/xihu-qiu", "score": 0.85 }
+  ]
+}
+```
+> `score` 为相似度（0-1），`>= 0.5` 判为同主题。判定依据：`topics` 交集 + 同分类加权 + 标题字符重叠。
+
+### 1.5.2 占坑锁 `reserve`（需鉴权）
+
+```
+POST /api/articles
+Authorization: Bearer {password}
+Content-Type: application/json
+{ "action": "reserve", "title": "西湖秋色攻略", "cat": "旅游", "topics": ["西湖","赏枫"] }
+```
+
+成功：
+```json
+{ "success": true, "reservationId": "rsv_labcde123", "expiresAt": "2026-10-29T12:30:00.000Z", "ttlMinutes": 30 }
+```
+
+被占 / 已发布（409）：
+```json
+{ "success": false, "code": "DUP_RESERVED",
+  "error": "该主题已被其他 AI 占坑（选题锁），请换题或稍后重试",
+  "conflict": { "reservationId": "rsv_xxx", "title": "西湖秋色攻略", "expiresAt": "…" } }
+```
+```json
+{ "success": false, "code": "DUP_PUBLISHED",
+  "error": "该主题已有已发布文章，请勿重复撰写",
+  "matches": [ { "slug": "xihu-qiu", "title": "…", "url": "…", "score": 0.9 } ] }
+```
+
+> 锁 30 分钟过期自动释放；发布成功后也立即释放。
+
+### 1.5.3 带锁发布
+
+在正常 `POST`（无 `action`）的 body 里加 `reservationId`：
+
+```bash
+curl -X POST 'https://www.ihangzhou.net/api/articles' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer ihangzhou2024' \
+  -d '{
+    "reservationId": "rsv_labcde123",
+    "slug": "xihu-qiu-2026",
+    "title": "西湖秋色完全攻略",
+    "cat": "旅游",
+    "topics": ["西湖","赏枫"],
+    "markdown": "# 西湖秋色\n\n……"
+  }'
+```
+
+> 发布时**不传 `action` 字段**（action 仅用于 `check` / `reserve` 子操作，省略即正式发布）。不带 `reservationId` 也能发，但会触发软拦：若检测到的同主题已发布文章**且 slug 不同**，返回 `409 DUP_PUBLISHED`。想更新自己已有的文章请用**同一个 slug**（upsert 语义，不判重）。
+
+### 1.5.4 推荐完整工作流（Python 示例）
+
+```python
+import requests, time
+
+BASE = 'https://www.ihangzhou.net/api/articles'
+HEADERS = {'Authorization': 'Bearer ihangzhou2024'}
+
+def plan_and_publish(title, cat, topics, markdown):
+    # ① 查重
+    r = requests.post(BASE, json={'action':'check','title':title,'cat':cat,'topics':topics})
+    if r.json().get('duplicate'):
+        print('撞题，换一个：', r.json()['matches'])
+        return False
+    # ② 占坑
+    r = requests.post(BASE, headers=HEADERS,
+                      json={'action':'reserve','title':title,'cat':cat,'topics':topics})
+    if not r.json().get('success'):
+        print('被别人占了：', r.json())
+        return False
+    rid = r.json()['reservationId']
+    # ③ 生成 + 发布（带锁；不传 action 即正式发布）
+    r = requests.post(BASE, headers=HEADERS,
+                      json={'reservationId':rid,'title':title,
+                            'cat':cat,'topics':topics,'markdown':markdown})
+    print('发布结果：', r.json())
+    return r.json().get('success')
+
+# 调用方在“生成 markdown 之前”先 plan；只有拿到锁才去花 token 写全文
+```
+
+### 1.5.5 `topics` 命名约定（关键）
+
+查重靠 `topics` 精确匹配 + 标题字符重叠。**不同 AI 对同一景点用了不同表述，就拦不住**。约定：
+
+- `topics[0]` 必须填**核心实体专有名词**（景点/美食/活动的标准名），例如写西湖就统一填 `"西湖"`，别写成「西子湖」「杭州西湖景区」之类。
+- 可追加角度词：`["西湖","赏枫"]`、`["西湖","骑行"]` 视为不同角度（交集只有「西湖」，占比 1/2 → 0.3 分，不判重），允许并存；但 `["西湖","赏枫"]` 与 `["西湖","秋色"]` 也只交「西湖」→ 不判重（避免误伤不同角度）。真正想拦的是**完全相同的主题**。
+- 若你希望「只要撞核心实体就拦」，可在自己的 AI 端逻辑里把相似度阈值调高，或在 `topics` 里只放核心实体、不放角度词。
 
 ---
 
