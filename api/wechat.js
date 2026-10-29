@@ -120,11 +120,25 @@ function genNewsReply(toUser, fromUser, article) {
   return `<xml><ToUserName><![CDATA[${toUser}]]></ToUserName><FromUserName><![CDATA[${fromUser}]]></FromUserName><CreateTime>${ts}</CreateTime><MsgType><![CDATA[news]]></MsgType><ArticleCount>1</ArticleCount><Articles><item><Title><![CDATA[${title}]]></Title><Description><![CDATA[${desc}]]></Description><PicUrl><![CDATA[${picUrl}]]></PicUrl><Url><![CDATA[${url}]]></Url></item></Articles></xml>`;
 }
 
+// 生成小程序卡片回复（MsgType = miniprogrampage）
+function genMiniProgramReply(toUser, fromUser, kw) {
+  const ts = Math.floor(Date.now() / 1000);
+  const title = kw.title || 'iHangzhou';
+  const appid = kw.appid || '';          // 小程序 AppId（必填）
+  const pagepath = kw.pagepath || '';    // 小程序页面路径，如 pages/index/index
+  const thumburl = kw.thumburl || 'https://www.ihangzhou.net/images/logo-mark-192.png';
+  return `<xml><ToUserName><![CDATA[${toUser}]]></ToUserName><FromUserName><![CDATA[${fromUser}]]></FromUserName><CreateTime>${ts}</CreateTime><MsgType><![CDATA[miniprogrampage]]></MsgType><MiniProgramInfo><Title><![CDATA[${title}]]></Title><AppId><![CDATA[${appid}]]></AppId><PagePath><![CDATA[${pagepath}]]></PagePath><ThumbUrl><![CDATA[${thumburl}]]></ThumbUrl></MiniProgramInfo></xml>`;
+}
+
 // 根据关键词配置生成对应类型的回复
 function genReply(toUser, fromUser, kwConfig) {
   if (!kwConfig) return null;
   if (kwConfig.type === 'news') {
     return genNewsReply(toUser, fromUser, kwConfig);
+  }
+  // 小程序卡片：跳转指定小程序页面
+  if (kwConfig.type === 'miniprogram') {
+    return genMiniProgramReply(toUser, fromUser, kwConfig);
   }
   // 资料分享类型：自动格式化网盘链接+提取码
   if (kwConfig.type === 'share') {
@@ -149,7 +163,14 @@ function genReply(toUser, fromUser, kwConfig) {
     lines.push('⚠️ 链接若失效请回复反馈');
     return genTextReply(toUser, fromUser, lines.join('\n'));
   }
-  return genTextReply(toUser, fromUser, kwConfig.reply || kwConfig.desc || '');
+  // 纯文本回复（支持在末尾附加链接）
+  var text = kwConfig.reply || kwConfig.desc || '';
+  if (kwConfig.url && text) {
+    text = text + '\n\n🔗 ' + kwConfig.url;
+  } else if (kwConfig.url && !text) {
+    text = '🔗 ' + kwConfig.url;
+  }
+  return genTextReply(toUser, fromUser, text);
 }
 
 // ========== 关键词智能匹配 ==========

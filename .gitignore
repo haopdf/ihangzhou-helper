@@ -35,3 +35,6 @@ __pycache__/
 # UI QA 截图（本地归档用，不入库）
 docs/ui-review/
 .env*.local
+
+# 文章 API 本地兜底存储（无 Blob token 时 dev 写入，不入库）
+data/.articles/

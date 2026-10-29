@@ -5,7 +5,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://ihangzhou.net/sitemap.xml
+Sitemap: https://www.ihangzhou.net/sitemap.xml
 
 # 爬虫指引
 Crawl-delay: 1

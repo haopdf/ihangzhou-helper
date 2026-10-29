@@ -57,12 +57,17 @@ Authorization: Bearer {password}
 |------|------|------|------|
 | `keyword` | string | ✅ | 主关键词（匹配优先级最高） |
 | `aliases` | string[] | ❌ | 别名数组，命中任一即触发回复 |
-| `type` | string | ✅ | `text`（纯文字回复）或 `news`（图文消息） |
-| `reply` | string | text 必填 | 纯文字回复内容（支持换行 `\n`） |
-| `title` | string | news 必填 | 图文消息标题 |
+| `type` | string | ✅ | `text`（纯文字+链接）/ `news`（图文消息）/ `miniprogram`（小程序卡片）/ `share`（网盘资料） |
+| `reply` | string | text 必填 | 纯文字回复内容（支持换行 `\n`）；配 `url` 会在末尾追加 `🔗` 链接 |
+| `title` | string | news/miniprogram 必填 | 图文标题 / 小程序卡片标题 |
 | `desc` | string | news 必填 | 图文消息描述 |
-| `picUrl` | string | news 必填 | 封面图片 URL（建议 900×383） |
-| `url` | string | ❌ | 点击图文跳转链接 |
+| `picUrl` | string | news 必填 | 图文封面 URL（建议 900×383） |
+| `url` | string | ❌ | 图文点击跳转链接；text 类型末尾追加 |
+| `appid` | string | miniprogram 必填 | 小程序 AppId |
+| `pagepath` | string | miniprogram 必填 | 小程序页面路径（可带参数） |
+| `thumburl` | string | miniprogram 必填 | 小程序卡片缩略图 URL |
+
+> 完整三类示例（文本+链接 / 图文 / 小程序）见 [内容发布与自动回复API指南](内容发布与自动回复API指南.md)。
 
 **成功响应**（200）：
 
@@ -165,6 +170,54 @@ https://www.ihangzhou.net/admin/
 ```
 
 在「关键词管理」面板中可以直接编辑、批量导入关键词，所见即所得。
+
+---
+
+## 📝 文章发布 / 清单管理 API
+
+> 用途：让外部 AI / 脚本把写好的文章投到本平台，并维护「已写文章清单」。
+> 存储于 Vercel Blob，公开阅读页 `/p/<slug>` 服务端渲染、SEO 友好。
+
+### 发布 / 更新文章（需鉴权）
+
+```
+POST /api/articles
+Authorization: Bearer {password}
+Content-Type: application/json
+```
+
+```json
+{
+  "slug": "xihu-autumn-2026",
+  "title": "西湖秋色完全攻略",
+  "cat": "旅游",
+  "summary": "断桥、孤山、北山街三条赏枫路线",
+  "cover": "https://www.ihangzhou.net/images/xxx.jpg",
+  "tags": ["西湖","赏枫"],
+  "markdown": "# 西湖秋色\n\n……"
+}
+```
+
+- `slug` 决定访问地址 `/p/<slug>`，重复提交=更新。
+- `html` 与 `markdown` 至少给一个（`html` 优先）。
+- 成功返回 `url` 即公开文章地址。
+
+### 获取文章清单（公开）
+
+```
+GET /api/articles                 # 全部（轻量 manifest，不含正文）
+GET /api/articles?status=published
+GET /api/articles?slug=xihu-autumn-2026   # 单篇全文
+```
+
+### 删除文章（需鉴权）
+
+```
+DELETE /api/articles?slug=xihu-autumn-2026
+Authorization: Bearer {password}
+```
+
+完整字段表与 curl / JS / Python 示例见 [内容发布与自动回复API指南](内容发布与自动回复API指南.md)。
 
 ---
 
