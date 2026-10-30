@@ -23,6 +23,7 @@ function merge(local, remote) {
 
 async function main() {
   const token = process.env.BLOB_READ_WRITE_TOKEN;
+  const storeId = process.env.BLOB_STORE_ID;
   const local = loadLocal();
   if (!token) {
     console.log(`[skip] 未检测到 BLOB_READ_WRITE_TOKEN，跳过 Blob 推送。`);
@@ -31,19 +32,33 @@ async function main() {
     console.log(`       BLOB_READ_WRITE_TOKEN=<你的token> node scripts/sync-keywords.mjs`);
     return;
   }
+  // 显式传入 token/storeId，强制走 readWrite 鉴权，跳过 SDK 的 OIDC 自动检测
+  // （项目开启了 OIDC 时，SDK 默认走 OIDC 分支，本地非 Vercel 环境会报
+  //  "OIDC is enabled ... but not for the 'development' environment"）
+  const authOpts = { token, storeId, access: 'private', useCache: false };
+  // 避免残留的 VERCEL_OIDC_TOKEN 干扰鉴权分支
+  delete process.env.VERCEL_OIDC_TOKEN;
+
   let remote = [];
   try {
-    const res = await get(BLOB_KEY, { access: 'private', useCache: false });
-    if (res) {
-      const buf = Buffer.from(await res.arrayBuffer());
-      remote = JSON.parse(buf.toString('utf-8'));
+    const res = await get(BLOB_KEY, authOpts);
+    if (res && res.stream) {
+      const reader = res.stream.getReader();
+      const chunks = [];
+      let done = false;
+      while (!done) {
+        const r = await reader.read();
+        done = r.done;
+        if (r.value) chunks.push(r.value);
+      }
+      remote = JSON.parse(Buffer.concat(chunks).toString('utf-8'));
     }
   } catch (e) {
     console.log(`[warn] 读取线上 Blob 失败（视为空）：${e.message}`);
   }
   const merged = merge(local, remote);
   await put(BLOB_KEY, JSON.stringify(merged), {
-    contentType: 'application/json', access: 'private', allowOverwrite: true,
+    ...authOpts, contentType: 'application/json', allowOverwrite: true,
   });
   console.log(`[ok] 已推送 ${merged.length} 条关键字到 Blob(${BLOB_KEY})（合并前 remote=${remote.length} / local=${local.length}）。`);
 }
