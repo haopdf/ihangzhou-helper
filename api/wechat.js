@@ -23,13 +23,25 @@ const DEFAULT_KEYWORDS = (reqJson('../data/cms.json') || {}).wechatKeywords || [
 // ========== 关键词数据缓存（10 秒内复用，减少 Blob 调用） ==========
 let KW_CACHE = { data: null, expires: 0 };
 
-// 只读取关键词数据（独立 Blob，约 5KB，不再读全量 600KB CMS 数据）
+// 关键词数据 = cms.json(基础层) ∪ Blob wechat-keywords.json(覆盖层)，见 loadKeywords
+// 合并策略：cms.json（DEFAULT_KEYWORDS）作为基础层——版本可控、随仓库提交必含；
+// Blob(wechat-keywords.json) 作为线上覆盖层，同 keyword 时 Blob 优先。
+// 这样即便 Blob 未同步/为空，git 中提交的关键词（如「百富榜」）也能立即生效，
+// 不再出现「cms.json 改了但线上只有 Blob 旧数据」导致的关键词失效问题。
+function mergeKeywords(local, remote) {
+  const map = new Map();
+  for (const k of (local || [])) if (k && k.keyword) map.set(k.keyword, k);
+  for (const k of (remote || [])) if (k && k.keyword) map.set(k.keyword, k); // Blob 覆盖同名
+  return [...map.values()];
+}
+
 async function loadKeywords() {
   const now = Date.now();
   if (KW_CACHE.data && KW_CACHE.expires > now) return KW_CACHE.data;
-  try {
-    const token = process.env.BLOB_READ_WRITE_TOKEN;
-    if (token) {
+  let remote = [];
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (token) {
+    try {
       const result = await get('wechat-keywords.json', { access: 'private', useCache: false });
       if (result) {
         const reader = result.stream.getReader();
@@ -40,16 +52,13 @@ async function loadKeywords() {
           done = r.done;
           if (r.value) chunks.push(r.value);
         }
-        var text = Buffer.concat(chunks).toString('utf-8');
-        var data = JSON.parse(text);
-        KW_CACHE = { data: data, expires: now + 10000 };
-        return data;
+        remote = JSON.parse(Buffer.concat(chunks).toString('utf-8'));
       }
-    }
-  } catch (e) { console.error('loadKeywords error:', e.message); }
-  // 兜底：使用本地 cms.json 中的关键词
-  KW_CACHE = { data: DEFAULT_KEYWORDS, expires: now + 2000 };
-  return DEFAULT_KEYWORDS;
+    } catch (e) { console.error('loadKeywords Blob error:', e.message); }
+  }
+  const merged = mergeKeywords(DEFAULT_KEYWORDS, remote);
+  KW_CACHE = { data: merged, expires: now + 10000 };
+  return merged;
 }
 
 // 需要全量 CMS 数据时（菜单同步等），才读 cms-data.json
