@@ -8,3 +8,12 @@ node_modules/
 .vercel/
 # 归档的旧 API 函数（已移出 api/，保留在 git 供追溯，但不部署、不计入 Serverless Function 数）
 api-archive/
+
+# 开发环境污染 & 非运行时静态资源（不进部署包，避免超 100MB 上限）
+edge-profile/
+trae/
+trash/
+obsolete/
+scripts/
+docs/
+data/
