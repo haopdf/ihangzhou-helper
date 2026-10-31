@@ -1,0 +1,232 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "‹ 📖 杭州薅羊毛省钱攻略：消费券、奶茶、积分、学生福利" [ref=e3] [cursor=pointer]:
+      - /url: /index.html
+      - generic [ref=e4]: ‹
+      - generic [ref=e5]: 📖 杭州薅羊毛省钱攻略：消费券、奶茶、积分、学生福利
+    - generic [ref=e6]:
+      - img
+      - textbox "搜索本片区..." [ref=e7]
+    - button "显示设置" [ref=e8] [cursor=pointer]:
+      - img [ref=e9]
+    - button "分享" [ref=e13] [cursor=pointer]:
+      - img [ref=e14]
+  - generic [ref=e19]:
+    - generic [ref=e20]:
+      - generic [ref=e21]: ⚙️ 显示设置
+      - button "关闭" [ref=e22] [cursor=pointer]: ✕
+    - generic [ref=e24]:
+      - generic [ref=e25]: 📍 当前城市
+      - generic [ref=e27] [cursor=pointer]:
+        - generic [ref=e28]: 杭州市
+        - generic [ref=e29]: ▼
+    - generic [ref=e30]:
+      - generic [ref=e32]: 🌙 深色模式
+      - generic [ref=e36]: 🔤 大字模式
+    - generic [ref=e40]:
+      - generic [ref=e41]: 🌈 主题色
+      - generic [ref=e42]:
+        - button "松绿" [ref=e43] [cursor=pointer]
+        - button "竹青" [ref=e44] [cursor=pointer]
+        - button "鎏金" [ref=e45] [cursor=pointer]
+        - button "胭脂" [ref=e46] [cursor=pointer]
+        - button "黛蓝" [ref=e47] [cursor=pointer]
+  - generic [ref=e48]:
+    - link "首页" [ref=e49] [cursor=pointer]:
+      - /url: ../index.html
+    - text: ›
+    - link "文章合集" [ref=e50] [cursor=pointer]:
+      - /url: ../articles.html
+    - text: › 杭州薅羊毛省钱攻略：消费券、奶茶、积分、学生福利
+  - generic [ref=e51]:
+    - generic [ref=e53]: 📅 2026-09-15 ✍️ iHangzhou 👀 杭州本地生活
+    - generic [ref=e54]:
+      - heading "杭州薅羊毛省钱攻略！消费券、奶茶、积分、学生福利…一年省几千块！" [level=1] [ref=e55]
+      - blockquote [ref=e56]:
+        - paragraph [ref=e57]: 回复【薅羊毛】获取杭州薅羊毛全攻略，回复【省钱】获取杭州生活省钱技巧！
+      - paragraph [ref=e58]:
+        - text: 💰
+        - strong [ref=e59]: 杭州人注意！你的钱可能正在悄悄溜走！
+      - paragraph [ref=e60]: 在杭州生活，有太多可以薅的羊毛——政府消费券、奶茶免单、商场积分兑换、学生专属福利、文旅优惠、银行活动…
+      - paragraph [ref=e61]: 今天小杭给大家整理一份杭州薅羊毛省钱攻略，收藏这篇，一年省几千块！
+      - heading "🎫 政府消费券" [level=2] [ref=e62]
+      - paragraph [ref=e63]:
+        - img "商场消费券使用" [ref=e64]
+      - paragraph [ref=e65]:
+        - strong [ref=e66]: 杭州定期发放各类消费券：
+      - paragraph [ref=e67]:
+        - strong [ref=e68]: 餐饮消费券：
+      - list [ref=e69]:
+        - listitem [ref=e70]: 上城区、萧山区等定期发放
+        - listitem [ref=e71]: 满200减40、满100减20等
+        - listitem [ref=e72]: 美团、饿了么、支付宝领取
+      - paragraph [ref=e73]:
+        - strong [ref=e74]: 商超消费券：
+      - list [ref=e75]:
+        - listitem [ref=e76]: 各大超市、商场通用
+        - listitem [ref=e77]: 满减力度大，叠加店铺优惠更划算
+      - paragraph [ref=e78]:
+        - strong [ref=e79]: 汽车/数码消费券：
+      - list [ref=e80]:
+        - listitem [ref=e81]: 购车补贴、以旧换新补贴
+        - listitem [ref=e82]: 手机、平板、家电家装消费券
+        - listitem [ref=e83]: 单笔最高可减1500元
+      - paragraph [ref=e84]:
+        - strong [ref=e85]: 领取方式：
+      - list [ref=e86]:
+        - listitem [ref=e87]: 关注"杭州发布"、各区发布公众号
+        - listitem [ref=e88]: 支付宝搜索"杭州消费券"
+        - listitem [ref=e89]: 美团、饿了么APP首页活动入口
+        - heading "🧋 奶茶/咖啡优惠" [level=2] [ref=e90]
+        - paragraph [ref=e91]:
+          - strong [ref=e92]: 奶茶党必看！
+        - paragraph [ref=e93]:
+          - strong [ref=e94]: 蜜雪冰城：
+        - list [ref=e95]:
+          - listitem [ref=e96]: 不定期抽1万张免单券（7元饮品免单）
+          - listitem [ref=e97]: 新品8.5折券、8.8折券
+          - listitem [ref=e98]: 关注蜜雪冰城公众号/小程序
+        - paragraph [ref=e99]:
+          - strong [ref=e100]: 古茗学生卡：
+        - list [ref=e101]:
+          - listitem [ref=e102]: 免费办理！0成本get！
+          - listitem [ref=e103]: 每周一次5折喝奶茶
+          - listitem [ref=e104]: 6元限定款：百香果双重奏
+          - listitem [ref=e105]: 6元经典款：古茗奶茶
+        - paragraph [ref=e106]:
+          - strong [ref=e107]: 茶百道/瑞幸：
+        - list [ref=e108]:
+          - listitem [ref=e109]: 新用户首杯免费/半价
+          - listitem [ref=e110]: 会员积分兑换饮品
+          - listitem [ref=e111]: 生日月专属优惠
+        - paragraph [ref=e112]:
+          - strong [ref=e113]: 商场新店开业：
+        - list [ref=e114]:
+          - listitem [ref=e115]: 湖滨银泰in77等商场新店开业
+          - listitem [ref=e116]: 万杯酸奶免费喝
+          - listitem [ref=e117]: 拍摄围挡实拍图+发小红书笔记+带话题
+        - heading "🛍️ 商场积分/会员福利" [level=2] [ref=e118]
+        - paragraph [ref=e119]:
+          - strong [ref=e120]: 逛商场别忘记积分！积分就是钱！
+        - paragraph [ref=e121]:
+          - strong [ref=e122]: 湖滨银泰in77：
+        - list [ref=e123]:
+          - listitem [ref=e124]: 积分超值兑换（9.18-9.30）
+          - listitem [ref=e125]: 限时满额送
+          - listitem [ref=e126]: 积分可兑换停车券、餐饮券、礼品
+        - paragraph [ref=e127]:
+          - strong [ref=e128]: 各大商场通用：
+        - list [ref=e129]:
+          - listitem [ref=e130]: 消费满额减免停车费
+          - listitem [ref=e131]: 会员免费时段停车（大悦城3小时免费）
+          - listitem [ref=e132]: 积分兑换餐饮券、电影票
+          - listitem [ref=e133]: 生日月双倍积分、专属礼品
+        - paragraph [ref=e134]:
+          - strong [ref=e135]: 薅羊毛技巧：
+        - list [ref=e136]:
+          - listitem [ref=e137]: 每次消费都要积分！
+          - listitem [ref=e138]: 关注商场公众号活动通知
+          - listitem [ref=e139]: 会员日/周年庆力度最大
+          - listitem [ref=e140]: 积分年底清零，记得用掉
+          - heading "🎓 学生专属福利" [level=2] [ref=e141]
+          - paragraph [ref=e142]:
+            - strong [ref=e143]: 学生党必看！
+          - paragraph [ref=e144]:
+            - strong [ref=e145]: 交通优惠：
+          - list [ref=e146]:
+            - listitem [ref=e147]: 学生交通卡：地铁公交5折
+            - listitem [ref=e148]: 凭学生证办理
+          - paragraph [ref=e149]:
+            - strong [ref=e150]: 奶茶优惠：
+          - list [ref=e151]:
+            - listitem [ref=e152]: 古茗学生卡：每周5折
+            - listitem [ref=e153]: 喜茶、奈雪学生认证优惠
+            - listitem [ref=e154]: 各大品牌开学季活动
+          - paragraph [ref=e155]:
+            - strong [ref=e156]: 购物优惠：
+          - list [ref=e157]:
+            - listitem [ref=e158]: 京东/淘宝学生认证优惠
+            - listitem [ref=e159]: 苹果教育优惠（Mac、iPad）
+            - listitem [ref=e160]: 微软、Adobe学生版
+          - paragraph [ref=e161]:
+            - strong [ref=e162]: 文旅优惠：
+          - list [ref=e163]:
+            - listitem [ref=e164]: 大部分景区学生半价
+            - listitem [ref=e165]: 博物馆免费（需预约）
+            - listitem [ref=e166]: 电影院学生票
+          - heading "🏞️ 文旅消费券/优惠" [level=2] [ref=e167]
+          - paragraph [ref=e168]:
+            - strong [ref=e169]: 出去玩也能薅羊毛！
+          - paragraph [ref=e170]:
+            - strong [ref=e171]: 西湖文旅消费券：
+          - list [ref=e172]:
+            - listitem [ref=e173]: 免费领取，美团/携程/飞猪搜"西湖文旅券"
+            - listitem [ref=e174]: 住宿7.5折起、景区6.5折、演艺8折
+            - listitem [ref=e175]: 覆盖123家品质酒店及民宿
+          - paragraph [ref=e176]:
+            - strong [ref=e177]: 赛事文旅优惠：
+          - list [ref=e178]:
+            - listitem [ref=e179]: 浙BA赛事期间，凭票根享优惠
+            - listitem [ref=e180]: 富阳"富春山居畅游票"
+            - listitem [ref=e181]: 热门景点半价优惠
+            - listitem [ref=e182]: 酒店、餐饮全方位优惠
+          - heading "🏦 银行/支付优惠" [level=2] [ref=e183]
+          - paragraph [ref=e184]:
+            - strong [ref=e185]: 这些支付优惠别错过！
+          - paragraph [ref=e186]:
+            - strong [ref=e187]: 支付宝：
+          - list [ref=e188]:
+            - listitem [ref=e189]: 花呗红包、余额宝体验金
+            - listitem [ref=e190]: 支付宝会员积分兑换
+            - listitem [ref=e191]: 周末消费券、随机立减
+            - listitem [ref=e192]: 芝麻信用免押金
+          - paragraph [ref=e193]:
+            - strong [ref=e194]: 微信支付：
+          - list [ref=e195]:
+            - listitem [ref=e196]: 微信支付有优惠（金币兑换提现券）
+            - listitem [ref=e197]: 支付后摇一摇免单
+            - listitem [ref=e198]: 商家优惠券自动抵扣
+          - paragraph [ref=e199]:
+            - strong [ref=e200]: 银行活动：
+          - list [ref=e201]:
+            - listitem [ref=e202]: 信用卡新用户礼（行李箱、耳机、刷卡金）
+            - listitem [ref=e203]: 周三/周六半价（招行、交行等）
+            - listitem [ref=e204]: 积分兑换礼品、里程
+            - listitem [ref=e205]: 生日月多倍积分
+          - heading "⚠️ 薅羊毛注意事项" [level=2] [ref=e206]
+          - list [ref=e207]:
+            - listitem [ref=e208]:
+              - strong [ref=e209]: 注意活动时间
+              - text: ：消费券有有效期，积分年底可能清零
+            - listitem [ref=e210]:
+              - strong [ref=e211]: 不要为了薅羊毛而消费
+              - text: ：不需要的东西再便宜也是浪费
+            - listitem [ref=e212]:
+              - strong [ref=e213]: 注意个人信息安全
+              - text: ：正规平台参与活动，不要泄露身份证、银行卡
+            - listitem [ref=e214]:
+              - strong [ref=e215]: 多平台对比
+              - text: ：同一件商品多平台比价，叠加优惠券更划算
+    - link "🏔️ 回到 iHangzhou 首页，发现更多杭州本地生活指南" [ref=e217] [cursor=pointer]:
+      - /url: ../index.html
+  - navigation [ref=e218]:
+    - link "🏠 首页" [ref=e219] [cursor=pointer]:
+      - /url: /index.html
+      - generic [ref=e220]: 🏠
+      - generic [ref=e221]: 首页
+    - link "🏞️ 旅游" [ref=e222] [cursor=pointer]:
+      - /url: /travel.html
+      - generic [ref=e223]: 🏞️
+      - generic [ref=e224]: 旅游
+    - link "📋 办事" [ref=e225] [cursor=pointer]:
+      - /url: /banshi.html
+      - generic [ref=e226]: 📋
+      - generic [ref=e227]: 办事
+    - link "📚 故事" [ref=e228] [cursor=pointer]:
+      - /url: /articles.html
+      - generic [ref=e229]: 📚
+      - generic [ref=e230]: 故事
+    - link "👤 我的" [ref=e231] [cursor=pointer]:
+      - /url: /index.html#me
+      - generic [ref=e232]: 👤
+      - generic [ref=e233]: 我的

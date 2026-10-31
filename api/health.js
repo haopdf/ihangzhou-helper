@@ -12,11 +12,12 @@ export default async function handler(req, res) {
     domain: 'www.ihangzhou.net',
     endpoints: [
       'GET  /api/health',
-      'GET  /api/articles?q=keyword&cat=xxx&page=1',
-      'POST /api/articles/create  (Auth)',
-      'GET  /api/articles/:slug',
-      'GET  /api/keywords?cat=xxx&q=xxx',
-      'POST /api/keywords/add    (Auth)',
+      'GET  /api/articles                 (列表)',
+      'GET  /api/articles?slug=xxx        (读全文)',
+      'POST /api/articles  (Auth)         action=check|reserve|发布',
+      'DELETE /api/articles?slug=xxx (Auth)',
+      'POST /api/wechat?action=upsertKeyword|deleteKeyword|setKeywords|listKeywords (Auth)',
+      'GET  /p/<slug>                     (SEO 阅读页)',
     ]
   };
 

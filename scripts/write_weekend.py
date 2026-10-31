@@ -1,0 +1,129 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import os
+
+content = '''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="杭州周末休闲指南">
+  <title>周末休闲 · iHangzhou</title>
+  <link rel="stylesheet" href="css/style.css?v=20260921h">
+  <script src="js/layout.js"></script>
+</head>
+<body>
+  <script>
+    window.IHZ_PAGE = { title: "周末休闲", channelId: "weekend" };
+    window.IZ_SKIP_APP_INIT = true;
+    window.IZ_SKIP_APP_THEME = true;
+  </script>
+  <div class="page active" id="pageChannel">
+    <div id="channelHeader" class="ch-hero" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;padding:32px 16px 24px;text-align:center;">
+      <div style="font-size:56px;line-height:1;margin-bottom:8px;">🎉</div>
+      <h1 style="font-size:24px;font-weight:700;margin:0;">周末休闲</h1>
+      <div style="font-size:13px;opacity:0.9;margin-top:6px;">iHangzhou · 杭州生活助手</div>
+    </div>
+    <div style="padding:16px;background:var(--bg-card);margin:0 16px;border-radius:12px;font-size:14px;line-height:1.7;color:var(--text-secondary);">
+      �️ 露营 · 🌸 赏花 · �‍👩‍👧 亲子 · 🖼️ 展览 · 🎪 市集 · � 骑行 · 🎤 演出 · � 观影
+    </div>
+    <div class="content">
+      <div class="section-head" style="margin-top:24px;">
+        <h2 id="channelTitle">周末休闲</h2>
+        <span class="tip" id="channelCount"></span>
+      </div>
+      <div class="service-grid" id="serviceGrid"></div>
+    </div>
+    <div class="related-channels">
+      <div class="section-head"><h2>相关频道</h2><span class="tip">探索更多</span></div>
+      <div class="channel-grid" id="relatedChannels"></div>
+    </div>
+    <div style="text-align:center;padding:24px 16px 48px;">
+      <a href="index.html" style="display:inline-block;padding:12px 16px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;">← 返回首页</a>
+    </div>
+  </div>
+  <script src="js/zhoumo-data.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      var DATA = window.ZHOUMO_DATA || {};
+      var keys = Object.keys(DATA);
+      var grid = document.getElementById('serviceGrid');
+      var countEl = document.getElementById('channelCount');
+      var titleEl = document.getElementById('channelTitle');
+      if (titleEl) titleEl.textContent = '周末休闲';
+      if (countEl) countEl.textContent = '共 ' + keys.length + ' 项';
+      var params = new URLSearchParams(location.search);
+      var detailId = params.get('id');
+      if (detailId && DATA[detailId]) {
+        renderDetail(DATA[detailId], detailId);
+        return;
+      }
+      if (grid && keys.length) {
+        grid.innerHTML = keys.map(function(k) {
+          var d = DATA[k];
+          return '<a class="sitem" href="weekend.html?id=' + k + '">' +
+            '<div class="sicon">' + (d.badge || '🎉') + '</div>' +
+            '<div class="sinfo"><div class="sname">' + d.name + '</div>' +
+            '<div class="sdesc">' + d.subtitle + '</div></div>' +
+            '<div class="sarrow">›</div></a>';
+        }).join('');
+      }
+      function renderDetail(data, id) {
+        var header = document.getElementById('channelHeader');
+        var titleEl = document.getElementById('channelTitle');
+        var grid = document.getElementById('serviceGrid');
+        header.innerHTML =
+          '<div style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:40px 16px 28px;text-align:center;">' +
+          '<span style="display:inline-block;padding:4px 12px;border-radius:8px;background:rgba(255,255,255,0.2);font-size:12px;margin-bottom:8px;font-weight:600;">' + (data.badge || '�') + '</span>' +
+          '<div style="font-size:32px;line-height:1;margin-bottom:6px;">' + (data.badge || '🎯') + '</div>' +
+          '<h1 style="font-size:24px;font-weight:700;margin:0;">' + data.name + '</h1>' +
+          '<div style="font-size:14px;opacity:0.9;margin-top:8px;">' + data.subtitle + '</div></div>';
+        header.style.padding = '0';
+        if (titleEl) titleEl.textContent = data.name;
+        var html = '';
+        if (data.history) {
+          html += '<div style="padding:16px;background:var(--bg-card);border-radius:12px;margin-bottom:12px;">' +
+            '<h3 style="font-size:16px;font-weight:600;margin:0 0 8px;">📖 活动介绍</h3>' +
+            '<div style="font-size:14px;line-height:1.8;color:var(--text-secondary);">' + data.history + '</div></div>';
+        }
+        if (data.features && data.features.length) {
+          html += '<div style="padding:16px;background:var(--bg-card);border-radius:12px;margin-bottom:12px;">' +
+            '<h3 style="font-size:16px;font-weight:600;margin:0 0 8px;">✨ 亮点</h3>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:6px;">' +
+            data.features.map(function(f){return '<span style="padding:4px 12px;background:var(--bg-alt);border-radius:8px;font-size:12px;">'+f+'</span>';}).join('') +
+            '</div></div>';
+        }
+        if (data.spots && data.spots.length) {
+          html += '<div style="padding:16px;background:var(--bg-card);border-radius:12px;margin-bottom:12px;">' +
+            '<h3 style="font-size:16px;font-weight:600;margin:0 0 8px;">📍 推荐去处</h3>';
+          data.spots.forEach(function(s){
+            html += '<div style="padding:8px 0;border-bottom:1px solid var(--border-light);"><div style="font-size:14px;font-weight:600;">'+s.n+'</div>';
+            if (s.a) html += '<div style="font-size:12px;color:var(--text-muted);margin-top:2px;">📍 '+s.a+'</div>';
+            if (s.d) html += '<div style="font-size:12px;color:var(--text-muted);margin-top:2px;">'+s.d+'</div>';
+            html += '</div>';
+          });
+          html += '</div>';
+        }
+        html += '<a href="weekend.html" style="display:block;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:24px;font-size:14px;text-decoration:none;font-weight:500;margin-top:12px;">← 返回全部活动</a>';
+        html += '<a href="cat.html?c=weekend" style="display:block;text-align:center;padding:12px;background:var(--bg-alt);border-radius:24px;font-size:14px;text-decoration:none;color:var(--primary);font-weight:500;margin-top:8px;">← 周末频道</a>';
+        grid.innerHTML = html;
+      }
+      var relatedEl = document.getElementById('relatedChannels');
+      if (relatedEl) {
+        relatedEl.innerHTML = '<a class="channel-item" href="food.html"><span class="ch-icon">🍜</span><span class="ch-name">杭州美食</span></a>' +
+          '<a class="channel-item" href="museum.html"><span class="ch-icon">�️</span><span class="ch-name">博物馆</span></a>' +
+          '<a class="channel-item" href="history.html"><span class="ch-icon">📜</span><span class="ch-name">杭州历史</span></a>' +
+          '<a class="channel-item" href="street.html"><span class="ch-icon">�</span><span class="ch-name">街巷</span></a>' +
+          '<a class="channel-item" href="coffee.html"><span class="ch-icon">☕</span><span class="ch-name">咖啡馆</span></a>' +
+          '<a class="channel-item" href="laozihao.html"><span class="ch-icon">�</span><span class="ch-name">老字号</span></a>';
+      }
+    })();
+  </script>
+  <script>if(window.IZ&&IZ.layout){document.addEventListener('DOMContentLoaded',IZ.layout.init)}</script>
+</body>
+</html>'''
+
+with open('/Users/asind/PycharmProjects/ihangzhou-helper/weekend.html', 'w', encoding='utf-8') as f:
+    f.write(content)
+print('weekend.html written successfully')

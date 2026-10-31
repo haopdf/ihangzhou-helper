@@ -1,0 +1,169 @@
+/* ============================================
+   iHangzhou 统一 Third-Level 页面样式
+   覆盖：guzhen/temple/chaguan/night-market/scenic/museum/laozihao/
+         travel/food/dessert/coffee/breakfast/tea/history/zhoubian/
+         zhoumo/route/internet/intangible/cat/celebrity/street/
+         hangbang/xiangxiang/dishes 等所有频道详情页
+   使用 CSS vars（来自 style.css），通过 --page-accent 区分频道
+   ============================================ */
+
+/* ── Hero ── */
+.page-hero {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--page-accent, var(--primary)), var(--page-accent-dk, var(--primary-dark)));
+}
+.page-hero img { width:100%; height:100%; object-fit:cover; opacity:0.85; }
+.page-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 30%, rgba(0,0,0,0.55));
+}
+.page-hero .ph-title {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 16px;
+  z-index: 2;
+  color: #fff;
+}
+.page-hero .ph-name { font-size: 24px; font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+.page-hero .ph-sub   { font-size: 13px; opacity: 0.92; margin-top: 4px; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+.page-hero .ph-icon  { font-size: 46px; line-height: 1; margin-bottom: 8px; }
+
+/* ── Body ── */
+.page-body { padding: 16px; }
+@media (min-width: 768px) {
+  .page-hero { height: 300px; }
+  .page-body { max-width: 720px; margin: 0 auto; }
+}
+
+/* ── Badge ── */
+.page-badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px 10px;
+  background: var(--page-accent-bg, var(--primary-100));
+  color: var(--page-accent, var(--primary));
+  border-radius: 10px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* ── Info Grid ── */
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 12px 0 16px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.info-row {
+  display: flex;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-card);
+}
+.info-row:last-child { border-bottom: none; }
+.info-row .ik { font-size: 12px; font-weight: 600; color: var(--text-secondary); min-width: 56px; flex-shrink: 0; }
+.info-row .iv { font-size: 13px; color: var(--text); }
+
+/* ── Section ── */
+.page-section { margin: 20px 0 8px; }
+.page-section h3 {
+  font-size: 16px; font-weight: 700;
+  margin: 0 0 10px;
+  padding-left: 8px;
+  border-left: 3px solid var(--page-accent, var(--primary));
+}
+
+/* ── Feature List ── */
+.feat-list { display: flex; flex-direction: column; gap: 6px; }
+.feat-list .feat-item {
+  font-size: 13px;
+  color: var(--text);
+  padding: 8px 12px;
+  background: var(--bg);
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+.feat-list .feat-item::before {
+  content: '\2713';
+  color: var(--page-accent, var(--primary));
+  font-weight: 700;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Info Card ── */
+.info-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: var(--bg-card);
+  border-radius: 10px;
+  border: 1px solid var(--border-light);
+}
+.info-card .ic-ico { font-size: 22px; flex-shrink: 0; }
+.info-card .ic-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.info-card .ic-desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+/* ── Neighbor Grid (相关推荐) ── */
+.neighbor-grid {
+  margin-top: 24px;
+  border-top: 8px solid var(--bg);
+  padding-top: 16px;
+}
+.neighbor-grid h3 { font-size: 15px; font-weight: 700; margin: 0 0 12px; }
+.neighbor-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.neighbor-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: var(--bg);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+}
+.neighbor-card:active { opacity: 0.7; }
+
+/* ── Empty State ── */
+.page-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+.page-empty .ei-big { font-size: 64px; margin-bottom: 16px; }
+
+/* ── Breadcrumb / Back ── */
+.page-back {
+  display: block;
+  margin: 18px 16px 20px;
+  padding: 14px;
+  text-align: center;
+  background: var(--primary);
+  color: #fff !important;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+
+/* ── Old aliases (兼容之前各个页面不同的 classname) ── */
+.guzhen-hero, .cg-hero, .nm-hero, .tp-hero, .sc-hero, .food-hero,
+.chaguan-hero, .dessert-hero, .coffee-hero, .breakfast-hero, .tea-hero,
+.laozihao-hero, .street-hero, .hangbang-hero, .xiangxiang-hero, .museum-hero,
+.tushuguan-hero, .history-hero, .zhoubian-hero, .zhoumo-hero { /* fallback */ }
