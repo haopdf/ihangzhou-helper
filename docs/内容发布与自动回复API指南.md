@@ -308,23 +308,66 @@ Authorization: Bearer {password}
 
 ## 3. 公众号关键词 → 自动回复（链接 / 图文 / 小程序）
 
-关键词数据由公众号回调接口 `api/wechat.js` 消费。通过 `api/content` 的
-`wechatKeywordsBatch` 批量写入（**已存在的主关键词自动跳过**）。
+### 3.0 数据存储两层模型（重要）
+
+公众号回调接口 `api/wechat.js` 的关键词来源是**两层合并**：
+
+| 层 | 存储 | 说明 |
+|----|------|------|
+| 基础层 | 仓库 `data/cms.json` 的 `wechatKeywords` | 随 git 提交，**部署即生效**，版本可控 |
+| 覆盖层 | Vercel Blob `wechat-keywords.json` | 线上运行时热更新，**无需重新部署**，`keyword` 同名时覆盖基础层 |
+
+> 合并策略：`基础层 ∪ 覆盖层`，同 `keyword` 以覆盖层为准。若想**隐藏**基础层某个词，
+> 在覆盖层写 `{ "keyword": "xxx", "disabled": true }` 即可，无需改仓库。
+
+### 3.0.1 三种改关键词的方式（任选）
+
+1. **改 `data/cms.json` + `git push` 重新部署**（基础层，适合结构性大改，版本可控）。
+2. **本地脚本**（合并 cms.json 进 Blob，适合批量同步）：
+   ```bash
+   BLOB_READ_WRITE_TOKEN=<你的token> node scripts/sync-keywords.mjs
+   ```
+3. **线上 API（推荐，无需部署、无需本地 token）** —— 见 3.0.2。
+
+### 3.0.2 关键字管理 API（Bearer 鉴权，运行时直接写 Blob）
 
 ```
-POST /api/content
-Authorization: Bearer {password}
+POST /api/wechat?action=<动作>
+Authorization: Bearer {CMS_ADMIN_PASSWORD}
 Content-Type: application/json
 ```
 
-```json
-{
-  "type": "wechatKeywordsBatch",
-  "data": {
-    "keywords": [ /* 见下方三类示例 */ ]
-  }
-}
+| action | body | 说明 |
+|--------|------|------|
+| `upsertKeyword` | `{ "keyword":"百富榜", "type":"news", "title":"…", "url":"…", ... }` | 新增或覆盖单个关键词（写入 Blob 覆盖层） |
+| `deleteKeyword` | `{ "keyword":"百富榜" }` | 删除覆盖层关键词；若该词仅存在于基础层，则写 `disabled:true` 覆盖隐藏 |
+| `setKeywords` | `{ "keywords": [ ... ] }` | 整体替换 Blob 覆盖层（批量全量同步，等价于脚本） |
+| `listKeywords` | 无 | 返回 `baseCount` / `overlayCount` / `activeCount` 及全量列表（调试用） |
+
+> 每次写入后服务端内存缓存立即失效，最多 **10 秒内** 全量生效（其余热实例缓存窗口）。
+
+示例（新增「百富榜」关键词，立即对公众号生效）：
+
+```bash
+curl -X POST 'https://www.ihangzhou.net/api/wechat?action=upsertKeyword' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer ihangzhou2024' \
+  -d '{
+    "keyword": "百富榜",
+    "aliases": ["胡润百富榜","富豪榜","中国首富","胡润","胡润榜"],
+    "type": "news",
+    "title": "2026 胡润百富榜正式发布",
+    "desc": "最新中国富豪榜单",
+    "picUrl": "https://www.ihangzhou.net/images/logo-mark-192.png",
+    "url": "https://hurun.net/zh-CN/Rank/HsRankDetails?pagetype=rich"
+  }'
+# 返回 {"success":true,"action":"upsert","keyword":"百富榜","overlayCount":N}
 ```
+
+> 注：之前文档提到的 `POST /api/content` (`wechatKeywordsBatch`) 并未实现，请以本节的
+> `POST /api/wechat?action=...` 为准。
+
+
 
 ### 3.1 三种回复类型
 

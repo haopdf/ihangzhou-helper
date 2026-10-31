@@ -35,6 +35,13 @@ function mergeKeywords(local, remote) {
   return [...map.values()];
 }
 
+// 过滤被禁用（disabled:true）的关键字。禁用条目仍保留在 Blob 覆盖层中，
+// 以便随时通过 upsert 同 keyword（不带 disabled）恢复。基础层 cms.json 的关键字
+// 也可通过覆盖层写 { keyword, disabled:true } 来隐藏，无需改仓库重新部署。
+function activeKeywords(merged) {
+  return (merged || []).filter(k => !(k && k.disabled));
+}
+
 async function loadKeywords() {
   const now = Date.now();
   if (KW_CACHE.data && KW_CACHE.expires > now) return KW_CACHE.data;
@@ -56,9 +63,99 @@ async function loadKeywords() {
       }
     } catch (e) { console.error('loadKeywords Blob error:', e.message); }
   }
-  const merged = mergeKeywords(DEFAULT_KEYWORDS, remote);
+  const merged = activeKeywords(mergeKeywords(DEFAULT_KEYWORDS, remote));
   KW_CACHE = { data: merged, expires: now + 10000 };
   return merged;
+}
+
+// ========== 关键字 Blob 覆盖层读写（供管理 API 使用） ==========
+const KW_BLOB_KEY = 'wechat-keywords.json';
+
+async function readKwOverlay() {
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token) return [];
+  try {
+    const result = await get(KW_BLOB_KEY, { access: 'private', useCache: false });
+    if (result && result.stream) {
+      const reader = result.stream.getReader();
+      const chunks = []; let done = false;
+      while (!done) { const r = await reader.read(); done = r.done; if (r.value) chunks.push(r.value); }
+      return JSON.parse(Buffer.concat(chunks).toString('utf-8'));
+    }
+  } catch (e) { console.error('readKwOverlay error:', e.message); }
+  return [];
+}
+
+async function writeKwOverlay(arr) {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) throw new Error('服务端未配置 BLOB_READ_WRITE_TOKEN，无法写入 Blob');
+  await put(KW_BLOB_KEY, JSON.stringify(arr), {
+    contentType: 'application/json', access: 'private', allowOverwrite: true
+  });
+}
+
+function isAdmin(req) {
+  const h = req.headers && req.headers.authorization;
+  return h === 'Bearer ' + (process.env.CMS_ADMIN_PASSWORD || 'ihangzhou2024');
+}
+
+// 处理关键字管理动作（Bearer 鉴权）：upsertKeyword / deleteKeyword / setKeywords / listKeywords
+async function handleKeywordAdmin(req, res) {
+  if (!isAdmin(req)) return res.status(401).json({ success: false, error: '需要认证 (Authorization: Bearer <CMS_ADMIN_PASSWORD>)' });
+
+  let body = req.body;
+  if (typeof body === 'string') { try { body = JSON.parse(body); } catch { body = {}; } }
+  body = body || {};
+  const action = req.query && req.query.action;
+
+  try {
+    if (action === 'listKeywords') {
+      const overlay = await readKwOverlay();
+      const active = activeKeywords(mergeKeywords(DEFAULT_KEYWORDS, overlay));
+      return res.status(200).json({
+        success: true,
+        baseCount: DEFAULT_KEYWORDS.length,
+        overlayCount: overlay.length,
+        activeCount: active.length,
+        overlay, active
+      });
+    }
+
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      return res.status(500).json({ success: false, error: '服务端未配置 BLOB_READ_WRITE_TOKEN' });
+    }
+
+    if (action === 'upsertKeyword') {
+      if (!body.keyword) return res.status(400).json({ success: false, error: 'keyword 为必填' });
+      const overlay = await readKwOverlay();
+      const idx = overlay.findIndex(k => k.keyword === body.keyword);
+      if (idx >= 0) overlay[idx] = body; else overlay.push(body);
+      await writeKwOverlay(overlay);
+      KW_CACHE = { data: null, expires: 0 }; // 立即失效内存缓存
+      return res.status(200).json({ success: true, action: 'upsert', keyword: body.keyword, overlayCount: overlay.length });
+    }
+
+    if (action === 'deleteKeyword') {
+      if (!body.keyword) return res.status(400).json({ success: false, error: 'keyword 为必填' });
+      const overlay = await readKwOverlay();
+      const idx = overlay.findIndex(k => k.keyword === body.keyword);
+      if (idx >= 0) overlay.splice(idx, 1);
+      else overlay.push({ keyword: body.keyword, disabled: true }); // 基础层关键字：用 disabled 覆盖隐藏
+      await writeKwOverlay(overlay);
+      KW_CACHE = { data: null, expires: 0 };
+      return res.status(200).json({ success: true, action: 'delete', keyword: body.keyword, overlayCount: overlay.length });
+    }
+
+    if (action === 'setKeywords') {
+      if (!Array.isArray(body.keywords)) return res.status(400).json({ success: false, error: 'keywords 数组为必填' });
+      await writeKwOverlay(body.keywords);
+      KW_CACHE = { data: null, expires: 0 };
+      return res.status(200).json({ success: true, action: 'set', overlayCount: body.keywords.length });
+    }
+
+    return res.status(400).json({ success: false, error: '未知关键字动作：' + action });
+  } catch (e) {
+    return res.status(500).json({ success: false, error: e.message });
+  }
 }
 
 // 需要全量 CMS 数据时（菜单同步等），才读 cms-data.json
@@ -345,6 +442,11 @@ export default async function handler(req, res) {
     } catch (e) {
       return res.status(500).json({ success: false, error: e.message });
     }
+  }
+
+  // 管理后台调用：关键字管理（upsertKeyword / deleteKeyword / setKeywords / listKeywords）
+  if (req.method === 'POST' && req.query && ['upsertKeyword', 'deleteKeyword', 'setKeywords', 'listKeywords'].includes(req.query.action)) {
+    return handleKeywordAdmin(req, res);
   }
 
   // GET 请求 - 微信服务器验证 URL
