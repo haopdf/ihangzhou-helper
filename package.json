@@ -25,7 +25,5 @@
     "@vercel/blob": "^2.8.0",
     "pg": "^8.23.1"
   },
-  "devDependencies": {
-    "playwright": "^1.49.0"
-  }
+  "devDependencies": {}
 }
