@@ -1,0 +1,4 @@
+# 部署构建时排除（git archive / Vercel 忽略），但本地 git 仍正常跟踪
+scripts/ export-ignore
+docs/ export-ignore
+data/ export-ignore

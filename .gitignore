@@ -44,3 +44,8 @@ edge-profile/
 .trae/
 trash/
 obsolete/
+
+# 构建脚本/文档/源数据：开发需要但不进部署包（避免超 Vercel 100MB 上限）
+scripts/
+docs/
+data/
