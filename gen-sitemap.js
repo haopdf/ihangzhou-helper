@@ -6,14 +6,15 @@
  *   2) articles/ 下全部静态文章页（2731 篇，之前完全没收录）
  *   3) 通过 API 发布的文章（Blob 中的 articles-manifest.json -> /p/<slug>）
  *
- * 用法：node scripts/gen-sitemap.js   （已接入 npm run build，每次部署自动刷新）
+ * 用法：node gen-sitemap.js   （已接入 npm run build，每次部署自动刷新）
+ * （本脚本位于仓库根目录，故 ROOT 直接取 __dirname）
  */
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.join(__dirname, '..');
+const ROOT = __dirname;
 const BASE = process.env.SITE_ORIGIN || 'https://www.ihangzhou.net';
 const OUT = path.join(ROOT, 'sitemap.xml');
 const TODAY = new Date().toISOString().slice(0, 10);

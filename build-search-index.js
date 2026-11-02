@@ -3,15 +3,16 @@
  * 从 articles/index.json 提取 {slug, title, cat, short}
  * 输出 articles/search-index.json（移动端用，只带80字符摘要）
  *
- * 用法：node scripts/build-search-index.js  或  npm run build
+ * 用法：node build-search-index.js  或  npm run build
+ * （本脚本位于仓库根目录，故直接以 __dirname 定位 articles/）
  */
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const INDEX_PATH = path.join(__dirname, '..', 'articles', 'index.json');
-const OUT_PATH   = path.join(__dirname, '..', 'articles', 'search-index.json');
+const INDEX_PATH = path.join(__dirname, 'articles', 'index.json');
+const OUT_PATH   = path.join(__dirname, 'articles', 'search-index.json');
 
 const full = JSON.parse(fs.readFileSync(INDEX_PATH, 'utf8'));
 
