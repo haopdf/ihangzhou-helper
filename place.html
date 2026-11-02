@@ -49,6 +49,21 @@
     .place-loading { text-align: center; padding: 80px 16px; color: var(--text-muted); }
     .place-error { text-align: center; padding: 60px 16px; }
     .place-error h1 { font-size: 20px; color: var(--text); margin-bottom: 8px; }
+    /* 目录页（直接访问 place.html 无 id 参数时） */
+    .place-dir-head { padding: 18px 16px 4px; }
+    .place-dir-head h1 { font-size: 20px; font-weight: 700; color: var(--text); margin: 0 0 6px; }
+    .place-dir-head p { font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.6; }
+    .place-dir-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 14px 16px; }
+    .place-dir-card { display: block; padding: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; }
+    .place-dir-card:active { transform: scale(0.98); }
+    .place-dir-ico { font-size: 26px; line-height: 1; margin-bottom: 8px; }
+    .place-dir-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .place-dir-tags { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+    .place-dir-tag { display: inline-block; background: var(--bg-alt); border: 1px solid var(--border-light); border-radius: 10px; padding: 1px 7px; margin: 0 3px 3px 0; }
+    .place-dir-sum { font-size: 12px; color: var(--text-secondary); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .place-dir-err { margin: 14px 16px 0; padding: 12px 14px; background: var(--bg-alt); border-left: 3px solid var(--primary); border-radius: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+    .place-rel { padding: 16px; border-top: 8px solid var(--bg-alt); }
+    .place-rel h2 { font-size: 16px; font-weight: 700; margin: 0 0 12px; }
     /* 面包屑导航：与全站 detail 页（文章 / 频道）一致 */
     .place-crumb { font-size: 12px; color: var(--text-muted); padding: 10px var(--gutter, 16px); background: var(--bg-alt); display: flex; flex-wrap: wrap; align-items: center; }
     .place-crumb a { color: var(--primary); text-decoration: none; }
@@ -81,47 +96,98 @@
       function getParam(name) {
         return new URLSearchParams(location.search).get(name) || '';
       }
-      function renderPlace(place) {
+      function esc(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      }
+      function iconOf(p) {
+        var t = (p.tags && p.tags[0]) || '';
+        var m = t.match(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/u);
+        return m ? m[0] : '📍';
+      }
+
+      /* 目录页：直接访问 place.html（无 id）或 id 未命中时展示全部地点 */
+      function renderDirectory(places, errMsg) {
+        var c = document.getElementById('placeContainer');
+        var rel = document.getElementById('placeRelated');
+        if (rel) rel.innerHTML = '';
+        var cards = places.map(function (p) {
+          var tags = (p.tags || []).slice(0, 3).map(function (t) {
+            return '<span class="place-dir-tag">' + esc(t) + '</span>';
+          }).join(' ');
+          return '<a class="place-dir-card" href="place.html?id=' + encodeURIComponent(p.id) + '">' +
+            '<div class="place-dir-ico">' + iconOf(p) + '</div>' +
+            '<div class="place-dir-name">' + esc(p.name) + '</div>' +
+            '<div class="place-dir-tags">' + tags + '</div>' +
+            '<div class="place-dir-sum">' + esc(p.summary || p.address || '') + '</div>' +
+            '</a>';
+        }).join('');
+        var html = (window.IHZW ? IHZW.breadcrumbHTML('杭州地点', '全部地点') : '') +
+          '<div class="place-dir-head"><h1>📍 杭州地点</h1>' +
+          '<p>共 ' + places.length + ' 个地点攻略，点击卡片查看门票、交通与玩法。</p></div>';
+        if (errMsg) html += '<div class="place-dir-err">' + errMsg + '</div>';
+        html += '<div class="place-dir-grid">' + cards + '</div>';
+        c.innerHTML = html;
+        document.title = '杭州地点 · 全部分类 · iHangzhou';
+      }
+
+      function renderPlace(place, places) {
         var c = document.getElementById('placeContainer');
                 // 面包屑改由 IHZW.breadcrumbHTML 统一渲染（见下方调用）
         if (!place) {
-          c.innerHTML = (window.IHZW?IHZW.breadcrumbHTML('杭州地点','未找到'):'') + '<div class="place-error"><h1>未找到地点</h1><p><a href="index.html">返回首页</a></p></div>';
+          renderDirectory(places || [], '未找到该地点，可能是链接有误。下面是全部地点：');
           return;
         }
         var heroImg = place.image || place.cover || '';
         var tags = (place.tags || []).map(function (t) {
-          return '<span class="place-tag">' + t + '</span>';
+          return '<span class="place-tag">' + esc(t) + '</span>';
         }).join('');
         var metaRows = [];
-        if (place.address) metaRows.push('<div class="place-meta-row"><span class="mi">📍</span><span>' + place.address + '</span></div>');
-        if (place.phone) metaRows.push('<div class="place-meta-row"><span class="mi">📞</span><span>' + place.phone + '</span></div>');
-        if (place.hours) metaRows.push('<div class="place-meta-row"><span class="mi">🕐</span><span>' + place.hours + '</span></div>');
-        if (place.price) metaRows.push('<div class="place-meta-row"><span class="mi">💰</span><span>' + place.price + '</span></div>');
-        if (place.rating) metaRows.push('<div class="place-meta-row"><span class="mi">⭐</span><span>评分 <strong>' + place.rating + '</strong></span></div>');
+        if (place.address) metaRows.push('<div class="place-meta-row"><span class="mi">📍</span><span>' + esc(place.address) + '</span></div>');
+        if (place.phone) metaRows.push('<div class="place-meta-row"><span class="mi">📞</span><span>' + esc(place.phone) + '</span></div>');
+        if (place.hours) metaRows.push('<div class="place-meta-row"><span class="mi">🕐</span><span>' + esc(place.hours) + '</span></div>');
+        if (place.price) metaRows.push('<div class="place-meta-row"><span class="mi">💰</span><span>' + esc(place.price) + '</span></div>');
+        if (place.rating) metaRows.push('<div class="place-meta-row"><span class="mi">⭐</span><span>评分 <strong>' + esc(place.rating) + '</strong></span></div>');
 
         var html = (window.IHZW?IHZW.breadcrumbHTML('杭州地点', place.name):'');
         if (heroImg) {
-          html += '<div class="place-hero"><img src="' + heroImg + '" alt="' + place.name + '" fetchpriority="high" decoding="async"><div class="place-hero-overlay"><h1>' + place.name + '</h1>' + tags + '</div></div>';
+          html += '<div class="place-hero"><img src="' + esc(heroImg) + '" alt="' + esc(place.name) + '" fetchpriority="high" decoding="async"><div class="place-hero-overlay"><h1>' + esc(place.name) + '</h1>' + tags + '</div></div>';
         } else {
-          html += '<div class="place-hero"><div class="place-hero-overlay"><h1>' + place.name + '</h1>' + tags + '</div></div>';
+          html += '<div class="place-hero"><div class="place-hero-overlay"><h1>' + esc(place.name) + '</h1>' + tags + '</div></div>';
         }
         if (metaRows.length) html += '<div class="place-meta">' + metaRows.join('') + '</div>';
-        if (place.summary) html += '<div class="place-summary"><p>' + place.summary + '</p></div>';
+        if (place.summary) html += '<div class="place-summary"><p>' + esc(place.summary) + '</p></div>';
         if (place.content) html += '<div class="place-content">' + place.content + '</div>';
-        if (place.tips) html += '<div class="place-tips"><h3>💡 温馨提示</h3><p>' + place.tips + '</p></div>';
+        if (place.tips) html += '<div class="place-tips"><h3>💡 温馨提示</h3><p>' + esc(place.tips) + '</p></div>';
 
         html += '<div class="place-actions">';
-        if (place.gmap) html += '<a class="place-action primary" href="' + place.gmap + '" target="_blank" rel="noopener">🗺️ 导航前往</a>';
-        if (place.phone) html += '<a class="place-action" href="tel:' + place.phone + '">📞 拨打电话</a>';
-        if (place.website) html += '<a class="place-action" href="' + place.website + '" target="_blank" rel="noopener">🌐 官网</a>';
+        if (place.gmap) html += '<a class="place-action primary" href="' + esc(place.gmap) + '" target="_blank" rel="noopener">🗺️ 导航前往</a>';
+        if (place.phone) html += '<a class="place-action" href="tel:' + esc(place.phone) + '">📞 拨打电话</a>';
+        if (place.website) html += '<a class="place-action" href="' + esc(place.website) + '" target="_blank" rel="noopener">🌐 官网</a>';
         html += '</div>';
         c.innerHTML = html;
+        document.title = place.name + ' · 杭州地点 · iHangzhou';
+
+        /* 相关地点 */
+        var rel = document.getElementById('placeRelated');
+        if (rel && places && places.length > 1) {
+          var others = places.filter(function (p) { return p.id !== place.id; }).slice(0, 4);
+          if (others.length) {
+            rel.innerHTML = '<div class="place-rel"><h2>📌 相关地点</h2><div class="place-dir-grid" style="padding:0">' +
+              others.map(function (p) {
+                return '<a class="place-dir-card" href="place.html?id=' + encodeURIComponent(p.id) + '">' +
+                  '<div class="place-dir-ico">' + iconOf(p) + '</div>' +
+                  '<div class="place-dir-name">' + esc(p.name) + '</div>' +
+                  '<div class="place-dir-sum">' + esc(p.summary || p.address || '') + '</div></a>';
+              }).join('') + '</div></div>';
+          }
+        }
       }
 
       // 从 places.json 加载数据
-      var placeId = getParam('id') || getParam('name') || '';
+      var placeId = getParam('id') || '';
       var placeName = getParam('name') || '';
-      var dataUrl = (location.protocol === 'file__' ? '' : '/') + 'data/places.json';
       fetch('data/places.json').then(function (r) { return r.json(); }).then(function (data) {
         var places = data.places || [];
         var map = {};
@@ -132,8 +198,9 @@
         else if (placeName) {
           for (var k in map) { if (map[k].name === placeName) { found = map[k]; break; } }
         }
-        renderPlace(found);
-      }).catch(function () { renderPlace(null); });
+        if (!placeId && !placeName) { renderDirectory(places); return; }
+        renderPlace(found, places);
+      }).catch(function () { renderDirectory([], '地点数据加载失败，请稍后重试。'); });
     })();
   </script>
 </body>

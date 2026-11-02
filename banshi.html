@@ -167,7 +167,7 @@
     </div>
 
     <!-- 频道服务网格 -->
-    <div class="content">
+    <div class="content" id="channelContent">
       <div class="section-head">
         <h2 id="channelTitle">办事指南 · 全部服务</h2>
         <span class="tip" id="channelCount"></span>
@@ -363,10 +363,26 @@
         fetchRelatedArticles(chips, category.name);
 
         // id 路由：?id=xxx 直达筛选
-        if (window.applyChannelRoute) category = applyChannelRoute(category, {});
+        var routed = false;
+        if (window.applyChannelRoute) {
+          var routedCat = applyChannelRoute(category, {});
+          if (routedCat !== category) { category = routedCat; routed = true; }
+        }
 
-        // 渲染标题与数量
-        document.getElementById('channelTitle').textContent = category.name + ' · 全部服务';
+        // 直达模式：隐藏「便民服务」6 大分区，只展示该主题的服务项
+        if (routed) {
+          var bf = document.getElementById('bfModules');
+          if (bf) bf.style.display = 'none';
+          var rel = document.getElementById('relatedChannels');
+          if (rel) rel.style.display = 'none';
+          var rh = document.getElementById('channelHeader');
+          if (rh) rh.style.display = 'none';
+        }
+
+        // 渲染标题与数量（直达模式下沿用 applyChannelRoute 设置的标题）
+        if (!routed) {
+          document.getElementById('channelTitle').textContent = category.name + ' · 全部服务';
+        }
         document.getElementById('channelCount').textContent = '共 ' + category.items.length + ' 项';
 
         // 渲染服务网格

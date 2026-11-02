@@ -25,10 +25,13 @@
     var routeId = (params.get('id') || '').trim();
     if (!routeId) return category;
 
-    // 按 id 或 name 精确匹配
+    // 按 id / name / key / aliases 精确匹配
     var matched = category.items.filter(function (it) {
       if (!it) return false;
       var keys = [it.id, it.name, it.key];
+      if (it.aliases && it.aliases.length) {
+        for (var a = 0; a < it.aliases.length; a++) keys.push(it.aliases[a]);
+      }
       for (var i = 0; i < keys.length; i++) {
         if (keys[i] != null && String(keys[i]).trim() === routeId) return true;
       }

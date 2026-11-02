@@ -213,7 +213,12 @@
         'breakfast.html': '#breakfastContainer', 'dessert.html': '#dessertContainer',
         'chaguan.html': '#cgContainer', 'gujian.html': '#gjContainer', 'tushuguan.html': '#tsContainer',
         'tide.html': '#tideContainer', 'tea.html': '#teaContainer', 'temple.html': '#templeContainer',
-        'zhoumo.html': '#zmContainer', 'articles.html': '#artList', 'scenic.html': '#scenicContent'
+        'zhoumo.html': '#zmContainer', 'articles.html': '#artList', 'scenic.html': '#scenicContent',
+        /* 办事/频道类：只取「服务网格」区，避免把整个频道头 + 便民服务 6 大分区带过来 */
+        'banshi.html': '#channelContent', 'traffic.html': '#channelContent',
+        'celebrity.html': '#channelContent', 'street.html': '#channelContent',
+        'zhaopin.html': '#channelContent', 'internet.html': '#channelContent',
+        'history.html': '#channelContent', 'food.html': '#channelContent'
       };
       function destSelector(dest) {
         var base = (dest.split('?')[0] || '').split('#')[0];
@@ -314,6 +319,14 @@
             var main = d ? d.querySelector(destSelector(dest)) : null;
             var txt = main ? (main.textContent || '').replace(/\s+/g, '') : '';
             var busy = main ? /正在加载|加载中|加载失败/.test(main.textContent || '') : true;
+            /* 频道页的 service-grid 由 JS 异步渲染：网格为空说明尚未就绪，
+               否则会误抓静态标题（如「办事指南 · 全部服务」）当成正文 */
+            if (main) {
+              var grids = main.querySelectorAll('.service-grid');
+              for (var g = 0; g < grids.length; g++) {
+                if (!grids[g].children.length) { busy = true; break; }
+              }
+            }
             if (main && txt.length > 8 && !busy) { extract(d, main); return; }
             if (tries >= 60) { fail(); return; }
             setTimeout(poll, 100);

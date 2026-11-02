@@ -476,7 +476,7 @@ window.CAT_DATA = [
           ['🏦', '余额查询', 'banshi.html'], ['💸', '租房提取', 'banshi.html?id=gjj'],
           ['🏠', '购房提取', 'banshi.html?id=gjj-goufang'], ['🔁', '还贷提取', 'banshi.html?id=gjj-huandai'],
           ['📄', '转移接续', 'banshi.html?id=gjj-zhuanyi'], ['🏗️', '贷款测算', 'banshi.html?id=gjj-daikuan'],
-          ['👴', '退休提取', 'banshi.html?id=gjj-tuixiu'], ['📊', '缴存证明', 'banshi.html?id=gij-cunzheng']
+          ['👴', '退休提取', 'banshi.html?id=gjj-tuixiu'], ['📊', '缴存证明', 'banshi.html?id=gjj-cunzheng']
         ],
         ft: [
           ['🧰', '办事大厅频道', '全部办事入口', 'banshi.html'],
@@ -746,7 +746,7 @@ window.CAT_DATA = [
         th: [
           ['💳', '社保新政', 'life.html'], ['🏦', '公积金调整', 'life.html'],
           ['🏠', '住房政策', 'life.html'], ['🎓', '教育新政', 'life.html'],
-          ['🏥', '医保变化', 'banshi.html?id=shebao-laoyang'], ['👴', '养老待遇', 'banshi.html?id=shebao'],
+          ['🏥', '医保变化', 'banshi.html?id=shebao-yibao'], ['👴', '养老待遇', 'banshi.html?id=shebao-laoyang'],
           ['💼', '就业补贴', 'life.html'], ['🧾', '税费调整', 'life.html']
         ],
         ft: [
