@@ -277,6 +277,29 @@
     .p-cards-img-ph {
       opacity: 0.4;
     }
+    /* 设计化占位卡：真实图片缺失时显示（渐变 + emoji + 景点名），避免破图 */
+    .p-cards-img-ph2 {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(135deg, var(--primary-dark, #15603f), #0c3a26);
+      color: #fff;
+      text-align: center;
+    }
+    .p-cards-img-ph2 .ph2-emoji {
+      font-size: 30px;
+      line-height: 1;
+    }
+    .p-cards-img-ph2 .ph2-name {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 0 8px;
+      opacity: 0.95;
+    }
     .p-cards-name {
       font-size: 14px;
       font-weight: 600;
@@ -326,14 +349,14 @@
       padding-left: 8px;
       border-left: 3px solid var(--secondary);
     }
-    .p-hist {
+    .p-hist-wrap {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
-    .p-hist {
+    .p-hist-wrap .p-hist {
       display: inline-block;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      background: linear-gradient(135deg, #15603f, #0c3a26);
       color: #fff;
       font-size: 12px;
       padding: 5px 14px;
@@ -400,6 +423,19 @@
       border-radius: 12px;
       font-weight: 500;
     }
+    .p-landmark {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
+      border: 1px solid var(--border);
+    }
+    .p-landmark:active {
+      transform: scale(0.96);
+    }
+    .p-landmark:hover {
+      background: var(--primary);
+      color: #fff;
+    }
     .p-infogrid-link {
       display: block;
       margin-top: 10px;
@@ -454,6 +490,16 @@
       font-size: 12px;
       color: var(--text-muted);
       margin-bottom: 18px;
+    }
+    .p-cards-detail {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      background: var(--bg-alt);
+      border-left: 3px solid var(--primary);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 16px;
     }
     .p-cards-btn {
       display: block;
@@ -550,7 +596,7 @@
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       }
       /* 城市名片：横排 */
-      #detailView .p-hist {
+      #detailView .p-hist-wrap {
         display: inline-flex;
         flex-wrap: wrap;
         gap: 8px;
@@ -689,7 +735,7 @@
     function renderDetail(d) {
       var view = document.getElementById('detailView');
       var landmarks = (d.landmarks || []).map(function (l) {
-        return '<span class="p-card">' + l + '</span>';
+        return '<span class="p-card p-landmark" data-name="' + l + '" data-district="' + d.name + '">' + l + '</span>';
       }).join('');
 
       // 按 type 分组渲染景点（景区/古村/寺院/溶洞/工业旅游/博物馆/主题公园等）
@@ -705,8 +751,8 @@
         var items = groups[type].map(function (s) {
           var imgName = (s.name || '').replace(/[\s（）()·、]/g, '-');
           var imgSrc = 'images/scenic/district/' + d.id + '-' + (s._idx+1) + '-' + imgName + '.jpg';
-          return '<div class="p-cards-item" data-name="' + s.name + '" data-district="' + d.name + '">' +
-            '<div class="p-cards-img" data-img="' + imgSrc + '">' +
+          return '<div class="p-cards-item" data-name="' + s.name + '" data-district="' + d.name + '" data-desc="' + (s.desc || '').replace(/"/g, '&quot;') + '">' +
+            '<div class="p-cards-img" data-img="' + imgSrc + '" data-name="' + s.name + '">' +
               '<span class="p-cards-img-ph">🏞️</span>' +
             '</div>' +
             '<div class="p-cards-name">' + s.name + '</div>' +
@@ -768,7 +814,7 @@
             '<h2>📖 区县概况</h2>' +
             '<div class="p-card-desc">' + d.desc + '</div>' +
           '</div>' +
-          (highlights ? '<div class="p-section"><h2>✨ 城市名片</h2><div class="p-hist">' + highlights + '</div></div>' : '') +
+          (highlights ? '<div class="p-section"><h2>✨ 城市名片</h2><div class="p-hist-wrap">' + highlights + '</div></div>' : '') +
           '<div class="p-section">' +
             '<h2>✨ 特色亮点</h2>' +
             '<div class="p-feat">' + d.features + '</div>' +
@@ -866,18 +912,43 @@ document.getElementById('listView').style.display = 'none';
 
       // 景点卡片点击：弹详情 + 尝试加载图片
       document.getElementById('detailView').addEventListener('click', function (e) {
+        // 重要地标：点击弹出高德/百度导航
+        var lm = e.target.closest('.p-landmark');
+        if (lm) {
+          var lname = lm.getAttribute('data-name');
+          var ldist = lm.getAttribute('data-district') || '';
+          if (!lname) return;
+          var lamap = 'https://uri.amap.com/marker?position=&name=' + encodeURIComponent(ldist + lname);
+          var lbaidu = 'https://www.baidu.com/s?wd=' + encodeURIComponent(ldist + lname + ' 攻略');
+          var lhtml = '<div class="p-cards-overlay" onclick="if(event.target===this)this.remove()">' +
+            '<div class="p-cards-card">' +
+              '<div class="p-cards-title">' + lname + '</div>' +
+              '<div class="p-cards-subtitle">' + ldist + ' · 重要地标</div>' +
+              '<a class="p-cards-btn amap" href="' + lamap + '" target="_blank" rel="noopener">📍 高德地图导航</a>' +
+              '<a class="p-cards-btn baidu" href="' + lbaidu + '" target="_blank" rel="noopener">🔍 百度搜攻略</a>' +
+              '<button class="p-cards-close" onclick="this.closest(\'.p-cards-overlay\').remove()">关闭</button>' +
+            '</div>' +
+          '</div>';
+          var old = document.querySelector('.p-cards-overlay');
+          if (old) old.remove();
+          document.body.insertAdjacentHTML('beforeend', lhtml);
+          return;
+        }
         var item = e.target.closest('.p-cards-item');
         if (!item) return;
         var name = item.getAttribute('data-name');
         var district = item.getAttribute('data-district');
+        var desc = item.getAttribute('data-desc') || '';
         if (!name) return;
-        // 弹详情：高德导航 + 百度攻略
+        // 弹详情：简介 + 高德导航 + 百度攻略
         var amap = 'https://uri.amap.com/marker?position=&name=' + encodeURIComponent(district + name);
         var baidu = 'https://www.baidu.com/s?wd=' + encodeURIComponent(district + name + ' 攻略');
+        var descHtml = desc ? '<div class="p-cards-detail">' + desc + '</div>' : '';
         var html = '<div class="p-cards-overlay" onclick="if(event.target===this)this.remove()">' +
           '<div class="p-cards-card">' +
             '<div class="p-cards-title">' + name + '</div>' +
             '<div class="p-cards-subtitle">' + district + '</div>' +
+            descHtml +
             '<a class="p-cards-btn amap" href="' + amap + '" target="_blank" rel="noopener">📍 高德地图导航</a>' +
             '<a class="p-cards-btn baidu" href="' + baidu + '" target="_blank" rel="noopener">🔍 百度搜攻略</a>' +
             '<button class="p-cards-close" onclick="this.closest(\'.p-cards-overlay\').remove()">关闭</button>' +
@@ -888,16 +959,20 @@ document.getElementById('listView').style.display = 'none';
         document.body.insertAdjacentHTML('beforeend', html);
       });
 
-      // 图片懒加载：尝试加载，失败保留占位
+      // 图片懒加载：加载真实图片；失败则用设计化占位卡（渐变 + emoji + 景点名），避免破图
       setTimeout(function () {
         document.querySelectorAll('.p-cards-img[data-img]').forEach(function (box) {
           var src = box.getAttribute('data-img');
+          var nm = box.getAttribute('data-name') || '';
           var img = new Image();
           img.onload = function () {
             box.innerHTML = '';
             box.appendChild(img);
           };
-          img.onerror = function () { /* 保留占位 */ };
+          img.onerror = function () {
+            box.innerHTML = '<div class="p-cards-img-ph2"><span class="ph2-emoji">🏞️</span>' +
+              '<span class="ph2-name">' + nm + '</span></div>';
+          };
           img.src = src;
         });
       }, 200);

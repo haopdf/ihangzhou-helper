@@ -3463,14 +3463,14 @@ function showMetro() {
         var settingsPanel = document.getElementById('settingsPanel');
         if (overlay) overlay.classList.remove('active');
         if (settingsPanel) settingsPanel.classList.remove('active');
-        // 切换到"杭州"：在首页则刷新，在其他页（如 district.html）则跳回首页
+        // 切换到"杭州"：先重置首页区县卡片，再判断是否在首页
         if (id === 'hangzhou') {
+          if (typeof renderDistrictInfo === 'function') renderDistrictInfo();
+          if (typeof renderTodayHangzhou === 'function') renderTodayHangzhou();
           var isIndex = location.pathname === '/' ||
             /\/index\.html?$/i.test(location.pathname) ||
             location.pathname.endsWith('/ihangzhou-helper/');
           if (isIndex) {
-            if (typeof renderTodayHangzhou === 'function') renderTodayHangzhou();
-            if (typeof renderDistrictInfo === 'function') renderDistrictInfo();
             showToast('已切换到 ' + d.full);
             return;
           }
@@ -3547,7 +3547,7 @@ function showMetro() {
         '<div class="di-section-title">🏛️ 地标</div>' +
         '<div class="di-landmark-list">' +
         info.landmarks.map(function(l) {
-          return '<span class="di-landmark">' + l + '</span>';
+          return '<span class="di-landmark" onclick="window._ihzOpenDistrictLandmark && window._ihzOpenDistrictLandmark(\'' + l.replace(/'/g, "\\'") + '\')">' + l + '</span>';
         }).join('') +
         '</div></div>';
     }
@@ -3592,7 +3592,20 @@ function showMetro() {
       '<a class="di-gov-link" style="display:block;text-align:center;margin-bottom:10px;" href="https://uri.amap.com/search?keyword=' + encodeURIComponent('杭州' + name) + '&city=330100" target="_blank" rel="noopener">🧭 高德地图导航</a>' +
       '<a class="di-gov-link" style="display:block;text-align:center;margin-bottom:10px;background:var(--bg-alt);color:var(--text);border:1px solid var(--border);" href="https://www.baidu.com/s?wd=' + encodeURIComponent('杭州' + name + ' 游玩攻略') + '" target="_blank" rel="noopener">🔍 百度搜索攻略</a>' +
       '<a class="di-gov-link" style="display:block;text-align:center;" href="travel.html" target="_blank" rel="noopener">🗺️ 查看更多杭州景点</a>';
-    modal.classList.add('show');
+    modal.classList.add('active');
+  };
+
+  // 区县地标点击弹窗（与景点一致，使用 .active 弹窗）
+  window._ihzOpenDistrictLandmark = function (name) {
+    var modal = document.getElementById('modalOverlay');
+    var mTitle = document.getElementById('modalTitle');
+    var mBody = document.getElementById('modalBody');
+    if (!modal || !mTitle || !mBody) return;
+    mTitle.textContent = '🏛️ ' + name;
+    mBody.innerHTML =
+      '<a class="di-gov-link" style="display:block;text-align:center;margin-bottom:10px;" href="https://uri.amap.com/search?keyword=' + encodeURIComponent('杭州' + name) + '&city=330100" target="_blank" rel="noopener">🧭 高德地图导航</a>' +
+      '<a class="di-gov-link" style="display:block;text-align:center;background:var(--bg-alt);color:var(--text);border:1px solid var(--border);" href="https://www.baidu.com/s?wd=' + encodeURIComponent('杭州' + name + ' 介绍') + '" target="_blank" rel="noopener">🔍 百度搜索介绍</a>';
+    modal.classList.add('active');
   };
 
   function bindCityDropdown() {
@@ -4581,6 +4594,14 @@ function init() {
   window._setFontSize = setFontSize;
   window.showCheckin = showCheckin;
   window._doCheckin = doCheckin;
+
+  // bfcache 回退（浏览器前进/后退）时重新渲染首页区县卡片与实时信息，
+  // 避免从 district.html 返回首页后 #districtInfo 仍显示旧区县内容
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted !== true) return;
+    if (typeof renderDistrictInfo === 'function') renderDistrictInfo();
+    if (typeof renderTodayHangzhou === 'function') renderTodayHangzhou();
+  });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
