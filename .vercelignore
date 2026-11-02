@@ -19,4 +19,3 @@ scripts/
 !scripts/build-search-index.js
 !scripts/gen-sitemap.js
 docs/
-data/
