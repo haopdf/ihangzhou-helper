@@ -4,7 +4,17 @@
   'use strict';
 
   var ANALYTICS_API = '/api/tools?action=track';
+  var ANALYTICS_BATCH_API = '/api/tools?action=trackBatch';
   var FEEDBACK_API = '/api/tools?action=feedback';
+
+  // ===== 批量缓冲上报 =====
+  // PV / 点击事件先入队，满 FLUSH_MAX 条或每 FLUSH_INTERVAL 毫秒合并一次上报，
+  // 避免「每次页面切换都触发一次 POST + 服务端 Blob 读-改-写」的 I/O 放大；
+  // 页面隐藏 / 卸载时立即冲刷，减少数据丢失。
+  var queue = [];
+  var flushTimer = null;
+  var FLUSH_INTERVAL = 5000;
+  var FLUSH_MAX = 20;
 
   // ===== UUID（持久访客标识） =====
   function getUuid() {
@@ -34,11 +44,30 @@
 
   function todayStr() { return new Date().toISOString().slice(0, 10); }
 
-  // ===== 数据发送 =====
+  // ===== 数据发送（入队 + 批量冲刷） =====
+  function flush() {
+    if (flushTimer) { clearTimeout(flushTimer); flushTimer = null; }
+    if (!queue.length) return;
+    var batch = queue;
+    queue = [];
+    try {
+      fetch(ANALYTICS_BATCH_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ events: batch }),
+        keepalive: true // 允许在页面卸载过程中继续发送
+      }).catch(function() {
+        // 网络异常直接丢弃：统计用途，不做无限重试
+      });
+    } catch (e) { /* 环境不支持 fetch */ }
+  }
+
   function send(data) {
     // 始终携带当前页面（含 hash）
     if (!data.page) data.page = location.pathname + (location.hash || '');
-    fetch(ANALYTICS_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).catch(function() {});
+    queue.push(data);
+    if (queue.length >= FLUSH_MAX) { flush(); return; }
+    if (!flushTimer) flushTimer = setTimeout(flush, FLUSH_INTERVAL);
   }
 
   // ===== 获取当前页面标识（含独立频道页与 hash） =====
@@ -79,6 +108,7 @@
       '<div class="fb-field"><label>联系方式（选填）</label><input type="text" id="fbContact" placeholder="微信号/手机/邮箱，便于我们回复您"></div>' +
       '<button class="btn btn-primary" onclick="submitFeedback()">提交反馈</button>' +
       '<p class="fb-tip">感谢您的反馈！我们会认真处理每一条意见</p>' +
+      '<p style="font-size:11px;color:#999;margin-top:6px;line-height:1.5;">📊 本站仅采集匿名访问统计（PV / 点击）用于改进内容，不收集姓名、手机号等个人身份信息。</p>' +
     '</div>';
     openModal('💬 意见反馈', html);
     document.querySelectorAll('.fb-type-btn').forEach(function(btn) {
@@ -119,6 +149,11 @@
     window.addEventListener('hashchange', function() {
       setTimeout(trackPageView, 200);
     });
+    // 页面隐藏 / 卸载时冲刷缓冲队列
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'hidden') flush();
+    });
+    window.addEventListener('pagehide', flush);
     // 反馈按钮
     if (!document.getElementById('feedbackBtn')) {
       var btn = document.createElement('div');

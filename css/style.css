@@ -3946,11 +3946,10 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
   .p-hero { display: flex; flex-direction: column; justify-content: flex-end; }
   .p-hero-inner { width: 1180px; max-width: 100%; }
 }
-  .travel-hero.ch-hero {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 22px 20px 18px;
-  }
+.travel-hero.ch-hero {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 22px 20px 18px;
 }
 [data-theme="dark"] .ch-hero { box-shadow: 0 4px 16px -8px rgba(0,0,0,0.5); }
 

@@ -3,6 +3,16 @@
 const fs = require('fs');
 const path = require('path');
 
+// 读取当前资源版本号（与 index.html 一致），避免生成文章页时写入过期 hash
+function currentAssetVersion() {
+  try {
+    var html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+    var m = html.match(/\?v=([a-z0-9]+)/);
+    return m ? '?v=' + m[1] : '';
+  } catch (e) { return ''; }
+}
+var ASSET_VER = currentAssetVersion();
+
 const raw = fs.readFileSync(path.join(__dirname, 'data', 'places.json'), 'utf8');
 const data = JSON.parse(raw);
 const places = data.places || [];
@@ -49,7 +59,7 @@ function genPlaceArticle(p) {
     '  <meta property="og:image" content="' + p.cover + '">\n' +
     '  <link rel="canonical" href="https://www.ihangzhou.net/place/' + p.id + '.html">\n' +
     '  <link rel="manifest" href="../manifest.json">\n' +
-    '  <link rel="stylesheet" href="../css/style.css?v=20261018l">\n' +
+    '  <link rel="stylesheet" href="../css/style.min.css' + ASSET_VER + '">\n' +
     '  <link rel="icon" href="data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><text y=\'.9em\' font-size=\'90\'>🏔️</text></svg>">\n' +
     '  <style>\n' +
     '    .pa-hero { position: relative; height: 220px; overflow: hidden; background: #0ea5e9; }\n' +
@@ -114,7 +124,7 @@ function genPlaceArticle(p) {
     '      <a class="pa-action" href="../index.html#discover">← 返回发现</a>\n' +
     '    </div>\n' +
     '  </article>\n\n' +
-    '  <script src="../js/app.js?v=20261018l"></script>\n' +
+    '  <script src="../js/app.min.js' + ASSET_VER + '"></script>\n' +
     '  <script>\n' +
     '    window.toggleFavoritePlace = function (id, name) {\n' +
     '      try {\n' +

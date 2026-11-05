@@ -13,10 +13,10 @@
   <link rel="canonical" href="https://www.ihangzhou.net/internet.html">
   <link rel="manifest" href="manifest.json">
   <title>互联网大厂 · iHangzhou 杭州生活助手</title>
-  <link rel="stylesheet" href="css/style.css?v=20261018l">
-  <script src="js/layout.js?v=20261018l"></script>
+  <link rel="stylesheet" href="css/style.min.css?v=50599ed0f3">
+  <script src="js/layout.min.js?v=50599ed0f3"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
-<style>:root{--primary:#0891b2;--primary-dark:#0e7490}</style><link rel="stylesheet" href="css/channel.css?v=20261018l">
+<style>:root{--primary:#0891b2;--primary-dark:#0e7490}</style><link rel="stylesheet" href="css/channel.min.css?v=50599ed0f3">
 </head>
 <body class="ch-page">
   <nav class="site-breadcrumb"><a href="index.html">首页</a><span class="sb-sep">›</span><b>互联网大厂</b></nav>
@@ -71,9 +71,9 @@
     </div>
   </div>
 
-  <script src="js/channel-route.js?v=20261018l"></script>
-  <script src="js/app.js?v=20261018l"></script>
-<script src="js/analytics.js?v=20261018l"></script>
+  <script src="js/channel-route.min.js?v=50599ed0f3"></script>
+  <script src="js/app.min.js?v=50599ed0f3"></script>
+<script src="js/analytics.min.js?v=50599ed0f3"></script>
   <script>
     // 频道专题页逻辑
     (function () {
@@ -107,21 +107,28 @@
         var allChips = (chips || []).slice(0, 3);
         if (categoryName) allChips.unshift(categoryName);
 
-        fetch('articles/index.json')
-          .then(function(r) { return r.json(); })
-          .then(function(list) {
-            var matched = [];
-            list.forEach(function(a) {
+        // 相关文章：优先服务端按需过滤（q=频道关键词）；接口不可用/失败时回退全量 index.json
+        var q = encodeURIComponent(allChips.filter(function (k) { return k; }).join(','));
+        var loadRelated = fetch('/api/articles-index?q=' + q + '&limit=5').then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        }).then(function (res) {
+          if (res && res.success && Array.isArray(res.data)) return res.data;
+          throw new Error('api unavailable');
+        }).catch(function () {
+          return fetch('articles/index.json').then(function (r) { return r.json(); }).then(function (list) {
+            var out = [];
+            list.forEach(function (a) {
               for (var i = 0; i < allChips.length; i++) {
                 var kw = allChips[i];
                 if (!kw) continue;
-                if (a.title.indexOf(kw) >= 0 || a.summary.indexOf(kw) >= 0 || a.cat.indexOf(kw) >= 0) {
-                  matched.push(a);
-                  break;
-                }
+                if (a.title.indexOf(kw) >= 0 || a.summary.indexOf(kw) >= 0 || a.cat.indexOf(kw) >= 0) { out.push(a); break; }
               }
             });
-            matched = matched.slice(0, 5);
+            return out.slice(0, 5);
+          });
+        });
+        loadRelated.then(function (matched) {
             if (!matched.length) { el.innerHTML = ''; return; }
 
             el.innerHTML =
@@ -258,11 +265,15 @@
         }
       }
 
-      // 初始化
+      // 初始化（等待兜底 categories 就绪后渲染；CMS 数据可用时优先）
+      function startChannelPage() {
+        if (window._ensureCategories) window._ensureCategories().then(renderChannel);
+        else renderChannel();
+      }
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', renderChannel);
+        document.addEventListener('DOMContentLoaded', startChannelPage);
       } else {
-        renderChannel();
+        startChannelPage();
       }
       // 频道页专用初始化（网格点击 + modal 关闭）：app.js 完整 init 被 IZ_SKIP_APP_INIT 跳过，bindEvents() 不执行，需显式调用
       if (window.IZ_INIT_CHANNEL_PAGE) window.IZ_INIT_CHANNEL_PAGE();

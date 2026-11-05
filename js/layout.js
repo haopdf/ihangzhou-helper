@@ -17,6 +17,48 @@
 
   var LOADED = { header: false, footer: false };
 
+  // ===== 图片加载失败兜底（全局，覆盖文章页等共用本脚本的所有 <img>）=====
+  var IHZ_IMG_PLACEHOLDER = (function () {
+    var svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480">' +
+      '<rect width="100%" height="100%" fill="#f3f4f6"/>' +
+      '<g fill="none" stroke="#c6ccd4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">' +
+      '<rect x="300" y="140" width="200" height="140" rx="14"/>' +
+      '<circle cx="352" cy="186" r="20"/>' +
+      '<path d="M316 264 L366 214 L404 248 L444 202 L484 252 L486 264"/>' +
+      '</g>' +
+      '<text x="400" y="330" font-family="sans-serif" font-size="30" fill="#98a0ab" text-anchor="middle">图片未找到</text>' +
+      '</svg>';
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  })();
+
+  function applyImgFallback(img) {
+    if (!img || img.tagName !== 'IMG') return;
+    if (img.getAttribute('data-ihz-fallback') === '1') return;
+    img.setAttribute('data-ihz-fallback', '1');
+    img.onerror = null;
+    img.src = IHZ_IMG_PLACEHOLDER;
+  }
+
+  function initImgFallback() {
+    // img 的 error 不冒泡，必须用捕获监听
+    document.addEventListener('error', function (e) {
+      applyImgFallback(e.target);
+    }, true);
+    // 兼容脚本执行时 img 已解析且已失败的情况
+    var imgs = document.querySelectorAll('img');
+    for (var i = 0; i < imgs.length; i++) {
+      var im = imgs[i];
+      if (im.complete && im.naturalWidth === 0) applyImgFallback(im);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initImgFallback);
+  } else {
+    initImgFallback();
+  }
+
   /**
    * Toast 提示（页面级反馈）
    */
@@ -41,7 +83,7 @@
    * 加载模板并注入
    */
   function loadTemplate(url, target) {
-    return fetch(url + '?v=20261018l')
+    return fetch(url) // 模板为 HTML 片段，无压缩产物，交由服务器缓存策略控制，不拼接版本号
       .then(function (r) { return r.text(); })
       .then(function (html) {
         var wrap = document.createElement('div');

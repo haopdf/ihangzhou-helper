@@ -1,6 +1,8 @@
 // iHangzhou AI 杭州本地助手 - Vercel Serverless
 // 调用阿里云百炼（DashScope）OpenAI 兼容模式
 // 环境变量：DASHSCOPE_API_KEY (在 Vercel Dashboard 配置)
+import { rateLimit, getClientIp } from '../lib/auth.js';
+
 export default async (req, res) => {
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -10,6 +12,11 @@ export default async (req, res) => {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+
+  // 限流：单 IP 30 次/分钟（Serverless 实例内存计数），防止 API Key 额度被恶意刷取
+  if (!rateLimit(getClientIp(req), 30)) {
+    return res.status(429).json({ error: '请求过于频繁，请稍后再试' });
   }
 
   const apiKey = process.env.DASHSCOPE_API_KEY;

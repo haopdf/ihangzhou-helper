@@ -3,6 +3,16 @@
 const fs = require('fs');
 const path = require('path');
 
+// 读取当前资源版本号（与 index.html 一致），避免生成页面时写入过期 hash
+function currentAssetVersion() {
+  try {
+    var html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+    var m = html.match(/\?v=([a-z0-9]+)/);
+    return m ? '?v=' + m[1] : '';
+  } catch (e) { return ''; }
+}
+var ASSET_VER = currentAssetVersion();
+
 const channels = [
   { id: 'banshi', name: '办事指南', icon: '🏛️', desc: '杭州政务办事一站导航，涵盖社保、公积金、落户、证件、人才、补贴等高频办事服务', kw: '杭州办事,社保查询,公积金,落户,杭州政务,ihangzhou' },
   { id: 'traffic', name: '交通出行', icon: '🗺️', desc: '杭州交通出行全攻略，限行查询、地铁公交、火车机票、打车租车、停车缴费、违章处理', kw: '杭州交通,限行查询,地铁,公交,火车,杭州出行,ihangzhou' },
@@ -35,7 +45,7 @@ function genChannelHtml(ch) {
   <link rel="canonical" href="https://www.ihangzhou.net/${ch.id}.html">
   <link rel="manifest" href="manifest.json">
   <title>${ch.name} · iHangzhou 杭州生活助手</title>
-  <link rel="stylesheet" href="css/style.css?v=20261018l">
+  <link rel="stylesheet" href="css/style.min.css${ASSET_VER}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
 </head>
 <body>
@@ -123,7 +133,7 @@ function genChannelHtml(ch) {
     </div>
   </div>
 
-  <script src="js/app.js?v=20261018l"></script>
+  <script src="js/app.min.js${ASSET_VER}"></script>
   <script>
     // 频道专题页逻辑
     (function () {

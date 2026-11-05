@@ -2,19 +2,18 @@
 // 需要配置: BLOB_READ_WRITE_TOKEN（在 Vercel 创建 Blob Storage 后自动获得）
 
 import { createRequire } from 'node:module';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 const __require = createRequire(import.meta.url);
 function reqJson(rel) { try { return __require(rel); } catch (e) { return null; } }
 import { put, get, list, del, head } from '@vercel/blob';
+import { checkAdminAuth } from '../lib/auth.js';
 
-const ADMIN_PASSWORD = process.env.CMS_ADMIN_PASSWORD || 'ihz2024';
 const SITE_ORIGIN = process.env.SITE_ORIGIN || 'https://www.ihangzhou.net';
 
 function checkAuth(req) {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) return false;
-  const [type, token] = authHeader.split(' ');
-  if (type !== 'Bearer') return false;
-  return token === ADMIN_PASSWORD;
+  return checkAdminAuth(req);
 }
 
 // 从 js/app.js 内容中提取 DATA 对象（括号计数法，避免正则无法匹配嵌套大括号）
@@ -50,8 +49,47 @@ function extractDataFromAppJs(content) {
   return null;
 }
 
-// 备用默认内容
-const DEFAULT_CMS = reqJson('../data/cms.json') || {};
+// 备用默认内容：优先 data/cms.json（本地开发）；部署包已移除该文件时，
+// 从始终随站部署的 js/app.js + js/data-categories.js 中提取兜底数据，
+// 避免 Blob 数据缺失时客户端拿到空对象覆盖本地完整内容。
+function seedFromStaticAssets() {
+  var seed = null;
+  try {
+    var content = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'js', 'app.js'), 'utf-8');
+    seed = extractDataFromAppJs(content);
+  } catch (e) { console.error('[content] app.js 兜底数据提取失败:', e.message); }
+  if (!seed) return null;
+  try {
+    var catContent = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'js', 'data-categories.js'), 'utf-8');
+    var m = catContent.match(/window\.IHZ_DATA_CATEGORIES\s*=\s*\[/);
+    if (m) {
+      var start = m.index + m[0].length - 1; // 指向 [
+      var depth = 0, inString = false, stringChar = '', escape = false;
+      for (var i = start; i < catContent.length; i++) {
+        var ch = catContent[i];
+        if (escape) { escape = false; continue; }
+        if (inString) {
+          if (ch === '\\') { escape = true; continue; }
+          if (ch === stringChar) inString = false;
+          continue;
+        }
+        if (ch === '"' || ch === "'" || ch === '`') { inString = true; stringChar = ch; continue; }
+        if (ch === '/' && catContent[i + 1] === '/') { while (i < catContent.length && catContent[i] !== '\n') i++; continue; }
+        if (ch === '[') depth++;
+        else if (ch === ']') {
+          depth--;
+          if (depth === 0) {
+            var cats = JSON.parse(catContent.slice(start, i + 1));
+            if (Array.isArray(cats)) seed.categories = cats;
+            break;
+          }
+        }
+      }
+    }
+  } catch (e) { console.error('[content] data-categories.js 兜底提取失败:', e.message); }
+  return seed;
+}
+const DEFAULT_CMS = reqJson('../data/cms.json') || seedFromStaticAssets() || {};
 
 const BLOB_KEY = 'cms-data.json';
 

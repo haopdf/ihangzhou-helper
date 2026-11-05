@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "vercel dev",
-    "build": "node build-search-index.js && node gen-sitemap.js",
+    "build": "node gen-sitemap.js && node build-index-data.mjs && node build-home-cats.mjs && node build-assets.mjs",
     "migrate": "node scripts/migrate.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,5 +25,7 @@
     "@vercel/blob": "^2.8.0",
     "pg": "^8.23.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
 }

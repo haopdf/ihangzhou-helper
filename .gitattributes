@@ -1,4 +1,4 @@
-# 部署构建时排除（git archive / Vercel 忽略），但本地 git 仍正常跟踪
+# 部署构建时排除（git archive 忽略），但本地 git 仍正常跟踪
+# 注意：data/places.json 为 place.html 运行时硬依赖，必须随部署下发，故不再整体排除 data/
 scripts/ export-ignore
 docs/ export-ignore
-data/ export-ignore

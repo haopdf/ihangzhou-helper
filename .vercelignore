@@ -14,8 +14,6 @@ edge-profile/
 trae/
 trash/
 obsolete/
-# scripts/ 整体不部署，但构建命令依赖下面两个脚本，必须用否定规则放出来
+# scripts/ 整体不部署（构建脚本位于仓库根目录，已在部署包内）
 scripts/
-!scripts/build-search-index.js
-!scripts/gen-sitemap.js
 docs/

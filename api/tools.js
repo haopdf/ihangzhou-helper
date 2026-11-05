@@ -5,7 +5,7 @@ import { createRequire } from 'node:module';
 const __require = createRequire(import.meta.url);
 function reqJson(rel) { try { return __require(rel); } catch (e) { return null; } }
 import { get, put } from '@vercel/blob';
-const ADMIN_PASSWORD = process.env.CMS_ADMIN_PASSWORD || 'ihangzhou2024';
+import { checkAdminAuth, getClientIp } from '../lib/auth.js';
 const FEEDBACK_BLOB = 'feedbacks.json';
 
 async function readFeedbacks() {
@@ -31,10 +31,88 @@ async function writeFeedbacks(list) {
 }
 
 function checkAuth(req) {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) return false;
-  const [type, token] = authHeader.split(' ');
-  return type === 'Bearer' && token === ADMIN_PASSWORD;
+  return checkAdminAuth(req);
+}
+
+// ===== 简易限流（Serverless 实例内存计数；全局最强限制请配合 Vercel Rate Limit / WAF）=====
+const rateBuckets = new Map();
+
+/** 返回 true 表示允许通过；false 表示超限 */
+function checkRateLimit(key, limit, windowMs) {
+  const now = Date.now();
+  const b = rateBuckets.get(key);
+  if (!b || now - b.start > windowMs) {
+    rateBuckets.set(key, { start: now, count: 1 });
+    return true;
+  }
+  b.count++;
+  return b.count <= limit;
+}
+
+// 定期清理过期桶，避免内存膨胀
+setInterval(() => {
+  const now = Date.now();
+  for (const [k, v] of rateBuckets) {
+    if (now - v.start > 2 * 60 * 60 * 1000) rateBuckets.delete(k);
+  }
+}, 10 * 60 * 1000);
+
+function clampStr(v, max) {
+  return typeof v === 'string' ? v.slice(0, max) : v;
+}
+
+// ===== 统计事件归一化 & 聚合（单条 / 批量共用）=====
+function normalizeTrackEvent(raw) {
+  return {
+    action: clampStr(raw && raw.action, 20) || 'click',
+    category: clampStr(raw && raw.category, 64),
+    item: clampStr(raw && raw.item, 200),
+    tab: clampStr(raw && raw.tab, 64),
+    search: clampStr(raw && raw.search, 200),
+    uuid: clampStr(raw && raw.uuid, 64),
+    fp: clampStr(raw && raw.fp, 64),
+    page: clampStr(raw && raw.page, 200),
+    ref: clampStr(raw && raw.ref, 200),
+    day: clampStr(raw && raw.day, 10) || new Date().toISOString().slice(0, 10),
+    t: Date.now()
+  };
+}
+
+function ensureStatsShape(stats) {
+  if (!stats.events) stats.events = [];
+  if (!stats.daily) stats.daily = {};
+  if (!stats.uvs) stats.uvs = {};
+  return stats;
+}
+
+function applyTrackEvent(stats, evt) {
+  stats.events.push(evt);
+  stats.events = stats.events.slice(-10000);
+
+  const d = evt.day;
+  if (!stats.daily[d]) stats.daily[d] = { pv: 0, click: 0, uuids: {}, pages: {}, searches: {} };
+  const dayStat = stats.daily[d];
+  if (evt.action === 'pv') {
+    dayStat.pv++;
+    if (evt.page) dayStat.pages[evt.page] = (dayStat.pages[evt.page] || 0) + 1;
+    if (evt.uuid) dayStat.uuids[evt.uuid] = (dayStat.uuids[evt.uuid] || 0) + 1;
+  } else {
+    dayStat.click++;
+    if (evt.item) dayStat.searches[evt.item] = (dayStat.searches[evt.item] || 0) + 1;
+  }
+
+  if (evt.uuid) {
+    if (!stats.uvs[evt.uuid]) stats.uvs[evt.uuid] = { firstDay: d, lastDay: d, count: 0, pages: {} };
+    stats.uvs[evt.uuid].count++;
+    stats.uvs[evt.uuid].lastDay = d;
+    if (evt.page) stats.uvs[evt.uuid].pages[evt.page] = (stats.uvs[evt.uuid].pages[evt.page] || 0) + 1;
+    // 保持 uvs 大小可控
+    const uvsKeys = Object.keys(stats.uvs);
+    if (uvsKeys.length > 5000) {
+      const sorted = uvsKeys.sort((a, b) => (stats.uvs[a].lastDay < stats.uvs[b].lastDay ? -1 : 1));
+      sorted.slice(0, 1000).forEach(k => delete stats.uvs[k]);
+    }
+  }
 }
 
 // ===== 汇率 =====
@@ -156,49 +234,42 @@ async function handleTrack(req, res) {
   // POST 上报事件
   if (req.method === 'POST') {
     try {
-      const { action, category, item, tab, search, uuid, fp, page, ref, day } = req.body;
-      let stats = await readStats();
-      if (!stats.events) stats.events = [];
-      if (!stats.daily) stats.daily = {};
-      if (!stats.uvs) stats.uvs = {};
-
-      // 记录原始事件
-      const evt = { action: action || 'click', category: category || '', item: item || '', tab: tab || '', search: search || '', uuid: uuid || '', fp: fp || '', page: page || '', ref: ref || '', day: day || new Date().toISOString().slice(0, 10), t: Date.now() };
-      stats.events.push(evt);
-      stats.events = stats.events.slice(-10000);
-
-      // 按天聚合
-      const d = evt.day;
-      if (!stats.daily[d]) stats.daily[d] = { pv: 0, click: 0, uuids: {}, pages: {}, searches: {} };
-      const dayStat = stats.daily[d];
-      if (action === 'pv') {
-        dayStat.pv++;
-        if (page) dayStat.pages[page] = (dayStat.pages[page] || 0) + 1;
-        if (uuid) dayStat.uuids[uuid] = (dayStat.uuids[uuid] || 0) + 1;
-      } else {
-        dayStat.click++;
-        if (item) dayStat.searches[item] = (dayStat.searches[item] || 0) + 1;
+      // 限流：单 IP 300 次/分钟（正常浏览远低于此）
+      if (!checkRateLimit('track:' + getClientIp(req), 300, 60 * 1000)) {
+        return res.status(429).json({ success: false, error: '请求过于频繁，请稍后再试' });
       }
-
-      // 全局 UV 统计
-      if (uuid) {
-        if (!stats.uvs[uuid]) stats.uvs[uuid] = { firstDay: d, lastDay: d, count: 0, pages: {} };
-        stats.uvs[uuid].count++;
-        stats.uvs[uuid].lastDay = d;
-        if (page) stats.uvs[uuid].pages[page] = (stats.uvs[uuid].pages[page] || 0) + 1;
-        // 保持 uvs 大小可控
-        const uvsKeys = Object.keys(stats.uvs);
-        if (uvsKeys.length > 5000) {
-          const sorted = uvsKeys.sort((a, b) => (stats.uvs[a].lastDay < stats.uvs[b].lastDay ? -1 : 1));
-          sorted.slice(0, 1000).forEach(k => delete stats.uvs[k]);
-        }
-      }
-
+      const body = req.body || {};
+      let stats = ensureStatsShape(await readStats());
+      applyTrackEvent(stats, normalizeTrackEvent(body));
       await writeStats(stats);
       return res.status(200).json({ success: true });
     } catch (e) { return res.status(200).json({ success: true, error: e.message }); }
   }
   res.status(400).json({ error: 'Invalid request' });
+}
+
+// 批量上报（analytics.js 的缓冲队列调用）：一次请求写入多条事件，
+// 相比逐条 POST 显著降低 Blob 读-改-写次数
+async function handleTrackBatch(req, res) {
+  if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
+  const rawEvents = req.body && Array.isArray(req.body.events) ? req.body.events : null;
+  if (!rawEvents) return res.status(400).json({ success: false, error: '缺少 events 数组' });
+  if (rawEvents.length > 100) return res.status(400).json({ success: false, error: '单次最多 100 条事件' });
+  // 限流：单 IP 300 次/分钟（与单条上报共用计数）
+  if (!checkRateLimit('track:' + getClientIp(req), 300, 60 * 1000)) {
+    return res.status(429).json({ success: false, error: '请求过于频繁，请稍后再试' });
+  }
+  try {
+    let stats = ensureStatsShape(await readStats());
+    let applied = 0;
+    rawEvents.forEach(function (raw) {
+      if (!raw || typeof raw !== 'object') return;
+      applyTrackEvent(stats, normalizeTrackEvent(raw));
+      applied++;
+    });
+    await writeStats(stats);
+    return res.status(200).json({ success: true, received: applied });
+  } catch (e) { return res.status(200).json({ success: true, error: e.message }); }
 }
 
 function buildDashboard(stats) {
@@ -263,11 +334,22 @@ async function handleFeedback(req, res) {
 
   if (req.method === 'POST') {
     try {
-      const { type, content, contact, url, ua } = req.body;
+      // 限流：单 IP 10 次/小时，防恶意灌库
+      if (!checkRateLimit('feedback:' + getClientIp(req), 10, 60 * 60 * 1000)) {
+        return res.status(429).json({ success: false, error: '提交过于频繁，请稍后再试' });
+      }
+      const body = req.body || {};
+      const content = clampStr(body.content, 2000);
+      const contact = clampStr(body.contact, 200);
+      const url = clampStr(body.url, 300);
+      const ua = clampStr(body.ua, 300);
       if (!content || content.trim().length < 2) return res.status(400).json({ success: false, error: '内容太短' });
-      const feedback = { id: Date.now().toString(36) + Math.random().toString(36).substr(2), type: type || 'suggest', content: content.trim(), contact: contact || '', url: url || '', ua: ua || '', time: new Date().toISOString(), status: 'pending' };
+      if (content.length > 2000 || contact.length > 200) return res.status(400).json({ success: false, error: '内容超出长度限制' });
+      const feedback = { id: Date.now().toString(36) + Math.random().toString(36).substr(2), type: clampStr(body.type, 20) || 'suggest', content: content.trim(), contact: contact.trim(), url: url, ua: ua, time: new Date().toISOString(), status: 'pending' };
       let feedbacks = await readFeedbacks();
       feedbacks.push(feedback);
+      // 条数上限：只保留最近 5000 条，防止 Blob 无限膨胀
+      if (feedbacks.length > 5000) feedbacks = feedbacks.slice(-5000);
       await writeFeedbacks(feedbacks);
       return res.status(200).json({ success: true, id: feedback.id });
     } catch (error) { return res.status(500).json({ success: false, error: '提交失败: ' + error.message }); }
@@ -406,6 +488,8 @@ export default async (req, res) => {
         return res.json(await handleYaohao(req));
       case 'track':
         return await handleTrack(req, res);
+      case 'trackBatch':
+        return await handleTrackBatch(req, res);
       case 'feedback':
         return await handleFeedback(req, res);
       case 'heatmap':
@@ -414,7 +498,7 @@ export default async (req, res) => {
       case 'keywords_batch':
         return await handleKeywords(req, res);
       default:
-        return res.json({ success: false, error: '未知动作', available: ['forex', 'gold', 'metro', 'yaohao', 'track', 'feedback', 'keywords', 'keywords_batch'] });
+        return res.json({ success: false, error: '未知动作', available: ['forex', 'gold', 'metro', 'yaohao', 'track', 'trackBatch', 'feedback', 'keywords', 'keywords_batch'] });
     }
   } catch (e) {
     return res.status(500).json({ success: false, error: e.message });

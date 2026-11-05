@@ -12,12 +12,12 @@
 // 防重复：POST 时 body.action = 'check'（公开查重）| 'reserve'（占坑锁）| 省略即正式发布
 
 import { put, get, del } from '@vercel/blob';
+import { checkAdminAuth } from '../lib/auth.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ADMIN_PASSWORD = process.env.CMS_ADMIN_PASSWORD || 'ihangzhou2024';
 const SITE_ORIGIN = process.env.SITE_ORIGIN || 'https://www.ihangzhou.net';
 
 const MANIFEST_KEY = 'articles-manifest.json';
@@ -32,10 +32,7 @@ const LOCAL_DIR = path.join(__dirname, '..', 'data', '.articles');
 const hasBlob = () => !!process.env.BLOB_READ_WRITE_TOKEN;
 
 function checkAuth(req) {
-  const h = req.headers && req.headers.authorization;
-  if (!h) return false;
-  const [type, token] = h.split(' ');
-  return type === 'Bearer' && token === ADMIN_PASSWORD;
+  return checkAdminAuth(req);
 }
 
 function safeSlug(slug) {

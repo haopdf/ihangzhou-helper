@@ -29,9 +29,6 @@ __pycache__/
 
 .env*
 
-# articles/*.html
-# articles/index.json
-
 # UI QA 截图（本地归档用，不入库）
 docs/ui-review/
 .env*.local
@@ -45,7 +42,27 @@ edge-profile/
 trash/
 obsolete/
 
+# 生成物（部署时由 build 脚本重新生成，不入库）
+# sitemap.xml   <- gen-sitemap.js
+# articles/search-index.json <- build-search-index.js
+# lib/articles-index.data.js <- build-index-data.mjs（api/articles-index.js 的数据包）
+sitemap.xml
+articles/search-index.json
+lib/articles-index.data.js
+
+# 压缩产物（build-assets.mjs 生成，源文件保留在 js/ css/）
+js/*.min.js
+css/*.min.css
+
+# 构建生成物（build-home-cats.mjs 从 js/cat-data.js 派生）
+js/home-cats.js
+
 # 构建脚本/文档/源数据：开发需要但不进部署包（避免超 Vercel 100MB 上限）
 scripts/
 docs/
-data/
+data/*
+# 例外：place.html 运行时硬依赖，必须入库、随部署下发
+!data/places.json
+
+# 本地 Playwright CLI 调试产物
+.playwright-cli/

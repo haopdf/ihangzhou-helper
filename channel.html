@@ -12,10 +12,10 @@
   <link rel="canonical" href="https://www.ihangzhou.net/channel.html">
   <link rel="manifest" href="manifest.json">
   <title>iHangzhou · 频道专题</title>
-  <link rel="stylesheet" href="css/style.css?v=20261018l">
-  <script src="js/layout.js?v=20261018l"></script>
+  <link rel="stylesheet" href="css/style.min.css?v=50599ed0f3">
+  <script src="js/layout.min.js?v=50599ed0f3"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
-<style>:root{--primary:#0ea5e9;--primary-dark:#0369a1}</style><link rel="stylesheet" href="css/channel.css?v=20261018l">
+<style>:root{--primary:#0ea5e9;--primary-dark:#0369a1}</style><link rel="stylesheet" href="css/channel.min.css?v=50599ed0f3">
 </head>
 <body class="ch-page">
   <nav class="site-breadcrumb"><a href="index.html">首页</a><span class="sb-sep">›</span><span>频道专题</span><span class="sb-sep">›</span><b id="chCrumbCur">频道</b></nav>
@@ -73,8 +73,8 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=20261018l"></script>
-  <script src="js/analytics.js?v=20261018l"></script>
+  <script src="js/app.min.js?v=50599ed0f3"></script>
+  <script src="js/analytics.min.js?v=50599ed0f3"></script>
   <script>
     // 频道专题页逻辑
     (function () {
@@ -120,23 +120,28 @@
         // 再加上频道名本身
         if (categoryName) allChips.unshift(categoryName);
 
-        fetch('articles/index.json')
-          .then(function(r) { return r.json(); })
-          .then(function(list) {
-            // 匹配：标题/摘要/分类 包含任意 chip 的
-            var matched = [];
-            list.forEach(function(a) {
+        // 相关文章：优先服务端按需过滤（q=频道关键词）；接口不可用/失败时回退全量 index.json
+        var q = encodeURIComponent(allChips.filter(function (k) { return k; }).join(','));
+        var loadRelated = fetch('/api/articles-index?q=' + q + '&limit=5').then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        }).then(function (res) {
+          if (res && res.success && Array.isArray(res.data)) return res.data;
+          throw new Error('api unavailable');
+        }).catch(function () {
+          return fetch('articles/index.json').then(function (r) { return r.json(); }).then(function (list) {
+            var out = [];
+            list.forEach(function (a) {
               for (var i = 0; i < allChips.length; i++) {
                 var kw = allChips[i];
                 if (!kw) continue;
-                if (a.title.indexOf(kw) >= 0 || a.summary.indexOf(kw) >= 0 || a.cat.indexOf(kw) >= 0) {
-                  matched.push(a);
-                  break;
-                }
+                if (a.title.indexOf(kw) >= 0 || a.summary.indexOf(kw) >= 0 || a.cat.indexOf(kw) >= 0) { out.push(a); break; }
               }
             });
-            // 限 5 篇
-            matched = matched.slice(0, 5);
+            return out.slice(0, 5);
+          });
+        });
+        loadRelated.then(function (matched) {
             if (!matched.length) { el.innerHTML = ''; return; }
 
             el.innerHTML =
@@ -327,11 +332,15 @@
         }
       }
 
-      // 初始化
+      // 初始化（等待兜底 categories 就绪后渲染；CMS 数据可用时优先）
+      function startChannelPage() {
+        if (window._ensureCategories) window._ensureCategories().then(renderChannel);
+        else renderChannel();
+      }
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', renderChannel);
+        document.addEventListener('DOMContentLoaded', startChannelPage);
       } else {
-        renderChannel();
+        startChannelPage();
       }
       window.addEventListener('hashchange', renderChannel);
     })();

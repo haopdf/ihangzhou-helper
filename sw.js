@@ -3,21 +3,22 @@
 // PWA 离线缓存策略：Network-first for pages, Cache-first for static assets
 // ============================================
 
-var CACHE_NAME = 'ihangzhou-v68';
+var CACHE_NAME = 'ihangzhou-v71';
 var OFFLINE_PAGE = '/offline.html';
 
+// 预缓存仅保留「首屏外壳」；articles/index.json(1.3MB)、cat-data.js(77KB)
+// 等大资源改为运行时按需缓存（见下方 fetch 拦截的缓存优先分支），
+// 避免首次安装即下载 2MB+。
 var CACHE_URLS = [
   '/',
   '/index.html',
-  '/cat.html',
-  '/js/cat-data.js',
-  '/articles/index.json',
+  '/offline.html',
   '/banshi.html',
+  '/cat.html',
   '/museum.html',
-  '/css/style.css',
+  '/css/style.min.css',
   '/manifest.json',
-  '/js/app.js',
-  OFFLINE_PAGE,
+  '/js/app.min.js',
   '/images/qrcode-ihangzhou.jpg',
   '/images/promo/search-box-white.jpg',
   '/images/promo/search-box-green.jpg'
@@ -80,6 +81,29 @@ self.addEventListener('fetch', function (event) {
   var isJs = /\.js(\?|$)/.test(url.pathname);
   var isCss = /\.css(\?|$)/.test(url.pathname);
   var isImage = /\.(png|jpg|jpeg|gif|svg|webp|ico)(\?|$)/.test(url.pathname);
+  var isAppJson = /^\/articles\/[^/]+\.json(\?|$)/.test(url.pathname);
+
+  // 应用数据 JSON（articles/index.json 等）：Stale-While-Revalidate
+  // 先回缓存秒开，后台静默更新；兼顾离线可用与数据新鲜度，
+  // 避免 cache-first 导致的文章列表永不过期问题。
+  if (isAppJson) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(function (cache) {
+        return cache.match(event.request).then(function (cached) {
+          var networkFetch = fetch(event.request).then(function (response) {
+            if (response && response.status === 200) {
+              var clone = response.clone();
+              cache.put(event.request, clone);
+            }
+            return response;
+          }).catch(function () { return null; });
+          // 有缓存先用缓存；无缓存等网络结果
+          return cached || networkFetch;
+        });
+      })
+    );
+    return;
+  }
 
   // HTML / JS / CSS / JSON：网络优先，失败回退缓存
   if (isHtml || isJs || isCss) {

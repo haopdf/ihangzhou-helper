@@ -15,10 +15,10 @@
   <link rel="canonical" href="https://www.ihangzhou.net/cat.html">
   <link rel="manifest" href="manifest.json">
   <title>iHangzhou · 杭州生活栏目</title>
-  <link rel="stylesheet" href="css/style.css?v=20261018l">
+  <link rel="stylesheet" href="css/style.min.css?v=50599ed0f3">
   <link rel="icon" type="image/png" href="images/logo-mark-96.png">
   <link rel="apple-touch-icon" href="images/logo-mark-192.png">
-  <script src="js/layout.js?v=20261018l"></script>
+  <script src="js/layout.min.js?v=50599ed0f3"></script>
   <script>
     window.IHZ_PAGE = { title: '杭州栏目', icon: '🧭' };
     window.IZ_SKIP_APP_THEME = true;
@@ -54,9 +54,9 @@
     </div>
   </div>
 
-  <script src="js/cat-data.js?v=20261018l"></script>
-  <script src="js/app.js?v=20261018l"></script>
-  <script src="js/analytics.js?v=20261018l"></script>
+  <script src="js/cat-data.min.js?v=50599ed0f3"></script>
+  <script src="js/app.min.js?v=50599ed0f3"></script>
+  <script src="js/analytics.min.js?v=50599ed0f3"></script>
   <script>
     /* 统一布局（页头 / 页脚导航）——与 travel / banshi 等页一致 */
     if (window.IZ && IZ.layout) {
@@ -440,27 +440,40 @@
         } else {
           kws = sub ? (sub.kw || []) : (cat.kw || []);
         }
-        fetch('articles/index.json')
-          .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-          .then(function (list) {
-            var scored = [];
-            list.forEach(function (a) {
-              var title = a.title || '', catg = a.cat || '', sum = a.summary || '';
-              var sc = 0;
-              kws.forEach(function (k) {
-                if (title.indexOf(k) >= 0) sc += 3;      // 标题命中权重最高
-                else if (catg.indexOf(k) >= 0) sc += 2;  // 分类命中次之
-                else if (sum.indexOf(k) >= 0) sc += 1;   // 摘要命中兜底
+        // 相关文章：服务端评分过滤（mode=score，与本地评分同权重）；不可用时回退全量 index.json
+        var q = encodeURIComponent(kws.filter(function (k) { return k; }).join(','));
+        var loadArts = fetch('/api/articles-index?q=' + q + '&mode=score&limit=12').then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        }).then(function (res) {
+          if (res && res.success && Array.isArray(res.data)) return { list: res.data, total: res.count || res.data.length };
+          throw new Error('api unavailable');
+        }).catch(function () {
+          return fetch('articles/index.json')
+            .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+            .then(function (list) {
+              var scored = [];
+              list.forEach(function (a) {
+                var title = a.title || '', catg = a.cat || '', sum = a.summary || '';
+                var sc = 0;
+                kws.forEach(function (k) {
+                  if (title.indexOf(k) >= 0) sc += 3;      // 标题命中权重最高
+                  else if (catg.indexOf(k) >= 0) sc += 2;  // 分类命中次之
+                  else if (sum.indexOf(k) >= 0) sc += 1;   // 摘要命中兜底
+                });
+                if (sc > 0) scored.push({ a: a, sc: sc });
               });
-              if (sc > 0) scored.push({ a: a, sc: sc });
+              scored.sort(function (x, y) {
+                if (y.sc !== x.sc) return y.sc - x.sc;
+                return (y.a.words || 0) - (x.a.words || 0);
+              });
+              return { list: scored.slice(0, 12).map(function (o) { return o.a; }), total: scored.length };
             });
-            scored.sort(function (x, y) {
-              if (y.sc !== x.sc) return y.sc - x.sc;
-              return (y.a.words || 0) - (x.a.words || 0);
-            });
-            var top = scored.slice(0, 12);
+        });
+        loadArts.then(function (result) {
+            var top = result.list;
             var cnt = $('catArtCount');
-            if (cnt) cnt.textContent = top.length ? '共 ' + scored.length + ' 篇匹配' : '';
+            if (cnt) cnt.textContent = top.length ? '共 ' + result.total + ' 篇匹配' : '';
             var box = $('catArts');
             if (!box) return;
             if (!top.length) {
@@ -468,7 +481,7 @@
               return;
             }
             box.innerHTML = top.map(function (o) {
-              var a = o.a;
+              var a = o.a || o; // 服务端返回纯文章对象；本地回退为 {a, sc} 包装
               return '<a class="cat-art" href="' + artUrl(a.slug) + '">' +
                 '<span class="ca-t">' + esc(a.title) + '</span>' +
                 '<span class="ca-m">' + esc(a.cat) + ' · ' + (a.words || 0) + ' 字</span></a>';

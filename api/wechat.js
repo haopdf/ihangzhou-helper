@@ -5,11 +5,12 @@ import { createRequire } from 'node:module';
 const __require = createRequire(import.meta.url);
 function reqJson(rel) { try { return __require(rel); } catch (e) { return null; } }
 import { get, put } from '@vercel/blob';
+import { checkAdminAuth, getWechatToken } from '../lib/auth.js';
 // 配置：环境变量 WECHAT_TOKEN（签名验证）、WX_APPID/WX_SECRET（菜单同步可选）
 
 import crypto from 'node:crypto';
 
-const WECHAT_TOKEN = process.env.WECHAT_TOKEN || 'ihangzhou2024';
+const WECHAT_TOKEN = getWechatToken();
 const DEFAULT_WELCOME = {
   type: 'text',
   title: '欢迎关注 iHangzhou · 杭州生活助手 🏔️',
@@ -94,8 +95,7 @@ async function writeKwOverlay(arr) {
 }
 
 function isAdmin(req) {
-  const h = req.headers && req.headers.authorization;
-  return h === 'Bearer ' + (process.env.CMS_ADMIN_PASSWORD || 'ihangzhou2024');
+  return checkAdminAuth(req);
 }
 
 // 处理关键字管理动作（Bearer 鉴权）：upsertKeyword / deleteKeyword / setKeywords / listKeywords
@@ -430,9 +430,7 @@ export default async function handler(req, res) {
 
   // 管理后台调用：同步菜单
   if (req.method === 'POST' && req.query && req.query.action === 'syncMenu') {
-    const authHeader = req.headers.authorization;
-    const isAdmin = authHeader === 'Bearer ' + (process.env.CMS_ADMIN_PASSWORD || 'ihangzhou2024');
-    if (!isAdmin) return res.status(401).json({ success: false, error: '需要认证' });
+    if (!checkAdminAuth(req)) return res.status(401).json({ success: false, error: '需要认证' });
     try {
       const cms = await loadCMS();
       const menuConfig = cms.wechatMenu;
