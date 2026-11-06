@@ -42,11 +42,10 @@ edge-profile/
 trash/
 obsolete/
 
-# 生成物（部署时由 build 脚本重新生成，不入库）
-# sitemap.xml   <- gen-sitemap.js
+# 生成物（部署时由 build 脚本重新生成）
+# sitemap.xml 由 gen-sitemap.js 生成，但随仓库收录与更新（供搜索引擎与部署前预检）
 # articles/search-index.json <- build-search-index.js
 # lib/articles-index.data.js <- build-index-data.mjs（api/articles-index.js 的数据包）
-sitemap.xml
 articles/search-index.json
 lib/articles-index.data.js
 
