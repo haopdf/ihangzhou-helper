@@ -3,8 +3,9 @@
  *
  * 覆盖：
  *   1) 站点顶层页面（index/travel/food/articles/cat/...）
- *   2) articles/ 下全部静态文章页（2731 篇，之前完全没收录）
- *   3) 通过 API 发布的文章（Blob 中的 articles-manifest.json -> /p/<slug>）
+ *   2) articles/ 下全部静态文章页（之前完全没收录）
+ *   3) celeb/ 下全部名人页（如 baijuyi.html）
+ *   4) 通过 API 发布的文章（Blob 中的 articles-manifest.json -> /p/<slug>）
  *
  * 用法：node gen-sitemap.js   （已接入 npm run build，每次部署自动刷新）
  * （本脚本位于仓库根目录，故 ROOT 直接取 __dirname）
@@ -20,7 +21,7 @@ const OUT = path.join(ROOT, 'sitemap.xml');
 const TODAY = new Date().toISOString().slice(0, 10);
 
 // 不参与 sitemap 的目录 / 文件
-const SKIP_DIRS = new Set(['node_modules', '.git', 'api', 'articles', 'admin', 'scripts', 'templates', 'assets', 'celeb', 'data', '_templates', '.playwright-cli', 'css', 'js', 'images', '.vercel']);
+const SKIP_DIRS = new Set(['node_modules', '.git', 'api', 'articles', 'admin', 'scripts', 'templates', 'assets', 'data', '_templates', '.playwright-cli', 'css', 'js', 'images', '.vercel']);
 const SKIP_FILES = new Set(['sitemap.xml', 'robots.txt']);
 
 function url(segments) {
@@ -47,7 +48,7 @@ function topLevelPages() {
   return out;
 }
 
-// ---------- 2) 静态文章页（articles/ 递归） ----------
+// ---------- 2) 静态文章页（articles/ 递归；celeb/ 复用本函数） ----------
 function walkArticles(dir, rel, acc) {
   for (const f of fs.readdirSync(dir)) {
     const fp = path.join(dir, f);
@@ -102,6 +103,12 @@ async function main() {
     urls.push(item(loc('articles/' + s + '.html'), { changefreq: 'monthly', priority: '0.6' }));
   }
 
+  // 静态名人页（celeb/）
+  const celebSlugs = walkArticles(path.join(ROOT, 'celeb'), '', []);
+  for (const s of celebSlugs) {
+    urls.push(item(loc('celeb/' + s + '.html'), { changefreq: 'monthly', priority: '0.6' }));
+  }
+
   // API 文章页
   const apiSlugs = await apiArticles();
   for (const s of apiSlugs) {
@@ -118,6 +125,7 @@ ${urls.join('\n')}
   console.log(`OK: sitemap.xml 生成完成`);
   console.log(`  顶层页面     : ${top.length}`);
   console.log(`  静态文章页   : ${articleSlugs.length}`);
+  console.log(`  名人页       : ${celebSlugs.length}`);
   console.log(`  API 文章页   : ${apiSlugs.length}`);
   console.log(`  合计 URL     : ${urls.length}`);
   console.log(`  输出文件     : ${OUT}`);
