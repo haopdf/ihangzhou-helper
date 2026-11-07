@@ -4,45 +4,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <meta name="description" content="杭州旅游大全：西湖十景、灵隐寺、西溪湿地、千岛湖、良渚、杭州古镇、赏花四季、寺庙古塔、夜景灯光一站齐，西湖/灵隐寺/西溪湿地/千岛湖/良渚/古镇/赏花/夜景全攻略">
-  <meta name="keywords" content="杭州旅游,西湖十景,断桥残雪,苏堤春晓,三潭印月,灵隐寺,法喜寺,雷峰塔,保俶塔,六和塔,西溪湿地,千岛湖,良渚,塘栖古镇,龙门古镇,深澳,新叶,严州古城,超山梅花,太子湾郁金香,满觉陇桂花,花港银杏,钱江新城灯光秀,西湖音乐喷泉,运河夜景,河坊街,北山街,杭州赏花,杭州夜景,杭州寺庙,ihangzhou">
+  <meta name="description" content="杭州旅游出行频道：景点门票、周边游、周末去哪、街巷漫步、路线攻略、钱塘江观潮、西湖十景、古镇古村 8 大分类 64 个入口，西湖十景、灵隐寺、西溪湿地、千岛湖、良渚、古镇、赏花、夜景全攻略一站直达。">
+  <meta name="keywords" content="杭州旅游,旅游出行,景点门票,周边游,周末去哪,街巷漫步,路线攻略,钱塘江观潮,西湖十景,古镇古村,断桥残雪,苏堤春晓,三潭印月,灵隐寺,法喜寺,雷峰塔,保俶塔,六和塔,西溪湿地,千岛湖,良渚,塘栖古镇,龙门古镇,深澳,新叶,严州古城,超山梅花,太子湾郁金香,满觉陇桂花,花港银杏,钱江新城灯光秀,西湖音乐喷泉,运河夜景,河坊街,北山街,杭州赏花,杭州夜景,杭州寺庙,ihangzhou">
   <meta name="theme-color" content="#1f7a5a">
-  <meta property="og:title" content="杭州旅游大全 · iHangzhou">
-  <meta property="og:description" content="西湖 + 古镇 + 赏花 + 四季 + 夜景 一站齐，杭州旅游全攻略">
+  <meta property="og:title" content="杭州旅游出行 · iHangzhou">
+  <meta property="og:description" content="8 大分类 64 个入口：景点门票 / 周边游 / 周末去哪 / 街巷漫步 / 路线攻略 / 钱塘江观潮 / 西湖十景 / 古镇古村，杭州旅游全攻略一站直达。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="iHangzhou 杭州生活助手">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:url" content="https://www.ihangzhou.net/travel.html">
   <link rel="canonical" href="https://www.ihangzhou.net/travel.html">
   <link rel="manifest" href="manifest.json">
-  <title>杭州旅游大全 · iHangzhou 杭州生活助手</title>
+  <title>杭州旅游出行 · iHangzhou 杭州生活助手</title>
   <link rel="icon" type="image/png" href="images/logo-mark-96.png">
   <link rel="apple-touch-icon" href="images/logo-mark-192.png">
   <link rel="stylesheet" href="css/style.min.css?v=ace34d55ae">
   <script src="js/layout.min.js?v=ace34d55ae"></script>
-  <style>:root{--primary:#0ea5e9;--primary-dark:#0369a1}</style><link rel="stylesheet" href="css/channel.min.css?v=ace34d55ae">
+  <style>
+    :root{--primary:#1f7a5a;--primary-dark:#15603f}
+    /* 旅游出行频道：二级栏目区块（与首页 catGrid「旅游出行」同源） */
+    .trv-sub{margin-bottom:26px;scroll-margin-top:76px}
+    .trv-sub-hd{display:flex;align-items:center;gap:12px;padding:13px 14px;background:var(--bg-card);border:1px solid var(--border-light);border-left:4px solid var(--ci,var(--primary));border-radius:var(--radius);text-decoration:none;color:var(--text);box-shadow:var(--shadow-sm);transition:transform var(--transition-fast),box-shadow var(--transition-fast);-webkit-tap-highlight-color:transparent}
+    .trv-sub-hd:hover{transform:translateY(-1px);box-shadow:var(--shadow-md)}
+    .trv-sub-ic{width:46px;height:46px;flex-shrink:0;border-radius:13px;display:grid;place-items:center;font-size:23px;color:#fff;background:var(--ci,var(--primary));box-shadow:0 4px 10px -4px var(--ci,var(--primary))}
+    .trv-sub-bd{flex:1;min-width:0}
+    .trv-sub-n{display:block;font-size:15.5px;font-weight:800}
+    .trv-sub-d{display:block;font-size:12px;color:var(--text-muted);margin-top:2px}
+    .trv-sub-go{flex-shrink:0;font-size:12px;font-weight:700;color:var(--ci,var(--primary));white-space:nowrap}
+    .trv-sub .cat-third{margin:6px 0 12px}
+    .trv-chipnav{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .trv-chipnav a{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;background:var(--bg-alt);border:1px solid var(--border);border-radius:16px;font-size:12.5px;color:var(--text-secondary);text-decoration:none;font-weight:600}
+    .trv-chipnav a:hover{border-color:var(--primary);color:var(--primary)}
+    .trv-citytip{margin-top:10px;padding:8px 12px;background:var(--bg-alt);border:1px dashed var(--border);border-radius:10px;font-size:12.5px;color:var(--text-secondary);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .trv-citytip a{color:var(--primary);text-decoration:none;font-weight:700;margin-left:auto}
+  </style>
+  <link rel="stylesheet" href="css/channel.min.css?v=ace34d55ae">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "杭州旅游出行 · 8 大分类",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "景点门票", "url": "https://www.ihangzhou.net/cat.html?c=travel&s=%E6%99%AF%E7%82%B9%E9%97%A8%E7%A5%A8" },
+      { "@type": "ListItem", "position": 2, "name": "周边游", "url": "https://www.ihangzhou.net/cat.html?c=travel&s=%E5%91%A8%E8%BE%B9%E6%B8%B8" },
+      { "@type": "ListItem", "position": 3, "name": "周末去哪", "url": "https://www.ihangzhou.net/cat.html?c=travel&s=%E5%91%A8%E6%9C%AB%E5%8E%BB%E5%93%AA" },
+      { "@type": "ListItem", "position": 4, "name": "街巷漫步", "url": "https://www.ihangzhou.net/cat.html?c=travel&s=%E8%A1%97%E5%B7%B7%E6%BC%AB%E6%AD%A5" },
+      { "@type": "ListItem", "position": 5, "name": "路线攻略", "url": "https://www.ihangzhou.net/cat.html?c=travel&s=%E8%B7%AF%E7%BA%BF%E6%94%BB%E7%95%A5" },
+      { "@type": "ListItem", "position": 6, "name": "钱塘江观潮", "url": "https://www.ihangzhou.net/cat.html?c=travel&s=%E9%92%B1%E5%A1%98%E6%B1%9F%E8%A7%82%E6%BD%AE" },
+      { "@type": "ListItem", "position": 7, "name": "西湖十景", "url": "https://www.ihangzhou.net/cat.html?c=travel&s=%E8%A5%BF%E6%B9%96%E5%8D%81%E6%99%AF" },
+      { "@type": "ListItem", "position": 8, "name": "古镇古村", "url": "https://www.ihangzhou.net/cat.html?c=travel&s=%E5%8F%A4%E9%95%87%E5%8F%A4%E6%9D%91" }
+    ]
+  }
+  </script>
 </head>
 
 <body class="ch-page">
   <nav class="site-breadcrumb"><a href="index.html">首页</a><span class="sb-sep">›</span><b>杭州旅游</b></nav>
   <script>
-    window.IHZ_PAGE = { title: "杭州旅游", icon: "🏞️", channelId: "travel" };
+    window.IHZ_PAGE = { title: "杭州旅游出行", icon: "🧭", channelId: "travel" };
     window.IZ_SKIP_APP_THEME = true;
     window.IZ_SKIP_APP_INIT = true;
   </script>
 
   <!-- 频道内容 -->
   <div class="page active" id="pageChannel">
-    <!-- 频道头部 -->
+    <!-- 频道头部（与首页「🧭 旅游出行」栏目同配置） -->
     <div class="channel-header" id="channelHeader"></div>
 
-    <!-- 频道描述 -->
+    <!-- 频道描述 + 分类快捷入口 -->
     <div class="channel-desc" id="channelDesc"></div>
 
-    <!-- 频道服务网格 -->
+    <!-- 🧭 旅游出行 8 大分类（数据源：js/cat-data.js，与首页 catGrid 一致） -->
+    <div class="content">
+      <div class="section-head">
+        <h2>🧭 旅游出行 · 分类导航</h2>
+        <span class="tip" id="sectionsTip"></span>
+      </div>
+      <div id="travelSections"></div>
+    </div>
+
+    <!-- 全部景点服务（78 项服务网格，支持搜索/区县筛选） -->
     <div class="content" id="channelContent">
       <div class="section-head">
-        <h2 id="channelTitle">杭州旅游 · 旅游攻略</h2>
+        <h2 id="channelTitle">全部景点服务</h2>
         <span class="tip" id="channelCount"></span>
       </div>
       <div class="service-grid" id="serviceGrid"></div>
@@ -51,13 +95,22 @@
     <!-- 相关频道推荐 -->
     <div class="related-channels">
       <div class="section-head">
-        <h2>相关频道</h2>
+        <h2>🎯 相关频道</h2>
         <span class="tip">探索更多</span>
       </div>
       <div class="channel-grid" id="relatedChannels"></div>
+    </div>
 
-      <!-- 相关文章 -->
-      <div id="relatedArticles"></div>
+    <!-- 相关文章（关键词匹配） -->
+    <div id="relatedArticles"></div>
+
+    <!-- 切换全部分类 -->
+    <div class="content">
+      <div class="section-head">
+        <h2>🗂️ 切换全部分类</h2>
+        <span class="tip">8 大栏目</span>
+      </div>
+      <div class="cat-subnav" id="catNav"></div>
     </div>
 
     <!-- 返回首页 -->
@@ -77,18 +130,17 @@
     </div>
   </div>
 
+  <script src="js/cat-data.min.js?v=ace34d55ae"></script>
   <script src="js/scenic-data.min.js?v=ace34d55ae"></script>
   <script src="js/app.min.js?v=ace34d55ae"></script>
-<script src="js/analytics.min.js?v=ace34d55ae"></script>
+  <script src="js/analytics.min.js?v=ace34d55ae"></script>
   <script>
-    // 频道专题页逻辑
+    // 旅游出行频道专题页（结构化：与首页「🧭 旅游出行」8 大分类一一对应）
     (function () {
       'use strict';
 
       var CHANNEL_ID = 'travel';
-      var CHANNEL_NAME = '杭州旅游';
-      var CHANNEL_ICON = '🏞️';
-      var CHANNEL_DESC = '西湖十景、灵隐寺、西溪湿地、千岛湖、良渚、杭州古镇、赏花四季、寺庙古塔、夜景灯光，杭州旅游全攻略一站齐，所有链接指向官方渠道。';
+      var CHANNEL_COLOR = '#1f7a5a';
 
       // 相关频道推荐（仅使用 data-categories.js 中存在且有 HTML 页面的频道）
       var RELATED = {
@@ -103,165 +155,202 @@
         'laozihao': ['food', 'street', 'history', 'travel']
       };
 
-      // 根据频道关键词从 articles/index.json 匹配相关文章
-      function fetchRelatedArticles(chips, categoryName) {
-        var el = document.getElementById('relatedArticles');
+      // 区县全称（与 layout.js 一致；window.DISTRICTS 存在时优先）
+      var DISTRICT_NAMES = {
+        hangzhou: '杭州市', shangcheng: '上城区', gongshu: '拱墅区', xihu: '西湖区',
+        binjiang: '滨江区', xiaoshan: '萧山区', yuhang: '余杭区', linping: '临平区',
+        qiantang: '钱塘区', fuyang: '富阳区', linan: '临安区', tonglu: '桐庐县',
+        chunan: '淳安县', jiande: '建德市'
+      };
+
+      // ---- 数据源：js/cat-data.min.js（与首页 catGrid 同一份数据） ----
+      var CATS = Array.isArray(window.CAT_DATA) ? window.CAT_DATA : [];
+      var CAT = null;
+      for (var ci = 0; ci < CATS.length; ci++) {
+        if (CATS[ci].k === CHANNEL_ID) { CAT = CATS[ci]; break; }
+      }
+
+      var T = { city: 'hangzhou' };
+
+      function esc(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+      function $(id) { return document.getElementById(id); }
+      function districtFull(id) {
+        if (window.DISTRICTS) {
+          var d = window.DISTRICTS.find(function (x) { return x.id === id; });
+          if (d) return d.full;
+        }
+        return DISTRICT_NAMES[id] || id;
+      }
+
+      // 链接属性：#act: 站内动作 / 外链新窗口 / 站内直链
+      function hrefAttrs(u) {
+        u = (u || '').trim();
+        if (/^#act:/.test(u)) return 'data-act="' + esc(u.slice(5)) + '" href="javascript:void(0)"';
+        if (/^javascript:/i.test(u)) return 'href="' + esc(u) + '"';
+        if (/^https?:\/\//i.test(u)) return 'href="' + esc(u) + '" target="_blank" rel="noopener noreferrer"';
+        return 'href="' + esc(u) + '"';
+      }
+
+      // 区县推断（与频道页网格一致的文本推断逻辑）
+      function inferDistricts(text) {
+        var ds = [];
+        if (/西溪|西湖|断桥|苏堤|白堤|灵隐|法喜|雷峰|保俶|六和|净慈|花港|曲院|平湖秋月|柳浪|双峰|北山街|南山路|之江|宋城/.test(text)) ds.push('xihu');
+        if (/河坊街|南宋御街|吴山|武林|湖滨|馒头山/.test(text)) ds.push('shangcheng');
+        if (/拱宸桥|运河|小河|大兜路/.test(text)) ds.push('gongshu');
+        if (/滨江|网易|阿里/.test(text)) ds.push('binjiang');
+        if (/萧山|湘湖/.test(text)) ds.push('xiaoshan');
+        if (/余杭|良渚|径山|梦想小镇|塘栖/.test(text)) ds.push('yuhang');
+        if (/临平/.test(text)) ds.push('linping');
+        if (/下沙/.test(text)) ds.push('qiantang');
+        if (/富阳|龙门/.test(text)) ds.push('fuyang');
+        if (/临安|天目|大明山/.test(text)) ds.push('linan');
+        if (/桐庐|瑶琳|深澳/.test(text)) ds.push('tonglu');
+        if (/千岛湖|淳安|建德|新安江|严州|大慈岩/.test(text)) ds.push('chunan');
+        if (ds.length === 0) ds = ['hangzhou'];
+        ds.push('hangzhou');
+        return ds;
+      }
+
+      // ---------------- 头部 / 描述 ----------------
+      function renderHeader() {
+        var el = $('channelHeader');
         if (!el) return;
-        var allChips = (chips || []).slice(0, 3);
-        if (categoryName) allChips.unshift(categoryName);
-
-        // 相关文章：优先服务端按需过滤（q=频道关键词）；接口不可用/失败时回退全量 index.json
-        var q = encodeURIComponent(allChips.filter(function (k) { return k; }).join(','));
-        var loadRelated = fetch('/api/articles-index?q=' + q + '&limit=5').then(function (r) {
-          if (!r.ok) throw new Error('HTTP ' + r.status);
-          return r.json();
-        }).then(function (res) {
-          if (res && res.success && Array.isArray(res.data)) return res.data;
-          throw new Error('api unavailable');
-        }).catch(function () {
-          return fetch('articles/index.json').then(function (r) { return r.json(); }).then(function (list) {
-            var out = [];
-            list.forEach(function (a) {
-              for (var i = 0; i < allChips.length; i++) {
-                var kw = allChips[i];
-                if (!kw) continue;
-                if (a.title.indexOf(kw) >= 0 || a.summary.indexOf(kw) >= 0 || a.cat.indexOf(kw) >= 0) { out.push(a); break; }
-              }
-            });
-            return out.slice(0, 5);
-          });
-        });
-        loadRelated.then(function (matched) {
-            if (!matched.length) { el.innerHTML = ''; return; }
-
-            el.innerHTML =
-              '<div class="section-head" style="margin-top:24px;padding:0 16px;">' +
-              '<h2>📚 相关杭州故事</h2>' +
-              '<span class="tip">共 ' + matched.length + ' 篇</span>' +
-              '</div>' +
-              '<div style="padding: 0 16px;">' +
-              matched.map(function(a) {
-                return '<a href="articles/' + a.slug + '.html" style="display:block;padding:12px 14px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;margin-bottom:8px;text-decoration:none;color:inherit;">' +
-                  '<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;">' + a.title + '</div>' +
-                  '<div style="font-size:12px;color:var(--text-muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">' + a.summary + '</div>' +
-                  '</a>';
-              }).join('') +
-              '<a href="articles.html" style="display:block;text-align:center;padding:12px;background:var(--bg-alt);border-radius:10px;color:var(--primary);font-size:13px;text-decoration:none;font-weight:500;margin-top:8px;">📖 查看全部杭州故事 →</a>' +
-              '</div>';
-          })
-          .catch(function() { /* 静默失败 */ });
-      }
-
-      function getServiceIcon(name) {
-        if (window.getServiceIcon) return window.getServiceIcon(name);
-        return '📌';
-      }
-
-      function renderChannel() {
-        if (!window._getData) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">数据加载失败，请刷新重试</div>';
+        if (!CAT) {
+          el.innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">栏目数据加载失败，请刷新重试</div>';
           return;
         }
+        el.innerHTML =
+          '<div class="ch-hero" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;text-align:center;">' +
+          '<div style="font-size:56px;line-height:1;margin-bottom:8px;">' + CAT.ic + '</div>' +
+          '<h1 style="font-size:24px;font-weight:700;margin:0;">' + esc(CAT.n) + '</h1>' +
+          '<div style="font-size:13px;opacity:.9;margin-top:6px;">' + esc(CAT.d || '') + '</div>' +
+          '<div style="font-size:12px;opacity:.75;margin-top:4px;">iHangzhou · 杭州生活助手</div>' +
+          '</div>';
+      }
 
+      function renderDesc() {
+        var el = $('channelDesc');
+        if (!el) return;
+        var intro = CAT ? (CAT.i || '') : '杭州旅游全攻略一站直达。';
+        var chips = '';
+        if (CAT) {
+          chips += CAT.subs.map(function (s) {
+            return '<a href="#sec-' + esc(s.k) + '">' + s.ic + ' ' + esc(s.n) + '</a>';
+          }).join('');
+        }
+        var kw = (CAT && CAT.kw ? CAT.kw : ['西湖', '灵隐寺', '西溪湿地', '千岛湖']).slice(0, 4).map(function (k) {
+          return '<a href="articles.html?q=' + encodeURIComponent(k) + '">📚 ' + esc(k) + '</a>';
+        }).join('');
+        el.innerHTML =
+          '<div style="padding:16px;background:var(--bg-card);border-radius:0 0 12px 12px;margin:0 16px;font-size:14px;line-height:1.7;color:var(--text-secondary);">' +
+          esc(intro) +
+          '<div class="trv-chipnav">' + chips + kw + '</div>' +
+          '<div id="cityTip"></div>' +
+          '</div>';
+      }
+
+      // ---------------- 8 大分类区块 ----------------
+      function renderSections() {
+        var wrap = $('travelSections');
+        if (!wrap) return;
+        if (!CAT) { wrap.innerHTML = ''; var t = $('sectionsTip'); if (t) t.textContent = ''; return; }
+        var total = 0;
+        wrap.innerHTML = CAT.subs.map(function (sub) {
+          var entries = sub.th || [];
+          var feats = sub.ft || [];
+          total += entries.length;
+          var subUrl = 'cat.html?c=' + encodeURIComponent(CHANNEL_ID) + '&s=' + encodeURIComponent(sub.n);
+          return '<div class="trv-sub" id="sec-' + esc(sub.k) + '">' +
+            '<a class="trv-sub-hd" href="' + esc(subUrl) + '" style="--ci:' + CHANNEL_COLOR + '">' +
+            '<span class="trv-sub-ic">' + sub.ic + '</span>' +
+            '<span class="trv-sub-bd">' +
+            '<span class="trv-sub-n">' + esc(sub.n) + '</span>' +
+            '<span class="trv-sub-d">' + esc(sub.d || '') + '</span>' +
+            '</span>' +
+            '<span class="trv-sub-go">进入二级栏目 ›</span>' +
+            '</a>' +
+            '<div class="cat-third">' +
+            entries.map(function (t3) {
+              return '<a class="cat-third-card trv-entry" data-name="' + esc(t3[1]) + '" data-sub="' + esc(sub.k) + '" ' + hrefAttrs(t3[2]) + '>' +
+                '<span class="cti">' + t3[0] + '</span><span class="ctn">' + esc(t3[1]) + '</span></a>';
+            }).join('') +
+            '</div>' +
+            (feats.length ?
+              '<div class="cat-feat">' +
+              feats.map(function (f) {
+                return '<a class="cat-feat-card trv-feat" data-name="' + esc(f[1]) + '" ' + hrefAttrs(f[3]) + '>' +
+                  '<span class="cf-ic">' + f[0] + '</span>' +
+                  '<span class="cf-bd"><span class="cf-t">' + esc(f[1]) + '</span>' +
+                  '<span class="cf-d">' + esc(f[2]) + '</span></span>' +
+                  '<span class="cf-ar">›</span></a>';
+              }).join('') +
+              '</div>' : '') +
+            '</div>';
+        }).join('');
+        var tip = $('sectionsTip');
+        if (tip) tip.textContent = CAT.subs.length + ' 大分类 · ' + total + ' 个入口';
+      }
+
+      // ---------------- 切换全部分类 ----------------
+      function renderCatNav() {
+        var el = $('catNav');
+        if (!el || !CATS.length) return;
+        el.innerHTML = CATS.map(function (c) {
+          var on = c.k === CHANNEL_ID ? ' on' : '';
+          return '<a class="cat-subnav-btn' + on + '" href="cat.html?c=' + encodeURIComponent(c.k) + '" style="--ci:' + esc(c.c || CHANNEL_COLOR) + '">' + c.ic + ' ' + esc(c.n) + '</a>';
+        }).join('');
+      }
+
+      // ---------------- 全部景点服务网格 ----------------
+      function renderGrid() {
+        if (!window._getData) return;
         var DATA = window._getData();
         var category = DATA.categories.find(function (c) { return c.id === CHANNEL_ID; });
-        if (!category) {
-          document.getElementById('channelHeader').innerHTML = '<div style="text-align:center;padding: 40px 16px;color:var(--text-muted);">频道「' + CHANNEL_NAME + '」数据未找到</div>';
-          return;
-        }
+        if (!category) return;
 
-        // 渲染频道头部
-        var header = document.getElementById('channelHeader');
-        header.innerHTML =
-          '<div class="ch-hero" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;text-align:center;">' +
-          '<div style="font-size:56px;line-height:1;margin-bottom:8px;">' + category.icon + '</div>' +
-          '<h1 style="font-size:24px;font-weight:700;margin:0;">' + category.name + '</h1>' +
-          '<div style="font-size:13px;opacity:0.9;margin-top:6px;">iHangzhou · 杭州生活助手</div>' +
-          '</div>';
-
-        // 渲染描述 + 提取关键词变成可点击 chip
-        var descEl = document.getElementById('channelDesc');
-        var descText = CHANNEL_DESC;
-        var chips = [];
-        var tokens = descText.split(/[、，,；。]/);
-        tokens.forEach(function(t) {
-          t = t.trim();
-          if (t.length >= 2 && t.length <= 10 && !/^[a-z0-9]+$/i.test(t)) chips.push(t);
-        });
-        chips = chips.filter(function(v, i, a) { return a.indexOf(v) === i; }).slice(0, 8);
-
-        var chipsHtml = chips.length ?
-          '<div class="ch-chips" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">' +
-          chips.map(function(c) {
-            return '<a class="ch-chip" href="articles.html?q=' + encodeURIComponent(c) + '" style="display:inline-block;padding:4px 12px;background:var(--bg-alt);border:1px solid var(--border);border-radius:14px;font-size:12px;color:var(--text-secondary);text-decoration:none;font-weight:500;">' + c + '</a>';
-          }).join('') + '</div>' : '';
-
-        descEl.innerHTML =
-          '<div style="padding:16px;background:var(--bg-card);border-radius:0 0 12px 12px;margin:0 16px;font-size:14px;line-height:1.7;color:var(--text-secondary);">' +
-          descText + chipsHtml +
-          '</div>';
-
-        // 相关文章区域
-        fetchRelatedArticles(chips, category.name);
-
-        // 渲染标题与数量
-        // 支持 ?city= 区县过滤：item.districts 包含 cityId 才显示
+        // 当前区县（URL 参数优先，其次 localStorage）
         var params = new URLSearchParams(location.search);
-        var cityId = params.get('city') || '';
-        var cityObj = null;
-        if (cityId && window.DISTRICTS) {
-          cityObj = window.DISTRICTS.find(function (d) { return d.id === cityId; });
+        T.city = params.get('city') || (function () { try { return localStorage.getItem('ihz_city') || 'hangzhou'; } catch (e) { return 'hangzhou'; } })();
+        var cityObj = (T.city !== 'hangzhou' && window.DISTRICTS) ? window.DISTRICTS.find(function (d) { return d.id === T.city; }) : null;
+        var cityPrefix = T.city !== 'hangzhou' ? districtFull(T.city) + ' · ' : '';
+
+        // 网格：按区县过滤（文本推断，与分类入口筛选口径一致）
+        var filteredItems = category.items;
+        if (T.city !== 'hangzhou') {
+          filteredItems = category.items.filter(function (item) {
+            var text = (item.name || '') + ' ' + (item.desc || '') + ' ' + (item.detail || '');
+            return inferDistricts(text).indexOf(T.city) >= 0;
+          });
         }
-        // 兜底推断 districts：item.districts 不存在时，从 detail/name 文本推断
-        function inferDistricts(item) {
-          if (Array.isArray(item.districts)) return item.districts;
-          var d = (item.detail || '') + ' ' + (item.name || '') + ' ' + (item.desc || '');
-          var ds = [];
-          if (/西湖|断桥|苏堤|白堤|灵隐|法喜|雷峰|保俶|六和|净慈|花港|曲院|平湖秋月|柳浪|双峰/.test(d)) ds.push('xihu');
-          if (/河坊街|南宋御街|吴山|武林|湖滨/.test(d)) ds.push('shangcheng');
-          if (/拱宸桥|运河|小河/.test(d)) ds.push('gongshu');
-          if (/滨江|网易|阿里/.test(d)) ds.push('binjiang');
-          if (/萧山|湘湖/.test(d)) ds.push('xiaoshan');
-          if (/余杭|良渚|径山|梦想小镇|塘栖/.test(d)) ds.push('yuhang');
-          if (/临平/.test(d)) ds.push('linping');
-          if (/下沙/.test(d)) ds.push('qiantang');
-          if (/富阳|龙门/.test(d)) ds.push('fuyang');
-          if (/临安|天目|大明山/.test(d)) ds.push('linan');
-          if (/桐庐|瑶琳|深澳/.test(d)) ds.push('tonglu');
-          if (/千岛湖|淳安|建德|新安江|严州|大慈岩/.test(d)) ds.push('chunan');
-          if (ds.length === 0) ds = ['hangzhou'];
-          ds.push('hangzhou');
-          return ds;
-        }
-        var filteredItems = cityId ?
-          category.items.filter(function (item) {
-            return inferDistricts(item).indexOf(cityId) >= 0;
-          }) :
-          category.items;
-        // 标题前缀：切了区县显示区县名
-        var cityPrefix = cityObj ? cityObj.full + ' · ' : '';
-        document.getElementById('channelTitle').textContent = cityPrefix + category.name + ' · 旅游攻略';
-        document.getElementById('channelCount').textContent = cityId ?
-          (filteredItems.length + ' 项匹配 ' + (cityObj ? cityObj.full : cityId)) :
+
+        // 标题与数量
+        $('channelTitle').textContent = cityPrefix + '全部景点服务';
+        $('channelCount').textContent = T.city !== 'hangzhou' ?
+          filteredItems.length + ' 项匹配 ' + districtFull(T.city) :
           ('共 ' + category.items.length + ' 项');
 
-        // 切了区县但无数据时的提示
-        if (cityId && filteredItems.length === 0) {
-          document.getElementById('serviceGrid').innerHTML =
+        var grid = $('serviceGrid');
+        if (!grid) return;
+
+        // 切了区县但无匹配时的提示
+        if (T.city !== 'hangzhou' && filteredItems.length === 0) {
+          grid.innerHTML =
             '<div style="grid-column:1/-1;text-align:center;padding:40px 16px;color:var(--text-muted);font-size:14px;">' +
-            '本区暂无标记旅游景点，<a href="travel.html" style="color:var(--primary);">查看全市旅游 →</a>' +
+            '本区暂无标记旅游景点，<a href="javascript:void(0)" data-act="clear-city" style="color:var(--primary);">查看全市旅游 →</a>' +
             '</div>';
           return;
         }
 
-        // 渲染服务网格
-        var grid = document.getElementById('serviceGrid');
+        // 网格渲染（保留无 url 条目的 data-action 交互，由 app.js 的 IZ_INIT_CHANNEL_PAGE 处理）
         grid.innerHTML = filteredItems.map(function (item) {
           // 景点类 item 优先跳 scenic.html?id=xxx 站内详情页（含门票/交通/贴士）
           var linkUrl = item.url || '';
           if (window.SCENIC_DATA) {
             var matchedId = null;
-            Object.keys(window.SCENIC_DATA).forEach(function(id){
+            Object.keys(window.SCENIC_DATA).forEach(function (id) {
               var v = window.SCENIC_DATA[id];
               if (v && v.name === item.name) matchedId = id;
             });
@@ -288,88 +377,192 @@
             '<div class="sarrow">›</div>' +
             '</div>';
         }).join('');
+      }
 
-        // 渲染相关频道
+      function getServiceIcon(name) {
+        if (window.getServiceIcon) return window.getServiceIcon(name);
+        return '📌';
+      }
+
+      // ---------------- 相关文章 ----------------
+      function fetchRelatedArticles() {
+        var el = $('relatedArticles');
+        if (!el) return;
+        var chips = (CAT && CAT.kw ? CAT.kw : ['旅游', '景点', '西湖']).slice(0, 3);
+        var allChips = chips.slice();
+        if (CAT) allChips.unshift(CAT.n);
+
+        // 相关文章：优先服务端按需过滤（q=关键词）；接口不可用/失败时回退全量 index.json
+        var q = encodeURIComponent(allChips.filter(function (k) { return k; }).join(','));
+        var loadRelated = fetch('/api/articles-index?q=' + q + '&limit=5').then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        }).then(function (res) {
+          if (res && res.success && Array.isArray(res.data)) return res.data;
+          throw new Error('api unavailable');
+        }).catch(function () {
+          return fetch('articles/index.json').then(function (r) { return r.json(); }).then(function (list) {
+            var out = [];
+            list.forEach(function (a) {
+              for (var i = 0; i < allChips.length; i++) {
+                var kw = allChips[i];
+                if (!kw) continue;
+                if (a.title.indexOf(kw) >= 0 || a.summary.indexOf(kw) >= 0 || a.cat.indexOf(kw) >= 0) { out.push(a); break; }
+              }
+            });
+            return out.slice(0, 5);
+          });
+        });
+        loadRelated.then(function (matched) {
+          if (!matched.length) { el.innerHTML = ''; return; }
+          el.innerHTML =
+            '<div class="section-head" style="margin-top:24px;padding:0 16px;">' +
+            '<h2>📚 相关杭州故事</h2>' +
+            '<span class="tip">共 ' + matched.length + ' 篇</span>' +
+            '</div>' +
+            '<div style="padding: 0 16px;">' +
+            matched.map(function (a) {
+              return '<a href="articles/' + a.slug + '.html" style="display:block;padding:12px 14px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:10px;margin-bottom:8px;text-decoration:none;color:inherit;">' +
+                '<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;">' + a.title + '</div>' +
+                '<div style="font-size:12px;color:var(--text-muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">' + a.summary + '</div>' +
+                '</a>';
+            }).join('') +
+            '<a href="articles.html" style="display:block;text-align:center;padding:12px;background:var(--bg-alt);border-radius:10px;color:var(--primary);font-size:13px;text-decoration:none;font-weight:500;margin-top:8px;">📖 查看全部杭州故事 →</a>' +
+            '</div>';
+        }).catch(function () { /* 静默失败 */ });
+      }
+
+      function renderRelatedChannels() {
         var related = RELATED[CHANNEL_ID] || [];
-        var relEl = document.getElementById('relatedChannels');
-        if (relEl && related.length) {
-          relEl.innerHTML = related.map(function (rid) {
-            var rcat = DATA.categories.find(function (c) { return c.id === rid; });
-            if (!rcat) return '';
-            return '<a class="p-neighbor" href="' + rid + '.html">' +
-              '<span class="ch-icon">' + rcat.icon + '</span>' +
-              '<span class="ch-name">' + rcat.name + '</span>' +
-              '</a>';
-          }).join('');
+        var relEl = $('relatedChannels');
+        if (!relEl || !related.length) return;
+        var DATA = window._getData ? window._getData() : null;
+        if (!DATA) return;
+        relEl.innerHTML = related.map(function (rid) {
+          var rcat = DATA.categories.find(function (c) { return c.id === rid; });
+          if (!rcat) return '';
+          return '<a class="p-neighbor" href="' + rid + '.html">' +
+            '<span class="ch-icon">' + rcat.icon + '</span>' +
+            '<span class="ch-name">' + rcat.name + '</span>' +
+            '</a>';
+        }).join('');
+      }
+
+      // ---------------- 搜索 / 区县筛选 ----------------
+      function districtHit(el) {
+        var sub = el.getAttribute('data-sub') || '';
+        var name = el.getAttribute('data-name') || '';
+        return inferDistricts(name + ' ' + sub).indexOf(T.city) >= 0;
+      }
+
+      function applyFilters() {
+        var input = $('headerSearchInput');
+        var q = input && input.value ? input.value.trim().toLowerCase() : '';
+
+        // 分类区块（入口卡 + 精选卡）
+        var subs = document.querySelectorAll('.trv-sub');
+        for (var i = 0; i < subs.length; i++) {
+          var block = subs[i];
+          var any = false;
+          var entries = block.querySelectorAll('.trv-entry');
+          for (var j = 0; j < entries.length; j++) {
+            var el = entries[j];
+            var name = (el.getAttribute('data-name') || '').toLowerCase();
+            var hit = !q || name.indexOf(q) >= 0;
+            var distOk = T.city === 'hangzhou' || districtHit(el);
+            if (hit && distOk) any = true;
+            el.style.display = (hit && distOk) ? '' : 'none';
+          }
+          var third = block.querySelector('.cat-third');
+          if (third) third.style.display = any ? '' : 'none';
+          var feats = block.querySelectorAll('.trv-feat');
+          for (var k = 0; k < feats.length; k++) {
+            var f = feats[k];
+            var fname = (f.getAttribute('data-name') || '').toLowerCase();
+            var fhit = !q || fname.indexOf(q) >= 0;
+            f.style.display = fhit ? '' : 'none';
+            if (fhit) any = true;
+          }
+          block.style.display = any ? '' : 'none';
         }
 
-        // 搜索（频道内搜索）- 用事件委托，避免 header 模板未加载时绑定失效
-        document.body.addEventListener('input', function (e) {
-          if (e.target.id !== 'headerSearchInput') return;
-          var q = e.target.value.trim().toLowerCase();
-          var grid = document.getElementById('serviceGrid');
-          if (!grid) return;
-          if (!q) {
-            grid.querySelectorAll('.sitem').forEach(function (el) { el.style.display = 'flex'; });
-            return;
-          }
+        // 全部景点服务网格
+        var grid = $('serviceGrid');
+        if (grid) {
           grid.querySelectorAll('.sitem').forEach(function (el) {
             var name = el.querySelector('.sname') ? el.querySelector('.sname').textContent.toLowerCase() : '';
             var desc = el.querySelector('.sdesc') ? el.querySelector('.sdesc').textContent.toLowerCase() : '';
-            el.style.display = (name.indexOf(q) >= 0 || desc.indexOf(q) >= 0) ? 'flex' : 'none';
+            el.style.display = (!q || name.indexOf(q) >= 0 || desc.indexOf(q) >= 0) ? 'flex' : 'none';
           });
-        });
+        }
+
+        renderCityTip();
       }
 
-      // 同步顶部区县名与 URL ?city= 参数
-      function syncCityName() {
-        var params = new URLSearchParams(location.search);
-        var cityId = params.get('city') || '';
-        // 无 city 参数时显示"杭州"（全市）
-        var el = document.getElementById('cityName');
+      function renderCityTip() {
+        var el = $('cityTip');
         if (!el) return;
-        if (!cityId) { el.textContent = '杭州'; return; }
-        if (!window.DISTRICTS) return;
-        var d = window.DISTRICTS.find(function (x) { return x.id === cityId; });
-        if (d) el.textContent = d.full;
-        // 标记当前选中项
-        document.querySelectorAll('#cityDropdown .p-neighbor-grid-item').forEach(function (it) {
-          it.classList.toggle('active', it.getAttribute('data-id') === cityId);
-        });
+        if (T.city && T.city !== 'hangzhou') {
+          el.innerHTML = '<span>📍 已按区县筛选：<strong>' + esc(districtFull(T.city)) + '</strong>，分类入口与景点服务仅显示相关项</span>' +
+            '<a href="javascript:void(0)" id="cityClear">清除筛选 ×</a>';
+          var clr = $('cityClear');
+          if (clr) clr.addEventListener('click', function (e) {
+            e.preventDefault();
+            try { localStorage.setItem('ihz_city', 'hangzhou'); } catch (ex) {}
+            setCity('hangzhou', false);
+          });
+        } else {
+          el.innerHTML = '';
+        }
       }
 
-      // 切换区县：用 history.pushState 更新 URL，不刷新页面，只重新渲染
-      function switchCity(id) {
-        var newUrl = id === 'hangzhou' ? 'travel.html' : 'travel.html?city=' + id;
-        history.pushState({ city: id }, '', newUrl);
-        renderChannel();
+      // ---------------- 区县切换 ----------------
+      function setCity(id, push) {
+        T.city = id || 'hangzhou';
+        try { localStorage.setItem('ihz_city', T.city); } catch (e) {}
+        var url = T.city === 'hangzhou' ? 'travel.html' : 'travel.html?city=' + encodeURIComponent(T.city);
+        try {
+          if (push && window.history.pushState) window.history.pushState({ city: T.city }, '', url);
+          else window.history.replaceState({ city: T.city }, '', url);
+        } catch (e) {}
+        renderGrid();
+        applyFilters();
         syncCityName();
       }
 
-      // 覆盖 app.js 的区县跳转：在 travel.html 上切换区县时不跳走，仅更新 URL 并重新渲染
+      function syncCityName() {
+        var el = $('cityName');
+        if (!el) return;
+        el.textContent = districtFull(T.city);
+        var box = $('cityDropdown');
+        if (!box) return;
+        box.querySelectorAll('.city-dropdown-item').forEach(function (it) {
+          it.classList.toggle('active', it.getAttribute('data-id') === T.city);
+        });
+      }
+
+      // 覆盖 layout.js 的区县跳转：在 travel.html 上切换区县时不跳走，仅更新筛选
       function overrideCityDropdown() {
-        var box = document.getElementById('cityDropdown');
-        if (!box || box._travelOverrideBound) return;
-        box._travelOverrideBound = true;
+        var box = $('cityDropdown');
+        if (!box || box._travelCaptureBound) return;
+        box._travelCaptureBound = true;
+        // capture 阶段拦截（优先于 layout.js 的冒泡默认跳转）
         box.addEventListener('click', function (e) {
-          var item = e.target.closest('.p-neighbor-grid-item');
+          var item = e.target.closest ? e.target.closest('.city-dropdown-item') : null;
           if (!item) return;
           e.preventDefault();
           e.stopPropagation();
-          var id = item.getAttribute('data-id');
-          try { localStorage.setItem('ihz_city', id); } catch (ex) {}
-          box.classList.remove('show');
-          // 更新选中态
-          box.querySelectorAll('.p-neighbor-grid-item').forEach(function (it) {
-            it.classList.toggle('active', it.getAttribute('data-id') === id);
-          });
-          switchCity(id);
-        });
+          var id = item.getAttribute('data-id') || 'hangzhou';
+          setCity(id, true);
+        }, true);
       }
 
       // 浏览器后退/前进时重新渲染（与 pushState 配合）
       window.addEventListener('popstate', function () {
-        renderChannel();
+        var p = new URLSearchParams(location.search).get('city') || 'hangzhou';
+        T.city = p;
+        renderGrid();
+        applyFilters();
         syncCityName();
       });
 
@@ -387,23 +580,58 @@
         });
       }
 
-      // 初始化（等待兜底 categories 就绪后渲染；CMS 数据可用时优先）
+      // ---------------- 站内动作（#act:xxx） ----------------
+      document.addEventListener('click', function (e) {
+        var el = e.target && e.target.closest ? e.target.closest('[data-act]') : null;
+        if (!el) return;
+        e.preventDefault();
+        var act = el.getAttribute('data-act');
+        if (!act) return;
+        if (act === 'tide' && window.showTide) { window.showTide(); return; }
+        if (act === 'clear-city') {
+          try { localStorage.setItem('ihz_city', 'hangzhou'); } catch (e) {}
+          setCity('hangzhou', false);
+          return;
+        }
+        if (window._handleAction) window._handleAction(act);
+      }, false);
+
+      // 顶栏搜索框：页面内即时过滤（不动跳转逻辑）
+      document.body.addEventListener('input', function (e) {
+        if (!e.target || e.target.id !== 'headerSearchInput') return;
+        applyFilters();
+      });
+
+      // ---------------- 渲染入口 ----------------
+      function renderChannel() {
+        renderHeader();
+        renderDesc();
+        renderSections();
+        renderCatNav();
+        renderGrid();
+        applyFilters();
+        renderRelatedChannels();
+        fetchRelatedArticles();
+      }
+
+      function startChannelPage() {
+        if (window._ensureCategories) window._ensureCategories().then(initPage);
+        else initPage();
+      }
       function initPage() {
         renderChannel();
         syncCityName();
         overrideCityDropdown();
         overrideBackButton();
       }
-      function startChannelPage() {
-        if (window._ensureCategories) window._ensureCategories().then(initPage);
-        else initPage();
-      }
+
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', startChannelPage);
       } else {
         startChannelPage();
       }
-      // 频道页专用初始化（网格点击 + modal 关闭）：app.js 完整 init 被 IZ_SKIP_APP_INIT 跳过，bindEvents() 不执行，需显式调用
+
+      // 频道页专用初始化（网格点击 + modal 关闭）
       if (window.IZ_INIT_CHANNEL_PAGE) window.IZ_INIT_CHANNEL_PAGE();
     })();
   </script>
