@@ -410,6 +410,10 @@
       <div class="form-group">
         <label>管理密码</label>
         <input type="password" id="password" placeholder="请输入管理密码" required>
+        <p style="font-size:12px;color:#94a3b8;margin-top:8px;line-height:1.5;">
+          默认密码 <code style="background:#f1f5f9;padding:1px 5px;border-radius:4px;">ihz2024</code>
+          （若已在 Vercel 配置 CMS_ADMIN_PASSWORD 环境变量，请使用您自己的密码）
+        </p>
       </div>
       <button type="submit" class="btn btn-primary" style="width:100%;">登录</button>
       <p class="error" id="errorMsg"></p>
@@ -666,16 +670,39 @@ var API_BASE = '';
 var CMS_DATA = null;
 var ADMIN_PASSWORD = localStorage.getItem('ihangzhou_admin_pwd') || '';
 
-if (ADMIN_PASSWORD) { initDashboard(); }
+if (ADMIN_PASSWORD) {
+  // 缓存密码先向服务端校验，失效则退回登录页（避免旧密码残留导致数据区空白）
+  (async function() {
+    try {
+      var r = await fetch(API_BASE + '/api/tools?action=track&stats=1', {
+        headers: { 'Authorization': 'Bearer ' + ADMIN_PASSWORD }
+      });
+      if (r.status === 401) { localStorage.removeItem('ihangzhou_admin_pwd'); ADMIN_PASSWORD = ''; return; }
+    } catch (e) { return; }
+    initDashboard();
+  })();
+}
 
-document.getElementById('loginForm').onsubmit = function(e) {
+document.getElementById('loginForm').onsubmit = async function(e) {
   e.preventDefault();
   var pwd = document.getElementById('password').value;
-  if (pwd) {
-    ADMIN_PASSWORD = pwd;
-    localStorage.setItem('ihangzhou_admin_pwd', pwd);
-    initDashboard();
-  }
+  if (!pwd) return;
+  // 登录前先向服务端校验密码：避免"任意密码都能进后台，但数据列表全空白"的假登录
+  var errEl = document.getElementById('errorMsg');
+  errEl.textContent = '正在验证…';
+  try {
+    var r = await fetch(API_BASE + '/api/tools?action=track&stats=1', {
+      headers: { 'Authorization': 'Bearer ' + pwd }
+    });
+    if (r.status === 401) {
+      errEl.textContent = '密码错误：服务端未接受该密码';
+      return;
+    }
+  } catch (e) { /* 网络异常时仍允许进入，数据加载会再报错 */ }
+  errEl.textContent = '';
+  ADMIN_PASSWORD = pwd;
+  localStorage.setItem('ihangzhou_admin_pwd', pwd);
+  initDashboard();
 };
 
 function logout() {
