@@ -43,12 +43,16 @@ const TARGETS = [
 ];
 
 // ---------- 1) 压缩 ----------
+// esbuild 已声明在 dependencies；此处仍做兜底：即使安装环境异常缺失，
+// 也不能让整个构建失败（否则部署包缺失 .min 产物会引发全站 JS 404）。
+// 降级方案：直接把源文件复制为 .min（不压缩），保证站点可用。
 let esbuild;
+let degraded = false;
 try {
   esbuild = await import('esbuild');
 } catch (e) {
-  console.error('  [build-assets] 缺少 esbuild，请先执行 npm install（devDependencies 已声明）');
-  process.exit(1);
+  degraded = true;
+  console.warn('  [build-assets] 缺少 esbuild，降级为复制源文件（不压缩）');
 }
 
 const outputs = [];
@@ -60,14 +64,18 @@ for (const [src, out] of TARGETS) {
     continue;
   }
   const before = fs.statSync(srcPath).size;
-  await esbuild.build({
-    entryPoints: [srcPath],
-    outfile: outPath,
-    minify: true,
-    charset: 'utf8', // 保留中文/emoji 原样，避免被转义成 \uXXXX 导致产物膨胀
-    logLevel: 'warning',
-    target: ['es2018', 'chrome80', 'safari14', 'firefox80']
-  });
+  if (degraded) {
+    fs.copyFileSync(srcPath, outPath);
+  } else {
+    await esbuild.build({
+      entryPoints: [srcPath],
+      outfile: outPath,
+      minify: true,
+      charset: 'utf8', // 保留中文/emoji 原样，避免被转义成 \uXXXX 导致产物膨胀
+      logLevel: 'warning',
+      target: ['es2018', 'chrome80', 'safari14', 'firefox80']
+    });
+  }
   const after = fs.statSync(outPath).size;
   outputs.push({ out: outPath, bytes: fs.readFileSync(outPath) });
   console.log(`  ${out.padEnd(28)} ${(before / 1024).toFixed(0)}KB -> ${(after / 1024).toFixed(0)}KB（${((1 - after / before) * 100).toFixed(0)}% 压缩）`);
